@@ -1,0 +1,98 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1>New Doctor</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="content m-3">
+        <div class="card pl-3 pr-3">
+            <div class="card-body card-block">
+                <form action="" method="post" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12 ml-5 pl-5">
+                                    <div class="wrap-custom-file">
+                                        <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                                        <label for="image1">
+                                            <span>Select Photo</span>
+                                            <i class="fa fa-plus-circle"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Doctor Name</label></div>
+                                        <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Select Doctor Name" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Registration No.</label></div>
+                                        <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Enter Registration Number" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Email Address</label></div>
+                                        <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Enter Email Address" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Phone No.</label></div>
+                                        <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Select Phone Number" class="form-control"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Specialist Type</label></div>
+                                <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Select Specialist Type" class="form-control"></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Commision</label></div>
+                                <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Select Commision" class="form-control"></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Commision Unit</label></div>
+                                <div class="col-12 col-md-9">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="comm_type" id="inlineCheckbox1" value="option1">
+                                        <label class="form-check-label" for="inlineCheckbox1">Percent</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="comm_type" id="inlineCheckbox2" value="option2">
+                                        <label class="form-check-label" for="inlineCheckbox2">Amount</label>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">About</label></div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="" id="" rows="8" class="form-control" placeholder="Enter About Details"></textarea>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                  
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+  
+  {% endblock %} {% block scripts %}{% endblock %}

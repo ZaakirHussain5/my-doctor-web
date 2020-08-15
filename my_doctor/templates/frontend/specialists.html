@@ -1,0 +1,74 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1>Specialist Types</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="content m-3">
+        <div class="card pl-3 pr-3">
+            <div class="card-body card-block">
+                <form action="" method="post" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Specialist Type</label></div>
+                                <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Enter Specialist Type" class="form-control"></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Description</label></div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Enter Descrition"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                        
+                                <div class="col-md-12 ml-5 pl-5">
+                                    <div class="wrap-custom-file">
+                                        <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                                        <label for="image1">
+                                            <span>Select Image</span>
+                                            <i class="fa fa-plus-circle"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="card pl-3 pr-3">
+            <div class="card-body card-block">
+                <table class="table" id="Specialists">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Specialist Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+  {% endblock %} {% block scripts %}{% endblock %}
