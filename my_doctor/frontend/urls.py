@@ -6,9 +6,10 @@ urlpatterns=[
     path('',views.login,name='login'),
     path('adminDashboard',views.dashboard,name='adminDashboard'),
     path('specialists',views.specialists,name='specialists'),
-    path('newDoctor',views.newDoctor,name='newDoctor'),
-    path('doctorsList',views.doctorsList,name='doctorsList'),
-    path('newExecutive',views.newExecutive,name='newExecutive'),
-    path('executivesList',views.executivesList,name='executivesList'),
+    path('Doctors',views.Doctors,name='Doctors'),
+    path('Executives',views.Executives,name='Executives'),
+    path('customerCareDashboard',views.customerCareDashboard,name='customerCareDashboard'),
+    path('patientsList',views.patientsList,name='patientsList'),
+    path('newAppointment',views.newAppointment,name='newAppointment'),
 
 ]

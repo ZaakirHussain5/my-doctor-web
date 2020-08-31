@@ -1,0 +1,255 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1 id="title">Doctors List</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+        </li>
+      </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="pills-home-tab">
+           <div class="content m-3">
+        <div class="card pl-3 pr-3">
+            <div class="card-body card-block">
+                <div class="form-group">
+                    <button type="button" id="newDoctor" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> New Doctor
+                    </button>
+                </div>
+                <table class="table" id="Doctors">
+                    <thead>
+                        <tr>
+                            <th>slno</th>
+                            <th>Image</th>
+                            <th>Specialist Type</th>
+                            <th>Name</th>
+                            <th>Phone No.</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+        </div>
+        <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="pills-home-tab">
+            
+                <div class="content m-3">
+                    <form class="form-horizontal" id="doc_form">
+                        <div class="card pl-3 pr-3">
+                            <div class="card-body card-block">
+                
+                                <div class="row">
+                                    <input type="hidden" name="user">
+                                    <input type="hidden" name="id" id="doc_id">
+                                    <div class="col-md-4">
+                                        <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                            <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                                            <label for="image1">
+                                                <span>Select Photo</span>
+                                                <i class="fa fa-plus-circle"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">User ID</label>
+                                            <div class="input-group">
+                                                <input type="text" id="username" name="username" placeholder="User ID"
+                                                    class="form-control" readonly="readonly">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-info" id="generate">
+                                                        Generate
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Password</label>
+                                            <input type="password" id="password" name="password" placeholder="Enter Password"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Doctor Name</label>
+                                            <input type="text" id="full_name" name="full_name" placeholder="Select Doctor Name"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Registration No.</label>
+                                            <input type="text" id="Registration_Number" name="Registration_Number"
+                                                placeholder="Enter Registration Number" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Email Address</label>
+                                            <input type="email" id="email" name="email" placeholder="Enter Email Address"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Phone No.</label>
+                                            <input type="text" id="phone_number" name="phone_number" placeholder="Select Phone Number"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Specialist Type</label>
+                                            <select id="specialist_type" name="specialist_type" class="form-control">
+                                                <option value="">Select Specialist Type</option>
+                                                {% for specialist_type in specialist_types%}
+                                                <option value="{{specialist_type.special_type}}">{{specialist_type.special_type}}
+                                                </option>
+                                                {% endfor%}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Commision</label>
+                                            <input type="text" id="commission_val" name="commission_val"
+                                                placeholder="Enter Commision Value" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">Commision Unit</label>
+                                            <br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox1"
+                                                    value="Percent" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Percent</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox2"
+                                                    value="Amount" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Amount</label>
+                                            </div>
+                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">MOU/Agreement File</label>
+                                            <input type="file" id="mou_file" name="mou_file" class="form-control"  accept=".png, .jpg, .pdf ,.doc ,.docx">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">About</label>
+                
+                                            <textarea name="about" id="about" rows="5" class="form-control"
+                                                placeholder="Enter About Details"></textarea>
+                
+                                        </div>
+                
+                                    </div>
+                                </div>
+                
+                
+                            </div>
+                            <div class="card-footer">
+                                <div class="pull-left">
+                                    <button type="button" id="listDoctors" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-arrow-left"></i> Back to List
+                                    </button>
+                                </div>
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i><span id="submitBtn">Submit</span>
+                                    </button>
+                                    <button type="reset" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+                
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+        </div>
+    </div>
+    
+  
+  {% endblock %} 
+  {% block scripts %}
+  <script>
+    jQuery(document).ready(function($){
+        $('#newDoctor').click(function(){
+          $('#title').html('New Doctor')
+          $('#myTab a[href="#form"]').tab('show')
+        })
+        
+        $('#listDoctors').click(function(){
+          $('#title').html('Doctors List')
+          $('#myTab a[href="#list"]').tab('show')
+        })
+
+        $('#generate').click(function(){
+            $.get('/api/GenerateDoctorID',function(data){
+                $('#username').val(data)
+            })
+        })
+
+        var table = $('#Doctors').DataTable({
+            ajax:{
+                url:'/api/doctors_info',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data:'profile_pic',
+                    render:function(data){
+                        return `<img src="${data}" style="height:90px;width:120px" alt="">`
+                    }
+                },
+                {
+                    data:'specialist_type'
+                },
+                {
+                    data:'full_name'
+                },
+                {
+                    data : 'phone_number'
+                },
+                {
+                    data:'id',
+                    render: function (data,type,row) {
+                          return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                      }
+                }
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+
+        crudOperations({
+              url:'/api/DoctorRegistration/',
+              put_url: '/api/doctors_info/',
+              table_id:'#Doctors',
+              id_selector:'#doc_id',
+              form_id:'#doc_form',
+              table:table,
+              entity:'Doctor',
+              tabs:true
+        })
+
+    })
+</script>
+  {% endblock %}

@@ -1,0 +1,285 @@
+{% extends 'customer_layout.html' %} {% load static%}{% block content %}
+<style>
+    #list {
+    height: 17em;
+    line-height: 2em;
+    padding: 0;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+</style>
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1>New Appointment</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="content m-3">
+        <div class="card pl-3 pr-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <section class="card">
+                            <div class="card-header user-header alt bg-primary">
+                                <div class="media">
+                                    <a href="#">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/1.jpg' %}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h2 class="text-light display-6">Praveen</h2>
+                                        <p class="text-white">#DP2020001</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="#"> <i class="fa fa-tint"></i> Blood Group <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">AB+</span></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#"> <i class="fa fa-user"></i> Age <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">45</span></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#"> <i class="fa fa-male"></i> Gender <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">M</span></a>
+                                </li>
+                            </ul>
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#patientDetails">View Details</button>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="card">
+                            <div class="card-header user-header alt bg-primary">
+                                <h5 class="text-white">Select Specialist</h5>
+                            </div>
+
+
+                            <ul class="list-group list-group-flush" id="list">
+                                <li class="list-group-item">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                        <label class="form-check-label" for="inlineradio1">Cardiologist</label>
+                                      </div>
+                               </li>
+                               <li class="list-group-item">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <label class="form-check-label" for="inlineradio1">Paediatrision</label>
+                                  </div>
+                               </li>
+                               <li class="list-group-item">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <label class="form-check-label" for="inlineradio1">Physiotherapy</label>
+                                  </div>
+                              </li>
+                              <li class="list-group-item">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <label class="form-check-label" for="inlineradio1">General Physician</label>
+                                  </div>
+                             </li>
+                             <li class="list-group-item">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <label class="form-check-label" for="inlineradio1">Neurologists</label>
+                                  </div>
+                             </li>
+                             <li class="list-group-item">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <label class="form-check-label" for="inlineradio1">Urologists</label>
+                                  </div>
+                             </li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="card">
+                            <div class="card-header user-header alt bg-primary">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="date" placeholder="Select Date" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select name="" id="" class="form-control form-control-sm">
+                                            <option value="">Select Time</option>
+                                            <option value="10:00 AM">10:00 AM</option>
+                                            <option value="11:00 AM">11:00 AM</option>
+                                            <option value="12:00 PM">12:00 PM</option>
+                                            <option value="01:00 PM">01:00 PM</option>
+                                            <option value="02:00 PM">02:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <ul class="list-group list-group-flush" id="list">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/4.jpg' %}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="text-lg mb-0">Dr. Nayak</p>
+                                            <p>Cardiologist</p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-sm btn-info mt-3">
+                                                <i class="fa fa-check"></i> Select
+                                            </button>
+                                        </div>
+                                    </div>
+                               </li>
+                               <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/2.jpg' %}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="text-lg mb-0">Dr. Nayak</p>
+                                        <p>Cardiologist</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-sm btn-info mt-3">
+                                            <i class="fa fa-check"></i> Select
+                                        </button>
+                                    </div>
+                                </div>
+                           </li>
+                           <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/3.jpg' %}">
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="text-lg mb-0">Dr. Nayak</p>
+                                    <p>Cardiologist</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-sm btn-info mt-3">
+                                        <i class="fa fa-check"></i> Select
+                                    </button>
+                                </div>
+                            </div>
+                       </li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+    <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row p-3">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
+                          </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">DP2020001</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Praveen</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">AB-</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Male/42</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Father/Naveen</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">+91 9899887787</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">+91 9899887715</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">praveen@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">English (Practice Default)</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">#1234 Unknown Street</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Unknown Locality</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Unknown City</p>
+                            </div>
+                        </div>
+                        
+                      </div>
+                  </div>
+          
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">
+                      Close
+                  </button>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+  
+  {% endblock %} {% block scripts %}{% endblock %}

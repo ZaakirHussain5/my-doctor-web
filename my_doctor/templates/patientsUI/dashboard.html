@@ -1,0 +1,154 @@
+{% extends 'patients_layout.html'%}
+{% load static%}
+{% block sideContent %}
+<div class="tab-content" id="caMainTabContent">
+   <div class="tab-pane fade show active" id="caChats" role="tabpanel" aria-labelledby="caChatsTab">
+       <div class="home-page" style="height: calc(100vh - 9.6875rem);">
+           <div class="container">
+               <div id="main-slider" class="owl-carousel owl-theme">
+                   <div class="item p-2"><img src="{% static 'patients/assets/images/media/slide1.PNG' %}" style="border-radius: 25px;"
+                           alt="The Last of us"></div>
+               </div>
+               <h5 class="text-lg p-2 pt-4">Specialities</h5>
+               <div id="spl-slider" class="owl-carousel owl-theme">
+                {% for specialist in specialists %}
+                   <div class="item p-2">
+                       <div class="text">
+                           <h6>{{specialist.special_type}}</h6>
+                       </div>
+                       <img src="/media/{{specialist.icon}}" style="border-radius: 20px;" alt="The Last of us">
+                   </div>
+                {% endfor %}
+               </div>
+               <h5 class="text-lg p-2 pt-4">Subscription Plans</h5>
+               <ul class="list-unstyled">
+                   <li>
+                       <div class="calllist bg-info text-white">
+                           <div class="user-avatar user-avatar-rounded">
+                               <img src="{% static 'patients/assets/images/user/layer-3.png' %}" alt="">
+                           </div>
+                           <div class="calllist__details">
+                               <div class="calllist__details--name">Family Care Plan</div>
+                               
+                           </div>
+
+                           <div class="calllist__actions">
+                               <div class="iconbox btn-hovered-light">
+                                   <i class="iconbox__icon mdi mdi-currency-inr"></i> 1,750
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+                   <li>
+                       <div class="calllist bg-info text-white">
+                           <div class="user-avatar user-avatar-rounded online">
+                               <img src="{% static 'patients/assets/images/user/250/03.jpg' %}" alt="">
+                           </div>
+                           <div class="calllist__details">
+                               <div class="calllist__details--name">Loyalty Consultation Plan</div>
+                               
+                           </div>
+
+                           <div class="calllist__actions">
+                               <div class="iconbox btn-hovered-light">
+                                   <i class="iconbox__icon mdi mdi-currency-inr"></i> 1,500
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+           </div>
+   
+       </div>
+   </div>
+</div>
+{% endblock %}
+{% block content %} 
+<div class="ca-content-wrapper">
+                <div class="ca-content">
+                    <div class="ca-content__chatstab">
+                        <div class="ca-content__callstab">
+                        
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="ca-call-details-card">
+                                                <div class="conversation-panel__back-button ">
+                                                    <i class="mdi mdi-arrow-left"></i>
+                                                </div>
+                                                <div class="ca-call-details__left">
+                                                    
+                                                    <div class="ca-call-details__pname">
+                                                        <div>Upcoiming Appointments</div>
+                                                    </div>                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <div class="ca-call-details-history">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="ca-call-history">
+                                                    <div class="ca-call-history__left">
+                                                        <div class="user-avatar user-avatar-rounded">
+                                                            <img class="img-fluid" src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
+                                                        </div>
+                                                        <div class="ca-call-history__left--title">
+                                                            <div>Dr. Kumari</div>
+                                                            <span>12/11/2020 - 12:00 AM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ca-call-history__right">
+                                                        <div class="iconbox btn-solid-info">
+                                                            <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="ca-call-history">
+                                                    <div class="ca-call-history__left">
+                                                        <div class="user-avatar user-avatar-rounded">
+                                                            <img class="img-fluid" src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
+                                                        </div>
+                                                        <div class="ca-call-history__left--title">
+                                                            <div>Dr. Kumari</div>
+                                                            <span>12/11/2020 - 12:00 AM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ca-call-history__right">
+                                                        <div class="iconbox btn-solid-info">
+                                                            <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        $('#caMainTab a[href="{% url "patients:dashboard"%}"]').addClass('active')
+    })
+</script>
+{% endblock %}

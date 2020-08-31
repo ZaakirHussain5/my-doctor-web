@@ -13,24 +13,16 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{% url 'frontend:adminDashboard' %}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    <a href="{% url 'frontend:adminDashboard' %}" data-toggle="tooltip" data-placement="right" title="Dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                 </li>
                 <li>
-                    <a href="{% url 'frontend:specialists' %}"> <i class="menu-icon fa fa-stethoscope"></i>Specialist Types </a>
+                    <a href="{% url 'frontend:specialists' %}" data-toggle="tooltip" data-placement="right" title="Specialist Types"> <i class="menu-icon fa fa-stethoscope"></i>Specialist Types </a>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Executives</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-user-plus"></i><a href="{% url 'frontend:newExecutive' %}">New Executive</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:executivesList' %}">Executives List</a></li>
-                    </ul>
+                <li>
+                    <a href="{% url 'frontend:Executives' %}" data-toggle="tooltip" data-placement="right" title="Executives"> <i class="menu-icon fa fa-headphones"></i>Executives </a>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-md"></i>Doctors</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle"></i><a href="{% url 'frontend:newDoctor' %}">New Doctor</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:doctorsList' %}">Doctors List</a></li>
-                    </ul>
+                <li>
+                    <a href="{% url 'frontend:Doctors' %}" data-toggle="tooltip" data-placement="right" title="Doctors"> <i class="menu-icon fa fa-user-md"></i>Doctors </a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Patients</a>
@@ -41,10 +33,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="widgets.html"> <i class="menu-icon fa fa-money"></i>Payments </a>
+                    <a href="widgets.html" data-toggle="tooltip" data-placement="right" title="Payments"> <i class="menu-icon fa fa-inr"></i>Payments </a>
                 </li>
                 <li>
-                    <a href="widgets.html"> <i class="menu-icon fa fa-clipboard"></i>Reports </a>
+                    <a href="widgets.html"> <i class="menu-icon fa fa-clipboard" data-toggle="tooltip" data-placement="right" title="Reports"></i>Reports </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

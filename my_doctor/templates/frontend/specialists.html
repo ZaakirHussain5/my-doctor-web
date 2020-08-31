@@ -10,44 +10,36 @@
       </div>
     </div>
     <div class="content m-3">
+        <form id="spl_form">
         <div class="card pl-3 pr-3">
             <div class="card-body card-block">
-                <form action="" method="post" class="form-horizontal">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Specialist Type</label></div>
-                                <div class="col-12 col-md-9"><input type="email" id="hf-email" name="hf-email" placeholder="Enter Specialist Type" class="form-control"></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="hf-email" class=" form-control-label">Description</label></div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Enter Descrition"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                        
-                                <div class="col-md-12 ml-5 pl-5">
-                                    <div class="wrap-custom-file">
-                                        <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                        <input type="hidden" name="id" id="spl_id">
+                        <div class="col-md-4 offset-md-2">
+                                    <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                        <input type="file" name="icon" id="image1" accept=".gif, .jpg, .png" />
                                         <label for="image1">
                                             <span>Select Image</span>
                                             <i class="fa fa-plus-circle"></i>
                                         </label>
                                     </div>
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row form-group">
+                                <label for="hf-email" class=" form-control-label">Specialist Type</label>
+                                <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Specialist Type" class="form-control">
+                            </div>
+                            <div class="row form-group">
+                                <label for="hf-email" class=" form-control-label">Description</label>
+                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="Enter Descrition"></textarea>
                             </div>
                         </div>
                     </div>
-                  
-                </form>
             </div>
             <div class="card-footer">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Submit
+                    <button type="submit" class="btn btn-primary btn-sm" >
+                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Specialist Type</span> 
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">
                         <i class="fa fa-ban"></i> Reset
@@ -56,19 +48,77 @@
                 
             </div>
         </div>
+        </form>
         <div class="card pl-3 pr-3">
             <div class="card-body card-block">
-                <table class="table" id="Specialists">
+                <table class="table able-bordered table-hovert" id="Specialists">
                     <thead>
                         <tr>
+                            <th>Slno</th>
                             <th>Image</th>
                             <th>Specialist Type</th>
+                            <th>is Active?</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
+        
     </div>
   
-  {% endblock %} {% block scripts %}{% endblock %}
+  {% endblock %} 
+  {% block scripts %}
+  <script>
+      jQuery(document).ready(function($){
+          var table = jQuery('#Specialists').DataTable({
+              ajax: {
+                  url: "/api/specialist_types",
+                  dataSrc: ""
+              },
+              columns: [
+                  {
+                      data: "id"
+                  },
+                  {
+                      data: "icon",
+                      render: function (data) {
+                          return `<img src="${data}" style="height:90px;width:120px" alt="">`
+                      }
+                  },
+                  {
+                      data: "special_type"
+                  },
+                  {
+                      data: 'is_active',
+                      render: function (data,type,row) {
+                          return `<label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2"><input type="checkbox" data-id='${row.id}' class="switch-input active" ${data==true ? "checked='true'" : ""} > <span class="switch-label"></span> <span class="switch-handle"></span></label>`
+                      }
+                  },
+                  {
+                      data: 'id',
+                      render: function (data,type,row) {
+                          return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                      }
+                  },
+              ]
+          })
+
+          crudOperations({
+              url:'/api/specialist_types/',
+              put_url:'/api/specialist_types/',
+              table_id:'#Specialists',
+              id_selector:'#spl_id',
+              form_id:'#spl_form',
+              table:table,
+              entity:'Specialist Type'
+          })
+      })
+  </script>
+  {% endblock %}

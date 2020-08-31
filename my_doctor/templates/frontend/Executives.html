@@ -1,0 +1,124 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1 id="title">Executives List</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+        </li>
+      </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="content m-3">
+                <div class="card pl-3 pr-3">
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <button type="button" id="newExecutive" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> New Executive
+                            </button>
+                        </div>
+                        <table class="table" id="Specialists">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone No.</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="content m-3">
+                <div class="card pl-3 pr-3">
+                    <div class="card-body card-block">
+                        <form action="" method="post" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-4">
+                                            <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                                <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                                                <label for="image1">
+                                                    <span>Select Photo</span>
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="hf-email" class=" form-control-label">Executive Name</label>
+                                        <input type="email" id="hf-email" name="hf-email" placeholder="Select Doctor Name" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hf-email" class=" form-control-label">Email Address</label>
+                                        <input type="email" id="hf-email" name="hf-email" placeholder="Enter Email Address" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hf-email" class=" form-control-label">Phone No.</label>
+                                        <input type="email" id="hf-email" name="hf-email" placeholder="Select Phone Number" class="form-control">
+                                    </div>
+                                    
+                                </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="hf-email" class=" form-control-label">About</label>
+                                            
+                                                <textarea name="" id="" rows="8" class="form-control" placeholder="Enter About Details"></textarea>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="pull-left">
+                            <button type="button" id="listExecutive" class="btn btn-primary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Back to List
+                            </button>
+                        </div>
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                            <button type="reset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-ban"></i> Reset
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+  
+  {% endblock %} 
+  {% block scripts %}
+  <script>
+      jQuery(document).ready(function($){
+          $('#newExecutive').click(function(){
+            $('#title').html('New Executive')
+            $('#myTab a[href="#form"]').tab('show')
+          })
+          
+          $('#listExecutive').click(function(){
+            $('#title').html('Executives List')
+            $('#myTab a[href="#list"]').tab('show')
+          })
+      })
+  </script>
+  {% endblock %}

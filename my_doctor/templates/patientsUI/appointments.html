@@ -1,0 +1,537 @@
+{% extends 'patients_layout.html'%}
+{% load static%}
+{% block sideContent %}
+<div class="tab-content" id="caMainTabContent">
+    <div class="tab-pane fade show active" id="caCalls" role="tabpanel" aria-labelledby="caCallsTab">
+        <div class="nav-style-2">
+            <div class="tab-content" id="caCallsTabInsideContent">
+                <div class="tab-pane fade show active" id="all-calls" role="tabpanel" aria-labelledby="all-calls-tab">
+                    <div class="sidebar-userlist">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="calllist active">
+                                    <div class="user-avatar user-avatar-rounded online">
+                                        <img src="assets/images/layer-14@2x.png" alt="">
+                                    </div>
+                                    <div class="calllist__details">
+                                        <div class="calllist__details--name">Dr. Kumari</div>
+                                        <div class="calllist__details--info">
+                                            <span><i class="mdi mdi-call-received"></i></span>
+                                            <span>12/11/2020 at 12:00AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="calllist__actions">
+                                        <div class="iconbox btn-hovered-light">
+                                            <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="missed-calls" role="tabpanel" aria-labelledby="missed-calls-tab">
+                    <div class="sidebar-userlist">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="calllist active">
+                                    <div class="user-avatar user-avatar-rounded online">
+                                        <img src="assets/images/user/250/03.jpg" alt="">
+                                    </div>
+                                    <div class="calllist__details">
+                                        <div class="calllist__details--name">Willie McLaughlin</div>
+                                        <div class="calllist__details--info text-danger">
+                                            <span><i class="mdi mdi-call-missed"></i></span>
+                                            <span>Today at 07:25AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="calllist__actions">
+                                        <div class="iconbox btn-hovered-light">
+                                            <i class="iconbox__icon mdi mdi-phone"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="calllist">
+                                    <div class="user-avatar user-avatar-rounded online">
+                                        <img src="assets/images/user/250/04.jpg" alt="">
+                                    </div>
+                                    <div class="calllist__details">
+                                        <div class="calllist__details--name">Andrew Showalter</div>
+                                        <div class="calllist__details--info text-danger">
+                                            <span><i class="mdi mdi-call-missed"></i></span>
+                                            <span>Today at 07:25AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="calllist__actions">
+                                        <div class="iconbox btn-hovered-light">
+                                            <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade position-relative" id="caContacts" role="tabpanel" aria-labelledby="caContactsTab">
+        <div class="sidebar-contactlist">
+            <ul class="list-unstyled">
+                <li>
+                    <div class="contactlist-heading">
+                        <span>Favourite</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/01.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Jack P. Angulo</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist active">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/500/09.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Pearl Villarreal</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Family members</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/500/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Marguerite E. Hutchings</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Friends</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/500/06.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Chuck McCann</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Friends</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>A</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Andrew Showalter</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Amanda Sinquefield</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>B</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Andrew Showalter</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Amanda Sinquefield</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>C</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Andrew Showalter</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Amanda Sinquefield</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>E</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Andrew Showalter</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Amanda Sinquefield</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>M</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Andrew Showalter</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Amanda Sinquefield</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>S</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Andrew Showalter</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">Amanda Sinquefield</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist-heading">
+                        <span>#</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/04.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">&#9829; My Love &#9829;</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contactlist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img src="assets/images/user/250/05.jpg" alt="">
+                        </div>
+                        <div class="contactlist__details">
+                            <div class="contactlist__details--name">&#126; Eva 	&#126;</div>
+                            <div class="calllist__details--info">
+                                <span><i class="mdi mdi-tag-outline"></i></span>
+                                <span>Co-Workers</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="alphabet-series">
+            <span><i class="mdi mdi-star"></i></span>
+            <span>A</span>
+            <span>B</span>
+            <span>D</span>
+            <span>E</span>
+            <span>F</span>
+            <span>G</span>
+            <span>H</span>
+            <span>I</span>
+            <span>J</span>
+            <span>K</span>
+            <span>L</span>
+            <span>M</span>
+            <span>N</span>
+            <span>O</span>
+            <span>P</span>
+            <span>Q</span>
+            <span>R</span>
+            <span>S</span>
+            <span>T</span>
+            <span>U</span>
+            <span>V</span>
+            <span>W</span>
+            <span>X</span>
+            <span>Y</span>
+            <span>Z</span>
+            <span>#</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block content %} 
+<div class="ca-content-for-contacts">
+    <div class="ca-content">
+        <div class="ca-content__chatstab">
+            <div class="ca-content__contactstab">
+            <div class="container">
+                <div class="conversation-panel__back-button back2contacts">
+                    <i class="mdi mdi-arrow-left"></i> 
+                    <span>Back</span>
+                </div>
+                <div class="ca-profile-thumb">
+                    
+                    <div class="ca-profile-info">
+                        <div class="ca-profile-pic"><img class="img-fluid" src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt=""></div>
+                    </div>
+
+                    <div class="ca-overlay"></div>
+                </div>
+
+                <div class="profile-settings-list border mb-5">
+                    <div class="ca-profile-title">
+                        <h2 class="ca-profile-name">Dr. Kumari</h2>
+                        <div class="ca-profile-tag">
+                            <span>Cardiologist</span>
+                        </div>
+                        <div class="ca-contcat-profile__calling-buttons pt-2">
+                            <div class="iconbox iconbox-pill btn-outline-light">
+                                <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                <span>Video Call</span> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-sunheading  setting-sunheading-style01  my-3">Doctor Information</div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-account-heart-outline"></i></div>
+                                    <div class="ps-list__left--name">Speciality</div>
+                                </div>
+                                <div class="ps-list__right">Cardiology</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-hospital"></i></div>
+                                    <div class="ps-list__left--name">Hospital</div>
+                                </div>
+                                <div class="ps-list__right">KIMS</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-cellphone-android"></i></div>
+                                    <div class="ps-list__left--name">Mobile number</div>
+                                </div>
+                                <div class="ps-list__right">+01 369 2015</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-email-outline"></i></div>
+                                    <div class="ps-list__left--name">Email</div>
+                                </div>
+                                <div class="ps-list__right">earnest.clements@email.com</div>
+                            </div>
+                        </li>                                
+                    </ul>
+
+
+                    <div class="setting-sunheading setting-sunheading-style01 my-4">Appointment Information</div>
+
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-facebook"></i></div>
+                                    <div class="ps-list__left--name">Appointment Date</div>
+                                </div>
+                                <div class="ps-list__right">12/11/2020</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-instagram"></i></div>
+                                    <div class="ps-list__left--name">Appointment Time</div>
+                                </div>
+                                <div class="ps-list__right">12:00 AM</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ps-list">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-snapchat"></i></div>
+                                    <div class="ps-list__left--name">Description</div>
+                                </div>
+                                <div class="ps-list__right">Severe headache, vomiting, chest pain and intense sweating</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ps-list border-bottom-0">
+                                <div class="ps-list__left">
+                                    <div class="ps-list__left--icon"><i class="mdi mdi-twitter"></i></div>
+                                    <div class="ps-list__left--name">Status</div>
+                                </div>
+                                <div class="ps-list__right">Approved</div>
+                            </div>
+                        </li> 
+                                                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active')
+    })
+</script>
+{% endblock %}

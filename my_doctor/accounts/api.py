@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from rest_framework import viewsets, permissions,generics
 
+
 class userViewSet(viewsets.ModelViewSet):
     queryset = user_details.objects.all()
     permissions = [

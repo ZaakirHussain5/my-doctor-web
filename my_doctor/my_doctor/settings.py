@@ -48,6 +48,14 @@ INSTALLED_APPS = [
     'consultant_chat',
     'subscription_plans',
     'frontend',
+    'doctorsUI',
+    'patientsUI',
+    'transactions',
+    'executive_details',
+    'doctor_payments',
+    'patient_wallet_details',
+    'feedback_replies',
+    'patient_feedbacks'
 ]
 
 MIDDLEWARE = [

@@ -9,15 +9,16 @@
         <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
         <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
         <link rel="stylesheet" href="{% static 'vendors/selectFX/css/cs-skin-elastic.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/jqvmap/dist/jqvmap.min.css' %}">
-    
-    
+        <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
+        
+        
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/file.css' %}">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    </head>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'></head>
 <body class="open">
-    {% include 'partials/_navbar.html'%}
+    {% include 'partials/_adminNavbar.html'%}
     <div id="right-panel" class="right-panel">
         <header id="header" class="header">
             <div class="header-menu">
@@ -64,7 +65,7 @@
                             <div class="dropdown-menu" aria-labelledby="message">
                                 <p class="red">You have 4 Mails</p>
                                 <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"></span>
+                                <span class="photo media-left"><img alt="avatar" src="{% static 'images/avatar/1.jpg' %}"></span>
                                 <span class="message media-body">
                                     <span class="name float-left">Jonathan Smith</span>
                                     <span class="time float-right">Just now</span>
@@ -72,7 +73,7 @@
                                 </span>
                             </a>
                                 <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/2.jpg"></span>
+                                <span class="photo media-left"><img alt="avatar" src="{% static 'images/avatar/2.jpg' %}"></span>
                                 <span class="message media-body">
                                     <span class="name float-left">Jack Sanders</span>
                                     <span class="time float-right">5 minutes ago</span>
@@ -80,7 +81,7 @@
                                 </span>
                             </a>
                                 <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"></span>
+                                <span class="photo media-left"><img alt="avatar" src="{% static 'images/avatar/3.jpg' %}"></span>
                                 <span class="message media-body">
                                     <span class="name float-left">Cheryl Wheeler</span>
                                     <span class="time float-right">10 minutes ago</span>
@@ -88,7 +89,7 @@
                                 </span>
                             </a>
                                 <a class="dropdown-item media bg-flat-color-3" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/4.jpg"></span>
+                                <span class="photo media-left"><img alt="avatar" src="{% static 'images/avatar/4.jpg' %}"></span>
                                 <span class="message media-body">
                                     <span class="name float-left">Rachel Santos</span>
                                     <span class="time float-right">15 minutes ago</span>
@@ -102,7 +103,7 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}" alt="User Avatar">
                         </a>
       
                         <div class="user-menu dropdown-menu">
@@ -144,13 +145,29 @@
         </div>
     
     <script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'assets/js/toastr.min.js' %}"></script>
     <script src="{% static 'assets/js/file.js' %}"></script>
-
+    <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+    
     <script src="{% static 'vendors/popper.js/dist/umd/popper.min.js'%}"></script>
     <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
     <script src="{% static 'assets/js/main.js'%}"></script>
-    
-     {% block scripts%} {% endblock %}
+    <script src="{% static 'assets/js/bootbox.all.min.js'%}"></script>
+
+    <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'vendors/jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+    <script src="{% static 'assets/js/crud.js'%}"></script>
+    {% block scripts%} {% endblock %}
+     
 </body>
 <!-- Sidebar -->
 

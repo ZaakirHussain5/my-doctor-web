@@ -1,0 +1,226 @@
+{% extends 'doctor_layout.html' %}
+{% block content%}
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1 id="title">Welcome Doctor!</h1>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="content m-3">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+            <form action="" method="post" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                    <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                                    <label for="image1">
+                                        <span>Select Profile Photo</span>
+                                        <i class="fa fa-plus-circle"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="nav nav-tabs nav-fill nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="pills-home" aria-selected="true">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#password" role="tab" aria-controls="pills-profile" aria-selected="false">Password</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#timings" role="tab" aria-controls="pills-contact" aria-selected="false">Timings</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="list">
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class="form-control-label float-right">ID</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <input type="email" id="hf-email" name="hf-email" placeholder="Doctor ID" class="form-control"
+                                            readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Full Name</label></div>
+                                    <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Full Name"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Email Address</label>
+                                    </div>
+                                    <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Email Address"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Phone Number</label>
+                                    </div>
+                                    <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Phone Number"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">About</label></div>
+                                    <div class="col-12 col-md-8"><textarea name="" id="" rows="8" class="form-control"
+                                            placeholder="Enter About Details"></textarea></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-12 col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Update Profile
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class="form-control-label float-right">Old Password</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <input type="password" id="hf-email" name="hf-email" placeholder="Old Passowrd" class="form-control"
+                                           >
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">New Password</label></div>
+                                    <div class="col-12 col-md-8"><input type="password" id="hf-email" name="hf-email" placeholder="New Password"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Confirm Password</label>
+                                    </div>
+                                    <div class="col-12 col-md-8"><input type="password" id="hf-email" name="hf-email" placeholder="Confirm Password"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-12 col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Update Password
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="timings" role="tabpanel" aria-labelledby="list">
+                                <div class="row">
+                                    <div class=" form-group col-md-2">
+                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                                        <input
+                                            type="checkbox" data-id='${row.id}' class="switch-input active"> <span
+                                            class="switch-label"></span> <span class="switch-handle"></span> </label>MON
+                                </div>
+                                <div class=" form-group col-md-2">
+                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                                        <input
+                                            type="checkbox" data-id='${row.id}' class="switch-input active"> <span
+                                            class="switch-label"></span> <span class="switch-handle"></span> </label>TUE
+                                </div>
+                                <div class=" form-group col-md-2">
+                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                                        <input
+                                            type="checkbox" data-id='${row.id}' class="switch-input active"> <span
+                                            class="switch-label"></span> <span class="switch-handle"></span> </label>WED
+                                </div>
+                                <div class=" form-group col-md-2">
+                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                                        <input
+                                            type="checkbox" data-id='${row.id}' class="switch-input active"> <span
+                                            class="switch-label"></span> <span class="switch-handle"></span> </label>THU
+                                </div>
+                                <div class=" form-group col-md-2">
+                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                                        <input
+                                            type="checkbox" data-id='${row.id}' class="switch-input active"> <span
+                                            class="switch-label"></span> <span class="switch-handle"></span> </label>FRI
+                                </div>
+                                <div class=" form-group col-md-2">
+                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                                        <input
+                                            type="checkbox" data-id='${row.id}' class="switch-input active"> <span
+                                            class="switch-label"></span> <span class="switch-handle"></span> </label> SAT
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class=" form-group">
+                                            <label for="hf-email" class=" form-control-label">From</label>
+                                            <input type="time" id="hf-email" name="hf-email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class=" form-group">
+                                            <label for="hf-email" class=" form-control-label">To</label>
+                                            <input type="time" id="hf-email" name="hf-email" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-12 ">
+                                        <center>
+                                            <button type="submit" class="btn btn-primary btn-sm ju">
+                                            <i class="fa fa-dot-circle-o"></i> Update Timings
+                                        </button>
+                                        </center>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <i class="fa fa-inr bg-flat-color-5 p-3 font-2xl mr-3 float-left text-light"></i>
+                                    <div class="h5 text-secondary mb-0 mt-1">₹ 4.999,50</div>
+                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Income</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <i class="fa fa-laptop bg-info p-3 font-2xl mr-3 float-left text-light"></i>
+                                    <div class="h5 text-secondary mb-0 mt-1">267</div>
+                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Appointments</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <i class="fa fa-user-md bg-warning p-3 font-2xl mr-3 float-left text-light"></i>
+                                    <div class="h5 text-secondary mb-0 mt-1">1,267</div>
+                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Consultations</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="pull-right">
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts%}
+{% endblock %}

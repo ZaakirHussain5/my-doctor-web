@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from specialist_type.models import specialist_type
 
 def login(request):
     return render(request,'auth/login.html')
@@ -9,14 +10,19 @@ def dashboard(request):
 def specialists(request):
     return render(request,'frontend/specialists.html')
 
-def newDoctor(request):
-    return render(request,'frontend/newDoctor.html')
+def Doctors(request):
+    return render(request,'frontend/Doctors.html',{
+        "specialist_types":specialist_type.objects.all()
+    })
 
-def doctorsList(request):
-    return render(request,'frontend/doctorsList.html')
+def Executives(request):
+    return render(request,'frontend/Executives.html')
 
-def newExecutive(request):
-    return render(request,'frontend/newExecutive.html')
+def customerCareDashboard(request):
+    return render(request,'frontend/customerCareDashboard.html')
 
-def executivesList(request):
-    return render(request,'frontend/executivesList.html')
+def patientsList(request):
+    return render(request,'frontend/patientsList.html')
+
+def newAppointment(request):
+    return render(request,'frontend/newAppointment.html')

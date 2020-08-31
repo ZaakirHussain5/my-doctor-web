@@ -91,7 +91,7 @@
                     $.cookie('Token', response.token, {
                         expires: 1
                     })
-                    window.location.href = '/dashboard'
+                    window.location.href = '/adminDashboard'
                 }).fail((err, error, wrong) => {
                     console.log(err)
                     alert(err.responseJSON.non_field_errors[0])

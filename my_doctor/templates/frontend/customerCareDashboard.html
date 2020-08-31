@@ -1,0 +1,477 @@
+{% extends 'customer_layout.html' %}
+{% load static %} {% block content %}
+<style>
+    #list {
+    height: 17em;
+    line-height: 2em;
+    padding: 0;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+</style>
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1 id="title">New Patient</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="form" aria-selected="true">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#plist" role="tab" aria-controls="list" aria-selected="false">Home</a>
+        </li>
+      </ul>
+    <div class="tab-content" id="myTabContent"> 
+        <div class="tab-pane fade" id="plist" role="tabpanel" aria-labelledby="list">
+            <div class="content m-3">
+                <div class="card pl-3 pr-3">
+                    <div class="card-body card-block">
+                        <table class="table" id="Specialists">
+                            <thead>
+                                <tr>
+                                    <th>Slno</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone No.</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="{% static 'images/avatar/1.jpg' %}" style="height:90px;width:120px" alt="">
+                                    </td>
+                                    <td>Praveen</td>
+                                    <td>paveen@gmail.com</td>
+                                    <td>+9182761523</td>
+                                    <td>
+                                        <button type="button" class="btn btn-circle btn-success btn-sm" data-toggle="modal"
+                                            data-target="#patientDetails">
+                                            <i class="fa fa-tasks"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-circle btn-primary btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="pull-left">
+                            <button type="button" id="newPatient" class="btn btn-primary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Patient Registration
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="form">
+            <div class="content m-3">
+                <div class="card pl-3 pr-3">
+                    <div class="card-body card-block">
+                        <form action="" method="post" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="wrap-custom-file">
+                                                <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                                                <label for="image1">
+                                                    <span>Select Photo</span>
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Patient ID</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <div class="input-group">
+                                                <input type="text" id="pat_id" name="pat_id" placeholder="Patient ID"
+                                                    class="form-control" readonly="readonly">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-info" id="generate">
+                                                        Generate
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Patient Name</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Select Patient Name" class="form-control"></div>
+                                    </div>
+        
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Gender</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Male</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="comm_type"
+                                                    id="inlineCheckbox2" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox2">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">DOB</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <div class="row form-group">
+                                                <div class="col col-md-5">
+                                                    <input type="date" class="form-control">
+                                                </div>
+                                                <div class="col col-md-3">
+                                                    <label>Or age</label>
+                                                </div>
+                                                <div class="col col-md-4">
+                                                    <input type="number" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Blood Group</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Select Blood Group</option>
+                                                <option value="A+">A+</option>
+                                                <option value="B+">B+</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="O+">O+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="O-">O-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Family</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <select name="" id="" class="btn btn-secondary">
+                                                        <option value="">Select Relation</option>
+                                                        <option value="Father">Father</option>
+                                                        <option value="Spouse">Spouse</option>
+                                                    </select>
+                                                </div>
+                                                <input type="text" id="input1-group2" name="input1-group2"
+                                                    placeholder="Relation Name" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 class="pb-3">Contact Details</h3>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Primary Mobile No.</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Enter Primary Phone No." class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Secondary Mobile No.</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Enter Secondary Phone No." class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Email ID</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Enter Email ID" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Preffered Language</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <select name="" id="" class="form-control">
+                                                <option value="">Select Preffered Language</option>
+                                                <option value="A+">English (Practice Default)</option>
+                                                <option value="B+">Kannada (Practice Default)</option>
+                                                <option value="AB+">Hindi (Practice Default)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Street Address</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Enter Street Address" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Locality</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Enter Locality" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">City</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Entery City" class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="hf-email"
+                                                class=" form-control-label float-right">Pincode</label></div>
+                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
+                                                placeholder="Enter Pincode" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
+        
+                                    <h3 class="pb-3">Medical History</h3>
+                                    <ul id="list" class="list">
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Hypertension</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Allergies</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Asthama</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Diabities</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Gastric Ulcers</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Undergone Denatal
+                                                    Treatment Earlier</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Epilepsy</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Pregnant/Breast
+                                                    Feedfing</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <h3 class="pb-3 pt-3">Other History</h3>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                    <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
+                                    <h3 class="pb-3 pt-3">Groups</h3>
+        
+                                    <ul id="list" class="list">
+                                        <li>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="comm_type"
+                                                    id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">Being a Parent</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+        
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="pull-left">
+                            <button type="button" id="listPatients" class="btn btn-primary btn-sm">
+                                <i class="fa fa-tasks"></i> Patients List
+                            </button>
+                        </div>
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Register
+                            </button>
+                            <button type="reset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-ban"></i> Reset
+                            </button>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row p-3">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
+                          </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">DP2020001</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Praveen</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">AB-</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Male/42</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Father/Naveen</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">+91 9899887787</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">+91 9899887715</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">praveen@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">English (Practice Default)</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">#1234 Unknown Street</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Unknown Locality</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static">Unknown City</p>
+                            </div>
+                        </div>
+                        
+                      </div>
+                  </div>
+          
+                </div>
+                <div class="modal-footer">
+                    <a href="/newAppointment" class="btn btn-primary">
+                        Book Appointmnet
+                    </a>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">
+                      Cancel
+                  </button>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+  
+  {% endblock %} 
+  {% block scripts %}
+  <script>
+    jQuery(document).ready(function($){
+        $('#newPatient').click(function(){
+          $('#title').html('New Patient')
+          $('#myTab a[href="#form"]').tab('show')
+        })
+        
+        $('#listPatients').click(function(){
+          $('#title').html('Patients List')
+          $('#myTab a[href="#plist"]').tab('show')
+        })
+        
+        $('#generate').click(function(){
+            $.get('/api/GeneratePatientID',function(data){
+                $('#pat_id').val(data)
+            })
+        })
+    })
+</script>
+  {% endblock %}
