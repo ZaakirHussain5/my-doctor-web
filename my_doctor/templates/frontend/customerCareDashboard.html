@@ -228,7 +228,8 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
+                                <button type="button" class="btn btn-sm btn-link pull-right" data-toggle="modal"
+                                data-target="#MedicalHistory">Add New</button>
             
                                 <h3 class="pb-3">Medical History</h3>
                                 <ul id="list" class="list">
@@ -293,7 +294,8 @@
                                 </ul>
                                 <h3 class="pb-3 pt-3">Other History</h3>
                                 <textarea class="form-control" rows="3" name="other_history" id="other_history"></textarea>
-                                <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
+                                <button type="button" class="btn btn-sm btn-link pull-right" data-toggle="modal"
+                                data-target="#MedicalGroups">Add New</button>
                                 <h3 class="pb-3 pt-3">Groups</h3>
             
                                 <ul id="list" class="list">
@@ -436,6 +438,89 @@
               
           </div>
         </div>
+        <div class="modal fade" id="MedicalHistory" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="scrollmodalLabel">Medical History</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                     <div class="form-group">
+                         <label for="medicalHistoryInput" class="form-control-label"></label>
+                         <div class="input-group">
+                            <input type="text" placeholder="Enter Medical History Item" class="form-control" id="medicalHistoryInput" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List">
+                                    <i class="fa fa-plus-circle"></i>
+                                </button>
+                            </span>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                        <ul id="list" class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Gastric Ulcers<span class="btn btn-danger btn-sm pull-right">
+                                     <i class="fa fa-trash"></i>
+                                 </span>
+                            </li>
+                        </ul>
+                     </div>
+              
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-danger">
+                          Close
+                      </button>
+                    </div>
+                  </div>
+                  
+              </div>
+            </div>
+
+            <div class="modal fade" id="MedicalGroups" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="scrollmodalLabel">Medical Groups</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                         <div class="form-group">
+                             <label for="medicalHistoryInput" class="form-control-label"></label>
+                             <div class="input-group">
+                                <input type="text" placeholder="Enter Medical Group Item" class="form-control" id="medicalHistoryInput" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </span>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                            <ul id="list" class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Being a Parent<span class="btn btn-danger btn-sm pull-right">
+                                         <i class="fa fa-trash"></i>
+                                     </span>
+                                </li>
+                            </ul>
+                         </div>
+                  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-danger">
+                              Close
+                          </button>
+                        </div>
+                      </div>
+                      
+                  </div>
+                </div>
   
   {% endblock %} 
   {% block scripts %}
