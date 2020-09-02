@@ -21,7 +21,7 @@ class patient_info(models.Model):
     medical_history = models.CharField(max_length=1000,null=True)
     other_history=models.CharField(max_length=100,null=True)
     groups=models.CharField(max_length=200,null=True)
-    profile_pic=models.FileField(max_length=355,null=True)
+    profile_pic=models.FileField(max_length=355,null=True, default='settings.MEDIA_ROOT/logos/anonymous-user.png')
     created_at=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
 

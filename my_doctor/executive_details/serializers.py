@@ -15,11 +15,13 @@ class ExecutiveRegistrationSerializer(serializers.Serializer):
     email = serializers.CharField()
     phone_number  = serializers.CharField()
     about = serializers.CharField()
+    full_name=serializers.CharField()
+    profile_pic=serializers.FileField()
 
     def create(self, validated_data):
         try:
             user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-            executive = executive_details.objects.create(user=user,phone_number=validated_data['phone_number'],about=validated_data['about'])
+            executive = executive_details.objects.create(user=user,phone_number=validated_data['phone_number'],about=validated_data['about'],full_name=validated_data['full_name'],profile_pic=validated_data['profile_pic'])
             executive.save()
             return user
         except IntegrityError:

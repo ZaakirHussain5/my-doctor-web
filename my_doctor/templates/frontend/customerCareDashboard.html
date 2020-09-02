@@ -32,38 +32,17 @@
             <div class="content m-3">
                 <div class="card pl-3 pr-3">
                     <div class="card-body card-block">
-                        <table class="table" id="Specialists">
+                        <table class="table table-bodered" style="width:100%" id="patients">
                             <thead>
                                 <tr>
                                     <th>Slno</th>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>Email</th>
                                     <th>Phone No.</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="{% static 'images/avatar/1.jpg' %}" style="height:90px;width:120px" alt="">
-                                    </td>
-                                    <td>Praveen</td>
-                                    <td>paveen@gmail.com</td>
-                                    <td>+9182761523</td>
-                                    <td>
-                                        <button type="button" class="btn btn-circle btn-success btn-sm" data-toggle="modal"
-                                            data-target="#patientDetails">
-                                            <i class="fa fa-tasks"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-circle btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-circle btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -79,251 +58,255 @@
         </div>
         <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="form">
             <div class="content m-3">
+                <form id="pat_form" class="form-horizontal">
                 <div class="card pl-3 pr-3">
                     <div class="card-body card-block">
-                        <form action="" method="post" class="form-horizontal">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="wrap-custom-file">
-                                                <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
-                                                <label for="image1">
-                                                    <span>Select Photo</span>
-                                                    <i class="fa fa-plus-circle"></i>
-                                                </label>
-                                            </div>
+                        <input type="hidden" name="id" id="patn_id">
+                        <input type="hidden" name="user">
+                        <input type="hidden" name="username" id="username">
+                        <input type="hidden" name="password" id="password">
+                        <input type="hidden" name="medical_history" id="medical_history">
+                        <input type="hidden" name="groups" id="groups">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="wrap-custom-file">
+                                            <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                                            <label for="image1">
+                                                <span>Select Photo</span>
+                                                <i class="fa fa-plus-circle"></i>
+                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Patient ID</label></div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="input-group">
-                                                <input type="text" id="pat_id" name="pat_id" placeholder="Patient ID"
-                                                    class="form-control" readonly="readonly">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-info" id="generate">
-                                                        Generate
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Patient Name</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Select Patient Name" class="form-control"></div>
-                                    </div>
-        
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Gender</label></div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Male</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="comm_type"
-                                                    id="inlineCheckbox2" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox2">Female</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">DOB</label></div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="row form-group">
-                                                <div class="col col-md-5">
-                                                    <input type="date" class="form-control">
-                                                </div>
-                                                <div class="col col-md-3">
-                                                    <label>Or age</label>
-                                                </div>
-                                                <div class="col col-md-4">
-                                                    <input type="number" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Blood Group</label></div>
-                                        <div class="col-12 col-md-8">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">Select Blood Group</option>
-                                                <option value="A+">A+</option>
-                                                <option value="B+">B+</option>
-                                                <option value="AB+">AB+</option>
-                                                <option value="O+">O+</option>
-                                                <option value="A-">A-</option>
-                                                <option value="B-">B-</option>
-                                                <option value="AB-">AB-</option>
-                                                <option value="O-">O-</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Family</label></div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="input-group">
-                                                <div class="input-group-btn">
-                                                    <select name="" id="" class="btn btn-secondary">
-                                                        <option value="">Select Relation</option>
-                                                        <option value="Father">Father</option>
-                                                        <option value="Spouse">Spouse</option>
-                                                    </select>
-                                                </div>
-                                                <input type="text" id="input1-group2" name="input1-group2"
-                                                    placeholder="Relation Name" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h3 class="pb-3">Contact Details</h3>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Primary Mobile No.</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Enter Primary Phone No." class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Secondary Mobile No.</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Enter Secondary Phone No." class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Email ID</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Enter Email ID" class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Preffered Language</label></div>
-                                        <div class="col-12 col-md-8">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">Select Preffered Language</option>
-                                                <option value="A+">English (Practice Default)</option>
-                                                <option value="B+">Kannada (Practice Default)</option>
-                                                <option value="AB+">Hindi (Practice Default)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Street Address</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Enter Street Address" class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Locality</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Enter Locality" class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">City</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Entery City" class="form-control"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-4"><label for="hf-email"
-                                                class=" form-control-label float-right">Pincode</label></div>
-                                        <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email"
-                                                placeholder="Enter Pincode" class="form-control"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
-        
-                                    <h3 class="pb-3">Medical History</h3>
-                                    <ul id="list" class="list">
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Hypertension</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Allergies</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Asthama</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Diabities</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Gastric Ulcers</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Undergone Denatal
-                                                    Treatment Earlier</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Epilepsy</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Pregnant/Breast
-                                                    Feedfing</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <h3 class="pb-3 pt-3">Other History</h3>
-                                    <textarea class="form-control" rows="3"></textarea>
-                                    <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
-                                    <h3 class="pb-3 pt-3">Groups</h3>
-        
-                                    <ul id="list" class="list">
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="comm_type"
-                                                    id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">Being a Parent</label>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
-        
-                        </form>
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Patient
+                                            ID</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" id="pat_id" name="pat_id" placeholder="Patient ID"
+                                                class="form-control" readonly="readonly">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-info" id="generate">
+                                                    Generate
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Patient
+                                            Name</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="full_name" name="full_name"
+                                            placeholder="Select Patient Name" class="form-control"></div>
+                                </div>
+            
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">Gender</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" value="male" id="genderMale"
+                                                value="option1">
+                                            <label class="form-check-label" for="genderMale">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" value="female" id="genderFemale"
+                                                value="option1">
+                                            <label class="form-check-label" for="genderFemale">Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">DOB</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="row form-group">
+                                            <div class="col col-md-5">
+                                                <input type="date" class="form-control" name="dob">
+                                            </div>
+                                            <div class="col col-md-3">
+                                                <label>Or age</label>
+                                            </div>
+                                            <div class="col col-md-4">
+                                                <input type="number" class="form-control" name="age">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Blood
+                                            Group</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <select name="blood_group" id="blood_group" class="form-control">
+                                            <option value="">Select Blood Group</option>
+                                            <option value="A+">A+</option>
+                                            <option value="B+">B+</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="O+">O+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O-">O-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">Family</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <select name="rel_type" id="rel_type" class="btn btn-secondary">
+                                                    <option value="">Select Relation</option>
+                                                    <option value="Father">Father</option>
+                                                    <option value="Spouse">Spouse</option>
+                                                </select>
+                                            </div>
+                                            <input type="text" id="input1-group2" id="relation" name="relation" placeholder="Relation Name"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="pb-3">Contact Details</h3>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Primary
+                                            Mobile No.</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="ph_no" name="ph_no"
+                                            placeholder="Enter Primary Phone No." class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">Secondary Mobile No.</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="s_ph_no" name="s_ph_no"
+                                            placeholder="Enter Secondary Phone No." class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Email
+                                            ID</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="email" name="email"
+                                            placeholder="Enter Email ID" class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">Preffered Language</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <select name="pref_lang" id="pref_lang" class="form-control">
+                                            <option value="">Select Preffered Language</option>
+                                            <option value="A+">English (Practice Default)</option>
+                                            <option value="B+">Kannada (Practice Default)</option>
+                                            <option value="AB+">Hindi (Practice Default)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Street
+                                            Address</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="street_address" name="street_address"
+                                            placeholder="Enter Street Address" class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">Locality</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="locality" name="locality"
+                                            placeholder="Enter Locality" class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">City</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="city" name="city" placeholder="Entery City"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label float-right">Pincode</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="pincode" name="pincode"
+                                            placeholder="Enter Pincode" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
+            
+                                <h3 class="pb-3">Medical History</h3>
+                                <ul id="list" class="list">
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Hypertension" value="Hypertension">
+                                            <label class="form-check-label" for="inlineCheckbox1">Hypertension</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Allergies" value="Allergies">
+                                            <label class="form-check-label" for="inlineCheckbox1">Allergies</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Asthama" value="Asthama">
+                                            <label class="form-check-label" for="inlineCheckbox1">Asthama</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Diabities" value="Diabities">
+                                            <label class="form-check-label" for="inlineCheckbox1">Diabities</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Gastric Ulcers" value="Gastric Ulcers">
+                                            <label class="form-check-label" for="inlineCheckbox1">Gastric Ulcers</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Undergone Denatal" value="Undergone Denatal">
+                                            <label class="form-check-label" for="Undergone Denatal">Undergone Denatal
+                                                Treatment Earlier</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Epilepsy" value="Epilepsy">
+                                            <label class="form-check-label" for="Epilepsy">Epilepsy</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="Pregnant/Breast" value="Pregnant/Breast">
+                                            <label class="form-check-label" for="Pregnant/Breast">Pregnant/Breast
+                                                Feedfing</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h3 class="pb-3 pt-3">Other History</h3>
+                                <textarea class="form-control" rows="3" name="other_history" id="other_history"></textarea>
+                                <button type="button" class="btn btn-sm btn-link pull-right">Add New</button>
+                                <h3 class="pb-3 pt-3">Groups</h3>
+            
+                                <ul id="list" class="list">
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="other_history"
+                                                id="Being a Parent" value="Being a Parent">
+                                            <label class="form-check-label" for="Being a Parent">Being a Parent</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="pull-left">
@@ -339,9 +322,10 @@
                                 <i class="fa fa-ban"></i> Reset
                             </button>
                         </div>
-        
+            
                     </div>
                 </div>
+                </form>
             </div>
         </div>
        
@@ -472,6 +456,76 @@
                 $('#pat_id').val(data)
             })
         })
+
+        $('#password').val(rand(1000,9999))
+        $('#ph_no').change(function(){
+            $('#username').val($(this).val())
+        })
+
+        function rand(min, max) {
+            let randomNum = Math.random() * (max - min) + min;
+            return Math.floor(randomNum);
+        }
+
+        var table = $('#patients').DataTable({
+            ajax:{
+                url:'/api/patient_info',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data:'profile_pic',
+                    render:function(data){
+                        return `<img src="${data}" style="height:90px;width:120px" alt="">`}
+
+                },
+                {
+                    data:'full_name'
+
+                },
+                {
+                    data: 'ph_no'
+                },
+                {
+                    data:'id',
+                    render: function (data,type,row) {
+                          return `<button type="button" class="btn btn-circle btn-success btn-sm" data-toggle="modal"
+                                            data-target="#patientDetails">
+                                            <i class="fa fa-tasks"></i>
+                                        </button>
+                          <button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                    }
+                }
+
+            ],language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+
+        crudOperations({
+              url:'/api/PatientResistration',
+              put_url: '/api/patient_info/',
+              table_id:'#patients',
+              id_selector:'#patn_id',
+              form_id:'#pat_form',
+              table:table,
+              entity:'patient',
+              tabs:true
+        })
+
     })
 </script>
   {% endblock %}
