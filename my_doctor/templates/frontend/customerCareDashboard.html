@@ -232,80 +232,16 @@
                                 data-target="#MedicalHistory">Add New</button>
             
                                 <h3 class="pb-3">Medical History</h3>
-                                <ul id="list" class="list">
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Hypertension" value="Hypertension">
-                                            <label class="form-check-label" for="inlineCheckbox1">Hypertension</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Allergies" value="Allergies">
-                                            <label class="form-check-label" for="inlineCheckbox1">Allergies</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Asthama" value="Asthama">
-                                            <label class="form-check-label" for="inlineCheckbox1">Asthama</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Diabities" value="Diabities">
-                                            <label class="form-check-label" for="inlineCheckbox1">Diabities</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Gastric Ulcers" value="Gastric Ulcers">
-                                            <label class="form-check-label" for="inlineCheckbox1">Gastric Ulcers</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Undergone Denatal" value="Undergone Denatal">
-                                            <label class="form-check-label" for="Undergone Denatal">Undergone Denatal
-                                                Treatment Earlier</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Epilepsy" value="Epilepsy">
-                                            <label class="form-check-label" for="Epilepsy">Epilepsy</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="Pregnant/Breast" value="Pregnant/Breast">
-                                            <label class="form-check-label" for="Pregnant/Breast">Pregnant/Breast
-                                                Feedfing</label>
-                                        </div>
-                                    </li>
+                                <ul id="list" class="list mhc-list">
+                                   
                                 </ul>
                                 <h3 class="pb-3 pt-3">Other History</h3>
                                 <textarea class="form-control" rows="3" name="other_history" id="other_history"></textarea>
                                 <button type="button" class="btn btn-sm btn-link pull-right" data-toggle="modal"
-                                data-target="#MedicalGroups">Add New</button>
+                                data-target="#Medicalgroup">Add New</button>
                                 <h3 class="pb-3 pt-3">Groups</h3>
-            
-                                <ul id="list" class="list">
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="other_history"
-                                                id="Being a Parent" value="Being a Parent">
-                                            <label class="form-check-label" for="Being a Parent">Being a Parent</label>
-                                        </div>
-                                    </li>
+
+                                <ul id="list" class="list mgc-list">
                                 </ul>
                             </div>
                         </div>
@@ -453,19 +389,15 @@
                          <div class="input-group">
                             <input type="text" placeholder="Enter Medical History Item" class="form-control" id="medicalHistoryInput" />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List">
+                                <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List" id="add_medical_history">
                                     <i class="fa fa-plus-circle"></i>
                                 </button>
                             </span>
                          </div>
                      </div>
                      <div class="form-group">
-                        <ul id="list" class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                Gastric Ulcers<span class="btn btn-danger btn-sm pull-right">
-                                     <i class="fa fa-trash"></i>
-                                 </span>
-                            </li>
+                        <ul id="list" class="list-group list-group-flush mh-list">
+                           
                         </ul>
                      </div>
               
@@ -480,34 +412,30 @@
               </div>
             </div>
 
-            <div class="modal fade" id="MedicalGroups" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+            <div class="modal fade" id="Medicalgroup" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="scrollmodalLabel">Medical Groups</h5>
+                            <h5 class="modal-title" id="scrollmodalLabel">Medical Group</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                          <div class="form-group">
-                             <label for="medicalHistoryInput" class="form-control-label"></label>
+                             <label for="medicalgroupInput" class="form-control-label"></label>
                              <div class="input-group">
-                                <input type="text" placeholder="Enter Medical Group Item" class="form-control" id="medicalHistoryInput" />
+                                <input type="text" placeholder="Enter Medical Group Item" class="form-control" id="medicalgroupInput" />
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List">
+                                    <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List" id="add_medical_group">
                                         <i class="fa fa-plus-circle"></i>
                                     </button>
                                 </span>
                              </div>
                          </div>
                          <div class="form-group">
-                            <ul id="list" class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    Being a Parent<span class="btn btn-danger btn-sm pull-right">
-                                         <i class="fa fa-trash"></i>
-                                     </span>
-                                </li>
+                            <ul id="list" class="list-group list-group-flush mg-list">
+                               
                             </ul>
                          </div>
                   
@@ -521,6 +449,7 @@
                       
                   </div>
                 </div>
+    
   
   {% endblock %} 
   {% block scripts %}
@@ -551,6 +480,129 @@
             let randomNum = Math.random() * (max - min) + min;
             return Math.floor(randomNum);
         }
+
+        function loadHistoryList() {
+            $.getJSON('/api/medical_history', {}, function (data) {
+                var items = '',checkItems ='';
+                $.each(data, function (i, item) {
+                    items += ` <li class="list-group-item">
+                               ${item.medical_history}<button type="button" data-mh-id="${item.id}" class="btn btn-danger btn-sm pull-right mh-delete" >
+                                     <i class="fa fa-trash"></i>
+                                </button>
+                            </li>`
+                    checkItems+=` <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="medical_history"
+                                                id="${item.medical_history}" value="${item.medical_history}">
+                                            <label class="form-check-label" for="${item.medical_history}">${item.medical_history}</label>
+                                        </div>
+                                    </li>`
+                })
+                $('.mh-list').html(items)
+                $('.mhc-list').html(checkItems)
+            })
+        }        
+
+        $('.mh-list').on('click', '.mh-delete', function () {
+            var id = $(this).attr('data-mh-id')
+            $.ajax({
+                url: `/api/medical_history/${id}/`,
+                method: 'DELETE',
+                contentType: 'application/json',
+                success: function (data) {
+                    loadHistoryList();
+                },
+                error: function (data) {
+                    console.log(data);
+                    toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
+                }
+            })
+        })
+
+
+        loadgroupList();
+        $('#add_medical_group').click(function(){
+            var mhItem=$('#medicalgroupInput').val()
+            if(mhItem && mhItem!=''){
+                $.ajax({
+                    url:'/api/groups/',
+                    method:'POST',
+                    data:JSON.stringify({groups:mhItem}),
+                    contentType:'application/json',
+                    success:function(data){
+                        loadgroupList();
+                        $('#medicalgroupInput').val('')
+                    },
+                    error:function(data){
+                        console.log(data);
+                        toastr.error("","Adding Failed",{positionClass:'toast-top-center'})
+                    }
+                })
+            }
+        })
+
+
+        function loadgroupList() {
+            $.getJSON('/api/groups', {}, function (data) {
+                var items = '',checkItems ='';
+                $.each(data, function (i, item) {
+                    items += ` <li class="list-group-item">
+                               ${item.groups}<button type="button" data-mh-id="${item.id}" class="btn btn-danger btn-sm pull-right mh-delete" >
+                                     <i class="fa fa-trash"></i>
+                                </button>
+                            </li>`
+                    checkItems+=` <li>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="groups"
+                                                id="${item.groups}" value="${item.groups}">
+                                            <label class="form-check-label" for="${item.groups}">${item.groups}</label>
+                                        </div>
+                                    </li>`
+                })
+                $('.mg-list').html(items)
+                $('.mgc-list').html(checkItems)
+            })
+        }        
+
+        $('.mg-list').on('click', '.mh-delete', function () {
+            var id = $(this).attr('data-mh-id')
+            $.ajax({
+                url: `/api/groups/${id}/`,
+                method: 'DELETE',
+                contentType: 'application/json',
+                success: function (data) {
+                    loadgroupList();
+                },
+                error: function (data) {
+                    console.log(data);
+                    toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
+                }
+            })
+        })
+
+
+        loadHistoryList();
+        $('#add_medical_history').click(function(){
+            var mhItem=$('#medicalHistoryInput').val()
+            if(mhItem && mhItem!=''){
+                $.ajax({
+                    url:'/api/medical_history/',
+                    method:'POST',
+                    data:JSON.stringify({medical_history:mhItem}),
+                    contentType:'application/json',
+                    success:function(data){
+                        loadHistoryList();
+                        $('#medicalHistoryInput').val('')
+                    },
+                    error:function(data){
+                        console.log(data);
+                        toastr.error("","Adding Failed",{positionClass:'toast-top-center'})
+                    }
+                })
+            }
+        })
+
+
 
         var table = $('#patients').DataTable({
             ajax:{
@@ -601,7 +653,7 @@
         })
 
         crudOperations({
-              url:'/api/PatientResistration',
+              url:'/api/PatientRegistration',
               put_url: '/api/patient_info/',
               table_id:'#patients',
               id_selector:'#patn_id',

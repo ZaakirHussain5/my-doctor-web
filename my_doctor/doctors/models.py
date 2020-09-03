@@ -22,4 +22,20 @@ class doctors_info(models.Model):
     
 
     def __str__(self):
-        return self.Registration_Number 
+        return self.full_name +','+ self.specialist_type
+
+
+class DoctorTimings(models.Model):
+    doctor=models.ForeignKey(doctors_info,on_delete=models.CASCADE)
+    mon=models.BooleanField()
+    tue=models.BooleanField()
+    wed=models.BooleanField()
+    thu=models.BooleanField()
+    fri=models.BooleanField()
+    sat=models.BooleanField()
+    sun=models.BooleanField()
+    from_time=models.CharField(max_length=50)
+    to_time=models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.doctor.full_name

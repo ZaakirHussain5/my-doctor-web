@@ -22,8 +22,23 @@ class patient_info(models.Model):
     other_history=models.CharField(max_length=100,null=True)
     groups=models.CharField(max_length=200,null=True)
     profile_pic=models.FileField(max_length=355,null=True, default='settings.MEDIA_ROOT/logos/anonymous-user.png')
+    height=models.DecimalField(max_digits=10,decimal_places=2,null=True)
+    weight=models.DecimalField(max_digits=10,decimal_places=2,null=True)
+    marital_status=models.CharField(max_length=20,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.full_name
+
+class medical_history(models.Model):
+    medical_history=models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.medical_history
+
+class groups(models.Model):
+    groups=models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.groups

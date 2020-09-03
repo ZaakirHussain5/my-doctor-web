@@ -7,5 +7,7 @@ def generateId(request):
     import datetime
     now = datetime.datetime.now()
     uid = patient_info.objects.aggregate(Max('id'))
-    uid = uid if uid is None else 1
-    return HttpResponse('DPPAT'+ str(now.year) + str(uid))
+    uid = uid['id__max'] 
+    if uid == None:
+        uid = 0
+    return HttpResponse('DPPAT'+ str(now.year) + str(uid+1))

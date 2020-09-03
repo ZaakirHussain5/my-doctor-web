@@ -143,26 +143,7 @@
                                     </a>
                                     <ul class="mfb-component__list">
                                         <li>
-                                            <a href="javascript:;"
-                                                data-mfb-label="Theme" class="mfb-component__button--child">
-                                            <i class="mfb-component__child-icon mdi mdi-palette"></i>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="javascript:;"  data-toggle="modal" data-target="#newGroupModal" data-mfb-label="Create Group" class="mfb-component__button--child">
-                                            <i class="mfb-component__child-icon mdi mdi-account-group"></i>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="javascript:;" data-toggle="modal" data-target="#newCallModal" data-mfb-label="New Call" class="mfb-component__button--child">
-                                                <i class="mfb-component__child-icon mdi mdi-phone"></i>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="javascript:;" data-toggle="modal" data-target="#newMsgModal" data-mfb-label="New Chat" class="mfb-component__button--child">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#newAppointmentModal" data-mfb-label="New Appointment" class="mfb-component__button--child">
                                                 <i class="mfb-component__child-icon mdi mdi-android-messages"></i>
                                             </a>
                                         </li>
@@ -595,437 +576,41 @@
             </div>
             <div class="new-msgcall-data">
                 <!-- NEW MESSAGE MODAL -->
-                <div class="modal new-message-dialog" id="newMsgModal" tabindex="-1" role="dialog" aria-labelledby="newMsgModal" aria-hidden="true">
+                <div class="modal new-message-dialog" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newMsgModal" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h6 class="modal-title" id="newMsgModalLabel">Create New Message</h6>
+                                <h6 class="modal-title" id="newMsgModalLabel">Book New Appointment</h6>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="searchbar">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text dialpad-opener"><i class="mdi mdi-dialpad"></i></span>
+                                <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                      <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#splSelection" role="tab" aria-controls="form" aria-selected="true">Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#dateSelection" role="tab" aria-controls="list" aria-selected="false">Home</a>
+                                    </li>
+                                  </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="splSelection" role="tabpanel" aria-labelledby="list">
+                                     <div class="modal-contact-list">
+                                    <ul class="list-unstyled" id="spl-list">
+                                        
+                                    </ul>
+                                   </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="dateSelection" role="tabpanel" aria-labelledby="list">
+                                        <div class="modal-contact-list">
+                                            <ul class="list-unstyled" id="selectedSpl">
+                                                
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-contact-list">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/06.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Chuck McCann</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Pearl Villarreal</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/03.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Sheila Hawkins</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                    <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                        <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                        <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="contactlist border-bottom-0">
-                                                <div class="user-avatar user-avatar-rounded">
-                                                    <img src="{% static 'patients/assets/images/user/500/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="contactlist__details">
-                                                    <div class="contactlist__details--name">Amanda Sinquefield</div>
-                                                    <div class="calllist__details--info">
-                                                        <span><i class="mdi mdi-tag-outline"></i></span>
-                                                        <span>Friends</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="contactlist__actions">
-                                                <div class="iconbox btn-solid-primary">
-                                                        <i class="iconbox__icon mdi mdi-message-text-outline"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="modal-dialpad">
-                                    <div class="dial-pad-wrap">
-                                        <div class="dial-pad">
-                                            <div class="dial-screen">+01-(363)-2612</div>
-                                            <div class="dial-table">
-                                                <div class="dial-table-row">
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="1">
-                                                        <div class="dial-key">1</div>
-                                                        <div class="dial-sub-key">&nbsp;</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="2">
-                                                        <div class="dial-key">2</div>
-                                                        <div class="dial-sub-key">abc</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="3">
-                                                        <div class="dial-key">3</div>
-                                                        <div class="dial-sub-key">def</div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div class="dial-table-row">
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="4">
-                                                        <div class="dial-key">4</div>
-                                                        <div class="dial-sub-key">ghi</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="5">
-                                                        <div class="dial-key">5</div>
-                                                        <div class="dial-sub-key">jkl</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="6">
-                                                        <div class="dial-key">6</div>
-                                                        <div class="dial-sub-key">mno</div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div class="dial-table-row">
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="7">
-                                                        <div class="dial-key">7</div>
-                                                        <div class="dial-sub-key">pqrs</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="8">
-                                                        <div class="dial-key">8</div>
-                                                        <div class="dial-sub-key">tuv</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="9">
-                                                        <div class="dial-key">9</div>
-                                                        <div class="dial-sub-key">wxyz</div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div class="dial-table-row">
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="*">
-                                                        <div class="dial-key">*</div>
-                                                        <div class="dial-sub-key">&nbsp;</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="0">
-                                                        <div class="dial-key">0</div>
-                                                        <div class="dial-sub-key">+</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="#">
-                                                        <div class="dial-key">#</div>
-                                                        <div class="dial-sub-key">&nbsp;</div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div class="dial-table-row no-sub-key">
-                                                    <div class="dial-table-col">
-                                                        <div class="dial-key-wrap" data-key="save-contact">
-                                                            <div class="dial-key"><i class="mdi mdi-account-plus-outline"></i></div>
-                                                            <div class="dial-sub-key">Call</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="call">
-                                                        <div class="dial-key"><i class="mdi mdi-message-text-outline"></i></div>
-                                                        <div class="dial-sub-key">Call</div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="dial-table-col">
-                                                    <div class="dial-key-wrap" data-key="back">
-                                                        <div class="dial-key"><i class="mdi mdi-arrow-left"></i></div>
-                                                        <div class="dial-sub-key">Back</div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -3038,5 +2623,46 @@
     <script src="{% static 'patients/js/app.js' %}"></script>
     {% block scripts%}
     {% endblock %}
+    <script>
+        $(document).ready(function(){
+            $.getJSON('/api/specialist_types',{},function(data){
+                var items = ''
+                if (data) {
+                    $.each(data, function (i, item) {
+                        items +=
+                            `<li id="spl-item" data-spl="${item.special_type}">
+                                            <div class="contactlist">
+                                                <div class="user-avatar user-avatar-rounded">
+                                                    <img src="${item.icon}" alt="">
+                                                </div>
+                                                <div class="contactlist__details">
+                                                    <div class="contactlist__details--name">${item.special_type}</div>
+                                                </div>
+
+                                                <div class="contactlist__actions">
+                                                <div class="iconbox btn-solid-primary btn-select">
+                                                    <i class="iconbox__icon mdi mdi-arrow-right"></i>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </li>`
+                    })
+                $('#spl-list').html(items)
+                }
+
+                
+            })
+            
+            $('#spl-list').on('click','.btn-select',function(){
+                 var list = $(this).closest('li').html()
+                 $('#selectedSpl').html('<li>'+list.replace('mdi-arrow-right','mdi-playlist-remove')+'</li>')
+                 $('#myTab a[href="#dateSelection"]').tab('show')
+            })
+
+            $('#selectedSpl').on('click','.btn-select',function(){
+                $('#myTab a[href="#splSelection"]').tab('show')
+            })
+        })
+    </script>
 </body>
 </html>
