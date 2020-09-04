@@ -26,7 +26,7 @@ class doctors_info(models.Model):
 
 
 class DoctorTimings(models.Model):
-    doctor=models.ForeignKey(doctors_info,on_delete=models.CASCADE)
+    doctor=models.ForeignKey(doctors_info,related_name="timings",on_delete=models.CASCADE)
     mon=models.BooleanField()
     tue=models.BooleanField()
     wed=models.BooleanField()

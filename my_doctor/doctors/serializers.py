@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import doctors_info
+from .models import doctors_info,DoctorTimings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.views.defaults import bad_request
@@ -10,9 +10,15 @@ class doctors_infoSerializer(serializers.ModelSerializer):
         model = doctors_info
         fields = '__all__'
 
-class doctors_detailsSerializer(serializers.ModelSerializer):
+class DoctorTimingsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = doctors_info
+        model = DoctorTimings
+        fields = '__all__'
+
+class AvlDoctorsListSerializer(serializers.ModelSerializer):
+    doctor=doctors_infoSerializer()
+    class Meta:
+        model = DoctorTimings
         fields = '__all__'
 
 class DoctorRegistration(serializers.Serializer):
