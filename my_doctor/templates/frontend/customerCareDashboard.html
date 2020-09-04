@@ -466,8 +466,8 @@
         })
         
         $('#generate').click(function(){
-            $.get('/api/GeneratePatientID',function(data){
-                $('#pat_id').val(data)
+            $.getJSON('/api/GeneratePatientID',{},function(data){
+                $('#pat_id').val(data.pat_id)
             })
         })
 

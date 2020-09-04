@@ -10,6 +10,7 @@ class appointmentSerializer(serializers.ModelSerializer):
 
 class appointmentsListSerializer(serializers.ModelSerializer):
     doctor = doctors_infoSerializer()
+    patient = UserAuthSerializer()
     class Meta:
         model = appointment
         fields = '__all__'

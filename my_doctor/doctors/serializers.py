@@ -10,6 +10,11 @@ class doctors_infoSerializer(serializers.ModelSerializer):
         model = doctors_info
         fields = '__all__'
 
+class doctors_detailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = doctors_info
+        fields = '__all__'
+
 class DoctorRegistration(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()

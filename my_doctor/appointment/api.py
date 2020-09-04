@@ -24,4 +24,13 @@ class getPatientAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         return self.request.user.appointments.all()
 
+class getAllAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = appointmentsListSerializer
+
+    def get_queryset(self):
+        return appointment.objects.all()
+
 
