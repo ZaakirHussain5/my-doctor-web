@@ -7,13 +7,16 @@
     <meta name="keywords" content="Flingo, Messaging app, chat, chat app"/>
     
     <title>Doctor Plus - Patient</title>
-    <link href="https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,600,700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'patients/assets/fonts/MaterialDesign/css/materialdesignicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'patients/assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
     <link rel="stylesheet" href="{% static 'patients/assets/vendors/OwlCarousel2/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'patients/assets/vendors/bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'patients/css/app.css' %}">
     <link rel="stylesheet" href="{% static 'patients/css/theme/default.css' %}">
+   <link rel="stylesheet" href="{% static 'assets/css/bootstrap.datapicker.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
+    
     <style>
     .ca-main-wrapper .ca-content-wrapper .ca-content__callstab{
         display: block;
@@ -37,12 +40,19 @@
     min-height: 100vh;
     position: relative;
 }
+.icvideocallwrapper .icvideo-user video {
+    border-radius: .25rem;
+    height: auto;
+    width: auto;
+    max-width: 9.375rem;
+    padding: .25rem;
+}
     </style>
 </head>
 <body class="light-default-theme">
     <div class="ca-main-conatiner">
         <div class="ca-main-wrapper">
-            <div class="ca-sidebar-wrapper">
+            <div class="ca-sidebar-wrapper" id="ca-sidebar-wrapper">
                 <div class="ca-sidebar">
                     <div class="ca-sidebar__header">
                         <div class="ca-userprofile" data-toggle="modal" data-target="#viewProfileModal">
@@ -56,9 +66,9 @@
                                 <i class="iconbox__icon mdi mdi-magnify"></i>
                             </div>
 
-                            <div class="iconbox btn-hovered-light">
+                            <button id="loginUser" class="iconbox btn-hovered-light">
                                 <i class="iconbox__icon mdi mdi-bell-outline"></i>
-                            </div>
+                            </button>
                             
                             <div class="iconbox-dropdown dropdown">
                                 <div class="iconbox btn-hovered-light" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -168,17 +178,17 @@
                             <div class="modal-body">
                                 <div class="text-center">
                                     <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                        <img src="{% static 'patients/assets/images/user/250/01.jpg' %}" alt="">
+                                        <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
                                     </div>
                                     <div class="userprofile-name">
                                         <span>Incoming Call</span>
-                                        <h4>Jack P. Angulo</h4>
-                                        <span>Product Manager</span>
+                                        <h4>Dr. Kumari</h4>
+                                        <span>Cardiology</span>
                                     </div>
 
                                     <div class="call-actions">
-                                        <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
-                                        <div class="call-pickup" data-toggle="modal" data-target="#incomingVideoStart"><i class="mdi mdi-video-outline"></i></div>
+                                        <button class="call-hangup" id="hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></button>
+                                        <button class="call-pickup" id="answer" data-toggle="modal" data-target="#incomingVideoStart"><i class="mdi mdi-video-outline"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -192,10 +202,10 @@
                             <div class="modal-body">
                                 <div class="icvideocallwrapper">
                                     <div class="icvideo-contact">
-                                        <img class="img-fluid icvideo-contact__inner" src="{% static 'patients/assets/images/media/call-01.jpg' %}" alt="">
+                                        <video class="img-fluid icvideo-contact__inner" id="videoincoming" autoplay></video>
                                     </div>
                                     <div class="icvideo-user">
-                                        <img class="" src="{% static 'patients/assets/images/media/call-02.jpg' %}" alt="">
+                                        <video id="videooutgoing" autoplay muted></video>
                                     </div>
                                     <div class="icvideo-actions">
                                         <div class="icvideo-actions__left">
@@ -223,9 +233,9 @@
                                             </div>
                                         </div>
                                         <div class="icvideo-actions__right">
-                                            <div class="iconbox btn-hovered-light bg-danger" data-dismiss="modal"  data-toggle="tooltip" data-placement="top" title="Hangup">
+                                            <button id="hangupVideo" class="iconbox btn-hovered-light bg-danger" data-dismiss="modal"  data-toggle="tooltip" data-placement="top" title="Hangup">
                                                 <i class="iconbox__icon text-white mdi mdi-phone-hangup"></i>
-                                            </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -233,296 +243,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- INCOMING GROUP VIDEO CALL -->
-                <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingGroupVideoCall" tabindex="-1" role="dialog" aria-labelledby="incomingGroupVideoCall" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <div class="calller-group">
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/01.jpg' %}" alt="">
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/03.jpg' %}" alt="">
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/04.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="userprofile-name">
-                                        <span>Incoming Call</span>
-                                        <h4>Conference Call</h4>
-                                    </div>
-
-                                    <div class="call-actions">
-                                        <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
-                                        <div class="call-pickup" data-toggle="modal" data-target="#incomingGroupVideoStart"><i class="mdi mdi-video-outline"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- GROUP VIDEO CALL START-->
-                <div class="modal fade videocall-modal group-video-call CallDialogFullscreen-sm" id="incomingGroupVideoStart" tabindex="-1" role="dialog" aria-labelledby="incomingGroupVideoStart" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-xl " role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="icvideocallwrapper">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div class="icvideo-contact">
-                                                    <img class="img-fluid icvideo-contact__inner" src="{% static 'patients/assets/images/media/call-01.jpg' %}" alt="">
-                                                    
-                                                </div>
-                                                
-                                            </td>
-                                            <td>
-                                                <div class="icvideo-contact">
-                                                    <img class="img-fluid icvideo-contact__inner" src="{% static 'patients/assets/images/media/call-02.jpg' %}" alt="">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                    <div class="icvideo-contact">
-                                                        <img class="img-fluid icvideo-contact__inner" src="{% static 'patients/assets/images/media/call-03.jpg' %}" alt="">
-                                                    </div>
-                                            </td>
-                                            <td>
-                                                    <div class="icvideo-contact">
-                                                    <img class="img-fluid icvideo-contact__inner" src="{% static 'patients/assets/images/media/call-04.jpg' %}" alt="">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <div class="icvideo-actions">
-                                        <div class="icvideo-actions__left">
-                                            <div class="icvideo-actions__left--duration">00:36</div>
-                                        </div>
-                                        <div class="icvideo-actions__middle">
-                                            <div class="">
-                                                
-                                                <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Speaker">
-                                                    <i class="iconbox__icon mdi mdi-volume-high"></i>
-                                                </div>
-                                                <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Hold">
-                                                    <i class="iconbox__icon mdi mdi-pause"></i>
-                                                </div>
-                                                <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Add Call">
-                                                    <i class="iconbox__icon mdi mdi-phone-plus"></i>
-                                                </div>
-                                                <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Disbale Video">
-                                                    <i class="iconbox__icon mdi mdi-video-off-outline"></i>
-                                                </div>
-                                                <div class="iconbox btn-hovered-light" data-toggle="tooltip" data-placement="top" title="Mute">
-                                                    <i class="iconbox__icon mdi mdi-microphone-off"></i>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="icvideo-actions__right">
-                                            <div class="iconbox btn-hovered-light bg-danger" data-dismiss="modal"  data-toggle="tooltip" data-placement="top" title="Hangup">
-                                                <i class="iconbox__icon text-white mdi mdi-phone-hangup"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- INCOMING VOICE CALL -->
-                <div class="modal  calling-modal CallDialogFullscreen-sm" id="incomingVoiceCall" tabindex="-1" role="dialog" aria-labelledby="incomingVoiceCall" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                        <img src="{% static 'patients/assets/images/user/250/01.jpg' %}" alt="">
-                                    </div>
-                                    <div class="userprofile-name">
-                                        <span>Incoming Call</span>
-                                        <h4>Jack P. Angulo</h4>
-                                        <span>Product Manager</span>
-                                    </div>
-
-                                    <div class="call-actions">
-                                        <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
-                                        <div class="call-pickup" data-toggle="modal" data-target="#incomingVoiceStart"><i class="mdi mdi-phone"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- VOICE CALL START-->
-                <div class="modal fade voicecall-modal CallDialogFullscreen-sm" id="incomingVoiceStart" tabindex="-1" role="dialog" aria-labelledby="incomingVoiceStart" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                        <img src="{% static 'patients/assets/images/user/250/01.jpg' %}" alt="">
-                                    </div>
-                                    <div class="userprofile-name">
-                                        <span>Incoming Call</span>
-                                        <h4>Jack P. Angulo</h4>
-                                        <span>Product Manager</span>
-                                    </div>
-
-                                    <div class="call-duration">00:36</div>
-                                    
-                                    <div class="call-options">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-microphone-off"></i>
-                                                </div>
-                                                <h6>Mute</h6>
-                                            </div>
-                                            <div class="col-3">
-                                                    <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-volume-high"></i>
-                                                </div>
-                                                <h6>Speaker</h6>
-                                            </div>
-                                            <div class="col-3">
-                                                    <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-pause"></i>
-                                                </div>
-                                                <h6>Hold</h6>
-                                            </div>                                                           
-                                            <div class="col-3">
-                                                    <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-phone-plus"></i>
-                                                </div>
-                                                <h6>Add call</h6>
-                                            </div>                                                           
-                                        </div>
-                                    </div>
-
-                                    <div class="call-actions">
-                                        <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- INCOMING GROUP VOICE CALL -->
-                <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingGroupVoiceCall" tabindex="-1" role="dialog" aria-labelledby="incomingGroupVoiceCall" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    
-                                    <div class="calller-group">
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/01.jpg' %}" alt="">
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/03.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="userprofile-name">
-                                        <span>Incoming Call</span>
-                                        <h4>Conference Call</h4>
-                                    </div>
-
-                                    
-
-                                    <div class="call-actions">
-                                        <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
-                                        <div class="call-pickup" data-toggle="modal" data-target="#incomingGroupVoiceCallStart"><i class="mdi mdi-phone"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- GROUP VOICE CALL START-->
-                <div class="modal fade voicecall-modal CallDialogFullscreen-sm" id="incomingGroupVoiceCallStart" tabindex="-1" role="dialog" aria-labelledby="incomingGroupVoiceCallStart" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <div class="calller-group">
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/01.jpg' %}" alt="">
-
-                                            <div class="caller-mute">
-                                                <i class="mdi mdi-phone-hangup"></i>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                            <div class="caller-mute">
-                                                <i class="mdi mdi-phone-hangup"></i>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                            <img src="{% static 'patients/assets/images/user/250/03.jpg' %}" alt="">
-                                            <div class="caller-mute">
-                                                <i class="mdi mdi-phone-hangup"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="userprofile-name">
-                                        <span>Incoming Call</span>
-                                        <h4>Conference Call</h4>
-                                    </div>
-
-                                    <div class="call-duration">00:36</div>
-                                    
-                                    <div class="call-options">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-microphone-off"></i>
-                                                </div>
-                                                <h6>Mute</h6>
-                                            </div>
-                                            <div class="col-3">
-                                                    <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-volume-high"></i>
-                                                </div>
-                                                <h6>Speaker</h6>
-                                            </div>
-                                            <div class="col-3">
-                                                    <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-pause"></i>
-                                                </div>
-                                                <h6>Hold</h6>
-                                            </div>                                                           
-                                            <div class="col-3">
-                                                    <div class="call-options__iconbox">
-                                                    <i class="mdi mdi-phone-plus"></i>
-                                                </div>
-                                                <h6>Add call</h6>
-                                            </div>                                                           
-                                        </div>
-                                    </div>
-
-                                    <div class="call-actions">
-                                        <div class="call-hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
 
                 <!-- OUTGOING VOICE CALL -->
@@ -576,41 +297,74 @@
             </div>
             <div class="new-msgcall-data">
                 <!-- NEW MESSAGE MODAL -->
-                <div class="modal new-message-dialog" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newMsgModal" aria-hidden="true">
+                <div class="modal new-message-dialog" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h6 class="modal-title" id="newMsgModalLabel">Book New Appointment</h6>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                      <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#splSelection" role="tab" aria-controls="form" aria-selected="true">Profile</a>
+                                        <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#splSelection"
+                                            role="tab" aria-controls="form" aria-selected="true">Profile</a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#dateSelection" role="tab" aria-controls="list" aria-selected="false">Home</a>
+                                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#dateSelection" role="tab"
+                                            aria-controls="list" aria-selected="false">Home</a>
                                     </li>
-                                  </ul>
+                                </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade active show" id="splSelection" role="tabpanel" aria-labelledby="list">
-                                     <div class="modal-contact-list">
-                                    <ul class="list-unstyled" id="spl-list">
-                                        
-                                    </ul>
-                                   </div>
+                                        <div class="modal-contact-list">
+                                            <ul class="list-unstyled" id="spl-list">
+                
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="dateSelection" role="tabpanel" aria-labelledby="list">
                                         <div class="modal-contact-list">
                                             <ul class="list-unstyled" id="selectedSpl">
-                                                
+                
                                             </ul>
+                                            <div class="form-group row mt-4">
+                                                <input type="hidden" id="spl-selected">
+                                                <div class="col-md-4 mt-2">
+                                                    <button type="button" class="btn mfb-component__button--main"
+                                                        style="width:100%; border-radius:30px" id="selectToday">
+                                                        Today
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-4 mt-2">
+                                                    <button type="button" class="btn mfb-component__button--main"
+                                                        style="width:100%;  border-radius:30px" id="selectTommorow">
+                                                        Tommorow
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-4 mt-2">
+                                                    <button type="button" class="btn mfb-component__button--main"
+                                                        style=" width:100%; border-radius:30px" id="selectDate">
+                                                        Select Date
+                                                    </button>
+                                                </div>
+                                                <div class="container" style="margin-left: 5rem;">
+                                                    <div id="datepicker" style="display: none;"></div>
+                                                    <input type="hidden" id="App_date">
+                                                </div>
+                                            </div>
                                         </div>
+                                        <input type="text" class="form-control text-center" placeholder="Selected Date"
+                                            id="dateSelected" style=" border-radius:30px">
+                                        <button type="button" class="btn btn-block mfb-component__button--main mt-2"
+                                            style=" width:100%; border-radius:30px" id="btnProceed">Proceed</button>
+                
                                     </div>
                                 </div>
-                               
+                
                             </div>
                         </div>
                     </div>
@@ -2614,13 +2368,18 @@
             <div class="backdrop-overlay hidden"></div>
         </div>
     </div>
-
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/material-floating-button/dist/mfb.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/OwlCarousel2/owl.carousel.min.js' %}"></script>
     <script src="{% static 'patients/js/app.js' %}"></script>
+    <script src="{% static 'patients/js/sinch.min.js' %}"></script>
+    <script src="{% static 'patients/js/VIDEOsample.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/toastr.min.js' %}"></script>
+    
     {% block scripts%}
     {% endblock %}
     <script>
@@ -2655,12 +2414,55 @@
             
             $('#spl-list').on('click','.btn-select',function(){
                  var list = $(this).closest('li').html()
+                 $('#spl-selected').val($(this).closest('li').attr('data-spl'))
                  $('#selectedSpl').html('<li>'+list.replace('mdi-arrow-right','mdi-playlist-remove')+'</li>')
                  $('#myTab a[href="#dateSelection"]').tab('show')
             })
 
             $('#selectedSpl').on('click','.btn-select',function(){
                 $('#myTab a[href="#splSelection"]').tab('show')
+            })
+
+            $('#datepicker').datepicker({
+              format:"dd/mm/yyyy"
+            });
+            $('#datepicker').on('changeDate', function () {
+                $('#App_date').val(
+                    $('#datepicker').datepicker('getFormattedDate')
+                );
+                $('#dateSelected').val(
+                    $('#datepicker').datepicker('getFormattedDate')
+                );
+            });
+
+            $('#datepicker table').removeClass('table-condensed')
+            $('#datepicker table').addClass('table')
+
+            $('#selectDate').click(function(){
+                $('#datepicker').show()
+            })
+
+            $('#selectToday').click(function(){
+                $('#dateSelected').val(
+                    moment(new Date()).format("DD/MM/YYYY")
+                );
+                $('#datepicker').hide()
+            })
+
+            $('#selectTommorow').click(function(){
+                $('#dateSelected').val(
+                    moment(new Date()).add(1, 'days').calendar().format("DD/MM/YYYY")
+                );
+                $('#datepicker').hide()
+            })
+
+            $('#btnProceed').click(function(){
+                if($('#dateSelected').val()==''){
+                    toastr.error("","Select Date",{positionClass:"toast-top-center"});
+                }else{
+                    var spl = $('#spl-selected').val()
+                    window.location.href = `/patients/selectDoctors?date=${$('#dateSelected').val()}&spl=${spl}`;
+                }
             })
         })
     </script>

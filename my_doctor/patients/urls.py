@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .api import patient_infoViewSet,PatientResgistrationAPI,medical_historyViewSet,groupsViewSet,PatientResgistrationAppAPI
+from .api import GetLoggedPatient,patient_infoViewSet,PatientResgistrationAPI,medical_historyViewSet,groupsViewSet,PatientResgistrationAppAPI
 from django.urls import path,include
 from . import views
 
@@ -13,5 +13,5 @@ urlpatterns = [
     path('PatientRegistration',PatientResgistrationAPI.as_view(),name='PatientRegistration'),
     path('GeneratePatientID',views.generateId,name='GeneratePatientID'),
     path('PatientRegInApp',PatientResgistrationAppAPI.as_view(),name='PatientRegInApp'),
-
+    path('getLoggedInPatient',GetLoggedPatient.as_view(),name='getLoggedInPatient')
 ]

@@ -3,6 +3,7 @@ from .models import patient_info,medical_history,groups
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
+from django.core.exceptions import ObjectDoesNotExist
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.all()
@@ -28,8 +29,6 @@ class PatientResgistrationAPI(generics.GenericAPIView):
 class PatientResgistrationAppAPI(generics.GenericAPIView):
     serializer_class = PatientResgistrationApp
     
-   
-    
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -37,6 +36,21 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         return Response({
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data
         })
+
+class GetLoggedPatient(generics.RetrieveAPIView):
+  permission_classes = [
+    permissions.IsAuthenticated,
+  ]
+  serializer_class = patient_infoSerializer
+
+  def get_object(self):
+        try:
+            patient = patient_info.objects.get(user__id=self.request.user.id)
+            return patient
+        except ObjectDoesNotExist:
+            return Response({
+                "Message":"User Not Found"
+            },status=404)
 
 class medical_historyViewSet(viewsets.ModelViewSet):
     queryset = medical_history.objects.all()

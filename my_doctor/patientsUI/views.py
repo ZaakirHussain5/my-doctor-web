@@ -12,3 +12,16 @@ def appointments(request):
 
 def consultations(request):
     return render(request,'patientsUI/consultations.html')
+
+def selectDoctors(request):
+    spl_type = specialist_type.objects.get(special_type=request.GET.get('spl'))
+    print(spl_type)
+    reqDate=request.GET.get('date').split('/')
+    weekDays={0:"mon",1:"tue",2:"wed",3:"thu",4:"fri",5:"sat",6:"sun"}
+    import datetime
+    week = datetime.datetime(int(reqDate[2]),int(reqDate[1]),int(reqDate[0])).weekday()
+    return render(request,'patientsUI/selectDoctors.html',{
+        "specialist":spl_type,
+        "date":request.GET.get('date'),
+        "week":weekDays[week]
+    })
