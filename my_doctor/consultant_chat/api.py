@@ -4,13 +4,15 @@ from rest_framework import viewsets, permissions
 
 
 class consultant_chatViewSet(viewsets.ModelViewSet):
+    
     permissions = [
         permissions.AllowAny
     ]
     serializer_class = consultant_chatSerializer
 
     def get_queryset(self):
-        return self.request.user.cons_chats.all()
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        queryset = consultant_chat.objects.all()
+        cons_id = self.request.query_params.get('cons_id', None)
+        if cons_id is not None:
+            queryset = consultant_chat.objects.filter(consultation_id=cons_id)
+        return consultant_chat.objects.all()
