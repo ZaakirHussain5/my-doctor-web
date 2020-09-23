@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import consultations
+from django.db.models import Max
 
 def generateId(request):
     import datetime

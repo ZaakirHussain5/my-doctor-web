@@ -17,4 +17,4 @@ class consultations(models.Model):
     comp_share = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
     def __str__(self):
-        return self.doctor_id
+        return self.doctor_id.full_name

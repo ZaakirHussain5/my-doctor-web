@@ -39,3 +39,13 @@ class getPatientConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     def get_queryset(self):
          return self.request.user.consultations.all()
+
+class getDoctorConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
+    
+    permissions = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = getAllConsultationsSerializer
+   
+    def get_queryset(self):
+        return consultations.objects.filter(doctor_id__user=self.request.user)
