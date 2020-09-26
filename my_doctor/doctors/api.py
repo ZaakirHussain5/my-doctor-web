@@ -34,14 +34,14 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
     serializer_class = DoctorTimingsSerializer
 
     def get_queryset(self):
-      return self.request.user.timings.all()
+      return DoctorTimings.objects.filter(doctor__user=self.request.user)
 
     def perform_create(self, serializer):
       try:
-         DoctorTimings.objects.get(doctor=self.request.user).delete()
+         DoctorTimings.objects.get(doctor__user=self.request.user).delete()
       except ObjectDoesNotExist:
          pass
-      serializer.save(doctor=self.request.user)
+      serializer.save()
 
 class getAvailableDoctors(viewsets.ModelViewSet):
   serializer_class = AvlDoctorsListSerializer

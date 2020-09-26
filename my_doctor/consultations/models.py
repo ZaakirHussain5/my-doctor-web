@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from doctors.models import doctors_info
+from patients.models import patient_info
+
 
 class consultations(models.Model):
     doctor_id = models.ForeignKey(doctors_info,related_name='doctor_consulataions',on_delete=models.CASCADE)
@@ -16,5 +18,18 @@ class consultations(models.Model):
     consultation_amt = models.DecimalField(max_digits=10,decimal_places=2)
     comp_share = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
+    @property
+    def patient_name(self):
+        return patient_info.objects.get(user__id=self.patient.id).full_name
+    
+    @property
+    def patient_age(self):
+        return patient_info.objects.get(user__id=self.patient.id).age
+    
+    @property
+    def patient_gender(self):
+        return patient_info.objects.get(user__id=self.patient.id).gender
+
+
     def __str__(self):
-        return self.doctor_id
+        return self.doctor_id.full_name
