@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from doctors.models import doctors_info
 from patients.models import patient_info
+from doctor_payments.models import doctor_payments
 
 
 class consultations(models.Model):
@@ -33,3 +34,8 @@ class consultations(models.Model):
 
     def __str__(self):
         return self.doctor_id.full_name
+
+    def save(self, *args, **kwargs):
+        if not doctor_payments.objects.filter(doctor = self.doctor_id):
+            doctor_payments.objects.create(doctor = self.doctor_id)
+        super().save(*args, **kwargs)
