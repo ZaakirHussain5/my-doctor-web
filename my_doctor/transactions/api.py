@@ -4,8 +4,14 @@ from rest_framework import viewsets, permissions
 
 
 class transactionsViewSet(viewsets.ModelViewSet):
-    queryset = transactions.objects.all()
+    
     permissions = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = transactionsSerializer
+
+    def get_queryset(self):
+        return self.request.user.transaction.all()
+
+    def perform_create(self,serializer):
+        return serializer.save(user_id=self.request.user)
