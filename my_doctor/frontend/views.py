@@ -2,7 +2,16 @@ from django.shortcuts import render
 from specialist_type.models import specialist_type
 
 def login(request):
-    return render(request,'auth/login.html')
+    user_type = ""
+    if hasattr(request.user,'doctors_info'):
+        user_type = "AD"
+    elif hasattr(request.user,'patient_info'):
+        user_type = "P"
+    elif hasattr(request.user,'executive_details'):
+        user_type = "E"
+    else:
+        user_type = "A"
+    return render(request,'auth/login.html', context = { "user_type":user_type})
 
 def dashboard(request):
     return render(request,'auth/dashboard.html')

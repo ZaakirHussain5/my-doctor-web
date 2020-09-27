@@ -22,7 +22,7 @@ class doctors_info(models.Model):
     
 
     def __str__(self):
-        return self.full_name +','+ self.specialist_type
+        return str(self.full_name) +','+ str(self.specialist_type)
 
 
 class DoctorTimings(models.Model):
