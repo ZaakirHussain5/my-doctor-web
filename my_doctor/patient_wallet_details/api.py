@@ -24,8 +24,13 @@ class patient_wallet_detailsViewSet(viewsets.ModelViewSet):
     #     serializer.save(patient_id=self.request.user,balance=new_balance)
 
 class WalletDetailView(viewsets.ModelViewSet):
-    queryset = patient_wallet_details.objects.all()
+    permission_classes=[
+        permissions.IsAuthenticated
+    ]
     serializer_class = WalletSerializer
+
+    def get_queryset(self):
+        return self.request.user.Wallet.all()
 
     # def get(self, request, format=None):
     #     wallet = patient_wallet_details.objects.all().values_list('patient', flat=True)
