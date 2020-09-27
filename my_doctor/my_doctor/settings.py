@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'feedback_replies',
     'patient_feedbacks',
     'patient_subscription',
-    # 'patient_medical_records',
+    'patient_medical_records',
 ]
 
 MIDDLEWARE = [
