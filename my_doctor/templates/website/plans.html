@@ -1,0 +1,152 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+
+<section class="breadcrumb">
+    <div class="container">
+    <div class="breadcrumb-outer">
+    <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Individual</li>
+    </ul>
+    </nav>
+    <h2>Choose your plan</h2>
+    </div>
+    </div>
+    </section>
+    
+    <section class="pricing">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="price-outer">
+    <div class="price-item">
+    <div class="price-title">
+    <h3>One Time</h3>
+    <p>Valid for single consult</p>
+    </div>
+    <hr>
+    <div class="price-content">
+    <ul>
+    <li>For One Individual</li>
+    <li>One time Only</li>
+    <li>Reports Storage Vault</li>
+    <li>Personalized Consult</li>
+    <li>Discounts on Lab Test</li>
+    </ul>
+    <span class="package-price"><sub><i class="fa fa-rupee"></i></sub> 250<sub>.00/-</sub></span>
+    <div class="price-btn">
+    <a href="#" class="btn"> Get Started</a>
+    </div>
+    </div>
+    </div>
+    <div class="price-box"></div>
+    </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="price-outer">
+    <div class="price-item">
+    <div class="price-title">
+    <h3>Unlimited</h3>
+    <p>Valid for 3 months</p>
+    </div>
+    <hr>
+    <div class="price-content">
+    <ul>
+    <li>For One Individual</li>
+    <li>Multiple consults</li>
+    <li>Reports Storage Vault</li>
+    <li>Free Cancelation</li>
+    <li>Discounts on Lab Test</li>
+    </ul>
+    <span class="package-price"><sub><i class="fa fa-rupee"></i></sub> 2,500<sub>.00/-</sub></span>
+    <div class="price-btn">
+    <a href="#" class="btn"> Get Started</a>
+    </div>
+    </div>
+    </div>
+    <div class="price-box"></div>
+    </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="price-outer">
+    <span class="x-stiker">Most-popular</span>
+    <div class="price-item">
+    <div class="price-title">
+    <h3>Unlimited</h3>
+    <p>Valid for 6 months</p>
+    </div>
+    <hr>
+    <div class="price-content">
+    <ul>
+    <li>For 2 Adults</li>
+    <li>Multiple consults</li>
+    <li>Reports Storage Vault</li>
+    <li>Free Cancelation</li>
+    <li>Discounts on Lab Test</li>
+    </ul>
+    <span class="package-price"><sub><i class="fa fa-rupee"></i></sub> 4,000<sub>.00/-</sub></span>
+    <div class="price-btn">
+    <a href="#" class="btn"> Get Started
+    </a>
+    </div>
+    </div>
+    </div>
+    <div class="price-box"></div>
+    </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="price-outer">
+    <div class="price-item">
+    <div class="price-title">
+    <h3>Unlimited</h3>
+    <p>Valid for 1 year</p>
+    </div>
+    <hr>
+    <div class="price-content">
+    <ul>
+    <li>For 2 Adults + 1 Child</li>
+    <li>Multiple consults</li>
+    <li>Reports Storage Vault</li>
+    <li>Free Cancelation</li>
+    <li>Discounts on Lab Test</li>
+    </ul>
+    <span class="package-price"><sub><i class="fa fa-rupee"></i></sub> 6,000<sub>.00/-</sub></span>
+    <div class="price-btn">
+    <a href="#" class="btn"> Get Started</a>
+    </div>
+    </div>
+    </div>
+    <div class="price-box"></div>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </section>
+    
+    <section class="newsletter">
+      <div class="container">
+      <div class="newsletter-content">
+      <div class="subscribe-form">
+      <div class="row">
+      <div class="col-md-6 col-sm-12">
+      <h3 class="white">Subscribe to newsletter</h3>
+      <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+      <form>
+      <input type="email" placeholder="abc@xyz.com">
+      <a href="#">Subscribe</a>
+      </form>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+{%endblock%}

@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'frontend'
 urlpatterns=[
-    path('',views.login,name='login'), #<str:type>
+    path('adminlogin',views.login,name='login'), #<str:type>
     path('adminDashboard',views.dashboard,name='adminDashboard'),
     path('specialists',views.specialists,name='specialists'),
     path('Doctors',views.Doctors,name='Doctors'),

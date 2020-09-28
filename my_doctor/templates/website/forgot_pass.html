@@ -1,0 +1,66 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+
+<section class="breadcrumb">
+    <div class="container">
+    <div class="breadcrumb-outer">
+    <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{%static 'website/index.html'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Forget Password</li>
+    </ul>
+    </nav>
+    <h2>Forget Password</h2>
+    </div>
+    </div>
+    </section>
+    
+    
+    <section class="forgot-password">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    <div class="fp-content">
+    <p>Please provide your email address. Click in the provided link to retrieve you account.</p><br>
+    <form>
+    <div class="row">
+    <div class="form-group col-xs-12">
+    
+    <input type="email" class="form-control" id="Name" placeholder="Enter phone or email id">
+    </div>
+    <div class="col-xs-12">
+    <div class="comment-btn">
+    <a href="#" class="btn">Reset Password</a>
+    </div>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    
+    
+    <section class="newsletter">
+      <div class="container">
+      <div class="newsletter-content">
+      <div class="subscribe-form">
+      <div class="row">
+      <div class="col-md-6 col-sm-12">
+      <h3 class="white">Subscribe to newsletter</h3>
+      <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+      <form>
+      <input type="email" placeholder="abc@xyz.com">
+      <a href="#">Subscribe</a>
+      </form>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+{%endblock%}

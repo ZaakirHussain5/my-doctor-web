@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doctor Plus Medical Consultancy Services</title>
+
+<script src="cdn-cgi/apps/head/aXeeT3C8FEVE2uMUPMMUDxVnKrs.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'website/website/img/favicon.png'%}">
+
+<link href="{% static 'website/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
+
+<link href="{% static 'website/css/default.css'%}" rel="stylesheet" type="text/css">
+
+<link href="{% static 'website/css/style.css'%}" rel="stylesheet" type="text/css">
+
+<link href="{% static 'website/css/responsive.css'%}" rel="stylesheet" type="text/css">
+
+<link href="{% static 'website/css/plugin.css'%}" rel="stylesheet" type="text/css">
+
+<link href="{% static 'website/fonts/flaticon.css'%}" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="{% static 'website/font-awesome/4.7.0/css/font-awesome.min.css'%}">
+
+</head>
+<body>
+
+<div id="preloader">
+<div id="status"></div>
+</div>
+{% include 'partials/_websiteNav.html'%}
+
+{%block content%}
+{%endblock%}
+
+<footer pad-top-50>
+<div class="container">
+
+<div class="footer-content">
+<div class="lower-footer pad-bottom-50">
+<div class="row">
+<div class="col-lg-3 col-md-3 col-sm-12">
+<div class="departments">
+<h3>Doctor Plus</h3>
+<ul>
+    <li><a href="{% url 'website:features'%}">How it works |</a></li>
+    <li><a href="{% url 'website:specialty'%}">Speciality |</a></li>
+    <li><a href="{% url 'website:plans'%}">Plans |</a></li>
+    <li><a href="{% url 'website:aboutus'%}">About Us |</a></li>
+    <li><a href="{% url 'website:contact'%}">Contact Us |</a></li>
+</ul>
+</div>
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-12">
+<h3>Legal</h3>
+<ul>
+    <li> <a href="{% url 'website:terms_condition'%}">Terms & Conditions</a></li>
+    <li><a href="{% url 'website:privacy_policy'%}">Privacy Policy</a></li>
+    <li><a href="{% url 'website:faq'%}">FAQ's</a></li>
+</ul>
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-12">
+<div class="footer-contact">
+  <h3>Bangalore</h3>
+  <p><b>Doctor Plus</b></p>
+  <p>No:1, Subbiaha Reddy block, Metro Station, Ulsoor, Bangalore - 560038</p>
+</div>
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-12">
+  <div class="footer-contact">
+    <div class="footer-logo text-center mar-bottom-15">
+      <img src="{%static 'website/img/white-logo.png'%} " alt="Image">
+      </div>
+  </div>
+  </div>
+</div>
+</div>
+<div class="copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-6 col-sm-6">
+    <div class="copyright">
+    <p>Copyright © 2020 Doctor Plus by <a href="https://www.codeeasy.org/" target="_blank" class="white">Drag n Drop</a></p>
+</div>
+</div>
+    <div class="col-md-6 col-sm-6"><div class="header-links">
+<ul>
+<li><a href="#" style="color: #3b5998 ;font-size: 25px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+</ul>
+</div></div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+
+<div id="back-to-top">
+<a href="#"></a>
+</div>
+
+
+<script src="{% static 'website/js/jquery-3.3.1.min.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/js/bootstrap.min.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/js/plugin.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/js/main.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/js/custom-lightbox.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/js/custom-nav.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/cloudflare-static/rocket-loader.min.js' %}" data-cf-settings="f2c2a34d55bd8643fa482c8c-|49" defer=""></script></body>
+</html>

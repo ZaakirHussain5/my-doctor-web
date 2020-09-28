@@ -1,0 +1,120 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+<section class="breadcrumb">
+    <div class="container">
+    <div class="breadcrumb-outer">
+    <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Specialty</li>
+    </ul>
+    </nav>
+    <h2>Book an Appointment</h2>
+    </div>
+    </div>
+    </section>
+    
+    <section class="appointment">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="section-title text-center">
+    
+    <h2>Book An <span>Appoinment</span></h2>
+    </div>
+    <div class="appointment-image">
+    <img src="{%static 'website/img/blog1.jpg'%}" alt="image">
+    </div>
+    </div>
+    
+    <div class="col-md-6 col-sm-12 col-xs-12">
+       <div class="appointment-form">
+        <form>
+            <div class="row">
+            <div class="">
+            <div class="form-group col-xs-6">
+            <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group col-xs-6">
+            
+            <input type="text" placeholder="Your Email" required>
+            </div>
+            <div class="form-group col-xs-6">
+            
+            <input type="tel" placeholder="Your Phone" minlength="10" maxlength="10" size="10" required>
+            </div>
+            <div class="form-group col-xs-6">
+            
+            <input type="text" placeholder="Your City">
+            </div>
+            <div class="form-group col-xs-6">
+            <select>
+            <option>Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            </select>
+            </div>
+            <div class="form-group col-xs-6">
+            
+            <input type="number" placeholder="Age" min="1" max="100">
+            </div>
+            <div class="form-group col-xs-12">
+            <select>
+            <option value="Speciality">Speciality</option>
+            <option value="General Physician">General Physician</option>
+            <option value="Dermatologist">Dermatologist</option>
+            <option value="Pediatrician">Pediatrician</option>
+            <option value="Dietitian">Dietitian</option>
+            <option value="Psychologist">Psychologist</option>
+            <option value="Gynaecologist">Gynaecologist</option>
+            </select>
+            </div>
+            </div>
+            
+            
+            
+            
+            <div class="">
+            <div class="form-group col-xs-12">
+            
+            <textarea placeholder="Your message"></textarea>
+                </div>
+            <div class="col-xs-12">
+            <div class="form-btn">
+            <button type="submit" class="btn">Submit</button>
+            </div>
+            </div>
+            </div>
+            
+            </div>
+            </form>
+    </div>
+        </div>
+    
+    </div>
+    </div>
+    </section>
+    
+    <section class="newsletter">
+        <div class="container">
+        <div class="newsletter-content">
+        <div class="subscribe-form">
+        <div class="row">
+        <div class="col-md-6 col-sm-12">
+        <h3 class="white">Subscribe to newsletter</h3>
+        <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+        <form>
+        <input type="email" placeholder="abc@xyz.com">
+        <a href="#">Subscribe</a>
+        </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+
+{% endblock %}

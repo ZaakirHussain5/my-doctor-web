@@ -1,0 +1,167 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+<section class="breadcrumb">
+    <div class="container">
+    <div class="breadcrumb-outer">
+    <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">How It Works?</li>
+    </ul>
+    </nav>
+    <h2>How It Works?</h2>
+    </div>
+    </div>
+    </section>
+    
+    
+    <section class="about-us icon-right">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-8 col-sm-12">
+    <div class="section-title">
+    
+    <h2>Book <span>Video </span> Consult</h2>
+    </div>
+    </div>
+    <div class="col-md-7 col-sm-12">
+    <div class="about-content">
+    <div class="content-box">
+    <div class="about-item">
+    <div class="about-icon">
+      <img src="{%static 'website/img/registration.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>SELF REGISTRATION OR CALL SUPPORT</h3>
+    <p>Click on login or sign-up fill in a few basic details, call 1800-657-88778 in case you need assistance.
+    </p>
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon child-2">
+      <img src="{%static 'website/img/choose.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>CHOOSE SPECIALITY</h3>
+    <p>Select the specialty required, date and time of consult and preferred doctor.
+    </p>
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon child-3">
+      <img src="{%static 'website/img/pay.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>PAYMENT</h3>
+    <p>All modes of online payment are accepted. Your subscription plan if any is auto applied. Payment wallet is built in for convenience.
+    </p>
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon">
+      <img src="{%static 'website/img/consult.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>CONSULTATION
+    </h3>
+    <p>Get app notification and call, begin consultation with selected doctor on specific date and time.
+    </p>
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon child-2">
+      <img src="{%static 'website/img/rx.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>PRESCRIPTION</h3>
+    <p>Prescription will be sent within the app + E-Mail, you can choose to order medicines & tests from us or do it yourself. All records will be stored in your account
+    </p>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-5 col-sm-12">
+    <div class="video">
+        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/bYCB_OYvqko" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <img src="{%static 'website/img/mobile-frame.png'%}" alt="">
+    </div>
+    </div>
+    </div>
+    
+    <div class="row pad-top-20">
+    <div class="col-md-8 col-sm-12">
+    <div class="section-title">
+    
+    <h2><span>Optional </span> After Consult</h2>
+    </div>
+    </div>
+    <div class="col-md-7 col-sm-7">
+    <img src="{%static 'website/img/features.png'%}" alt="image">
+    </div>
+    <div class="col-md-5 col-sm-5">
+    <div class="about-content">
+    <div class="content-box sample">
+    <div class="about-item">
+    <div class="about-icon">
+      <img src="{%static 'website/img/storage-report.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>REPORT STORAGE</h3>
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon child-2">
+      <img src="{%static 'website/img/sample.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>SAMPLE COLLECTION</h3>
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon child-3">
+      <img src="{%static 'website/img/lab.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>LAB TESTS</h3>
+    
+    </div>
+    </div>
+    <div class="about-item">
+    <div class="about-icon">
+      <img src="{%static 'website/img/pharmacy.png'%}" alt="">
+    </div>
+    <div class="about-desc">
+    <h3>MEDICINE DELIVERY
+    </h3>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    
+    <section class="newsletter">
+      <div class="container">
+      <div class="newsletter-content">
+      <div class="subscribe-form">
+      <div class="row">
+      <div class="col-md-6 col-sm-12">
+      <h3 class="white">Subscribe to newsletter</h3>
+      <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+      <form>
+      <input type="email" placeholder="abc@xyz.com">
+      <a href="#">Subscribe</a>
+      </form>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+{%endblock%}
