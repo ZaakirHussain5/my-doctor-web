@@ -8,6 +8,7 @@ class appointmentViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = appointmentSerializer
+    
     def get_queryset(self):
         return self.request.user.appointments.all()
 

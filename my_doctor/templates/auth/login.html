@@ -82,7 +82,7 @@
                     username: $('#username').val(),
                     password: $('#password').val()
                 }
-                $.ajax({
+                JQuery.ajax({
                     url: '/api/auth/login',
                     data: JSON.stringify(data),
                     method: 'POST',

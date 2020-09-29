@@ -7,7 +7,7 @@
             <div class="tab-content" id="caCallsTabInsideContent">
                 <div class="tab-pane fade show active" id="all-calls" role="tabpanel" aria-labelledby="all-calls-tab">
                     <div class="sidebar-userlist">
-                        <ul class="list-unstyled">
+                        <ul id="appointment_list" class="list-unstyled">
                             <li>
                                 <div class="calllist active">
                                     <div class="user-avatar user-avatar-rounded online">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="tab-pane fade" id="missed-calls" role="tabpanel" aria-labelledby="missed-calls-tab">
                     <div class="sidebar-userlist">
-                        <ul class="list-unstyled">
+                        <ul  class="list-unstyled">
                             <li>
                                 <div class="calllist active">
                                     <div class="user-avatar user-avatar-rounded online">
@@ -416,7 +416,7 @@
                 <div class="ca-profile-thumb">
                     
                     <div class="ca-profile-info">
-                        <div class="ca-profile-pic"><img class="img-fluid" src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt=""></div>
+                        <div class="ca-profile-pic"><img id="doctor_image" class="img-fluid" src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt=""></div>
                     </div>
 
                     <div class="ca-overlay"></div>
@@ -426,12 +426,12 @@
                     <div class="ca-profile-title">
                         <h2 class="ca-profile-name">Dr. Kumari</h2>
                         <div class="ca-profile-tag">
-                            <span>Cardiologist</span>
+                            <span id="specialist__at">Cardiologist</span>
                         </div>
                         <div class="ca-contcat-profile__calling-buttons pt-2">
                             <div class="iconbox iconbox-pill btn-outline-light">
                                 <i class="iconbox__icon mdi mdi-video-outline"></i>
-                                <span>Video Call</span> 
+                                <span>Video Call</span>
                             </div>
                         </div>
                     </div>
@@ -444,7 +444,7 @@
                                     <div class="ps-list__left--icon"><i class="mdi mdi-account-heart-outline"></i></div>
                                     <div class="ps-list__left--name">Speciality</div>
                                 </div>
-                                <div class="ps-list__right">Cardiology</div>
+                                <div id="speciality_at" class="ps-list__right">Cardiology</div>
                             </div>
                         </li>
                         <li>
@@ -462,7 +462,7 @@
                                     <div class="ps-list__left--icon"><i class="mdi mdi-cellphone-android"></i></div>
                                     <div class="ps-list__left--name">Mobile number</div>
                                 </div>
-                                <div class="ps-list__right">+01 369 2015</div>
+                                <div id="doctor_phone" class="ps-list__right">+01 369 2015</div>
                             </div>
                         </li>
                         <li>
@@ -471,9 +471,9 @@
                                     <div class="ps-list__left--icon"><i class="mdi mdi-email-outline"></i></div>
                                     <div class="ps-list__left--name">Email</div>
                                 </div>
-                                <div class="ps-list__right">earnest.clements@email.com</div>
+                                <div id="doctor_email" class="ps-list__right">earnest.clements@email.com</div>
                             </div>
-                        </li>                                
+                        </li>
                     </ul>
 
 
@@ -487,7 +487,7 @@
                                     <div class="ps-list__left--icon"><i class="mdi mdi-facebook"></i></div>
                                     <div class="ps-list__left--name">Appointment Date</div>
                                 </div>
-                                <div class="ps-list__right">12/11/2020</div>
+                                <div id="appointment_date" class="ps-list__right">12/11/2020</div>
                             </div>
                         </li>
                         <li>
@@ -496,7 +496,7 @@
                                     <div class="ps-list__left--icon"><i class="mdi mdi-instagram"></i></div>
                                     <div class="ps-list__left--name">Appointment Time</div>
                                 </div>
-                                <div class="ps-list__right">12:00 AM</div>
+                                <div id="appontment_time" class="ps-list__right">12:00 AM</div>
                             </div>
                         </li>
                         <li>
@@ -516,14 +516,14 @@
                                 </div>
                                 <div class="ps-list__right">Approved</div>
                             </div>
-                        </li> 
-                                                       
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </div>
         </div>
-        
+
     </div>
 </div>
 {% endblock %}
@@ -531,7 +531,78 @@
 {% block scripts %}
 <script>
     $(document).ready(function(){
-        $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active')
+        $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
+
+        let dataList = [];
+        function getAppoinmentList(){
+            $.ajax({
+                'url': '/api/getPatientsAppointments/',
+                'contentType': 'application/json',
+                'async': false,
+                'method': 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                },
+            }).done((response)=>{
+                console.log('response response', response);
+                dataList = response;
+            });
+            console.log('data list is', dataList);
+            let totalLi = '';
+            for(var i=0; i < dataList.length; i++){
+                let data = dataList[i];
+                const liDesign = `<li id="patient${data.id}"><div class="calllist" id="patientDiv${data.id}">
+                            <div class="user-avatar user-avatar-rounded online">
+                                <img src="${data.doctor.profile_pic}" alt="">
+                            </div>
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">${data['doctor']['full_name']}</div>
+                                <div class="calllist__details--info">
+                                    <span><i class="mdi mdi-call-received"></i></span>
+                                    <span>${data.appointment_date} at ${data.appointment_time}</span>
+                                </div>
+                            </div>
+                            <div class="calllist__actions">
+                                <div class="iconbox btn-hovered-light">
+                                    <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>`;
+                totalLi += liDesign;
+            }
+            $('#appointment_list').html(totalLi);
+        }
+        getAppoinmentList()
+        let old_active_id = null;
+        $('#appointment_list').on('click', 'li', function(){
+            let id = $(this).attr('id');
+            let ID= id.slice(7)
+            $('#'+id+' #patientDiv'+ID).addClass('active');
+            if(old_active_id == null){
+                old_active_id = '#patientDiv'+ID;
+            }
+            else{
+                $(old_active_id).removeClass('active');
+                old_active_id = '#patientDiv'+ID;
+            }
+
+            for(let i=0; i< dataList.length; i++){
+                const index = dataList[i];
+                if(index.id == ID){
+                    $("#doctor_image").attr('src', index.doctor.profile_pic);
+                    $(".ca-profile-name").html(index.doctor.full_name);
+                    $("#specialist__at").html(index.doctor.specialist_type);
+                    $("#speciality_at").html(index.doctor.specialist_type);
+                    $("#doctor_phone").html(index.doctor.phone_number);
+                    //$("#doctor_email").html(index.doctor.phone_number);
+                    $("#appointment_date").html(index.appointment_date);
+                    $("#appontment_time").html(index.appointment_time);
+                }
+            }
+
+
+        })
     })
 </script>
 {% endblock %}
