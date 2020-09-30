@@ -107,11 +107,17 @@
 </div>
 
 
-<script src="{% static 'website/js/jquery-3.3.1.min.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
+<script src="{% static 'website/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
 <script src="{% static 'website/js/bootstrap.min.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/plugin.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/main.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/custom-lightbox.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/custom-nav.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/cloudflare-static/rocket-loader.min.js' %}" data-cf-settings="f2c2a34d55bd8643fa482c8c-|49" defer=""></script></body>
+
+{% block scripts %}
+
+
+{% endblock %}
 </html>

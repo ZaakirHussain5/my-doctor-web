@@ -121,7 +121,7 @@ img.avatar {
                                                                     <div class="ps-list__left--icon"><i class="mdi mdi-calendar"></i></div>
                                                                     <div class="ps-list__left--name">Appointment Date</div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="app-date">12/11/2020</div>
+                                                                <div class="ps-list__right" id="app-date"></div>
                                                             </div>
                                                         </li>
                                                         <li>
@@ -148,7 +148,7 @@ img.avatar {
                                                                     <div class="ps-list__left--icon"><i class="mdi mdi-currency-inr"></i></div>
                                                                     <div class="ps-list__left--name">Total Amount</div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="amount"> 380.00</div>
+                                                                <div class="ps-list__right" id="amount"></div>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -276,9 +276,11 @@ img.avatar {
         })
     })
 
-    var options = {
+
+document.getElementById('rzp-button1').onclick = function(e){
+   var options = {
     "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
-    "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "amount": parseFloat($('#amount').html())*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
     "name": "Doctor Plus",
     "description": "Online Doctor Appointment",
@@ -292,9 +294,25 @@ img.avatar {
                 Description:  $('#consultingAbout').html(),
                 consultation_status: "Pending",
                 payment_type: "UPI",
-                payment_id: "rzp_ghfkdg654",
-                paid_amount: "300"
+                payment_id: payment_id,
+                paid_amount: $('#amount').html()
             };
+            // '/Authorization Token {value}/appoinments/'
+            $.ajax({
+                'url': '/api/appointments/',
+                'method': 'POST',
+                'contentType': 'application/json',
+                'data': JSON.stringify(data),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                },
+            }).done((response) => {
+                   console.log(response);
+            }).fail((err, error, wrong) => {
+                $('.btn-user').removeAttr('disabled')
+                $('.btn-user').html('Login')
+                console.log(err)
+            })
         },
     "prefill": {
         "name": "Gaurav Kumar",
@@ -309,7 +327,6 @@ img.avatar {
     }
 };
 var rzp1 = new Razorpay(options);
-document.getElementById('rzp-button1').onclick = function(e){
     rzp1.open();
     e.preventDefault();
 }

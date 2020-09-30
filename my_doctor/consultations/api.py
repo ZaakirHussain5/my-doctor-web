@@ -39,6 +39,7 @@ class getPatientConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = getAllConsultationsSerializer
 
     def get_queryset(self):
+         print(self.request.user.consultations.all())
          return self.request.user.consultations.all()
 
 class getDoctorConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):

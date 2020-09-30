@@ -37,52 +37,53 @@
                             <div class="col-8 settings-nav-content">
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
-                                        <div class="ca-profile-thumb"  style="background-image: url(assets/images/media/07.jpg);height: auto;">
-                                            <div class="ca-profile-info">
-                                                <div class="ca-profile-pic"><img class="img-fluid" src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt=""></div>
-                                                <div class="ca-profile-title">
-                                                    <input type="file" class="sr-only" id="profile_pic">
+                                        <form id="profile-form">
+                                            <div class="ca-profile-thumb"  style="background-image: url(assets/images/media/07.jpg);height: auto;">
+                                                <div class="ca-profile-info">
+                                                    <div class="ca-profile-pic"><img class="img-fluid" src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt=""></div>
+                                                    <div class="ca-profile-title">
+                                                        <input type="file" class="sr-only" id="profile_pic">
+                                                    </div>
+                                                </div>
+                                                <div class="ca-profile-actions">
+                                                    <div class="iconbox-group">
+                                                        <label for="profile_pic" class="iconbox mfb-component__button--main ion-plus-round">
+                                                            <i class="iconbox__icon mdi mdi-pencil-outline" style="margin: 5!important;"></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="ca-overlay"></div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="full_name" class="form-control-label">Name</label>
+                                                        <input type="text" class="form-control" placeholder="Your Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="username" class="form-control-label">Phone Number</label>
+                                                        <input type="text" class="form-control" placeholder="Your Phone Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email" class="form-control-label">Email</label>
+                                                        <input type="email" class="form-control" placeholder="Your Phone Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email" class="form-control-label">Blood Group</label>
+                                                        <input type="email" class="form-control" placeholder="Your Blood Group">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email" class="form-control-label">Age</label>
+                                                        <input type="email" class="form-control" placeholder="Your Age">
+                                                    </div>
+                                                    <div class="form-group pull-right">
+                                                        <button type="submit" class="btn float-right mfb-component__button--main" style="width:190px; border-radius:0px">
+                                                            Update Profile
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="ca-profile-actions">
-                                                <div class="iconbox-group">
-                                                    <label for="profile_pic" class="iconbox mfb-component__button--main ion-plus-round">
-                                                        <i class="iconbox__icon mdi mdi-pencil-outline" style="margin: 5!important;"></i>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="ca-overlay"></div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="full_name" class="form-control-label">Name</label>
-                                                    <input type="text" class="form-control" placeholder="Your Name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="username" class="form-control-label">Phone Number</label>
-                                                    <input type="text" class="form-control" placeholder="Your Phone Number">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email" class="form-control-label">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Your Phone Number">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email" class="form-control-label">Blood Group</label>
-                                                    <input type="email" class="form-control" placeholder="Your Blood Group">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email" class="form-control-label">Age</label>
-                                                    <input type="email" class="form-control" placeholder="Your Age">
-                                                </div>
-                                                <div class="form-group pull-right">
-                                                    <button type="submit" class="btn float-right mfb-component__button--main" style="width:190px; border-radius:0px">
-                                                        Update Profile
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
+                                        </form>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
                                         <div class="settings-inside-wrapper">
