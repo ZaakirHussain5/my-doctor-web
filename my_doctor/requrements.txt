@@ -1,0 +1,38 @@
+home page:
+	1. book submission form 
+	2. dinamic doctors list
+speciality page;
+	1. book appoinment form
+plans page:
+
+
+login page :
+	1. login form (login patient) (templates/website/login )
+
+
+patient dashboard:
+	1. profile editing ( form = templates/patientsui/_settings.html) script = templates/patientsui/dashboard.html
+	2. password reset
+	3. theme setting
+	4. profile photo show 
+
+patient appoinment:
+	1. appoinment submission ( templates/patientsui/selectdoctors.html)
+
+
+...................
+1.apponments : appoinments/urls.py / ('GET') cookie 'getPatientsAppointments'
+    template: patientsUI/apoinments.html
+2. consultations : consultations/urls.py / 'getPatientConsultations'
+
+..............
+consultations chat module:
+chats Post Request Data : {
+    "user": "P",
+    "message": "I followed the Routine but ther i no improve ment",
+    "attachment": false,
+    'attachment_file':'file'
+    "seen": false,
+    "delivered": false,
+    "consultation_id": 1
+}

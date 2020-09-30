@@ -8,7 +8,7 @@
             <div class="tab-content" id="caChatsTabInsideContent">
                 <div class="tab-pane fade show active" id="personal-chat" role="tabpanel" aria-labelledby="personal-chat-tab">
                     <div class="sidebar-userlist">
-                        <ul class="list-unstyled">
+                        <ul id="consultation_doctor_list" class="list-unstyled">
                             <li>
                                 <div class="conversation active">
                                     <div class="user-avatar user-avatar-rounded offline">
@@ -2124,8 +2124,84 @@
 {% endblock %}
 {% block scripts %}
 <script>
-    $(document).ready(function(){
-        $('#caMainTab a[href="{% url "patients:consultations"%}"]').addClass('active')
-    })
+$(document).ready(function(){
+    $('#caMainTab a[href="{% url "patients:consultations"%}"]').addClass('active');
+
+    let dataList = [];
+    function getConsultantListList(){
+
+        $.ajax({
+            'url': '/api/getPatientConsultations/',
+            'contentType': 'application/json',
+            'async': false,
+            'method': 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+            },
+        }).done((response)=>{
+            dataList = response;
+        });
+
+        let totalLi = '';
+        for(var i=0; i < dataList.length; i++){
+            let data = dataList[i];
+            const liDesign = `
+                <li>
+                    <div class="conversation active">
+                        <div class="user-avatar user-avatar-rounded offline">
+                            <img src="${data.doctor_id.profile_pic}" alt="">
+                        </div>
+                        <div class="conversation__details">
+                            <div class="conversation__name">
+                                <div class="conversation__name--title">${data.doctor_id.full_name}</div>
+                                <div class="conversation__time">${getDateOrName(data.consultation_date_time)}</div>
+                            </div>
+                            <div class="conversation__message">
+                                <div class="conversation__message-preview">
+                                    <span class="tick">
+                                        <img src="{% static 'patients/assets/images/tick/tick-send.svg" alt="">
+                                    </span>
+                                    Hello! Are you free today?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>`;
+            totalLi += liDesign;
+        }
+        $('#consultation_doctor_list').html(totalLi);
+    }
+    getConsultantListList()
+
+    function getDateOrName(date){
+        let dateTime = new Date(date);
+        let today_date_time = Date.now();
+        let yesterday = today_date_time - (1000*60*60*24);
+        let past_day_of_yesterdey = yesterday - (1000*60*60*24);
+        if(dateTime.getTime() >= yesterday){
+            return "today";
+        }
+        else if( dateTime.getTime() > past_day_of_yesterdey){
+            return "yesterday";
+        }
+        else{
+            let day = dateTime.getDate()
+            let month = dateTime.getMonth()
+            let year = dateTime.getFullYear()
+            return day + "-" + month + "-" + year;
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+})
 </script>
 {% endblock %}
