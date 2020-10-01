@@ -1,4 +1,4 @@
-from .serializers import doctors_infoSerializer,DoctorRegistration,DoctorTimingsSerializer,AvlDoctorsListSerializer
+from .serializers import UpdateProfile, doctors_infoSerializer,DoctorRegistration,DoctorTimingsSerializer,AvlDoctorsListSerializer
 from .models import doctors_info,DoctorTimings
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
@@ -42,6 +42,38 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
       except ObjectDoesNotExist:
          pass
       serializer.save()
+
+class DoctorUpdateProfileAPI(generics.GenericAPIView):
+    serializer_class = UpdateProfile
+
+    permission_classes=[
+        permissions.IsAuthenticated
+    ]
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save(loggedInuser=self.request.user.id)
+        print(user)
+        return Response({
+            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        })
+
+class GetLoggedDoctor(generics.RetrieveAPIView):
+  permission_classes = [
+    permissions.IsAuthenticated,
+  ]
+  serializer_class = doctors_infoSerializer
+
+  def get_object(self):
+        try:
+            doctor = doctors_info.objects.get(user__id=self.request.user.id)
+            return doctor
+        except ObjectDoesNotExist:
+            return Response({
+                "Message":"User Not Found"
+            },status=404)
 
 class getAvailableDoctors(viewsets.ModelViewSet):
   serializer_class = AvlDoctorsListSerializer
