@@ -14,20 +14,7 @@
         <div class="card-body card-block">
             <form action="" method="post" class="form-horizontal">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="wrap-custom-file" style="margin-left: 5rem;">
-                                    <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
-                                    <label for="image1">
-                                        <span>Select Profile Photo</span>
-                                        <i class="fa fa-plus-circle"></i>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <ul class="nav nav-tabs nav-fill nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="pills-home" aria-selected="true">Profile</a>
@@ -41,45 +28,60 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="list">
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class="form-control-label float-right">ID</label></div>
-                                    <div class="col-12 col-md-8">
-                                        <input type="email" id="hf-email" name="hf-email" placeholder="Doctor ID" class="form-control"
-                                            readonly="readonly">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                            <input type="file" name="photo" id="image1" accept=".gif, .jpg, .png" />
+                                            <label for="image1">
+                                                <span>Select Profile Photo</span>
+                                                <i class="fa fa-plus-circle"></i>
+                                            </label>
+                                        </div>
                                     </div>
+                                    <div class="col-md-9">
+                                        <div class="row form-group">
+                                         <div class="col col-md-4"><label for="hf-email" class="form-control-label float-right">ID</label></div>
+                                         <div class="col-12 col-md-8">
+                                             <input type="email" id="hf-email" name="hf-email" placeholder="Doctor ID" class="form-control"
+                                                 readonly="readonly">
+                                         </div>
+                                     </div>
+                                     <div class="row form-group">
+                                         <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Full Name</label></div>
+                                         <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Full Name"
+                                                 class="form-control"></div>
+                                     </div>
+                                     <div class="row form-group">
+                                         <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Email Address</label>
+                                         </div>
+                                         <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Email Address"
+                                                 class="form-control"></div>
+                                     </div>
+                                     <div class="row form-group">
+                                         <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Phone Number</label>
+                                         </div>
+                                         <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Phone Number"
+                                                 class="form-control"></div>
+                                     </div>
+                                     <div class="row form-group">
+                                         <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">About</label></div>
+                                         <div class="col-12 col-md-8"><textarea name="" id="" rows="8" class="form-control"
+                                                 placeholder="Enter About Details"></textarea></div>
+                                     </div>
+                                     <div class="row form-group">
+                                         <div class="col-12 col-md-8 offset-md-4">
+                                             <button type="submit" class="btn btn-primary btn-sm">
+                                                 <i class="fa fa-dot-circle-o"></i> Update Profile
+                                             </button>
+                                             <button type="reset" class="btn btn-danger btn-sm">
+                                                 <i class="fa fa-ban"></i> Reset
+                                             </button>
+                                         </div>
+                                     </div>  
+                                     </div>
+                                    
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Full Name</label></div>
-                                    <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Full Name"
-                                            class="form-control"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Email Address</label>
-                                    </div>
-                                    <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Email Address"
-                                            class="form-control"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Phone Number</label>
-                                    </div>
-                                    <div class="col-12 col-md-8"><input type="email" id="hf-email" name="hf-email" placeholder="Phone Number"
-                                            class="form-control"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">About</label></div>
-                                    <div class="col-12 col-md-8"><textarea name="" id="" rows="8" class="form-control"
-                                            placeholder="Enter About Details"></textarea></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-12 col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Update Profile
-                                        </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Reset
-                                        </button>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
                                 <div class="row form-group">

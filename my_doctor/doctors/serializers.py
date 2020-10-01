@@ -57,5 +57,33 @@ class DoctorRegistration(serializers.Serializer):
         except IntegrityError:
           raise serializers.ValidationError("User already Exists")
 
+class UpdateProfile(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+    email = serializers.CharField()
+    full_name = serializers.CharField()
+    phone_number = serializers.CharField(max_length=15)
+    commission_val=serializers.DecimalField(max_digits=10,decimal_places=2,default=2)
+    commission_type=serializers.CharField(max_length=15,default='Percent')
+    Registration_Number = serializers.CharField(max_length=25)
+    specialist_type = serializers.CharField(max_length=25)
+    consultation_fee = serializers.DecimalField(max_digits=10,decimal_places=2,default=0)
+    about  = serializers.CharField(max_length=500)
+    profile_pic = serializers.FileField()
+
+    def create(self, validated_data):
+        try:
+            user = User.objects.get(id=validated_data["loggedInuser"])
+            doctor = doctors_info.objects.get(user__id=user.id)
+            print(validated_data)
+            user.username=validated_data['username']
+            user.email=validated_data['email']
+            for key,value in validated_data.items():
+                if key!='pat_id':
+                    setattr(doctor,key,value)
+            doctor.save()
+            return user
+        except IntegrityError:
+            raise serializers.ValidationError("User Already Exists")
 
 
