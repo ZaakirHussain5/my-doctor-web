@@ -27,6 +27,9 @@ patient appoinment:
 
 ..............
 consultations chat module:
+
+post url = /api/consultant_chats/
+get url =  /api/consultant_chats/?cons_id=1
 chats Post Request Data : {
     "user": "P",
     "message": "I followed the Routine but ther i no improve ment",

@@ -21,9 +21,7 @@
                                         </div>
                                         <div class="conversation__message">
                                             <div class="conversation__message-preview">
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-send.svg" alt="">
-                                                </span>
+
                                                 Hello! Are you free today?
                                             </div>                                                                        
                                         </div>
@@ -56,7 +54,7 @@
                                     <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
                                 </div>
                                 <div class="conversation__name">
-                                    <div class="conversation__name--title">Dr. Kumari</div>
+                                    <div id='conversation_doc' class="conversation__name--title">Dr. Kumari()</div>
                                     <div class="conversation__time">last seen at 07:15 PM</div>
                                 </div>
                             </div>
@@ -109,881 +107,40 @@
 
                         <div class="conversation-panel__body">
                             <div class="container">
-                                <div class="chatstyle-01">
-                                    <div class="chat-date"><span>Monday 16 May</span></div>
+                                <div id="chatDiv" class="chatstyle-01">
 
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons1"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons1">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Hi Marie, welcome to Live Chat! My name is Jason. How can I help you today?</div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                       
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
+<!--                                    <div class="ca-send">-->
+<!--                                        <div class="ca-send__msg-group">-->
+<!--                                            <div class="ca-send__msgwrapper">-->
+<!--                                                <div class="ca-send__msg">Hi Marie, welcome to Live Chat! My name is Jason. How can I help you today?</div>-->
+<!--                                            </div>-->
+<!--                                            <div class="metadata">-->
+<!--                                                <span class="time">10:10 AM</span>-->
+<!--                                                <span class="tick">-->
+<!--                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">-->
+<!--                                                </span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                       -->
+<!--                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">-->
+<!--                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">Hi, I wanted to check my order status. My order number is 0009483021 😀</div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr1"  role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr1">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons3"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons3">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Great, thanks 😀 for the information! Give me one moment please while I check on that for you.</div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
+<!--                                    <div class="ca-received">-->
+<!--                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">-->
+<!--                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="ca-received__msg-group">-->
+<!--                                            <div class="ca-received__msgwrapper">-->
+<!--                                                <div class="ca-received__msg">Hi, I wanted to check my order status. My order number is 0009483021 😀</div>-->
 
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">Thanks. I’m worried 😳 it won’t arrive in time ⌚ for my daughter’s birthday🎂  party 🎉🎊🎈this weekend.</div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr4">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <div class="ca-received__msg-media-group">
-                                                        <div class="ca-received__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/02.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="ca-received__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/05.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="ca-received__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/04.jpg' %}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr6">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons5">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">I understand your concern… I wouldn’t want my child’s gift to arrive late either. It looks like your order is set to arrive in 2 business days, so it should arrive by Friday, just in time!</div>
-                                            </div>
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons6">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Is there anything else that I can do for you?</div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/pdf.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.pdf</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr7">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/word.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.docs</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr8">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/powerpoint.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.pptx</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr9" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr9">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/excel.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.xlxs</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr10" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr10">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons7">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/pdf.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.pdf</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons8">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/word.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.docs</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons9" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenuButtons9">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/powerpoint.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.pptx</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons10" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons10">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">
-                                                    <div class="ca__file">
-                                                        <div class="ca__fileicon">
-                                                            <img src="{% static 'patients/assets/images/svg/excel.svg" alt="">
-                                                        </div>
-                                                        <div class="ca__filename">
-                                                            <span class="ca__filename--title">example.xlxs</span>
-                                                            <span class="ca__filename--size">21Kb</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    Great, thank you! Yes, I also wanted to make sure I entered the right shipping address. My address is 12390 Mulberry Ln, Coral Springs, FL 33067. Is that where it’s being shipped to?
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr11">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons11">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">No problem, let me check that for you.</div>
-                                            </div>
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtons12"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtons12">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Yes, I have here the shipping address as 12390 Mulberry Ln, Coral Springs, FL 33067. It looks like you’re good to go!</div>
-                                            </div>
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsms1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsms1">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">
-                                                    <div class="ca-send__msg-media-group">
-                                                        <div class="ca-send__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/02.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="ca-send__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/05.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="ca-send__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/04.jpg' %}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    Thanks so much!
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsr14" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsr14">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <img src="{% static 'patients/assets/images/svg/typing-01.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                            </div>-->
+<!--                                            <div class="metadata">-->
+<!--                                                <span class="time">10:10 AM</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
                                 </div>
                             </div>
@@ -991,31 +148,32 @@
 
                         <div class="conversation-panel__footer">
                             <div class="composer">
-                                <div class="composer__left">
-                                    <div class="composer__left--sticker">
-                                        <i class="mdi mdi-sticker-emoji"></i>
-                                    </div>
-                                    <div class="composer__left--emoticon">
-                                        <i class="mdi mdi-emoticon-outline"></i>
-                                    </div>     
-                                </div>
+<!--                                <div class="composer__left">-->
+<!--                                    <div class="composer__left&#45;&#45;sticker">-->
+<!--                                        <i class="mdi mdi-sticker-emoji"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="composer__left&#45;&#45;emoticon">-->
+<!--                                        <i class="mdi mdi-emoticon-outline"></i>-->
+<!--                                    </div>     -->
+<!--                                </div>-->
 
                                 <div class="composer__middle">
-                                    <textarea class="form-control" rows="1" placeholder="Type a message..."></textarea>
-                            
+                                    <form id="messege_form">
+                                        <textarea id="typed-message" class="form-control" rows="1" placeholder="Type a message..."></textarea>
+                                    </form>
                                     <div class="composer__middle--microphone">
-                                        <i class="mdi mdi-microphone"></i>
-                                    </div>
-                                    <div class="composer__middle--photo">
                                         <i class="mdi mdi-camera"></i>
                                     </div>
-                                    <div class="composer__middle--attachment">
-                                        <i class="mdi mdi-attachment"></i>
-                                    </div>
+<!--                                    <div class="composer__middle&#45;&#45;photo">-->
+<!--                                        <i class="mdi mdi-camera"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="composer__middle&#45;&#45;attachment">-->
+<!--                                        <i class="mdi mdi-camera"></i>-->
+<!--                                    </div>-->
                                 </div>
 
                                 <div class="composer__right">
-                                    <div class="composer__right--send">
+                                    <div id="sendButton" class="composer__right--send">
                                         <i class="mdi mdi-send"></i>
                                     </div>
                                     <div class="composer__right--microphone">
@@ -1140,7 +298,7 @@
                                                 <li>
                                                     <div class="doclist">
                                                         <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/pdf.svg" alt="">
+<!--                                                            <img src="{% static 'patients/assets/images/svg/pdf.svg" alt="">-->
                                                         </div>
                                                         <div class="doctitle">
                                                             <div class="docname">example-file.pdf</div>
@@ -1151,7 +309,7 @@
                                                 <li>
                                                     <div class="doclist">
                                                         <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/word.svg" alt="">
+<!--                                                            <img src="{% static 'patients/assets/images/svg/word.svg" alt="">-->
                                                         </div>
                                                         <div class="doctitle">
                                                             <div class="docname">example-file.docs</div>
@@ -1162,7 +320,7 @@
                                                 <li>
                                                     <div class="doclist">
                                                         <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/excel.svg" alt="">
+<!--                                                            <img src="{% static 'patients/assets/images/svg/excel.svg" alt="">-->
                                                         </div>
                                                         <div class="doctitle">
                                                             <div class="docname">example-file.xlxs</div>
@@ -1173,7 +331,7 @@
                                                 <li>
                                                     <div class="doclist">
                                                         <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/powerpoint.svg" alt="">
+<!--                                                            <img src="{% static 'patients/assets/images/svg/powerpoint.svg" alt="">-->
                                                         </div>
                                                         <div class="doctitle">
                                                             <div class="docname">example-file.pptx</div>
@@ -1261,863 +419,6 @@
                     </div>
                 </div>
             </div>
-            <div class="ca-content__chatstab--group">
-                <div class="conversation-wrapper">
-                    <div class="conversation-panel">
-                        <div class="conversation-panel__head">
-                            <div class="conversation-panel__back-button">
-                                <i class="mdi mdi-arrow-left"></i>
-                            </div>
-                            <div class="conversation-panel__avatar groupinfo-panel-opener">
-                                <div class="user-avatar user-avatar-rounded">
-                                    <img src="{% static 'patients/assets/images/media/friends.jpg' %}" alt="">
-                                </div>
-                                <div class="conversation__name">
-                                    <div class="conversation__name--title">Friends Forever</div>
-                                    <div class="conversation__time">250 Members</div>
-                                </div>
-                            </div>
-                            <div class="conversation__actions">
-                                <div class="action-icon"  data-toggle="modal" data-target="#addMemberModal">
-                                    <i class="mdi mdi-account-plus-outline"></i>
-                                </div>
-                                <div class="action-icon"  data-toggle="modal" data-target="#outGoingCall">
-                                    <i class="mdi mdi-phone"></i>
-                                </div>
-                                <div class="action-icon" data-toggle="modal" data-target="#incomingGroupVideoStart">
-                                    <i class="mdi mdi-video-outline"></i>
-                                </div>
-
-                                <div class="iconbox-dropdown dropdown">
-                                    <div class="iconbox btn-hovered-light" role="button" id="dropdownGroupMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="iconbox__icon mdi mdi-dots-vertical"></i>
-                                    </div>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownGroupMenuLink2">
-                                        <a class="dropdown-item personalinfo-panel-opener" href="javascript:;">
-                                            <span><i class="mdi mdi-information-outline"></i></span> 
-                                            <span>View Contact</span>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <span><i class="mdi mdi-magnify"></i></span> 
-                                            <span>Search</span>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <span><i class="mdi mdi-volume-mute"></i></span> 
-                                            <span>Mute notifications</span>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <span><i class="mdi mdi-wallpaper"></i></span> 
-                                            <span>Wallpaper</span>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <span><i class="mdi mdi-notification-clear-all"></i></span> 
-                                            <span>Clear Chat</span>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <span><i class="mdi mdi-export-variant"></i></span> 
-                                            <span>Export Chat</span>
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <span><i class="mdi mdi-logout"></i></span> 
-                                            <span>Leave Group</span>
-                                        </a>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
-
-                        <div class="conversation-panel__body">
-                            <div class="container">
-                                <div class="chatstyle-01">
-                                    <div class="chat-date"><span>Monday 16 May</span></div>
-
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsSG1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonsSG1">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Hi Marie, welcome to Live Chat! My name is Jason. How can I help you today?</div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">Hi, I wanted to check my order status. My order number is 0009483021</div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsRG1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsRG1">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/500/02.jpg' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">Great, thanks for the information! Give me one moment please while I check on that for you.</div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonSG3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonSG3">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">Thanks. I’m worried it won’t arrive in time for my daughter’s birthday party this weekend.</div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsRG4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsRG4">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <div class="ca-received__msg-media-group">
-                                                        <div class="ca-received__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/02.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="ca-received__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/05.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="ca-received__msg-media">
-                                                            <img src="{% static 'patients/assets/images/media/04.jpg' %}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsRG6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsRG6">
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-download-outline"></i></span> 
-                                                                <span>Download</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonSG5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonSG5">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">I understand your concern… I wouldn’t want my child’s gift to arrive late either. It looks like your order is set to arrive in 2 business days, so it should arrive by Friday, just in time!</div>
-                                            </div>
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonSG6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonSG6">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Is there anything else that I can do for you?</div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/500/05.jpg' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    Great, thank you! Yes, I also wanted to make sure I entered the right shipping address. My address is 12390 Mulberry Ln, Coral Springs, FL 33067. Is that where it’s being shipped to?
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsRG11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsRG11">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-send">
-                                        <div class="ca-send__msg-group">
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonSG11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonSG11">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">No problem, let me check that for you.</div>
-                                            </div>
-                                            <div class="ca-send__msgwrapper">
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonSG12" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonSG12">
-                                                            
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ca-send__msg">Yes, I have here the shipping address as 12390 Mulberry Ln, Coral Springs, FL 33067. It looks like you’re good to go!</div>
-                                            </div>
-                                            
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                                <span class="tick">
-                                                    <img src="{% static 'patients/assets/images/tick/tick-read.svg" alt="">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    Thanks so much!
-                                                </div>
-                                                <div class="ca-msg-actions">
-                                                    <div class="iconbox-dropdown dropdown">
-                                                        <div class="iconbox btn-hovered-light" id="dropdownMenuButtonsRG14" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="iconbox__icon mdi mdi-dots-horizontal"></i>
-                                                        </div>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonsRG14">
-                                                
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-share-outline"></i></span> 
-                                                                <span>Forward</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-content-copy"></i></span> 
-                                                                <span>Copy</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-star-outline"></i></span> 
-                                                                <span>Add Star</span>
-                                                            </a>
-                                                            <a class="dropdown-item" href="javascript:;">
-                                                                <span><i class="mdi mdi-trash-can-outline"></i></span> 
-                                                                <span>Delete</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="metadata">
-                                                <span class="time">10:10 AM</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ca-received">
-                                        <div class="user-avatar user-avatar-sm user-avatar-rounded online">
-                                            <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                        </div>
-                                        <div class="ca-received__msg-group">
-                                            <div class="ca-received__msgwrapper">
-                                                <div class="ca-received__msg">
-                                                    <img src="{% static 'patients/assets/images/svg/typing-02.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="conversation-panel__footer">
-                            <div class="composer">
-                                <div class="composer__left">
-                                    <div class="composer__left--sticker">
-                                        <i class="mdi mdi-sticker-emoji"></i>
-                                    </div>
-                                    <div class="composer__left--emoticon">
-                                        <i class="mdi mdi-emoticon-outline"></i>
-                                    </div>     
-                                </div>
-
-                                <div class="composer__middle">
-                                    <textarea class="form-control" rows="1" placeholder="Type a message..."></textarea>
-                            
-                                    <div class="composer__middle--microphone">
-                                        <i class="mdi mdi-microphone"></i>
-                                    </div>
-                                    <div class="composer__middle--photo">
-                                        <i class="mdi mdi-camera"></i>
-                                    </div>
-                                    <div class="composer__middle--attachment">
-                                        <i class="mdi mdi-attachment"></i>
-                                    </div>
-                                </div>
-
-                                <div class="composer__right">
-                                    <div class="composer__right--send">
-                                        <i class="mdi mdi-send"></i>
-                                    </div>
-                                    <div class="composer__right--microphone">
-                                        <i class="mdi mdi-microphone"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="information-panel group-information-panel">
-                        <div class="information-panel__head">
-                            <h5>Group info</h5>
-                            <div class="information-panel__closer">
-                                <i class="mdi mdi-close"></i>
-                            </div>
-                        </div>
-        
-                        <div class="information-panel__body">
-                            <div class="userprofile-avatar">
-                                <img class="img-fluid" src="{% static 'patients/assets/images/media/friends.jpg' %}" alt="">
-                            </div>
-        
-                            <div class="userprofile-name">
-                                <h4>Friends Forever</h4>
-                                <span>250 Members</span>
-                            </div>
-        
-                            <hr>
-        
-                            <div class="accordion accordion-ungrouped mb-3" id="accordionGroupChat">
-                                <div class="card">
-                                    <div class="card-header" id="headingOneGroup">
-                                        <div class="card-title collapsed justify-content-between align-items-center" data-toggle="collapse" role="button" data-target="#collapseOneGroup"
-                                         aria-expanded="false" aria-controls="collapseOneGroup">
-                                            <div class="acpanel__heading">
-                                                <div class="acpanel__left">
-                                                    <span><i class="mdi mdi-camera-outline"></i></span>
-                                                    <span>Photos & Media</span>
-                                                </div>
-                                                <div class="acpanel__right">
-                                                    <span class="badge badge-info">26</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            
-                                    <div id="collapseOneGroup" class="collapse " aria-labelledby="headingOneGroup" data-parent="#accordionGroupChat">
-                                        <div class="card-body">
-                                            <div class="owl-carousel">
-                                                <div class="item">
-                                                    <img class="img-fluid" src="{% static 'patients/assets/images/media/01.jpg' %}" alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="img-fluid" src="{% static 'patients/assets/images/media/02.jpg' %}" alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="img-fluid" src="{% static 'patients/assets/images/media/03.jpg' %}" alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="img-fluid" src="{% static 'patients/assets/images/media/04.jpg' %}" alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="img-fluid" src="{% static 'patients/assets/images/media/05.jpg' %}" alt="">
-                                                </div>
-                                                <div class="item">
-                                                    <img class="img-fluid" src="{% static 'patients/assets/images/media/06.jpg' %}" alt="">
-                                                </div>
-                                            </div>                                                                                                          
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="card">
-                                    <div class="card-header" id="headingTwoGroup">
-                                        <div class="card-title collapsed d-flex justify-content-between align-items-center" role="button" data-toggle="collapse" data-target="#collapseTwoGroup"
-                                            aria-expanded="false" aria-controls="collapseTwoGroup">
-                                            <div class="acpanel__heading">
-                                                <div class="acpanel__left">
-                                                    <span><i class="mdi mdi-file-document-outline"></i></span>
-                                                    <span>Documents</span>
-                                                </div>
-                                                <div class="acpanel__right">
-                                                    <span class="badge badge-info">16</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapseTwoGroup" class="collapse" aria-labelledby="headingTwoGroup" data-parent="#accordionGroupChat">
-                                        <div class="card-body">
-                                            <ul class="list-unstyled documentlist-wrapper">
-                                                <li>
-                                                    <div class="doclist">
-                                                        <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/pdf.svg" alt="">
-                                                        </div>
-                                                        <div class="doctitle">
-                                                            <div class="docname">example-file.pdf</div>
-                                                            <div class="docsize">217kb</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="doclist">
-                                                        <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/word.svg" alt="">
-                                                        </div>
-                                                        <div class="doctitle">
-                                                            <div class="docname">example-file.docs</div>
-                                                            <div class="docsize">217kb</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="doclist">
-                                                        <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/excel.svg" alt="">
-                                                        </div>
-                                                        <div class="doctitle">
-                                                            <div class="docname">example-file.xlxs</div>
-                                                            <div class="docsize">217kb</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="doclist">
-                                                        <div class="docicon">
-                                                            <img src="{% static 'patients/assets/images/svg/powerpoint.svg" alt="">
-                                                        </div>
-                                                        <div class="doctitle">
-                                                            <div class="docname">example-file.pptx</div>
-                                                            <div class="docsize">217kb</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li> <div class="doclistall">View All</div></li>
-                                               
-                                            </ul> 
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="card">
-                                    <div class="card-header" id="headingThreeGroup">
-                                        <div class="card-title collapsed  d-flex justify-content-between align-items-center" role="button" data-toggle="collapse" data-target="#collapseThreeGroup"
-                                            aria-expanded="false" aria-controls="collapseThreeGroup">
-                                            <div class="acpanel__heading">
-                                                <div class="acpanel__left">
-                                                    <span><i class="mdi mdi-settings-outline"></i></span>
-                                                    <span>Settings</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapseThreeGroup" class="collapse" aria-labelledby="headingThreeGroup" data-parent="#accordionGroupChat">
-                                        <div class="card-body">
-        
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    <div class="setting-list">
-                                                        <div class="setting-list-name">Media Auto Download</div>
-                                                        <div class="setting-list-switch">
-                                                            <label class="material-switch">
-                                                                <input type="checkbox">
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="setting-list">
-                                                        <div class="setting-list-name">Mute Conversation</div>
-                                                        <div class="setting-list-switch">
-                                                            <label class="material-switch">
-                                                                <input type="checkbox">
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="setting-list">
-                                                        <div class="setting-list-name">Notifications</div>
-                                                        <div class="setting-list-switch">
-                                                            <label class="material-switch">
-                                                                <input type="checkbox">
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="setting-list">
-                                                        <div class="setting-list-name">Block</div>
-                                                        <div class="setting-list-switch">
-                                                            <label class="material-switch">
-                                                                <input type="checkbox">
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-header" id="headingFourGroup">
-                                        <div class="card-title  d-flex justify-content-between align-items-center" role="button" data-toggle="collapse" data-target="#collapseFourGroup"
-                                            aria-expanded="true" aria-controls="collapseFourGroup">
-                                            <div class="acpanel__heading">
-                                                <div class="acpanel__left">
-                                                    <span><i class="mdi mdi-file-document-outline"></i></span>
-                                                    <span>Members List</span>
-                                                </div>
-                                                <div class="acpanel__right">
-                                                    <span class="badge badge-info">250</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapseFourGroup" class="collapse show" aria-labelledby="headingFourGroup" data-parent="#accordionGroupChat">
-                                        <div class="card-body">
-                                            <ul class="list-unstyled documentlist-wrapper">
-                                                <li>
-                                                    <div class="memberlist">
-                                                        <div class="membericon">
-                                                            <img class="img-fluid" src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
-                                                        </div>
-                                                        <div class="membertitle">
-                                                            <div class="membername">Jack P. Angulo</div>
-                                                            <div class="membersubtext">California</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="memberlist">
-                                                        <div class="membericon">
-                                                            <img class="img-fluid" src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="membertitle">
-                                                            <div class="membername">Jack P. Angulo</div>
-                                                            <div class="membersubtext">Newyork</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="memberlist">
-                                                        <div class="membericon">
-                                                            <img class="img-fluid" src="{% static 'patients/assets/images/user/250/03.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="membertitle">
-                                                            <div class="membername">Jack P. Angulo</div>
-                                                            <div class="membersubtext">Japan</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="memberlist">
-                                                        <div class="membericon">
-                                                            <img class="img-fluid" src="{% static 'patients/assets/images/user/250/04.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="membertitle">
-                                                            <div class="membername">Jack P. Angulo</div>
-                                                            <div class="membersubtext">Newyork</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="memberlist">
-                                                        <div class="membericon">
-                                                            <img class="img-fluid" src="{% static 'patients/assets/images/user/250/05.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="membertitle">
-                                                            <div class="membername">Jack P. Angulo</div>
-                                                            <div class="membersubtext">California</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="memberlist">
-                                                        <div class="membericon">
-                                                            <img class="img-fluid" src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt="">
-                                                        </div>
-                                                        <div class="membertitle">
-                                                            <div class="membername">Jack P. Angulo</div>
-                                                            <div class="membersubtext">California</div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                
-                                                <li> <div class="doclistall">Load More</div></li>
-                                               
-                                            </ul> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -2128,6 +429,11 @@ $(document).ready(function(){
     $('#caMainTab a[href="{% url "patients:consultations"%}"]').addClass('active');
 
     let dataList = [];
+    let chatData_list = [];
+    let old_active_id = null;
+    let shoing_conversation_id = null;
+
+
     function getConsultantListList(){
 
         $.ajax({
@@ -2145,9 +451,10 @@ $(document).ready(function(){
         let totalLi = '';
         for(var i=0; i < dataList.length; i++){
             let data = dataList[i];
+
             const liDesign = `
-                <li>
-                    <div class="conversation active">
+                <li id="activate_list${data.id}">
+                    <div id="activate_class${data.id}" class="conversation">
                         <div class="user-avatar user-avatar-rounded offline">
                             <img src="${data.doctor_id.profile_pic}" alt="">
                         </div>
@@ -2169,9 +476,46 @@ $(document).ready(function(){
                 </li>`;
             totalLi += liDesign;
         }
+
         $('#consultation_doctor_list').html(totalLi);
+        console.log(dataList[0].id);
+        consultationList(dataList[0].id)
+        
     }
     getConsultantListList()
+    
+    $('#consultation_doctor_list').on('click', 'li', function(){
+        let id = $(this).attr('id');
+        console.log(id)
+        return consultationList(id.slice(13))
+    })
+    
+    function consultationList(id){
+        console.log(id);
+        
+        for(var i=0; i < dataList.length; i++){
+            console.log(dataList[i]);
+            if(dataList[i].id == id){
+                shoing_conversation_id = dataList[i].id;
+                getChatData(shoing_conversation_id);
+                console.log('shoing_conversation_id', shoing_conversation_id);
+                $('#conversation_doc').html(dataList[i].doctor_id.full_name);
+                break;
+            }
+        }
+        let activate_class = '#activate_class';
+
+        if(old_active_id == null){
+            old_active_id = id;
+        }
+        else{
+            $(activate_class + old_active_id).removeClass('active');
+            old_active_id = id;
+        }
+        $(activate_class + id).addClass('active');
+        
+
+    }
 
     function getDateOrName(date){
         let dateTime = new Date(date);
@@ -2190,18 +534,126 @@ $(document).ready(function(){
             let year = dateTime.getFullYear()
             return day + "-" + month + "-" + year;
         }
-
-
     }
 
+function getChatData(consult_id){
+    const get_url = '/api/consultant_chats/?cons_id='+ consult_id;
+    console.log(get_url)
+    $.ajax({
+            'url': get_url,
+            'contentType': 'application/json',
+            'async': false,
+            'method': 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+            },
+        }).done((response)=>{
+            chatData_list= response;
+        })
+    
+
+    
+    return showList();
+}
+
+function showList(){
+    let liLists = '';
+    for(var i=0; i < chatData_list.length; i++){
+        const data = chatData_list[i];
+        
+        if(data.user == 'D'){
+            const li = `
+            <div class="ca-received">
+                <div class="user-avatar user-avatar-sm user-avatar-rounded online">
+                    <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
+                </div>
+                <div class="ca-received__msg-group">
+                    <div class="ca-received__msgwrapper">
+                        <div class="ca-received__msg">${data.message}</div>
+
+                    </div>
+                    <div class="metadata">
+                        <span class="time">${data.message_date_time}</span>
+                    </div>
+                </div>
+            </div>`;
+
+            liLists += li;
+        }
+        else{
+            const li = `
+            <div class="ca-send">
+
+                <div class="ca-send__msg-group">
+                    <div class="ca-send__msgwrapper">
+                        <div class="ca-send__msg">${data.message}</div>
+                    </div>
+                    <div class="metadata">
+                        <span class="time">${data.message_date_time}</span>
+
+                    </div>
+
+                </div>
+                <div class="user-avatar user-avatar-sm user-avatar-rounded online">
+                    <img src="{% static 'patients/assets/images/user/250/02.jpg' %}" alt="">
+                </div>
+            </div>
+                `;
+
+            liLists += li;
+        }
+    }
+    $('#chatDiv').html(liLists);
+    if(old_active_id == null){
+        old_active_id = chatData_list[0].consultation_id;
+    }
+    else{
+        
+    }
+}
+setInterval(function(){ 
+  getChatData(shoing_conversation_id); }, 1000); 
 
 
+function sendMessage(consult_id){
+    let data = {
+        user: 'P',
+        message: $('#typed-message').val(),
+        attachment: false,
+        //attachment_file:'file'
+        seen: false,
+        delivered: false,
+        consultation_id: consult_id
+    }
+    $.ajax({
+        url: '/api/consultant_chats/',
+        data: JSON.stringify(data),
+        method: 'POST',
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+        },
+    }).done((response)=>{
+        console.log("postrequest response -", response);
+    }).fail((err, error, wrong) => {
+        console.log(err)
 
+    })
 
+}
+    $('#messege_form').submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        sendMessage()
 
-
-
-
+    })
+    $('#sendButton').click(function(){
+        let values = $('#typed-message').val();
+        if(values.length >0){
+            sendMessage(old_active_id)
+        }
+        $('#typed-message').val('')
+    })
 })
 </script>
 {% endblock %}

@@ -532,8 +532,11 @@
 <script>
     $(document).ready(function(){
         $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
-
+        // VARIABLES...
         let dataList = [];
+        let old_active_id = null;
+
+
         function getAppoinmentList(){
             $.ajax({
                 'url': '/api/getPatientsAppointments/',
@@ -572,11 +575,14 @@
                 totalLi += liDesign;
             }
             $('#appointment_list').html(totalLi);
+            const liId = 'patient' + dataList[0].id;
+            appoinmentList(liId);
         }
         getAppoinmentList()
-        let old_active_id = null;
-        $('#appointment_list').on('click', 'li', function(){
-            let id = $(this).attr('id');
+
+
+        function appoinmentList(id){
+
             let ID= id.slice(7)
             $('#'+id+' #patientDiv'+ID).addClass('active');
             if(old_active_id == null){
@@ -601,7 +607,11 @@
                 }
             }
 
+        }
 
+        $('#appointment_list').on('click', 'li', function(){
+            let id = $(this).attr('id');
+            return appoinmentList(id)
         })
     })
 </script>

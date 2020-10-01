@@ -33,7 +33,7 @@ class consultations(models.Model):
 
 
     def __str__(self):
-        return self.doctor_id.full_name
+        return self.doctor_id.full_name + str(self.id)
 
     def save(self, *args, **kwargs):
         if not doctor_payments.objects.filter(doctor = self.doctor_id):
