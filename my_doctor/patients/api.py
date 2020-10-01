@@ -1,9 +1,10 @@
-from .serializers import patient_infoSerializer,PatientResgistrationSerializer,medical_historySerializer,groupsSerializer,PatientResgistrationApp
+from .serializers import UpdateProfile,patient_infoSerializer,PatientResgistrationSerializer,medical_historySerializer,groupsSerializer,PatientResgistrationApp
 from .models import patient_info,medical_history,groups
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
 from django.core.exceptions import ObjectDoesNotExist
+from knox.models import AuthToken
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.all()
@@ -34,7 +35,25 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
-            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data
+            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        })
+
+class PatientUpdateProfileAPI(generics.GenericAPIView):
+    serializer_class = UpdateProfile
+
+    permission_classes=[
+        permissions.IsAuthenticated
+    ]
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save(loggedInuser=self.request.user.id)
+        print(user)
+        return Response({
+            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
         })
 
 class GetLoggedPatient(generics.RetrieveAPIView):

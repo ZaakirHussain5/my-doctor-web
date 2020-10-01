@@ -94,6 +94,37 @@ class PatientResgistrationApp(serializers.Serializer):
             raise serializers.ValidationError("User Already Exists")
 
 
+class UpdateProfile(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.CharField()
+    full_name = serializers.CharField()
+    gender = serializers.CharField()
+    age = serializers.IntegerField()
+    height=serializers.DecimalField(max_digits=10,decimal_places=2)
+    weight=serializers.DecimalField(max_digits=10,decimal_places=2)
+    marital_status=serializers.CharField()
+    blood_group = serializers.CharField()
+    ph_no=serializers.CharField()
+    loggedInuser=serializers.IntegerField(allow_null=True)
+    profile_pic=serializers.FileField(allow_null=True)
+
+    def create(self, validated_data):
+        try:
+            
+            user = User.objects.get(id=validated_data["loggedInuser"])
+            patient = patient_info.objects.get(user__id=user.id)
+            print(validated_data)
+            user.username=validated_data['username']
+            user.email=validated_data['email']
+            for key,value in validated_data.items():
+                if key!='pat_id':
+                    setattr(patient,key,value)
+            patient.save()
+            return user
+        except IntegrityError:
+            raise serializers.ValidationError("User Already Exists")
+
+
 
 class medical_historySerializer(serializers.ModelSerializer):
     class Meta:
