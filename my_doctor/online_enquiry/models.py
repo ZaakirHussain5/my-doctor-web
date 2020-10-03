@@ -9,6 +9,8 @@ class online_enquiry(models.Model):
     speciality =models.CharField(max_length=50)
     city=models.CharField(max_length=50)
     message=models.CharField(max_length=300)
+    is_contacted = models.BooleanField(default=False)
+    age = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

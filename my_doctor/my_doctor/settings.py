@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'patient_feedbacks',
     'patient_subscription',
     'patient_medical_records',
-    'website'
+    'website',
+    'online_enquiry'
 ]
 
 MIDDLEWARE = [

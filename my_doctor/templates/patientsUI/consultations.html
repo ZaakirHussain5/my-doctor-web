@@ -445,6 +445,7 @@ $(document).ready(function(){
                 xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
             },
         }).done((response)=>{
+            console.log(response)
             dataList = response;
         });
 
@@ -478,8 +479,7 @@ $(document).ready(function(){
         }
 
         $('#consultation_doctor_list').html(totalLi);
-        console.log(dataList[0].id);
-        consultationList(dataList[0].id)
+        
         
     }
     getConsultantListList()
@@ -605,13 +605,17 @@ function showList(){
     }
     $('#chatDiv').html(liLists);
     if(old_active_id == null){
-        old_active_id = chatData_list[0].consultation_id;
+        if(chatData_list.length !=0){
+
+            old_active_id = chatData_list[0].consultation_id;
+        }
     }
     else{
         
     }
 }
 setInterval(function(){ 
+    
   getChatData(shoing_conversation_id); }, 1000); 
 
 

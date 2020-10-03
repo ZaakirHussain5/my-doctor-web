@@ -8,6 +8,7 @@ class patient_infoSerializer(serializers.ModelSerializer):
     class Meta:
         model = patient_info
         fields = '__all__'
+        depth= 1
 
 class PatientResgistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -102,11 +103,11 @@ class UpdateProfile(serializers.Serializer):
     age = serializers.IntegerField()
     height=serializers.DecimalField(max_digits=10,decimal_places=2)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2)
-    marital_status=serializers.CharField()
+    marital_status=serializers.CharField(required=False)
     blood_group = serializers.CharField()
     ph_no=serializers.CharField()
-    loggedInuser=serializers.IntegerField(allow_null=True)
-    profile_pic=serializers.FileField(allow_null=True)
+    loggedInuser=serializers.IntegerField(required=False)
+    profile_pic=serializers.FileField(required=False)
 
     def create(self, validated_data):
         try:
@@ -135,3 +136,33 @@ class groupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = groups
         fields = '__all__'
+
+class UserEmail(serializers.ModelSerializer):
+    class Meta:
+        model=User            
+        fields = ['email']
+
+
+class UpdatePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField()
+    new_password = serializers.CharField()
+    confirm_new_password = serializers.CharField()
+    loggedInuser = serializers.IntegerField(required=False)
+
+    def create(self, validated_data):
+        # getting the user
+        user = User.objects.get(id = validated_data['loggedInuser'])
+        password = validated_data['old_password']
+        # Check if the user's typed password is correct or not
+        if user.check_password(password):
+            # checking new two password is same or not.
+            if validated_data['new_password'] == validated_data['confirm_new_password']:
+                # set new password to the user.
+                print(validated_data['new_password'])
+                user.set_password(validated_data['new_password'])
+                user.save()
+                return user
+            raise serializers.ValidationError("Your new passwords is not matched.")
+
+        raise serializers.ValidationError("Your password is wrong. Please provide us right password") 
+

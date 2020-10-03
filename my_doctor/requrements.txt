@@ -1,5 +1,5 @@
 home page:
-	1. book submission form 
+
 	2. dinamic doctors list
 speciality page;
 	1. book appoinment form
@@ -21,12 +21,12 @@ patient appoinment:
 
 
 ...................
-1.apponments : appoinments/urls.py / ('GET') cookie 'getPatientsAppointments'
+1.apponments : appoinments/urls.py / ('GET') cookie 'getPatientsAppointments' (done)
     template: patientsUI/apoinments.html
-2. consultations : consultations/urls.py / 'getPatientConsultations'
+2. consultations : consultations/urls.py / 'getPatientConsultations' (done)
 
 ..............
-consultations chat module:
+3.consultations chat module: (done)
 
 post url = /api/consultant_chats/
 get url =  /api/consultant_chats/?cons_id=1
@@ -39,3 +39,75 @@ chats Post Request Data : {
     "delivered": false,
     "consultation_id": 1
 }
+
+
+...................
+1.patient profile.	
+	update_profile:(done)
+	    get_url = '/api/getLoggedInPatient' Note: pass token on the header..
+        template = form= _settig, patients_layout
+        update_url = '/api/PatientUpdateProfile'
+    update_password = using django forms(done)
+
+
+2. doctorsUI
+doctor:
+    {   username = DPDOC2020001
+        Password : 12345
+        redirect = '/doctors/dashboard'
+    *done}
+
+    (get_url = '/api/getLoggedInDoctor'
+    template = doctorsUI/dashboard.html)(done)
+    
+    update_url = '/api/DoctorUpdateProfile'
+
+    update_password = using django forms
+
+3.Doctor Timings:
+     url = '/api/DoctorTimings'
+    respose:
+     {
+        "mon": true,
+        "tue": true,
+        "wed": true,
+        "thu": true,
+        "fri": true,
+        "sat": false,
+        "sun": false,
+        "from_time": "12:00 PM",
+        "to_time": "5:00 PM",
+        "doctor": 1
+    }
+
+4........
+1. website dynamic doctor..
+    url: '/api/doctors_info'  (<div class="special-item">)
+    template: website/index.html
+
+2. book apponment form submission:
+    url: '/api/online_enquiry'
+    method: 'post'
+    data: from online enquiry app
+
+.............
+temlate = frontend/customerCareDashboard.html
+1. image remove from /customerCareDashboard and add gender and age.
+2. dynamic popup
+3. url /newAppoinment?patient=patient_id
+
+
+
+template = frontend/newAppoinment.html
+4. dynamic patient view get the patient id from the url in views
+refer patientsUI app's selectDoctors function and dsiplay detals on popup.
+
+5. display dynamic doctors list filter doctors list based on specility selected.
+6. use '/api/getAvailableDoctors?spl=specility type'
+
+
+patients list.
+7. url = '/api/patients_info' => template = frontend/patientsList.html
+
+consultations list
+8. get url = '/api/getAllConsultations' => template = frontend/consultationsList.html(create New)

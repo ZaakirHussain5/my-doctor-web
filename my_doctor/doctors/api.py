@@ -4,7 +4,7 @@ from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
 from django.core.exceptions import ObjectDoesNotExist
-
+from knox.models import AuthToken
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.all()

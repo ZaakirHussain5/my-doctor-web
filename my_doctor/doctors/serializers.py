@@ -59,7 +59,7 @@ class DoctorRegistration(serializers.Serializer):
 
 class UpdateProfile(serializers.Serializer):
     username = serializers.CharField()
-    password = serializers.CharField()
+    # password = serializers.CharField()
     email = serializers.CharField()
     full_name = serializers.CharField()
     phone_number = serializers.CharField(max_length=15)
@@ -69,11 +69,12 @@ class UpdateProfile(serializers.Serializer):
     specialist_type = serializers.CharField(max_length=25)
     consultation_fee = serializers.DecimalField(max_digits=10,decimal_places=2,default=0)
     about  = serializers.CharField(max_length=500)
-    profile_pic = serializers.FileField()
+    profile_pic = serializers.FileField( required = False)
 
     def create(self, validated_data):
         try:
             user = User.objects.get(id=validated_data["loggedInuser"])
+            print(user)
             doctor = doctors_info.objects.get(user__id=user.id)
             print(validated_data)
             user.username=validated_data['username']

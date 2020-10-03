@@ -240,9 +240,9 @@
     </div>
     </div>
     </div>
-    <div class="specialist-slider row">
-    <div class="col-xs-12">
-    <div class="special-main">
+    <div id="doctorss_list" class="specialist-slider row">
+    <div  class="col-xs-12">
+    <div  class="special-main">
     <div class="special-item">
     <div class="special-image">
     <img src="{%static 'website/img/specialist.jpg'%}" alt="image">
@@ -455,7 +455,7 @@
     </section>
     
     <section class="testimonial">
-    <div class="container">
+    <div  class="container">
     <div class="row">
     <div class="col-md-5 col-sm-12">
     <div class="section-title title-white mar-0">
@@ -597,22 +597,22 @@
         <div class="row">
             <div class="">
                 <div class="form-group col-xs-6">
-                    <input type="text" placeholder="Your Name" required>
+                    <input type="text" id="id_name" placeholder="Your Name" required>
                 </div>
-            <div class="form-group col-xs-6">
+            <div  class="form-group col-xs-6">
     
-            <input type="text" placeholder="Your Email" required>
+            <input id="id_email" type="text" placeholder="Your Email" required>
         </div>
         <div class="form-group col-xs-6">
     
-            <input type="tel" placeholder="Your Phone" minlength="10" maxlength="10" size="10" required>
+            <input id="id_ph_no" type="tel" placeholder="Your Phone" minlength="10" maxlength="10" size="10" required>
         </div>
         <div class="form-group col-xs-6">
 
-            <input type="text" placeholder="Your City">
+            <input type="text" id="id_city" placeholder="Your City">
         </div>
         <div class="form-group col-xs-6">
-            <select>
+            <select id="id_gender">
                 <option>Gender</option>
                 <option>Male</option>
                 <option>Female</option>
@@ -620,10 +620,10 @@
         </div>
         <div class="form-group col-xs-6">
     
-            <input type="number" placeholder="Age" min="1" max="100">
+            <input type="number" id="id_age" placeholder="Age" min="1" max="100">
         </div>
-        <div class="form-group col-xs-12">
-            <select>
+        <div class="form-group col-xs-6">
+            <select id="select-specialist">
                 <option value="Speciality">Speciality</option>
                 <option value="General Physician">General Physician</option>
                 <option value="Dermatologist">Dermatologist</option>
@@ -633,6 +633,9 @@
                 <option value="Gynaecologist">Gynaecologist</option>
             </select>
         </div>
+        <div class="form-group col-xs-6" >
+            <input type="text" id="id_blood" placeholder="Blood Group">
+        </div>
     </div>
     
     
@@ -641,7 +644,7 @@
     <div class="">
     <div class="form-group col-xs-12">
     
-    <textarea placeholder="Your message"></textarea>
+    <textarea id="id_message" placeholder="Your message"></textarea>
         </div>
     <div class="col-xs-12">
     <div class="form-btn">
@@ -685,5 +688,97 @@
 {% endblock %}
 {% block scripts %}
 <script >
+    function getDoctorList(){
+        $.ajax({
+            url: '/api/doctors_info',
+            method: 'GET',
+            contentType: 'application/json',
+        }).done((response)=>{
+            console.log(response);
+            let doctor_div = '';
+            for(var i =0; i < response.length; i++){
+                let data = response[i];
+                let full_name = data.full_name;
+                console.log(full_name);
+                const doctor_carausel = `
+                    <div class="col-xs-12">
+                        <div class="special-main">
+                            <div class="special-item">
+                                <div class="special-image">
+                                    <img src="${data.profile_pic}" alt="image">
+                                    <div class="special-links">
+                                    <ul>
+                                        <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                        <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="color-overlay"></div>
+                                </div>
+                                <div class="special-content">
+                                     <h4>${full_name}</h4>
+                                    <p>${data.specialist_type}</p>
+                                    <div class="fees">
+                                      <a href="#"><p>Consult Now Rs.${data.consultation_fee}/-</p> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+
+                    doctor_div += doctor_carausel;
+            }
+            $("#doctorss_list").html(doctor_div);
+
+
+
+
+        }).fail((error)=>{console.log(error);})
+
+    }
+    getDoctorList()
+
+    $('h3 a').click(function(){
+        const text = $(this).text();
+        //const options = $('#select-specialist option');
+        $("div.form-group select").val(text);
+    })
+
+
+/////////////////////  APPOINMENT FORM SUBMITED /////////////////
+    $("#appointments-main-form").submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        let data = {
+            name: $('#id_name').val(),
+            email: $('#id_email').val(),
+            ph_no: $('#id_ph_no').val(),
+            gender: $('#id_gender').val(),
+            blood_group: $("#id_blood").val(),
+            age: $("#id_age").val(),
+            speciality: $("#select-specialist").val(),
+            city: $("#id_city").val(),
+            message: $("#id_message").val()
+        };
+        $.ajax({
+            url: '/api/onlineEnquiry/',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+        }).done((response)=>{
+            console.log(response);
+            alert("Your appoinment is booking successful. We are call you soon.");
+            $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
+        })
+        .fail((error)=>{
+            console.log(error)
+        })
+
+    })
+
+
+
+
 </script>
 {% endblock %}
