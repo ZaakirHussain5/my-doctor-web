@@ -80,8 +80,9 @@ class getAvailableDoctors(viewsets.ModelViewSet):
   def get_queryset(self):
     day = self.request.query_params.get('day', None)
     spl = self.request.query_params.get('spl', None)
-    if day is not None or spl is not None:
+    if spl is not None:
        queryset = doctors_info.objects.filter(specialist_type=spl)
+    if day is not None:
        if day=='mon':
           queryset = DoctorTimings.objects.filter(mon=True).filter(doctor__in=queryset)
        if day=='tue':
@@ -97,7 +98,7 @@ class getAvailableDoctors(viewsets.ModelViewSet):
        if day=='sun':
           queryset = DoctorTimings.objects.filter(sun=True).filter(doctor__in=queryset)
     else:
-       queryset=["Specialist Type and day not specified"]
+       queryset=["Specialist Type or day not specified"]
     return queryset
 
 class DoctorLogout(generics.GenericAPIView):
