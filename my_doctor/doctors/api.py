@@ -99,3 +99,10 @@ class getAvailableDoctors(viewsets.ModelViewSet):
     else:
        queryset=["Specialist Type and day not specified"]
     return queryset
+
+class DoctorLogout(generics.GenericAPIView):
+   def post(self,request):
+      if request.user is not None:
+         doctor = doctors_info.objects.get(user=request.user).update(is_loggedin=False)
+         doctor.save()
+         return Response({})

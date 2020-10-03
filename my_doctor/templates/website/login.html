@@ -1,7 +1,36 @@
 {%extends 'website_layout.html'%}
 {%load static%}
 {% block content%}
-
+<style>
+    .register .nav-tabs{
+    margin-bottom: 3%;
+    border: none;
+    background: #0b818b;
+    border-radius: 1.5rem;
+    width: 37%;
+}
+.register .nav-tabs .nav-link{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.register .nav-tabs .nav-item a:hover{
+    border: none;
+    color:#0b818b
+}
+.register .nav-tabs .nav-item.active a{
+    width: 100px;
+    color: #0b818b;
+    border: 2px solid #0b818b;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    background-color: #fff;
+}
+</style>
 <section class="breadcrumb">
     <div class="container">
     <div class="breadcrumb-outer">
@@ -18,7 +47,7 @@
     <section class="login">
     <div class="container">
     <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
     <div class="login-form">
     <form id="loging_in">
         <div class="row">
@@ -28,31 +57,39 @@
                     <p>Login with your registered details</p>
                 </div>
             </div>
+            <div class="col-md-12 register">
+                <label>You are a</label>
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Patient</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Doctor</a>
+                    </li>
+                </ul>
+            </div>
             <div class="form-group col-xs-12">
                 <input type="email" class="form-control" id="Name1" placeholder="Enter registered phone number">
             </div>
-            <div class="form-group col-xs-8">
+            <div class="form-group col-xs-12">
 
-                <input type="password" class="form-control" id="email1" placeholder="Enter OTP or password">
-            </div>
-            <div class="form-group col-xs-4 otp">
-                <p><a href="#">Get OTP</a></p>
+                <input type="password" class="form-control" id="email1" placeholder="Enter password">
             </div>
             <div class="col-xs-12">
                 <div class="checkbox-outer">
-                    <input type="checkbox" name="vehicle2" value="Car"> Remember Me? &nbsp; <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
+                     <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="comment-btn">
-                    <a href="#" class="btn">Login</a>
-                    <button type="submit" id="submit_login"> Login </button>
+                    <button type="submit" class="btn" id="submit_login"> Login </button>
                 </div>
             </div>
         </div>
     </form>
     </div>
     </div>
+    <!--
     <div class="col-md-6 col-sm-6 col-xs-12">
     <div class="login-form">
     <form>
@@ -106,7 +143,7 @@
     </div>
     </form>
     </div>
-    </div>
+    </div>-->
     </div>
     </div>
     </section>

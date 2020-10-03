@@ -19,6 +19,7 @@ class doctors_info(models.Model):
     created_by = models.CharField(max_length=25, null=True)
     Last_modied = models.DateTimeField(auto_now=True)
     Modified_by = models.CharField(max_length=25, null=True)
+    is_loggedin = models.BooleanField(default=False)
     
 
     def __str__(self):

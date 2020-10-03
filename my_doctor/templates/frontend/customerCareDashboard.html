@@ -629,13 +629,10 @@
                 {
                     data:'id',
                     render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-circle btn-success btn-sm" data-toggle="modal"
+                          return `<button type="button" class="btn btn-circle data-pat='${JSON.stringify(row)}' btn-success btn-sm" data-toggle="modal"
                                             data-target="#patientDetails">
                                             <i class="fa fa-tasks"></i>
                                         </button>
-                          <button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
-                                    <i class="fa fa-edit"></i>
-                                </button>
                                 <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
                                     <i class="fa fa-trash"></i>
                                 </button>`
