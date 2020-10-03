@@ -4,8 +4,14 @@ from rest_framework import viewsets, permissions
 
 
 class patient_feedbacksViewSet(viewsets.ModelViewSet):
-    queryset = patient_feedbacks.objects.all()
+    
     permissions = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = patient_feedbacksSerializer
+
+    def get_queryset(self):
+        return self.request.user.feedbacks.all()
+
+    def perform_create(self,serializer):
+        return serializer.save(patient=self.request.user)

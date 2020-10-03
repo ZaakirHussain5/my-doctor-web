@@ -80,8 +80,9 @@ class UpdateProfile(serializers.Serializer):
             user.username=validated_data['username']
             user.email=validated_data['email']
             for key,value in validated_data.items():
-                if key!='pat_id':
-                    setattr(doctor,key,value)
+                setattr(doctor,key,value)
+            doctor.is_active = True
+            user.save()
             doctor.save()
             return user
         except IntegrityError:

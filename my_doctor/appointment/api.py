@@ -15,6 +15,13 @@ class appointmentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(patient=self.request.user)
 
+class NewAppointmentAPI(viewsets.ModelViewSet):
+    queryset = appointment.objects.all()
+    serializer_class = appointmentSerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
 class getPatientAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     
     permissions = [
