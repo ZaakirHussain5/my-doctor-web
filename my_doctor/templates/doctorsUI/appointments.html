@@ -1,4 +1,5 @@
 {% extends 'doctor_layout.html' %}
+{% load static %}
 {% block content%}
 <style>
 
@@ -544,6 +545,49 @@ jQuery('#timingsForm').submit((e)=>{
     })
 
 })
+
+var table = $('#Appointments').DataTable({
+            ajax:{
+                url:'/api/getDoctorAppointments',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                },
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data:'profile_pic'
+                },
+                {
+                    data:'age'
+                },
+                {
+                    data : 'gender'
+                },
+                {
+                    data : 'ph_no'
+                },
+                {
+                    data:'id',
+                    render: function (data,type,row) {
+                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-pat='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                                    <i class="fa fa-tasks"></i>
+                                </button>`
+                      }
+                }
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
 
 </script>
 {% endblock %}

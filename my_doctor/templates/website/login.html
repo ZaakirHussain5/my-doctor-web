@@ -69,7 +69,8 @@
                 </ul>
             </div>
             <div class="form-group col-xs-12">
-                <input type="email" class="form-control" id="Name1" placeholder="Enter registered phone number">
+                <input id="user_type" type="hidden" value="P">
+                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
             </div>
             <div class="form-group col-xs-12">
 
@@ -82,13 +83,7 @@
             </div>
             <div class="col-xs-12">
                 <div class="comment-btn">
-<<<<<<< HEAD
-                    <a href="#" class="btn">Login</a>
-                    <button type="submit" id="submit_login"> Login </button>
-                    <button type="submit" id="doctor_login"> DoctorLogin </button>
-=======
-                    <button type="submit" class="btn" id="submit_login"> Login </button>
->>>>>>> fbca51ad36ff47593715971759fa07d48781a9f7
+                    <button type="submit" class="btn">Login</a>
                 </div>
             </div>
         </div>
@@ -184,6 +179,16 @@
             // patient tocken store to localstorage
         // else aleart message
         jQuery(document).ready(function($){
+            $('#myTab li:first-child').click(()=>{
+                console.log('clicked');
+                $('#user_type').val('P')
+            })
+
+            $('#myTab:nth-child(2)').click(()=>{
+                console.log('clicked');
+                $('#user_type').val('D');
+            })
+
             function submit_doctor_loginForm(){
                 console.log('doctorsUpload');
             var data = {
@@ -230,12 +235,43 @@
                     alert(err.responseJSON.non_field_errors[0])
                 })
         }
-       $('#submit_login').click(submit_loginForm)
 
-       $('#doctor_login').click(submit_doctor_loginForm)
+        $("#loging_in").submit((e)=>{
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            const data = {
+                username: $('#Name1').val(),
+                password: $('#email1').val(),
+                user_type: $('#user_type').val()
+            };
+            console.log(data);
+            $.ajax({
+                    url: '/api/auth/login',
+                    data: JSON.stringify(data),
+                    method: 'POST',
+                    contentType: 'application/json'
+                }).done((response) => {
+                    if (data.user_type == "P") {
+                        $.cookie('Token', response.token, {
+                        expires: 1
+                        })
+                        window.location.href = 'patients/dashboard'    
+                    }
+                    else{
+                        $.cookie('DoctorToken', response.token, {
+                        expires: 1
+                        })
+                        window.location.href = '/doctors/dashboard'
+                    }
+                    
+                }).fail((err, error, wrong) => {
+                    console.log(err)
+                    alert(err.responseJSON.non_field_errors[0])
+                })
+
         })
 
-
+    })
 
 
     </script>

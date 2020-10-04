@@ -116,3 +116,29 @@ consultations list
 
 9. assign accurate urls on the admin navbar (done)
 template = partials/_adminNavbar.html
+
+
+----------------
+
+10)
+ In Doctors dashboard appoinments list. templete= /doctorsUI/apponments.html
+ url = '/api/getDoctorAppointments'(GET) ** DOCTOR TOKEN in header
+
+11) 
+    doctor dashboard consultaions and chat.
+    templete = doctorsUI/consultatons.html
+    url = '/api/getDoctorConsultation' (GET) ** DOCTOR TOKEN in header
+
+12> Chat Module...
+post url = /api/consultant_chats/
+get url =  /api/consultant_chats/?cons_id=1
+chats Post Request Data : {
+    "user": "D",
+    "message": "I followed the Routine but ther i no improve ment",
+    "attachment": false,
+    'attachment_file':'file'
+    "seen": false,
+    "delivered": false,
+    "consultation_id": 1
+}
+13. login with input form. (done)
