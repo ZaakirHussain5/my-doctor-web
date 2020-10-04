@@ -36,8 +36,9 @@
                             <thead>
                                 <tr>
                                     <th>Slno</th>
-                                    <th>Image</th>
                                     <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
                                     <th>Phone No.</th>
                                     <th>Actions</th>
                                 </tr>
@@ -286,7 +287,7 @@
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">DP2020001</p>
+                                <p class="form-control-static"></p>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -601,7 +602,7 @@
                 })
             }
         })
-
+    
 
 
         var table = $('#patients').DataTable({
@@ -614,13 +615,16 @@
                     data:'id'
                 },
                 {
-                    data:'profile_pic',
-                    render:function(data){
-                        return `<img src="${data}" style="height:90px;width:120px" alt="">`}
+                    data:'full_name',
+                    
 
                 },
                 {
-                    data:'full_name'
+                    data:'age'
+
+                },
+                {
+                    data:'gender'
 
                 },
                 {
@@ -629,8 +633,7 @@
                 {
                     data:'id',
                     render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-circle data-pat='${JSON.stringify(row)}' btn-success btn-sm" data-toggle="modal"
-                                            data-target="#patientDetails">
+                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-pat='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
                                             <i class="fa fa-tasks"></i>
                                         </button>
                                 <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
@@ -660,6 +663,47 @@
               tabs:true
         })
 
+
+    $('#patientDetails').on('show.bs.modal', function (event) {
+        var myVal = $(event.relatedTarget).data('pat');
+        console.log(myVal)
+
+        let gender_age = myVal.gender + '/' + myVal.age;
+
+
+        let rel_type_relation = myVal.rel_type + '/' + myVal.relation;
+        if(myVal.rel_type == null && myVal.relation == null){
+            rel_type_relation = '';
+        }
+        else if(myVal.rel_type != null && myVal.relation == null){
+            rel_type_relation = myVal.rel_type
+        }
+        else if(myVal.rel_type == null && myVal.relation != null){
+            rel_type_relation = myVal.relation
+        }else{
+            rel_type_relation = myVal.rel_type + '/' + myVal.relation
+        }
+        let ps = $(this).find('p');
+        let valList = [myVal.pat_id, myVal.full_name, myVal.blood_group, gender_age, rel_type_relation, myVal.ph_no, myVal.s_ph_no, myVal.user.email, myVal.pref_lang, myVal.street_address, myVal.locality, myVal.city]
+        for(var i=0; i < ps.length; i++){
+
+            ps[i].innerHTML = valList[i]    
+            
+            ;
+        }
+        $(this).find('img').attr('src', myVal.profile_pic);
+        $(this).find('a').attr('href', '/newAppointment?patient='+ myVal.id)
+        
     })
+
+
+
+
+
+
+
+    })
+
+
 </script>
   {% endblock %}

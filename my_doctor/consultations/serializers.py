@@ -22,4 +22,6 @@ class getAllConsultationsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = consultations
-        fields = ('id','doctor_id','patient','patient_name','patient_age','patient_gender','patient_pic','consultation_date_time','message')
+        fields = ('id','doctor_id','patient','patient_name','patient_age','patient_gender','patient_pic','consultation_date_time','message',
+            'inv_number', 'video_audio_rating', 'consultation_rating', 'overall_rating', 'consultation_amt'
+            )

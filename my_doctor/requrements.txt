@@ -81,33 +81,38 @@ doctor:
     }
 
 4........
-1. website dynamic doctor..
+1. website dynamic doctor..(done)
     url: '/api/doctors_info'  (<div class="special-item">)
     template: website/index.html
 
-2. book apponment form submission:
+2. book apponment form submission:(done)
     url: '/api/online_enquiry'
     method: 'post'
     data: from online enquiry app
 
 .............
-temlate = frontend/customerCareDashboard.html
-1. image remove from /customerCareDashboard and add gender and age.
-2. dynamic popup
-3. url /newAppoinment?patient=patient_id
+A. temlate = frontend/customerCareDashboard.html (done)
+    1. image remove from /customerCareDashboard and add gender and age.
+    2. dynamic popup
+    3. url /newAppoinment?patient=patient_id
 
 
 
-template = frontend/newAppoinment.html
-4. dynamic patient view get the patient id from the url in views
-refer patientsUI app's selectDoctors function and dsiplay detals on popup.
+B. template = frontend/newAppoinment.html (done)
+    4. dynamic patient view get the patient id from the url in views
+    refer patientsUI app's selectDoctors function and dsiplay details on popup.
 
 5. display dynamic doctors list filter doctors list based on specility selected.
 6. use '/api/getAvailableDoctors?spl=specility type'
+/api/
 
 
-patients list.
+patients list.(done)
 7. url = '/api/patients_info' => template = frontend/patientsList.html
 
 consultations list
 8. get url = '/api/getAllConsultations' => template = frontend/consultationsList.html(create New)
+** create view and url in frontend app 7 and 8
+
+9. assign accurate urls on the admin navbar (done)
+template = partials/_adminNavbar.html

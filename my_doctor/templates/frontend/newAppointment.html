@@ -27,11 +27,16 @@
                             <div class="card-header user-header alt bg-primary">
                                 <div class="media">
                                     <a href="#">
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/1.jpg' %}">
+                                        {% if patient_info.profile_pic %}
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{ patient_info.profile_pic.url }}">
+                                        {% else %}
+                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/1.jpg' %}">
+                                        {% endif %}
+                                        }
                                     </a>
                                     <div class="media-body">
-                                        <h2 class="text-light display-6">Praveen</h2>
-                                        <p class="text-white">#DP2020001</p>
+                                        <h2 class="text-light display-6">{{patient_info.full_name}}</h2>
+                                        <p class="text-white">#{{ patient_info.pat_id }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -39,13 +44,13 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-tint"></i> Blood Group <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">AB+</span></a>
+                                    <a href="#"> <i class="fa fa-tint"></i> Blood Group <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">{{ patient_info.blood_group }} </span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-user"></i> Age <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">45</span></a>
+                                    <a href="#"> <i class="fa fa-user"></i> Age <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">{{ patient_info.age }}</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#"> <i class="fa fa-male"></i> Gender <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">M</span></a>
+                                    <a href="#"> <i class="fa fa-male"></i> Gender <span class="btn btn-primary btn-sm pull-right" style="width: 40px;">{{ patient_info.gender }}</span></a>
                                 </li>
                             </ul>
                             <div class="card-footer">
@@ -58,42 +63,84 @@
                             <div class="card-header user-header alt bg-primary">
                                 <h5 class="text-white">Select Specialist</h5>
                             </div>
+                                <script type="text/javascript">
+                                    function radioChange(thiss){
+                                        values = thiss.value;
+                                        jQuery.ajax({
+                                            url: '/api/getAvailableDoctors?spl='+values,
+                                            method:'GET',
+                                            contentType: 'application/json'
+                                        })
+                                        .done((response)=>{
+                                            if(response.length == 0){
+                                                jQuery('#doctor-list').innerHTML = "No doctor available"
+                                            }
+                                            let totalLi = ''
+                                            for(var i=0; i < response.length; i++){
+                                                const data = response[i];
+                                                let listHtml = `
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="${data.profile_pic}">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="text-lg mb-0">${data.full_name}</p>
+                                                            <p>${data.specialist_type}</p>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button type="button" class="btn btn-sm btn-info mt-3">
+                                                                <i class="fa fa-check"></i> Select
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                               </li>
+                                            `;
+                                            totalLi += listHtml;
+                                            }
+                                            jQuery('#doctor-list').html(totalLi)
+                                            
+                                        })
+                                        .fail((error)=>{console.log(error);})
+                                    }
 
+                                    
+                                </script>
 
                             <ul class="list-group list-group-flush" id="list">
                                 <li class="list-group-item">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                        <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="Cardiology">
                                         <label class="form-check-label" for="inlineradio1">Cardiologist</label>
                                       </div>
                                </li>
                                <li class="list-group-item">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="Paediatrision">
                                     <label class="form-check-label" for="inlineradio1">Paediatrision</label>
                                   </div>
                                </li>
                                <li class="list-group-item">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="Phisiotherapy">
                                     <label class="form-check-label" for="inlineradio1">Physiotherapy</label>
                                   </div>
                               </li>
                               <li class="list-group-item">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="General Physician">
                                     <label class="form-check-label" for="inlineradio1">General Physician</label>
                                   </div>
                              </li>
                              <li class="list-group-item">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="Neurologists">
                                     <label class="form-check-label" for="inlineradio1">Neurologists</label>
                                   </div>
                              </li>
                              <li class="list-group-item">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="comm_type" id="inlineradio1" value="option1">
+                                    <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="Urologists">
                                     <label class="form-check-label" for="inlineradio1">Urologists</label>
                                   </div>
                              </li>
@@ -121,55 +168,8 @@
                             </div>
 
 
-                            <ul class="list-group list-group-flush" id="list">
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/4.jpg' %}">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p class="text-lg mb-0">Dr. Nayak</p>
-                                            <p>Cardiologist</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn btn-sm btn-info mt-3">
-                                                <i class="fa fa-check"></i> Select
-                                            </button>
-                                        </div>
-                                    </div>
-                               </li>
-                               <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/2.jpg' %}">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p class="text-lg mb-0">Dr. Nayak</p>
-                                        <p>Cardiologist</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" class="btn btn-sm btn-info mt-3">
-                                            <i class="fa fa-check"></i> Select
-                                        </button>
-                                    </div>
-                                </div>
-                           </li>
-                           <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{% static 'images/avatar/3.jpg' %}">
-                                </div>
-                                <div class="col-md-4">
-                                    <p class="text-lg mb-0">Dr. Nayak</p>
-                                    <p>Cardiologist</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-sm btn-info mt-3">
-                                        <i class="fa fa-check"></i> Select
-                                    </button>
-                                </div>
-                            </div>
-                       </li>
+                            <ul class="list-group list-group-flush" id="doctor-list">
+                              
                             </ul>
                         </section>
                     </div>
@@ -191,36 +191,40 @@
                   <div class="row p-3">
                       <div class="col-md-6">
                           <div class="form-group">
-                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
+                            {% if patient_info.profile_pic %}
+                                <img class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="" src="{{ patient_info.profile_pic.url }}">
+                            {% else %}
+                                <img class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="" src="{% static 'images/avatar/1.jpg' %}">
+                            {% endif %}
                           </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">DP2020001</p>
+                                <p class="form-control-static">{{patient_info.pat_id}}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">Praveen</p>
+                                <p class="form-control-static">{{ patient_info.full_name }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">AB-</p>
+                                <p class="form-control-static">{{patient_info.blood_group }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">Male/42</p>
+                                <p class="form-control-static">{{patient_info.gender}}/{{ patient_info.age }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">Father/Naveen</p>
+                                <p class="form-control-static">{{ patient_info.rel_type }}/{{ patient_info.relation}}</p>
                             </div>
                         </div>
                       </div>
@@ -228,43 +232,43 @@
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">+91 9899887787</p>
+                                <p class="form-control-static">+91 {{patient_info.ph_no }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">+91 9899887715</p>
+                                <p class="form-control-static">+91 {{ patient_info.s_ph_no }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">praveen@gmail.com</p>
+                                <p class="form-control-static">{{ patient_info.user.email }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">English (Practice Default)</p>
+                                <p class="form-control-static">{{ patient_info.pref_lang }}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">#1234 Unknown Street</p>
+                                <p class="form-control-static">{{patient_info.street_address}}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">Unknown Locality</p>
+                                <p class="form-control-static">{{patient_info.locality}}</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">Unknown City</p>
+                                <p class="form-control-static">{{ patient_info.city }}</p>
                             </div>
                         </div>
                         
@@ -282,4 +286,35 @@
           </div>
         </div>
   
-  {% endblock %} {% block scripts %}{% endblock %}
+  {% endblock %} 
+  
+  {% block scripts %}
+  <script type="text/javascript">
+      function getSpecilist(){
+        let xml = new XMLHttpRequest();
+        xml.open('GET', '/api/specialist_types', false);
+        xml.onload = function(){
+            let data = JSON.parse(xml.responseText);
+            let lis = '';
+            for(var i=0; i < data.length; i++){
+                let data1 = data[i];
+                
+                const list = `
+
+                    <li class="list-group-item">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" onchange="radioChange(this)" name="comm_type" id="inlineradio1" value="${data1.special_type}">
+                            <label class="form-check-label" for="inlineradio1">${data1.special_type}</label>
+                          </div>
+                   </li>
+                `;
+                lis += list;
+            }
+            console.log(lis);
+            document.getElementById('list').innerHTML = lis;
+        }
+        xml.send()
+    }
+    getSpecilist()
+  </script>
+  {% endblock %}
