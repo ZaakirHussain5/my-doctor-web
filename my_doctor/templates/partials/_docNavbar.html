@@ -20,17 +20,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{% url 'frontend:specialists' %}"> <i class="menu-icon fa fa-stethoscope"></i>Appointments </a>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Payments</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-user-plus"></i><a href="#">Pending</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="#">Completed</a></li>
-                    </ul>
+                    <a href="{% url 'doctorsUI:appointments' %}"> <i class="menu-icon fa fa-stethoscope"></i>Appointments </a>
                 </li>
                 <li>
-                    <a href="widgets.html"> <i class="menu-icon fa fa-clipboard"></i>Reports </a>
+                    <a href="{% url 'doctorsUI:consultations' %}"> <i class="menu-icon fa fa-user-md"></i>Consultations </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
