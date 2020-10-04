@@ -1,4 +1,4 @@
-{% extends 'doctor_layout.html' %}
+;{% extends 'doctor_layout.html' %}
 {% block content%}
 <style>
 
@@ -45,12 +45,15 @@
 .people-list .about {
   float: left;
   margin-top: 8px;
+
 }
 .people-list .about {
   padding-left: 8px;
+  margin-left: 22pt;
+  color: black;
 }
 .people-list .status {
-  color: #fff;
+  
 }
 
 .chat {
@@ -200,7 +203,18 @@
   clear: both;
   height: 0;
 }
+.clearfixs{
+  background: white;
+  border-radius: 15pt;
+  margin: 15px 0;
 
+}
+.patient__image_style {
+  border-radius: 50%;
+    height: 70px;
+    object-fit: cover;
+    width: 70px;
+}
 </style>
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -223,11 +237,11 @@
             
             <div class="chat">
               <div class="chat-header clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+                <img style="height: 58px; width: 50px; object-fit: cover; border-radius: 50%;" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
                 
                 <div class="chat-about">
-                  <div class="chat-with">Chat with Vincent Porter</div>
-                  <div class="chat-num-messages">already 1 902 messages</div>
+                  <div class="chat-with"></div>
+                  <div class="chat-num-messages"></div>
                 </div>
               </div> <!-- end chat-header -->
               
@@ -369,54 +383,54 @@
 //     getDataa()
 
     
-function formDeserialize(form, data) {
-        const entries = (new URLSearchParams(data)).entries();
-        for (const [key, val] of entries) {
-          console.log(key);
-            const input = form.elements[key];
-            if (input != undefined) {
-                if (input.type == 'file') {
-                    if (val) {
-                        var $file = jQuery('#' + input.id),
-                            $label = $file.next('label'),
-                            $labelText = $label.find('span'),
-                            labelDefault = $labelText.text();
-                        var filename = val.split('/').pop()
-                        if (filename) {
-                            $label
-                                .addClass('file-ok')
-                                .css('background-image', 'url(' + val + ')');
-                            $labelText.text('Click here to change pic');
-                        } else {
-                            $label.removeClass('file-ok');
-                            $labelText.text(labelDefault);
-                        }
-                    }
+// function formDeserialize(form, data) {
+//         const entries = (new URLSearchParams(data)).entries();
+//         for (const [key, val] of entries) {
+//           console.log(key);
+//             const input = form.elements[key];
+//             if (input != undefined) {
+//                 if (input.type == 'file') {
+//                     if (val) {
+//                         var $file = jQuery('#' + input.id),
+//                             $label = $file.next('label'),
+//                             $labelText = $label.find('span'),
+//                             labelDefault = $labelText.text();
+//                         var filename = val.split('/').pop()
+//                         if (filename) {
+//                             $label
+//                                 .addClass('file-ok')
+//                                 .css('background-image', 'url(' + val + ')');
+//                             $labelText.text('Click here to change pic');
+//                         } else {
+//                             $label.removeClass('file-ok');
+//                             $labelText.text(labelDefault);
+//                         }
+//                     }
                     
-                } else {
+//                 } else {
     
-                    switch (input.type) {
-                        case 'checkbox':
-                            input.checked = !!val;
-                            break;
-                        case 'select-one':
-                            if (val)
-                                input.value = val;
-                            else
-                                input.selectedIndex = 0;
+//                     switch (input.type) {
+//                         case 'checkbox':
+//                             input.checked = !!val;
+//                             break;
+//                         case 'select-one':
+//                             if (val)
+//                                 input.value = val;
+//                             else
+//                                 input.selectedIndex = 0;
     
-                            break;
-                        default:
-                            input.value = val;
-                            break;
+//                             break;
+//                         default:
+//                             input.value = val;
+//                             break;
     
-                    }
+//                     }
     
-                }
-            }
+//                 }
+//             }
     
-        }
-    }
+//         }
+//     }
 
 
 //////////////// username change event ////////////////
@@ -458,29 +472,29 @@ function formDeserialize(form, data) {
 // })
 
 ////////// PASSWORD CHANGE FEATURES //////////
-jQuery('#password_form').submit((e)=>{
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('password_form'))
-       jQuery.ajax({
-            url: '/api/changePassword',
-            method: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-           },
-        }).done((response)=>{
-            console.log(response);
-            //jQuery.removeCookie('DoctorToken');
-            //window.location.href = '/login';
-        }).fail((error)=>{
-           console.log('errors are ', error)
-      })
+// jQuery('#password_form').submit((e)=>{
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         const data = new FormData(document.getElementById('password_form'))
+//        jQuery.ajax({
+//             url: '/api/changePassword',
+//             method: 'POST',
+//             data: data,
+//             contentType: false,
+//             processData: false,
+//             beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//            },
+//         }).done((response)=>{
+//             console.log(response);
+//             //jQuery.removeCookie('DoctorToken');
+//             //window.location.href = '/login';
+//         }).fail((error)=>{
+//            console.log('errors are ', error)
+//       })
 
 
-    })
+//     })
 
 ///////////// Doctor Timings://///////////
 // function getDoctorTimings(){
@@ -542,6 +556,9 @@ let consultation_list = [];
 let old_active_id = null;
 let chatData_list = [];
 let shoing_conversation_id = null;
+let doctor_name = '';
+let patient_name='';
+
 function showing_consultationList(){
   jQuery.ajax({
     url: '/api/getDoctorConsultations',
@@ -552,7 +569,6 @@ function showing_consultationList(){
       xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
     },    
   }).done((response)=>{
-    console.log(response);
 
     consultation_list = response;
     let list = ''
@@ -560,18 +576,17 @@ function showing_consultationList(){
       let data = response[i];
       let li_is = `
       <li id="doctor${data.id}" class="clearfix">
-        <img src="${data.patient_pic}" alt="avatar" />
+        <img class="patient__image_style" src="${data.patient_pic}" alt="avatar" />
           <div class="about">
             <div class="name">${data.patient_name}</div>
             <div class="status">
-               
+               ${data.patient_gender}/${data.patient_age}
             </div>
           </div>
         </li>
       `;
       list += li_is;
     }
-    console.log(list)
     document.getElementById('patient__list').innerHTML = list;
     let data = consultation_list[0]
     consultationList(data.id)
@@ -583,42 +598,42 @@ showing_consultationList()
 
 jQuery('#patient__list').on('click', 'li', function(){
         let id = jQuery(this).attr('id');
-        console.log(id)
         return consultationList(id.slice(6))
     })
 
 
 
 function consultationList(id){
-        console.log(id);
-        
         for(var i=0; i < consultation_list.length; i++){
-            console.log(consultation_list[i]);
             if(consultation_list[i].id == id){
                 shoing_conversation_id = consultation_list[i].id;
                 getChatData(shoing_conversation_id);
-                console.log('shoing_conversation_id', shoing_conversation_id);
                 jQuery('#conversation_doc').html(consultation_list[i].doctor_id.full_name);
+                doctor_name = consultation_list[i].doctor_id.full_name;
+                patient_name= consultation_list[i].patient_name;
+                jQuery('.chat-with').html(consultation_list[i].patient_name);
+                jQuery('.chat-header img').attr('src', consultation_list[i].patient_pic);
+                jQuery('.chat-num-messages').html(consultation_list[i].patient_gender + " " + consultation_list[i].patient_age);
+                //jQuery('#doctor'+id).addClass('clearfixs')
                 break;
             }
         }
-        let activate_class = '#activate_class';
+        let activate_class = '#doctor';
 
         if(old_active_id == null){
             old_active_id = id;
         }
         else{
-            jQuery(activate_class + old_active_id).removeClass('active');
+            jQuery(activate_class + old_active_id).removeClass('clearfixs');
             old_active_id = id;
         }
-        jQuery(activate_class + id).addClass('active');
+        jQuery(activate_class + id).addClass('clearfixs');
         
 
     }
 
 function getChatData(consult_id){
     const get_url = '/api/consultant_chats/?cons_id='+ consult_id;
-    console.log(get_url)
     jQuery.ajax({
             'url': get_url,
             'contentType': 'application/json',
@@ -638,13 +653,12 @@ function showList(){
     let liLists = '';
     for(var i=0; i < chatData_list.length; i++){
         const data = chatData_list[i];
-        console.log(chatData_list)
         if(data.user == 'D'){
             const li = `
             <li class="clearfix">
                     <div class="message-data align-right">
-                      <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-                      <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+                      <span class="message-data-time" >${data.message_date_time}</span> &nbsp; &nbsp;
+                      <span class="message-data-name" >${doctor_name}</span> <i class="fa fa-circle me"></i>
                       
                     </div>
                     <div class="message other-message float-right">
@@ -658,8 +672,8 @@ function showList(){
             const li = `
             <li>
                 <div class="message-data">
-                  <span class="message-data-name"> Vincent</span>
-                  <span class="message-data-time">10:20 AM, Today</span>
+                  <span class="message-data-name"> ${patient_name}</span>
+                  <span class="message-data-time">${data.message_date_time}</span>
                 </div>
                 <div class="message my-message">
                   ${data.message}
@@ -708,7 +722,7 @@ function sendMessage(consult_id){
             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
         },
     }).done((response)=>{
-        console.log("postrequest response -", response);
+        let message='success';
     }).fail((err, error, wrong) => {
         console.log(err)
 
