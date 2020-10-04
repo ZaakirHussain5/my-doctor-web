@@ -26,7 +26,7 @@
                                             <div class="settingmenu__name">Password</div>
                                         </div>
                                     </a>
-                                    <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#v-pills-theme" role="tab" aria-controls="v-pills-theme" aria-selected="false">
+                                   <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#v-pills-theme" role="tab" aria-controls="v-pills-theme" aria-selected="false">
                                         <div class="settingmenu">
                                             <div class="settingmenu__icon"><i class="mdi mdi-palette-outline"></i></div>
                                             <div class="settingmenu__name">Theme</div>
@@ -40,9 +40,12 @@
                                         <form id="profile-form">
                                             <div class="ca-profile-thumb"  style="background-image: url(assets/images/media/07.jpg);height: auto;">
                                                 <div class="ca-profile-info">
-                                                    <div class="ca-profile-pic"><img class="img-fluid" src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt=""></div>
+                                                    <div class="ca-profile-pic">
+                                                       <input type="file" class="sr-only" id="profile_pic" name="profile_pic">
+                                                        <img id="previewImg" class="img-fluid" src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt="" style="height: inherit; width: inherit; object-fit: cover;">
+                                                    </div>
                                                     <div class="ca-profile-title">
-                                                        <input type="file" class="sr-only" id="profile_pic">
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="ca-profile-actions">
@@ -56,27 +59,37 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-body">
+                                                <input type="hidden" name="gender">
                                                     <div class="form-group">
                                                         <label for="full_name" class="form-control-label">Name</label>
-                                                        <input type="text" class="form-control" placeholder="Your Name">
+                                                        <input type="text" class="form-control" name="full_name" placeholder="Your Name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="username" class="form-control-label">Phone Number</label>
-                                                        <input type="text" class="form-control" placeholder="Your Phone Number">
+                                                        <input type="text" class="form-control" name="ph_no" placeholder="Your Phone Number" id="ph_no">
+                                                        <input type="hidden" name="username" id="username">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="email" class="form-control-label">Email</label>
-                                                        <input type="email" class="form-control" placeholder="Your Phone Number">
+                                                        <input type="email" class="form-control" name="email" placeholder="Your Email Address">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="email" class="form-control-label">Blood Group</label>
-                                                        <input type="email" class="form-control" placeholder="Your Blood Group">
+                                                        <input type="text" class="form-control" name="blood_group" placeholder="Your Blood Group">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="email" class="form-control-label">Age</label>
-                                                        <input type="email" class="form-control" placeholder="Your Age">
+                                                        <input type="text" class="form-control" name="age" placeholder="Your Age">
                                                     </div>
-                                                    <div class="form-group pull-right">
+                                                    <div class="form-group">
+                                                        <label for="email" class="form-control-label">Height</label>
+                                                        <input type="text" class="form-control" name="height" placeholder="Your Height">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email" class="form-control-label">Weight</label>
+                                                        <input type="text" class="form-control" name="weight" placeholder="Your Weight">
+                                                    </div>
+                                                    <div class="form-group float-right">
                                                         <button type="submit" class="btn float-right mfb-component__button--main" style="width:190px; border-radius:0px">
                                                             Update Profile
                                                         </button>
@@ -89,62 +102,73 @@
                                         <div class="settings-inside-wrapper">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="setting-sunheading">notification configuration</div>
-                                                    <ul class="list-unstyled ca-setting-list">
-                                                        <li>
-                                                            <div class="ca-setting-type">
-                                                                <div class="ca-setting-name">
-                                                                    <div class="ca-setting-name-main">View Notification for</div>
-                                                                    <div class="ca-setting-name-sub">You will get notification for</div>
-                                                                </div>
-                                                                <div class="ca-setting-action">
-                                                                    <div class="dropdown">
-                                                                        <a class="btn btn-link dropdown-toggle" href="#" role="button" id="notiDropdownSettings1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            Both
-                                                                        </a>
-                                                                        
-                                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notiDropdownSettings1">
-                                                                            <a class="dropdown-item" href="javascript:;">Call only</a>
-                                                                            <a class="dropdown-item" href="javascript:;">Message only</a>
-                                                                            <a class="dropdown-item" href="javascript:;">Both</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="ca-setting-type">
-                                                                <div class="ca-setting-name">
-                                                                    <div class="ca-setting-name-main">Notification sound for</div>
-                                                                    <div class="ca-setting-name-sub">Notification sound play for</div>
-                                                                </div>
-                                                                <div class="ca-setting-action">
-                                                                    <div class="dropdown">
-                                                                        <a class="btn btn-link dropdown-toggle" href="#" role="button" id="notiDropdownSettings2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            Message only
-                                                                        </a>
-                                                                        
-                                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notiDropdownSettings2">
-                                                                            <a class="dropdown-item" href="javascript:;">Call only</a>
-                                                                            <a class="dropdown-item" href="javascript:;">Message only</a>
-                                                                            <a class="dropdown-item" href="javascript:;">Both</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="setting-list">
-                                                                <div class="setting-list-name">Desktop notifications</div>
-                                                                <div class="setting-list-switch">
-                                                                    <label class="material-switch">
-                                                                        <input type="checkbox">
-                                                                        <span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
+                                                    <div class="setting-sunheading">Update Password</div>
+                                                    <form id="password_form">
+                                                    
+                                                    <div class="row" style="background: #d4ebf2">
+                                                    <div style="padding: 0; background: #d4ebf2">
+                                                      <i
+                                                        class="fal fa-info-circle"
+                                                        style="font-size: 3rem; color: #182672"
+                                                      ></i>
+                                                    </div>
+                                                    <div
+                                                      class="col"
+                                                      style="
+                                                        padding: 0;
+                                                        margin-top: 2pt;
+                                                        margin-left: 1rem;
+                                                        background: #d4ebf2;
+                                                      "
+                                                    >
+                                                    </div>
+                                                    </div>
+                                                    <br />
+                                                        <label for="id_old_password" class="pasword__font">Old password</label>
+                                                        <input
+                                                        name="old_password"
+                                                        class="form-control"
+                                                        type="password"
+                                                        id="id_old_password"
+                                                        required="true"
+                                                        />
+
+                                                        <label for="id_new_password1" class="pasword__font">New password </label>
+                                                        <input
+                                                        name="new_password"
+                                                        class="form-control "
+                                                        type="password"
+                                                        id="id_new_password1"
+                                                        required="true"
+                                                        />
+                                                        <label for="id_new_password2" class="pasword__font"
+                                                        >Re-enter new password</label
+                                                        >
+                                                            <input
+                                                            name="confirm_new_password"
+                                                            class="form-control "
+                                                            type="password"
+                                                            id="id_new_password2"
+                                                            required="true"
+                                                            />
+
+                                                        {% for field in form %} {% for error in field.errors %}
+                                                            <p style="color: red">{{ error }}</p>
+                                                        {% endfor %} {% endfor %}
+
+
+                                                            <button
+                                                              class="btn btn-active text-light pull-right "
+                                                              type="submit"
+                                                              style="
+                                                                background: #c2405a;
+                                                                border-radius: 20px;
+                                                                border: 1px solid #c2405a;
+                                                              "
+                                                            >
+                                                              Update
+                                                            </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

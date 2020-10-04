@@ -1,10 +1,14 @@
-from .serializers import UpdateProfile,patient_infoSerializer,PatientResgistrationSerializer,medical_historySerializer,groupsSerializer,PatientResgistrationApp
+from django.contrib.auth import logout
+from django.http import JsonResponse
+
+from .serializers import UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,PatientResgistrationSerializer,medical_historySerializer,groupsSerializer,PatientResgistrationApp, UserEmail
 from .models import patient_info,medical_history,groups
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
 from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
+from django.contrib.auth.models import User
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.all()
@@ -84,3 +88,33 @@ class groupsViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = groupsSerializer
+
+
+class PatientEmail(generics.RetrieveAPIView):
+    permission_classes = [
+    permissions.IsAuthenticated,
+      ]
+    serializer_class = UserEmail
+
+    def get_object(self):
+        try:
+            patient = User.objects.get(id=self.request.user.id)
+            return patient
+        except ObjectDoesNotExist:
+            return Response({
+                "Message":"User Not Found"
+            },status=404)
+
+    
+class PasswordChange(generics.GenericAPIView):
+    permission_classes = [
+    permissions.IsAuthenticated,
+      ]
+    serializer_class = UpdatePasswordSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save(loggedInuser=self.request.user.id)
+        print(user)
+        return JsonResponse({'done': 'done'}, safe=False)

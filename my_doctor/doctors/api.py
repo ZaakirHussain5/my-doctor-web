@@ -4,7 +4,7 @@ from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
 from django.core.exceptions import ObjectDoesNotExist
-
+from knox.models import AuthToken
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.all()
@@ -80,6 +80,7 @@ class getAvailableDoctors(viewsets.ModelViewSet):
   def get_queryset(self):
     day = self.request.query_params.get('day', None)
     spl = self.request.query_params.get('spl', None)
+    queryset = doctors_info.objects.filter(specialist_type=spl)
     if spl is not None:
        queryset = doctors_info.objects.filter(specialist_type=spl)
     if day is not None:
@@ -97,8 +98,6 @@ class getAvailableDoctors(viewsets.ModelViewSet):
           queryset = DoctorTimings.objects.filter(sat=True).filter(doctor__in=queryset)
        if day=='sun':
           queryset = DoctorTimings.objects.filter(sun=True).filter(doctor__in=queryset)
-    else:
-       queryset=["Specialist Type or day not specified"]
     return queryset
 
 class DoctorLogout(generics.GenericAPIView):

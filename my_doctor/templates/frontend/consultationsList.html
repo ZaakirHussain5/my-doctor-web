@@ -9,7 +9,7 @@
       <div class="col-sm-4">
           <div class="page-header float-left">
               <div class="page-title">
-                  <h1>Patients List</h1>
+                  <h1>Consultations List</h1>
               </div>
           </div>
       </div>
@@ -17,24 +17,27 @@
     <div class="content m-3">
         <div class="card pl-3 pr-3">
             <div class="card-body card-block">
-                <table class="table" id="Patients">
+                <table class="table" id="Specialists">
                     <thead>
                         <tr>
                             <th>Slno</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Phone No.</th>
-                            <th>Actions</th>
+                            <th>Doctors</th>
+                            <th>Patient</th>
+                            <th>Invoice No.</th>
+                            <th>Video/Audio/ Rating</th>
+                            <th>Consultation Rating</th>
+                            <th>Overall Rating</th>
+                            <th>Paid Amount</th>
                         </tr>
                     </thead>
                     <tbody>
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+    <div class="modal fade" id="ConsultancDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -144,14 +147,17 @@
   
 {% endblock %}
 
+
+
+
 {% block scripts %}
+
+
 <script type="text/javascript">
     jQuery(document).ready(function($){
-        
-
-        var table = $('#Patients').DataTable({
+        var table = $('#Specialists').DataTable({
             ajax:{
-                url:'/api/patient_info',
+                url:'/api/getAllConsultations',
                 dataSrc:""
             },
             columns:[
@@ -159,25 +165,28 @@
                     data:'id'
                 },
                 {
-                    data:'full_name'
+                    data: 'doctor_id.full_name'
                 },
                 {
-                    data:'age'
+                    data:'patient_name'
                 },
                 {
-                    data : 'gender'
+                    data:'inv_number'
                 },
                 {
-                    data : 'ph_no'
+                    data : 'video_audio_rating'
                 },
                 {
-                    data:'id',
-                    render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-pat='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
-                                    <i class="fa fa-tasks"></i>
-                                </button>`
-                      }
-                }
+                    data : 'video_audio_rating'
+                },
+                {
+                    data : 'overall_rating'
+                },
+
+                {
+                    data : 'consultation_amt'
+                },
+                
             ],
               language: {
                   lengthMenu: "_MENU_",
@@ -189,42 +198,10 @@
               }
         })
 
-        
-
-
-        $('#patientDetails').on('show.bs.modal', function (event) {
-        var myVal = $(event.relatedTarget).data('pat');
-        console.log(myVal)
-
-        let gender_age = myVal.gender + '/' + myVal.age;
-
-
-        let rel_type_relation = myVal.rel_type + '/' + myVal.relation;
-        if(myVal.rel_type == null && myVal.relation == null){
-            rel_type_relation = '';
-        }
-        else if(myVal.rel_type != null && myVal.relation == null){
-            rel_type_relation = myVal.rel_type
-        }
-        else if(myVal.rel_type == null && myVal.relation != null){
-            rel_type_relation = myVal.relation
-        }else{
-            rel_type_relation = myVal.rel_type + '/' + myVal.relation
-        }
-        let ps = $(this).find('p');
-        let valList = [myVal.pat_id, myVal.full_name, myVal.blood_group, gender_age, rel_type_relation, myVal.ph_no, myVal.s_ph_no, myVal.user.email, myVal.pref_lang, myVal.street_address, myVal.locality, myVal.city]
-        for(var i=0; i < ps.length; i++){
-
-            ps[i].innerHTML = valList[i]    
-            
-            ;
-        }
-        $(this).find('img').attr('src', myVal.profile_pic);
-        $(this).find('a').attr('href', '/newAppointment?patient='+ myVal.id)
+        // $('#ConsultancDetails')
         
     })
 
-    })
 
 </script>
 

@@ -82,7 +82,13 @@
             </div>
             <div class="col-xs-12">
                 <div class="comment-btn">
+<<<<<<< HEAD
+                    <a href="#" class="btn">Login</a>
+                    <button type="submit" id="submit_login"> Login </button>
+                    <button type="submit" id="doctor_login"> DoctorLogin </button>
+=======
                     <button type="submit" class="btn" id="submit_login"> Login </button>
+>>>>>>> fbca51ad36ff47593715971759fa07d48781a9f7
                 </div>
             </div>
         </div>
@@ -178,8 +184,32 @@
             // patient tocken store to localstorage
         // else aleart message
         jQuery(document).ready(function($){
+            function submit_doctor_loginForm(){
+                console.log('doctorsUpload');
+            var data = {
+                    username: 'DPDOC2020001',
+                    password: '12345',
+                    user_type: 'D'
+                }
+
+                $.ajax({
+                    url: '/api/auth/login',
+                    data: JSON.stringify(data),
+                    method: 'POST',
+                    contentType: 'application/json'
+                }).done((response) => {
+                    $.cookie('DoctorToken', response.token, {
+                        expires: 1
+                    })
+                    window.location.href = '/doctors/dashboard'
+                }).fail((err, error, wrong) => {
+                    console.log(err)
+                    alert(err.responseJSON.non_field_errors[0])
+                })
+        }
+
         function submit_loginForm(){
-           console.log('Submit form here.');
+           
             var data = {
                     username: '9945981381',
                     password: '1234',
@@ -201,7 +231,11 @@
                 })
         }
        $('#submit_login').click(submit_loginForm)
+
+       $('#doctor_login').click(submit_doctor_loginForm)
         })
+
+
 
 
     </script>

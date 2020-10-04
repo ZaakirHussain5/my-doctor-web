@@ -238,7 +238,10 @@ $(document).ready(function () {
     $(this).addClass("selected");
     $('body').removeClass(themes);
     $('body').addClass($(this).attr('data-theme'));
+    localStorage.setItem('theme',$(this).attr('data-theme'))
   });
+
+  $('body').addClass(localStorage.getItem('theme')?localStorage.getItem('theme'):'light-default-theme')
 
   // switch between background images
   var bgs = "bg1 bg2 bg3 bg4 bg5 bg6 bg7 bg8 bg9 bg10 bg11 bg12";

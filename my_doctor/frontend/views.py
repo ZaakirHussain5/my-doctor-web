@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from specialist_type.models import specialist_type
+from patients.models import patient_info
 
 def login(request):
     user_type = ""
@@ -34,4 +35,14 @@ def patientsList(request):
     return render(request,'frontend/patientsList.html')
 
 def newAppointment(request):
-    return render(request,'frontend/newAppointment.html')
+    context = {}
+    patient_id = request.GET.get('patient')
+    print(patient_id)
+    patient_data = patient_info.objects.get(id=patient_id)
+    print(patient_data)
+    context['patient_info'] = patient_data
+    return render(request,'frontend/newAppointment.html', context)
+
+
+def consultationsList(request):
+    return render(request, 'frontend/consultationsList.html')

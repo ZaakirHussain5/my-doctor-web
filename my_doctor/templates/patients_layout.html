@@ -66,9 +66,9 @@
                                 <i class="iconbox__icon mdi mdi-magnify"></i>
                             </div>
 
-                            <button id="loginUser" class="iconbox btn-hovered-light">
+                            <div id="loginUser" class="iconbox btn-hovered-light">
                                 <i class="iconbox__icon mdi mdi-bell-outline"></i>
-                            </button>
+                            </div>
                             
                             <div class="iconbox-dropdown dropdown">
                                 <div class="iconbox btn-hovered-light" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -2455,7 +2455,162 @@
                     window.location.href = `/patients/selectDoctors?date=${$('#dateSelected').val()}&spl=${spl}`;
                 }
             })
+            // PROFILE SCRIPT HERE .
+
+        function formDeserialize(form, data) {
+        const entries = (new URLSearchParams(data)).entries();
+        for (const [key, val] of entries) {
+            const input = form.elements[key];
+            if (input != undefined) {
+                if (input.type == 'file') {
+                    if (val) {
+                        var $file = jQuery('#' + input.id),
+                            $label = $file.next('img'),
+                            $labelText = $label.find('span'),
+                            labelDefault = $labelText.text();
+                        var filename = val.split('/').pop()
+                        if (filename) {
+                            $label
+                                .addClass('file-ok')
+                                .attr('src', val);
+                            $labelText.text(filename);
+                        } else {
+                            $label.removeClass('file-ok');
+                            $labelText.text(labelDefault);
+                        }
+                    }
+                    
+                } else {
+    
+                    switch (input.type) {
+                        case 'checkbox':
+                            input.checked = !!val;
+                            break;
+                        case 'select-one':
+                            if (val)
+                                input.value = val;
+                            else
+                                input.selectedIndex = 0;
+    
+                            break;
+                        default:
+                            input.value = val;
+                            break;
+    
+                    }
+    
+                }
+            }
+    
+        }
+    }
+    function previewFile(input){
+        var file = $("input[type=file]").get(0).files[0];
+ 
+        if(file){
+            var reader = new FileReader();
+ 
+            reader.onload = function(){
+                $("#previewImg").attr("src", reader.result);
+            }
+ 
+            reader.readAsDataURL(file);
+        }
+    }
+    $('#profile_pic').change(function(){
+        previewFile(this);
+    })
+
+    function getPatientData(){
+        const profileForm = document.getElementById('profile-form');
+        $.ajax({
+            url: '/api/getLoggedInPatient',
+            method: 'GET',
+            contendType: 'application/json',
+            'async': false,
+            'method': 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+            },
+        }).done((response)=>{
+            $.ajax({
+                url: "/api/getEmail",
+                method: 'GET',
+                contendType: 'application/json',
+                async: false,
+                method: 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+            },
+            }).done((response)=>{
+                formDeserialize(profileForm, response);
+                
+            })
+            formDeserialize(profileForm, response);
+            $('#username').val($('#ph_no').val())
         })
+    }
+    getPatientData()
+
+$('#ph_no').change(function(){
+
+    $('#username').val($(this).val())
+})
+ 
+
+    $("#profile-form").submit((e)=>{
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('profile-form'))
+        console.log(data);
+        $.ajax({
+        url: '/api/PatientUpdateProfile',
+        data:data,
+        method: 'POST',
+        contentType: false,
+        processData: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+        },
+    }).done((response)=>{
+        console.log("postrequest response -", response);
+    }).fail((error)=>{
+        console.log(error);
+    })
+    })
+
+$('#password_form').submit((e)=>{
+    console.log('password form submit');
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('password_form'))
+       $.ajax({
+            url: '/api/changePassword',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+           },
+        }).done((response)=>{
+           console.log(response);
+           window.location.href = '/login'
+        }).fail((error)=>{
+           console.log('errors are ', error)
+      })
+
+
+    })
+    
+
+
+
+
+
+
+
+    })
     </script>
 </body>
 </html>
