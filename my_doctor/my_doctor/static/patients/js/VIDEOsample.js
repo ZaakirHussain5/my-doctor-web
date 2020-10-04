@@ -40,6 +40,34 @@ var sessionName = 'sinchSessionVIDEO-' + sinchClient.applicationKey;
 
 
 /*** Check for valid session. NOTE: Deactivated by default to allow multiple browser-tabs with different users. ***/
+$.ajax({
+	url: '/api/getLoggedInPatient',
+	method: 'GET',
+	contendType: 'application/json',
+	'async': false,
+	'method': 'GET',
+	beforeSend: function (xhr) {
+		xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+	},
+}).done((res)=>{
+	var custom_user = `{"username":"${res.ph_no}","password":"${res.ph_no}"}`
+		sinchClient.newUser(JSON.parse(custom_user), function (ticket) {
+			//On success, start the client
+			sinchClient.start(ticket, function () {
+				global_username = res.ph_no;
+				//On success, show the UI
+				showUI();
+		
+				//Store session & manage in some way (optional)
+				localStorage[sessionName] = JSON.stringify(sinchClient.getSession());
+			}).fail(function(res){
+				if(res.errorCode == 40003 ){
+					sinchClient.start()
+				}
+			});
+		}).fail(handleError);
+})
+
 
 var sessionObj = JSON.parse('{}');
 if (sessionObj.userId) {

@@ -4,5 +4,7 @@ from . import views
 app_name='doctorsUI'
 
 urlpatterns=[
-    path('dashboard',views.dashboard,name='dashboard')
+    path('dashboard',views.dashboard,name='dashboard'),
+    path('consultations',views.consultations,name='consultations'),
+    path('appointments',views.appointments,name='appointments'),
 ]
