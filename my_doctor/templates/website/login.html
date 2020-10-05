@@ -68,29 +68,47 @@
                     </li>
                 </ul>
             </div>
-            <div class="form-group col-xs-12">
-                <input type="email" class="form-control" id="Name1" placeholder="Enter registered phone number">
-            </div>
-            <div class="form-group col-xs-12">
-
-                <input type="password" class="form-control" id="email1" placeholder="Enter password">
-            </div>
-            <div class="col-xs-12">
-                <div class="checkbox-outer">
-                     <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
+            <div class="tab-content">
+                <div class="tab-pane" id="doctor">
+                    <div class="form-group col-xs-12">
+                        <input type="email" class="form-control" id="Name1" placeholder="Enter Doctor ID">
+                    </div>
+                    <div class="form-group col-xs-12">
+        
+                        <input type="password" class="form-control" id="email1" placeholder="Enter password">
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="checkbox-outer">
+                             <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="comment-btn">
+                            <button type="submit" class="btn" id="submit_login"> Login </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in active" id="patient">
+                    <div class="form-group col-xs-12">
+                        <input type="email" class="form-control" id="Name1" placeholder="Enter registered phone number">
+                    </div>
+                    <div class="form-group col-xs-12">
+        
+                        <input type="password" class="form-control" id="email1" placeholder="Enter password">
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="checkbox-outer">
+                             <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="comment-btn">
+                            <button type="submit" class="btn" id="submit_login"> Login </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-12">
-                <div class="comment-btn">
-<<<<<<< HEAD
-                    <a href="#" class="btn">Login</a>
-                    <button type="submit" id="submit_login"> Login </button>
-                    <button type="submit" id="doctor_login"> DoctorLogin </button>
-=======
-                    <button type="submit" class="btn" id="submit_login"> Login </button>
->>>>>>> fbca51ad36ff47593715971759fa07d48781a9f7
-                </div>
-            </div>
+            
         </div>
     </form>
     </div>
