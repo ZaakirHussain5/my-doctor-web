@@ -159,9 +159,7 @@
                 {
                     data:'id',
                     render: function (data,type,row) {
-                          return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
-                                    <i class="fa fa-edit"></i>
-                                </button>
+                          return `
                                 <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
                                     <i class="fa fa-trash"></i>
                                 </button>`

@@ -37,36 +37,32 @@
     <nav aria-label="breadcrumb">
     <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Login</li>
+    <li class="breadcrumb-item active" aria-current="page">Register</li>
     </ul>
     </nav>
-    <h2>Login</h2>
+    <h2>Register</h2>
     </div>
     </div>
     </section>
     <section class="login">
     <div class="container">
     <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+    <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="login-form">
     <form id="loging_in">
         <div class="row">
             <div class="col-xs-12">
                 <div class="form-title">
-                    <h2>Login</h2>
-                    <p>Login with your registered details</p>
+                    <h2>Register</h2>
+                    <p>Enter your details to become a member</p>
                 </div>
             </div>
-            <div class="col-md-12 register">
-                <label>You are a</label>
-                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                    <li id="Patient" class="nav-item active">
-                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Patient</a>
-                    </li>
-                    <li id="Doctor" class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Doctor</a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-md-6">
+ <div class="form-group col-xs-12">
+                <input id="user_type" type="hidden" value="P">
+                <label for="Name1">Full Name</label>
+                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
             </div>
             <div class="form-group col-xs-12">
                 <input id="user_type" type="hidden" value="P">
@@ -74,22 +70,61 @@
                 <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
             </div>
             <div class="form-group col-xs-12">
+                <input id="user_type" type="hidden" value="P">
+                <label for="Name1">Email Address(optional)</label>
+                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
+            </div>
+            <div class="form-group col-xs-12">
             <label for="email1">Password</label>
                 <input type="password" class="form-control" id="email1" placeholder="Enter password">
             </div>
-            <div class="col-xs-12">
-                <div class="checkbox-outer">
-                     <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
-                </div>
+            <div class="form-group col-xs-12">
+                <label for="email1">Age</label>
+                <input type="number" class="form-control" id="email1" placeholder="Enter Age">
             </div>
+          >
+                </div>
+                <div class="col-md-6">
+              <div class="form-group col-xs-12">
+                <label for="email1">Gender</label>
+                <select name="" id="">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>   
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="email1">Blood Group</label>
+                <select name="" id="">
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O-">O-</option>
+                </select>   
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="email1">Height</label>
+                <input type="number" class="form-control" id="email1" placeholder="Enter Height">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="email1">Weight</label>
+                <input type="number" class="form-control" id="email1" placeholder="Enter Weight">
+            </div>
+
             <div class="col-xs-12">
                 <div class="comment-btn">
-                    <button type="submit" class="btn">Login</a>
+                    <button type="submit" class="btn pull-right">Signup</a>
                 </div>
             </div>
-            <div class="col-xs-12" >
-                <p style="padding: 15px 0;">Not a Member? <a href='/PatientRegistration'>Register Here</a></p>
+                </div>
             </div>
+           
+           
             
         </div>
     </form>
