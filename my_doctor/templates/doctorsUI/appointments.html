@@ -1,4 +1,5 @@
 {% extends 'doctor_layout.html' %}
+{% load static %}
 {% block content%}
 <style>
 
@@ -342,208 +343,252 @@
 {% block scripts%}
 <script>
 let dataList = [];
-    function getDataa(){
-        console.log('here')
-        const form = document.getElementById('profile_form');
-        jQuery.ajax({
-                url: '/api/getLoggedInDoctor',
-                method: 'GET',
-                contentType: 'application/json',
-                async: false,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                },
-            }).done((response)=>{
-                console.log('response response', response);
-                jQuery.ajax({
-                    url: "/api/getEmail",
-                    method: 'GET',
-                    contendType: 'application/json',
-                    async: false,
-                    method: 'GET',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                    },
-                }).done((response)=>{
-                        formDeserialize(form, response);
-                    })
-                formDeserialize(form, response);
+    // function getDataa(){
+    //     console.log('here')
+    //     const form = document.getElementById('profile_form');
+    //     jQuery.ajax({
+    //             url: '/api/getLoggedInDoctor',
+    //             method: 'GET',
+    //             contentType: 'application/json',
+    //             async: false,
+    //             beforeSend: function (xhr) {
+    //                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+    //             },
+    //         }).done((response)=>{
+    //             console.log('response response', response);
+    //             jQuery.ajax({
+    //                 url: "/api/getEmail",
+    //                 method: 'GET',
+    //                 contendType: 'application/json',
+    //                 async: false,
+    //                 method: 'GET',
+    //                 beforeSend: function (xhr) {
+    //                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+    //                 },
+    //             }).done((response)=>{
+    //                     formDeserialize(form, response);
+    //                 })
+    //             formDeserialize(form, response);
                 
-            }).fail((error)=>{
-                console.log(error);
-            });
-    }
-    getDataa()
+    //         }).fail((error)=>{
+    //             console.log(error);
+    //         });
+    // }
+    // getDataa()
 
     
-function formDeserialize(form, data) {
-        const entries = (new URLSearchParams(data)).entries();
-        for (const [key, val] of entries) {
-            const input = form.elements[key];
-            if (input != undefined) {
-                if (input.type == 'file') {
-                    if (val) {
-                        var $file = jQuery('#' + input.id),
-                            $label = $file.next('label'),
-                            $labelText = $label.find('span'),
-                            labelDefault = $labelText.text();
-                        var filename = val.split('/').pop()
-                        if (filename) {
-                            $label
-                                .addClass('file-ok')
-                                .css('background-image', 'url(' + val + ')');
-                            $labelText.text('Click here to change pic');
-                        } else {
-                            $label.removeClass('file-ok');
-                            $labelText.text(labelDefault);
-                        }
-                    }
+// function formDeserialize(form, data) {
+//         const entries = (new URLSearchParams(data)).entries();
+//         for (const [key, val] of entries) {
+//             const input = form.elements[key];
+//             if (input != undefined) {
+//                 if (input.type == 'file') {
+//                     if (val) {
+//                         var $file = jQuery('#' + input.id),
+//                             $label = $file.next('label'),
+//                             $labelText = $label.find('span'),
+//                             labelDefault = $labelText.text();
+//                         var filename = val.split('/').pop()
+//                         if (filename) {
+//                             $label
+//                                 .addClass('file-ok')
+//                                 .css('background-image', 'url(' + val + ')');
+//                             $labelText.text('Click here to change pic');
+//                         } else {
+//                             $label.removeClass('file-ok');
+//                             $labelText.text(labelDefault);
+//                         }
+//                     }
                     
-                } else {
+//                 } else {
     
-                    switch (input.type) {
-                        case 'checkbox':
-                            input.checked = !!val;
-                            break;
-                        case 'select-one':
-                            if (val)
-                                input.value = val;
-                            else
-                                input.selectedIndex = 0;
+//                     switch (input.type) {
+//                         case 'checkbox':
+//                             input.checked = !!val;
+//                             break;
+//                         case 'select-one':
+//                             if (val)
+//                                 input.value = val;
+//                             else
+//                                 input.selectedIndex = 0;
     
-                            break;
-                        default:
-                            input.value = val;
-                            break;
+//                             break;
+//                         default:
+//                             input.value = val;
+//                             break;
     
-                    }
+//                     }
     
-                }
-            }
+//                 }
+//             }
     
-        }
-    }
+//         }
+//     }
 
 
 //////////////// username change event ////////////////
-jQuery('#ph_no').change(function(){
-    jQuery('#username').val(jQuery(this).val())
-})
-jQuery('#username').val(jQuery('#ph_no').val())
+// jQuery('#ph_no').change(function(){
+//     jQuery('#username').val(jQuery(this).val())
+// })
+// jQuery('#username').val(jQuery('#ph_no').val())
 
 
 //////// UPDATING PROFILE //////////
-jQuery("#profile_form").submit((e)=>{
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('profile_form'))
-        console.log(data);
-        jQuery.ajax({
-        url: '/api/DoctorUpdateProfile',
-        data: data,
-        method: 'POST',
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log("postrequest response -", response);
-        jQuery.removeCookie('DoctorToken');
-        jQuery.cookie('DoctorToken', response.token, {expires: 1})
-    })
-    .fail((error)=>{
-        console.log(error);
-    })
-    }) 
+// jQuery("#profile_form").submit((e)=>{
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         const data = new FormData(document.getElementById('profile_form'))
+//         console.log(data);
+//         jQuery.ajax({
+//         url: '/api/DoctorUpdateProfile',
+//         data: data,
+//         method: 'POST',
+//         contentType: false,
+//         processData: false,
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//         },
+//     })
+//     .done((response)=>{
+//         console.log("postrequest response -", response);
+//         jQuery.removeCookie('DoctorToken');
+//         jQuery.cookie('DoctorToken', response.token, {expires: 1})
+//     })
+//     .fail((error)=>{
+//         console.log(error);
+//     })
+//     }) 
 
 
-jQuery('#pills-profile-tab').click(()=>{
+// jQuery('#pills-profile-tab').click(()=>{
     
-})
+// })
 
 ////////// PASSWORD CHANGE FEATURES //////////
-jQuery('#password_form').submit((e)=>{
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('password_form'))
-       jQuery.ajax({
-            url: '/api/changePassword',
-            method: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-           },
-        }).done((response)=>{
-            console.log(response);
-            //jQuery.removeCookie('DoctorToken');
-            //window.location.href = '/login';
-        }).fail((error)=>{
-           console.log('errors are ', error)
-      })
+// jQuery('#password_form').submit((e)=>{
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         const data = new FormData(document.getElementById('password_form'))
+//        jQuery.ajax({
+//             url: '/api/changePassword',
+//             method: 'POST',
+//             data: data,
+//             contentType: false,
+//             processData: false,
+//             beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//            },
+//         }).done((response)=>{
+//             console.log(response);
+//             //jQuery.removeCookie('DoctorToken');
+//             //window.location.href = '/login';
+//         }).fail((error)=>{
+//            console.log('errors are ', error)
+//       })
 
 
-    })
+//     })
 
 ///////////// Doctor Timings://///////////
-function getDoctorTimings(){
-    const form =document.getElementById('timingsForm');
-    jQuery.ajax({
-        url: '/api/DoctorTimings',
-        method: 'GET',
-        contendType: 'application/json',
-        async: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log(response);
-        console.log(form);
-        if(response.length!=0){
-            formDeserialize(form, response[0]);
-            for(var key in response[0]){
-                if(response[0][key] !== true){
-                console.log('')
-                let parent = jQuery("#" + key).parent()
-                    parent.removeClass('switch-success');
+// function getDoctorTimings(){
+//     const form =document.getElementById('timingsForm');
+//     jQuery.ajax({
+//         url: '/api/DoctorTimings',
+//         method: 'GET',
+//         contendType: 'application/json',
+//         async: false,
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//         },
+//     })
+//     .done((response)=>{
+//         console.log(response);
+//         console.log(form);
+//         if(response.length!=0){
+//             formDeserialize(form, response[0]);
+//             for(var key in response[0]){
+//                 if(response[0][key] !== true){
+//                 console.log('')
+//                 let parent = jQuery("#" + key).parent()
+//                     parent.removeClass('switch-success');
 
-                }
+//                 }
 
-            }
+//             }
             
-        }
-    })
-    .fail((error)=>{
-        console.log(error)
-    })
-}
-getDoctorTimings();
-jQuery('#timingsForm').submit((e)=>{
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const data = new FormData(document.getElementById('timingsForm'))
-    jQuery.ajax({
-        url: '/api/DoctorTimings/',
-        method: 'POST',
-        data: data,
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log(response);
-    })
-    .fail((error)=>{
-        console.log(error)
-    })
+//         }
+//     })
+//     .fail((error)=>{
+//         console.log(error)
+//     })
+// }
+// getDoctorTimings();
+// jQuery('#timingsForm').submit((e)=>{
+//     e.preventDefault();
+//     e.stopImmediatePropagation();
+//     const data = new FormData(document.getElementById('timingsForm'))
+//     jQuery.ajax({
+//         url: '/api/DoctorTimings/',
+//         method: 'POST',
+//         data: data,
+//         contentType: false,
+//         processData: false,
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//         },
+//     })
+//     .done((response)=>{
+//         console.log(response);
+//     })
+//     .fail((error)=>{
+//         console.log(error)
+//     })
 
-})
+// // })
+// let token = ;
+var table = jQuery('#Appointments').DataTable({
+            ajax:{
+                url:'/api/getDoctorAppointments',
+                dataSrc:"",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                },
+                
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+
+                {
+                    data:'patient_pic',
+                    render: function(data){
+                      return `<img src="${data}" style="height:90px;width:120px" alt="">`
+                    }
+                },
+                {
+                  data: "patient_name"
+                },
+                {
+                    data:'appointment_date'
+                },
+                {
+                    data : 'appointment_time'
+                },
+                {
+                    data : 'Description'
+                }
+                
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
 
 </script>
 {% endblock %}

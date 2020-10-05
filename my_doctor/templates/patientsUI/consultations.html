@@ -436,13 +436,13 @@ $(document).ready(function(){
 
     function getConsultantListList(){
 
-        $.ajax({
+        jQuery.ajax({
             'url': '/api/getPatientConsultations/',
             'contentType': 'application/json',
             'async': false,
             'method': 'GET',
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
             },
         }).done((response)=>{
             console.log(response)
@@ -452,7 +452,10 @@ $(document).ready(function(){
         let totalLi = '';
         for(var i=0; i < dataList.length; i++){
             let data = dataList[i];
+            if(i ==0){
+                consultationList(data.id)
 
+            }
             const liDesign = `
                 <li id="activate_list${data.id}">
                     <div id="activate_class${data.id}" class="conversation">
@@ -479,7 +482,6 @@ $(document).ready(function(){
         }
 
         $('#consultation_doctor_list').html(totalLi);
-        
         
     }
     getConsultantListList()
@@ -550,8 +552,6 @@ function getChatData(consult_id){
         }).done((response)=>{
             chatData_list= response;
         })
-    
-
     
     return showList();
 }

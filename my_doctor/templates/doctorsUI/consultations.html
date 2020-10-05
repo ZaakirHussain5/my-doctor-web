@@ -1,4 +1,4 @@
-{% extends 'doctor_layout.html' %}
+;{% extends 'doctor_layout.html' %}
 {% block content%}
 <style>
 
@@ -45,12 +45,15 @@
 .people-list .about {
   float: left;
   margin-top: 8px;
+
 }
 .people-list .about {
   padding-left: 8px;
+  margin-left: 22pt;
+  color: black;
 }
 .people-list .status {
-  color: #fff;
+  
 }
 
 .chat {
@@ -200,7 +203,18 @@
   clear: both;
   height: 0;
 }
+.clearfixs{
+  background: white;
+  border-radius: 15pt;
+  margin: 15px 0;
 
+}
+.patient__image_style {
+  border-radius: 50%;
+    height: 70px;
+    object-fit: cover;
+    width: 70px;
+}
 </style>
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -216,121 +230,23 @@
         <div class="mainDiv clearfix">
             <div class="people-list" id="people-list">
              
-              <ul class="list">
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Vincent Porter</div>
-                    <div class="status">
-                       online
-                    </div>
-                  </div>
-                </li>
+              <ul class="list" id="patient__list">
                 
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Aiden Chavez</div>
-                    <div class="status">
-                       left 7 mins ago
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Mike Thomas</div>
-                    <div class="status">
-                       online
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_04.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Erica Hughes</div>
-                    <div class="status">
-                       online
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_05.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Ginger Johnston</div>
-                    <div class="status">
-                       online
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_06.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Tracy Carpenter</div>
-                    <div class="status">
-                       left 30 mins ago
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_07.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Christian Kelly</div>
-                    <div class="status">
-                       left 10 hours ago
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_08.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Monica Ward</div>
-                    <div class="status">
-                       online
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Dean Henry</div>
-                    <div class="status">
-                       offline since Oct 28
-                    </div>
-                  </div>
-                </li>
-                
-                <li class="clearfix">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
-                  <div class="about">
-                    <div class="name">Peyton Mckinney</div>
-                    <div class="status">
-                       online
-                    </div>
-                  </div>
-                </li>
               </ul>
             </div>
             
             <div class="chat">
               <div class="chat-header clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+                <img style="height: 58px; width: 50px; object-fit: cover; border-radius: 50%;" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
                 
                 <div class="chat-about">
-                  <div class="chat-with">Chat with Vincent Porter</div>
-                  <div class="chat-num-messages">already 1 902 messages</div>
+                  <div class="chat-with"></div>
+                  <div class="chat-num-messages"></div>
                 </div>
               </div> <!-- end chat-header -->
               
               <div class="chat-history">
-                <ul>
+                <ul id="chats">
                   <li class="clearfix">
                     <div class="message-data align-right">
                       <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
@@ -393,7 +309,7 @@
                 <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
                 <i class="fa fa-file-image-o"></i>
                 
-                <button>Send</button>
+                <button id="sendButton">Send</button>
         
               </div> <!-- end chat-message -->
               
@@ -432,209 +348,395 @@
 
 {% block scripts%}
 <script>
-let dataList = [];
-    function getDataa(){
-        console.log('here')
-        const form = document.getElementById('profile_form');
-        jQuery.ajax({
-                url: '/api/getLoggedInDoctor',
-                method: 'GET',
-                contentType: 'application/json',
-                async: false,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                },
-            }).done((response)=>{
-                console.log('response response', response);
-                jQuery.ajax({
-                    url: "/api/getEmail",
-                    method: 'GET',
-                    contendType: 'application/json',
-                    async: false,
-                    method: 'GET',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                    },
-                }).done((response)=>{
-                        formDeserialize(form, response);
-                    })
-                formDeserialize(form, response);
+// let dataList = [];
+//     function getDataa(){
+//         console.log('here')
+//         const form = document.getElementById('profile_form');
+//         jQuery.ajax({
+//                 url: '/api/getLoggedInDoctor',
+//                 method: 'GET',
+//                 contentType: 'application/json',
+//                 async: false,
+//                 beforeSend: function (xhr) {
+//                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//                 },
+//             }).done((response)=>{
+//                 console.log('response response', response);
+//                 jQuery.ajax({
+//                     url: "/api/getEmail",
+//                     method: 'GET',
+//                     contendType: 'application/json',
+//                     async: false,
+//                     method: 'GET',
+//                     beforeSend: function (xhr) {
+//                         xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//                     },
+//                 }).done((response)=>{
+//                         //formDeserialize(form, response);
+//                     })
+//                 //formDeserialize(form, response);
                 
-            }).fail((error)=>{
-                console.log(error);
-            });
-    }
-    getDataa()
+//             }).fail((error)=>{
+//                 console.log(error);
+//             });
+//     }
+//     getDataa()
 
     
-function formDeserialize(form, data) {
-        const entries = (new URLSearchParams(data)).entries();
-        for (const [key, val] of entries) {
-            const input = form.elements[key];
-            if (input != undefined) {
-                if (input.type == 'file') {
-                    if (val) {
-                        var $file = jQuery('#' + input.id),
-                            $label = $file.next('label'),
-                            $labelText = $label.find('span'),
-                            labelDefault = $labelText.text();
-                        var filename = val.split('/').pop()
-                        if (filename) {
-                            $label
-                                .addClass('file-ok')
-                                .css('background-image', 'url(' + val + ')');
-                            $labelText.text('Click here to change pic');
-                        } else {
-                            $label.removeClass('file-ok');
-                            $labelText.text(labelDefault);
-                        }
-                    }
+// function formDeserialize(form, data) {
+//         const entries = (new URLSearchParams(data)).entries();
+//         for (const [key, val] of entries) {
+//           console.log(key);
+//             const input = form.elements[key];
+//             if (input != undefined) {
+//                 if (input.type == 'file') {
+//                     if (val) {
+//                         var $file = jQuery('#' + input.id),
+//                             $label = $file.next('label'),
+//                             $labelText = $label.find('span'),
+//                             labelDefault = $labelText.text();
+//                         var filename = val.split('/').pop()
+//                         if (filename) {
+//                             $label
+//                                 .addClass('file-ok')
+//                                 .css('background-image', 'url(' + val + ')');
+//                             $labelText.text('Click here to change pic');
+//                         } else {
+//                             $label.removeClass('file-ok');
+//                             $labelText.text(labelDefault);
+//                         }
+//                     }
                     
-                } else {
+//                 } else {
     
-                    switch (input.type) {
-                        case 'checkbox':
-                            input.checked = !!val;
-                            break;
-                        case 'select-one':
-                            if (val)
-                                input.value = val;
-                            else
-                                input.selectedIndex = 0;
+//                     switch (input.type) {
+//                         case 'checkbox':
+//                             input.checked = !!val;
+//                             break;
+//                         case 'select-one':
+//                             if (val)
+//                                 input.value = val;
+//                             else
+//                                 input.selectedIndex = 0;
     
-                            break;
-                        default:
-                            input.value = val;
-                            break;
+//                             break;
+//                         default:
+//                             input.value = val;
+//                             break;
     
-                    }
+//                     }
     
-                }
-            }
+//                 }
+//             }
     
-        }
-    }
+//         }
+//     }
 
 
 //////////////// username change event ////////////////
-jQuery('#ph_no').change(function(){
-    jQuery('#username').val(jQuery(this).val())
-})
-jQuery('#username').val(jQuery('#ph_no').val())
+// jQuery('#ph_no').change(function(){
+//     jQuery('#username').val(jQuery(this).val())
+// })
+// jQuery('#username').val(jQuery('#ph_no').val())
 
 
 //////// UPDATING PROFILE //////////
-jQuery("#profile_form").submit((e)=>{
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('profile_form'))
-        console.log(data);
-        jQuery.ajax({
-        url: '/api/DoctorUpdateProfile',
-        data: data,
-        method: 'POST',
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log("postrequest response -", response);
-        jQuery.removeCookie('DoctorToken');
-        jQuery.cookie('DoctorToken', response.token, {expires: 1})
-    })
-    .fail((error)=>{
-        console.log(error);
-    })
-    }) 
+// jQuery("#profile_form").submit((e)=>{
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         const data = new FormData(document.getElementById('profile_form'))
+//         console.log(data);
+//         jQuery.ajax({
+//         url: '/api/DoctorUpdateProfile',
+//         data: data,
+//         method: 'POST',
+//         contentType: false,
+//         processData: false,
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//         },
+//     })
+//     .done((response)=>{
+//         console.log("postrequest response -", response);
+//         jQuery.removeCookie('DoctorToken');
+//         jQuery.cookie('DoctorToken', response.token, {expires: 1})
+//     })
+//     .fail((error)=>{
+//         console.log(error);
+//     })
+//     }) 
 
 
-jQuery('#pills-profile-tab').click(()=>{
+// jQuery('#pills-profile-tab').click(()=>{
     
-})
+// })
 
 ////////// PASSWORD CHANGE FEATURES //////////
-jQuery('#password_form').submit((e)=>{
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('password_form'))
-       jQuery.ajax({
-            url: '/api/changePassword',
-            method: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-           },
-        }).done((response)=>{
-            console.log(response);
-            //jQuery.removeCookie('DoctorToken');
-            //window.location.href = '/login';
-        }).fail((error)=>{
-           console.log('errors are ', error)
-      })
+// jQuery('#password_form').submit((e)=>{
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         const data = new FormData(document.getElementById('password_form'))
+//        jQuery.ajax({
+//             url: '/api/changePassword',
+//             method: 'POST',
+//             data: data,
+//             contentType: false,
+//             processData: false,
+//             beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//            },
+//         }).done((response)=>{
+//             console.log(response);
+//             //jQuery.removeCookie('DoctorToken');
+//             //window.location.href = '/login';
+//         }).fail((error)=>{
+//            console.log('errors are ', error)
+//       })
 
 
-    })
+//     })
 
 ///////////// Doctor Timings://///////////
-function getDoctorTimings(){
-    const form =document.getElementById('timingsForm');
-    jQuery.ajax({
-        url: '/api/DoctorTimings',
-        method: 'GET',
-        contendType: 'application/json',
-        async: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log(response);
-        console.log(form);
-        if(response.length!=0){
-            formDeserialize(form, response[0]);
-            for(var key in response[0]){
-                if(response[0][key] !== true){
-                console.log('')
-                let parent = jQuery("#" + key).parent()
-                    parent.removeClass('switch-success');
+// function getDoctorTimings(){
+//     const form =document.getElementById('timingsForm');
+//     jQuery.ajax({
+//         url: '/api/DoctorTimings',
+//         method: 'GET',
+//         contendType: 'application/json',
+//         async: false,
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//         },
+//     })
+//     .done((response)=>{
+//         console.log(response);
+//         console.log(form);
+//         if(response.length!=0){
+//             //formDeserialize(form, response[0]);
+//             for(var key in response[0]){
+//                 if(response[0][key] !== true){
+//                 console.log('')
+//                 let parent = jQuery("#" + key).parent()
+//                     parent.removeClass('switch-success');
 
-                }
+//                 }
 
-            }
+//             }
             
-        }
-    })
-    .fail((error)=>{
-        console.log(error)
-    })
+//         }
+//     })
+//     .fail((error)=>{
+//         console.log(error)
+//     })
+// }
+// getDoctorTimings();
+// jQuery('#timingsForm').submit((e)=>{
+//     e.preventDefault();
+//     e.stopImmediatePropagation();
+//     const data = new FormData(document.getElementById('timingsForm'))
+//     jQuery.ajax({
+//         url: '/api/DoctorTimings/',
+//         method: 'POST',
+//         data: data,
+//         contentType: false,
+//         processData: false,
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+//         },
+//     })
+//     .done((response)=>{
+//         console.log(response);
+//     })
+//     .fail((error)=>{
+//         console.log(error)
+//     })
+
+// })
+let consultation_list = [];
+let old_active_id = null;
+let chatData_list = [];
+let shoing_conversation_id = null;
+let doctor_name = '';
+let patient_name='';
+
+function showing_consultationList(){
+  jQuery.ajax({
+    url: '/api/getDoctorConsultations',
+    method: 'GET',
+    async: false,
+    contentType: 'application/json',
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+    },    
+  }).done((response)=>{
+
+    consultation_list = response;
+    let list = ''
+    for(var i=0; i < response.length; i++){
+      let data = response[i];
+      let li_is = `
+      <li id="doctor${data.id}" class="clearfix">
+        <img class="patient__image_style" src="${data.patient_pic}" alt="avatar" />
+          <div class="about">
+            <div class="name">${data.patient_name}</div>
+            <div class="status">
+               ${data.patient_gender}/${data.patient_age}
+            </div>
+          </div>
+        </li>
+      `;
+      list += li_is;
+    }
+    document.getElementById('patient__list').innerHTML = list;
+    let data = consultation_list[0]
+    consultationList(data.id)
+  }).fail((error)=>{console.log(error)})
 }
-getDoctorTimings();
-jQuery('#timingsForm').submit((e)=>{
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const data = new FormData(document.getElementById('timingsForm'))
+
+showing_consultationList()
+
+
+jQuery('#patient__list').on('click', 'li', function(){
+        let id = jQuery(this).attr('id');
+        return consultationList(id.slice(6))
+    })
+
+
+
+function consultationList(id){
+        for(var i=0; i < consultation_list.length; i++){
+            if(consultation_list[i].id == id){
+                shoing_conversation_id = consultation_list[i].id;
+                getChatData(shoing_conversation_id);
+                jQuery('#conversation_doc').html(consultation_list[i].doctor_id.full_name);
+                doctor_name = consultation_list[i].doctor_id.full_name;
+                patient_name= consultation_list[i].patient_name;
+                jQuery('.chat-with').html(consultation_list[i].patient_name);
+                jQuery('.chat-header img').attr('src', consultation_list[i].patient_pic);
+                jQuery('.chat-num-messages').html(consultation_list[i].patient_gender + " " + consultation_list[i].patient_age);
+                //jQuery('#doctor'+id).addClass('clearfixs')
+                break;
+            }
+        }
+        let activate_class = '#doctor';
+
+        if(old_active_id == null){
+            old_active_id = id;
+        }
+        else{
+            jQuery(activate_class + old_active_id).removeClass('clearfixs');
+            old_active_id = id;
+        }
+        jQuery(activate_class + id).addClass('clearfixs');
+        
+
+    }
+
+function getChatData(consult_id){
+    const get_url = '/api/consultant_chats/?cons_id='+ consult_id;
     jQuery.ajax({
-        url: '/api/DoctorTimings/',
+            'url': get_url,
+            'contentType': 'application/json',
+            'async': false,
+            'method': 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response)=>{
+            chatData_list= response;
+        })
+    
+    return showList();
+}
+
+function showList(){
+    let liLists = '';
+    for(var i=0; i < chatData_list.length; i++){
+        const data = chatData_list[i];
+        if(data.user == 'D'){
+            const li = `
+            <li class="clearfix">
+                    <div class="message-data align-right">
+                      <span class="message-data-time" >${data.message_date_time}</span> &nbsp; &nbsp;
+                      <span class="message-data-name" >${doctor_name}</span> <i class="fa fa-circle me"></i>
+                      
+                    </div>
+                    <div class="message other-message float-right">
+                      ${data.message}
+                    </div>
+                  </li>`;
+
+            liLists += li;
+        }
+        else{
+            const li = `
+            <li>
+                <div class="message-data">
+                  <span class="message-data-name"> ${patient_name}</span>
+                  <span class="message-data-time">${data.message_date_time}</span>
+                </div>
+                <div class="message my-message">
+                  ${data.message}
+                </div>
+              </li>
+                `;
+              liLists += li;
+        }
+        
+
+    }
+    jQuery('#chats').html(liLists);
+    if(old_active_id == null){
+        if(chatData_list.length !=0){
+
+            old_active_id = chatData_list[0].consultation_id;
+        }
+    }
+    else{
+        
+    }
+}
+setInterval(function(){ 
+    
+  getChatData(shoing_conversation_id); }, 1000); 
+
+
+
+
+function sendMessage(consult_id){
+    let data = {
+        user: 'D',
+        message: jQuery('#message-to-send').val(),
+        attachment: false,
+        //attachment_file:'file'
+        seen: false,
+        delivered: false,
+        consultation_id: consult_id
+    }
+    jQuery.ajax({
+        url: '/api/consultant_chats/',
+        data: JSON.stringify(data),
         method: 'POST',
-        data: data,
-        contentType: false,
-        processData: false,
+        contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
         },
-    })
-    .done((response)=>{
-        console.log(response);
-    })
-    .fail((error)=>{
-        console.log(error)
+    }).done((response)=>{
+        let message='success';
+    }).fail((err, error, wrong) => {
+        console.log(err)
+
     })
 
-})
+}
 
+
+jQuery('#sendButton').click(function(){
+        let values = jQuery('#message-to-send').val();
+        if(values.length >0){
+            sendMessage(old_active_id)
+        }
+        jQuery('#message-to-send').val('')
+    })
 </script>
 {% endblock %}
