@@ -4,14 +4,10 @@ from patients.models import patient_info
 
 def login(request):
     user_type = ""
-    if hasattr(request.user,'doctors_info'):
-        user_type = "AD"
-    elif hasattr(request.user,'patient_info'):
-        user_type = "P"
-    elif hasattr(request.user,'executive_details'):
-        user_type = "E"
-    else:
+    if request.GET.get('user') == 'admin':
         user_type = "A"
+    else:
+        user_type = "E"
     return render(request,'auth/login.html', context = { "user_type":user_type})
 
 def dashboard(request):

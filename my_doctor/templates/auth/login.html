@@ -6,7 +6,7 @@
 <body  class="login-page sidebar-collapse">
 
     <div class="page-header clear-filter" filter-color="blue">
-        <div class="page-header-image" style="background-image:url({% static 'assets/img/login.jpg'%})"></div>
+        <div class="page-header-image" style="background-image:url('{% static 'assets/img/login.jpg'%}');""></div>
         <div class="content">
           <div class="container">
             <div class="col-md-4 ml-auto mr-auto">
@@ -34,6 +34,7 @@
                       </div>
                       <input type="password" placeholder="Password" id="password" class="form-control" />
                     </div>
+                    <input type="hidden" value="{{user_type}}" id="user_type">
                     <button type="submit" class="btn btn-info btn-round btn-lg btn-block" >LOGIN</button>
 
                   </div>
@@ -80,18 +81,21 @@
                 e.stopImmediatePropagation();
                 var data = {
                     username: $('#username').val(),
-                    password: $('#password').val()
+                    password: $('#password').val(),
+                    user_type:$('#user_type').val()
                 }
-                JQuery.ajax({
+                $.ajax({
                     url: '/api/auth/login',
                     data: JSON.stringify(data),
                     method: 'POST',
                     contentType: 'application/json'
                 }).done((response) => {
-                    $.cookie('Token', response.token, {
-                        expires: 1
-                    })
-                    window.location.href = '/adminDashboard'
+                    if(data.user_type == 'A'){
+                      window.location.href = '/adminDashboard'
+                    }else{
+                      window.location.href = '/customerCareDashboard'
+                    }
+                    
                 }).fail((err, error, wrong) => {
                     console.log(err)
                     alert(err.responseJSON.non_field_errors[0])

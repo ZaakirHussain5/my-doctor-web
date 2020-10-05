@@ -35,3 +35,6 @@ def doctor_reg(request):
 
 def forgot_pass(request):
     return render(request,'website/forgot_pass.html')
+
+def PatientRegistration(request):
+    return render(request,'website/PatientRegistration.html')

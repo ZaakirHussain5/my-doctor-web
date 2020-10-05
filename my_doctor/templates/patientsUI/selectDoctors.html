@@ -308,17 +308,14 @@ document.getElementById('rzp-button1').onclick = function(e){
                 },
             }).done((response) => {
                    console.log(response);
+                   setTimeout(function(){
+                       window.location.href='/patients/dashboard'
+                   },200)
+                   toastr.success("Appointmnt booked Successfully","Success",{positionClass:"toast-top-center"})
             }).fail((err, error, wrong) => {
-                $('.btn-user').removeAttr('disabled')
-                $('.btn-user').html('Login')
                 console.log(err)
             })
         },
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
-    },
     "notes": {
         "address": "Razorpay Corporate Office"
     },
