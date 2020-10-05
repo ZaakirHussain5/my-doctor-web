@@ -16,9 +16,9 @@ class DoctorTimingsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AvlDoctorsListSerializer(serializers.ModelSerializer):
-    # doctor=doctors_infoSerializer()
+    doctor=doctors_infoSerializer()
     class Meta:
-        model = doctors_info
+        model = DoctorTimings
         fields = '__all__'
 
 class DoctorRegistration(serializers.Serializer):

@@ -80,7 +80,8 @@ class getAvailableDoctors(viewsets.ModelViewSet):
   def get_queryset(self):
     day = self.request.query_params.get('day', None)
     spl = self.request.query_params.get('spl', None)
-    queryset = doctors_info.objects.filter(specialist_type=spl)
+    queryset = doctors_info.objects.all()
+    print(day,spl)
     if spl is not None:
        queryset = doctors_info.objects.filter(specialist_type=spl)
     if day is not None:
