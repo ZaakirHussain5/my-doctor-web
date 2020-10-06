@@ -11,6 +11,7 @@ urlpatterns=[
     path('customerCareDashboard',views.customerCareDashboard,name='customerCareDashboard'),
     path('patientsList',views.patientsList,name='patientsList'),
     path('newAppointment',views.newAppointment,name='newAppointment'),
-    path('consultationsList', views.consultationsList, name="consultations_list")
+    path('consultationsList', views.consultationsList, name="consultations_list"),
+    path("WebDoctorList", views.webDoctorList, name="webDoctorList")
 
 ]

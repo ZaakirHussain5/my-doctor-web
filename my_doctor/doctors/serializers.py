@@ -89,3 +89,28 @@ class UpdateProfile(serializers.Serializer):
             raise serializers.ValidationError("User Already Exists")
 
 
+class WebNewDoctorRegistrationSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+    email = serializers.CharField()
+    full_name = serializers.CharField()
+    phone_number = serializers.CharField(max_length=15)
+    specialist_type = serializers.CharField(max_length=25)
+    about = serializers.CharField(max_length=500)
+    web_registration = serializers.BooleanField()
+
+    def create(self, validated_data):
+        try:
+          user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+          details = doctors_info.objects.create(
+              user=user,
+              phone_number=validated_data['phone_number'],
+              about=validated_data['about'],
+              specialist_type=validated_data['specialist_type'],
+              full_name=validated_data['full_name'],
+              web_registration=validated_data['web_registration']
+          )
+          details.save()
+          return user
+        except IntegrityError:
+          raise serializers.ValidationError("User already Exists")

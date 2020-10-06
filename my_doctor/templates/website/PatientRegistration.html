@@ -62,40 +62,39 @@
  <div class="form-group col-xs-12">
                 <input id="user_type" type="hidden" value="P">
                 <label for="Name1">Full Name</label>
-                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
+                <input type="text" required class="form-control" id="Name1" placeholder="Enter your full name">
             </div>
             <div class="form-group col-xs-12">
-                <input id="user_type" type="hidden" value="P">
-                <label for="Name1">Phone Number</label>
-                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
+                
+                <label for="mob1">Phone Number</label>
+                <input type="text" class="form-control"  required id="mob1" placeholder="Enter registered phone number">
             </div>
             <div class="form-group col-xs-12">
-                <input id="user_type" type="hidden" value="P">
-                <label for="Name1">Email Address(optional)</label>
-                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
+                <label for="email">Email Address</label>
+                <input type="text" required class="form-control" id="email" placeholder="Enter your email">
             </div>
             <div class="form-group col-xs-12">
-            <label for="email1">Password</label>
-                <input type="password" class="form-control" id="email1" placeholder="Enter password">
+            <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required placeholder="Enter password">
             </div>
             <div class="form-group col-xs-12">
-                <label for="email1">Age</label>
-                <input type="number" class="form-control" id="email1" placeholder="Enter Age">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" required id="age" placeholder="Enter Age">
             </div>
-          >
+          
                 </div>
                 <div class="col-md-6">
               <div class="form-group col-xs-12">
-                <label for="email1">Gender</label>
-                <select name="" id="">
+                <label for="gender">Gender</label>
+                <select name="" id="gender" required>
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>   
             </div>
             <div class="form-group col-xs-12">
-                <label for="email1">Blood Group</label>
-                <select name="" id="">
+                <label for="bloodGroup">Blood Group</label>
+                <select name="" id="bloodGroup">
                     <option value="">Select Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="B+">B+</option>
@@ -108,17 +107,17 @@
                 </select>   
             </div>
             <div class="form-group col-xs-12">
-                <label for="email1">Height</label>
-                <input type="number" class="form-control" id="email1" placeholder="Enter Height">
+                <label for="height">Height</label>
+                <input type="number" class="form-control" id="height" placeholder="Enter Height">
             </div>
             <div class="form-group col-xs-12">
-                <label for="email1">Weight</label>
-                <input type="number" class="form-control" id="email1" placeholder="Enter Weight">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" placeholder="Enter Weight">
             </div>
 
             <div class="col-xs-12">
                 <div class="comment-btn">
-                    <button type="submit" class="btn pull-right">Signup</a>
+                    <button type="submit" id="submit" class="btn pull-right">Signup</button>
                 </div>
             </div>
                 </div>
@@ -130,61 +129,7 @@
     </form>
     </div>
     </div>
-    <!--
-    <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="login-form">
-    <form>
-    <div class="row">
-    <div class="col-xs-12">
-    <div class="form-title">
-    <h2>Register</h2>
-    <p>Enter your details to become a member</p>
-    </div>
-    </div>
-    <div class="">
-    <div class="form-group col-md-6 col-xs-12">
-    <input type="text" placeholder="Your Name" required>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
     
-    <input type="text" placeholder="Your Email" required>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    
-    <input type="tel" placeholder="Your Phone"  minlength="10" maxlength="10" size="10" required>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    
-    <input type="text" placeholder="Your City">
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    <select>
-    <option>Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    </select>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    
-    <input type="number" placeholder="Age" min="1" max="100">
-    </div>
-    </div>
-    
-    
-    
-    
-    <div class="">
-    <div class="col-xs-12">
-    <div class="form-btn">
-      <button type="submit" class="btn">Submit</button>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    </form>
-    </div>
-    </div>-->
     </div>
     </div>
     </section>
@@ -212,12 +157,6 @@
 {%endblock%}
 {% block scripts %}
     <script>
-        // post url= '/api/auth/login/'
-        //
-        // data= 'username', 'password', 'user_type=P',
-        // if  status=200 redirect to '/patients/dashoard/'
-            // patient tocken store to localstorage
-        // else aleart message
         jQuery(document).ready(function($){
             $('#myTab li:first-child').click(()=>{
                 console.log('clicked');
@@ -239,89 +178,51 @@
                 return false
             })
 
-            function submit_doctor_loginForm(){
-                console.log('doctorsUpload');
-            var data = {
-                    username: 'DPDOC2020001',
-                    password: '12345',
-                    user_type: 'D'
-                }
-
-                $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                    $.cookie('DoctorToken', response.token, {
-                        expires: 1
-                    })
-                    window.location.href = '/doctors/dashboard'
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
-                })
-        }
-
-        function submit_loginForm(){
-           
-            var data = {
-                    username: '9945981381',
-                    password: '1234',
-                    user_type: 'P'
+            function submitForm(){
+                let data = {
+                    full_name: $('#Name1').val(),
+                    user_type: $('#user_type').val(),
+                    username: $('#mob1').val(),
+                    ph_no: $('#mob1').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val(),
+                    age: $("#age").val(),
+                    gender: $("#gender").val(),
+                    blood_group: $("#bloodGroup").val(),
+                    height: $("#height").val(),
+                    weight: $("#weight").val(),
+                    marital_status: 'Not Specified'
                 }
                 $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                    $.cookie('Token', response.token, {
-                        expires: 1
-                    })
-                    window.location.href = 'patients/dashboard'
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
-                })
-        }
+                    url: '/api/GeneratePatientID',
+                    method: 'GET',
+                    contentType: 'application/json',
+                }).done((response)=>{
+                        data.pat_id = response.pat_id
+                        $.ajax({
+                        url: '/api/PatientRegInApp',
+                        data: JSON.stringify(data),
+                        method: 'POST',
+                        contentType: 'application/json'
+                    }).done((response)=>{
+                        $.cookie('Token', response.token, { expires: 1 })
+                        window.location.href = 'patients/dashboard'
+                    }).fail((error)=>{
+                        console.log(error);
 
-        $("#loging_in").submit((e)=>{
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            const data = {
-                username: $('#Name1').val(),
-                password: $('#email1').val(),
-                user_type: $('#user_type').val()
-            };
-            console.log(data);
-            $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                    if (data.user_type == "P") {
-                        $.cookie('Token', response.token, {
-                        expires: 1
-                        })
-                        window.location.href = 'patients/dashboard'    
-                    }
-                    else{
-                        $.cookie('DoctorToken', response.token, {
-                        expires: 1
-                        })
-                        window.location.href = '/doctors/dashboard'
-                    }
-                    
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
+                    })
+                }).fail((error)=>{
+                    console.log(error)
+
                 })
+
+
+            }
+
+        $('#submit').click(submitForm)
 
         })
 
-    })
 
 
     </script>

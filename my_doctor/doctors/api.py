@@ -1,4 +1,4 @@
-from .serializers import UpdateProfile, doctors_infoSerializer,DoctorRegistration,DoctorTimingsSerializer,AvlDoctorsListSerializer
+from .serializers import *
 from .models import doctors_info,DoctorTimings
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
-    queryset = doctors_info.objects.all()
+    queryset = doctors_info.objects.filter(web_registration = False)
     permissions = [
         permissions.AllowAny
     ]
@@ -107,3 +107,23 @@ class DoctorLogout(generics.GenericAPIView):
          doctor = doctors_info.objects.get(user=request.user).update(is_loggedin=False)
          doctor.save()
          return Response({})
+
+
+class NewDoctorRegistration(generics.GenericAPIView):
+    serializer_class = WebNewDoctorRegistrationSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            "Doctor": UserAuthSerializer(user, context=self.get_serializer_context()).data
+        })
+
+
+class webdoctorViewset(viewsets.ModelViewSet):
+        queryset = doctors_info.objects.filter(web_registration=True)
+        permissions = [
+            permissions.AllowAny
+        ]
+        serializer_class = doctors_infoSerializer

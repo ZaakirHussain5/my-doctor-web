@@ -13,14 +13,14 @@ class doctors_info(models.Model):
     consultation_fee = models.DecimalField(max_digits=10,decimal_places=2,default=0)
     profile_pic = models.FileField(max_length=355, null=True)
     mou_file = models.FileField(null=True)
-    about  = models.CharField(max_length=500, null=True)
+    about = models.CharField(max_length=500, null=True)
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.CharField(max_length=25, null=True)
     Last_modied = models.DateTimeField(auto_now=True)
     Modified_by = models.CharField(max_length=25, null=True)
     is_loggedin = models.BooleanField(default=False)
-    
+    web_registration = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.full_name) +','+ str(self.specialist_type)
