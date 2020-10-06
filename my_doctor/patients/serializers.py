@@ -13,7 +13,7 @@ class patient_infoSerializer(serializers.ModelSerializer):
 class PatientResgistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
-    email = serializers.CharField(allow_blank=True,allow_null=True)
+    email = serializers.CharField(required=False)
     pat_id = serializers.CharField()
     full_name = serializers.CharField()
     gender = serializers.CharField()
@@ -65,14 +65,14 @@ class PatientResgistrationSerializer(serializers.Serializer):
 class PatientResgistrationApp(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
-    email = serializers.CharField()
+    email = serializers.CharField(required=False)
     pat_id = serializers.CharField()
     full_name = serializers.CharField()
     gender = serializers.CharField()
     age = serializers.IntegerField()
     height=serializers.DecimalField(max_digits=10,decimal_places=2)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2)
-    marital_status=serializers.CharField()
+    marital_status=serializers.CharField(required=False)
     blood_group = serializers.CharField()
     ph_no=serializers.CharField()
 

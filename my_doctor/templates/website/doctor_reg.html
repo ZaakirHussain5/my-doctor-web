@@ -20,41 +20,50 @@
     <div class="row" >
     <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="login-form">
-      <form>
+      <form id="doctorRegistration">
         <div class="row">
         <div class="col-xs-12">
-        <div class="form-title">
-        <h2>Register</h2>
-        <p>Enter your details to become a member</p>
-        </div>
+            <div class="form-title">
+                <h2>Register</h2>
+                <p>Enter your details to become a member</p>
+            </div>
         </div>
         <div class="">
-        <div class="form-group col-md-6 col-xs-12">
-        <input type="text" placeholder="Your Name" required>
-        </div>
-        <div class="form-group col-md-6 col-xs-12">
-        
-        <input type="text" placeholder="Your Email" required>
-        </div>
-        <div class="form-group col-md-6 col-xs-12">
-        
-        <input type="tel" placeholder="Your Phone"  minlength="10" maxlength="10" size="10" required>
-        </div>
-        <div class="form-group col-md-6 col-xs-12">
-        
-        <input type="text" placeholder="Your City">
-        </div>
-        <div class="form-group col-md-6 col-xs-12">
-        <select>
-        <option>Gender</option>
-        <option>Male</option>
-        <option>Female</option>
-        </select>
-        </div>
-        <div class="form-group col-md-6 col-xs-12">
-        
-        <input type="number" placeholder="Age" min="1" max="100">
-        </div>
+            <div class="form-group col-md-6 col-xs-12">
+                <input type="text" name="full_name" placeholder="Your Name" required>
+                <input type="hidden" name="web_registration" placeholder="Your Name" value="true">
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+
+                <input type="text" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+
+                <input type="tel" placeholder="Your Phone Number" name="phone_number"  minlength="10" maxlength="10" size="10" required>
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+                <input type="text" placeholder="password" name="password" min="18" max="100" required>
+
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+                <select>
+                    <option>Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+
+                <input type="number" placeholder="Age" min="18" max="100" required>
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+
+                <input type="text" name="specialist_type" placeholder="specialist Type" min="18" max="100" required>
+            </div>
+             <div class="form-group col-md-6 col-xs-12">
+
+                <input type="text" name="about" placeholder="about" min="18" max="100" required>
+            </div>
         </div>
         
         
@@ -98,3 +107,38 @@
       </section>
 
 {%endblock%}
+
+{% block scripts %}
+<script type="text/javascript">
+    $("#doctorRegistration").submit((e)=>{
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            url: '/api/GenerateDoctorID',
+            method: 'GET',
+            contentType: 'application/json'
+        }).done((response)=>{
+                console.log("response ", response);
+
+                let form = document.getElementById("doctorRegistration");
+                let formdata = new FormData(form);
+                formdata.append('username', response.doctorId);
+                formdata.append('web_registration', true);
+                $.ajax({
+                  url: '/api/NewDoctorRegistration',
+                  method: 'POST',
+                  data: formdata,
+                  contentType: false,
+                  processData: false,
+                }).done((response)=>{
+                       alert('Your form submited successfull. We will connect you soon.');
+                       $('#doctorRegistration').trigger('reset');
+                    }).fail((error)=>{
+                    console.log(error);
+                })
+        })
+
+
+    })
+</script>
+{% endblock %}

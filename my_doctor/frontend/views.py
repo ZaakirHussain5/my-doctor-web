@@ -42,3 +42,6 @@ def newAppointment(request):
 
 def consultationsList(request):
     return render(request, 'frontend/consultationsList.html')
+
+def webDoctorList(request):
+    return render(request, 'frontend/doctorsList.html')

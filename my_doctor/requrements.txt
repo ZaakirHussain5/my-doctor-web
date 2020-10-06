@@ -142,3 +142,16 @@ chats Post Request Data : {
     "consultation_id": 1
 }
 13. login with input form. (done)
+..............
+
+14.patient registration: (done)
+    url = '/api/PatientRegInApp'
+    method = POST
+    template= website/patientregistrtion.html
+
+15. doctor registration in website (done)
+consider all the fields excluding cummision_type, cummision_val, consultation fee, 
+rating, registration number, profile_pic, mou file
+template = doctor_reg.html
+
+16. create a page at the admin site to display all the doctors registr from the site 
