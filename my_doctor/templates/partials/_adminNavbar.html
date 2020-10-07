@@ -18,8 +18,12 @@
                 <li>
                     <a href="{% url 'frontend:Executives' %}" data-toggle="tooltip" data-placement="right" title="Executives"> <i class="menu-icon fa fa-headphones"></i>Executives </a>
                 </li>
-                <li>
-                    <a href="{% url 'frontend:Doctors' %}" data-toggle="tooltip" data-placement="right" title="Doctors"> <i class="menu-icon fa fa-user-md"></i>Doctors </a>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-md"></i>Doctors</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Registration Requests</a></li>
+                        <li><i class="menu-icon fa fa-user-md"></i><a href="{% url 'frontend:Doctors' %}" data-toggle="tooltip" data-placement="right" title="Doctors"> Doctors List</a></li>
+                    </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Patients</a>
@@ -30,10 +34,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="widgets.html" data-toggle="tooltip" data-placement="right" title="Payments"> <i class="menu-icon fa fa-inr"></i>Payments </a>
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="Payments"> <i class="menu-icon fa fa-inr"></i>Payments </a>
                 </li>
                 <li>
-                    <a href="widgets.html"> <i class="menu-icon fa fa-clipboard" data-toggle="tooltip" data-placement="right" title="Reports"></i>Reports </a>
+                    <a href="#"> <i class="menu-icon fa fa-clipboard" data-toggle="tooltip" data-placement="right" title="Reports"></i>Reports </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
