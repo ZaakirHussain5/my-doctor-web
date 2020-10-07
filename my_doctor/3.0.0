@@ -1,0 +1,5 @@
+Requirement already satisfied: python-jose in c:\users\vivaan\.virtualenvs\my-doctor-web-8dknpf75\lib\site-packages (3.2.0)
+Requirement already satisfied: pyasn1 in c:\users\vivaan\.virtualenvs\my-doctor-web-8dknpf75\lib\site-packages (from python-jose) (0.4.8)
+Requirement already satisfied: rsa in c:\users\vivaan\.virtualenvs\my-doctor-web-8dknpf75\lib\site-packages (from python-jose) (4.6)
+Requirement already satisfied: ecdsa<0.15 in c:\users\vivaan\.virtualenvs\my-doctor-web-8dknpf75\lib\site-packages (from python-jose) (0.14.1)
+Requirement already satisfied: six<2.0 in c:\users\vivaan\.virtualenvs\my-doctor-web-8dknpf75\lib\site-packages (from python-jose) (1.15.0)

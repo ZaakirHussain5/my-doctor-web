@@ -188,8 +188,8 @@
         })
 
         $('#generate').click(function(){
-            $.get('/api/GenerateDoctorID',function(data){
-                $('#username').val(data)
+            $.getJSON('/api/GenerateDoctorID',{},function(data){
+                $('#username').val(data.doctorId)
             })
         })
 
@@ -198,6 +198,7 @@
                 url:'/api/doctors_info',
                 dataSrc:""
             },
+            responsive: true,
             columns:[
                 {
                     data:'id'

@@ -37,7 +37,7 @@
                       </div>
                   </div>
                   <h4 class="mb-0">
-                      <span class="count">10468</span>
+                      <span class="count" id="doctorCount"></span>
                   </h4>
                   <p class="text-light">Registered Doctors</p>
 
@@ -67,7 +67,7 @@
                       </div>
                   </div>
                   <h4 class="mb-0">
-                      <span class="count">10468</span>
+                      <span class="count" id="patientsCount"></span>
                   </h4>
                   <p class="text-light">Registered Patients</p>
 
@@ -96,9 +96,9 @@
                       </div>
                   </div>
                   <h4 class="mb-0">
-                      <span class="count">10468</span>
+                      <span class="count" id="consultationCount"></span>
                   </h4>
-                  <p class="text-light">Consultations Completed</p>
+                  <p class="text-light">Today consulta</p>
 
               </div>
 
@@ -125,7 +125,7 @@
                       </div>
                   </div>
                   <h4 class="mb-0">
-                      <span class="count">10468</span>
+                      <span class="count" >10468</span>
                   </h4>
                   <p class="text-light">Customer Feedbacks</p>
 
@@ -177,4 +177,24 @@
       </div>
   </div> 
 
-{% endblock %} {% block scripts %}{% endblock %}
+{% endblock %}
+{% block scripts %}
+    <script>
+        jQuery.ajax({
+            url: '/getAllCount',
+            method: 'GET',
+            contenType: 'application/json'
+        }).done((response)=>{
+            jQuery('#doctorCount').html(response.doctorCount);
+            jQuery('#patientsCount').html(response.patientCount);
+            jQuery('#consultationCount').html(response.consultationsCount);
+
+        }).fail((error)=>{
+            console.log(error);
+        })
+
+
+
+    </script>
+
+{% endblock %}

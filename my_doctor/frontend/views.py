@@ -1,6 +1,9 @@
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from specialist_type.models import specialist_type
 from patients.models import patient_info
+from doctors.models import doctors_info
+from consultations.models import consultations
 
 def login(request):
     user_type = ""
@@ -45,3 +48,16 @@ def consultationsList(request):
 
 def webDoctorList(request):
     return render(request, 'frontend/doctorsList.html')
+
+
+def GetAllInfoCount(request):
+    registered_doctor = doctors_info.objects.filter(is_active=True).count()
+    registered_patients = patient_info.objects.all().count()
+    registered_consultations = consultations.objects.all().count()
+    obj = {
+        'doctorCount': registered_doctor,
+        'patientCount': registered_patients,
+        'consultationsCount': registered_consultations
+    }
+
+    return JsonResponse(obj, safe=False)

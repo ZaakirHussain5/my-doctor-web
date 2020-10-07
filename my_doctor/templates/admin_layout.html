@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Doctor Plus - Admin</title>
@@ -17,13 +16,12 @@
         <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/file.css' %}">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'></head>
-<body class="open">
+<body>
     {% include 'partials/_adminNavbar.html'%}
     <div id="right-panel" class="right-panel">
         <header id="header" class="header">
             <div class="header-menu">
                 <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
