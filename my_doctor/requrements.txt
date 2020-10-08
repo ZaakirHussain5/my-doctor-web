@@ -155,3 +155,16 @@ rating, registration number, profile_pic, mou file
 template = doctor_reg.html
 
 16. create a page at the admin site to display all the doctors registr from the site 
+
+
+...........
+17. Create Reminders app.
+ model fields:
+ 	reminder_date
+ 	reminder_message(max length =500)               (DONE)
+ 	reminder_owner = ForeignKey(User)
+ 	created_at = auto_now()
+ oparetions(CRUD)
+18. doctorpaymetntslist.html===>(done)
+	table fields ===> doctor name, phone number, consultations count, total amount, company share, amount payable
+	 

@@ -61,3 +61,6 @@ def GetAllInfoCount(request):
     }
 
     return JsonResponse(obj, safe=False)
+
+def viewDoctorPayment(request):
+    return render(request, 'frontend/doctorPaymentsList.html')
