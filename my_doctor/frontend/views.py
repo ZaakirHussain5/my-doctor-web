@@ -64,3 +64,6 @@ def GetAllInfoCount(request):
 
 def viewDoctorPayment(request):
     return render(request, 'frontend/doctorPaymentsList.html')
+
+def reminders(request):
+    return render(request,'frontend/reminders.html')
