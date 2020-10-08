@@ -59,10 +59,13 @@ INSTALLED_APPS = [
     'patient_subscription',
     'patient_medical_records',
     'website',
-    'online_enquiry'
+    'online_enquiry',
+    'reminders',
+    'social_django'
 ]
 
 MIDDLEWARE = [
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -85,6 +88,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -128,6 +134,12 @@ REST_FRAMEWORK = {
    ),
 }
 
+AUTHENTICATION_BACKENDS = (
+
+    'social.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S' 
@@ -152,3 +164,12 @@ STATICFILES_DIRS = [
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '145610180262-e30cgv3sdtul1eu6kplk1q3i3r79h574.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jzx9qTt54W8JvTNoNt3jSCqK'
+
+LOGIN_URL = 'http://localhost:8000/login'
+LOGIN_REDIRECT_URL = 'http://localhost:8000/patients/dashboard'
+

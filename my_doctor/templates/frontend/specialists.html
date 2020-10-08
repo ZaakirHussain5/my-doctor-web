@@ -55,7 +55,7 @@
          <div class="card">
             <div class="card-body card-block">
                 <div class="table-responsive">
-                     <table class="table table-bordered table-hover" id="Specialists">
+                     <table class="table table-bordered table-hover" id="Specialists" style="display:none">
                     <thead>
                         <tr>
                             <th>Slno</th>
@@ -84,6 +84,7 @@
                   url: "/api/specialist_types",
                   dataSrc: ""
               },
+              responsive:true,
               columns: [
                   {
                       data: "id"

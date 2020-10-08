@@ -7,5 +7,6 @@ router.register('executive_details', executive_detailsViewSet, 'executive_detail
 
 urlpatterns = [
     path('',include(router.urls)),
-    path('executiveRegistration',ExecutiveRegistrationAPI.as_view(),name='executiveRegistration')
+    path('executiveRegistration',ExecutiveRegistrationAPI.as_view(),name='executiveRegistration'),
+
 ]
