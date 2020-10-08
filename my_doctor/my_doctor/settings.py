@@ -130,6 +130,7 @@ REST_FRAMEWORK = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S' 
 
 LANGUAGE_CODE = 'en-us'
 
