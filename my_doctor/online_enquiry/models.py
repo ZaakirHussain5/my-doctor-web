@@ -14,4 +14,3 @@ class online_enquiry(models.Model):
 
     def __str__(self):
         return self.name
-

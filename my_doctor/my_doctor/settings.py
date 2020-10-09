@@ -60,8 +60,7 @@ INSTALLED_APPS = [
     'patient_medical_records',
     'website',
     'online_enquiry',
-    'reminders',
-    'social_django'
+    'reminders'
 ]
 
 MIDDLEWARE = [
@@ -142,6 +141,7 @@ AUTHENTICATION_BACKENDS = (
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S' 
 
 LANGUAGE_CODE = 'en-us'
 

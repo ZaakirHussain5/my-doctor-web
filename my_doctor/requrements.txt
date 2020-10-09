@@ -167,4 +167,18 @@ template = doctor_reg.html
  oparetions(CRUD)
 18. doctorpaymetntslist.html===>(done)
 	table fields ===> doctor name, phone number, consultations count, total amount, company share, amount payable
-	 
+	
+.............
+19. 
+template = frontend/reminders.html 
+(582 line.) add reminder:
+    send add reminder ajax request.
+    url: 
+
+(599 line) list events based on date.
+login_url(web) = '/app-login?user=admin'
+username= 'admin' 
+
+............................
+20. contact.html, speciality.html book appoinment apiss
+

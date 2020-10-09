@@ -26,7 +26,7 @@
                         <li><i class="fa fa-tasks"></i><a href="/patientsList">View Patients</a></li>
                         <li><i class="fa fa-tasks"></i><a href="/consultationsList">Consultations List</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">View Prescriptions</a></li>
-                        <li><i class=""></i><a href="#">Follow up Set Date</a></li>
+                        <li><i class=""></i><a href="/reminders">Reminders</a></li>
                         <li><i class=""></i><a href="#">Complaints</a></li>
                     </ul>
                 </li>
@@ -35,19 +35,18 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-md"></i>Doctors</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Registration Requests</a></li>
-                        <li><i class="menu-icon fa fa-user-md"></i><a href="{% url 'frontend:Doctors' %}" data-toggle="tooltip" data-placement="right" title="Doctors"> Doctors List</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="#">Register New Doctor</a></li>
+                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Doctor List</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">Doctors Agreement</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">Doctors Bank Details</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="#">Doctors Settlement Details</a></li>
+                        <li><i class="fa fa-inr"></i><a href="#">Doctors Settlement Details</a></li>
                     </ul>
                 </li>
                 
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Administration</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-tasks"></i><a href="#">Speciality Category</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="#">Add User / Executive</a></li>
+                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:specialists' %}">Speciality Category</a></li>
+                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Executives' %}">Add User / Executive</a></li>
                         <li><i class="fa fa-envelope-o"></i><a href="#">Create E-mail ID</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">Consultations report</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">View reports</a></li>
@@ -57,16 +56,6 @@
                         <li><i class="fa fa-envelope-o"></i><a href="#">Send Bulk Email</a></li>
                         <li><i class="fa fa-video-camera"></i><a href="#">Recorded Calls / Video</a></li>
                         <li><i class="fa fa-comments-o"></i><a href="#">Feedback & Replies </a></li>
-
-                    </ul>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Reminders</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-tasks"></i><a href="#">New Patient reminder</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="#">New Doctors reminder</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="#">New Doctors reminder</a></li>
-                        
 
                     </ul>
                 </li>

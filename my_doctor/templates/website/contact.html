@@ -49,64 +49,64 @@
     </div>
     </div>
     <div class="col-md-7 col-sm-12 col-xs-12">
-    <form>
-    <div class="row">
-    <div class="">
-    <div class="form-group col-xs-6">
-    <input type="text" placeholder="Your Name" required>
-    </div>
-    <div class="form-group col-xs-6">
-    
-    <input type="text" placeholder="Your Email" required>
-    </div>
-    <div class="form-group col-xs-6">
-    
-    <input type="tel" placeholder="Your Phone" minlength="10" maxlength="10" size="10" required>
-    </div>
-    <div class="form-group col-xs-6">
-    
-    <input type="text" placeholder="Your City">
-    </div>
-    <div class="form-group col-xs-6">
-    <select>
-    <option>Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    </select>
-    </div>
-    <div class="form-group col-xs-6">
-    
-    <input type="number" placeholder="Age" min="1" max="100">
-    </div>
-    <div class="form-group col-xs-12">
-    <select>
-    <option>Speciality</option>
-    <option>General Physician</option>
-    <option>Dermatologist</option>
-    <option value="">Pediatrician</option>
-    <option value="">Dietitian</option>
-    <option value="">Psychologist</option>
-    <option value="">Gynaecologist</option>
-    </select>
-    </div>
-    </div>
-    
-    
-    
-    
-    <div class="">
-    <div class="form-group col-xs-12">
-    
-    <textarea placeholder="Your message"></textarea>
+    <form id="appointments-main-form">
+        <div class="row">
+            <div class="">
+                <div class="form-group col-xs-6">
+                    <input type="text" placeholder="Your Name" id="id_name" required>
+                </div>
+                <div class="form-group col-xs-6">
+        
+                    <input type="text" placeholder="Your Email" id="id_email" required>
+                </div>
+                <div class="form-group col-xs-6">
+        
+                    <input type="tel" placeholder="Your Phone" id="id_ph_no" minlength="10" maxlength="10" size="10" required>
+                </div>
+                <div class="form-group col-xs-6">
+        
+                    <input type="tel" placeholder="Blood Group" id="id_blood" minlength="10" maxlength="10" size="10" required>
+                </div>
+                <div class="form-group col-xs-6">
+        
+                    <input type="text" id="id_city" placeholder="Your City">
+                </div>
+                <div class="form-group col-xs-6">
+                    <select id="id_gender">
+                        <option>Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6">
+                
+                    <input type="number" id="id_age" placeholder="Age" min="1" max="100">
+                </div>
+                <div class="form-group col-xs-12">
+                    <select id="select-specialist">
+                        <option>Speciality</option>
+                        <option>General Physician</option>
+                        <option>Dermatologist</option>
+                        <option value="">Pediatrician</option>
+                        <option value="">Dietitian</option>
+                        <option value="">Psychologist</option>
+                        <option value="">Gynaecologist</option>
+                    </select>
+                </div>
+            </div>
+            <div class="">
+                <div class="form-group col-xs-12">
+        
+                    <textarea id="id_message" placeholder="Your message"></textarea>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-btn">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        
         </div>
-    <div class="col-xs-12">
-    <div class="form-btn">
-      <button type="submit" class="btn">Submit</button>
-    </div>
-    </div>
-    </div>
-    
-    </div>
     </form>
     </div>
     </div>
@@ -115,3 +115,38 @@
     </section>
     
 {%endblock%}
+{% block scripts %}
+<script type="text/javascript">
+    $("#appointments-main-form").submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        let data = {
+            name: $('#id_name').val(),
+            email: $('#id_email').val(),
+            ph_no: $('#id_ph_no').val(),
+            gender: $('#id_gender').val(),
+            blood_group: $("#id_blood").val(),
+            age: $("#id_age").val(),
+            speciality: $("#select-specialist").val(),
+            city: $("#id_city").val(),
+            message: $("#id_message").val()
+        };
+        $.ajax({
+            url: '/api/onlineEnquiry/',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+        }).done((response)=>{
+            console.log(response);
+            alert("Your appoinment is booking successful. We are call you soon.");
+            $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
+        })
+        .fail((error)=>{
+            console.log(error)
+        })
+
+    })
+</script>
+
+{% endblock %}

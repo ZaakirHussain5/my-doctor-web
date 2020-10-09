@@ -5,7 +5,7 @@ from django.urls import path, include
 
 
 router = routers.DefaultRouter()
-router.register('reminderList', reminders_api, 'remindersList')
+router.register('reminders', reminders_api, 'remindersList')
 
 urlpatterns = [
     path('',include(router.urls)),
