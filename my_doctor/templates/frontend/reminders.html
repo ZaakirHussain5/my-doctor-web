@@ -465,7 +465,6 @@ var calendar = document.getElementById("calendar-table");
 var gridTable = document.getElementById("table-body");
 var currentDate = new Date();
 var selectedDate = currentDate;
-console.log(selectedDate);
 var selectedDayBlock = null;
 var globalEventObj = {};
 
@@ -581,6 +580,7 @@ nextButton.onclick = function changeMonthNext() {
    createCalendar(currentDate, "right");
 }
 
+
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -597,7 +597,6 @@ function formatDate(date) {
 
 
 function addEvent(title, desc) {
-  console.log("addEvent")
    if (!globalEventObj[selectedDate.toDateString()]) {
       globalEventObj[selectedDate.toDateString()] = {};
    }
@@ -648,7 +647,6 @@ function showEvents() {
     console.log(error);
    })
    sidebarEvents.innerHTML = "";
-   console.log('===========.....',objWithDate)
    if (objWithDate) {
       let eventsCount = 0;
       for (key in objWithDate) {
