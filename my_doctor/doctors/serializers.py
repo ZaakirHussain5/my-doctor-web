@@ -1,14 +1,22 @@
 from rest_framework import serializers
-from .models import doctors_info,DoctorTimings
+from .models import doctors_info,DoctorTimings, settlement_details, DoctorBankDetails
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.views.defaults import bad_request
-
+from accounts.serializers import UserAuthSerializer
 
 class doctors_infoSerializer(serializers.ModelSerializer):
     class Meta:
         model = doctors_info
         fields = '__all__'
+
+
+class doctors_listSerializer(serializers.ModelSerializer):
+    user = UserAuthSerializer()
+    class Meta:
+        model = doctors_info
+        fields = '__all__'
+
 
 class DoctorTimingsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -114,3 +122,15 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
           return user
         except IntegrityError:
           raise serializers.ValidationError("User already Exists")
+
+
+class settlement_detailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = settlement_details
+        fields = "__all__"
+
+
+class DoctorBankDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorBankDetails
+        fields = "__all__"

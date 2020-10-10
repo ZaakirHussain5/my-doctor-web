@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import doctors_info,DoctorTimings
+from .models import doctors_info,DoctorTimings, settlement_details
 # Register your models here.
 
 admin.site.register(doctors_info)
 admin.site.register(DoctorTimings)
+admin.site.register(settlement_details)

@@ -25,6 +25,7 @@
                             <th>Email</th>
                             <th>Phone No.</th>
                             <th>Specialist</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,89 +44,85 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <div class="row p-3">
-                      <div class="col-md-6">
-                          <div class="form-group">
-                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
-                          </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">DP2020001</p>
+                    <form id="profile_form">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                    <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                                    <label for="image1">
+                                        <span>Select Profile Photo</span>
+                                        <i class="fa fa-plus-circle"></i>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Praveen</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">AB-</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Male/42</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Father/Naveen</p>
-                            </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">+91 9899887787</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">+91 9899887715</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">praveen@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">English (Practice Default)</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">#1234 Unknown Street</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Unknown Locality</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Unknown City</p>
-                            </div>
-                        </div>
+                            <div class="col-md-9">
+                                <div class="row form-group">
+                                 <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label></div>
+                                 <div class="col-12 col-md-8">
+                                     <input type="text" id="id" name="Registration_Number" placeholder="Doctor ID" class="form-control"
+                                         readonly="readonly">
+                                 </div>
+                             </div>
+                             <div class="row form-group">
+                                <div class="col col-md-4">
+                                    <label for="full-name" class=" form-control-label float-right">Full Name</label>
+                                </div>
+                                 <div class="col-12 col-md-8">
+                                    <input type="text" id="full-name" name="full_name" placeholder="Full Name"
+                                         class="form-control">
+                                 </div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col col-md-4"><label for="email" class=" form-control-label float-right">Email Address</label>
+                                 </div>
+                                 <div class="col-12 col-md-8"><input type="email" id="email" name="email" placeholder="Email Address"
+                                         class="form-control"></div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">Phone Number</label>
+                                 </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text"  id="ph_no" name="phone_number" placeholder="Phone Number" class="form-control">
+                                    
+                                </div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col col-md-4"><label for="consultation_fee" class=" form-control-label float-right">Fees</label>
+                                 </div>
+                                 <div class="col-12 col-md-8">
+                                    <input type="text" id="consultation_fee" name="consultation_fee" placeholder="Phone Number" class="form-control">
+                                    
+                                </div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">Specialist Type</label>
+                                 </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="specialist_type" name="specialist_type" placeholder="Phone Number" class="form-control">
+                                </div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col col-md-4"><label for="specialist-type" class=" form-control-label float-right">About</label></div>
+                                 <div class="col-12 col-md-8">
+                                    <textarea name="about" id="specialist-type" rows="8" class="form-control"  placeholder="Enter About Details"></textarea>
+                                    <input type="hidden" id="username", placeholder="username" name="username">
+                                     </div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col-12 col-md-8 offset-md-4">
+                                     <button type="submit" class="btn btn-primary btn-sm">
+                                         <i class="fa fa-dot-circle-o"></i> Update Profile
+                                     </button>
+                                     <button type="reset" class="btn btn-danger btn-sm">
+                                         <i class="fa fa-ban"></i> Reset
+                                     </button>
+                                 </div>
+                             </div>  
+                         </div>
                         
-                      </div>
-                  </div>
-          
+                        </div>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
                     
@@ -166,6 +163,14 @@
                 },
                 {
                     data : 'specialist_type'
+                },
+                {
+                    data: 'id',
+                    render: function (data,type,row) {
+                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                                    <i class="fa fa-tasks"></i>
+                                </button>`
+                      }
                 }
 
             ],
@@ -182,37 +187,25 @@
         
 
 
-<!--        $('#patientDetails').on('show.bs.modal', function (event) {-->
-<!--        var myVal = $(event.relatedTarget).data('pat');-->
-<!--        console.log(myVal)-->
-
-<!--        let gender_age = myVal.gender + '/' + myVal.age;-->
-
-
-<!--        let rel_type_relation = myVal.rel_type + '/' + myVal.relation;-->
-<!--        if(myVal.rel_type == null && myVal.relation == null){-->
-<!--            rel_type_relation = '';-->
-<!--        }-->
-<!--        else if(myVal.rel_type != null && myVal.relation == null){-->
-<!--            rel_type_relation = myVal.rel_type-->
-<!--        }-->
-<!--        else if(myVal.rel_type == null && myVal.relation != null){-->
-<!--            rel_type_relation = myVal.relation-->
-<!--        }else{-->
-<!--            rel_type_relation = myVal.rel_type + '/' + myVal.relation-->
-<!--        }-->
-<!--        let ps = $(this).find('p');-->
-<!--        let valList = [myVal.pat_id, myVal.full_name, myVal.blood_group, gender_age, rel_type_relation, myVal.ph_no, myVal.s_ph_no, myVal.user.email, myVal.pref_lang, myVal.street_address, myVal.locality, myVal.city]-->
-<!--        for(var i=0; i < ps.length; i++){-->
-
-<!--            ps[i].innerHTML = valList[i]    -->
-<!--            -->
-<!--            ;-->
-<!--        }-->
-<!--        $(this).find('img').attr('src', myVal.profile_pic);-->
-<!--        $(this).find('a').attr('href', '/newAppointment?patient='+ myVal.id)-->
-<!--        -->
-<!--    })-->
+        $('#patientDetails').on('show.bs.modal', function (event) {
+        var myVal = $(event.relatedTarget).data('doct');
+        console.log(myVal)
+        
+        $(this).find('img').attr('src', myVal.profile_pic);
+        
+        let valList = ['', myVal.user.username, myVal.full_name, myVal.user.email, myVal.phone_number, myVal.consultation_fee, myVal.specialist_type]
+        console.log(valList)
+        let inputList = $(this).find('input');
+        for(var i=0; i <inputList.length; i++){
+            if(i==0){continue}
+            else{
+                console.log(inputList[i])
+                $(inputList[i]).val(valList[i])
+            }
+        }
+        $('#specialist-type').val(myVal.about);
+        $('#username').val(myVal.user.username)
+    })
 
     })
 

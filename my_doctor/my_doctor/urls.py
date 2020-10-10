@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/',include('patient_medical_records.urls')),
     path('api/',include('online_enquiry.urls')),
     path('api/',include('reminders.urls')),
+    path('api/', include('patient_subscription.urls')),
+    path('api/', include('bill_payments.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
 ]
 

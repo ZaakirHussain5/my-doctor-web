@@ -4,8 +4,7 @@ class subscription_plans(models.Model):
     plan_name = models.CharField(max_length=25, null=True)
     plan_price = models.IntegerField()
     validity = models.IntegerField()
-    description = models.CharField(max_length=1000,null=True)
-    icon  = models.FileField(max_length=355,null=True)
+    benifits_list = models.CharField(max_length=1000,null=True)
     created_at  = models.DateTimeField(auto_now_add=True)
     Last_modied = models.DateTimeField(auto_now_add=True)
 

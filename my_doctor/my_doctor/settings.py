@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'patient_medical_records',
     'website',
     'online_enquiry',
-    'reminders'
+    'reminders',
+    'bill_payments'
 ]
 
 MIDDLEWARE = [

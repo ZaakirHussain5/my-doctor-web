@@ -182,3 +182,19 @@ username= 'admin'
 ............................
 20. contact.html, speciality.html book appoinment apiss
 
+.............................
+21. Approve doctor registration request
+    template = doctorslist.html
+    button = 'register'
+    update api on doctors app
+
+22. subscriptionplan  modification
+    benifits_list will store array
+
+23. patient_subcription 
+    create model with fields=
+        user
+        start_date = datefield(auto_now_add)
+        end_date = datefield() ** add the velidity from plans list
+        plan = foreignKey of subscriptionPLans
+        is_active = booleanField

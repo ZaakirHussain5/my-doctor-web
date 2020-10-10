@@ -192,11 +192,7 @@
 
         $('#patientDetails').on('show.bs.modal', function (event) {
         var myVal = $(event.relatedTarget).data('pat');
-        console.log(myVal)
-
         let gender_age = myVal.gender + '/' + myVal.age;
-
-
         let rel_type_relation = myVal.rel_type + '/' + myVal.relation;
         if(myVal.rel_type == null && myVal.relation == null){
             rel_type_relation = '';

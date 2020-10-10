@@ -1,5 +1,5 @@
 from .serializers import *
-from .models import doctors_info,DoctorTimings
+from .models import doctors_info,DoctorTimings, settlement_details, DoctorBankDetails
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
@@ -126,4 +126,20 @@ class webdoctorViewset(viewsets.ModelViewSet):
         permissions = [
             permissions.AllowAny
         ]
-        serializer_class = doctors_infoSerializer
+        serializer_class = doctors_listSerializer
+
+
+class get_settlement_details(viewsets.ModelViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = settlement_detailsSerializer
+    queryset = settlement_details.objects.all()
+
+
+class get_doctor_bankDetails(viewsets.ModelViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = DoctorBankDetailsSerializer
+    queryset = DoctorBankDetails.objects.all()
