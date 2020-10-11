@@ -4,7 +4,7 @@
       <div class="col-sm-4">
           <div class="page-header float-left">
               <div class="page-title">
-                  <h1>Specialist Types</h1>
+                  <h1>Subscription Plans</h1>
               </div>
           </div>
       </div>
@@ -16,23 +16,27 @@
             <div class="card-body card-block">
                     <div class="row">
                         <input type="hidden" name="id" id="spl_id">
-                        <div class="col-md-4 offset-md-2">
-                                    <div class="wrap-custom-file" style="margin-left: 5rem;">
-                                        <input type="file" name="icon" id="image1" accept=".gif, .jpg, .png" />
-                                        <label for="image1">
-                                            <span>Select Image</span>
-                                            <i class="fa fa-plus-circle"></i>
-                                        </label>
-                                    </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="offset-md-2 col-md-4 pr-5 pl-5">
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Specialist Type</label>
-                                <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Specialist Type" class="form-control">
+                                <label for="hf-email" class=" form-control-label">Plan Name</label>
+                                <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Name" class="form-control">
                             </div>
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Description</label>
-                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="Enter Descrition"></textarea>
+                                <label for="hf-email" class=" form-control-label">Plan Price</label>
+                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
+                            </div>
+                            <div class="row form-group">
+                                <label for="hf-email" class=" form-control-label">Plan Validity</label>
+                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Validity" class="form-control">
+                                <small>Plan Validity in Days</small>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-4 pr-5 pl-5">
+                            <div class="row form-group">
+                                <label for="hf-email" class=" form-control-label">Benifits List</label>
+                                    <textarea name="description" id="description"  rows="5" class="form-control" placeholder="Enter Benifits List"></textarea>
+                                    <small>User comma(,) to seperate a benifit</small>
                             </div>
                         </div>
                     </div>
@@ -55,13 +59,14 @@
          <div class="card">
             <div class="card-body card-block">
                 <div class="table-responsive">
-                     <table class="table table-bordered table-hover" id="Specialists">
+                     <table class="table table-bordered table-hover" id="subs_plans">
                     <thead>
                         <tr>
                             <th>Slno</th>
-                            <th>Image</th>
-                            <th>Specialist Type</th>
-                            <th>is Active?</th>
+                            <th>Plan Name</th>
+                            <th>Plan Price</th>
+                            <th>Validity</th>
+                            <th>Description</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
