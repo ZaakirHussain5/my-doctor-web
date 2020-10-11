@@ -25,7 +25,7 @@
                             <th>Email</th>
                             <th>Phone No.</th>
                             <th>Specialist</th>
-                            <th></th>
+                            <th>Register</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,16 +46,14 @@
                 <div class="modal-body">
                     <form id="profile_form">
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="wrap-custom-file" style="margin-left: 5rem;">
+                            <div class="col-md-10">
+                                <div class="wrap-custom-file" style="margin-left: 200px;width: 50%;">
                                     <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
                                     <label for="image1">
                                         <span>Select Profile Photo</span>
                                         <i class="fa fa-plus-circle"></i>
                                     </label>
                                 </div>
-                            </div>
-                            <div class="col-md-9">
                                 <div class="row form-group">
                                  <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label></div>
                                  <div class="col-12 col-md-8">
@@ -113,8 +111,8 @@
                                      <button type="submit" class="btn btn-primary btn-sm">
                                          <i class="fa fa-dot-circle-o"></i> Update Profile
                                      </button>
-                                     <button type="reset" class="btn btn-danger btn-sm">
-                                         <i class="fa fa-ban"></i> Reset
+                                     <button type="button" data-dismiss="modal" class="btn btn-danger btn-sm">
+                                         <i class="fa fa-ban"></i> Cancel
                                      </button>
                                  </div>
                              </div>  
@@ -123,12 +121,6 @@
                         </div>
                     </form>
 
-                </div>
-                <div class="modal-footer">
-                    
-                    <button type="button" data-dismiss="modal" class="btn btn-danger">
-                      Close
-                  </button>
                 </div>
               </div>
               
@@ -167,8 +159,8 @@
                 {
                     data: 'id',
                     render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
-                                    <i class="fa fa-tasks"></i>
+                          return `<button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                                    <i class="fa fa-user-md"></i>Register
                                 </button>`
                       }
                 }

@@ -4,7 +4,7 @@
       <div class="col-sm-4">
           <div class="page-header float-left">
               <div class="page-title">
-                  <h1 id="title">Executive List</h1>
+                  <h1 id="title">Users List</h1>
               </div>
           </div>
       </div>
@@ -24,7 +24,7 @@
             <div class="card-body card-block">
                 <div class="form-group">
                     <button type="button" id="newExecutive" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> New Executive
+                        <i class="fa fa-plus"></i> New User
                     </button>
                 </div>
                 <table class="table" id="executive">
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="hf-email" class=" form-control-label">Executive Name</label>
+                                            <label for="hf-email" class=" form-control-label">User Name</label>
                                             <input type="text" id="full_name" name="full_name" placeholder="Select Doctor Name"
                                                 class="form-control">
                                         </div>
@@ -81,6 +81,11 @@
                                             <label for="hf-email" class=" form-control-label">Password</label>
                                             <input type="password" id="password" name="password" placeholder="Enter Password"
                                                 class="form-control">
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="is_super_user"
+                                                id="is_super_user" value="super_user">
+                                            <label class="form-check-label" for="is_super_user">is Super User?</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -122,12 +127,12 @@
   <script>
     jQuery(document).ready(function($){
         $('#newExecutive').click(function(){
-          $('#title').html('New Executive')
+          $('#title').html('New User')
           $('#myTab a[href="#form"]').tab('show')
         })
         
         $('#listExecutive').click(function(){
-          $('#title').html('New Executive')
+          $('#title').html('Users List')
           $('#myTab a[href="#list"]').tab('show')
         })
 

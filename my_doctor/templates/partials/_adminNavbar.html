@@ -12,22 +12,17 @@
                 <li>
                     <a href="{% url 'frontend:adminDashboard' %}" data-toggle="tooltip" data-placement="right" title="Dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                 </li>
-                <li>
-                    <a href="{% url 'frontend:specialists' %}" data-toggle="tooltip" data-placement="right" title="Specialist Types"> <i class="menu-icon fa fa-stethoscope"></i>Specialist Types </a>
-                </li>
-                <li>
-                    <a href="{% url 'frontend:Executives' %}" data-toggle="tooltip" data-placement="right" title="Executives"> <i class="menu-icon fa fa-headphones"></i>Executives </a>
-                </li>
 
 
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Patients</a>
                     <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-tasks"></i><a href="/NewPatient">Register New Patient</a></li>
                         <li><i class="fa fa-tasks"></i><a href="/patientsList">View Patients</a></li>
                         <li><i class="fa fa-tasks"></i><a href="/consultationsList">Consultations List</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">View Prescriptions</a></li>
-                        <li><i class=""></i><a href="/reminders">Reminders</a></li>
-                        <li><i class=""></i><a href="#">Complaints</a></li>
+                        <li><i class="fa fa-bell"></i><a href="/reminders">Reminders</a></li>
+                        <li><i class="fa fa-comments"></i><a href="#">Feedbacks</a></li>
                     </ul>
                 </li>
 
@@ -36,9 +31,9 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Registration Requests</a></li>
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Doctor List</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="#">Doctors Agreement</a></li>
+                        <li><i class="fa fa-file-text-o"></i><a href="">Doctors Agreement</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">Doctors Bank Details</a></li>
-                        <li><i class="fa fa-inr"></i><a href="#">Doctors Settlement Details</a></li>
+                        <li><i class="fa fa-inr"></i><a href="{% url 'frontend:viewDoctorPayments' %}">Doctors Settlement Details</a></li>
                     </ul>
                 </li>
                 
@@ -46,11 +41,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Administration</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:specialists' %}">Speciality Category</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Executives' %}">Add User / Executive</a></li>
+                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Executives' %}">Manage Users</a></li>
                         <li><i class="fa fa-envelope-o"></i><a href="#">Create E-mail ID</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="#">Consultations report</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="#">View reports</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="#">Packages</a></li>
+                        <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:consultations_list' %}">Consultations report</a></li>
+                        <li><i class="fa fa-file-text-o"></i><a href="#">MIS reports</a></li>
+                        <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:subscription_plans' %}">Packages</a></li>
                         <li><i class="fa fa-credit-card"></i><a href="#">Payments / Settlements</a></li>
                         <li><i class='fa fa-commenting'></i><a href="#">Bulk Messages</a></li>
                         <li><i class="fa fa-envelope-o"></i><a href="#">Send Bulk Email</a></li>

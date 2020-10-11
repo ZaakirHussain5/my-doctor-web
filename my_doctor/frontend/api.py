@@ -8,7 +8,7 @@ from django.db.models import Q
 import json
 
 @api_view(['GET'])
-def Enquires(request):
+def SearchAPI(request):
     requested_text = request.GET.get('search')
     matched_doctor = doctors_info.objects.filter(Q(Registration_Number__icontains = requested_text) | Q(phone_number__icontains=requested_text) | Q(full_name__icontains=requested_text))
     matched_patient = patient_info.objects.filter( Q(pat_id__icontains = requested_text) | Q(ph_no__icontains=requested_text) | Q(full_name__icontains=requested_text))

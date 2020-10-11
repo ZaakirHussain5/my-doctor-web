@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from . import views
-from .api import Enquires
+from .api import SearchAPI
 
 router = routers.DefaultRouter()
 
@@ -13,14 +13,15 @@ urlpatterns=[
     path('Doctors',views.Doctors,name='Doctors'),
     path('Executives',views.Executives,name='Executives'),
     path('enquiresList', views.EnquiresList,  name="enquiresList"),
-    path('customerCareDashboard',views.customerCareDashboard,name='customerCareDashboard'),
+    path('NewPatient',views.customerCareDashboard,name='customerCareDashboard'),
     path('patientsList',views.patientsList,name='patientsList'),
     path('newAppointment',views.newAppointment,name='newAppointment'),
     path('consultationsList', views.consultationsList, name="consultations_list"),
     path("WebDoctorList", views.webDoctorList, name="webDoctorList"),
     path('getAllCount', views.GetAllInfoCount, name="GetMyAllInfo"),
-    path('viewDoctorPayments', views.viewDoctorPayment, name="viewDoctorPayment"),
+    path('viewDoctorPayments', views.viewDoctorPayment, name="viewDoctorPayments"),
     path('reminders', views.reminders, name="reminders"),
-    path('searching', Enquires, name="searching")
+    path('subscription_plans', views.subscription_plans, name="subscription_plans"),
+    path('searching', SearchAPI, name="searching")
 
 ]

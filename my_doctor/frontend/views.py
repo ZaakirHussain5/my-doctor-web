@@ -71,3 +71,6 @@ def reminders(request):
 
 def EnquiresList(request):
     return render(request, 'frontend/enquiresList.html')
+
+def subscription_plans(request):
+    return render(request, 'frontend/subscription_plans.html')
