@@ -8,8 +8,8 @@
             </div>
         </div>
     </div>
-  </div>
-  <div class="content m-3">
+</div>
+<div class="content m-3">
     <div class="card pl-3 pr-3">
         <div class="card-body card-block">
             <div id="doctorProfileForm" action="" method="post" class="form-horizontal">
@@ -17,104 +17,126 @@
                     <div class="col-md-8">
                         <ul class="nav nav-tabs nav-fill nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="pills-home" aria-selected="true">Profile</a>
+                                <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#profile"
+                                    role="tab" aria-controls="pills-home" aria-selected="true">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#password" role="tab" aria-controls="pills-profile" aria-selected="false">Password</a>
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#password"
+                                    role="tab" aria-controls="pills-profile" aria-selected="false">Password</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#timings" role="tab" aria-controls="pills-contact" aria-selected="false">Timings</a>
+                                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#timings" role="tab"
+                                    aria-controls="pills-contact" aria-selected="false">Timings</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
 
                             <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="list">
                                 <form id="profile_form">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="wrap-custom-file" style="margin-left: 5rem;">
-                                            <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
-                                            <label for="image1">
-                                                <span>Select Profile Photo</span>
-                                                <i class="fa fa-plus-circle"></i>
-                                            </label>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                                <input type="file" name="profile_pic" id="image1"
+                                                    accept=".gif, .jpg, .png" />
+                                                <label for="image1">
+                                                    <span>Select Profile Photo</span>
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </label>
+                                            </div>
                                         </div>
+                                        <div class="col-md-9">
+                                            <div class="row form-group">
+                                                <div class="col col-md-4"><label for="id"
+                                                        class="form-control-label float-right">ID</label></div>
+                                                <div class="col-12 col-md-8">
+                                                    <input type="text" id="id" name="Registration_Number"
+                                                        placeholder="Doctor ID" class="form-control"
+                                                        readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-4"><label for="full-name"
+                                                        class=" form-control-label float-right">Full Name</label></div>
+                                                <div class="col-12 col-md-8"><input type="text" id="full-name"
+                                                        name="full_name" placeholder="Full Name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-4"><label for="email"
+                                                        class=" form-control-label float-right">Email Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-8"><input type="email" id="email" name="email"
+                                                        placeholder="Email Address" class="form-control"></div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-4"><label for="ph_no"
+                                                        class=" form-control-label float-right">Phone Number</label>
+                                                </div>
+                                                <div class="col-12 col-md-8">
+                                                    <input type="text" id="ph_no" name="phone_number"
+                                                        placeholder="Phone Number" class="form-control">
+                                                    <input type="hidden" id="username" , placeholder="username"
+                                                        name="username">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-4"><label for="consultation_fee"
+                                                        class=" form-control-label float-right">Fees</label>
+                                                </div>
+                                                <div class="col-12 col-md-8">
+                                                    <input type="text" id="consultation_fee" name="consultation_fee"
+                                                        placeholder="Phone Number" class="form-control">
+                                                    <input type="hidden" id="specialist_type" name="specialist_type"
+                                                        placeholder="Phone Number" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-4"><label for="specialist-type"
+                                                        class=" form-control-label float-right">About</label></div>
+                                                <div class="col-12 col-md-8"><textarea name="about" id="specialist-type"
+                                                        rows="8" class="form-control"
+                                                        placeholder="Enter About Details"></textarea></div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-12 col-md-8 offset-md-4">
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-dot-circle-o"></i> Update Profile
+                                                    </button>
+                                                    <button type="reset" class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-ban"></i> Reset
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="col-md-9">
-                                        <div class="row form-group">
-                                         <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label></div>
-                                         <div class="col-12 col-md-8">
-                                             <input type="text" id="id" name="Registration_Number" placeholder="Doctor ID" class="form-control"
-                                                 readonly="readonly">
-                                         </div>
-                                     </div>
-                                     <div class="row form-group">
-                                         <div class="col col-md-4"><label for="full-name" class=" form-control-label float-right">Full Name</label></div>
-                                         <div class="col-12 col-md-8"><input type="text" id="full-name" name="full_name" placeholder="Full Name"
-                                                 class="form-control"></div>
-                                     </div>
-                                     <div class="row form-group">
-                                         <div class="col col-md-4"><label for="email" class=" form-control-label float-right">Email Address</label>
-                                         </div>
-                                         <div class="col-12 col-md-8"><input type="email" id="email" name="email" placeholder="Email Address"
-                                                 class="form-control"></div>
-                                     </div>
-                                     <div class="row form-group">
-                                         <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">Phone Number</label>
-                                         </div>
-                                        <div class="col-12 col-md-8">
-                                            <input type="text"  id="ph_no" name="phone_number" placeholder="Phone Number" class="form-control">
-                                            <input type="hidden" id="username", placeholder="username" name="username">
-                                        </div>
-                                     </div>
-                                     <div class="row form-group">
-                                         <div class="col col-md-4"><label for="consultation_fee" class=" form-control-label float-right">Fees</label>
-                                         </div>
-                                         <div class="col-12 col-md-8">
-                                            <input type="text" id="consultation_fee" name="consultation_fee" placeholder="Phone Number" class="form-control">
-                                            <input type="hidden" id="specialist_type" name="specialist_type" placeholder="Phone Number" class="form-control">
-                                        </div>
-                                     </div>
-                                     <div class="row form-group">
-                                         <div class="col col-md-4"><label for="specialist-type" class=" form-control-label float-right">About</label></div>
-                                         <div class="col-12 col-md-8"><textarea name="about" id="specialist-type" rows="8" class="form-control"
-                                                 placeholder="Enter About Details"></textarea></div>
-                                     </div>
-                                     <div class="row form-group">
-                                         <div class="col-12 col-md-8 offset-md-4">
-                                             <button type="submit" class="btn btn-primary btn-sm">
-                                                 <i class="fa fa-dot-circle-o"></i> Update Profile
-                                             </button>
-                                             <button type="reset" class="btn btn-danger btn-sm">
-                                                 <i class="fa fa-ban"></i> Reset
-                                             </button>
-                                         </div>
-                                     </div>  
-                                     </div>
-                                    
-                                </div>
                                 </form>
                             </div>
 
 
-                                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
-                                    <form id="password_form">
+                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
+                                <form id="password_form">
                                     <div class="row form-group">
-                                        <div class="col col-md-4"><label for="old_password" class="form-control-label float-right">Old Password</label></div>
+                                        <div class="col col-md-4"><label for="old_password"
+                                                class="form-control-label float-right">Old Password</label></div>
                                         <div class="col-12 col-md-8">
-                                            <input type="password" id="old_password" name="old_password" placeholder="Old Passowrd" class="form-control"
-                                            >
+                                            <input type="password" id="old_password" name="old_password"
+                                                placeholder="Old Passowrd" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-4"><label for="new_password" class=" form-control-label float-right">New Password</label></div>
-                                        <div class="col-12 col-md-8"><input type="password" id="new_password" name="new_password" placeholder="New Password"
-                                                class="form-control"></div>
+                                        <div class="col col-md-4"><label for="new_password"
+                                                class=" form-control-label float-right">New Password</label></div>
+                                        <div class="col-12 col-md-8"><input type="password" id="new_password"
+                                                name="new_password" placeholder="New Password" class="form-control">
+                                        </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-4"><label for="confirm_new_password" class=" form-control-label float-right">Confirm Password</label>
+                                        <div class="col col-md-4"><label for="confirm_new_password"
+                                                class=" form-control-label float-right">Confirm Password</label>
                                         </div>
-                                        <div class="col-12 col-md-8"><input type="password" id="confirm_new_password" name="confirm_new_password" placeholder="Confirm Password"
+                                        <div class="col-12 col-md-8"><input type="password" id="confirm_new_password"
+                                                name="confirm_new_password" placeholder="Confirm Password"
                                                 class="form-control"></div>
                                     </div>
                                     <div class="row form-group">
@@ -127,85 +149,92 @@
                                             </button>
                                         </div>
                                     </div>
-                                    </form>
-                                </div>
+                                </form>
+                            </div>
 
 
                             <div class="tab-pane fade" id="timings" role="tabpanel" aria-labelledby="list">
                                 <form id="timingsForm">
-                                <div class="row">
-                                    <div class=" form-group col">
-                                        <input type="hidden" name="doctor" >
-                                        <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="mon" name="mon" class="switch-input"> <span
-                                            class="switch-label"></span> <span id="monday" class="switch-handle"></span> </label>MON
-                                </div>
-                                <div class=" form-group col">
-                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="tue" name="tue" data-id='${row.id}' class="switch-input "> <span
-                                            class="switch-label"></span> <span id="tueday" class="switch-handle"></span> </label>TUE
-                                </div>
-                                <div class=" form-group col">
-                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="wed" name="wed" data-id='${row.id}' class="switch-input"> <span
-                                            class="switch-label"></span> <span id="wedday" class="switch-handle"></span> </label>WED
-                                </div>
-                                <div class=" form-group col">
-                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="thu" name="thu" data-id='${row.id}' class="switch-input active"> <span
-                                            class="switch-label"></span> <span id="thuday" class="switch-handle"></span> </label>THU
-                                </div>
-                                <div class=" form-group col">
-                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="fri" name="fri" data-id='${row.id}' class="switch-input active"> <span
-                                            class="switch-label"></span> <span id="friday" class="switch-handle"></span> </label>FRI
-                                </div>
-                                <div class=" form-group col">
-                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="sat" name="sat" data-id='${row.id}' class="switch-input active"> <span
-                                            class="switch-label"></span> <span id="satday" class="switch-handle"></span> </label> SAT
-                                </div>
-                                    <div class=" form-group col">
-                                    <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                        <input
-                                            type="checkbox" id="sun" name="sun" data-id='${row.id}' class="switch-input "> <span
-                                            class="switch-label"></span> <span id="sunday" class="switch-handle"></span> </label> SUN
-                                </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class=" form-group">
-                                            <label for="from_time" class=" form-control-label">From</label>
-                                            <input type="time" id="from_time" name="from_time" class="form-control">
+                                    <div class="row">
+                                        <div class=" form-group col">
+                                            <input type="hidden" name="doctor">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="mon" name="mon" class="switch-input"> <span
+                                                    class="switch-label"></span> <span id="monday"
+                                                    class="switch-handle"></span> </label>MON
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="tue" name="tue" data-id='${row.id}'
+                                                    class="switch-input "> <span class="switch-label"></span> <span
+                                                    id="tueday" class="switch-handle"></span> </label>TUE
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="wed" name="wed" data-id='${row.id}'
+                                                    class="switch-input"> <span class="switch-label"></span> <span
+                                                    id="wedday" class="switch-handle"></span> </label>WED
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="thu" name="thu" data-id='${row.id}'
+                                                    class="switch-input active"> <span class="switch-label"></span>
+                                                <span id="thuday" class="switch-handle"></span> </label>THU
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="fri" name="fri" data-id='${row.id}'
+                                                    class="switch-input active"> <span class="switch-label"></span>
+                                                <span id="friday" class="switch-handle"></span> </label>FRI
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="sat" name="sat" data-id='${row.id}'
+                                                    class="switch-input active"> <span class="switch-label"></span>
+                                                <span id="satday" class="switch-handle"></span> </label> SAT
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="sun" name="sun" data-id='${row.id}'
+                                                    class="switch-input "> <span class="switch-label"></span> <span
+                                                    id="sunday" class="switch-handle"></span> </label> SUN
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class=" form-group">
-                                            <label for="to_time" class=" form-control-label">To</label>
-                                            <input type="time" id="to_time" name="to_time" class="form-control">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="from_time" class=" form-control-label">From</label>
+                                                <input type="time" id="from_time" name="from_time" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="to_time" class=" form-control-label">To</label>
+                                                <input type="time" id="to_time" name="to_time" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-md-12 ">
-                                        <center>
-                                            <button type="submit" class="btn btn-primary btn-sm ju">
-                                            <i class="fa fa-dot-circle-o"></i> Update Timings
-                                        </button>
-                                        </center>
-                                        
+                                    <div class="row form-group">
+                                        <div class="col-md-12 ">
+                                            <center>
+                                                <button type="submit" class="btn btn-primary btn-sm ju">
+                                                    <i class="fa fa-dot-circle-o"></i> Update Timings
+                                                </button>
+                                            </center>
+
+                                        </div>
                                     </div>
-                                </div>
                                 </form>
                             </div>
                         </div>
-                       
+
                     </div>
                     <div class="col-md-3">
                         <div class="card">
@@ -222,7 +251,8 @@
                                 <div class="clearfix">
                                     <i class="fa fa-laptop bg-info p-3 font-2xl mr-3 float-left text-light"></i>
                                     <div class="h5 text-secondary mb-0 mt-1">267</div>
-                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Appointments</div>
+                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Appointments
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +261,8 @@
                                 <div class="clearfix">
                                     <i class="fa fa-user-md bg-warning p-3 font-2xl mr-3 float-left text-light"></i>
                                     <div class="h5 text-secondary mb-0 mt-1">1,267</div>
-                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Consultations</div>
+                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Consultations
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +273,7 @@
         </div>
         <div class="card-footer">
             <div class="pull-right">
-                
+
             </div>
 
         </div>
@@ -253,42 +284,42 @@
 
 {% block scripts%}
 <script>
-let dataList = [];
-    function getDataa(){
+    let dataList = [];
+    function getDataa() {
         console.log('here')
         const form = document.getElementById('profile_form');
         jQuery.ajax({
-                url: '/api/getLoggedInDoctor',
+            url: '/api/getLoggedInDoctor',
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+            console.log('response response', response);
+            jQuery.ajax({
+                url: "/api/getEmail",
                 method: 'GET',
-                contentType: 'application/json',
+                contendType: 'application/json',
                 async: false,
+                method: 'GET',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },
-            }).done((response)=>{
-                console.log('response response', response);
-                jQuery.ajax({
-                    url: "/api/getEmail",
-                    method: 'GET',
-                    contendType: 'application/json',
-                    async: false,
-                    method: 'GET',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                    },
-                }).done((response)=>{
-                        formDeserialize(form, response);
-                    })
+            }).done((response) => {
                 formDeserialize(form, response);
-                
-            }).fail((error)=>{
-                console.log(error);
-            });
+            })
+            formDeserialize(form, response);
+
+        }).fail((error) => {
+            console.log(error);
+        });
     }
     getDataa()
 
-    
-function formDeserialize(form, data) {
+
+    function formDeserialize(form, data) {
         const entries = (new URLSearchParams(data)).entries();
         for (const [key, val] of entries) {
             const input = form.elements[key];
@@ -310,9 +341,9 @@ function formDeserialize(form, data) {
                             $labelText.text(labelDefault);
                         }
                     }
-                    
+
                 } else {
-    
+
                     switch (input.type) {
                         case 'checkbox':
                             input.checked = !!val;
@@ -322,140 +353,139 @@ function formDeserialize(form, data) {
                                 input.value = val;
                             else
                                 input.selectedIndex = 0;
-    
+
                             break;
                         default:
                             input.value = val;
                             break;
-    
+
                     }
-    
+
                 }
             }
-    
+
         }
     }
 
 
-//////////////// username change event ////////////////
-jQuery('#ph_no').change(function(){
-    jQuery('#username').val(jQuery(this).val())
-})
-jQuery('#username').val(jQuery('#ph_no').val())
+    //////////////// username change event ////////////////
+    jQuery('#ph_no').change(function () {
+        jQuery('#username').val(jQuery(this).val())
+    })
+    jQuery('#username').val(jQuery('#ph_no').val())
 
 
-//////// UPDATING PROFILE //////////
-jQuery("#profile_form").submit((e)=>{
+    //////// UPDATING PROFILE //////////
+    jQuery("#profile_form").submit((e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
         const data = new FormData(document.getElementById('profile_form'))
         console.log(data);
         jQuery.ajax({
-        url: '/api/DoctorUpdateProfile',
-        data: data,
-        method: 'POST',
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
+            url: '/api/DoctorUpdateProfile',
+            data: data,
+            method: 'POST',
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        })
+            .done((response) => {
+                console.log("postrequest response -", response);
+                jQuery.removeCookie('DoctorToken');
+                jQuery.cookie('DoctorToken', response.token, { expires: 1 })
+            })
+            .fail((error) => {
+                console.log(error);
+            })
     })
-    .done((response)=>{
-        console.log("postrequest response -", response);
-        jQuery.removeCookie('DoctorToken');
-        jQuery.cookie('DoctorToken', response.token, {expires: 1})
-    })
-    .fail((error)=>{
-        console.log(error);
-    })
-    }) 
 
 
-jQuery('#pills-profile-tab').click(()=>{
-    
-})
+    jQuery('#pills-profile-tab').click(() => {
 
-////////// PASSWORD CHANGE FEATURES //////////
-jQuery('#password_form').submit((e)=>{
+    })
+
+    ////////// PASSWORD CHANGE FEATURES //////////
+    jQuery('#password_form').submit((e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
         const data = new FormData(document.getElementById('password_form'))
-       jQuery.ajax({
+        jQuery.ajax({
             url: '/api/changePassword',
             method: 'POST',
             data: data,
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-           },
-        }).done((response)=>{
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
             console.log(response);
             //jQuery.removeCookie('DoctorToken');
             //window.location.href = '/login';
-        }).fail((error)=>{
-           console.log('errors are ', error)
-      })
+        }).fail((error) => {
+            console.log('errors are ', error)
+        })
 
 
     })
 
-///////////// Doctor Timings://///////////
-function getDoctorTimings(){
-    const form =document.getElementById('timingsForm');
-    jQuery.ajax({
-        url: '/api/DoctorTimings',
-        method: 'GET',
-        contendType: 'application/json',
-        async: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log(response);
-        console.log(form);
-        if(response.length!=0){
-            formDeserialize(form, response[0]);
-            for(var key in response[0]){
-                if(response[0][key] !== true){
-                console.log('')
-                let parent = jQuery("#" + key).parent()
-                    parent.removeClass('switch-success');
+    ///////////// Doctor Timings://///////////
+    function getDoctorTimings() {
+        const form = document.getElementById('timingsForm');
+        jQuery.ajax({
+            url: '/api/DoctorTimings',
+            method: 'GET',
+            contendType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        })
+            .done((response) => {
+                console.log(response);
+                console.log(form);
+                if (response.length != 0) {
+                    formDeserialize(form, response[0]);
+                    for (var key in response[0]) {
+                        if (response[0][key] !== true) {
+                            let parent = jQuery("#" + key).parent()
+                            parent.removeClass('switch-success');
+
+                        }
+
+                    }
 
                 }
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+    }
+    getDoctorTimings();
+    jQuery('#timingsForm').submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('timingsForm'))
+        jQuery.ajax({
+            url: '/api/DoctorTimings/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        })
+            .done((response) => {
+                console.log(response);
+            })
+            .fail((error) => {
+                console.log(error)
+            })
 
-            }
-            
-        }
     })
-    .fail((error)=>{
-        console.log(error)
-    })
-}
-getDoctorTimings();
-jQuery('#timingsForm').submit((e)=>{
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const data = new FormData(document.getElementById('timingsForm'))
-    jQuery.ajax({
-        url: '/api/DoctorTimings/',
-        method: 'POST',
-        data: data,
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    })
-    .done((response)=>{
-        console.log(response);
-    })
-    .fail((error)=>{
-        console.log(error)
-    })
-
-})
 
 </script>
 {% endblock %}

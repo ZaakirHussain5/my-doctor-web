@@ -1,203 +1,243 @@
-
 {% extends 'admin_layout.html' %}{% load static%} {% block content %}
 <style>
-    .btn-circle{
+    .btn-circle {
         border-radius: 50%;
     }
 </style>
-  <div class="breadcrumbs">
-      <div class="col-sm-4">
-          <div class="page-header float-left">
-              <div class="page-title">
-                  <h1>Doctor List</h1>
-              </div>
-          </div>
-      </div>
-    </div>
-    <div class="content m-3">
-        <div class="card pl-3 pr-3">
-            <div class="card-body card-block">
-                <table class="table" id="Patients">
-                    <thead>
-                        <tr>
-                            <th>Slno</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone No.</th>
-                            <th>Specialist</th>
-                            <th>Register</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Doctor List</h1>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="profile_form">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="wrap-custom-file" style="margin-left: 200px;width: 50%;">
-                                    <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
-                                    <label for="image1">
-                                        <span>Select Profile Photo</span>
-                                        <i class="fa fa-plus-circle"></i>
-                                    </label>
+</div>
+<div class="content m-3">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+            <table class="table" id="Patients">
+                <thead>
+                    <tr>
+                        <th>Slno</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone No.</th>
+                        <th>Specialist</th>
+                        <th>Register</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Doctor Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="profile_form">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="wrap-custom-file" style="margin-left: 200px;width: 50%;">
+                                <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                                <label for="image1">
+                                    <span>Select Profile Photo</span>
+                                    <i class="fa fa-plus-circle"></i>
+                                </label>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="id"
+                                        class="form-control-label float-right">ID</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="id" name="Registration_Number" placeholder="Doctor ID"
+                                        class="form-control" readonly="readonly">
                                 </div>
-                                <div class="row form-group">
-                                 <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label></div>
-                                 <div class="col-12 col-md-8">
-                                     <input type="text" id="id" name="Registration_Number" placeholder="Doctor ID" class="form-control"
-                                         readonly="readonly">
-                                 </div>
-                             </div>
-                             <div class="row form-group">
+                            </div>
+                            <div class="row form-group">
                                 <div class="col col-md-4">
                                     <label for="full-name" class=" form-control-label float-right">Full Name</label>
                                 </div>
-                                 <div class="col-12 col-md-8">
+                                <div class="col-12 col-md-8">
                                     <input type="text" id="full-name" name="full_name" placeholder="Full Name"
-                                         class="form-control">
-                                 </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col col-md-4"><label for="email" class=" form-control-label float-right">Email Address</label>
-                                 </div>
-                                 <div class="col-12 col-md-8"><input type="email" id="email" name="email" placeholder="Email Address"
-                                         class="form-control"></div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">Phone Number</label>
-                                 </div>
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="email"
+                                        class=" form-control-label float-right">Email Address</label>
+                                </div>
+                                <div class="col-12 col-md-8"><input type="email" id="email" name="email"
+                                        placeholder="Email Address" class="form-control"></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="ph_no"
+                                        class=" form-control-label float-right">Phone Number</label>
+                                </div>
                                 <div class="col-12 col-md-8">
-                                    <input type="text"  id="ph_no" name="phone_number" placeholder="Phone Number" class="form-control">
-                                    
-                                </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col col-md-4"><label for="consultation_fee" class=" form-control-label float-right">Fees</label>
-                                 </div>
-                                 <div class="col-12 col-md-8">
-                                    <input type="text" id="consultation_fee" name="consultation_fee" placeholder="Phone Number" class="form-control">
-                                    
-                                </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">Specialist Type</label>
-                                 </div>
-                                <div class="col-12 col-md-8">
-                                    <input type="text" id="specialist_type" name="specialist_type" placeholder="Phone Number" class="form-control">
-                                </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col col-md-4"><label for="specialist-type" class=" form-control-label float-right">About</label></div>
-                                 <div class="col-12 col-md-8">
-                                    <textarea name="about" id="specialist-type" rows="8" class="form-control"  placeholder="Enter About Details"></textarea>
-                                    <input type="hidden" id="username", placeholder="username" name="username">
-                                     </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-12 col-md-8 offset-md-4">
-                                     <button type="submit" class="btn btn-primary btn-sm">
-                                         <i class="fa fa-dot-circle-o"></i> Update Profile
-                                     </button>
-                                     <button type="button" data-dismiss="modal" class="btn btn-danger btn-sm">
-                                         <i class="fa fa-ban"></i> Cancel
-                                     </button>
-                                 </div>
-                             </div>  
-                         </div>
-                        
-                        </div>
-                    </form>
+                                    <input type="text" id="ph_no" name="phone_number" placeholder="Phone Number"
+                                        class="form-control">
 
-                </div>
-              </div>
-              
-          </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="consultation_fee"
+                                        class=" form-control-label float-right">Fees</label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="consultation_fee" name="consultation_fee"
+                                        placeholder="Phone Number" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="ph_no"
+                                        class=" form-control-label float-right">Specialist Type</label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="specialist_type" name="specialist_type"
+                                        placeholder="Phone Number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">MOU
+                                        File</label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="file" required id="mou_file" name="mou_file" placeholder="MOU File"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="specialist-type"
+                                        class=" form-control-label float-right">About</label></div>
+                                <div class="col-12 col-md-8">
+                                    <textarea name="about" id="specialist-type" rows="8" class="form-control"
+                                        placeholder="Enter About Details"></textarea>
+                                    <input type="hidden" id="username" , placeholder="username" name="username">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-12 col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> register doctor
+                                    </button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-ban"></i> Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
         </div>
-      </div>
-  
+
+    </div>
+</div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
-    jQuery(document).ready(function($){
-        
+    jQuery(document).ready(function ($) {
+
 
         var table = $('#Patients').DataTable({
-            ajax:{
-                url:'/api/webDorRegistrationList/',
-                dataSrc:"",
+            ajax: {
+                url: '/api/webDorRegistrationList/',
+                dataSrc: "",
             },
-            columns:[
+            columns: [
                 {
-                    data:'id'
+                    data: 'id'
                 },
                 {
-                    data:'full_name'
+                    data: 'full_name'
                 },
                 {
-                    data:'user.email'
+                    data: 'user.email'
                 },
                 {
-                    data : 'phone_number'
+                    data: 'phone_number'
                 },
                 {
-                    data : 'specialist_type'
+                    data: 'specialist_type'
                 },
                 {
                     data: 'id',
-                    render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
                                     <i class="fa fa-user-md"></i>Register
                                 </button>`
-                      }
+                    }
                 }
 
             ],
-              language: {
-                  lengthMenu: "_MENU_",
-                  search: "",
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
-              }
+            language: {
+                lengthMenu: "_MENU_",
+                search: "",
+            },
+            fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
+            }
         })
 
-        
+
 
 
         $('#patientDetails').on('show.bs.modal', function (event) {
-        var myVal = $(event.relatedTarget).data('doct');
-        console.log(myVal)
-        
-        $(this).find('img').attr('src', myVal.profile_pic);
-        
-        let valList = ['', myVal.user.username, myVal.full_name, myVal.user.email, myVal.phone_number, myVal.consultation_fee, myVal.specialist_type]
-        console.log(valList)
-        let inputList = $(this).find('input');
-        for(var i=0; i <inputList.length; i++){
-            if(i==0){continue}
-            else{
-                console.log(inputList[i])
-                $(inputList[i]).val(valList[i])
+            var myVal = $(event.relatedTarget).data('doct');
+            console.log(myVal)
+
+            $(this).find('img').attr('src', myVal.profile_pic);
+
+            let valList = ['', myVal.user.username, myVal.full_name, myVal.user.email, myVal.phone_number, myVal.consultation_fee, myVal.specialist_type]
+            console.log(valList)
+            let inputList = $(this).find('input');
+            for (var i = 0; i < inputList.length; i++) {
+                if (i == 0) { continue }
+                else {
+                    console.log(inputList[i])
+                    $(inputList[i]).val(valList[i])
+                }
             }
-        }
-        $('#specialist-type').val(myVal.about);
-        $('#username').val(myVal.user.username)
-    })
+            $('#specialist-type').val(myVal.about);
+            $('#username').val(myVal.user.username)
+        })
+
+        $('#profile_form').submit((e)=>{
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            let form = document.getElementById("profile_form");
+            let formData = new FormData(form);
+            $.ajax({
+                url: '/api/doctor_registrationByAdmin/',
+                method: "POST",
+                data: formData,
+                contentType: false,
+                processData: false
+            }).done((response)=>{
+                console.log(response)
+                table.ajax.reload();
+                $('#patientDetails').modal('hide')
+                toastr.success("Doctor Registered Successfully","Success",{positionClass:"toast-top-center"})
+            }).fail((error)=>{
+                console.log(error)
+            })
+        })
 
     })
 

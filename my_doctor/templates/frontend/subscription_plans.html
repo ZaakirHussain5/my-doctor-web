@@ -1,65 +1,69 @@
 {% extends 'admin_layout.html' %} {% block content %}
 
-  <div class="breadcrumbs">
-      <div class="col-sm-4">
-          <div class="page-header float-left">
-              <div class="page-title">
-                  <h1>Subscription Plans</h1>
-              </div>
-          </div>
-      </div>
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Subscription Plans</h1>
+            </div>
+        </div>
     </div>
-    <div class="content m-3">
-      <form id="spl_form">
-        <div class="card">  
-            
+</div>
+<div class="content m-3">
+    <form id="subscriptionForm">
+        <div class="card">
+
             <div class="card-body card-block">
-                    <div class="row">
-                        <input type="hidden" name="id" id="spl_id">
-                        <div class="offset-md-2 col-md-4 pr-5 pl-5">
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Plan Name</label>
-                                <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Name" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Plan Price</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Plan Validity</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Validity" class="form-control">
-                                <small>Plan Validity in Days</small>
-                            </div>
-                            
+                <div class="row">
+                    <input type="hidden" name="id" id="spl_id">
+                    <div class="offset-md-2 col-md-4 pr-5 pl-5">
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Plan Name</label>
+                            <input type="text" required="" id="plan_name" name="plan_name" placeholder="Enter Name"
+                                class="form-control">
                         </div>
-                        <div class="col-md-4 pr-5 pl-5">
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Benifits List</label>
-                                    <textarea name="description" id="description"  rows="5" class="form-control" placeholder="Enter Benifits List"></textarea>
-                                    <small>User comma(,) to seperate a benifit</small>
-                            </div>
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Plan Price</label>
+                            <input type="number" required="" id="plan_price" name="plan_price"
+                                placeholder="Enter Plan Price" class="form-control">
+                        </div>
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Plan Validity</label>
+                            <input type="number" required="" id="validity" name="validity"
+                                placeholder="Enter Plan Validity" class="form-control">
+                            <small>Plan Validity in Days</small>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 pr-5 pl-5">
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Benifits List</label>
+                            <textarea name="benifits_list" id="benifits_list" rows="5" class="form-control"
+                                placeholder="Enter Benifits List"></textarea>
+                            <small>Use comma(,) to seperate a benifit</small>
                         </div>
                     </div>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-sm" >
-                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Specialist Type</span> 
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Subscription Plan</span>
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">
                         <i class="fa fa-ban"></i> Reset
                     </button>
                 </div>
-                
+
             </div>
-        </div> 
+        </div>
     </form>
-    </div>
-    <div class="content m-3">
-         <div class="card">
-            <div class="card-body card-block">
-                <div class="table-responsive">
-                     <table class="table table-bordered table-hover" id="subs_plans">
+</div>
+<div class="content m-3">
+    <div class="card">
+        <div class="card-body card-block">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="subs_plans">
                     <thead>
                         <tr>
                             <th>Slno</th>
@@ -72,66 +76,63 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-                </div>
-               
             </div>
+
         </div>
-       
-        
     </div>
-  
-  {% endblock %} 
-  {% block scripts %}
-  <script>
-      jQuery(document).ready(function($){
-          var table = jQuery('#Specialists').DataTable({
-              ajax: {
-                  url: "/api/specialist_types",
-                  dataSrc: ""
-              },
-              responsive:true,
-              columns: [
-                  {
-                      data: "id"
-                  },
-                  {
-                      data: "icon",
-                      render: function (data) {
-                          return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                      }
-                  },
-                  {
-                      data: "special_type"
-                  },
-                  {
-                      data: 'is_active',
-                      render: function (data,type,row) {
-                          return `<label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2"><input type="checkbox" data-id='${row.id}' class="switch-input active" ${data==true ? "checked='true'" : ""} > <span class="switch-label"></span> <span class="switch-handle"></span></label>`
-                      }
-                  },
-                  {
-                      data: 'id',
-                      render: function (data,type,row) {
-                          return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+    jQuery(document).ready(function ($) {
+        
+            var table = jQuery('#subs_plans').DataTable({
+                ajax: {
+                    url: "/api/subscription_plans",
+                    dataSrc: ""
+                },
+                responsive: true,
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "plan_name"
+                    },
+                    {
+                        data: "plan_price"
+                    },
+                    {
+                        data: "validity"
+                    },
+                    {
+                        data: "benifits_list"
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
                                     <i class="fa fa-trash"></i>
                                 </button>`
-                      }
-                  },
-              ]
-          })
+                        }
+                    },
+                ]
+            })
+        
 
-          crudOperations({
-              url:'/api/specialist_types/',
-              put_url:'/api/specialist_types/',
-              table_id:'#Specialists',
-              id_selector:'#spl_id',
-              form_id:'#spl_form',
-              table:table,
-              entity:'Specialist Type'
-          })
-      })
-  </script>
-  {% endblock %}
+        crudOperations({
+            url:'/api/subscription_plans/',
+            put_url:'/api/subscription_plans/',
+            table_id:'#subs_plans',
+            id_selector:'#spl_id',
+            form_id:'#subscriptionForm',
+            table:table,
+            entity:'Specialist Type'
+        })
+    })
+</script>
+{% endblock %}

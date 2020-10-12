@@ -4,45 +4,44 @@
       <div class="col-sm-4">
           <div class="page-header float-left">
               <div class="page-title">
-                  <h1>Subscription Plans</h1>
+                  <h1>Doctor Bank Details</h1>
               </div>
           </div>
       </div>
     </div>
     <div class="content m-3">
-      <form id="spl_form">
-        <div class="card">  
-            
+      <form id="DOctorBankDetailsForm">
+        <div class="card">
             <div class="card-body card-block">
                     <div class="row">
                         <input type="hidden" name="id" id="spl_id">
                         <div class="offset-md-2 col-md-4 pr-5 pl-5">
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Select Doctor</label>
-                                <select name="doctor_id" id="">
+                                <label for="doctor_id" class=" form-control-label">Select Doctor</label>
+                                <select name="doctor_id" id="doctor_id" class="form-control">
                                     <option value="">Select Doctor</option>
                                 </select>
                             </div>
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Acc Holder Name</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
+                                <label for="account_holder_name" class=" form-control-label">Acc Holder Name</label>
+                                <input type="text" required id="account_holder_name" name="account_holder_name" placeholder="Enter Account Holder Name" class="form-control">
                             </div>
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Acc No.</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
+                                <label for="account_no" class=" form-control-label">Acc No.</label>
+                                <input type="text" required="" id="account_no" name="account_no" placeholder="Enter Account No." class="form-control">
                             </div>
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">IFSC Code</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Validity" class="form-control">
+                                <label for="ifsc_no" class=" form-control-label">IFSC Code</label>
+                                <input type="text" required="" id="ifsc_no" name="ifsc_no" placeholder="Enter IFSC Code" class="form-control">
                                
                             </div>
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Bank</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
+                                <label for="bank_name" class=" form-control-label">Bank</label>
+                                <input type="text" required="" id="bank_name" name="bank_name" placeholder="Enter Bank Name" class="form-control">
                             </div>
                             <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Branch</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Validity" class="form-control">
+                                <label for="branch_name" class=" form-control-label">Branch</label>
+                                <input type="text" required="" id="branch_name" name="branch_name" placeholder="Enter Branch Name" class="form-control">
                                
                             </div>
                             
@@ -67,7 +66,7 @@
          <div class="card">
             <div class="card-body card-block">
                 <div class="table-responsive">
-                     <table class="table table-bordered table-hover" id="subs_plans">
+                     <table class="table table-bordered table-hover" id="doctorBankDeails">
                     <thead>
                         <tr>
                             <th>Slno</th>
@@ -94,9 +93,9 @@
   {% block scripts %}
   <script>
       jQuery(document).ready(function($){
-          var table = jQuery('#Specialists').DataTable({
+          var table = jQuery('#doctorBankDeails').DataTable({
               ajax: {
-                  url: "/api/specialist_types",
+                  url: "/api/doctor_bank_details",
                   dataSrc: ""
               },
               responsive:true,
@@ -105,19 +104,22 @@
                       data: "id"
                   },
                   {
-                      data: "icon",
-                      render: function (data) {
-                          return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                      }
+                      data: "doctor_id"
                   },
                   {
-                      data: "special_type"
+                      data: "account_holder_name"
                   },
                   {
-                      data: 'is_active',
-                      render: function (data,type,row) {
-                          return `<label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2"><input type="checkbox" data-id='${row.id}' class="switch-input active" ${data==true ? "checked='true'" : ""} > <span class="switch-label"></span> <span class="switch-handle"></span></label>`
-                      }
+                      data: "account_no"
+                  },
+                  {
+                      data: "ifsc_no"
+                  },
+                  {
+                      data: "bank_name"
+                  },
+                  {
+                    data: "branch_name"
                   },
                   {
                       data: 'id',
@@ -132,15 +134,40 @@
                   },
               ]
           })
+        // select options are made with api
+        
+        function setOptions(){
+            $.ajax({
+                url: "/api/doctor_agreement_list",
+                method: 'GET',
+                contentType: "application/json"
+            }).done((response)=>{
+                console.log(response)
+                let options = ''
+                for(var i=0; i < response.length; i++){
+                    const option = `
+                        <option value="${response[i].id}">${response[i].user.username}</option>
+                    `;
+                    options += option
+                }
+                let lastOptions = $('#doctor_id').html();
+                lastOptions += options;
+                $('#doctor_id').html(lastOptions)
+            }).fail((error)=>{
+                console.log(error);
+            })
+        }
+        setOptions()
 
           crudOperations({
-              url:'/api/specialist_types/',
-              put_url:'/api/specialist_types/',
-              table_id:'#Specialists',
+              url:'/api/doctor_bank_details/',
+              put_url:'/api/doctor_bank_details/',
+              table_id:'#doctorBankDeails',
               id_selector:'#spl_id',
-              form_id:'#spl_form',
+              form_id:'#DOctorBankDetailsForm',
               table:table,
-              entity:'Specialist Type'
+              entity:'Bank Details',
+              tabs:false
           })
       })
   </script>

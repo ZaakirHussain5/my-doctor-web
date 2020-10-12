@@ -74,3 +74,13 @@ def EnquiresList(request):
 
 def subscription_plans(request):
     return render(request, 'frontend/subscription_plans.html')
+
+def doctorAgreement(request):
+    return render(request, 'frontend/doctorsAgreement.html')
+
+
+def doctorBankDetails(request):
+    return render(request, 'frontend/doctor_bank_details.html')
+
+def doctorTimings(request):
+    return render(request, 'frontend/doctorTimings.html')
