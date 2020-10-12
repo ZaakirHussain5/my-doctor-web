@@ -198,3 +198,31 @@ username= 'admin'
         end_date = datefield() ** add the velidity from plans list
         plan = foreignKey of subscriptionPLans
         is_active = booleanField
+
+...........
+
+24> 
+    template = frontend/doctorsAgreement.html (done)
+    list all the active doctors is_active is true
+    add a button view agreement(anchor tag)(open the mou file in new tab)
+
+25. plans page all crud oparetions (done)
+template = frontend/subscription_plans.html
+
+26. (done)
+    doctor_bankdetail page
+    template = frontend/doctor_bank_details.html
+    create views and urls frontend
+    urls ='/api/doctor_bank_details'
+    all crud oparetions-
+
+27.(done)
+create api for doctor registration from registration request
+add mou file and chenge the button text to register doctor
+
+28.
+add consultation fee field in doctors list (done)
+templete = frontend/Doctors.html
+
+29.
+add doctor timings module to the admin page 

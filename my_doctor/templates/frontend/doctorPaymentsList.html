@@ -19,6 +19,7 @@
                 <table class="table" id="Patients">
                     <thead>
                         <tr>
+                            <th>Sl No.</th>
                             <th>Doctor Name</th>
                             <th>Phone Number</th>
                             <th>Consultations Count</th>
@@ -152,6 +153,9 @@
                 dataSrc:"",
             },
             columns:[
+            {
+                data:"id"
+            },
                 {
                     data:'doctor.full_name'
                 },
@@ -181,9 +185,6 @@
                   return nRow;
               }
         })
-
-
-
 
 <!--        $('#patientDetails').on('show.bs.modal', function (event) {-->
 <!--        var myVal = $(event.relatedTarget).data('pat');-->

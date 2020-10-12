@@ -31,9 +31,10 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Registration Requests</a></li>
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Doctor List</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="">Doctors Agreement</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="#">Doctors Bank Details</a></li>
+                        <li><i class="fa fa-file-text-o"></i><a href="{%  url 'frontend:doctorAgreement' %}">Doctors Agreement</a></li>
+                        <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:doctorBankDetails' %}">Doctors Bank Details</a></li>
                         <li><i class="fa fa-inr"></i><a href="{% url 'frontend:viewDoctorPayments' %}">Doctors Settlement Details</a></li>
+                        <li><i class="fa fa-inr"></i><a href="{% url 'frontend:doctorTimings' %}">Doctors Timings</a></li>
                     </ul>
                 </li>
                 

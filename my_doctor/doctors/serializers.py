@@ -90,6 +90,7 @@ class UpdateProfile(serializers.Serializer):
             for key,value in validated_data.items():
                 setattr(doctor,key,value)
             doctor.is_active = True
+            doctor.web_registration=False
             user.save()
             doctor.save()
             return user

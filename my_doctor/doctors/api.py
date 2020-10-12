@@ -143,3 +143,55 @@ class get_doctor_bankDetails(viewsets.ModelViewSet):
     ]
     serializer_class = DoctorBankDetailsSerializer
     queryset = DoctorBankDetails.objects.all()
+
+
+class doctor_agreement_list(viewsets.ModelViewSet):
+    serializer_class = doctors_listSerializer
+    permissions = [
+        permissions.AllowAny
+    ]
+
+    queryset = doctors_info.objects.filter(is_active = True)
+
+
+class doctorRegistrationAdmin(generics.GenericAPIView):
+    serializer_class = UpdateProfile
+
+    permission_classes=[
+        permissions.AllowAny
+    ]
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        input_username = request.data['username']
+        user = User.objects.get(username=input_username)
+        user = serializer.save(loggedInuser=user.id)
+        print(user)
+        return Response({
+            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        })
+
+
+class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = DoctorTimingsSerializer
+
+    def get_queryset(self):
+        id = self.request.GET.get('id')
+
+        return DoctorTimings.objects.filter( doctor_id = id)
+
+    def perform_create(self, serializer):
+        try:
+            timing_id = self.request.data['id']
+            print("timing_id=====", timing_id)
+            if timing_id != '':
+                old_timing = DoctorTimings.objects.get(id=timing_id)
+                old_timing.delete()
+        except ObjectDoesNotExist:
+            pass
+        serializer.save()
