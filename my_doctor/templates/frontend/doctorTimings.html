@@ -1,0 +1,206 @@
+{% extends 'admin_layout.html' %}{% load static%} {% block content %}
+<div class="breadcrumbs">
+    <label for="selectDoctor">Select Doctor</label>
+    <select id="selectDoctor">
+        <option value="">Select Doctor</option>
+    </select>
+    <form id="timingsForm">
+        <div class="row">
+            <div class=" form-group col">
+                <input type="hidden" name="doctor" id="doctor">
+                <input type="hidden" name="id" id="timingsId">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="mon" name="mon" class="switch-input"> <span class="switch-label"></span>
+                    <span id="monday" class="switch-handle"></span> </label>MON
+            </div>
+            <div class=" form-group col">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="tue" name="tue" data-id='${row.id}' class="switch-input "> <span
+                        class="switch-label"></span> <span id="tueday" class="switch-handle"></span> </label>TUE
+            </div>
+            <div class=" form-group col">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="wed" name="wed" data-id='${row.id}' class="switch-input"> <span
+                        class="switch-label"></span> <span id="wedday" class="switch-handle"></span> </label>WED
+            </div>
+            <div class=" form-group col">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="thu" name="thu" data-id='${row.id}' class="switch-input active"> <span
+                        class="switch-label"></span> <span id="thuday" class="switch-handle"></span> </label>THU
+            </div>
+            <div class=" form-group col">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="fri" name="fri" data-id='${row.id}' class="switch-input active"> <span
+                        class="switch-label"></span> <span id="friday" class="switch-handle"></span> </label>FRI
+            </div>
+            <div class=" form-group col">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="sat" name="sat" data-id='${row.id}' class="switch-input active"> <span
+                        class="switch-label"></span> <span id="satday" class="switch-handle"></span> </label> SAT
+            </div>
+            <div class=" form-group col">
+                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
+                    <input type="checkbox" id="sun" name="sun" data-id='${row.id}' class="switch-input "> <span
+                        class="switch-label"></span> <span id="sunday" class="switch-handle"></span> </label> SUN
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class=" form-group">
+                    <label for="from_time" class=" form-control-label">From</label>
+                    <input type="time" id="from_time" name="from_time" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class=" form-group">
+                    <label for="to_time" class=" form-control-label">To</label>
+                    <input type="time" id="to_time" name="to_time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12 ">
+                <center>
+                    <button type="submit" class="btn btn-primary btn-sm ju">
+                        <i class="fa fa-dot-circle-o"></i> Update Timings
+                    </button>
+                </center>
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        function setOptions() {
+            $.ajax({
+                url: "/api/doctor_agreement_list",
+                method: 'GET',
+                contentType: "application/json"
+            }).done((response) => {
+                console.log(response)
+                let options = ''
+                for (var i = 0; i < response.length; i++) {
+                    const option = `
+                        <option value="${response[i].id}">${response[i].user.username}</option>
+                    `;
+                    options += option
+                }
+                let lastOptions = $('#selectDoctor').html();
+                lastOptions += options;
+                $('#selectDoctor').html(lastOptions)
+            }).fail((error) => {
+                console.log(error);
+            })
+        }
+        setOptions()
+
+
+        function formDeserialized(form, data) {
+            const entries = (new URLSearchParams(data)).entries();
+            for (const [key, val] of entries) {
+                const input = form.elements[key];
+                if (input != undefined) {
+                    if (input.type == 'file') {
+                        if (val) {
+
+                            var $file = jQuery('#' + input.id),
+                                $label = $file.next('label'),
+                                $labelText = $label.find('span'),
+                                labelDefault = $labelText.text();
+                            var filename = val.split('/').pop()
+                            if (filename) {
+                                $label
+                                    .addClass('file-ok')
+                                    .css('background-image', 'url(' + val + ')');
+                                $labelText.text('Click here to change pic');
+                            } else {
+                                $label.removeClass('file-ok');
+                                $labelText.text(labelDefault);
+                            }
+                        }
+
+                    } else {
+
+                        switch (input.type) {
+
+                            case 'checkbox':
+                                input.checked = !!val;
+                                break;
+                            case 'select-one':
+                                if (val)
+                                    input.value = val;
+                                else
+                                    input.selectedIndex = 0;
+
+                                break;
+                            default:
+                                input.value = val;
+                                break;
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+
+
+        $('#selectDoctor').change(function () {
+
+            $.ajax({
+                url: "/api/DoctorTimingsAdminAPI?id=" + $('#selectDoctor').val(),
+                method: 'GET',
+                contentType: "application/json"
+            }).done((response) => {
+                console.log(response)
+                if (response.length > 0) {
+                    formDeserialized(document.getElementById('timingsForm'), response[0]);
+                    for (var key in response[0]) {
+                        if (response[0][key] !== true) {
+                            let parent = jQuery("#" + key).parent()
+                            parent.removeClass('switch-success');
+
+                        }
+
+                    }
+                }else{
+                    $('#doctor').val($('#selectDoctor').val());
+                    
+                }
+            }).fail((error) => {
+                console.log(error)
+            })
+        })
+
+        jQuery('#timingsForm').submit((e) => {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            const data = new FormData(document.getElementById('timingsForm'))
+            jQuery.ajax({
+                url: '/api/DoctorTimingsAdminAPI/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done((response) => {
+                console.log(response);
+            }).fail((error) => {
+                console.log(error)
+            })
+
+        })
+
+    })
+
+
+</script>
+
+{% endblock %}

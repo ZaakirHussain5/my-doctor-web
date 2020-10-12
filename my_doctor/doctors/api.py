@@ -188,8 +188,10 @@ class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         try:
             timing_id = self.request.data['id']
+            print("timing_id=====", timing_id)
             if timing_id != '':
-                DoctorTimings.objects.get(id=timing_id).delete()
+                old_timing = DoctorTimings.objects.get(id=timing_id)
+                old_timing.delete()
         except ObjectDoesNotExist:
             pass
         serializer.save()

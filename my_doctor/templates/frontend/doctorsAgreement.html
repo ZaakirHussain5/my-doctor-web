@@ -1,0 +1,113 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+  <div class="breadcrumbs">
+      <div class="col-sm-4">
+          <div class="page-header float-left">
+              <div class="page-title">
+                  <h1 id="title">Doctors Agreement List</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+    <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+        </li>
+      </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="pills-home-tab">
+           <div class="content m-3">
+                <div class="card pl-3 pr-3">
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            
+                        </div>
+                        <table class="table" id="Doctors">
+                            <thead>
+                                <tr>
+                                    <th>slno</th>
+                                    <th>Image</th>
+                                    <th>Specialist Type</th>
+                                    <th>Name</th>
+                                    <th>Phone No.</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  
+  {% endblock %} 
+  {% block scripts %}
+  <script>
+    jQuery(document).ready(function($){
+        $('#newDoctor').click(function(){
+          $('#title').html('New Doctor')
+          $('#myTab a[href="#form"]').tab('show')
+        })
+        
+        $('#listDoctors').click(function(){
+          $('#title').html('Doctors List')
+          $('#myTab a[href="#list"]').tab('show')
+        })
+
+        $('#generate').click(function(){
+            $.getJSON('/api/GenerateDoctorID',{},function(data){
+                $('#username').val(data.doctorId)
+            })
+        })
+
+        var table = $('#Doctors').DataTable({
+            ajax:{
+                url:'/api/doctor_agreement_list',
+                dataSrc:""
+            },
+            responsive: true,
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data:'profile_pic',
+                    render:function(data){
+                        return `<img src="${data}" style="height:90px;width:120px" alt="">`
+                    }
+                },
+                {
+                    data:'specialist_type'
+                },
+                {
+                    data:'full_name'
+                },
+                {
+                    data : 'phone_number'
+                },
+                {
+                    data:'id',
+                    render: function (data,type,row) {
+                          return `
+                                <a href="#" target=_blank><button  type="button"  class="btn  btn-success btn-sm delete">
+                                    <i class="fa fa-file-text-o"></i> View mou
+                                </button></a>`
+                      }
+                }
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+    })
+</script>
+  {% endblock %}
