@@ -59,7 +59,7 @@ class DoctorRegistration(serializers.Serializer):
           specialist_type=validated_data['specialist_type'],
           profile_pic=validated_data['profile_pic'],
           full_name=validated_data['full_name'],
-          mou_file=validated_data['mou_file'])
+          mou_file=validated_data['mou_file'],is_active=True)
           details.save()
           return user
         except IntegrityError:

@@ -169,8 +169,7 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
         user = serializer.save(loggedInuser=user.id)
         print(user)
         return Response({
-            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
+            "Doctor": UserAuthSerializer(user, context=self.get_serializer_context()).data,
         })
 
 
