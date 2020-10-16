@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="page-header text-center">
             <div class="page-title">
-                <h2>Subscription Plans</h2>
+                <h2>Doctor Bill Payments</h2>
             </div>
         </div>
     </div>
@@ -18,29 +18,41 @@
                     <input type="hidden" name="id" id="spl_id">
                     <div class="offset-md-2 col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Plan Name</label>
-                            <input type="text" required="" id="plan_name" name="plan_name" placeholder="Enter Name"
+                            <label for="hf-email" class=" form-control-label">Bill Type</label>
+                            <input type="text" required="true" id="bill_type" name="bill_type" placeholder="Enter bill type"
                                 class="form-control">
                         </div>
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Plan Price</label>
-                            <input type="number" required="" id="plan_price" name="plan_price"
-                                placeholder="Enter Plan Price" class="form-control">
+                            <label for="hf-email" class=" form-control-label">Paid Date</label>
+                            <input type="date" required="true" id="paid_date" name="paid_date"
+                                placeholder="Enter paid date" class="form-control">
                         </div>
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Plan Validity</label>
-                            <input type="number" required="" id="validity" name="validity"
-                                placeholder="Enter Plan Validity" class="form-control">
-                            <small>Plan Validity in Days</small>
+                            <label for="hf-email" class=" form-control-label">Bill Amount</label>
+                            <input type="number" required="true" id="bill_amount" name="bill_amount"
+                                placeholder="Enter bill amount" class="form-control">
+                            
+                        </div>
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Paid By</label>
+                            <input type="text" required="true" id="paid_by" name="paid_by"
+                                placeholder="Write paid mathod" class="form-control">
+                            
                         </div>
 
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Bill Date</label>
+                            <input type="date" required="true" id="bill_date" name="bill_date"
+                                placeholder="Enter bill date" class="form-control">
+                            
+                        </div>
                     </div>
                     <div class="col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Benifits List</label>
-                            <textarea name="benifits_list" id="benifits_list" rows="5" class="form-control"
-                                placeholder="Enter Benifits List"></textarea>
-                            <small>Use comma(,) to seperate a benifit</small>
+                            <label for="hf-email" class=" form-control-label">Description</label>
+                            <textarea name="description" id="description" rows="16" class="form-control"
+                                placeholder="Describe about the bill payments"></textarea>
+                            
                         </div>
                     </div>
                 </div>
@@ -48,7 +60,7 @@
             <div class="card-footer">
                 <div class="pull-right">
                     <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Subscription Plan</span>
+                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add payment details</span>
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">
                         <i class="fa fa-ban"></i> Reset
@@ -66,11 +78,14 @@
                 <table class="table table-bordered table-hover" id="subs_plans">
                     <thead>
                         <tr>
-                            <th>Slno</th>
-                            <th>Plan Name</th>
-                            <th>Plan Price</th>
-                            <th>Validity</th>
+                            <th>Sl No</th>
+                            <th>Bill Type</th>
+                            <th>Paid Date</th>
+                            <th>Bill Amount</th>
+                            <th>Paid By </th>
                             <th>Description</th>
+                            <th>Bill Date</th>
+                            <th>Created At</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -89,7 +104,7 @@
         
             var table = jQuery('#subs_plans').DataTable({
                 ajax: {
-                    url: "/api/subscription_plans",
+                    url: "/api/CheckBillPayments",
                     dataSrc: ""
                 },
                 responsive: true,
@@ -98,16 +113,25 @@
                         data: "id"
                     },
                     {
-                        data: "plan_name"
+                        data: "bill_type"
                     },
                     {
-                        data: "plan_price"
+                        data: "paid_date"
                     },
                     {
-                        data: "validity"
+                        data: "bill_amount"
                     },
                     {
-                        data: "benifits_list"
+                        data: "paid_by"
+                    },
+                    {
+                        data: "description"
+                    },
+                    {
+                        data: "bill_date"
+                    },
+                    {
+                        data: "created_at"
                     },
                     {
                         data: 'id',
@@ -125,16 +149,16 @@
         
 
         crudOperations({
-            url:'/api/subscription_plans/',
-            put_url:'/api/subscription_plans/',
+            url:'/api/CheckBillPayments/',
+            put_url:'/api/CheckBillPayments/',
             table_id:'#subs_plans',
             id_selector:'#spl_id',
             form_id:'#subscriptionForm',
             table:table,
-            entity:'Specialist Type'
+            entity:'Bill payments'
         })
 
-         DoHeighLight('Administration', 'subscription_plans')
+         DoHeighLight('Administration', 'Settlements')
         
     })
 </script>

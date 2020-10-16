@@ -38,16 +38,16 @@
                     </ul>
                 </li>
                 
-                <li class="menu-item-has-children dropdown">
+                <li id="Administration" class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Administration</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:specialists' %}">Speciality Category</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Executives' %}">Manage Users</a></li>
+                        <li id="specialists"><i class="fa fa-tasks"></i><a href="{% url 'frontend:specialists' %}">Speciality Category</a></li>
+                        <li id="Executives"><i class="fa fa-tasks"></i><a href="{% url 'frontend:Executives' %}">Manage Users</a></li>
                         <!-- <li><i class="fa fa-envelope-o"></i><a href="#">Create E-mail ID</a></li> -->
-                        <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:consultations_list' %}">Consultations report</a></li>
+                        <li id="consultations_list"><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:consultations_list' %}">Consultations report</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">MIS reports</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:subscription_plans' %}">Packages</a></li>
-                        <li><i class="fa fa-credit-card"></i><a href="#">Payments / Settlements</a></li>
+                        <li id="subscription_plans"><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:subscription_plans' %}">Packages</a></li>
+                        <li id="Settlements"><i class="fa fa-credit-card"></i><a href="{% url 'frontend:doctorBillPayments' %}">Payments / Settlements</a></li>
                         <!-- <li><i class='fa fa-commenting'></i><a href="#">Bulk Messages</a></li> -->
                         <!-- <li><i class="fa fa-envelope-o"></i><a href="#">Send Bulk Email</a></li> -->
                         <!-- <li><i class="fa fa-video-camera"></i><a href="#">Recorded Calls / Video</a></li> -->

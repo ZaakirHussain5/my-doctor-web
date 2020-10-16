@@ -84,3 +84,7 @@ def doctorBankDetails(request):
 
 def doctorTimings(request):
     return render(request, 'frontend/doctorTimings.html')
+
+
+def doctorBillPayments(request):
+    return render(request, 'frontend/billPayments.html')

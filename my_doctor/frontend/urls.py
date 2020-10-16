@@ -6,6 +6,7 @@ from .api import SearchAPI
 router = routers.DefaultRouter()
 
 app_name = 'frontend'
+
 urlpatterns=[
     path('app-login',views.login,name='login'), #<str:type>
     path('adminDashboard',views.dashboard,name='adminDashboard'),
@@ -25,6 +26,7 @@ urlpatterns=[
     path('searching', SearchAPI, name="searching"),
     path('doctorAgreement', views.doctorAgreement, name="doctorAgreement"),
     path('doctorBankDetails', views.doctorBankDetails, name="doctorBankDetails"),
-    path('doctorTimings', views.doctorTimings, name="doctorTimings")
+    path('doctorTimings', views.doctorTimings, name="doctorTimings"),
+    path('doctorBillPayments', views.doctorBillPayments, name="doctorBillPayments"),
 
 ]

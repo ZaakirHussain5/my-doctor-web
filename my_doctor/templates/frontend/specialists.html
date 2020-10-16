@@ -1,10 +1,10 @@
 {% extends 'admin_layout.html' %} {% block content %}
 
   <div class="breadcrumbs">
-      <div class="col-sm-4">
-          <div class="page-header float-left">
+      <div class="col-12">
+          <div class="page-header text-center">
               <div class="page-title">
-                  <h1>Specialist Types</h1>
+                  <h2>Specialist Types</h2>
               </div>
           </div>
       </div>
@@ -127,6 +127,8 @@
               table:table,
               entity:'Specialist Type'
           })
+
+          DoHeighLight('Administration', 'specialists')
       })
   </script>
   {% endblock %}
