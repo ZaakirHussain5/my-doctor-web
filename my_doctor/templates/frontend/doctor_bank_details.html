@@ -15,35 +15,45 @@
             <div class="card-body card-block">
                     <div class="row">
                         <input type="hidden" name="id" id="spl_id">
-                        <div class="offset-md-2 col-md-4 pr-5 pl-5">
-                            <div class="row form-group">
-                                <label for="doctor_id" class=" form-control-label">Select Doctor</label>
-                                <select name="doctor_id" id="doctor_id" class="form-control">
-                                    <option value="">Select Doctor</option>
-                                </select>
+                        <div class="col-md-12 pr-5 pl-5">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="doctor_id" class=" form-control-label">Select Doctor</label>
+                                    <select name="doctor_id" id="doctor_id" class="form-control">
+                                        <option value="">Select Doctor</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="row form-group">
-                                <label for="account_holder_name" class=" form-control-label">Acc Holder Name</label>
-                                <input type="text" required id="account_holder_name" name="account_holder_name" placeholder="Enter Account Holder Name" class="form-control">
+                            <div class="row">
+                                <div class="col form-group">
+                                    <label for="account_holder_name" class=" form-control-label">Acc Holder Name</label>
+                                    <input type="text" required id="account_holder_name" name="account_holder_name"
+                                        placeholder="Enter Account Holder Name" class="form-control">
+                                </div>
+                                <div class="col form-group">
+                                    <label for="account_no" class=" form-control-label">Acc No.</label>
+                                    <input type="text" required="" id="account_no" name="account_no" placeholder="Enter Account No."
+                                        class="form-control">
+                                </div>
+                                <div class="col form-group">
+                                    <label for="ifsc_no" class=" form-control-label">IFSC Code</label>
+                                    <input type="text" required="" id="ifsc_no" name="ifsc_no" placeholder="Enter IFSC Code" class="form-control">
+                            
+                                </div>
+                                <div class="col form-group">
+                                    <label for="bank_name" class=" form-control-label">Bank</label>
+                                    <input type="text" required="" id="bank_name" name="bank_name" placeholder="Enter Bank Name"
+                                        class="form-control">
+                                </div>
+                                <div class="col form-group">
+                                    <label for="branch_name" class=" form-control-label">Branch</label>
+                                    <input type="text" required="" id="branch_name" name="branch_name" placeholder="Enter Branch Name"
+                                        class="form-control">
+                            
+                                </div>
                             </div>
-                            <div class="row form-group">
-                                <label for="account_no" class=" form-control-label">Acc No.</label>
-                                <input type="text" required="" id="account_no" name="account_no" placeholder="Enter Account No." class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="ifsc_no" class=" form-control-label">IFSC Code</label>
-                                <input type="text" required="" id="ifsc_no" name="ifsc_no" placeholder="Enter IFSC Code" class="form-control">
-                               
-                            </div>
-                            <div class="row form-group">
-                                <label for="bank_name" class=" form-control-label">Bank</label>
-                                <input type="text" required="" id="bank_name" name="bank_name" placeholder="Enter Bank Name" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="branch_name" class=" form-control-label">Branch</label>
-                                <input type="text" required="" id="branch_name" name="branch_name" placeholder="Enter Branch Name" class="form-control">
-                               
-                            </div>
+                           
+                           
                             
                         </div>
                     </div>
@@ -169,6 +179,10 @@
               entity:'Bank Details',
               tabs:false
           })
+          
+
+          DoHeighLight('DoctorDropDown', 'doctorBankDetails')
+
       })
   </script>
   {% endblock %}

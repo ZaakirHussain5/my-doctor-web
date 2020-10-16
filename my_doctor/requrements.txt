@@ -248,3 +248,8 @@ add doctor timings module to the admin page
         **email notification should come after doctor registration
         ** get otp verification should be implemented in doctors registration
     ** login with otp for patient login
+
+
+bill payments api
+template = Billpaymnts.html
+refer packages template

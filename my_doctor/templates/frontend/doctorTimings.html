@@ -1,74 +1,105 @@
 {% extends 'admin_layout.html' %}{% load static%} {% block content %}
 <div class="breadcrumbs">
-    <label for="selectDoctor">Select Doctor</label>
-    <select id="selectDoctor">
-        <option value="">Select Doctor</option>
-    </select>
-    <form id="timingsForm">
-        <div class="row">
-            <div class=" form-group col">
-                <input type="hidden" name="doctor" id="doctor">
-                <input type="hidden" name="id" id="timingsId">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="mon" name="mon" class="switch-input"> <span class="switch-label"></span>
-                    <span id="monday" class="switch-handle"></span> </label>MON
-            </div>
-            <div class=" form-group col">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="tue" name="tue" data-id='${row.id}' class="switch-input "> <span
-                        class="switch-label"></span> <span id="tueday" class="switch-handle"></span> </label>TUE
-            </div>
-            <div class=" form-group col">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="wed" name="wed" data-id='${row.id}' class="switch-input"> <span
-                        class="switch-label"></span> <span id="wedday" class="switch-handle"></span> </label>WED
-            </div>
-            <div class=" form-group col">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="thu" name="thu" data-id='${row.id}' class="switch-input active"> <span
-                        class="switch-label"></span> <span id="thuday" class="switch-handle"></span> </label>THU
-            </div>
-            <div class=" form-group col">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="fri" name="fri" data-id='${row.id}' class="switch-input active"> <span
-                        class="switch-label"></span> <span id="friday" class="switch-handle"></span> </label>FRI
-            </div>
-            <div class=" form-group col">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="sat" name="sat" data-id='${row.id}' class="switch-input active"> <span
-                        class="switch-label"></span> <span id="satday" class="switch-handle"></span> </label> SAT
-            </div>
-            <div class=" form-group col">
-                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                    <input type="checkbox" id="sun" name="sun" data-id='${row.id}' class="switch-input "> <span
-                        class="switch-label"></span> <span id="sunday" class="switch-handle"></span> </label> SUN
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Doctor Timings</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class=" form-group">
-                    <label for="from_time" class=" form-control-label">From</label>
-                    <input type="time" id="from_time" name="from_time" class="form-control">
+    </div>
+  </div>
+<div class="content m-3">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+            <form id="timingsForm">
+                <div class="row mb-5">
+                    <div class="form-group col-md-4">
+                    <label for="selectDoctor">Select Doctor</label>
+                    <select id="selectDoctor" class="form-control">
+                        <option value="">Select Doctor</option>
+                    </select>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class=" form-group">
-                    <label for="to_time" class=" form-control-label">To</label>
-                    <input type="time" id="to_time" name="to_time" class="form-control">
                 </div>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-12 ">
-                <center>
-                    <button type="submit" class="btn btn-primary btn-sm ju">
-                        <i class="fa fa-dot-circle-o"></i> Update Timings
-                    </button>
-                </center>
+                
 
-            </div>
+                <div class="row">
+                    <div class=" form-group col">
+                        <input type="hidden" name="doctor" id="doctor">
+                        <input type="hidden" name="id" id="timingsId">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="mon" name="mon" class="switch-input"> <span
+                                class="switch-label"></span>
+                            <span id="monday" class="switch-handle"></span> </label>MON
+                    </div>
+                    <div class=" form-group col">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="tue" name="tue" data-id='${row.id}' class="switch-input "> <span
+                                class="switch-label"></span> <span id="tueday" class="switch-handle"></span> </label>TUE
+                    </div>
+                    <div class=" form-group col">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="wed" name="wed" data-id='${row.id}' class="switch-input"> <span
+                                class="switch-label"></span> <span id="wedday" class="switch-handle"></span> </label>WED
+                    </div>
+                    <div class=" form-group col">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="thu" name="thu" data-id='${row.id}' class="switch-input active">
+                            <span class="switch-label"></span> <span id="thuday" class="switch-handle"></span>
+                        </label>THU
+                    </div>
+                    <div class=" form-group col">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="fri" name="fri" data-id='${row.id}' class="switch-input active">
+                            <span class="switch-label"></span> <span id="friday" class="switch-handle"></span>
+                        </label>FRI
+                    </div>
+                    <div class=" form-group col">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="sat" name="sat" data-id='${row.id}' class="switch-input active">
+                            <span class="switch-label"></span> <span id="satday" class="switch-handle"></span> </label>
+                        SAT
+                    </div>
+                    <div class=" form-group col">
+                        <label style="vertical-align: middle"
+                            class="switch switch-default switch-pill switch-success mr-2">
+                            <input type="checkbox" id="sun" name="sun" data-id='${row.id}' class="switch-input "> <span
+                                class="switch-label"></span> <span id="sunday" class="switch-handle"></span> </label>
+                        SUN
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class=" form-group">
+                            <label for="from_time" class=" form-control-label">From</label>
+                            <input type="time" id="from_time" name="from_time" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class=" form-group">
+                            <label for="to_time" class=" form-control-label">To</label>
+                            <input type="time" id="to_time" name="to_time" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12 ">
+                        <center>
+                            <button type="submit" class="btn btn-primary btn-sm ju">
+                                <i class="fa fa-dot-circle-o"></i> Update Timings
+                            </button>
+                        </center>
+
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
 
@@ -198,6 +229,8 @@
 
         })
 
+         DoHeighLight('DoctorDropDown', 'doctorTimings')
+         
     })
 
 
