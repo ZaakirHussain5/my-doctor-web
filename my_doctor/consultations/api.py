@@ -13,15 +13,15 @@ class consultationsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return consultations.objects.all()
 
-    # def perform_create(self, serializer):
-    #     print(self.request.data)
-    #     doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
-    #     cons_fee = self.request.data['consultation_amt']
-    #     share_type = doctor.commission_type
-    #     share_val = doctor.commission_val
-    #     if share_type == 'Pencent':
-    #         share_val = cons_fee * (share_val/100)
-    #     serializer.save(patient=self.request.user,comp_share=share_val)
+    def perform_create(self, serializer):
+        print(self.request.data)
+        doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
+        cons_fee = self.request.data['consultation_amt']
+        share_type = doctor.commission_type
+        share_val = doctor.commission_val
+        if share_type == 'Pencent':
+            share_val = cons_fee * (share_val/100)
+        serializer.save(patient=self.request.user, comp_share=share_val)
 
 class getAllConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     permissions = [
@@ -30,6 +30,10 @@ class getAllConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = getAllConsultationsSerializer
 
     def get_queryset(self):
+        day = self.request.query_params.get('today', None)
+        if day:
+            return consultations.objects.filter(consultation_date_time=day)
+
         return consultations.objects.all()
 
 class getPatientConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):

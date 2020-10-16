@@ -9,32 +9,32 @@
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
+                <li id='dashboard'>
                     <a href="{% url 'frontend:adminDashboard' %}" data-toggle="tooltip" data-placement="right" title="Dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                 </li>
 
 
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Patients</a>
+                <li id="PatientsDropDown" class="menu-item-has-children dropdown">
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Patients</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-tasks"></i><a href="/NewPatient">Register New Patient</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="/patientsList">View Patients</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="/consultationsList">Consultations List</a></li>
+                        <li id="NewPatient"><i class="fa fa-tasks"></i><a href="/NewPatient">Register New Patient</a></li>
+                        <li id="viewPatients"><i class="fa fa-tasks"></i><a href="/patientsList">View Patients</a></li>
+                        <li id="ConsultationsList"><i class="fa fa-tasks"></i><a href="/consultationsList">Consultations List</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">View Prescriptions</a></li>
-                        <li><i class="fa fa-bell"></i><a href="/reminders">Reminders</a></li>
+                        <!-- <li><i class="fa fa-bell"></i><a href="/reminders">Reminders</a></li> -->
                         <li><i class="fa fa-comments"></i><a href="#">Feedbacks</a></li>
                     </ul>
                 </li>
 
-                <li class="menu-item-has-children dropdown">
+                <li id="DoctorDropDown" class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-md"></i>Doctors</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Registration Requests</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Doctor List</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="{%  url 'frontend:doctorAgreement' %}">Doctors Agreement</a></li>
-                        <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:doctorBankDetails' %}">Doctors Bank Details</a></li>
-                        <li><i class="fa fa-inr"></i><a href="{% url 'frontend:viewDoctorPayments' %}">Doctors Settlement Details</a></li>
-                        <li><i class="fa fa-inr"></i><a href="{% url 'frontend:doctorTimings' %}">Doctors Timings</a></li>
+                        <li id="webDoctorList"><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Registration Requests</a></li>
+                        <li id="DoctorList"><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Doctor List</a></li>
+                        <li id="doctorAgreement"><i class="fa fa-file-text-o"></i><a href="{%  url 'frontend:doctorAgreement' %}">Doctors Agreement</a></li>
+                        <li id="doctorBankDetails"><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:doctorBankDetails' %}">Doctors Bank Details</a></li>
+                        <li id="DoctorPaymentList"><i class="fa fa-inr"></i><a href="{% url 'frontend:viewDoctorPayments' %}">Doctors Settlement Details</a></li>
+                        <li id="doctorTimings"><i class="fa fa-inr"></i><a href="{% url 'frontend:doctorTimings' %}">Doctors Timings</a></li>
                     </ul>
                 </li>
                 
@@ -43,15 +43,15 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:specialists' %}">Speciality Category</a></li>
                         <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:Executives' %}">Manage Users</a></li>
-                        <li><i class="fa fa-envelope-o"></i><a href="#">Create E-mail ID</a></li>
+                        <!-- <li><i class="fa fa-envelope-o"></i><a href="#">Create E-mail ID</a></li> -->
                         <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:consultations_list' %}">Consultations report</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="#">MIS reports</a></li>
                         <li><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:subscription_plans' %}">Packages</a></li>
                         <li><i class="fa fa-credit-card"></i><a href="#">Payments / Settlements</a></li>
-                        <li><i class='fa fa-commenting'></i><a href="#">Bulk Messages</a></li>
-                        <li><i class="fa fa-envelope-o"></i><a href="#">Send Bulk Email</a></li>
-                        <li><i class="fa fa-video-camera"></i><a href="#">Recorded Calls / Video</a></li>
-                        <li><i class="fa fa-comments-o"></i><a href="#">Feedback & Replies </a></li>
+                        <!-- <li><i class='fa fa-commenting'></i><a href="#">Bulk Messages</a></li> -->
+                        <!-- <li><i class="fa fa-envelope-o"></i><a href="#">Send Bulk Email</a></li> -->
+                        <!-- <li><i class="fa fa-video-camera"></i><a href="#">Recorded Calls / Video</a></li> -->
+                        <!-- <li><i class="fa fa-comments-o"></i><a href="#">Feedback & Replies </a></li> -->
 
                     </ul>
                 </li>

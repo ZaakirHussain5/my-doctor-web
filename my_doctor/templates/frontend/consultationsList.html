@@ -6,10 +6,10 @@
     }
 </style>
   <div class="breadcrumbs">
-      <div class="col-sm-4">
-          <div class="page-header float-left">
+      <div class="col-12">
+          <div class="page-header text-center">
               <div class="page-title">
-                  <h1>Consultations List</h1>
+                  <h2>Consultations List</h2>
               </div>
           </div>
       </div>
@@ -20,14 +20,17 @@
                 <table class="table" id="Specialists">
                     <thead>
                         <tr>
-                            <th>Slno</th>
-                            <th>Doctors</th>
+                            <th>Sl No.</th>
+                            <th>Date</th>
+                            <th>Invoice No</th>
+                            <th>Speciality</th>
+                            <th>Doctor</th>
                             <th>Patient</th>
-                            <th>Invoice No.</th>
-                            <th>Video/Audio/ Rating</th>
                             <th>Consultation Rating</th>
-                            <th>Overall Rating</th>
-                            <th>Paid Amount</th>
+                            <!-- 
+                            <th>Video/Audio/ Rating</th>
+                            <th>Overall Rating</th> -->
+                            <th>Amount Paid</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -165,22 +168,25 @@
                     data:'id'
                 },
                 {
-                    data: 'doctor_id.full_name'
-                },
-                {
-                    data:'patient_name'
+                    data: 'consultation_date_time',
+                    render: function(data){
+                        return $.format.date(data, "dd-MM-yyyy")
+                    }
                 },
                 {
                     data:'inv_number'
                 },
                 {
-                    data : 'video_audio_rating'
+                    data:'doctor_id.specialist_type'
                 },
                 {
-                    data : 'video_audio_rating'
+                    data : 'doctor_id.full_name'
                 },
                 {
-                    data : 'overall_rating'
+                    data : 'patient_name'
+                },
+                {
+                    data : 'consultation_rating'
                 },
 
                 {
@@ -199,6 +205,8 @@
         })
 
         // $('#ConsultancDetails')
+        
+         DoHeighLight('PatientsDropDown', 'ConsultationsList')
         
     })
 

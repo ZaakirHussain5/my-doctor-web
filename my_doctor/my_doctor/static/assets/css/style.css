@@ -1077,7 +1077,7 @@ aside.left-panel {
         display: none; }
       .navbar .navbar-nav li > a {
         background: none !important;
-        color: #ffffff !important;
+        color: #ffffff ;
         display: inline-block;
         font-family: 'Open Sans';
         font-size: 14px;

@@ -20,7 +20,9 @@
                 <table class="table" id="Patients">
                     <thead>
                         <tr>
-                            <th>Slno</th>
+                            <th>Sl No</th>
+                            <th>Patient ID</th>
+                            <th>Reg Date</th>
                             <th>Name</th>
                             <th>Age</th>
                             <th>Gender</th>
@@ -154,7 +156,16 @@
             },
             columns:[
                 {
-                    data:'id'
+                    data: 'id'
+                },
+                {
+                    data:'pat_id',
+                },
+                {
+                    data: "created_at",
+                    render: function(data){
+                        return $.format.date(data, "dd-MM-yyyy");
+                    }
                 },
                 {
                     data:'full_name'
@@ -218,6 +229,8 @@
         
     })
 
+        
+         DoHeighLight('PatientsDropDown', 'viewPatients')
     })
 
 </script>

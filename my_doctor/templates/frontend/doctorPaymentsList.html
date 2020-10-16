@@ -20,12 +20,13 @@
                     <thead>
                         <tr>
                             <th>Sl No.</th>
-                            <th>Doctor Name</th>
-                            <th>Phone Number</th>
-                            <th>Consultations Count</th>
+                            <th>Dr. ID</th>
+                            <th>Dr. Name</th>
+                            <th>Consultation Count</th>
                             <th>Total Amount</th>
-                            <th>Company Share</th>
-                            <th>Amount Payable</th>
+                            <th>Commission</th>
+                            <th>Payback Amount</th>
+                            <th>Balance</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,11 +157,14 @@
             {
                 data:"id"
             },
+            {
+                data: 'doctor',
+                render: function(data){
+                    return data.Registration_Number
+                }
+            },
                 {
                     data:'doctor.full_name'
-                },
-                {
-                    data:'doctor.phone_number'
                 },
                 {
                     data:'consultations_count'
@@ -173,6 +177,10 @@
                 },
                 {
                     data : 'amount_payable'
+                },
+                {
+                    data: "amount_payable",
+                    
                 }
 
             ],
@@ -186,16 +194,12 @@
               }
         })
 
-<!--        $('#patientDetails').on('show.bs.modal', function (event) {-->
-<!--        var myVal = $(event.relatedTarget).data('pat');-->
-<!--        console.log(myVal)-->
-
-<!--        let gender_age = myVal.gender + '/' + myVal.age;-->
-
-
+    
+    DoHeighLight('DoctorDropDown', 'DoctorPaymentList')
 
     })
-
+    
+   
 </script>
 
 {% endblock %}
