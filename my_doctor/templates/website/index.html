@@ -528,21 +528,15 @@
         </div>
         <div class="form-group col-xs-6">
 
-            <input type="text" id="id_city" placeholder="Your City">
+            <input type="text" id="id_city" required placeholder="Your City">
         </div>
-        <div class="form-group col-xs-6">
-            <select id="id_gender">
-                <option>Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-            </select>
-        </div>
+        
         <div class="form-group col-xs-6">
     
-            <input type="number" id="id_age" placeholder="Age" min="1" max="100">
+            <input type="number" id="id_age"  required placeholder="Age" min="1" max="100">
         </div>
         <div class="form-group col-xs-6">
-            <select id="select-specialist">
+            <select id="select-specialist" required="true">
                 <option value="Speciality">Speciality</option>
                 <option value="General Physician">General Physician</option>
                 <option value="Dermatologist">Dermatologist</option>
@@ -553,7 +547,18 @@
             </select>
         </div>
         <div class="form-group col-xs-6" >
-            <input type="text" id="id_blood" placeholder="Blood Group">
+            <!-- <input type="text" id="id_blood" required placeholder="Blood Group"> -->
+            <select id="id_blood" required="true">
+                <option value="blood_group">Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB-">AB-</option>
+                <option value="A-">A-</option>
+                <option value="B-">B-</option>
+            </select>
         </div>
     </div>
     
@@ -563,7 +568,7 @@
     <div class="">
     <div class="form-group col-xs-12">
     
-    <textarea id="id_message" placeholder="Your message"></textarea>
+    <textarea id="id_message" required placeholder="Briefly describe about your problem."></textarea>
         </div>
     <div class="col-xs-12">
     <div class="form-btn">
@@ -683,7 +688,7 @@
             contentType: 'application/json',
         }).done((response)=>{
             console.log(response);
-            alert("Your appoinment is booking successful. We are call you soon.");
+            alert("Form received. Our representative will get back to you shortly.");
             $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
         })
         .fail((error)=>{

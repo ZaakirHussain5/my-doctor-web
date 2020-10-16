@@ -226,3 +226,25 @@ templete = frontend/Doctors.html
 
 29.
 add doctor timings module to the admin page 
+.............................................................
+30. 
+    a. book appoinment
+        1.Gender should be removed(done)
+        2.blood group will be dropdown(done)
+        3.'your message' will be "Briefly describe about your problem." (done)
+        4. in book appoinment form all the fields will be required (done)
+        5. alert message wii be :
+            "form received. Our representative will get back to you shortly." (done)
+        6. email notification for customer enquiry
+    b.  
+        1. in patient when we click on call/vedio call then it will be redirect to doctor's profile
+    c. How it works 
+        1. need step-number  (done)
+
+    d. when click on speciality it redirects to speciality section(done)
+    e. when click on get started button in plans page it will redirect to login page (done)
+    
+    **g. Doctor registration page shoud be implemented 
+        **email notification should come after doctor registration
+        ** get otp verification should be implemented in doctors registration
+    ** login with otp for patient login

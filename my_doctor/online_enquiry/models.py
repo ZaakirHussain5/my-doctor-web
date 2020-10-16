@@ -4,7 +4,7 @@ class online_enquiry(models.Model):
     name=models.CharField(max_length=50)
     email=models.CharField(max_length=50)
     ph_no=models.CharField(max_length=13)
-    gender=models.CharField(max_length=10)
+    gender=models.CharField(max_length=10, blank=True, null=True)
     blood_group=models.CharField(max_length=10)
     speciality =models.CharField(max_length=50)
     city=models.CharField(max_length=50)

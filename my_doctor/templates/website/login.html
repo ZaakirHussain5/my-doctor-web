@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="col-xs-12" >
-                <p style="padding: 15px 0;">Not a Member? <a href='/PatientRegistration'>Register Here</a></p>
+                <p style="padding: 15px 0;">Not a Member? <a id="redirectTo" href='/PatientRegistration'>Register Here</a></p>
             </div>
             
         </div>
@@ -189,6 +189,7 @@
             $('#myTab li:first-child').click(()=>{
                 console.log('clicked');
                 $('#user_type').val('P')
+                $('#redirectTo').attr('href', "/PatientRegistration")
                 $('label[for="Name1"]').html('Phone Number')
                 $('#Name1').attr('placeholder','Enter registered phone number')
                 $('#myTab #Doctor').removeClass('active')
@@ -199,6 +200,7 @@
             $('#myTab:nth-child(2)').click(()=>{
                 console.log('clicked');
                 $('#user_type').val('D');
+                $('#redirectTo').attr('href', "/doctor_reg")
                 $('label[for="Name1"]').html('Doctor ID')
                 $('#Name1').attr('placeholder','Enter Doctor ID')
                 $('#myTab #Patient').removeClass('active')

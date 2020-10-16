@@ -7,11 +7,11 @@
     <div class="breadcrumb-outer">
     <nav aria-label="breadcrumb">
     <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{%static 'website/index.html'%}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Login</li>
     </ul>
     </nav>
-    <h2>Login</h2>
+    <h2>Doctor Registration</h2>
     </div>
     </div>
     </section>
@@ -25,24 +25,23 @@
         <div class="col-xs-12">
             <div class="form-title">
                 <h2>Register</h2>
-                <p>Enter your details to become a member</p>
             </div>
         </div>
         <div class="">
             <div class="form-group col-md-6 col-xs-12">
-                <input type="text" name="full_name" placeholder="Your Name" required>
-                <input type="hidden" name="web_registration" placeholder="Your Name" value="true">
+                <input type="text" name="full_name" placeholder="Doctor Name" required>
+                <input type="hidden" name="web_registration" placeholder="Doctor Name" value="true">
             </div>
             <div class="form-group col-md-6 col-xs-12">
 
-                <input type="text" name="email" placeholder="Your Email" required>
+                <input type="text" name="email" placeholder="Doctor Email" required>
             </div>
             <div class="form-group col-md-6 col-xs-12">
 
-                <input type="tel" placeholder="Your Phone Number" name="phone_number"  minlength="10" maxlength="10" size="10" required>
+                <input type="tel" placeholder="Doctor Phone Number" name="phone_number"  minlength="10" maxlength="10" size="10" required>
             </div>
             <div class="form-group col-md-6 col-xs-12">
-                <input type="text" placeholder="password" name="password" min="18" max="100" required>
+                <input type="password" placeholder="password" name="password" min="18" max="100" required>
 
             </div>
             <div class="form-group col-md-6 col-xs-12">
@@ -58,11 +57,24 @@
             </div>
             <div class="form-group col-md-6 col-xs-12">
 
-                <input type="text" name="specialist_type" placeholder="specialist Type" min="18" max="100" required>
+                <!-- <input type="text" name="specialist_type" placeholder="specialist Type"  required> -->
+                <select id="select-specialist" required="true">
+                <option value="Speciality">Select Your Speciality</option>
+                <option value="General Physician">General Physician</option>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Dietitian">Dietitian</option>
+                <option value="Psychologist">Psychologist</option>
+                <option value="Gynaecologist">Gynaecologist</option>
+            </select>
             </div>
              <div class="form-group col-md-6 col-xs-12">
 
-                <input type="text" name="about" placeholder="about" min="18" max="100" required>
+                <input type="text" name="city" placeholder="City" required>
+            </div>
+            <div class="form-group col-md-6 col-xs-12">
+
+                <input type="text" name="about" placeholder="About doctor" min="18" max="100" required>
             </div>
         </div>
         
@@ -131,7 +143,7 @@
                   contentType: false,
                   processData: false,
                 }).done((response)=>{
-                       alert('Your form submited successfull. We will connect you soon.');
+                       alert('Form received. Our representative will get back to you soon.');
                        $('#doctorRegistration').trigger('reset');
                     }).fail((error)=>{
                     console.log(error);

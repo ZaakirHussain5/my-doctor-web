@@ -4,41 +4,25 @@
       <div class="col-sm-4">
           <div class="page-header float-left">
               <div class="page-title">
-<<<<<<< HEAD
                   <h1>Doctor Bank Details</h1>
-=======
-                  <h1>Subscription Plans</h1>
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
               </div>
           </div>
       </div>
     </div>
     <div class="content m-3">
-<<<<<<< HEAD
       <form id="DOctorBankDetailsForm">
         <div class="card">
-=======
-      <form id="spl_form">
-        <div class="card">  
-            
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
             <div class="card-body card-block">
                     <div class="row">
                         <input type="hidden" name="id" id="spl_id">
                         <div class="offset-md-2 col-md-4 pr-5 pl-5">
                             <div class="row form-group">
-<<<<<<< HEAD
                                 <label for="doctor_id" class=" form-control-label">Select Doctor</label>
                                 <select name="doctor_id" id="doctor_id" class="form-control">
-=======
-                                <label for="hf-email" class=" form-control-label">Select Doctor</label>
-                                <select name="doctor_id" id="">
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
                                     <option value="">Select Doctor</option>
                                 </select>
                             </div>
                             <div class="row form-group">
-<<<<<<< HEAD
                                 <label for="account_holder_name" class=" form-control-label">Acc Holder Name</label>
                                 <input type="text" required id="account_holder_name" name="account_holder_name" placeholder="Enter Account Holder Name" class="form-control">
                             </div>
@@ -58,27 +42,6 @@
                             <div class="row form-group">
                                 <label for="branch_name" class=" form-control-label">Branch</label>
                                 <input type="text" required="" id="branch_name" name="branch_name" placeholder="Enter Branch Name" class="form-control">
-=======
-                                <label for="hf-email" class=" form-control-label">Acc Holder Name</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Acc No.</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">IFSC Code</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Validity" class="form-control">
-                               
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Bank</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Price" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Branch</label>
-                                <input type="number" required="" id="hf-email" name="special_type" placeholder="Enter Plan Validity" class="form-control">
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
                                
                             </div>
                             
@@ -103,11 +66,7 @@
          <div class="card">
             <div class="card-body card-block">
                 <div class="table-responsive">
-<<<<<<< HEAD
                      <table class="table table-bordered table-hover" id="doctorBankDeails">
-=======
-                     <table class="table table-bordered table-hover" id="subs_plans">
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
                     <thead>
                         <tr>
                             <th>Slno</th>
@@ -134,15 +93,9 @@
   {% block scripts %}
   <script>
       jQuery(document).ready(function($){
-<<<<<<< HEAD
           var table = jQuery('#doctorBankDeails').DataTable({
               ajax: {
                   url: "/api/doctor_bank_details",
-=======
-          var table = jQuery('#Specialists').DataTable({
-              ajax: {
-                  url: "/api/specialist_types",
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
                   dataSrc: ""
               },
               responsive:true,
@@ -151,7 +104,6 @@
                       data: "id"
                   },
                   {
-<<<<<<< HEAD
                       data: "doctor_id"
                   },
                   {
@@ -168,21 +120,6 @@
                   },
                   {
                     data: "branch_name"
-=======
-                      data: "icon",
-                      render: function (data) {
-                          return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                      }
-                  },
-                  {
-                      data: "special_type"
-                  },
-                  {
-                      data: 'is_active',
-                      render: function (data,type,row) {
-                          return `<label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2"><input type="checkbox" data-id='${row.id}' class="switch-input active" ${data==true ? "checked='true'" : ""} > <span class="switch-label"></span> <span class="switch-handle"></span></label>`
-                      }
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
                   },
                   {
                       data: 'id',
@@ -197,7 +134,6 @@
                   },
               ]
           })
-<<<<<<< HEAD
         // select options are made with api
         
         function setOptions(){
@@ -232,17 +168,6 @@
               table:table,
               entity:'Bank Details',
               tabs:false
-=======
-
-          crudOperations({
-              url:'/api/specialist_types/',
-              put_url:'/api/specialist_types/',
-              table_id:'#Specialists',
-              id_selector:'#spl_id',
-              form_id:'#spl_form',
-              table:table,
-              entity:'Specialist Type'
->>>>>>> 460a0e8525c2acc7b9738679b6ddc6d4ab3ce9cf
           })
       })
   </script>
