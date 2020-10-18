@@ -1,0 +1,252 @@
+{% extends 'doctor_layout.html' %}
+{% block content %}
+
+<div class="breadcrumbs">
+    <div class="col-12">
+        <div class="page-header text-center">
+            <div class="page-title">
+                <h2> Patient Prescription </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content m-3">
+    <form id="subscriptionForm">
+        <div class="card">
+
+            <div class="card-body card-block">
+                <div class="row">
+                    <input type="hidden" name="id" id="spl_id">
+                    <div class="offset-md-2 col-md-4 pr-5 pl-5">
+                        <div class="row form-group">
+                            <label for="patient" class=" form-control-label">Patient</label>
+                            <select id="patient" name="patient" class="form-control">
+                                <option value="">Select Specialist Type</option>
+                                {% for patient in patients %}
+                                <option value="{{patient.user.id}}">{{patient.pat_id}}-{{patient.full_name}}
+                                </option>
+                                {% endfor%}
+                            </select>
+                        </div>
+                        <div class="row form-group">
+                            <label for="record_type" class=" form-control-label">Record Type</label>
+                            <input type="text" required="" id="record_type" name="record_type" placeholder="Enter Record Type"
+                                class="form-control">
+                            <input type="hidden"  id="created_by" name="created_by" placeholder="Enter Record Type"
+                                class="form-control" value="created by doctor">
+                        </div>
+                        <div class="row form-group">
+                            <label for="record_files" class=" form-control-label">Record Files</label>
+                            <input type="file" required="" id="record_files" name="record_files"
+                                placeholder="Enter Plan Price" class="form-control">
+                        </div>
+                        
+
+                    </div>
+                    <div class="col-md-4 pr-5 pl-5">
+                        <div class="row form-group">
+                            <label for="description" class=" form-control-label">description</label>
+                            <textarea name="description" id="description" rows="5" class="form-control"
+                                placeholder="Describe about the recoed"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Prescription</span>
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-body card-block">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="subs_plans">
+                    <thead>
+                        <tr>
+                            <th>Slno</th>
+                            <th>Patient Name</th>
+                            <th>Record Type</th>
+                            <th>Description</th>
+                            <th>created_by</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+    jQuery(document).ready(function ($) {
+        
+            var table = jQuery('#subs_plans').DataTable({
+                ajax: {
+                    url: "/api/DoctorPrescription",
+                    dataSrc: "",
+                    'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                },
+                },
+                responsive: true,
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "patient"
+                    },
+                    {
+                        data: "record_type"
+                    },
+                    {
+                        data: "description"
+                    },
+                    {
+                        data: "created_by"
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                        }
+                    },
+                ]
+            })
+        
+
+        $('#subscriptionForm').submit(function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            let data = new FormData(document.getElementById('subscriptionForm'))
+            console.log(data);
+            $.ajax({
+                url: "/api/DoctorPrescription/",
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                }
+            }).done((response)=>{
+                console.log(response)
+                table.ajax.reload();
+            }).fail((error)=>{
+                console.log(error)
+            })
+
+
+
+        })
+        jQuery('#subs_plans').on('click', '.delete', function () {
+        var id = jQuery(this).attr('data-id')  
+        bootbox.confirm({
+              message: "Are you sure to delete the Specialist Type permenently?",
+              callback: function (result) {
+                  if(result){
+                      jQuery.ajax({
+                          url:`/api/DoctorPrescriptionDelete/${id}/`,
+                          method: 'DELETE',
+                          success:function(){
+                              table.ajax.reload()
+                              toastr.success("Deleted Successfully","Success",{positionClass:'toast-top-center'})
+                          },
+                          error:function(err){
+                              console.log(err)
+                              toastr.error("Deletion Failed","Error",{positionClass:'toast-top-center'})
+                          }
+                      })
+                  }
+              }
+          });
+      })
+
+
+    function formDeserialize(form, data) {
+        const entries = (new URLSearchParams(data)).entries();
+        for (const [key, val] of entries) {
+            const input = form.elements[key];
+            if (input != undefined) {
+                if (input.type == 'file') {
+                    if (val) {
+                        var $file = jQuery('#' + input.id),
+                            $label = $file.next('label'),
+                            $labelText = $label.find('span'),
+                            labelDefault = $labelText.text();
+                        var filename = val.split('/').pop()
+                        console.log(filename)
+                        if (filename) {
+                            $label
+                                .addClass('file-ok')
+                                .css('background-image', 'url(' + val + ')');
+                            $labelText.text(filename);
+                        } else {
+                            $label.removeClass('file-ok');
+                            $labelText.text(labelDefault);
+                        }
+                    }
+                    
+                } else {
+    
+                    switch (input.type) {
+                        case 'checkbox':
+                            input.checked = !!val;
+                            break;
+                        case 'select-one':
+                            if (val)
+                                input.value = val;
+                            else
+                                input.selectedIndex = 0;
+    
+                            break;
+                        default:
+                            input.value = val;
+                            break;
+    
+                    }
+    
+                }
+            }
+    
+        }
+    }
+
+
+    // jQuery('#subs_plans').on('click', '.edit', function () {
+    //       var data = JSON.parse(jQuery(this).attr('data-obj'))
+    //       formDeserialize(document.getElementById('#subscriptionForm'.slice(1)), data)
+    //       jQuery('#submitBtn').html('Update ' + "prescription")
+    //       if(options.tabs){
+    //         jQuery('#myTab a[href="#form"]').tab('show')
+    //       }
+    //       else{
+    //         document.documentElement.scrollTop = 0;
+    //       }
+          
+    //   })
+        
+        
+    })
+</script>
+{% endblock %}

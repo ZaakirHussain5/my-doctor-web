@@ -88,3 +88,6 @@ def doctorTimings(request):
 
 def doctorBillPayments(request):
     return render(request, 'frontend/billPayments.html')
+
+def prescription(request):
+    return render(request, 'frontend/prescriptions.html')

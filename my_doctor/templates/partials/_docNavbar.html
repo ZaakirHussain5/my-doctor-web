@@ -12,18 +12,15 @@
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Patients</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-user-plus"></i><a href="{% url 'frontend:customerCareDashboard' %}">New Patient</a></li>
-                        <li><i class="fa fa-tasks"></i><a href="{% url 'frontend:patientsList' %}">Patients List </a></li>
-                    </ul>
-                </li>
+                
                 <li>
                     <a href="{% url 'doctorsUI:appointments' %}"> <i class="menu-icon fa fa-stethoscope"></i>Appointments </a>
                 </li>
                 <li>
                     <a href="{% url 'doctorsUI:consultations' %}"> <i class="menu-icon fa fa-user-md"></i>Consultations </a>
+                </li>
+                <li>
+                    <a href="{% url 'doctorsUI:Prescription' %}"> <i class="menu-icon fa fa-user-md"></i>Prescription </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

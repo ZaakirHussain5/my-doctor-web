@@ -9,12 +9,12 @@
       <div class="col-12">
           <div class="page-header text-center">
               <div class="page-title">
-                <h2>Doctor Setelment Details </h2>
+                <h2>Doctor Settlement Details </h2>
               </div>
           </div>
       </div>
     </div>
-    <div class="content m-3">
+    <div class="content">
         <div class="card pl-3 pr-3">
             <div class="card-body card-block">
                 <table class="table" id="Patients">
@@ -37,11 +37,11 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+    <div class="modal fade" id="settlementDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
+                    <h5 class="modal-title" id="scrollmodalLabel">Settlement Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,82 +50,55 @@
                   <div class="row p-3">
                       <div class="col-md-6">
                           <div class="form-group">
-                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
+                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="doctor's img">
                           </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Registration No.</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">DP2020001</p>
+                                <p class="form-control-static"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Full Name</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static"></p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Phone No.</label></div>
                             <div class="col-12 col-md-6">
-                                <p class="form-control-static">Praveen</p>
+                                <p class="form-control-static"></p>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">AB-</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Male/42</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Father/Naveen</p>
-                            </div>
-                        </div>
+                        
                       </div>
                       <div class="col-md-6">
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">+91 9899887787</p>
+                        <form id="PaymentForm">
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="balance" class="form-control-label float-right">Payable Balance</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="balance" name="balance" placeholder="Doctor ID" class="form-control" 
+                                        readonly="readonly">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">+91 9899887715</p>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="paid_amount" class="form-control-label float-right">Paid Balance</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="paid_amount" name="paid_amount" placeholder="Doctor ID" class="form-control">
+                                    <input type="hidden" id="doctor_id" name="doctor_id" placeholder="Doctor ID" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">praveen@gmail.com</p>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="bank_trans_id" class="form-control-label float-right">Bank Transaction Id</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="bank_trans_id" name="bank_trans_id" placeholder="" class="form-control"
+                                        >
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">English (Practice Default)</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">#1234 Unknown Street</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Unknown Locality</p>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
-                            <div class="col-12 col-md-6">
-                                <p class="form-control-static">Unknown City</p>
-                            </div>
-                        </div>
+                            <br>
+                            <button type="submit" class="btn btn-active btn-success">Make payment</button>
+                        </form>
 
                       </div>
                   </div>
@@ -133,7 +106,7 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" data-dismiss="modal" class="btn btn-danger">
+                    <button id="closePopUP" type="button" data-dismiss="modal" class=" btn btn-danger">
                       Close
                   </button>
                 </div>
@@ -187,8 +160,13 @@
                 {
                     data: 'id',
                     render: function(id, type, row){
-                        return `<button>make payment</button><br>
-                            <button> view settelments</button>
+                        return `
+                        <button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetails">
+                                make payment
+                                </button>
+                            <button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetails">
+                                view settelments
+                                </button>
                         `
                     }
                 }
@@ -206,6 +184,54 @@
 
     
     DoHeighLight('DoctorDropDown', 'DoctorPaymentList')
+
+    $('#settlementDetails').on('show.bs.modal', function (event) {
+        var myVal = $(event.relatedTarget).data('doct');
+        console.log(myVal)
+        if(myVal.balance >0){
+            $(this).find('img').attr('src', myVal.doctor.profile_pic);
+
+            let valList = [myVal.doctor.Registration_Number, myVal.doctor.full_name, myVal.doctor.phone_number, myVal.doctor.specialist_type, myVal.doctor.consultation_fee]
+            console.log(valList)
+            let inputList = $(this).find('input');
+            let ps = $(this).find('p');
+            console.log(ps.length)
+            for(var i=0; i < ps.length; i++){
+                ps[i].innerHTML = valList[i]    
+            }
+            $('#balance').val(myVal.balance)
+            $('#paid_amount').val(myVal.balance)
+            $('#doctor_id').val(myVal.doctor.id)
+        }else{
+            alert('There has not any amount to pay.')
+            event.preventDefault()}
+        
+        
+        
+    })
+
+    $('#PaymentForm').submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        let form = new FormData(document.getElementById('PaymentForm'));
+        $.ajax({
+            url: '/api/get_settlement_details/',
+            method : 'POST',
+            data: form,
+            contentType: false,
+            processData: false  
+
+        }).done((response)=>{
+            console.log("Settlement", response)
+            document.getElementById('closePopUP').click();
+            table.ajax.reload()
+        }).error((err)=>{
+            console.log(err)
+        })
+
+
+    })
+
 
     })
     

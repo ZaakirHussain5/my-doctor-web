@@ -28,5 +28,6 @@ urlpatterns=[
     path('doctorBankDetails', views.doctorBankDetails, name="doctorBankDetails"),
     path('doctorTimings', views.doctorTimings, name="doctorTimings"),
     path('doctorBillPayments', views.doctorBillPayments, name="doctorBillPayments"),
+    path('Prescription', views.prescription, name="Prescription"),
 
 ]

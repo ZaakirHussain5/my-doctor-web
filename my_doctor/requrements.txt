@@ -253,3 +253,11 @@ add doctor timings module to the admin page
 bill payments api
 template = Billpaymnts.html
 refer packages template
+/////////////////////////////
+
+delete database file migrate everything again. Create patients and doctors and consultations
+
+////////////
+create a page in doctorsUI name=Prescription.html
+crud oparetin for a prescription 
+    app name = patient_medical_recoard

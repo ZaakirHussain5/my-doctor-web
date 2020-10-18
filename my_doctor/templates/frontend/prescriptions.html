@@ -4,7 +4,7 @@
       <div class="col-12">
           <div class="page-header text-center">
               <div class="page-title">
-                  <h2 id="title">Doctors Agreement List</h2>
+                  <h2 id="title">Patient Prescription List</h2>
               </div>
           </div>
       </div>
@@ -30,9 +30,11 @@
                                 <tr>
                                     <th>slno</th>
                                     <th>Image</th>
-                                    <th>Specialist Type</th>
-                                    <th>Name</th>
-                                    <th>Phone No.</th>
+                                    <th>Record Type</th>
+                                    <th>description</th>
+                                    <th>created By</th>
+                                    <th>Prescription</th>
+                                    <th>Doctor</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -66,7 +68,7 @@
 
         var table = $('#Doctors').DataTable({
             ajax:{
-                url:'/api/doctor_agreement_list',
+                url:'/api/getAllPrescriptions',
                 dataSrc:""
             },
             responsive: true,
@@ -75,26 +77,32 @@
                     data:'id'
                 },
                 {
-                    data:'profile_pic',
+                    data:'record_files',
                     render:function(data){
                         return `<img src="${data}" style="height:90px;width:120px" alt="">`
                     }
                 },
                 {
-                    data:'specialist_type'
+                    data:'record_type'
                 },
                 {
-                    data:'full_name'
+                    data:'description'
                 },
                 {
-                    data : 'phone_number'
+                    data : 'created_by'
+                },
+                {
+                    data: "is_prescription"
+                },
+                {
+                  data: "doctor"
                 },
                 {
                     data:'id',
                     render: function (data,type,row) {
                           return `
-                                <a href="${row.mou_file}" target=_blank><button  type="button"  class="btn  btn-success btn-sm delete">
-                                    <i class="fa fa-file-text-o"></i> View mou
+                                <a href="${row.record_files}" target=_blank><button  type="button"  class="btn  btn-success btn-sm delete">
+                                    <i class="fa fa-file-text-o"></i> View prescription
                                 </button></a>`
                       }
                 }
