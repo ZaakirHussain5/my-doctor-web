@@ -25,7 +25,7 @@ class doctors_info(models.Model):
     def __str__(self):
         return str(self.full_name) +','+ str(self.specialist_type)
 
-
+#doctor timings
 class DoctorTimings(models.Model):
     doctor=models.ForeignKey(doctors_info,related_name="timings",on_delete=models.CASCADE)
     mon=models.BooleanField()
