@@ -21,7 +21,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         share_val = doctor.commission_val
         if share_type == 'Pencent':
             share_val = cons_fee * (share_val/100)
-        serializer.save(patient=self.request.user, comp_share=share_val)
+        serializer.save(patient_id=self.request.user.id, comp_share=share_val)
 
 class getAllConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     permissions = [

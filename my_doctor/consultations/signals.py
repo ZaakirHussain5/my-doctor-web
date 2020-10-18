@@ -3,10 +3,12 @@ from django.dispatch import receiver
 
 from consultations.models import consultations
 from doctor_payments.models import doctor_payments
+from doctors.models import settlement_details, doctors_info
 
 @receiver(post_save, sender=consultations)
 def save_doctor_payment(sender, instance, **kwargs):
     total_amount = doctor_payments.objects.filter(doctor = instance.doctor_id).values_list('total_amt',flat=True).first()
+    balance = doctor_payments.objects.filter(doctor = instance.doctor_id).values_list('balance',flat=True).first()
     commission_amount = doctor_payments.objects.filter(doctor = instance.doctor_id).values_list('comm_amt',flat=True).first()
     if instance.consultation_amt and instance.comp_share:
         if total_amount:
@@ -18,5 +20,7 @@ def save_doctor_payment(sender, instance, **kwargs):
         else:
             commission_amount = instance.comp_share
         payable = total_amount - commission_amount
+        if balance:
+            balance = balance + payable
     doc_count = consultations.objects.filter(doctor_id = instance.doctor_id).count()
-    payments = doctor_payments.objects.filter(doctor = instance.doctor_id).update(total_amt=total_amount, consultations_count=doc_count, comm_amt=commission_amount, amount_payable=payable)
+    payments = doctor_payments.objects.filter(doctor = instance.doctor_id).update(total_amt=total_amount, consultations_count=doc_count, comm_amt=commission_amount, amount_payable=payable, balance=balance)
