@@ -9,7 +9,7 @@
       <div class="col-12">
           <div class="page-header text-center">
               <div class="page-title">
-                <h2>Doctor Payments List </h2>
+                <h2>Doctor Setelment Details </h2>
               </div>
           </div>
       </div>
@@ -28,6 +28,7 @@
                             <th>Commission</th>
                             <th>Payback Amount</th>
                             <th>Balance</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -182,6 +183,14 @@
                 {
                     data: "balance",
                     
+                },
+                {
+                    data: 'id',
+                    render: function(id, type, row){
+                        return `<button>make payment</button><br>
+                            <button> view settelments</button>
+                        `
+                    }
                 }
 
             ],
