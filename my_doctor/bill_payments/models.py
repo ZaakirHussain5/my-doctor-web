@@ -10,3 +10,4 @@ class BillPayments(models.Model):
     paid_by = models.CharField(max_length=100)
     bill_date = models.DateField(blank=True, null=True)
     created_at = models.DateField(auto_now_add=True, blank=True, null=True)
+    

@@ -9,6 +9,6 @@ class doctor_payments(models.Model):
     amount_payable = models.IntegerField(null=True, blank=True, default=0) #total_amt - comm_amt
     created_at = models.DateTimeField(auto_now_add=True)
     last_modied = models.DateTimeField(auto_now=True)
-
+    balance = models.FloatField(default=00.00)
     def __str__(self):
         return str(self.doctor)
