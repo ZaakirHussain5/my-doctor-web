@@ -29,11 +29,8 @@
                             <thead>
                                 <tr>
                                     <th>slno</th>
-                                    <th>Image</th>
                                     <th>Record Type</th>
                                     <th>description</th>
-                                    <th>created By</th>
-                                    <th>Prescription</th>
                                     <th>Doctor</th>
                                     <th>Actions</th>
                                 </tr>
@@ -77,22 +74,10 @@
                     data:'id'
                 },
                 {
-                    data:'record_files',
-                    render:function(data){
-                        return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                    }
-                },
-                {
                     data:'record_type'
                 },
                 {
                     data:'description'
-                },
-                {
-                    data : 'created_by'
-                },
-                {
-                    data: "is_prescription"
                 },
                 {
                   data: "doctor"
@@ -117,7 +102,7 @@
               }
         })
 
-        DoHeighLight('DoctorDropDown', 'doctorAgreement')
+        DoHeighLight('PatientsDropDown', 'viewPrescription')
     })
 </script>
   {% endblock %}
