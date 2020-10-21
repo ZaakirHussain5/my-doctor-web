@@ -92,10 +92,15 @@
                 {
                     data:'id',
                     render: function (data,type,row) {
-                          return `
+                        if(row.mou_file){
+                            return `
                                 <a href="${row.mou_file}" target=_blank><button  type="button"  class="btn  btn-success btn-sm delete">
                                     <i class="fa fa-file-text-o"></i> View mou
                                 </button></a>`
+                        }else{
+                            return `<p> No MOU file</p>`
+                        }
+                          
                       }
                 }
             ],

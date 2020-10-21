@@ -85,10 +85,13 @@
                 {
                     data:'id',
                     render: function (data,type,row) {
-                          return `
+                          if(row.record_files){return `
                                 <a href="${row.record_files}" target=_blank><button  type="button"  class="btn  btn-success btn-sm delete">
                                     <i class="fa fa-file-text-o"></i> View prescription
                                 </button></a>`
+                            }else{
+                                return `<p>No prescripton</p>`
+                            }
                       }
                 }
             ],
