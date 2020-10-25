@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class executive_details(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     full_name=models.CharField(max_length=32,null=True)
-    profile_pic=models.FileField(null=True)
+    profile_pic=models.FileField(null=True, blank=True)
     phone_number  = models.CharField(max_length=25, null=True)
     about = models.CharField(max_length=500,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
