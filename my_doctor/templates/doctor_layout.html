@@ -143,7 +143,34 @@
         </header>
         {% block content%} {% endblock %}
         </div>
-    
+        <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingVideoCall" tabindex="-1" role="dialog" aria-labelledby="incomingVideoCall" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <div class="user-avatar user-avatar-rounded user-avatar-xl">
+                                <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
+                            </div>
+                            <div class="userprofile-name">
+                                <span>Incoming Call</span>
+                                <h4 id="PatientName"></h4>
+                            </div>
+
+                            <div class="call-actions">
+                                <button class="btn btn-danger" id="hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i> Ignore</button>
+                                <a id="answerCall" class="btn btn-success" ><i class="fa fa-phone"> Accept</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <audio id="myAudio">
+            <source src="{% static 'video/skype_ringtone.mp3' %}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
     <script src="{% static 'assets/js/toastr.min.js' %}"></script>
@@ -167,7 +194,34 @@
     <script src="{% static 'vendors/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
     <script src="{% static 'assets/js/crud.js'%}"></script>
     {% block scripts%} {% endblock %}
-     
+    <script>
+        function checkForCall() {
+            var x = document.getElementById("myAudio");
+            jQuery.ajax({
+                'url': '/api/vedioChatOparetion/?user=doc',
+                'contentType': 'application/json',
+                'async': false,
+                'method': 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            }).done((response) => {
+                console.log(response)
+                var list = response;
+                if(list && list.length >0){
+                    x.loop =true;
+                    x.play()
+                    jQuery('#answerCall').attr('href','/api/DoctorVideoUI?session_id='+list[0].Call_session)
+                    jQuery('#incomingVideoCall').modal('show')
+                }
+            });
+
+        }
+
+        setInterval(function () {
+            checkForCall();
+        }, 2000); 
+    </script>
 </body>
 <!-- Sidebar -->
 
