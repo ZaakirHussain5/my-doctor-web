@@ -45,8 +45,8 @@
                    </div> -->
                 {% endfor %}
                </div>
-               <h5 class="text-lg p-2 pt-4">Subscription Plans</h5>
-               <ul class="list-unstyled">
+               <h5 class="text-lg p-2 pt-4">All Subscription Plans</h5>
+               <ul class="list-unstyled" id="subscriptionPlans">
                    <li>
                        <div class="calllist bg-info text-white">
                            <div class="user-avatar user-avatar-rounded">
@@ -157,7 +157,42 @@
 
         // geturl = '/api/getLoggedInPatient/'
         // get a object and need to bind with the profile form
+        function getAllSubscriptionPlan(){
+            $.ajax({
+                url: `/api/subscription_plans`,
+                method: 'GET',
+                contentType: "application/json"
+            }).done((response)=>{
+                let liList = '';
+                for(let i=0; i < response.length; i++){
+                    let li = `
+                        <li>
+                            <div class="calllist bg-info text-white">
+                                <div class="user-avatar user-avatar-rounded">
+                                    <!--<img src="{% static 'patients/assets/images/user/layer-3.png' %}" alt="">-->
+                                </div>
+                                <div class="calllist__details">
+                                    <div class="calllist__details--name">${response[i]['plan_name']} for ${response[i]['validity']} days.</div>
+                                    
+                                </div>
 
+                                <div class="calllist__actions">
+                                    <div class="iconbox btn-hovered-light">
+                                        <i class="iconbox__icon mdi mdi-currency-inr"></i> ${response[i]['plan_price']}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    liList += li
+                }
+                $('#subscriptionPlans').html(liList);
+            
+            }).fail((err)=>{
+                console.log(err);
+            })
+        }
+        getAllSubscriptionPlan()
 
     })
 

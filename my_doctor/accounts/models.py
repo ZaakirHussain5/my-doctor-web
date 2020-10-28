@@ -10,7 +10,7 @@ class user_details(models.Model):
     registered_date = models.DateTimeField(auto_now_add=True)
     profile_pic = models.FileField(max_length=355, null=True)
     phone_no = models.CharField(max_length=32)
-    s_phone_no = models.CharField(max_length=15)
+    s_phone_no = models.CharField(max_length=15, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.CharField(max_length=25, null=True)
     last_modified = models.DateTimeField(auto_now=True)

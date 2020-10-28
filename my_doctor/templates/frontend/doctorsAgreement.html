@@ -29,9 +29,8 @@
                             <thead>
                                 <tr>
                                     <th>slno</th>
-                                    <th>Image</th>
-                                    <th>Specialist Type</th>
                                     <th>Name</th>
+                                    <th>Specialist Type</th>
                                     <th>Phone No.</th>
                                     <th>Actions</th>
                                 </tr>
@@ -75,16 +74,10 @@
                     data:'id'
                 },
                 {
-                    data:'profile_pic',
-                    render:function(data){
-                        return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                    }
+                    data:'full_name'
                 },
                 {
                     data:'specialist_type'
-                },
-                {
-                    data:'full_name'
                 },
                 {
                     data : 'phone_number'

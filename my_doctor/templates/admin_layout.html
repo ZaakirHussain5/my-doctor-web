@@ -1,30 +1,34 @@
 {% load static %}
 <html lang="en">
-    <head>
-        <title>Doctor Plus - Admin</title>
 
-        <link rel="stylesheet" href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/selectFX/css/cs-skin-elastic.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
-        
-        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/file.css' %}">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'></head>
-        <style>
-            .heighLight{
-                border-color: white;
-                border-top-color: white;
-                color: white; 
-                background-color: #74B9FF;
-            }
-        </style>
-    </head>
-    <body>
+<head>
+    <title>Doctor Plus - Admin</title>
+
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/selectFX/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/file.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+</head>
+<style>
+    .heighLight {
+        border-color: white;
+        border-top-color: white;
+        color: white;
+        background-color: #74B9FF;
+    }
+</style>
+</head>
+
+<body>
+    
     {% include 'partials/_adminNavbar.html'%}
     <div id="right-panel" class="right-panel">
         <header id="header" class="header">
@@ -34,42 +38,47 @@
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
                             <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..."
+                                    aria-label="Search">
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
                         </div>
-      
+
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}" alt="User Avatar">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}"
+                                alt="User Avatar">
                         </a>
-      
+
                         <div class="user-menu dropdown-menu">
-      
+
                             <a class="nav-link" href="/app-login?user=admin"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
-      
-      
+
+
                 </div>
             </div>
-      
+
         </header>
         {% block content%} {% endblock %}
 
-        </div>
-         
-    
+    </div>
+
+
     <script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
     <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
     <script src="{% static 'assets/js/toastr.min.js' %}"></script>
     <script src="{% static 'assets/js/file.js' %}"></script>
     <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" integrity="sha512-YKERjYviLQ2Pog20KZaG/TXt9OO0Xm5HE1m/OkAEBaKMcIbTH1AwHB4//r58kaUDh5b1BWwOZlnIeo0vOl1SEA==" crossorigin="anonymous"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"
+        integrity="sha512-YKERjYviLQ2Pog20KZaG/TXt9OO0Xm5HE1m/OkAEBaKMcIbTH1AwHB4//r58kaUDh5b1BWwOZlnIeo0vOl1SEA=="
+        crossorigin="anonymous"></script>
+
     <script src="{% static 'vendors/popper.js/dist/umd/popper.min.js'%}"></script>
     <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
     <script src="{% static 'assets/js/main.js'%}"></script>
@@ -86,17 +95,17 @@
     <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
     <script src="{% static 'vendors/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
     <script src="{% static 'assets/js/crud.js'%}"></script>
-    
+
     <script type="text/javascript">
-        function DoHeighLight(dropdownName, liName){
-        jQuery('#' + dropdownName).addClass('show')
-        jQuery('#' + dropdownName +' a').attr("aria-expanded","true");
-        jQuery('#' + dropdownName +' ul').addClass('show');
-        jQuery('#' + liName).addClass('heighlight')
-    }
-    
+        function DoHeighLight(dropdownName, liName) {
+            jQuery('#' + dropdownName).addClass('show')
+            jQuery('#' + dropdownName + ' a').attr("aria-expanded", "true");
+            jQuery('#' + dropdownName + ' ul').addClass('show');
+            jQuery('#' + liName).addClass('heighlight')
+        }
+
     </script>
-     {% block scripts%} {% endblock %}
+    {% block scripts%} {% endblock %}
 </body>
 <!-- Sidebar -->
 

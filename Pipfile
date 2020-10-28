@@ -12,7 +12,7 @@ djangorestframework = "*"
 django-rest-knox = "*"
 djongo = "*"
 social-auth-app-django = "*"
-opentok = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.8"

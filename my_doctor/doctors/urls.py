@@ -3,7 +3,7 @@ from .api import (DoctorUpdateProfileAPI, GetLoggedDoctor,DoctorTimingsAPI,
                   doctors_infoViewSet,DoctorRegisterAPI,getAvailableDoctors,
                   NewDoctorRegistration, webdoctorViewset, get_settlement_details,
                   get_doctor_bankDetails, doctor_agreement_list, doctorRegistrationAdmin,
-                  DoctorTimingsAdminAPI
+                  DoctorTimingsAdminAPI, specificDoctorSettlement
                   )
 from django.urls import path,include
 from . import views
@@ -17,6 +17,8 @@ router.register('webDorRegistrationList',webdoctorViewset,'DoctorTimings')
 router.register('get_settlement_details',get_settlement_details,'get_settlement_details')
 router.register('doctor_bank_details', get_doctor_bankDetails,'get_settlement_details')
 router.register('doctor_agreement_list', doctor_agreement_list,'get_settlement_details')
+router.register('specificDoctorPaymentList', specificDoctorSettlement, 'specificDoctorSettlement')
+
 
 urlpatterns = [
     path('',include(router.urls)),

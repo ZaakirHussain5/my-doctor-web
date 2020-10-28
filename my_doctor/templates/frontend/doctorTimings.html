@@ -193,18 +193,43 @@
             }).done((response) => {
                 console.log(response)
                 if (response.length > 0) {
-                    formDeserialized(document.getElementById('timingsForm'), response[0]);
-                    for (var key in response[0]) {
-                        if (response[0][key] !== true) {
-                            let parent = jQuery("#" + key).parent()
-                            parent.removeClass('switch-success');
+                    // formDeserialized(document.getElementById('timingsForm'), response[0]);
+                    // for (var key in response[0]) {
+                    //     if (response[0][key] !== true) {
+                    //         let parent = jQuery("#" + key).parent()
+                    //         parent.removeClass('switch-success');
 
-                        }
+                    //     }
 
+                    // }
+                    let inboxes = $('#timingsForm input:checkbox')
+                    // let name = $(inboxes[0]).attr('name')
+                    
+                    for(let i=0; i < inboxes.length; i++){
+                            let name = $(inboxes[i]).attr('name');
+                            if(response[0][name] == true){
+                            console.log(name)
+                                $(inboxes[i]).prop('checked', true)
+                                console.log('Here condition matched')
+                            }else{
+                                $(inboxes[i]).prop('checked', false)
+                            }
+                        
                     }
+                    $('#from_time').val(response[0]['from_time'])
+                    $('#to_time').val(response[0]['to_time'])
+                    $('#doctor').val(response[0]['doctor'])
+                    $('#timingsId').val(response[0]['id'])
+                    // $('#timingsId').val(response[0]['id'])
+                    
                 }else{
                     $('#doctor').val($('#selectDoctor').val());
-                    
+                    let inboxes = $('#timingsForm input:checkbox')
+                    for(let i=0; i < inboxes.length; i++){
+                        $(inboxes[i]).prop('checked', false)
+                    }
+                    $('#from_time').val('')
+                    $('#to_time').val('')
                 }
             }).fail((error) => {
                 console.log(error)
@@ -222,6 +247,7 @@
                 contentType: false,
                 processData: false,
             }).done((response) => {
+                alert("Doctor timing update successfully.")
                 console.log(response);
             }).fail((error) => {
                 console.log(error)

@@ -122,19 +122,29 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">DOB</label></div>
+                                    <div class="col col-md-4">
+                                        <label for="hf-email" class="form-control-label float-right">DOB</label>
+                                    </div>
                                     <div class="col-12 col-md-8">
                                         <div class="row form-group">
-                                            <div class="col col-md-5">
-                                                <input type="date" class="form-control" name="dob">
+                                            <div class="col col-sm-8 col-md-12">
+                                                <input type="date" id="bday" onchange="submitBday()" placeholder="dob" targate="Your date of birth" class="form-control" name="dob">
                                             </div>
-                                            <div class="col col-md-3">
-                                                <label>Or age</label>
+                                            
+                                        </div><br>
+                                        <div class="col"><h4>Or</h4></div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">
+                                        <label for="hf-email" class="form-control-label float-right">Age</label>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="row form-group">
+                                            <div class="col col-sm-8 col-md-12">
+                                                <input type="number" targate="Your age" id="pat_age" placeholder="Age" class="form-control" name="age">
                                             </div>
-                                            <div class="col col-md-4">
-                                                <input type="number" class="form-control" name="age">
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +205,7 @@
                                     <div class="col col-md-4"><label for="hf-email"
                                             class=" form-control-label float-right">Preffered Language</label></div>
                                     <div class="col-12 col-md-8">
-                                        <select name="pref_lang" id="pref_lang" class="form-control">
+                                        <select name="pref_lang" id="pref_lang" required class="form-control">
                                             <option value="">Select Preffered Language</option>
                                             <option value="A+">English (Practice Default)</option>
                                             <option value="B+">Kannada (Practice Default)</option>
@@ -696,6 +706,8 @@
         
     })
 
+    
+
 
 
 
@@ -703,6 +715,13 @@
 
 
     })
+    function submitBday() {
+        var Q4A = 0;
+        var Bdate = document.getElementById('bday').value;
+        var Bday = +new Date(Bdate);
+        Q4A = Math.floor((Date.now() - Bday) / (31557600000));
+        jQuery('#pat_age').val(Q4A)
+    }
 
 
 </script>

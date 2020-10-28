@@ -114,6 +114,34 @@
 
           </div>
         </div>
+        <div class="modal fade" id="settlementDetailsOfDoctor" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Doctor Settelment Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table" id="AsettlementDetailsOfDoctor">
+                        <thead>
+                            <tr>
+                                <th>Sl No.</th>
+                                
+                                <th>Paid Date</th>
+                                <th>Bank Transaction Id</th>
+                                <th>Paid Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        </div>
       </div>
 
 {% endblock %}
@@ -160,11 +188,12 @@
                 {
                     data: 'id',
                     render: function(id, type, row){
+                        
                         return `
-                        <button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetails">
+                        <button type="button" class="btn btn-success mb-2 btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetails">
                                 make payment
-                                </button>
-                            <button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetails">
+                                </button><br>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="getSettlementData(this)" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetailsOfDoctor">
                                 view settelments
                                 </button>
                         `
@@ -232,8 +261,50 @@
 
     })
 
+    
+
 
     })
+    function getSettlementData(doctor_id){
+        let data = jQuery(doctor_id).data('doct')
+        doctor_id = data['doctor']['Registration_Number'];
+        // $.ajax({
+        //     url: `/api/specificDoctorPaymentList?doctor_id=${doctor_id}`,
+        //     method: 'GET',
+        //     contentType: "application/json",
+
+        // }).done((response)=>{console.log(response)})
+        // .fail((err)=>{console.log(err)})
+        var tables = jQuery('#AsettlementDetailsOfDoctor').DataTable({
+            ajax:{
+                url:`/api/specificDoctorPaymentList?doctor_id=${doctor_id}`,
+                dataSrc:"",
+            },
+            columns:[
+            {
+                data:"id"
+            },
+            {
+                data: "paid_date"
+            },
+            {
+                data: "bank_trans_id"
+            },
+            {
+                data: "paid_amount"
+            }
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+        
+    }
     
    
 </script>
