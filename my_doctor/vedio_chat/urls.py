@@ -12,6 +12,7 @@ urlpatterns = [
     path('createVideoSession',views.createVideoSession,name='sessionID'),
     path('getDoctorToken',views.getDoctorToken,name="DoctorToken"),
     path('videoCall',InitiateCallAPI.as_view(),name='VideoCall'),
-    path('PatinetVideoUI',views.patientVideoChat,name="video_chat"),
-    path('DoctorVideoUI',views.doctorVideoChat,name="video_chat")
+    path('PatientVideoUI',views.patientVideoChat,name="video_chat"),
+    path('DoctorVideoUI',views.doctorVideoChat,name="video_chat"),
+    path('ratings',views.ratings,name='ratings')
 ]

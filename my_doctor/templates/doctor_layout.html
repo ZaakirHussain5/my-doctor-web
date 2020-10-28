@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Doctor Plus - Admin</title>
+        <title>Doctor Plus - Doctor</title>
 
         <link rel="stylesheet" href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
@@ -149,16 +149,21 @@
                     <div class="modal-body">
                         <div class="text-center">
                             <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                <img src="{% static 'patients/assets/images/layer-14@2x.png' %}" alt="">
+                                <img src="/media/logos/anonymous-user.png" alt="">
                             </div>
                             <div class="userprofile-name">
                                 <span>Incoming Call</span>
                                 <h4 id="PatientName"></h4>
                             </div>
-
-                            <div class="call-actions">
-                                <button class="btn btn-danger" id="hangup" data-dismiss="modal"><i class="mdi mdi-phone-hangup"></i> Ignore</button>
-                                <a id="answerCall" class="btn btn-success" ><i class="fa fa-phone"> Accept</i></a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-danger btn-block" id="hangupBtn"><i class="fa fa-phone" style="transform: rotate(140deg)"></i> Ignore</button>
+                            </div>
+                            <div class="col">
+                                <a id="answerCall" class="btn btn-success btn-block" ><i class="fa fa-phone"> Accept</i></a>
                             </div>
                         </div>
                     </div>
@@ -208,15 +213,37 @@
             }).done((response) => {
                 console.log(response)
                 var list = response;
-                if(list && list.length >0){
-                    x.loop =true;
+                if (list && list.length > 0) {
+                    x.loop = true;
                     x.play()
-                    jQuery('#answerCall').attr('href','/api/DoctorVideoUI?session_id='+list[0].Call_session)
+                    jQuery('#hangupBtn').attr('data-id', list[0].id)
+                    jQuery('#PatientName').html(list[0].patient_name)
+                    jQuery('#answerCall').attr('href', `/api/DoctorVideoUI?session_id=${list[0].Call_session}&conf_id=${ list[0].id}`)
                     jQuery('#incomingVideoCall').modal('show')
+                }
+                else
+                {
+                    x.stop()
+                    jQuery('#incomingVideoCall').modal('hide')
                 }
             });
 
         }
+
+        jQuery('#hangupBtn').click(function () {
+            jQuery.ajax({
+                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') +'/',
+                'method': 'DELETE',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            }).done((response) => {
+                console.log(response)
+                jQuery('#incomingVideoCall').modal('hide')
+            }).fail((response) => {
+                console.log(response)
+            })
+        })
 
         setInterval(function () {
             checkForCall();

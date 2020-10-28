@@ -1,5 +1,5 @@
 /* global OT API_KEY TOKEN SESSION_ID SAMPLE_SERVER_BASE_URL */
-
+//const urlParams = new URLSearchParams(window.location.search);
 var apiKey = "46964534";
 var sessionId;
 var token;
@@ -9,9 +9,10 @@ function handleError(error) {
     console.error(error);
   }
 }
+var session;
 
 function initializeSession() {
-  var session = OT.initSession(apiKey, sessionId);
+   session = OT.initSession(apiKey, sessionId);
 
   // Subscribe to a newly created stream
   session.on('streamCreated', function streamCreated(event) {
@@ -25,6 +26,14 @@ function initializeSession() {
 
   session.on('sessionDisconnected', function sessionDisconnected(event) {
     console.log('You were disconnected from the session.', event.reason);
+    if(window.location.href.search('PatientVideoUI') !=-1)
+    {
+          window.location.href = '/api/ratings'
+    }
+    else
+    {
+          window.location.href = '/doctors/Prescription?pat_id=1'
+    }
   });
 
   // initialize the publisher
@@ -45,6 +54,24 @@ function initializeSession() {
     }
   });
 }
+
+$('#endCall').click(function(){
+  if(window.location.href.search('DoctorVideoUI') !=-1) {
+    $.ajax({
+      'url': '/api/vedioChatOparetion/' + urlParams.get('conf_id')+'/',
+      'method': 'DELETE',
+      beforeSend: function (xhr) {
+          xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+      },
+  }).done((response) => {
+      console.log(response)
+  }).fail((response) => {
+      console.log(response)
+  })
+  }
+  session.disconnect()
+
+})
 
 // See the config.js file.
 if (API_KEY && TOKEN && SESSION_ID) {

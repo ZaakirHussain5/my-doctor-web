@@ -21,7 +21,7 @@
                         <div class="row form-group">
                             <label for="patient" class=" form-control-label">Patient</label>
                             <select id="patient" name="patient" class="form-control">
-                                <option value="">Select Specialist Type</option>
+                                <option value="">Select Patient</option>
                                 {% for patient in patients %}
                                 <option value="{{patient.user.id}}">{{patient.pat_id}}-{{patient.full_name}}
                                 </option>
@@ -29,14 +29,14 @@
                             </select>
                         </div>
                         <div class="row form-group">
-                            <label for="record_type" class=" form-control-label">Record Type</label>
+                            <label for="record_type" class=" form-control-label">Prescription Title</label>
                             <input type="text" required="" id="record_type" name="record_type" placeholder="Enter Record Type"
                                 class="form-control">
                             <input type="hidden"  id="created_by" name="created_by" placeholder="Enter Record Type"
                                 class="form-control" value="created by doctor">
                         </div>
                         <div class="row form-group">
-                            <label for="record_files" class=" form-control-label">Record Files</label>
+                            <label for="record_files" class=" form-control-label">Prescription File</label>
                             <input type="file" required="" id="record_files" name="record_files"
                                 placeholder="Enter Plan Price" class="form-control">
                         </div>
@@ -45,9 +45,9 @@
                     </div>
                     <div class="col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="description" class=" form-control-label">description</label>
+                            <label for="description" class=" form-control-label">Description</label>
                             <textarea name="description" id="description" rows="5" class="form-control"
-                                placeholder="Describe about the recoed"></textarea>
+                                placeholder="Describe about the Prescription"></textarea>
                         </div>
                     </div>
                 </div>

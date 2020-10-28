@@ -23,4 +23,7 @@ def patientVideoChat(request):
 def doctorVideoChat(request):
     return render(request,'video_chat/doctor_video_ui.html')
 
+def ratings(request):
+    return render(request,'video_chat/ratings.html')
+
 
