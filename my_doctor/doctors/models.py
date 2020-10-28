@@ -7,6 +7,7 @@ class doctors_info(models.Model):
     phone_number = models.CharField(max_length=15,null=True)
     commission_val=models.DecimalField(max_digits=10,decimal_places=2,default=2)
     commission_type=models.CharField(max_length=15,default='Percent')
+    gender=models.CharField(max_length=6, default='male')
     Registration_Number = models.CharField(max_length=25, null=True)
     specialist_type = models.CharField(max_length=25, null=True)
     rating = models.IntegerField(default=0)

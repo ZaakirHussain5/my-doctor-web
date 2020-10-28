@@ -107,6 +107,7 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
     specialist_type = serializers.CharField(max_length=25)
     about = serializers.CharField(max_length=500)
     web_registration = serializers.BooleanField()
+    gender=serializers.CharField(max_length=6)
 
     def create(self, validated_data):
         try:
@@ -117,7 +118,8 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
               about=validated_data['about'],
               specialist_type=validated_data['specialist_type'],
               full_name=validated_data['full_name'],
-              web_registration=validated_data['web_registration']
+              web_registration=validated_data['web_registration'],
+              gender=validated_data['gender']
           )
           details.save()
           return user

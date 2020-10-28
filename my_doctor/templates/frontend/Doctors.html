@@ -116,19 +116,19 @@
                                         <div class="form-group">
                                             <label for="hf-email" class=" form-control-label">Commision</label>
                                             <input type="text" id="commission_val" name="commission_val"
-                                                placeholder="Enter Commision Value" class="form-control">
+                                                placeholder="Enter Commision Value" class="form-control" onkeypress="return /^[0-9]+$/i.test(event.key)">
                                         </div>
                                         <div class="form-group">
                                             <label for="hf-email" class=" form-control-label">Commision Unit</label>
                                             <br>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox1"
-                                                    value="Percent" value="option1">
+                                                    value="Percent">
                                                 <label class="form-check-label" for="inlineCheckbox1">Percent</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox2"
-                                                    value="Amount" value="option2">
+                                                    value="Amount">
                                                 <label class="form-check-label" for="inlineCheckbox2">Amount</label>
                                             </div>
                 
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-dot-circle-o"></i><span id="submitBtn">Submit</span>
+                                        <i class="fa fa-dot-circle-o"></i><span id="submitBtn"> Submit</span>
                                     </button>
                                     <button type="reset" class="btn btn-danger btn-sm">
                                         <i class="fa fa-ban"></i> Reset

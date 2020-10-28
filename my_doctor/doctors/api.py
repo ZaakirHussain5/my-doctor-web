@@ -137,6 +137,22 @@ class get_settlement_details(viewsets.ModelViewSet):
     queryset = settlement_details.objects.all()
 
 
+
+class specificDoctorSettlement(viewsets.ModelViewSet):
+    
+    permissions=[
+        permissions.AllowAny
+    ]
+    serializer_class = settlement_detailsSerializer
+
+    def get_queryset(self):
+        id = self.request.query_params.get('doctor_id')
+        print("id is ", id)
+        doctor = doctors_info.objects.get( Registration_Number = id)
+        return settlement_details.objects.filter(doctor_id = doctor)
+        
+
+
 class get_doctor_bankDetails(viewsets.ModelViewSet):
     permissions = [
         permissions.AllowAny
@@ -181,7 +197,6 @@ class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
 
     def get_queryset(self):
         id = self.request.GET.get('id')
-
         return DoctorTimings.objects.filter( doctor_id = id)
 
     def perform_create(self, serializer):

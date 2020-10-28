@@ -18,7 +18,7 @@ class PatientResgistrationSerializer(serializers.Serializer):
     full_name = serializers.CharField()
     gender = serializers.CharField()
     dob = serializers.CharField(allow_blank=True,allow_null=True)
-    age = serializers.IntegerField()
+    age = serializers.IntegerField(required=False)
     blood_group = serializers.CharField(allow_blank=True,allow_null=True)
     rel_type = serializers.CharField(allow_blank=True,allow_null=True)
     relation = serializers.CharField(allow_blank=True,allow_null=True)
@@ -30,7 +30,7 @@ class PatientResgistrationSerializer(serializers.Serializer):
     city = serializers.CharField(allow_blank=True,allow_null=True)
     pincode=serializers.CharField(allow_blank=True,allow_null=True)
     medical_history = serializers.CharField(allow_blank=True,allow_null=True)
-    other_history=serializers.CharField(allow_blank=True,allow_null=True)
+    other_history=serializers.CharField(required=False, allow_blank=True, allow_null=True)
     groups=serializers.CharField(allow_blank=True,allow_null=True)
     profile_pic=serializers.FileField(allow_null=True)
 
@@ -54,10 +54,13 @@ class PatientResgistrationSerializer(serializers.Serializer):
             city = validated_data['city'],
             pincode = validated_data['pincode'],
             medical_history = validated_data['medical_history'],
-            other_history = validated_data['other_history'],
             groups = validated_data['groups'],
             profile_pic = validated_data['profile_pic'])
             patient_details.save()
+            if "other_history" in validated_data:
+                other_history = validated_data['other_history']
+                patient_details.other_history = other_history
+                patient_details.save()
             return user
         except IntegrityError:
             raise serializers.ValidationError("User Already Exists")
@@ -69,7 +72,8 @@ class PatientResgistrationApp(serializers.Serializer):
     pat_id = serializers.CharField()
     full_name = serializers.CharField()
     gender = serializers.CharField()
-    age = serializers.IntegerField()
+    dob = serializers.CharField(required=False)
+    age = serializers.IntegerField(required=False)
     height=serializers.DecimalField(max_digits=10,decimal_places=2)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2)
     marital_status=serializers.CharField(required=False)
