@@ -1,0 +1,44 @@
+body, html {
+    background-color: gray;
+    height: 100%;
+}
+#videos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#subscriber {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 92%;
+    z-index: 10;
+}
+#publisher {
+    position: absolute;
+    width: 360px;
+    height: 240px;
+    bottom: 100px;
+    left: 10px;
+    z-index: 100;
+    border: 3px solid white;
+    border-radius: 3px;
+}
+.round-button{
+    background-color: #E71C23;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    font-size: 25px;
+}

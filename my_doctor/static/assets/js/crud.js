@@ -13,7 +13,7 @@ function crudOperations(options){
                 url: options.url + button.attr('data-id') + '/',
                 contentType: 'application/json',
                 success: function(data) {
-                    toastr.success(button.prop('checked')=='true'?'Activated Successfully':'Deactivated Successfully', 'Success', {
+                    toastr.success(record.is_active=='true'?'Activated Successfully':'Deactivated Successfully', 'Success', {
                         positionClass: "toast-top-center"
                     })
                 },

@@ -22,29 +22,6 @@
                    <div class="item p-2"><img src="{% static 'patients/assets/images/media/slide1.PNG' %}" style="border-radius: 25px;"
                            alt="The Last of us"></div>
                </div>
-               <h5 class="text-lg p-2 pt-4">Specialities</h5>
-               <div id="spl-slider" class="owl-carousel owl-theme">
-                {% for specialist in specialists %}
-                <div class="item m-2" style="
-                    background: url('/media/{{specialist.icon}}');
-                    height: 248px;
-                    border-radius: 15%;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                ">
-                    <div class="text" style="text-shadow: 5px 5px #c1c1c1;">
-                        <h6 style="/* text-shadow: 5px 5px #000000; */color: white;text-shadow: 10px 10px 15px #000000;">{{specialist.special_type}}</h6>
-                    </div>
-                
-                </div>
-                   <!-- <div class="item p-2">
-                       <div class="text">
-                           <h6></h6>
-                       </div>
-                       <img src="/media/{{specialist.icon}}" style="border-radius: 20px;" alt="The Last of us">
-                   </div> -->
-                {% endfor %}
-               </div>
                <h5 class="text-lg p-2 pt-4">All Subscription Plans</h5>
                <ul class="list-unstyled" id="subscriptionPlans">
                    <li>
@@ -95,7 +72,8 @@
                         <div class="ca-content__callstab">
                         
                         <div class="container">
-                            <div class="row">
+                            
+<div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body p-0">
@@ -106,7 +84,7 @@
                                                 <div class="ca-call-details__left">
                                                     
                                                     <div class="ca-call-details__pname">
-                                                        <div>Doctors online</div>
+                                                        <div>Our Specialities</div>
                                                     </div>                                                    
                                                 </div>
                                                 
@@ -117,30 +95,21 @@
                             </div>
 
                             <div class="row mt-4">
-                                <div class="col-12">
-                                    <div class="ca-call-details-history">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="ca-call-history">
-                                                    <div class="ca-call-history__left">
-                                                        <div class="user-avatar user-avatar-rounded">
-                                                            <img class="img-fluid" src="/media/group-12x_iTo1KTH.png" alt="">
-                                                        </div>
-                                                        <div class="ca-call-history__left--title">
-                                                            <div>Dr. Ahmed</div>
-                                                            <span>12/11/2020 - 12:00 AM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ca-call-history__right">
-                                                        <a href="/api/PatientVideoUI?doctor_id=1" class="iconbox btn-solid-info">
-                                                            <i class="iconbox__icon mdi mdi-video-outline"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="row">
+                                    {% for specialist in specialists %}
+                                                          <div class="col-md-4 col-xs-4">
+                                                              <div class="card">
+                                                                  <div class="card-body p-2">
+                                                                      <img src="/media/{{specialist.icon}}" alt="" style="width: 100%; height:250px;border-radius: 25%;">
+                                                                      
+                                                                  </div>
+                                                                  <div class="card-footer text-center">
+                                                                    <h4>{{specialist.special_type}}</h4>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          {% endfor %}
+                              </div>
                             </div>
                         </div>
                     </div>
