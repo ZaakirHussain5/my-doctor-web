@@ -4,30 +4,63 @@
 
     
     
-    <section class="slider">
+    <!-- <section class="slider">
+        <div id="x_023_animated_layers" class="">
     
-    <div id="x_023_animated_layers" class="">
-    
-    <div class="carousel-inner" role="listbox">
-    
-    <div class="item active">
-    <img src="{%static 'website/img/BannerImage.jpg'%}" alt="">
-    <div class="x_023_animated_layers_content">
-    <div class="x_023_animated_layers_txt" class="margin-top:40px"> 
-    <h3>Talk to our Doctor’s</h3>
-    <h4 class="white">
-    Consult our experienced team of Doctors from anywhere, anytime Through VIDEO / PHONE or CHAT.
-    </h4>
-        <h4 class="white">
-            Our patient outreach program Has been specially designed for Convenient access.
-        </h4>
-     
-    
-    </div> 
-    </div> 
-    </div> 
-    </div> 
-    </section>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="{%static 'website/img/Main Image1.jpg'%}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{%static 'website/img/Main Image 2.jpg'%}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{%static 'website/img/Main Image 3.jpg'%}" alt="">
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <section class="slider" style="padding:8% 0 0 0;">
+
+        <div id="x_023_animated_layers" class="carousel slide x_023_animated_layers_indicators x_023_animated_layers_control_button thumb_scroll_x swipe_x ps_easeOutInCubic" data-ride="carousel" data-pause="hover" data-interval="8000" data-duration="2000">
+        
+        <ol class="carousel-indicators">
+        
+        <li data-target="#x_023_animated_layers" data-slide-to="0" class="active"></li>
+        
+        <li data-target="#x_023_animated_layers" data-slide-to="1"></li>
+        
+        <li data-target="#x_023_animated_layers" data-slide-to="2"></li>
+        </ol>
+        
+        <div class="carousel-inner" role="listbox">
+        <div class="item active">
+        
+        <div class="x_023_animated_layers_content" style="background-image: url({%static 'website/img/Main image 3.jpg'%});background-size: cover;">
+        </div> 
+        </div> 
+        <div class="item">
+        
+        <div class="x_023_animated_layers_content" style="background-image: url({%static 'website/img/Main Image1.jpg'%});background-size: cover;">
+        </div> 
+        </div> 
+        <div class="item">
+        
+        <div class="x_023_animated_layers_content" style="background-image: url({%static 'website/img/Main image 2.jpg'%});background-size: cover;">
+        </div> 
+        </div> 
+        </div> 
+        
+        <a class="left carousel-control" href="#x_023_animated_layers" role="button" data-slide="prev">
+        <span class="fa fa-angle-left"></span>
+        </a>
+        
+        <a class="right carousel-control" href="#x_023_animated_layers" role="button" data-slide="next">
+        <span class="fa fa-angle-right"></span>
+        </a>
+        </div> 
+        <div class="overlay"></div>
+        </section>
     
     <div class="footer">
         <div class="f-contact">
@@ -48,7 +81,7 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-8 col-12">
         <a href="#appointment" class="btn" data-animation="animated fadeInLeft">Book Appointment</a> &nbsp;
-    <a href="contact.html" class="btn" data-animation="animated fadeInLeft"><i class="fa fa-phone"></i> 080-4554-9494</a>
+    <a href="/contact" class="btn" data-animation="animated fadeInLeft"><i class="fa fa-phone"></i> 080-4554-9494</a>
     </div>
     </div>
     </div>
@@ -518,123 +551,10 @@ I also liked the way doctors spoke and understood the problem.</p>
     <div class="overlay"></div>
     </section>
     
-    <section class="appointment">
-    <div class="container">
-    <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    <div class="section-title text-center">
-    
-    <h2>Book An <span>Appoinment</span></h2>
-    </div>
-    <div class="appointment-image">
-    <img src="{%static 'website/img/blog1.jpg'%}" alt="image">
-    </div>
-    </div>
-    
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-       <div class="appointment-form">
-    <form id="appointments-main-form" >
-        {% csrf_token %}
-        <div class="row">
-            <div class="">
-                <div class="form-group col-xs-6">
-                    <input type="text" id="id_name" placeholder="Your Name" required>
-                </div>
-            <div  class="form-group col-xs-6">
-    
-            <input id="id_email" type="text" placeholder="Your Email" required>
-        </div>
-        <div class="form-group col-xs-6">
-    
-            <input id="id_ph_no" type="tel" placeholder="Your Phone" minlength="10" maxlength="10" size="10" required>
-        </div>
-        <div class="form-group col-xs-6">
-
-            <input type="text" id="id_city" required placeholder="Your City">
-        </div>
-        
-        <div class="form-group col-xs-6">
-    
-            <input type="number" id="id_age"  required placeholder="Age" min="1" max="100">
-        </div>
-        <div class="form-group col-xs-6">
-            <select id="select-specialist" required="true">
-                <option value="Speciality">Speciality</option>
-                <option value="General Physician">General Physician</option>
-                <option value="Dermatologist">Dermatologist</option>
-                <option value="Pediatrician">Pediatrician</option>
-                <option value="Dietitian">Dietitian</option>
-                <option value="Psychologist">Psychologist</option>
-                <option value="Gynaecologist">Gynaecologist</option>
-            </select>
-        </div>
-        <div class="form-group col-xs-6" >
-            <!-- <input type="text" id="id_blood" required placeholder="Blood Group"> -->
-            <select id="id_blood" required="true">
-                <option value="blood_group">Blood Group</option>
-                <option value="A+">A+</option>
-                <option value="B+">B+</option>
-                <option value="AB+">AB+</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-                <option value="AB-">AB-</option>
-                <option value="A-">A-</option>
-                <option value="B-">B-</option>
-            </select>
-        </div>
-    </div>
+   
     
     
-    
-    
-    <div class="">
-    <div class="form-group col-xs-12">
-    
-    <textarea id="id_message" required placeholder="Briefly describe about your problem."></textarea>
-        </div>
-    <div class="col-xs-12">
-    <div class="form-btn">
-    <button type="submit" class="btn">Submit</button>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    </form>
-    </div>
-        </div>
-    
-    </div>
-    </div>
-    </section>
-    
-    
-    <section class="newsletter">
-    <div class="container">
-    <div class="newsletter-content">
-    <div class="subscribe-form">
-    <div class="row">
-    <div class="col-md-6 col-sm-12">
-    <h3 class="white">Subscribe to newsletter</h3>
-    <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
-    </div>
-    <div class="col-md-6 col-sm-12">
-                        <form id="newsletter-form">
-                            {% csrf_token %}
-                            <input id="SubsricbeToNewsletter" type="email" placeholder="abc@xyz.com">
-                            <span>
-                                <div class="form-btn">
-                                    <button type="submit" class="btn">Submit</button>
-                                </div>
-                            </span>
-
-                        </form>
-                    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </section>
+   
 
 
 {% endblock %}

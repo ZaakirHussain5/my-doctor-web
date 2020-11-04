@@ -35,7 +35,7 @@
                                 <form id="profile_form">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                            <div class="wrap-custom-file">
                                                 <input type="file" name="profile_pic" id="image1"
                                                     accept=".gif, .jpg, .png" />
                                                 <label for="image1">
@@ -49,7 +49,7 @@
                                                 <div class="col col-md-4"><label for="id"
                                                         class="form-control-label float-right">ID</label></div>
                                                 <div class="col-12 col-md-8">
-                                                    <input type="text" id="id" name="Registration_Number"
+                                                    <input type="text" id="username" name="username"
                                                         placeholder="Doctor ID" class="form-control"
                                                         readonly="readonly">
                                                 </div>
@@ -75,8 +75,6 @@
                                                 <div class="col-12 col-md-8">
                                                     <input type="text" id="ph_no" name="phone_number"
                                                         placeholder="Phone Number" class="form-control">
-                                                    <input type="hidden" id="username" , placeholder="username"
-                                                        name="username">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -298,19 +296,8 @@
             },
         }).done((response) => {
             console.log('response response', response);
-            jQuery.ajax({
-                url: "/api/getEmail",
-                method: 'GET',
-                contendType: 'application/json',
-                async: false,
-                method: 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                },
-            }).done((response) => {
-                formDeserialize(form, response);
-            })
-            formDeserialize(form, response);
+            formDeserialize(form, response.user);
+            formDeserialize(form,response)
 
         }).fail((error) => {
             console.log(error);
@@ -369,10 +356,7 @@
 
 
     //////////////// username change event ////////////////
-    jQuery('#ph_no').change(function () {
-        jQuery('#username').val(jQuery(this).val())
-    })
-    jQuery('#username').val(jQuery('#ph_no').val())
+   
 
 
     //////// UPDATING PROFILE //////////
