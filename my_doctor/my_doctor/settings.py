@@ -25,7 +25,7 @@ SECRET_KEY = 'rd*14e!dam(_=6n!^=)2*ee73%lkbnnhop2u5w-7!9kuh(unv6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['doctor-plus.in','www.doctor-plus.in']
+ALLOWED_HOSTS = ['127.0.0.1','doctor-plus.in','www.doctor-plus.in']
 
 
 # Application definition
@@ -104,26 +104,26 @@ WSGI_APPLICATION = 'my_doctor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'doctor_plus',
-        'USER': 'bstejas_dp',
-        'PASSWORD': 'bstejas_dp1',
-        'HOST': '148.66.136.124',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'doctor_plus',
+#        'USER': 'bstejas_dp',
+#        'PASSWORD': 'bstejas_dp1',
+#        'HOST': '148.66.136.124',
+#        'PORT': '3306',
+#        'OPTIONS': {
+#            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#        }
+#    }
+#}
 
 
 # Password validation

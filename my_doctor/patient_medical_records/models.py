@@ -5,7 +5,7 @@ from doctors.models import doctors_info
 # Create your models here.
 
 class patient_medical_records(models.Model):
-    patient = models.ForeignKey(User,related_name='records',on_delete=models.CASCADE)
+    patient = models.ForeignKey(User,related_name='records',on_delete=models.CASCADE,null=True)
     record_type = models.CharField(max_length = 255, null=True, blank=True)
     description = models.CharField(max_length = 255, null=True, blank=True)
     record_files = models.FileField(upload_to ='uploads', null=True, blank=True) 

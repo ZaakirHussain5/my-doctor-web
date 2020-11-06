@@ -14,3 +14,9 @@ def Prescription(request):
 	patients = patient_info.objects.all()
 	context['patients'] = patients
 	return render(request, 'doctorsUI/prescription.html', context)
+
+def profile(request):
+	return render(request,'doctorsUI/profile.html')
+
+def settings(request):
+	return render(request,'doctorsUI/settings.html')

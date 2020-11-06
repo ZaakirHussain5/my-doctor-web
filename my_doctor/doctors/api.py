@@ -64,7 +64,7 @@ class GetLoggedDoctor(generics.RetrieveAPIView):
   permission_classes = [
     permissions.IsAuthenticated,
   ]
-  serializer_class = doctors_infoSerializer
+  serializer_class = doctors_listSerializer
 
   def get_object(self):
         try:

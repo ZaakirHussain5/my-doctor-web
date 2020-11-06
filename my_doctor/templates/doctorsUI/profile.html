@@ -1,0 +1,412 @@
+{% extends 'doctor_layout.html' %}
+{% block content%}
+<div class="breadcrumbs">
+    <div class="col-12">
+        <div class="page-header">
+            <div class="page-title p-2">
+                <h1 id="title">Update Profile</h1>
+            </div>
+        </div>
+    </div>
+  </div>
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+            <div class="row">
+                <div class="col-md-10">
+                    <form id="profile_form">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="wrap-custom-file">
+                                    <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                                    <label for="image1">
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="id"
+                                            class="form-control-label float-right">ID</label></div>
+                                    <div class="col-12 col-md-8">
+                                        <input type="text" id="username" name="username" placeholder="Doctor ID"
+                                            class="form-control" readonly="readonly">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="specialist_type">
+                                <input type="hidden" name="Registration_Number">
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="full-name"
+                                            class=" form-control-label float-right">Full Name</label></div>
+                                    <div class="col-12 col-md-8"><input type="text"  id="full-name"
+                                            name="full_name" placeholder="Full Name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="email"
+                                            class=" form-control-label float-right">Email Address</label>
+                                    </div>
+                                    <div class="col-12 col-md-8"><input type="email"  id="email"
+                                            name="email" placeholder="Email Address" class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="ph_no"
+                                            class=" form-control-label float-right">Phone Number</label>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <input type="text"  id="ph_no" name="phone_number"
+                                            placeholder="Phone Number" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4"><label for="specialist-type"
+                                            class=" form-control-label float-right">About me</label></div>
+                                    <div class="col-12 col-md-8"><textarea name="about" 
+                                            id="specialist-type" rows="8" class="form-control"
+                                            placeholder="Enter About Details"></textarea></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-12 col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Update Profile
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+                <!-- <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
+                                <form id="password_form">
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="old_password"
+                                                class="form-control-label float-right">Old Password</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <input type="password" id="old_password" name="old_password"
+                                                placeholder="Old Passowrd" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="new_password"
+                                                class=" form-control-label float-right">New Password</label></div>
+                                        <div class="col-12 col-md-8"><input type="password" id="new_password"
+                                                name="new_password" placeholder="New Password" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-4"><label for="confirm_new_password"
+                                                class=" form-control-label float-right">Confirm Password</label>
+                                        </div>
+                                        <div class="col-12 col-md-8"><input type="password" id="confirm_new_password"
+                                                name="confirm_new_password" placeholder="Confirm Password"
+                                                class="form-control"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12 col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-dot-circle-o"></i> Update Password
+                                            </button>
+                                            <button type="reset" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-ban"></i> Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="timings" role="tabpanel" aria-labelledby="list">
+                                <form id="timingsForm">
+                                    <div class="row">
+                                        <div class=" form-group col">
+                                            <input type="hidden" name="doctor">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="mon" name="mon" class="switch-input"> <span
+                                                    class="switch-label"></span> <span id="monday"
+                                                    class="switch-handle"></span> </label>MON
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="tue" name="tue" data-id='${row.id}'
+                                                    class="switch-input "> <span class="switch-label"></span> <span
+                                                    id="tueday" class="switch-handle"></span> </label>TUE
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="wed" name="wed" data-id='${row.id}'
+                                                    class="switch-input"> <span class="switch-label"></span> <span
+                                                    id="wedday" class="switch-handle"></span> </label>WED
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="thu" name="thu" data-id='${row.id}'
+                                                    class="switch-input active"> <span class="switch-label"></span>
+                                                <span id="thuday" class="switch-handle"></span> </label>THU
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="fri" name="fri" data-id='${row.id}'
+                                                    class="switch-input active"> <span class="switch-label"></span>
+                                                <span id="friday" class="switch-handle"></span> </label>FRI
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="sat" name="sat" data-id='${row.id}'
+                                                    class="switch-input active"> <span class="switch-label"></span>
+                                                <span id="satday" class="switch-handle"></span> </label> SAT
+                                        </div>
+                                        <div class=" form-group col">
+                                            <label style="vertical-align: middle"
+                                                class="switch switch-default switch-pill switch-success mr-2">
+                                                <input type="checkbox" id="sun" name="sun" data-id='${row.id}'
+                                                    class="switch-input "> <span class="switch-label"></span> <span
+                                                    id="sunday" class="switch-handle"></span> </label> SUN
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="from_time" class=" form-control-label">From</label>
+                                                <input type="time" id="from_time" name="from_time" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="to_time" class=" form-control-label">To</label>
+                                                <input type="time" id="to_time" name="to_time" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-12 ">
+                                            <center>
+                                                <button type="submit" class="btn btn-primary btn-sm ju">
+                                                    <i class="fa fa-dot-circle-o"></i> Update Timings
+                                                </button>
+                                            </center>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> -->
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="pull-right">
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts%}
+<script>
+    let dataList = [];
+    function getDataa() {
+        console.log('here')
+        const form = document.getElementById('profile_form');
+        jQuery.ajax({
+            url: '/api/getLoggedInDoctor',
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+            console.log('response response', response);
+            formDeserialize(form, response.user);
+            formDeserialize(form,response)
+
+        }).fail((error) => {
+            console.log(error);
+        });
+    }
+    getDataa()
+
+
+    function formDeserialize(form, data) {
+        const entries = (new URLSearchParams(data)).entries();
+        for (const [key, val] of entries) {
+            const input = form.elements[key];
+            if (input != undefined) {
+                if (input.type == 'file') {
+                    if (val) {
+                        var $file = jQuery('#' + input.id),
+                            $label = $file.next('label'),
+                            $labelText = $label.find('span'),
+                            labelDefault = $labelText.text();
+                        var filename = val.split('/').pop()
+                        if (filename) {
+                            $label
+                                .addClass('file-ok')
+                                .css('background-image', 'url(' + val + ')');
+                            $labelText.text('Click here to change pic');
+                        } else {
+                            $label.removeClass('file-ok');
+                            $labelText.text(labelDefault);
+                        }
+                    }
+
+                } else {
+
+                    switch (input.type) {
+                        case 'checkbox':
+                            input.checked = !!val;
+                            break;
+                        case 'select-one':
+                            if (val)
+                                input.value = val;
+                            else
+                                input.selectedIndex = 0;
+
+                            break;
+                        default:
+                            input.value = val;
+                            break;
+
+                    }
+
+                }
+            }
+
+        }
+    }
+
+
+    //////////////// username change event ////////////////
+   
+
+
+    //////// UPDATING PROFILE //////////
+    jQuery("#profile_form").submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('profile_form'))
+        console.log(data);
+        jQuery.ajax({
+            url: '/api/DoctorUpdateProfile',
+            data: data,
+            method: 'POST',
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        })
+            .done((response) => {
+                console.log("postrequest response -", response);
+                jQuery.removeCookie('DoctorToken');
+                jQuery.cookie('DoctorToken', response.token, { expires: 1 })
+                toastr.success("Your details have been Updated Successfully","Profile Updated",{positionClass:"toast-top-center"})
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    })
+
+
+    jQuery('#pills-profile-tab').click(() => {
+
+    })
+
+    ////////// PASSWORD CHANGE FEATURES //////////
+    jQuery('#password_form').submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('password_form'))
+        jQuery.ajax({
+            url: '/api/changePassword',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+            console.log(response);
+            //jQuery.removeCookie('DoctorToken');
+            //window.location.href = '/login';
+        }).fail((error) => {
+            console.log('errors are ', error)
+        })
+
+
+    })
+
+    ///////////// Doctor Timings://///////////
+    function getDoctorTimings() {
+        const form = document.getElementById('timingsForm');
+        jQuery.ajax({
+            url: '/api/DoctorTimings',
+            method: 'GET',
+            contendType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        })
+            .done((response) => {
+                console.log(response);
+                console.log(form);
+                if (response.length != 0) {
+                    formDeserialize(form, response[0]);
+                    for (var key in response[0]) {
+                        if (response[0][key] !== true) {
+                            let parent = jQuery("#" + key).parent()
+                            parent.removeClass('switch-success');
+
+                        }
+
+                    }
+
+                }
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+    }
+    getDoctorTimings();
+    jQuery('#timingsForm').submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('timingsForm'))
+        jQuery.ajax({
+            url: '/api/DoctorTimings/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        })
+            .done((response) => {
+                console.log(response);
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+
+    })
+
+</script>
+{% endblock %}

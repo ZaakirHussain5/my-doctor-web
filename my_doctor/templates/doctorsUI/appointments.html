@@ -205,9 +205,9 @@
 </style>
 <div class="breadcrumbs">
     <div class="col-12">
-        <div class="page-header text-center">
+        <div class="page-header ">
             <div class="page-title">
-                <h2 id="title">Appointments List</h2>
+                <h1 id="title">Upcoming Appointments</h1>
             </div>
         </div>
     </div>
@@ -219,11 +219,11 @@
                 <thead>
                     <tr>
                         <th>Slno</th>
-                        <th>Photo</th>
+                        
                         <th>Patient</th>
                         <th>Appointment Date</th>
                         <th>Appointment Time</th>
-                        <th>Description</th>
+                        <th>Description</th><th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -232,6 +232,66 @@
             </table>
         </div>
     </div>
+</div>
+<div class="breadcrumbs">
+  <div class="col-12">
+      <div class="page-header ">
+          <div class="page-title">
+              <h1 id="title">Todays Appointments</h1>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="content">
+  <div class="card pl-3 pr-3">
+      <div class="card-body card-block">
+          <table class="table" id="Appointments">
+              <thead>
+                  <tr>
+                      <th>Slno</th>
+                      
+                      <th>Patient</th>
+                      <th>Appointment Date</th>
+                      <th>Appointment Time</th>
+                      <th>Description</th><th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+<div class="breadcrumbs">
+  <div class="col-12">
+      <div class="page-header ">
+          <div class="page-title">
+              <h1 id="title">Previous Appointments</h1>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="content">
+  <div class="card pl-3 pr-3">
+      <div class="card-body card-block">
+          <table class="table" id="Appointments">
+              <thead>
+                  <tr>
+                      <th>Slno</th>
+                      
+                      <th>Patient</th>
+                      <th>Appointment Date</th>
+                      <th>Appointment Time</th>
+                      <th>Description</th><th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  
+              </tbody>
+          </table>
+      </div>
+  </div>
 </div>
 <div class="modal fade" id="ConsultancDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -559,13 +619,6 @@ var table = jQuery('#Appointments').DataTable({
                 {
                     data:'id'
                 },
-
-                {
-                    data:'patient_pic',
-                    render: function(data){
-                      return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                    }
-                },
                 {
                   data: "patient_name"
                 },
@@ -577,6 +630,9 @@ var table = jQuery('#Appointments').DataTable({
                 },
                 {
                     data : 'Description'
+                },
+                {
+                  data:"id"
                 }
                 
             ],

@@ -8,4 +8,7 @@ urlpatterns=[
     path('consultations',views.consultations,name='consultations'),
     path('appointments',views.appointments,name='appointments'),
     path('Prescription', views.Prescription, name="Prescription"),
+    path('profile', views.profile, name="profile"),
+    path('settings', views.settings, name="settings"),
+
 ]

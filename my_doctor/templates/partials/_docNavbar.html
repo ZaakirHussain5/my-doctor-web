@@ -2,8 +2,9 @@
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
 
-        <div class="navbar-header text-white mb-5 mt-3">
-            <h3>Doctor Dashboard</h3>
+        <div class="navbar-header">
+            <a class="navbar-brand mb-4" href="/doctors/dashboard" style="border-bottom:none">
+                <img src="{% static 'website/img/logo.png' %}" alt="Logo"></a>
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -15,10 +16,18 @@
                     <a href="{% url 'doctorsUI:appointments' %}"> <i class="menu-icon fa fa-stethoscope"></i>Appointments </a>
                 </li>
                 <li>
-                    <a href="{% url 'doctorsUI:consultations' %}"> <i class="menu-icon fa fa-user-md"></i>Consultations </a>
+                    <a href="{% url 'doctorsUI:consultations' %}"> <i class="menu-icon fa fa-file"></i>Billing History </a>
                 </li>
                 <li>
-                    <a href="{% url 'doctorsUI:Prescription' %}"> <i class="menu-icon fa fa-user-md"></i>Prescription </a>
+                    <a href="{% url 'doctorsUI:Prescription' %}"> <i class="menu-icon fa fa-edit"></i>Prescription </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'doctorsUI:profile' %}"> <i class="menu-icon fa fa-user"></i>Profile </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'doctorsUI:settings' %}"> <i class="menu-icon fa fa-cog"></i>Settings </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

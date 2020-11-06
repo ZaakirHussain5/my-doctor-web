@@ -1,0 +1,120 @@
+
+/*------------------------------------------------------------------
+* Project:        Swasthye
+* Author:         CN-InfoTech
+* URL:            hthttps://themeforest.net/user/cn-infotech
+* Created:        08/07/2019
+-------------------------------------------------------------------
+
+*/
+/* ========================================= */
+/*          Default CSS                      */
+/* ========================================= */
+
+
+body.night-mode, .night-mode .header_menu.affix{
+  background: #000;
+}
+
+.night-mode h1, .night-mode h2, .night-mode h3, .night-mode h4, .night-mode h5, .night-mode h6, .night-mode p,
+.night-mode ul li, .night-mode ol li, .night-mode a, select, label, .night-mode .sidebar-content ul li a, 
+.night-mode .sidebar-box form, .night-mode .recent-item, 
+.night-mode.blog-home .header_menu .navbar.navbar-default .nav.navbar-nav li a,
+.night-mode .header_menu .navbar.navbar-default .nav.navbar-nav li a, 
+.night-mode .header_menu.affix .navbar.navbar-default .nav.navbar-nav > li > a, .night-mode blockquote:before, .night-mode .breaking_news marquee a{
+  color: #fff;
+}
+
+.night-mode .header_menu.affix{
+  box-shadow: 0 0 10px #cccccc56;
+}
+
+.night-mode a:hover, .night-mode a:focus {
+    text-decoration: none!important;
+    color: #00a3c8;
+    transition: all 0.4s ease;
+}
+
+.night-mode input[type=text],
+.night-mode input[type=email],
+.night-mode input[type=number],
+.night-mode input[type=search],
+.night-mode input[type=password],
+.night-mode input[type=tel],
+.night-mode textarea,
+.night-mode select {
+  background-color: #191919;
+  border: 1px solid #666;
+  color: #fff;
+}
+
+.night-mode blockquote {
+  background-color: #191919;
+  border-left: 4px solid #1db9a0;
+  color: #fff;
+}
+
+.night-mode blockquote span:before {
+  background: #ffac00;
+}
+
+.night-mode .btn:hover, .night-mode button.btn:hover, .night-mode .subscribe-form a:hover{
+  color: #fff;
+}
+
+.night-mode a.text-btn {
+    color: #1db9a0;
+}
+
+/*pagination*/
+
+.night-mode .pagination__wrapper {
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #000 17%, #000 83%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #000 17%, #000 83%, rgba(255, 255, 255, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+}
+.night-mode .pagination__wrapper:before, .night-mode .pagination__wrapper:after {
+  background: -webkit-linear-gradient(to right, transparent 0%, rgba(251, 251, 251, 0.1) 17%, rgba(255, 255, 255, 0.1) 83%, transparent 100%);
+  background: linear-gradient(to right, transparent 0%, rgba(251, 251, 251, 0.1) 17%, rgba(255, 255, 255, 0.1) 83%, transparent 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
+}
+.night-mode .pagination button,
+.night-mode .pagination span {
+  color: rgba(251, 251, 251, 0.3);
+}
+
+.night-mode .pagination button:before {
+  background: rgba(251, 251, 251, 0.3);
+}
+.night-mode .pagination button:hover:not(.active) {
+  color: #fff;
+}
+
+.night-mode .pagination button.active {
+    background: rgba(251, 251, 251, 0.3);
+    color: #fff;
+}
+
+.blog-home.night-mode .top-bar, .night-mode .top-bar {
+    background: #00a3c8;
+}
+
+.night-mode .news-content, .night-mode .sidebar-content ul li a, 
+.night-mode .sidebar-box form, .night-mode .recent-item, .night-mode .breaking_inner, 
+.night-mode footer, .night-mode .detail-box, .night-mode .comments{background: #131212; box-shadow: none;}
+
+.night-mode .footer-contact, .night-mode section.newsletter:after,
+.night-mode .breaking_inner, .night-mode footer .f-contact{background: #333; box-shadow: none;}
+
+.night-mode .article-footer, .night-mode .comment-item, .night-mode .tagcloud a,
+.night-mode .latest-tweets ul>li, .night-mode .news-content h3, .night-mode .breaking_inner{border-color: #333;}
+
+.night-mode .blog-item, .night-mode .news-item{box-shadow: none; background: transparent;}
+
+.night-mode .sidebar-ad, .night-mode .gallery-item{box-shadow: none;}
+
+.night-mode .blog-item:hover{transform: none;}
+
+.night-mode section.breadcrumb {
+    background: radial-gradient(#333333, #000000);
+}

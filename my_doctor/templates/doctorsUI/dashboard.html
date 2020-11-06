@@ -1,21 +1,57 @@
 {% extends 'doctor_layout.html' %}
 {% block content%}
-<div class="breadcrumbs">
-    <div class="col-12">
-        <div class="page-header text-center">
-            <div class="page-title">
-                <h2 id="title">Welcome Doctor!</h2>
+
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="clearfix">
+                    <i class="fa fa-laptop bg-info p-3 font-2xl mr-3 float-left text-light"></i>
+                    <div class="h5 text-secondary mb-0 mt-1">267</div>
+                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Todays's Appointments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="clearfix">
+                    <i class="fa fa-users bg-info p-3 font-2xl mr-3 float-left text-light"></i>
+                    <div class="h5 mb-0 mt-1">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Overall Rating 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="clearfix">
+                    <i class="fa fa-inr bg-flat-color-5 p-3 font-2xl mr-3 float-left text-light"></i>
+                    <div class="h5 text-secondary mb-0 mt-1">₹ 4.999,50</div>
+                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Income</div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="content">
-    <div class="card pl-3 pr-3">
-        <div class="card-body card-block">
-            <div id="doctorProfileForm" action="" method="post" class="form-horizontal">
                 <div class="row">
-                    <div class="col-md-8">
-                        <ul class="nav nav-tabs nav-fill nav-pills mb-3" id="pills-tab" role="tablist">
+                    <div class="col-md-10">
+                        <!-- <ul class="nav nav-tabs nav-fill nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#profile"
                                     role="tab" aria-controls="pills-home" aria-selected="true">Profile</a>
@@ -28,28 +64,27 @@
                                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#timings" role="tab"
                                     aria-controls="pills-contact" aria-selected="false">Timings</a>
                             </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
+                        </ul> -->
+                        <!-- <div class="tab-content" id="myTabContent">
 
-                            <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="list">
+                            <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="list"> -->
                                 <form id="profile_form">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="wrap-custom-file" style="margin-left: 5rem;">
+                                        <div class="col-md-2">
+                                            <div class="wrap-custom-file" onclick="return false;" style="cursor: pointer;">
                                                 <input type="file" name="profile_pic" id="image1"
                                                     accept=".gif, .jpg, .png" />
                                                 <label for="image1">
-                                                    <span>Select Profile Photo</span>
-                                                    <i class="fa fa-plus-circle"></i>
+                                                    
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-8">
                                             <div class="row form-group">
                                                 <div class="col col-md-4"><label for="id"
                                                         class="form-control-label float-right">ID</label></div>
                                                 <div class="col-12 col-md-8">
-                                                    <input type="text" id="id" name="Registration_Number"
+                                                    <input type="text" id="username" name="username"
                                                         placeholder="Doctor ID" class="form-control"
                                                         readonly="readonly">
                                                 </div>
@@ -57,7 +92,7 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-4"><label for="full-name"
                                                         class=" form-control-label float-right">Full Name</label></div>
-                                                <div class="col-12 col-md-8"><input type="text" id="full-name"
+                                                <div class="col-12 col-md-8"><input type="text" readonly="readonly" id="full-name"
                                                         name="full_name" placeholder="Full Name" class="form-control">
                                                 </div>
                                             </div>
@@ -65,7 +100,7 @@
                                                 <div class="col col-md-4"><label for="email"
                                                         class=" form-control-label float-right">Email Address</label>
                                                 </div>
-                                                <div class="col-12 col-md-8"><input type="email" id="email" name="email"
+                                                <div class="col-12 col-md-8"><input type="email" readonly="readonly" id="email" name="email"
                                                         placeholder="Email Address" class="form-control"></div>
                                             </div>
                                             <div class="row form-group">
@@ -73,18 +108,16 @@
                                                         class=" form-control-label float-right">Phone Number</label>
                                                 </div>
                                                 <div class="col-12 col-md-8">
-                                                    <input type="text" id="ph_no" name="phone_number"
+                                                    <input type="text" readonly="readonly" id="ph_no" name="phone_number"
                                                         placeholder="Phone Number" class="form-control">
-                                                    <input type="hidden" id="username" , placeholder="username"
-                                                        name="username">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-4"><label for="consultation_fee"
-                                                        class=" form-control-label float-right">Fees</label>
+                                                        class=" form-control-label float-right">Consultation Fees</label>
                                                 </div>
                                                 <div class="col-12 col-md-8">
-                                                    <input type="text" id="consultation_fee" name="consultation_fee"
+                                                    <input type="text" readonly="readonly" id="consultation_fee" name="consultation_fee"
                                                         placeholder="Phone Number" class="form-control">
                                                     <input type="hidden" id="specialist_type" name="specialist_type"
                                                         placeholder="Phone Number" class="form-control">
@@ -92,20 +125,10 @@
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-4"><label for="specialist-type"
-                                                        class=" form-control-label float-right">About</label></div>
-                                                <div class="col-12 col-md-8"><textarea name="about" id="specialist-type"
+                                                        class=" form-control-label float-right">About me</label></div>
+                                                <div class="col-12 col-md-8"><textarea name="about" readonly="readonly" id="specialist-type"
                                                         rows="8" class="form-control"
                                                         placeholder="Enter About Details"></textarea></div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-12 col-md-8 offset-md-4">
-                                                    <button type="submit" class="btn btn-primary btn-sm">
-                                                        <i class="fa fa-dot-circle-o"></i> Update Profile
-                                                    </button>
-                                                    <button type="reset" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-ban"></i> Reset
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
 
@@ -114,7 +137,7 @@
                             </div>
 
 
-                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
+                            <!-- <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="list">
                                 <form id="password_form">
                                     <div class="row form-group">
                                         <div class="col col-md-4"><label for="old_password"
@@ -233,43 +256,10 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> -->
 
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="clearfix">
-                                    <i class="fa fa-inr bg-flat-color-5 p-3 font-2xl mr-3 float-left text-light"></i>
-                                    <div class="h5 text-secondary mb-0 mt-1">₹ 4.999,50</div>
-                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Income</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="clearfix">
-                                    <i class="fa fa-laptop bg-info p-3 font-2xl mr-3 float-left text-light"></i>
-                                    <div class="h5 text-secondary mb-0 mt-1">267</div>
-                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Appointments
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="clearfix">
-                                    <i class="fa fa-user-md bg-warning p-3 font-2xl mr-3 float-left text-light"></i>
-                                    <div class="h5 text-secondary mb-0 mt-1">1,267</div>
-                                    <div class="text-muted text-uppercase font-weight-bold font-xs small">Consultations
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-            </div>
         </div>
         <div class="card-footer">
             <div class="pull-right">
@@ -298,19 +288,8 @@
             },
         }).done((response) => {
             console.log('response response', response);
-            jQuery.ajax({
-                url: "/api/getEmail",
-                method: 'GET',
-                contendType: 'application/json',
-                async: false,
-                method: 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                },
-            }).done((response) => {
-                formDeserialize(form, response);
-            })
-            formDeserialize(form, response);
+            formDeserialize(form, response.user);
+            formDeserialize(form,response)
 
         }).fail((error) => {
             console.log(error);
@@ -369,10 +348,7 @@
 
 
     //////////////// username change event ////////////////
-    jQuery('#ph_no').change(function () {
-        jQuery('#username').val(jQuery(this).val())
-    })
-    jQuery('#username').val(jQuery('#ph_no').val())
+   
 
 
     //////// UPDATING PROFILE //////////
