@@ -1,0 +1,422 @@
+{% extends 'new_patient_layout.html'%}
+{% load static%}
+{% block content %} 
+<div class="ca-content__chatstab">
+                        
+    <div class="ca-content__callstab">
+        <div class="conversation-panel__body ps">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Book a Consultation in 5 easy Steps</h4>
+                    </div>
+                    <div class="card-body">
+                         <ul class="nav nav-pills  nav-justified" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#spl-select" role="tab" aria-controls="pills-home" aria-selected="true">1. Select Speciality</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#date-selection" role="tab" aria-controls="pills-profile" aria-selected="false">2. Select Date</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#select-doctor" role="tab" aria-controls="pills-contact" aria-selected="false">3. Select Doctor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#payment" role="tab" aria-controls="pills-contact" aria-selected="false">4. Payment</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#Confirmation" role="tab" aria-controls="pills-contact" aria-selected="false">5. Confirmation</a>
+                      </li>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="spl-select" role="tabpanel" aria-labelledby="pills-home-tab">
+                    
+                        <div class="ca-call-details-history spl-list" id="spl-list">
+                            <div class="container-fluid">
+                                <div class="card">
+                                <div class="card-body">
+                                    <div class="ca-call-history">
+                                        <div class="ca-call-history__left">
+                                            <div class="user-avatar user-avatar-rounded mt-3 img-div">
+                                                <img class="img-fluid" src="assets/images/spl/layer-11.png" alt="">
+                                            </div>
+                                            <div class="ml-2 ca-call-history__left--title text-div">
+                                                
+                                                <h5>General Physician</h5>
+                                                <span class="font-weight-bold text-secondary">
+                                                    doctors who specializes in conditions involving the skin, hair, and nails. We can identify and treat more than 3,000 conditions. These conditions include eczema, psoriasis, and skin cancer, among many others. The skin is an incredible organ.
+                                                </span>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="ca-call-history__right">
+                                            <button type="button" data-doctor="${item.doctor.full_name}" data-doctor-id="${item.doctor.id}" data-image="${item.doctor.profile_pic}" data-app-date="${$('#date-val').html()}" data-time="${item.from_time}" data-fee="${consFee}" class="btn iconbox btn-solid-info text-white bookAppointment">
+                                                Select
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="ca-call-history">
+                                        <div class="ca-call-history__left">
+                                            <div class="user-avatar user-avatar-rounded mt-3 img-div">
+                                                <img class="img-fluid" src="assets/images/spl/layer-10.png" alt="">
+                                            </div>
+                                            <div class="ml-2 ca-call-history__left--title text-div">
+                                                
+                                                <h5>Paediatritian</h5>
+                                                <span class="font-weight-bold text-secondary">
+                                                    doctors who specializes in conditions involving the skin, hair, and nails. We can identify and treat more than 3,000 conditions. These conditions include eczema, psoriasis, and skin cancer, among many others. The skin is an incredible organ.
+                                                </span>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="ca-call-history__right">
+                                            <button type="button" data-doctor="${item.doctor.full_name}" data-doctor-id="${item.doctor.id}" data-image="${item.doctor.profile_pic}" data-app-date="${$('#date-val').html()}" data-time="${item.from_time}" data-fee="${consFee}" class="btn iconbox btn-solid-info text-white bookAppointment">
+                                                Select
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="date-selection" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="spl-list">
+                            <div class="container">
+                                <div class="form-group row">
+                                    <input type="hidden" id="spl-selected">
+                                    <div class="col-md-6 mt-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn mfb-component__button--main" style="width:100%; border-radius:30px"
+                                                    id="selectToday">
+                                                    Today
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn mfb-component__button--main mt-1" style="width:100%;  border-radius:30px"
+                                                    id="selectTommorow">
+                                                    Tommorow
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn mfb-component__button--main mt-1" style=" width:100%; border-radius:30px"
+                                                    id="selectDate">
+                                                    Select Date
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                       
+                                       
+                                    
+                                    </div>
+                                    <div class="col-md-6 mt-5" id="dateSelector">
+                                        <div class="container">
+                                            <div id="datepicker" style="display: none;"></div>
+                                            <input type="hidden" id="App_date">
+                                        </div>
+                                        <input type="text" class="form-control text-center" placeholder="Selected Date" id="dateSelected"
+                                            style=" border-radius:30px">
+                                        <button type="button" class="btn btn-block mfb-component__button--main mt-2"
+                                            style=" width:100%; border-radius:30px" id="btnProceed">Proceed</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="select-doctor" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="ca-call-details-history" id="doctors-list">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="ca-call-history">
+                                        <div class="ca-call-history__left">
+                                            <div class="user-avatar user-avatar-rounded">
+                                                <img class="img-fluid" src="assets/images/layer-14@2x.png" alt="">
+                                            </div>
+                                            <div class="ml-2 ca-call-history__left--title">
+                                                <div>Dr. John Doe</div>
+                                                <span class="font-weight-bold text-success">Available Time : 10:20 AM</span>
+                                                <br>
+                                                <span class="font-weight-bold text-success">Consultation Fee : 400/-</span>
+                                                </div>
+                                            </div>
+                                            <div class="ca-call-history__right">
+                                                <button type="button" data-doctor="${item.doctor.full_name}" data-doctor-id="${item.doctor.id}" data-image="${item.doctor.profile_pic}" data-app-date="${$('#date-val').html()}" data-time="${item.from_time}" data-fee="${consFee}" class="btn iconbox btn-solid-info text-white bookAppointment">
+                                                    Book Appointment
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="spl-list">
+                             <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                        
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <div class="ps-list">
+                                                            <div class="ps-list__left">
+                                                                <div class="ps-list__left--icon"></div>
+                                                                <div class="ps-list__left--name">Doctor</div>
+                                                            </div>
+                                                            <div class="ps-list__right" id="Doctor">Dr. Kumari</div>
+                                                            <input type="hidden" id="doctor-id">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="ps-list">
+                                                            <div class="ps-list__left">
+                                                                <div class="ps-list__left--icon"></div>
+                                                                <div class="ps-list__left--name">Appointment Date</div>
+                                                            </div>
+                                                            <div class="ps-list__right" id="app-date">10/12/2020</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="ps-list">
+                                                            <div class="ps-list__left">
+                                                                <div class="ps-list__left--icon"></div>
+                                                                <div class="ps-list__left--name">Appointment Time</div>
+                                                            </div>
+                                                            <div class="ps-list__right" id="app-time">12:00 AM</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="ps-list">
+                                                            <div class="ps-list__left">
+                                                                <div class="ps-list__left--icon"></div>
+                                                                <div class="ps-list__left--name">Description</div>
+                                                            </div>
+                                                            <div class="ps-list__right" id="consultingAbout">For cold and Cough</div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="spl-list" style="height: 150px;">
+                                         <ul class="list-unstyled">
+                                        <li>
+                                            <div class="ps-list">
+                                                <div class="ps-list__left">
+                                                    <div class="ps-list__left--icon"><input type="radio" name="SubsPlan"></div>
+                                                    <div class="ps-list__left--name">One Time Consultation</div>
+                                                </div>
+                                                <div class="ps-list__right" id="amount">Rs 300.00</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ps-list">
+                                                <div class="ps-list__left">
+                                                    <div class="ps-list__left--icon"><input type="radio" name="SubsPlan"></div>
+                                                    <div class="ps-list__left--name">Unlimited for 30 Days</div>
+                                                </div>
+                                                <div class="ps-list__right" id="amount">Rs. 2500.00</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ps-list">
+                                                <div class="ps-list__left">
+                                                    <div class="ps-list__left--icon"><input type="radio" name="SubsPlan"></div>
+                                                    <div class="ps-list__left--name">Unlimited for 180 Days</div>
+                                                </div>
+                                                <div class="ps-list__right" id="amount">Rs. 6000.00</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ps-list">
+                                                <div class="ps-list__left">
+                                                    <div class="ps-list__left--icon"><input type="radio" name="SubsPlan"></div>
+                                                    <div class="ps-list__left--name">Unlimited for 180 Days</div>
+                                                </div>
+                                                <div class="ps-list__right" id="amount">Rs. 6000.00</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="ps-list">
+                                                <div class="ps-list__left">
+                                                    <div class="ps-list__left--icon"><input type="radio" name="SubsPlan"></div>
+                                                    <div class="ps-list__left--name">Unlimited for 180 Days</div>
+                                                </div>
+                                                <div class="ps-list__right" id="amount">Rs. 6000.00</div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    
+                                    </div>
+                                   <div class="card">
+                                        <div class="card-header">
+                                            Payable Amount
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h2>
+                                                <i class="mdi mdi-currency-inr"></i> 450.00 
+                                            </h2>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
+                                            Pay Securely
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                       
+                        
+                    </div>
+                    <div class="tab-pane fade" id="Confirmation" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="spl-list">
+                             <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="ca-profile-thumb" style="height: auto;">
+        
+                                        <div class="ca-profile-info">
+                                            <div class="ca-profile-pic"><img class="img-fluid" id="summaryProfile"
+                                                    src="assets/images/layer-14@2x.png" alt=""></div>
+                                        </div>
+                        
+                                        <div class="ca-overlay"></div>
+                                    </div>
+                                    <div class="text-center mt-5">
+                                        <h5>Appointment Confirmed</h5>
+                                        <p>Your appointment with <strong>Dr. Kumari</strong>  has been fixed for <strong>10/12/2020</strong>  at <strong>12:00 PM</strong>  you will be notified 15 minutes prior your consultation</p>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Paid Amount
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h4>
+                                                <i class="mdi mdi-currency-inr"></i> 450.00 
+                                            </h4>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
+                                            Done
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                       
+                        
+                    </div>
+                  </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
+        // VARIABLES...
+        let dataList = [];
+        let old_active_id = null;
+
+
+        function getAppoinmentList(){
+            $.ajax({
+                'url': '/api/getPatientsAppointments/',
+                'contentType': 'application/json',
+                'async': false,
+                'method': 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                },
+            }).done((response)=>{
+                console.log('response response', response);
+                dataList = response;
+            });
+            console.log('data list is', dataList);
+            let totalLi = '';
+            for(var i=0; i < dataList.length; i++){
+                let data = dataList[i];
+                const liDesign = `<li id="patient${data.id}"><div class="calllist" id="patientDiv${data.id}">
+                            <div class="user-avatar user-avatar-rounded online">
+                                <img src="${data.doctor.profile_pic}" alt="">
+                            </div>
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">${data['doctor']['full_name']}</div>
+                                <div class="calllist__details--info">
+                                    <span><i class="mdi mdi-call-received"></i></span>
+                                    <span>${data.appointment_date} at ${data.appointment_time}</span>
+                                </div>
+                            </div>
+                            <div class="calllist__actions">
+                                <div class="iconbox btn-hovered-light">
+                                    <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>`;
+                totalLi += liDesign;
+            }
+            $('#appointment_list').html(totalLi);
+            const liId = 'patient' + dataList[0].id;
+            appoinmentList(liId);
+        }
+        getAppoinmentList()
+
+
+        function appoinmentList(id){
+
+            let ID= id.slice(7)
+            $('#'+id+' #patientDiv'+ID).addClass('active');
+            if(old_active_id == null){
+                old_active_id = '#patientDiv'+ID;
+            }
+            else{
+                $(old_active_id).removeClass('active');
+                old_active_id = '#patientDiv'+ID;
+            }
+
+            for(let i=0; i< dataList.length; i++){
+                const index = dataList[i];
+                if(index.id == ID){
+                    $("#doctor_image").attr('src', index.doctor.profile_pic);
+                    $(".ca-profile-name").html(index.doctor.full_name);
+                    $("#specialist__at").html(index.doctor.specialist_type);
+                    $("#speciality_at").html(index.doctor.specialist_type);
+                    $("#doctor_phone").html(index.doctor.phone_number);
+                    //$("#doctor_email").html(index.doctor.phone_number);
+                    $("#appointment_date").html(index.appointment_date);
+                    $("#appontment_time").html(index.appointment_time);
+                }
+            }
+
+        }
+
+        $('#appointment_list').on('click', 'li', function(){
+            let id = $(this).attr('id');
+            return appoinmentList(id)
+        })
+    })
+</script>
+{% endblock %}

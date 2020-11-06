@@ -25,3 +25,15 @@ def selectDoctors(request):
         "date":request.GET.get('date'),
         "week":weekDays[week]
     })
+
+def newAppointment(request):
+    return render(request,'patientsUI/new_appointment.html')
+
+def billHistory(request):
+    return render(request,'patientsUI/bill_history.html')
+
+def medical_records(request):
+    return render(request,'patientsUI/medical_records.html')
+
+def plan(request):
+    return render(request,'patientsUI/plan.html')

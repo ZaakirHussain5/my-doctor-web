@@ -1,0 +1,103 @@
+{% load static %}
+<div class="ca-sidebar__body">
+    <div class="ca-navigation-tabs">
+        <div class="nav-style-1">
+            <div class="tab-content" id="caMainTabContent">
+
+                <div class="tab-pane fade show active" id="caChats" role="tabpanel"
+                    aria-labelledby="caChatsTab">
+                    <div class="nav-style-2">
+                        <div class="tab-content" id="caChatsTabInsideContent">
+                            <div class="tab-pane fade show active" id="personal-chat"
+                                role="tabpanel" aria-labelledby="personal-chat-tab">
+                                <div class="sidebar-userlist">
+                                    <a href="#" class="click-me">
+                                        <i class="mdi mdi-menu"></i>
+                                    </a> <br><br>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="{% url 'patients:dashboard'%}">
+                                                <div class="conversation active">
+                                                    <div
+                                                        class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-home"></span>
+                                                        <span class="url">Dashbord</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'patients:appointments'%}">
+                                                <div class="conversation">
+                                                    <div
+                                                        class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-clock"></span>
+                                                        <span class="url">Appointments</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'patients:newAppointment'%}">
+                                                <div class="conversation">
+                                                    <div
+                                                        class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-stethoscope"></span>
+                                                        <span class="url">New Appointment</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'patients:billHistory'%}">
+                                                <div class="conversation">
+                                                    <div class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-clipboard"></span>
+                                                        <span class="url">Billing History</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'patients:medicalRecords'%}">
+                                                <div class="conversation">
+                                                    <div
+                                                        class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-plus-circle-outline"></span>
+                                                        <span class="url">Medical Record</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'patients:plan'%}">
+                                                <div class="conversation">
+                                                    <div
+                                                        class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-checkbox-marked-outline"></span>
+                                                        <span class="url">Select a Plan</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#settingsModalCenter">
+                                                <div class="conversation">
+                                                    <div
+                                                        class="user-avatar user-avatar-rounded online">
+                                                        <span class="mdi mdi-settings"></span>
+                                                        <span class="url">Settings</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

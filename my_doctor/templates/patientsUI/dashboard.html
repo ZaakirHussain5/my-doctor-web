@@ -1,125 +1,128 @@
-{% extends 'patients_layout.html'%}
+{% extends 'new_patient_layout.html'%}
 {% load static%}
-{% block sideContent %}
-<style>
-    .overlay {
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    overflow: auto;
-    top: 0px;
-    left: 0px;
-    background: rgba(0, 0, 0, 0.7); /*can be anything, of course*/
-    }
-</style>
 
-<div class="tab-content" id="caMainTabContent">
-   <div class="tab-pane fade show active" id="caChats" role="tabpanel" aria-labelledby="caChatsTab">
-       <div class="home-page" style="height: calc(100vh - 9.6875rem);">
-           <div class="container">
-               <div id="main-slider" class="owl-carousel owl-theme">
-                   <div class="item p-2"><img src="{% static 'patients/assets/images/media/slide1.PNG' %}" style="border-radius: 25px;"
-                           alt="The Last of us"></div>
-               </div>
-               <h5 class="text-lg p-2 pt-4">All Subscription Plans</h5>
-               <ul class="list-unstyled" id="subscriptionPlans">
-                   <li>
-                       <div class="calllist bg-info text-white">
-                           <div class="user-avatar user-avatar-rounded">
-                               <img src="{% static 'patients/assets/images/user/layer-3.png' %}" alt="">
-                           </div>
-                           <div class="calllist__details">
-                               <div class="calllist__details--name">Family Care Plan</div>
-                               
-                           </div>
 
-                           <div class="calllist__actions">
-                               <div class="iconbox btn-hovered-light">
-                                   <i class="iconbox__icon mdi mdi-currency-inr"></i> 1,750
-                               </div>
-                           </div>
-                       </div>
-                   </li>
-                   <li>
-                       <div class="calllist bg-info text-white">
-                           <div class="user-avatar user-avatar-rounded online">
-                               <img src="{% static 'patients/assets/images/user/250/03.jpg' %}" alt="">
-                           </div>
-                           <div class="calllist__details">
-                               <div class="calllist__details--name">Loyalty Consultation Plan</div>
-                               
-                           </div>
-
-                           <div class="calllist__actions">
-                               <div class="iconbox btn-hovered-light">
-                                   <i class="iconbox__icon mdi mdi-currency-inr"></i> 1,500
-                               </div>
-                           </div>
-                       </div>
-                   </li>
-               </ul>
-           </div>
-   
-       </div>
-   </div>
-</div>
-{% endblock %}
-{% block content %} 
-<div class="ca-content-wrapper">
-                <div class="ca-content">
-                    <div class="ca-content__chatstab">
-                        <div class="ca-content__callstab">
-                        
-                        <div class="container">
-                            
-<div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body p-0">
-                                            <div class="ca-call-details-card">
-                                                <div class="conversation-panel__back-button ">
-                                                    <i class="mdi mdi-arrow-left"></i>
-                                                </div>
-                                                <div class="ca-call-details__left">
-                                                    
-                                                    <div class="ca-call-details__pname">
-                                                        <div>Our Specialities</div>
-                                                    </div>                                                    
-                                                </div>
-                                                
-                                            </div>
+{% block content%}
+<div class="ca-content__chatstab">
+    <div class="ca-content__callstab">
+        <div class="conversation-panel__body ps">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card" ">
+                            <div class=" card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+                                    <div class="ca-call-details__pname">
+                                        <div class="mb-3">Book a Consultation</div>
+                                        <div class="calllist__details--info">
+                                            <span>Book a Consultation from your home and get our doctors Online for your
+                                                customized Solution</span>
                                         </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-stethoscope mdi-48px"></i>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
 
-                            <div class="row mt-4">
-                                <div class="row">
-                                    {% for specialist in specialists %}
-                                                          <div class="col-md-4 col-xs-4">
-                                                              <div class="card">
-                                                                  <div class="card-body p-2">
-                                                                      <img src="/media/{{specialist.icon}}" alt="" style="width: 100%; height:250px;border-radius: 25%;">
-                                                                      
-                                                                  </div>
-                                                                  <div class="card-footer text-center">
-                                                                    <h4>{{specialist.special_type}}</h4>
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-                                                          {% endfor %}
-                              </div>
+                                    <div class="ca-call-details__pname">
+                                        <div class="mb-3">My appointments</div>
+                                        <div class="calllist__details--info">
+                                            <span>Don't miss out any appointments that you have with our experts
+                                                doctors.</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-clock-outline mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div>Order Medicine</div>
+                                        <div class="calllist__details--info">
+                                            <span>Lorem ipsum dolor sit amet consectetur
+                                                adipisicing elit. Optio animi facilis hic nam
+                                                at, consequuntur doloremque officia excepturi
+                                                repellendus dolores.</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-medical-bag mdi-48px"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
 
-                    
+                                    <div class="ca-call-details__pname">
+                                        <div>Book a Diagnostics</div>
+                                        <div class="calllist__details--info">
+                                            <span>Book a Diagnostic to Determine your Better Health</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-thermometer mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div>Medical Records</div>
+                                        <div class="calllist__details--info">
+                                            <span>Maintain all your Medical Recors on our CloudMedical Records </span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-plus-circle-outline mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+</div>
 {% endblock %}
+
 {% block scripts %}
+
+
 <script>
     $(document).ready(function(){
         $('#caMainTab a[href="{% url "patients:dashboard"%}"]').addClass('active')
