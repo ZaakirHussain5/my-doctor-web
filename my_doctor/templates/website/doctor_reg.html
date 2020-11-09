@@ -1,7 +1,38 @@
 {%extends 'website_layout.html'%}
 {%load static%}
 {% block content%}
-
+<style>
+    .register .nav-tabs{
+    margin-bottom: 3%;
+    border: none;
+    background: #0b818b;
+    border-radius: 1.5rem;
+}
+.register .nav-tabs .nav-link{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.register .nav-tabs .nav-item a:hover{
+    border: none;
+    color:#0b818b
+}
+.register .nav-tabs .nav-item.active a{
+    width: 100px;
+    color: #0b818b;
+    border: 2px solid #0b818b;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    background-color: #fff;
+}.breadcrumb-outer span{
+    float: right;
+    position: relative;
+    top: -34px}
+</style>
 <section class="breadcrumb">
     <div class="container">
     <div class="breadcrumb-outer">
@@ -11,113 +42,95 @@
     <li class="breadcrumb-item active" aria-current="page">Login</li>
     </ul>
     </nav>
-    <h2>Doctor Registration</h2>
+    <h2>Register</h2>
+    <span class="register">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li id="Patient" class="nav-item">
+                        <a class="nav-link" id="home-tab" href="/PatientRegistration" role="tab" aria-controls="home" aria-selected="true">Patient</a>
+                    </li>
+                    <li id="Doctor" class="nav-item active">
+                        <a class="nav-link" id="profile-tab" href="#" role="tab" aria-controls="profile" aria-selected="false">Doctor</a>
+                    </li>
+                </ul>
+     
+    </span>
     </div>
     </div>
     </section>
     <section class="login">
-    <div class="container">
-    <div class="row" >
-    <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="login-form">
-      <form id="doctorRegistration">
-        <div class="row">
-        <div class="col-xs-12">
-            <div class="form-title">
-                <h2>Register</h2>
-            </div>
-        </div>
-        
-           
-            <div class="form-group col-md-6 col-xs-12">
-                <input type="text" name="full_name" placeholder="Doctor Name" required 
-                 onkeypress="return /^[a-zA-Z ]+$/i.test(event.key)">
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-
-                <input type="email" name="email" placeholder="Doctor Email" required>
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-
-                <input type="tel" placeholder="Doctor Phone Number" name="phone_number"  minlength="10" maxlength="10" size="10" required>
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-                <input type="password" placeholder="password" name="password" min="18" max="100" required>
-
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-                <select name="gender" required>
-                    <option value="">Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-
-                <input type="number" placeholder="Age" min="18" max="100" required>
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-
-                <!-- <input type="text" name="specialist_type" placeholder="specialist Type"  required> -->
-                <select name='specialist_type' id="select-specialist" required>
-                <option value="">Select Your Speciality</option>
-                <option value="General Physician">General Physician</option>
-                <option value="Dermatologist">Dermatologist</option>
-                <option value="Pediatrician">Pediatrician</option>
-                <option value="Dietitian">Dietitian</option>
-                <option value="Psychologist">Psychologist</option>
-                <option value="Gynaecologist">Gynaecologist</option>
-            </select>
-            </div>
-             <div class="form-group col-md-6 col-xs-12">
-
-                <input type="text" name="city" placeholder="City" required>
-            </div>
-            <div class="form-group col-md-6 col-xs-12">
-
-                <input type="text" name="about" placeholder="About doctor" min="18" max="100" required>
-            </div>
-        </div>
-        
-        
-        
-        
-        <div class="">
-        <div class="col-xs-12">
-        <div class="form-btn">
-          <button type="submit" class="btn">Submit</button>
-        </div>
-        </div>
-        </div>
-        
-        </div>
-        </form>
+<div class="container">
+<div class="row" >
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="login-form" style="padding: 0 10%;">
+ <div class="col-xs-12">
+    <div class="form-title" style="text-align: justify;padding: 20px 17%;margin-bottom: 0"><br>
+    <p>Dear Doctor, </p><br>
+    <p>Kindly spare a few minutes to register yourself on our platform. We have a
+vast database of patients who need your care and expertise. </p><br>
+   <p>Once we receive your basic details you will be sent an MOU on which we
+require your signature and seal after which we can start consulting
+immediately</p><br>
+   <p>We request your support and cooperation in this regard to make our patient
+outreach program a success.</p><br>
+   <p><b>Basic Contact Information</b></p>
     </div>
     </div>
+  <form style="padding: 30px 20%;">
+    <div class="row">
+    <div class="">
+    <div class="form-group col-12">
+    <input type="text" placeholder="Name" required>
     </div>
-    </div>
-    </section>
+    <div class="form-group col-12">
     
-    <section class="newsletter">
-      <div class="container">
-      <div class="newsletter-content">
-      <div class="subscribe-form">
-      <div class="row">
-      <div class="col-md-6 col-sm-12">
-      <h3 class="white">Subscribe to newsletter</h3>
-      <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
-      </div>
-      <div class="col-md-6 col-sm-12">
-      <form>
-      <input type="email" placeholder="abc@xyz.com">
-      <a href="#">Subscribe</a>
-      </form>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </section>
+    <input type="text" placeholder="Medical ID" required>
+    </div>
+    <div class="form-group col-12">
+    
+    <input type="text" placeholder="Specialty" required>
+    </div>
+    <div class="form-group col-12">
+    
+    <input type="tel" placeholder="Phone">
+    </div>
+    <div class="form-group col-12">
+    
+    <input type="email" placeholder="Email ID">
+    </div>
+    <div class="form-group col-12">
+    
+    <input type="text" placeholder="City">
+    </div>
+    <div class="form-group col-12">
+    
+    <input type="password" placeholder="Set Password">
+    </div>
+    <div class="form-group col-12">
+    
+    <input type="password" placeholder="Re enter Password">
+    </div>
+    </div>
+    
+    
+    
+    
+    <div class="">
+    <div class="col-xs-12">
+    <div class="form-btn" style="text-align: center;">
+      <button type="submit" class="btn btn-block">Register me!</button>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+</section>
+    
+ 
 
 {%endblock%}
 

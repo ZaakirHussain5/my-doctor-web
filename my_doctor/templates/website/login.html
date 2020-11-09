@@ -44,21 +44,20 @@
     </div>
     </div>
     </section>
-    <section class="login">
-    <div class="container">
-    <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <div class="login-form">
-    <form id="loging_in">
+   <section class="login icon-left">
+<div class="container">
+<div class="row" >
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="login-form" style="padding: 0 10%;">
+    <form id="loging_in" style="padding: 30px 20%;">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-12 col-sm-12">
                 <div class="form-title">
                     <h2>Login</h2>
                     <p>Login with your registered details</p>
                 </div>
             </div>
-            <div class="col-md-12 register">
-                <label>You are a</label>
+            <div class="col-12 col-sm-12 register">
                 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                     <li id="Patient" class="nav-item active">
                         <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Patient</a>
@@ -68,114 +67,53 @@
                     </li>
                 </ul>
             </div>
-            <div class="form-group col-xs-12">
+            <div class="form-group col-12 col-sm-12">
                 <input id="user_type" type="hidden" value="P">
-                <label for="Name1">Phone Number</label>
-                <input type="text" class="form-control" id="Name1" placeholder="Enter registered phone number">
+                <label for="Name1">Phone Number or Patient ID</label>
+                <input type="tel" class="form-control" id="Name1" placeholder="Phone Number or Patient ID">
             </div>
-            <div class="form-group col-xs-12">
-            <label for="email1">Password</label>
+            <div class=" form-group col-12 col-sm-12">
+            <div class="col-xs-6"><label for="email1">Password</label></div>
+               <div class="col-xs-6" style="text-align: end;color: #3a85f5;"><a href="">Show</a></div>
                 <input type="password" class="form-control" id="email1" placeholder="Enter password">
             </div>
-            <div class="col-xs-12">
-                <div class="checkbox-outer">
-                     <a href="{% url 'website:forgot_pass'%}"> Forgot Password?</a>
+            <div class="col-12 col-sm-12">
+<div class="checkbox-outer">
+<input type="checkbox" name="vehicle2" value="Car"> Keep me signed in
+</div>
+</div>
+            <div class="col-12 col-sm-12">
+                <div class="comment-btn" style="text-align: center;">
+                    <button type="submit" class="btn btn-block">Login</button>
                 </div>
+            </div><br>
+            <div class="col-12 col-sm-12">
+            <p style="text-align: center;padding: 20px 0;">Or sign in with</p>
             </div>
-            <div class="col-xs-12">
-                <div class="comment-btn">
-                    <button type="submit" class="btn">Login</button>
-
+            <a  href="/PatientRegistration">
+             <div class="col-lg-5 col-sm-12 text-primary" style="padding: 10px 30px;text-align: center; border: 1px solid;margin: 18px;">
+                    <i class="fa fa-facebook"></i> Facebook
                 </div>
-            </div>
-            <div class="col-xs-12" >
-                <p style="padding: 15px 0;">Not a Member? <a id="redirectTo" href='/PatientRegistration'>Register Here</a></p>
-            </div>
+                 </a>
+                  <a  href="/PatientRegistration">
+             <div class="col-lg-5 col-sm-12" style="padding: 10px 30px;text-align: center;border: 1px solid;margin: 18px;">
+                    <i class="fa fa-google"></i> Google
+                </div>
+                 </a>
+                 <div class="col-12 col-sm-12">
+<div class="checkbox-outer"><a href="forgot-password.html" style="color: #3a85f5;"> Forgot Password? </a>&nbsp;  Not a registered user &nbsp;<a href="" style="color: #3a85f5;"> Register here </a>
+</div>
+</div>
             
         </div>
     </form>
-        <!-- <a href="">Login with Google</a> -->
-    </div>
-    </div>
-    <!--
-    <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="login-form">
-    <form>
-    <div class="row">
-    <div class="col-xs-12">
-    <div class="form-title">
-    <h2>Register</h2>
-    <p>Enter your details to become a member</p>
-    </div>
-    </div>
-    <div class="">
-    <div class="form-group col-md-6 col-xs-12">
-    <input type="text" placeholder="Your Name" required>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
+</div>
+</div>
+</div>
+</div>
+</section>
     
-    <input type="text" placeholder="Your Email" required>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    
-    <input type="tel" placeholder="Your Phone"  minlength="10" maxlength="10" size="10" required>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    
-    <input type="text" placeholder="Your City">
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    <select>
-    <option>Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    </select>
-    </div>
-    <div class="form-group col-md-6 col-xs-12">
-    
-    <input type="number" placeholder="Age" min="1" max="100">
-    </div>
-    </div>
-    
-    
-    
-    
-    <div class="">
-    <div class="col-xs-12">
-    <div class="form-btn">
-      <button type="submit" class="btn">Submit</button>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    </form>
-    </div>
-    </div>-->
-    </div>
-    </div>
-    </section>
-    
-    <section class="newsletter">
-      <div class="container">
-      <div class="newsletter-content">
-      <div class="subscribe-form">
-      <div class="row">
-      <div class="col-md-6 col-sm-12">
-      <h3 class="white">Subscribe to newsletter</h3>
-      <p class="white">Enter your mail ID for latest updates, new promotions and offers</p>
-      </div>
-      <div class="col-md-6 col-sm-12">
-      <form>
-      <input type="email" placeholder="abc@xyz.com">
-      <a href="#">Subscribe</a>
-      </form>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </section>
+  
 {%endblock%}
 {% block scripts %}
     <script>
@@ -190,19 +128,19 @@
                 console.log('clicked');
                 $('#user_type').val('P')
                 $('#redirectTo').attr('href', "/PatientRegistration")
-                $('label[for="Name1"]').html('Phone Number')
-                $('#Name1').attr('placeholder','Enter registered phone number')
+                $('label[for="Name1"]').html('Phone Number or Patient ID')
+                $('#Name1').attr('placeholder','Phone Number or Patient ID')
                 $('#myTab #Doctor').removeClass('active')
                 $('#myTab #Patient').addClass('active')
                 return false
             })
 
-            $('#myTab:nth-child(2)').click(()=>{
+            $('#myTab #Doctor').click(()=>{
                 console.log('clicked');
                 $('#user_type').val('D');
                 $('#redirectTo').attr('href', "/doctor_reg")
-                $('label[for="Name1"]').html('Doctor ID')
-                $('#Name1').attr('placeholder','Enter Doctor ID')
+                $('label[for="Name1"]').html('Phone Number or Doctor ID')
+                $('#Name1').attr('placeholder','Phone Number or Doctor ID')
                 $('#myTab #Patient').removeClass('active')
                 $('#myTab #Doctor').addClass('active')
                 return false
