@@ -26,6 +26,28 @@
 <!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
  -->
+ 
+ <style>
+     .header_menu .navbar.navbar-default .nav.navbar-nav li a{
+         padding-top:18px;
+     }
+     section{
+         padding:15px 0 0 0;
+     }
+     .services p{
+         text-align:left;
+     }
+section.breadcrumb{
+    padding:2% 0 0 0;
+}
+.fa-google {
+  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+ </style>
 </head>
 <body>
 
@@ -46,17 +68,28 @@
 <div class="col-lg-3 col-md-3 col-sm-12">
 <div class="departments">
 <h3>Doctor Plus</h3>
-<ul>
-    <li><a href="{% url 'website:features'%}">How it works |</a></li>
-    <li><a href="{% url 'website:specialty'%}">Speciality |</a></li>
-    <li><a href="{% url 'website:plans'%}">Plans |</a></li>
-    <li><a href="{% url 'website:aboutus'%}">About Us |</a></li>
-    <li><a href="{% url 'website:contact'%}">Contact Us |</a></li>
+<div class="row">
+    <div class="col-md-5">
+        <ul>
+    <li><a href="{% url 'website:features'%}">How it works</a></li>
+    <li><a href="{% url 'website:specialty'%}">Speciality</a></li>
+    <li><a href="{% url 'website:plans'%}">Plans</a></li>
 </ul>
+    </div>
+    <div class="col-md-7">
+        <ul>
+   <li><a href="{% url 'website:doctor_reg'%}">Doctor Registration</a></li> 
+    <li><a href="{% url 'website:contact'%}">Contact Us</a></li>
+    <li><a href="{% url 'website:aboutus'%}">About Us</a></li>
+</ul>
+    </div>
+    
+</div>
+
 </div>
 </div>
 
-<div class="col-lg-3 col-md-3 col-sm-12">
+<div class="col-lg-2 col-md-2 col-sm-12">
 <h3>Legal</h3>
 <ul>
     <li> <a href="{% url 'website:terms_condition'%}">Terms & Conditions</a></li>
@@ -75,8 +108,9 @@
 
 <div class="col-lg-3 col-md-3 col-sm-12">
   <div class="footer-contact">
-    <div class="footer-logo text-center mar-bottom-15">
-      <img src="{%static 'website/img/logo.png'%} " alt="Image">
+    <div class="footer-logo text-center mar-bottom-15" style="margin-left:85px">
+      <img src="{%static 'website/img/footer-logo.png'%} " alt="Image">
+      <img src="{%static 'website/img/ISO.jpeg'%} " style="height:100px" alt="Image">
       </div>
   </div>
   
@@ -94,6 +128,16 @@
       <button type="submit" value="Submit" class="btn">Subscribe</button>
       </form>
       </div>
+      <div class="col-md-6 col-sm-12">
+          <div class="header-links">
+<ul>
+<li><a href="#" style="color: #3b5998 ;font-size: 25px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+</ul>
+</div>
+      </div>
       </div>
       </section>
 <div class="copyright">
@@ -101,17 +145,10 @@
 <div class="row">
 <div class="col-md-6 col-sm-6">
     <div class="copyright">
-    <p>Copyright © 2020 Doctor Plus Power by <a href="http://http://dragndroptechsolutions.com/" target="_blank" class="white">Dragndrop Tech Solutions</a></p>
+    <p>Copyright © 2020 Doctor Plus Powered by <a href="http://dragndroptechsolutions.com/" target="_blank" class="white">Dragndrop Tech Solutions</a></p>
 </div>
 </div>
-    <div class="col-md-6 col-sm-6"><div class="header-links">
-<ul>
-<li><a href="#" style="color: #3b5998 ;font-size: 25px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-</ul>
-</div></div>
+    <div class="col-md-6 col-sm-6"></div>
 
 </div>
 </div>
@@ -140,4 +177,7 @@
 
 
 {% endblock %}
+<script>
+//document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 </html>

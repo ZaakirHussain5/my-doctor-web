@@ -20,9 +20,9 @@
             </div>
         </div>
     </section> -->
-    <section class="slider" style="padding:8% 0 0 0;">
+    <section class="slider" style="padding:5% 0 0 0;">
 
-        <div id="x_023_animated_layers" class="carousel slide x_023_animated_layers_indicators x_023_animated_layers_control_button thumb_scroll_x swipe_x ps_easeOutInCubic" data-ride="carousel" data-pause="hover" data-interval="8000" data-duration="2000">
+        <div id="x_023_animated_layers" class="carousel slide x_023_animated_layers_indicators x_023_animated_layers_control_button thumb_scroll_x swipe_x ps_easeOutInCubic" data-ride="carousel" data-pause="hover" data-interval="8000" data-duration="1000">
         
         <ol class="carousel-indicators">
         
@@ -75,13 +75,13 @@
     <div class="col-lg-5 col-md-5 col-sm-8 col-12">
     <div class="f-contact-inner title">
     <div class="contact-title">
-    <h4 class="white">Daily consultation available from 9.00 Am to 7:00 Pm</h4>
+    <h4 class="white">Daily consultation available<br> from 9.00 Am to 7:00 Pm</h4>
     </div>
     </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-8 col-12">
-        <a href="#appointment" class="btn" data-animation="animated fadeInLeft">Book Appointment</a> &nbsp;
-    <a href="/contact" class="btn" data-animation="animated fadeInLeft"><i class="fa fa-phone"></i> 080-4554-9494</a>
+        <a href="/PatientRegistration" class="btn" data-animation="animated fadeInLeft">Book Appointment</a> 
+    <a href="tel:080-4554-9494" class="btn" data-animation="animated fadeInLeft"><i class="fa fa-phone"></i> 080-4554-9494</a>
     </div>
     </div>
     </div>
@@ -90,11 +90,85 @@
     
     <section class="services icon-left">
     
-    
+    <div class="container" id="web">
+<div class="row">
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="service-item">
+<div class="service-icon mar-bottom-20">
+<img src="{%static 'website/img/stethoscope.png'%}" alt="">
+<h3><a href="#">General Physician</a></h3>
+</div>
+<div class="service-content">
+<p><b>We are</b> highly trained doctors who provide a range of non-surgical health care to adult patients. We care for difficult, serious or unusual medical problems and continue to see you patient until these problems have resolved.</p>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="service-item">
+<div class="service-icon mar-bottom-20 child-2">
+<img src="{% static 'website/img/dermatologist.png' %}" alt="">
+<h3><a href="#">Dermatologist</a></h3>
+</div>
+<div class="service-content">
+
+<p><b>We are </b>doctors who specializes in conditions involving the skin, hair, and nails. We can identify and treat more than 3,000 conditions. These conditions include eczema, psoriasis, and skin cancer, among many others. The skin is an incredible organ.</p>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="service-item">
+<div class="service-icon mar-bottom-20 child-3">
+<img src="{% static 'website/img/pediatrician.png' %}" alt="">
+<h3><a href="#">Pediatrician</a></h3>
+</div>
+<div class="service-content">
+
+<p><b>We are</b> doctor who manages the physical, behavioural, and mental care for children from birth until age 18. we are trained to diagnose and treat a broad range of childhood illnesses, from minor health problems to serious diseases.</p>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="service-item">
+<div class="service-icon mar-bottom-20 child-2">
+<img src="{% static 'website/img/diet.png' %}" alt="">
+<h3><a href="#">Dietitian</a></h3>
+</div>
+<div class="service-content">
+
+<p><b>We are</b> expert human nutrition and the regulation of diet. We alters their patient's nutrition based upon their medical condition and individual needs. We are regulated healthcare professionals licensed to assess, diagnose, and treat nutritional problems.</p>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="service-item">
+<div class="service-icon mar-bottom-20 child-3">
+<img src="{% static 'website/img/psychology.png' %}" alt="">
+<h3><a href="#">Psychologist</a></h3>
+</div>
+<div class="service-content">
+
+<p><b>We are</b> someone who studies the human mind, emotions and behavior. We help you to deal with different types of mental and emotional distress. Various techniques and medications are suggested to overcome your problems. <br><br></p>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="service-item">
+ <div class="service-icon mar-bottom-20">
+<img src="{% static 'website/img/gynecology.png' %}" alt="">
+<h3><a href="#">Gynaecologist</a></h3>
+</div>
+<div class="service-content">
+
+<p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix. <br><br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
     <div class="container" id="tab">
         <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="#appointment">
+        <a href="/login">
             <div class="service-item">
                 <div class="service-icon mar-bottom-20">
                     <img src="{%static 'website/img/stethoscope.png'%}" alt="">
@@ -107,7 +181,7 @@
         </a>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-      <a href="#appointment">
+      <a href="/login">
         <div class="service-item">
             <div class="service-icon mar-bottom-20 child-2">
                 <img src="{%static 'website/img/dermatologist.png'%}" alt="">
@@ -121,7 +195,7 @@
         </a>
       </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <a href="#appointment">
+            <a href="/login">
                 <div class="service-item">
                     <div class="service-icon mar-bottom-20 child-3">
                         <img src="{%static 'website/img/pediatrician.png'%}" alt="">
@@ -138,7 +212,7 @@
       </div>
       <div class="row">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="#appointment">
+          <a href="/login">
               <div class="service-item">
                   <div class="service-icon mar-bottom-20 child-2">
                       <img src="{%static 'website/img/diet.png'%}" alt="">
@@ -151,7 +225,7 @@
           </a>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="#appointment" >
+          <a href="/login" >
             <div class="service-item">
             <div class="service-icon mar-bottom-20 child-3">
             <img src="{%static 'website/img/psychology.png'%}" alt="">
@@ -165,7 +239,7 @@
           </a>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="#appointment">
+          <a href="/login">
               <div class="service-item">
                <div class="service-icon mar-bottom-20">
               <img src="{%static 'website/img/gynecology.png'%}" alt="">
@@ -180,6 +254,7 @@
       </div>
       </div>
       </div>
+    
     </section>
     
     <section class="specialist ">
@@ -191,16 +266,16 @@
     </div>
     </div>
     </div>
-    <div id="doctorss_list" class="specialist-slider row">
-    <div  class="col-xs-12">
+    <div class=" row">
+    <div  class="col-lg-3 col-md-3 col-xs-6">
     <div  class="special-main">
     <div class="special-item">
     <div class="special-image">
-    <img src="{%static 'website/img/specialist.jpg'%}" alt="image">
+    <img src="{%static 'website/img/specialist4.jpg'%}" alt="image">
     <div class="special-links">
     <ul>
-    <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-    <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
     </ul>
     </div>
     <div class="color-overlay"></div>
@@ -208,124 +283,66 @@
     <div class="special-content">
      <h4>Alexander Kola</h4>
     <p>Surgeon</p>
-    <div class="fees">
-      <a href="#"><p>Consult Now Rs.1,500/-</p> </a>
     </div>
     </div>
     </div>
     </div>
-    </div>
-    <div class="col-xs-12">
-    <div class="special-main">
-    <div class="special-item">
-    <div class="special-image">
-    <img src="{%static 'website/img/specialist2.jpg'%}" alt="image">
-    <div class="special-links">
-    <ul>
-    <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-    <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
-    </ul>
-    </div>
-    <div class="color-overlay"></div>
-    </div>
-    <div class="special-content">
-    <h4>Sam Smiths</h4>
-    <p>Dentist</p>
-    <div class="fees">
-      <a href="#"><p>Consult Now Rs.600/-</p> </a>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="col-xs-12">
-    <div class="special-main">
+    <div  class="col-lg-3 col-md-3 col-xs-6">
+    <div  class="special-main">
     <div class="special-item">
     <div class="special-image">
     <img src="{%static 'website/img/specialist3.jpg'%}" alt="image">
     <div class="special-links">
     <ul>
-    <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-    <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
     </ul>
     </div>
     <div class="color-overlay"></div>
     </div>
     <div class="special-content">
-    <h4>Randall Clover</h4>
-    <p>Neurologist</p>
-    <div class="fees">
-      <a href="#"><p>Consult Now Rs.1,500/-</p> </a>
+     <h4>Alexander Kola</h4>
+    <p>Surgeon</p>
     </div>
     </div>
     </div>
     </div>
+    <div  class="col-lg-3 col-md-3 col-xs-6">
+    <div  class="special-main">
+    <div class="special-item">
+    <div class="special-image">
+    <img src="{%static 'website/img/specialist2.jpg'%}" alt="image">
+    <div class="special-links">
+    <ul>
+    <li><a href="/login"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
+    </ul>
     </div>
-    <div class="col-xs-12">
-    <div class="special-main">
+    <div class="color-overlay"></div>
+    </div>
+    <div class="special-content">
+     <h4>Alexander Kola</h4>
+    <p>Surgeon</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div  class="col-lg-3 col-md-3 col-xs-6">
+    <div  class="special-main">
     <div class="special-item">
     <div class="special-image">
     <img src="{%static 'website/img/specialist1.jpg'%}" alt="image">
     <div class="special-links">
     <ul>
-    <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-    <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+    <li><a href="/login"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
     </ul>
     </div>
     <div class="color-overlay"></div>
     </div>
     <div class="special-content">
-    <h4>Riley Goon</h4>
-    <p>Consultant</p>
-    <div class="fees">
-      <a href="#"><p>Consult Now Rs.1,500/-</p> </a>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="col-xs-12">
-    <div class="special-main">
-    <div class="special-item">
-    <div class="special-image">
-    <img src="{%static 'website/img/specialist2.jpg'%}" alt="image">
-    <div class="special-links">
-     <ul>
-    <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-    <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
-    </ul>
-    </div>
-    <div class="color-overlay"></div>
-    </div>
-    <div class="special-content">
-    <h4>Haliam Dicola</h4>
+     <h4>Alexander Kola</h4>
     <p>Surgeon</p>
-    <div class="fees">
-      <a href="#"><p>Consult Now Rs.600/-</p> </a>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="col-xs-12">
-    <div class="special-main">
-    <div class="special-item">
-    <div class="special-image">
-    <img src="{%static 'website/img/specialist3.jpg'%}" alt="image">
-    <div class="special-links">
-    <ul>
-    <li><a href="#appointment"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-    <li><a href="#appointment"><i class="fa fa-file-video-o" aria-hidden="true"></i></a></li>
-    </ul>
-    </div>
-    <div class="color-overlay"></div>
-    </div>
-    <div class="special-content">
-    <h4>Phumdon Haman</h4>
-    <p>Consultant</p>
-    <div class="fees">
-      <a href="#"><p>Consult Now Rs.1,500/-</p> </a>
-    </div>
     </div>
     </div>
     </div>
@@ -339,66 +356,18 @@
     <div class="row">
     <div class="col-xs-12">
     <div class="section-title text-left">
-    <h2>Our <span>Partner</span> Hospitals</h2>
+    <h2> <span>Partner</span> Hospitals</h2>
     </div>
     </div>
     </div>
     <div class="row">
-    <div class="col-md-3 col-sm-6">
-    <div class="event-outer">
-    <div class="event-item mar-bottom-60">
-    <div class="event-content">
-    <div class="event-title clearfix">
-    <div class="event-author">
-    <img src="{%static 'website/img/l1.png'%}" alt="Image">
+    <div class="col-md-3 col-xs-3"><img src="{%static 'website/img/l1.png'%}" alt="Image">
     </div>
+    <div class="col-md-3 col-xs-3"><img src="{%static 'website/img/l2.jpg'%}" alt="Image">
     </div>
+    <div class="col-md-3 col-xs-3"> <img src="{%static 'website/img/l3.jpg'%}" alt="Image">
     </div>
-    </div>
-    
-    </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-    <div class="event-outer">
-    <div class="event-item mar-bottom-60">
-    <div class="event-content">
-    <div class="event-title clearfix">
-    <div class="event-author">
-    <img src="{%static 'website/img/l2.jpg'%}" alt="Image">
-    </div>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-    <div class="event-outer">
-    <div class="event-item mar-bottom-60">
-    <div class="event-content">
-    <div class="event-title clearfix">
-    <div class="event-author">
-    <img src="{%static 'website/img/l3.jpg'%}" alt="Image">
-    </div>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-    <div class="event-outer">
-    <div class="event-item mar-bottom-60">
-    <div class="event-content">
-    <div class="event-title clearfix">
-    <div class="event-author">
-    <img src="{%static 'website/img/l4.jpg'%}" alt="Image">
-    </div>
-    </div>
-    </div>
-    </div>
-    
-    </div>
+    <div class="col-md-3 col-xs-3"><img src="{%static 'website/img/l4.jpg'%}" alt="Image">
     </div>
     
     </div>
@@ -408,15 +377,14 @@
     <section class="testimonial">
     <div  class="container">
     <div class="row">
-    <div class="col-md-5 col-sm-12">
+    <div class="col-md-12 col-sm-12">
     <div class="section-title title-white mar-0">
-    <h2>Happy <span>Patients Reviews</span></h2>
-    <p>If you need any medical help we are available for you. Lorem ipsum dolor sit amet, sectetur adipiscing elit, sed do eiusmod tempor the incididunt ut labore et dolore.</p>
+    <h2>Reviews</h2>
     </div>
     </div>
-    <div class="col-md-7 col-sm-12">
+    <div class="col-md-12 col-sm-12">
     <div class="row testimonial-slider">
-    <div class="col-xs-12">
+    <div class="col-lg-6 col-xs-12">
     <div class="slider-item">
     <div class="slider-content">
     <div class="quote-icon">
@@ -559,60 +527,4 @@ I also liked the way doctors spoke and understood the problem.</p>
 
 {% endblock %}
 {% block scripts %}
-<script >
-    function getDoctorList(){
-        $.ajax({
-            url: '/api/doctors_info',
-            method: 'GET',
-            contentType: 'application/json',
-        }).done((response)=>{
-            console.log(response);
-            let doctor_div = '';
-            for(var i =0; i < response.length; i++){
-                let data = response[i];
-                let full_name = data.full_name;
-                console.log(full_name);
-                const doctor_carausel = `
-                    <div class="col-xs-12">
-                        <div class="special-main">
-                            <div class="special-item">
-                                <div class="special-image">
-                                    <img src="${data.profile_pic}" alt="image" class="big-image">
-                                    
-                                </div>
-                                <div class="color-overlay"></div>
-                                </div>
-                                <div class="special-content">
-                                     <h4>DR. ${full_name}</h4>
-                                    <p>${data.specialist_type}</p>
-                                    <div class="fees">
-                                      <a href="#"><p>Consult Now Rs.${data.consultation_fee}/-</p> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    `;
-
-                    doctor_div += doctor_carausel;
-            }
-            $("#doctorss_list").html(doctor_div);
-
-
-
-
-        }).fail((error)=>{console.log(error);})
-
-    }
-    getDoctorList()
-
-    $('a[href="#appointment"]').click(function(){
-        const text = $(this).find('.spl-text').html();
-        //const options = $('#select-specialist option');
-        $("div.form-group select").val(text);
-    })
-
-
-
-</script>
 {% endblock %}
