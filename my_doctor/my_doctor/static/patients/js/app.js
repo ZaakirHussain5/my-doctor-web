@@ -1,6 +1,27 @@
 $(document).ready(function () {
 
   /*--------------------------------------------------------------
+  SEARCHBAR START
+  --------------------------------------------------------------*/
+  var sp = document.querySelector('.iconbox-search');
+  var searchbar = document.querySelector('.iconbox-searchbar');
+  var shclose = document.querySelector('.search-close');
+
+  function changeClass() {
+    searchbar.classList.add('search-visible');
+  }
+
+  function closesearch() {
+    searchbar.classList.remove('search-visible');
+  }
+  sp.addEventListener('click', changeClass);
+  shclose.addEventListener('click', closesearch);
+  /*--------------------------------------------------------------
+  SEARCHBAR END
+  --------------------------------------------------------------*/
+
+
+  /*--------------------------------------------------------------
   TOOLTIP START
   --------------------------------------------------------------*/
   $('[data-toggle="tooltip"]').tooltip()
@@ -25,7 +46,7 @@ $(document).ready(function () {
   /*--------------------------------------------------------------
   PERFECT SCROLLBAR START
   --------------------------------------------------------------*/
-  var selectors = ['.spl-list','.home-page','.sidebar-userlist', '.sidebar-contactlist', '.conversation-panel__body', '.information-panel__body', '.ca-call-details-history', '.ca-content__contactstab', '.modal-contact-list', '.profile-settings-list'];
+  var selectors = ['.home-page','.sidebar-userlist', '.sidebar-contactlist', '.conversation-panel__body', '.information-panel__body', '.ca-call-details-history', '.ca-content__contactstab', '.modal-contact-list', '.profile-settings-list'];
   selectors.forEach(function (selector) {
     $(selector).each(function () {
       const ps = new PerfectScrollbar($(this)[0], {
@@ -219,7 +240,9 @@ $(document).ready(function () {
     $('body').addClass($(this).attr('data-theme'));
     localStorage.setItem('theme',$(this).attr('data-theme'))
   });
+
   $('body').addClass(localStorage.getItem('theme')?localStorage.getItem('theme'):'light-default-theme')
+
   // switch between background images
   var bgs = "bg1 bg2 bg3 bg4 bg5 bg6 bg7 bg8 bg9 bg10 bg11 bg12";
   $('[data-bg]').click(function () {

@@ -13,7 +13,7 @@ function crudOperations(options){
                 url: options.url + button.attr('data-id') + '/',
                 contentType: 'application/json',
                 success: function(data) {
-                    toastr.success(button.prop('checked')=='true'?'Activated Successfully':'Deactivated Successfully', 'Success', {
+                    toastr.success(record.is_active=='true'?'Activated Successfully':'Deactivated Successfully', 'Success', {
                         positionClass: "toast-top-center"
                     })
                 },
@@ -67,10 +67,7 @@ function crudOperations(options){
           e.preventDefault();
           e.stopImmediatePropagation();
           var data = new FormData(this)
-          if(document.getElementById('image1')!=null){
-            if(document.getElementById('image1').files.length==0) data.delete('icon')
-          }
-          
+          if(document.getElementById('image1').files.length==0) data.delete('icon')
           var action = 'POST'
           var url = options.url
           var successMessage = options.entity + ' Added Successfully'
@@ -78,18 +75,6 @@ function crudOperations(options){
               action = 'PUT';
               url = `${options.put_url}${jQuery(options.id_selector).val()}/`
               successMessage = options.entity + ' Updated Successfully'
-          }
-          console.log("Urls is ", url)
-          if(url == '/api/DoctorRegistration/'){
-              let values = jQuery(`${options.form_id} input[name="commission_type"]:checked`).val();
-              console.log("Commission type", values)
-              if(values == 'Percent'){
-                  let valuesOfCommision = jQuery(`${options.form_id} #commission_val`).val();
-                  if(valuesOfCommision.length > 2){
-                      alert("You can not write more than 2 digit in Commision.")
-                      return 
-                  }
-              }
           }
           if(jQuery(options.form_id).valid()){
               jQuery.ajax({
