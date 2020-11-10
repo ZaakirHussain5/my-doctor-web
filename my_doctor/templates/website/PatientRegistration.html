@@ -64,31 +64,40 @@
 <div class="row">
 <div class="col-md-6 col-sm-6 col-xs-12">
 <div class="login-form">
-<form>
+<form id="">
     <div class="col-xs-12">
 <div class="form-title">
 <h2>Self Registration</h2>
 </div>
 </div>
 <div class="row" style="height:222px;overflow-y:auto;overflow-x:hidden">
-<div class="form-group col-xs-12">
-<input type="text" class="form-control" id="name" placeholder="Enter your name">
+<div class="form-group col-xs-6">
+<input type="text" class="form-control" id="Name1" placeholder="Enter your name">
 </div>
+<div class="form-group col-xs-6">
+
+<input type="tel" class="form-control" id="mob1" placeholder="Phone No">
+</div>
+
 <div class="form-group col-xs-9">
 
-<input type="tel" class="form-control" id="phone" placeholder="Phone No">
+<input type="text" class="form-control" id="OTP" placeholder="Enter the OTP">
 </div>
 <div class="form-group col-xs-3 otp">
-<p><a href="#" style="color:green;">Get OTP</a></p>
-</div>
-<div class="form-group col-xs-12">
-
-<input type="tel" class="form-control" id="phone" placeholder="Verify OTP">
-</div>
+    <p><a href="#" style="color:green;">Get OTP</a></p>
+    </div>
 <div class="form-group col-xs-12">
 
 <input type="email" class="form-control" id="email" placeholder="Email ID">
 </div>
+<div class="form-group col-xs-6">
+
+    <input type="password" class="form-control" id="password" placeholder="Set Password">
+    </div>
+    <div class="form-group col-xs-6">
+    
+    <input type="password" class="form-control" id="confpassword" placeholder="Re enter Password">
+    </div>
 <div class="row">
 <div class="col-xs-12">
 <div class="form-group col-xs-6">
@@ -122,21 +131,14 @@
 </div>
 </div>
 
-<div class="form-group col-xs-12">
 
-<input type="password" class="form-control" id="password" placeholder="Set Password">
-</div>
-<div class="form-group col-xs-12">
-
-<input type="password" class="form-control" id="password" placeholder="Re enter Password">
-</div>
 
 
 
 </div>
 <div class="col-xs-12 text-center">
 <div class="comment-btn">
-<a href="#" class="btn btn-block">Register</a>
+<button type="button" class="btn btn-block" id="submit">Register</button>
 </div>
 </div>
 </form>
@@ -176,30 +178,11 @@ process.</p>
 {% block scripts %}
     <script>
         jQuery(document).ready(function($){
-            $('#myTab li:first-child').click(()=>{
-                console.log('clicked');
-                $('#user_type').val('P')
-                $('label[for="Name1"]').html('Phone Number')
-                $('#Name1').attr('placeholder','Enter registered phone number')
-                $('#myTab #Doctor').removeClass('active')
-                $('#myTab #Patient').addClass('active')
-                return false
-            })
-
-            $('#myTab:nth-child(2)').click(()=>{
-                console.log('clicked');
-                $('#user_type').val('D');
-                $('label[for="Name1"]').html('Doctor ID')
-                $('#Name1').attr('placeholder','Enter Doctor ID')
-                $('#myTab #Patient').removeClass('active')
-                $('#myTab #Doctor').addClass('active')
-                return false
-            })
+            
 
             function submitForm(){
                 let data = {
                     full_name: $('#Name1').val(),
-                    user_type: $('#user_type').val(),
                     username: $('#mob1').val(),
                     ph_no: $('#mob1').val(),
                     email: $('#email').val(),
