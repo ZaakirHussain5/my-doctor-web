@@ -42,3 +42,11 @@ class groups(models.Model):
 
     def __str__(self):
         return self.groups
+
+
+class PatientBillingHistory(models.Model):
+    patient = models.ForeignKey(patient_info, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=0)
+    date = models.DateTimeField(auto_now_add = True)
+    status=models.CharField(max_length=50)
+    description = models.CharField(max_length=100)

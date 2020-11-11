@@ -25,7 +25,7 @@ SECRET_KEY = 'rd*14e!dam(_=6n!^=)2*ee73%lkbnnhop2u5w-7!9kuh(unv6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','doctor-plus.in','www.doctor-plus.in']
+ALLOWED_HOSTS = ['127.0.0.1','doctor-plus.in','www.doctor-plus.in', 'localhost']
 
 
 # Application definition

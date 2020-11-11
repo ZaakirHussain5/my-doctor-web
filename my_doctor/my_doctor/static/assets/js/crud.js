@@ -67,7 +67,7 @@ function crudOperations(options){
           e.preventDefault();
           e.stopImmediatePropagation();
           var data = new FormData(this)
-          if(document.getElementById('image1').files.length==0) data.delete('icon')
+          if(!document.getElementById('image1') || document.getElementById('image1').files.length==0) data.delete('icon')
           var action = 'POST'
           var url = options.url
           var successMessage = options.entity + ' Added Successfully'

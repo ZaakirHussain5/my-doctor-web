@@ -3,7 +3,8 @@ from .api import (DoctorUpdateProfileAPI, GetLoggedDoctor,DoctorTimingsAPI,
                   doctors_infoViewSet,DoctorRegisterAPI,getAvailableDoctors,
                   NewDoctorRegistration, webdoctorViewset, get_settlement_details,
                   get_doctor_bankDetails, doctor_agreement_list, doctorRegistrationAdmin,
-                  DoctorTimingsAdminAPI, specificDoctorSettlement
+                  DoctorTimingsAdminAPI, specificDoctorSettlement,
+                  getAvailableDoctorsForApponment
                   )
 from django.urls import path,include
 from . import views
@@ -11,6 +12,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register('doctors_info', doctors_infoViewSet, 'doctors_info')
 router.register('getAvailableDoctors', getAvailableDoctors, 'getAvailableDoctors')
+router.register('patientAppointment/DoctorAvailable', getAvailableDoctorsForApponment, 'getAvailableDoctorsForApponment')
 router.register('DoctorTimings',DoctorTimingsAPI,'DoctorTimings')
 router.register('DoctorTimingsAdminAPI',DoctorTimingsAdminAPI,'DoctorTimingsAdminAPI')
 router.register('webDorRegistrationList',webdoctorViewset,'DoctorTimings')

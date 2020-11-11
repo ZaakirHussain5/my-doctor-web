@@ -64,7 +64,7 @@
 <div class="row">
 <div class="col-md-6 col-sm-6 col-xs-12">
 <div class="login-form">
-<form id="">
+<form id="patientRegistration">
     <div class="col-xs-12">
 <div class="form-title">
 <h2>Self Registration</h2>
@@ -180,8 +180,11 @@ process.</p>
         jQuery(document).ready(function($){
             
 
-            function submitForm(){
-                let data = {
+
+        $('#patientRegistration').submit(function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            let data = {
                     full_name: $('#Name1').val(),
                     username: $('#mob1').val(),
                     ph_no: $('#mob1').val(),
@@ -192,8 +195,11 @@ process.</p>
                     blood_group: $("#bloodGroup").val(),
                     height: $("#height").val(),
                     weight: $("#weight").val(),
-                    marital_status: 'Not Specified'
+                    marital_status: 'Not Specified',
+                    user_type: 'P'
                 }
+            console.log(data);
+
                 $.ajax({
                     url: '/api/GeneratePatientID',
                     method: 'GET',
@@ -207,7 +213,7 @@ process.</p>
                         contentType: 'application/json'
                     }).done((response)=>{
                         $.cookie('Token', response.token, { expires: 1 })
-                        window.location.href = 'patients/dashboard'
+                        
                     }).fail((error)=>{
                         console.log(error);
 
@@ -216,11 +222,7 @@ process.</p>
                     console.log(error)
 
                 })
-
-
-            }
-
-        $('#submit').click(submitForm)
+        })
 
         })
 

@@ -49,13 +49,25 @@ class DoctorPrescriptionAPIDelete(viewsets.ModelViewSet):
 class PatientPrescriptionAPI(viewsets.ModelViewSet):
     permissions = [
         permissions.IsAuthenticated
-    ]
 
+    ]
+    serializer_class = MedicalRecordSerializer
     def get_queryset(self):
         return self.request.user.records.filter(is_prescription=True)
 
     def perform_create(self,serializer):
         return serializer.save(is_prescription=True,patient=self.request.user)
+
+
+class PatientRecordAPI(viewsets.ModelViewSet):
+    permission = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = MedicalRecordSerializer
+    def get_queryset(self):
+        return self.request.user.records.filter(is_prescription = False)
+
+
 
 
 class getAllPrescriptions(mixins.ListModelMixin,viewsets.GenericViewSet):

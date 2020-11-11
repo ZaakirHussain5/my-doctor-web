@@ -27,7 +27,9 @@ def selectDoctors(request):
     })
 
 def newAppointment(request):
-    return render(request,'patientsUI/new_appointment.html')
+    context ={}
+    context['specialist']=specialist_type.objects.all()
+    return render(request,'patientsUI/new_appointment.html', context)
 
 def billHistory(request):
     return render(request,'patientsUI/bill_history.html')

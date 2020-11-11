@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import patient_info,medical_history,groups
+from .models import patient_info,medical_history,groups, PatientBillingHistory
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
@@ -170,3 +170,8 @@ class UpdatePasswordSerializer(serializers.Serializer):
 
         raise serializers.ValidationError("Your password is wrong. Please provide us right password") 
 
+class PatientBillingHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientBillingHistory
+        fields= '__all__'
+        read_only_fields = ('patient', )

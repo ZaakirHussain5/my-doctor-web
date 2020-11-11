@@ -1,8 +1,8 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
-{% block content %} 
+{% block content %}
 <div class="ca-content__chatstab">
-                        
+
     <div class="ca-content__callstab">
         <div class="conversation-panel__body ps">
             <div class="container">
@@ -13,119 +13,210 @@
                     <div class="card-body">
                         <div class="d-flex flex-wrap align-content-center" style="justify-content: center;">
                             <ul class="nav nav-pills my-3" id="caCallsTabInside" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link" id="all-calls-tab" data-toggle="pill" href="#all-calls" role="tab" aria-controls="all-calls" aria-selected="false">Prescriptions</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" id="missed-calls-tab" data-toggle="pill" href="#missed-calls" role="tab" aria-controls="missed-calls" aria-selected="true">Reports</a>
-                            </li>
-                        </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="all-calls-tab" data-toggle="pill" href="#prescriptions-tab"
+                                        role="tab" aria-controls="all-calls" aria-selected="false">Prescriptions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="missed-calls-tab" data-toggle="pill" href="#reports-tab"
+                                        role="tab" aria-controls="missed-calls" aria-selected="true">Reports</a>
+                                </li>
+                            </ul>
                         </div>
-                        
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        slno
-                                    </th>
-                                    <th>Description</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="tab-content">
+                            <div class="tab-pane  fade" id="prescriptions-tab" role="tabpanel"
+                                aria-labelledby="pills-contact-tab">
+                                <table id="tbl-prescription" class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                slno
+                                            </th>
+                                            
+                                            <th>Description</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="tab-pane show active fade" id="reports-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
+                               
+                                <table id="reports" class="table table-hover" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Slno</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                                <div class="float-right">
+                                    <button data-toggle="modal" data-target="#newReport" type="button" class="btn btn-primary">
+                                        Upload New Report
+                                     </button>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
-               
+
             </div>
         </div>
+    </div>
 </div>
-</div>
+<div class="modal new-message-dialog" id="newReport" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <h5>New Report</h5>
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <form id="mediaclForms">
+
+                            <div class="form-group">
+                               <label for="RecordType">Report Title</label>
+                               <input name="record_type" type="text" class="form-control" placeholder="Enter Report title">
+                            </div>
+                            <div class="form-group">
+                                <label for="RecordType">Report Files</label>
+                                <input type="file" name="record_files" class="form-control">
+                             </div>
+                            <div class="form-group">
+                                <label for="ConsultingAbout">Description</label>
+                                <textarea name="description" class="form-control" id="ConsultingAbout" rows="7" placeholder="Describe your Problem" style="font-size: medium;"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn mfb-component__button--main"
+                                style="width:100%; border-radius:30px" id="ConfirmClick">Add Report</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-    $(document).ready(function(){
-        $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
-        // VARIABLES...
-        let dataList = [];
-        let old_active_id = null;
-
-
-        function getAppoinmentList(){
-            $.ajax({
-                'url': '/api/getPatientsAppointments/',
-                'contentType': 'application/json',
-                'async': false,
-                'method': 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+    $(document).ready(function () {
+        let prescription = $('#tbl-prescription').DataTable({
+            ajax: {
+                url: '/api/PatientPrescription/',
+                dataSrc: "",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
-            }).done((response)=>{
-                console.log('response response', response);
-                dataList = response;
-            });
-            console.log('data list is', dataList);
-            let totalLi = '';
-            for(var i=0; i < dataList.length; i++){
-                let data = dataList[i];
-                const liDesign = `<li id="patient${data.id}"><div class="calllist" id="patientDiv${data.id}">
-                            <div class="user-avatar user-avatar-rounded online">
-                                <img src="${data.doctor.profile_pic}" alt="">
-                            </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">${data['doctor']['full_name']}</div>
-                                <div class="calllist__details--info">
-                                    <span><i class="mdi mdi-call-received"></i></span>
-                                    <span>${data.appointment_date} at ${data.appointment_time}</span>
-                                </div>
-                            </div>
-                            <div class="calllist__actions">
-                                <div class="iconbox btn-hovered-light">
-                                    <i class="iconbox__icon mdi mdi-video-outline"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </li>`;
-                totalLi += liDesign;
-            }
-            $('#appointment_list').html(totalLi);
-            const liId = 'patient' + dataList[0].id;
-            appoinmentList(liId);
-        }
-        getAppoinmentList()
-
-
-        function appoinmentList(id){
-
-            let ID= id.slice(7)
-            $('#'+id+' #patientDiv'+ID).addClass('active');
-            if(old_active_id == null){
-                old_active_id = '#patientDiv'+ID;
-            }
-            else{
-                $(old_active_id).removeClass('active');
-                old_active_id = '#patientDiv'+ID;
-            }
-
-            for(let i=0; i< dataList.length; i++){
-                const index = dataList[i];
-                if(index.id == ID){
-                    $("#doctor_image").attr('src', index.doctor.profile_pic);
-                    $(".ca-profile-name").html(index.doctor.full_name);
-                    $("#specialist__at").html(index.doctor.specialist_type);
-                    $("#speciality_at").html(index.doctor.specialist_type);
-                    $("#doctor_phone").html(index.doctor.phone_number);
-                    //$("#doctor_email").html(index.doctor.phone_number);
-                    $("#appointment_date").html(index.appointment_date);
-                    $("#appontment_time").html(index.appointment_time);
+            },
+            columns: [
+                {
+                    data: 'id'
+                },
+                {
+                    data: 'description'
+                },
+                {
+                    data: 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                                    <i class="fa fa-user-md"></i>View Details
+                                </button>`
+                    }
                 }
+
+            ],
+            language: {
+                lengthMenu: "_MENU_",
+                search: "",
+            },
+            fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
             }
 
-        }
+        })
 
-        $('#appointment_list').on('click', 'li', function(){
-            let id = $(this).attr('id');
-            return appoinmentList(id)
+        let report = $('#reports').DataTable({
+            ajax: {
+                url: '/api/PatientRecordAPI/',
+                dataSrc: "",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                },
+            },
+            columns: [
+                {
+                    data: 'id'
+                },
+                {
+                    data: 'record_type'
+                },
+                {
+                    data: 'description'
+                },
+
+                {
+                    data: 'id',
+                    render: function (data, type, row) {
+                        console.log(row)
+                        return `<a href="${row.record_files}" class=" btn btn-success btn-sm">
+                                    <i class="mdi mdi-file text-light"></i>
+                                    </a>
+                                    <button type='button' class='btn btn-danger btn-sm'>
+                                        <i class="mdi mdi-trash-can-outline text-light"></i>
+                                    
+                                </button>`
+                    }
+                }
+
+            ],
+            language: {
+                lengthMenu: "_MENU_",
+                search: "",
+            },
+            fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
+            }
+
+        })
+
+
+        ////////////////// MEDICAL REPORT SUBMITING //////////////////
+        $('#mediaclForms').submit((e)=>{
+            e.preventDefault(); //pick my call
+            e.stopImmediatePropagation();
+            let data = new FormData(document.getElementById('mediaclForms'))
+            $.ajax({
+                url: '/api/patient-medical-records/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData:false,
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                },
+
+            }).done((response)=>{
+                console.log(response)
+                report.ajax.reload()
+                $('#newReport').removeClass('active')
+                $('#newReport').modal('hide')
+            }).fail((error)=>{
+                console.log(error);
+            })
         })
     })
 </script>

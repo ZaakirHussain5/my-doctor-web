@@ -1,8 +1,13 @@
 from django.contrib.auth import logout
 from django.http import JsonResponse
 
-from .serializers import UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,PatientResgistrationSerializer,medical_historySerializer,groupsSerializer,PatientResgistrationApp, UserEmail
-from .models import patient_info,medical_history,groups
+from .serializers import ( 
+    UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,
+    PatientResgistrationSerializer,medical_historySerializer,
+    groupsSerializer,PatientResgistrationApp, UserEmail,
+    PatientBillingHistorySerializer,
+)
+from .models import (patient_info,medical_history,groups, PatientBillingHistory)
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
@@ -118,3 +123,20 @@ class PasswordChange(generics.GenericAPIView):
         user = serializer.save(loggedInuser=self.request.user.id)
         print(user)
         return JsonResponse({'done': 'done'}, safe=False)
+
+
+class PatientBillingHistorys(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = PatientBillingHistorySerializer
+
+    def get_queryset(self):
+        # queryset = PatientBillingHistory.objects.filter(patient = patient_info.objects.get(user = self.request.user))
+        queryset = PatientBillingHistory.objects.all()
+        return queryset
+
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            serializer.save()
+            return serializer

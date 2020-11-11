@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
+                            <table id="upcoming" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>slno</th>
@@ -61,7 +61,7 @@
                         <h4>Previous Appointments</h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-hover">
+                        <table id="previousAppoinment" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>slno</th>
@@ -88,9 +88,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                        
-                                                        
-                                                    
                                             </div>
                                     </td>
                                     <td class="text-center">
@@ -230,87 +227,174 @@
 <script>
     $(document).ready(function(){
         $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
-        // VARIABLES...
-        let dataList = [];
-        let old_active_id = null;
 
-
-        function getAppoinmentList(){
-            $.ajax({
-                'url': '/api/getPatientsAppointments/',
-                'contentType': 'application/json',
-                'async': false,
-                'method': 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+        
+        let previousAppoinment = $('#previousAppoinment').DataTable({
+            ajax: {
+                url: '/api/getAppoinmentHistory',
+                dataSrc: '',
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
                 },
-            }).done((response)=>{
-                console.log('response response', response);
-                dataList = response;
-            });
-            console.log('data list is', dataList);
-            let totalLi = '';
-            for(var i=0; i < dataList.length; i++){
-                let data = dataList[i];
-                const liDesign = `<li id="patient${data.id}"><div class="calllist" id="patientDiv${data.id}">
-                            <div class="user-avatar user-avatar-rounded online">
-                                <img src="${data.doctor.profile_pic}" alt="">
-                            </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">${data['doctor']['full_name']}</div>
-                                <div class="calllist__details--info">
-                                    <span><i class="mdi mdi-call-received"></i></span>
-                                    <span>${data.appointment_date} at ${data.appointment_time}</span>
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                  data: "doctor",
+                  render: function (data){
+                      return `
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="user-avatar user-avatar-rounded">
+                                        <img class="img-fluid" src="${doctor.profile_pic}" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="calllist__actions">
-                                <div class="iconbox btn-hovered-light">
-                                    <i class="iconbox__icon mdi mdi-video-outline"></i>
+                                <div class="col-md-10">
+                                    <div class="ml-2 ca-call-history__left--title">
+                                        <div>${doctor.full_name}</div>
+                                        <span class="text-secondary">${doctor.specialist_type}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </li>`;
-                totalLi += liDesign;
-            }
-            $('#appointment_list').html(totalLi);
-            const liId = 'patient' + dataList[0].id;
-            appoinmentList(liId);
-        }
-        getAppoinmentList()
-
-
-        function appoinmentList(id){
-
-            let ID= id.slice(7)
-            $('#'+id+' #patientDiv'+ID).addClass('active');
-            if(old_active_id == null){
-                old_active_id = '#patientDiv'+ID;
-            }
-            else{
-                $(old_active_id).removeClass('active');
-                old_active_id = '#patientDiv'+ID;
-            }
-
-            for(let i=0; i< dataList.length; i++){
-                const index = dataList[i];
-                if(index.id == ID){
-                    $("#doctor_image").attr('src', index.doctor.profile_pic);
-                    $(".ca-profile-name").html(index.doctor.full_name);
-                    $("#specialist__at").html(index.doctor.specialist_type);
-                    $("#speciality_at").html(index.doctor.specialist_type);
-                    $("#doctor_phone").html(index.doctor.phone_number);
-                    //$("#doctor_email").html(index.doctor.phone_number);
-                    $("#appointment_date").html(index.appointment_date);
-                    $("#appontment_time").html(index.appointment_time);
-                }
-            }
-
-        }
-
-        $('#appointment_list').on('click', 'li', function(){
-            let id = $(this).attr('id');
-            return appoinmentList(id)
+                      `;
+                  }
+                },
+                {
+                    data:'Last_modied'
+                },
+                {
+                    data : 'Description'
+                },
+                
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
         })
+
+        let upcoming = $('#upcoming').DataTable({
+            ajax: {
+                url: '/api/getUpcomingAppoinment',
+                dataSrc: '',
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                },
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                  data: "doctor"
+                },
+                {
+                    data:'Last_modied'
+                },
+                {
+                    data : 'Description'
+                },
+                
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+        // VARIABLES...
+        // let dataList = [];
+        // let old_active_id = null;
+
+
+        // function getAppoinmentList(){
+        //     $.ajax({
+        //         'url': '/api/getPatientsAppointments/',
+        //         'contentType': 'application/json',
+        //         'async': false,
+        //         'method': 'GET',
+        //         beforeSend: function (xhr) {
+        //             xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+        //         },
+        //     }).done((response)=>{
+        //         console.log('response response', response);
+        //         dataList = response;
+        //     });
+        //     console.log('data list is', dataList);
+        //     let totalLi = '';
+        //     for(var i=0; i < dataList.length; i++){
+        //         let data = dataList[i];
+        //         const liDesign = `<li id="patient${data.id}"><div class="calllist" id="patientDiv${data.id}">
+        //                     <div class="user-avatar user-avatar-rounded online">
+        //                         <img src="${data.doctor.profile_pic}" alt="">
+        //                     </div>
+        //                     <div class="calllist__details">
+        //                         <div class="calllist__details--name">${data['doctor']['full_name']}</div>
+        //                         <div class="calllist__details--info">
+        //                             <span><i class="mdi mdi-call-received"></i></span>
+        //                             <span>${data.appointment_date} at ${data.appointment_time}</span>
+        //                         </div>
+        //                     </div>
+        //                     <div class="calllist__actions">
+        //                         <div class="iconbox btn-hovered-light">
+        //                             <i class="iconbox__icon mdi mdi-video-outline"></i>
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //             </li>`;
+        //         totalLi += liDesign;
+        //     }
+        //     $('#appointment_list').html(totalLi);
+        //     const liId = 'patient' + dataList[0].id;
+        //     appoinmentList(liId);
+        // }
+        // getAppoinmentList()
+
+
+        // function appoinmentList(id){
+
+        //     let ID= id.slice(7)
+        //     $('#'+id+' #patientDiv'+ID).addClass('active');
+        //     if(old_active_id == null){
+        //         old_active_id = '#patientDiv'+ID;
+        //     }
+        //     else{
+        //         $(old_active_id).removeClass('active');
+        //         old_active_id = '#patientDiv'+ID;
+        //     }
+
+        //     for(let i=0; i< dataList.length; i++){
+        //         const index = dataList[i];
+        //         if(index.id == ID){
+        //             $("#doctor_image").attr('src', index.doctor.profile_pic);
+        //             $(".ca-profile-name").html(index.doctor.full_name);
+        //             $("#specialist__at").html(index.doctor.specialist_type);
+        //             $("#speciality_at").html(index.doctor.specialist_type);
+        //             $("#doctor_phone").html(index.doctor.phone_number);
+        //             //$("#doctor_email").html(index.doctor.phone_number);
+        //             $("#appointment_date").html(index.appointment_date);
+        //             $("#appontment_time").html(index.appointment_time);
+        //         }
+        //     }
+
+        // }
+
+        // $('#appointment_list').on('click', 'li', function(){
+        //     let id = $(this).attr('id');
+        //     return appoinmentList(id)
+        // })
+
     })
 </script>
 {% endblock %}

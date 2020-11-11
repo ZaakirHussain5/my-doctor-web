@@ -17,7 +17,7 @@
                                     <ul class="list-unstyled">
                                         <li>
                                             <a href="{% url 'patients:dashboard'%}">
-                                                <div class="conversation active">
+                                                <div id="dashbord" class="conversation">
                                                     <div
                                                         class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-home"></span>
@@ -28,7 +28,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url 'patients:appointments'%}">
-                                                <div class="conversation">
+                                                <div id="appointments" class="conversation">
                                                     <div
                                                         class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-clock"></span>
@@ -39,7 +39,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url 'patients:newAppointment'%}">
-                                                <div class="conversation">
+                                                <div id="new_appointment" class="conversation">
                                                     <div
                                                         class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-stethoscope"></span>
@@ -50,7 +50,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url 'patients:billHistory'%}">
-                                                <div class="conversation">
+                                                <div id="billing_history" class="conversation">
                                                     <div class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-clipboard"></span>
                                                         <span class="url">Billing History</span>
@@ -60,7 +60,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url 'patients:medicalRecords'%}">
-                                                <div class="conversation">
+                                                <div id="medical_record" class="conversation">
                                                     <div
                                                         class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-plus-circle-outline"></span>
@@ -71,7 +71,7 @@
                                         </li>
                                         <li>
                                             <a href="{% url 'patients:plan'%}">
-                                                <div class="conversation">
+                                                <div id="select_a_plan" class="conversation">
                                                     <div
                                                         class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-checkbox-marked-outline"></span>
@@ -82,7 +82,7 @@
                                         </li>
                                         <li>
                                             <a href="#" data-toggle="modal" data-target="#settingsModalCenter">
-                                                <div class="conversation">
+                                                <div id="settings" class="conversation">
                                                     <div class="user-avatar user-avatar-rounded online">
                                                         <span class="mdi mdi-settings"></span>
                                                         <span class="url">Settings</span>
@@ -100,3 +100,26 @@
         </div>
     </div>
 </div>
+<script >
+    let urls = window.location.href;
+    urls = urls.split('/').slice(3, ).join('/')
+    if(urls == 'patients/dashboard'){
+        $('#dashbord').addClass('active')
+    }
+    else if(urls == 'patients/appointments'){
+        $('#appointments').addClass('active')
+    }
+    else if(urls == 'patients/new-appointment'){
+        $('#new_appointment').addClass('active')
+    }
+    else if(urls == 'patients/billHistory'){
+        $('#billing_history').addClass('active')
+    }
+    else if(urls == 'patients/medical-records'){
+        $('#medical_record').addClass('active')
+    }
+    else if(urls == 'patients/plan'){
+        $('#select_a_plan').addClass('active')
+    }
+    console.log(urls)
+</script>

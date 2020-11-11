@@ -14,7 +14,7 @@
                             <div class="ca-call-details-card" style="height: 250px;">
                                 <div class="ca-call-details__left pl-2">
                                     <div class="ca-call-details__pname">
-                                        <div class="mb-3">Book a Consultation</div>
+                                        <div class="mb-3"><a href="{% url 'patients:newAppointment' %}">Book a Consultation</a></div>
                                         <div class="calllist__details--info">
                                             <span>Book a Consultation from your home and get our doctors Online for your
                                                 customized Solution</span>
@@ -35,7 +35,7 @@
                                 <div class="ca-call-details__left pl-2">
 
                                     <div class="ca-call-details__pname">
-                                        <div class="mb-3">My appointments</div>
+                                        <div class="mb-3"><a href="{% url 'patients:appointments' %}">My appointments</a></div>
                                         <div class="calllist__details--info">
                                             <span>Don't miss out any appointments that you have with our experts
                                                 doctors.</span>
@@ -57,7 +57,7 @@
                                 <div class="ca-call-details__left pl-2">
 
                                     <div class="ca-call-details__pname">
-                                        <div>Order Medicine</div>
+                                        <div id="orderMedicine">Order Medicine</div>
                                         <div class="calllist__details--info">
                                             <span>Lorem ipsum dolor sit amet consectetur
                                                 adipisicing elit. Optio animi facilis hic nam
@@ -100,7 +100,7 @@
                                 <div class="ca-call-details__left pl-2">
 
                                     <div class="ca-call-details__pname">
-                                        <div>Medical Records</div>
+                                        <div><a href="{% url 'patients:medicalRecords' %}">Medical Records</a></div>
                                         <div class="calllist__details--info">
                                             <span>Maintain all your Medical Recors on our CloudMedical Records </span>
                                         </div>
@@ -127,6 +127,9 @@
     $(document).ready(function(){
         $('#caMainTab a[href="{% url "patients:dashboard"%}"]').addClass('active')
 
+        $('#orderMedicine').click(()=>{
+            alert("This featurs is not available now.")
+        })
         // geturl = '/api/getLoggedInPatient/'
         // get a object and need to bind with the profile form
         function getAllSubscriptionPlan(){

@@ -286,7 +286,9 @@ document.getElementById('rzp-button1').onclick = function(e){
     "description": "Online Doctor Appointment",
     "image": "{% static 'assets/img/login.jpg'%}",
     "handler": function (response) {
-            var payment_id = response.razorpay_payment_id;
+            
+        // implement in booking appoinment
+        var payment_id = response.razorpay_payment_id;
             var data = {
                 appointment_date:  $('#app-date').html(),
                 appointment_time: $('#app-time').html(),

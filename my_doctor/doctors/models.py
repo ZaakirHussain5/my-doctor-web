@@ -29,13 +29,7 @@ class doctors_info(models.Model):
 #doctor timings
 class DoctorTimings(models.Model):
     doctor=models.ForeignKey(doctors_info,related_name="timings",on_delete=models.CASCADE)
-    mon=models.BooleanField()
-    tue=models.BooleanField()
-    wed=models.BooleanField()
-    thu=models.BooleanField()
-    fri=models.BooleanField()
-    sat=models.BooleanField()
-    sun=models.BooleanField()
+    day = models.CharField(max_length = 10, null=True)
     from_time=models.CharField(max_length=50)
     to_time=models.CharField(max_length=50)
 
