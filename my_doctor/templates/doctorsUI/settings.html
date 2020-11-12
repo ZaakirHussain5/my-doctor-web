@@ -25,11 +25,11 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#Consultation-fee" role="tab"
-                                    aria-controls="pills-contact" aria-selected="false">Consultation Fees</a>
+                                    aria-controls="pills-contact" aria-selected="false" onclick="getDataa()">Consultation Fees</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#bankDetails" role="tab"
-                                    aria-controls="pills-contact" aria-selected="false">Bank Details</a>
+                                    aria-controls="pills-contact" aria-selected="false" onclick="getDoctorBankDetails()">Bank Details</a>
                             </li>
                         </ul> 
                     <div class="tab-content" id="myTabContent">
@@ -42,25 +42,25 @@
                             </div>
                             <ul class="nav nav-tabs nav-pills left-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#tab-panel-1" data-toggle="tab">Monday</a>
+                                    <a class="nav-link active" href="#tab-panel-1" data-toggle="tab" onclick="setDay('monday')">Monday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab-panel-2" data-toggle="tab">Tuesday</a>
+                                    <a class="nav-link" href="#tab-panel-2" data-toggle="tab" onclick="setDay('tuesday')">Tuesday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab">Wednesday</a>
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('wednesday')">Wednesday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab">Thursday</a>
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('thursday')">Thursday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab">Friday</a>
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('friday')" >Friday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab">Saturday</a>
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('saturday')" >Saturday</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab">Sunday</a>
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('sunday')" >Sunday</a>
                                 </li>
                             </ul>
                         </div>
@@ -69,35 +69,43 @@
                                 <h5>Update Availablity</h5>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class=" form-group col">
-                                                <label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2">
-                                                    <input type="checkbox" id="thu" name="thu" data-id='${row.id}' class="switch-input active">
-                                                    <span class="switch-label"></span>
-                                                    <span id="thuday" class="switch-handle"></span> </label>Available Monday
+                                <form id="doctorTiming">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class=" form-group col">
+                                                    <label style="vertical-align: middle"
+                                                        class="switch switch-default switch-pill switch-success mr-2">
+                                                        <input type="checkbox" id="available" name="available"
+                                                            data-id='${row.id}' class="switch-input active">
+                                                        <input type="hidden" id="day" name="day" value='monday'>
+                                                        <span class="switch-label"></span>
+                                                        <span id="thuday" class="switch-handle"></span>
+                                                    </label> <span id="day_name_here"></span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class=" form-group">
-                                            <label for="from_time" class=" form-control-label">From</label>
-                                            <input type="time" id="from_time" name="from_time" class="form-control">
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="from_time" class=" form-control-label">From</label>
+                                                <input type="time" id="from_time" name="from_time"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="to_time" class=" form-control-label">To</label>
+                                                <input type="time" id="to_time" name="to_time"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 d-flex flex-wrap justify-content-center">
+                                            <button type="submit" class="btn btn-primary btn-sm ju">
+                                                <i class="fa fa-dot-circle-o"></i> Update Timings
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class=" form-group">
-                                            <label for="to_time" class=" form-control-label">To</label>
-                                            <input type="time" id="to_time" name="to_time" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 d-flex flex-wrap justify-content-center">
-                                        <button type="submit" class="btn btn-primary btn-sm ju">
-                                            <i class="fa fa-dot-circle-o"></i> Update Timings
-                                        </button>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -155,15 +163,14 @@
                                                 <div class="col col-md-5"><label for="old_password" class="form-control-label float-right">
                                                         Current Consultation Fee</label></div>
                                                 <div class="col-12 col-md-7">
-                                                    <input type="number" id="old_fee" name="old_password" placeholder="Current Cunsultation Fee"
+                                                    <input type="number" id="consultation_fee" name="consultation_fee" placeholder="Current Cunsultation Fee"
                                                         class="form-control" value="500.00">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
                                                         New Consultation Fee</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter New Cunsultation Fee" class="form-control">
+                                                <div class="col-12 col-md-7"><input type="number"  id="new_fee" name="new_fees" placeholder="Enter New Cunsultation Fee" class="form-control">
                                                 </div>
                                             </div>
                                         <div class="row form-group">
@@ -181,64 +188,77 @@
                         <div class="tab-pane fade" id="bankDetails" role="tabpanel" aria-labelledby="list">
                             <div class="row">
                                 <div class="col-md-10 ">
-                                    <form id="ConsultationFeeForm">
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="old_password" class="form-control-label float-right">
-                                                        A/c No.</label></div>
-                                                <div class="col-12 col-md-7">
-                                                    <input type="number" id="old_fee" name="old_password" placeholder="Enter yout Account Number"
-                                                        class="form-control">
-                                                </div>
+                                    <form id="DoctorBankDetailsForm">
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="account_no"
+                                                    class="form-control-label float-right">
+                                                    A/c No.</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <input type="number" id="account_no" name="account_no"
+                                                    placeholder="Enter yout Account Number" class="form-control">
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                        A/c Holder Name</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter the Name Linked with the Account" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="account_holder_name"
+                                                    class=" form-control-label float-right">
+                                                    A/c Holder Name</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="account_holder_name"
+                                                    name="account_holder_name"
+                                                    placeholder="Enter the Name Linked with the Account"
+                                                    class="form-control">
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                        Bank Name</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter the Bank Name" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="bank_name"
+                                                    class=" form-control-label float-right">
+                                                    Bank Name</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="bank_name"
+                                                    name="bank_name" placeholder="Enter the Bank Name"
+                                                    class="form-control">
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                        Branch Name</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter the Branch Name" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="branch_name"
+                                                    class=" form-control-label float-right">
+                                                    Branch Name</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="branch_name"
+                                                    name="branch_name" placeholder="Enter the Branch Name"
+                                                    class="form-control">
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                        IFSC</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter the IFSC" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="ifsc_no"
+                                                    class=" form-control-label float-right">
+                                                    IFSC</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="ifsc_no" name="ifsc_no"
+                                                    placeholder="Enter the IFSC" class="form-control">
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                        UPI ID</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter UPI ID" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="upi_id"
+                                                    class=" form-control-label float-right">
+                                                    UPI ID</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="upi_id" name="upi_id"
+                                                    placeholder="Enter UPI ID" class="form-control">
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                        Phone Number</label></div>
-                                                <div class="col-12 col-md-7"><input type="number" id="new_fee" name="new_password"
-                                                        placeholder="Enter the Phone Number" class="form-control">
-                                                        <small>Phone Number which is linked with Google Pay,Phone pe or other UPI apps.</small>
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-5"><label for="phone_no"
+                                                    class=" form-control-label float-right">
+                                                    Phone Number</label></div>
+                                            <div class="col-12 col-md-7"><input type="number" id="phone_no"
+                                                    name="phone_no" placeholder="Enter the Phone Number"
+                                                    class="form-control">
+                                                <small>Phone Number which is linked with Google Pay,Phone pe or other
+                                                    UPI apps.</small>
                                             </div>
+                                        </div>
                                         <div class="row form-group">
                                             <div class="col-md-7 offset-md-5">
-                                                    <button type="submit" class="btn btn-primary btn-sm ju">
-                                                        <i class="fa fa-building"></i> Update Details
-                                                    </button>
-                            
+                                                <button type="submit" class="btn btn-primary btn-sm ju">
+                                                    <i class="fa fa-building"></i> Update Details
+                                                </button>
+
                                             </div>
                                         </div>
                                     </form>
@@ -265,8 +285,7 @@
 <script>
     let dataList = [];
     function getDataa() {
-        console.log('here')
-        const form = document.getElementById('profile_form');
+        const form = document.getElementById('ConsultationFeeForm');
         jQuery.ajax({
             url: '/api/getLoggedInDoctor',
             method: 'GET',
@@ -284,7 +303,7 @@
             console.log(error);
         });
     }
-    getDataa()
+    
 
 
     function formDeserialize(form, data) {
@@ -335,73 +354,17 @@
         }
     }
 
-
-    //////////////// username change event ////////////////
-   
-
-
-    //////// UPDATING PROFILE //////////
-    jQuery("#profile_form").submit((e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('profile_form'))
-        console.log(data);
-        jQuery.ajax({
-            url: '/api/DoctorUpdateProfile',
-            data: data,
-            method: 'POST',
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-            },
-        })
-            .done((response) => {
-                console.log("postrequest response -", response);
-                jQuery.removeCookie('DoctorToken');
-                jQuery.cookie('DoctorToken', response.token, { expires: 1 })
-                toastr.success("Your details have been Updated Successfully","Profile Updated",{positionClass:"toast-top-center"})
-            })
-            .fail((error) => {
-                console.log(error);
-            })
-    })
-
-
-    jQuery('#pills-profile-tab').click(() => {
-
-    })
-
-    ////////// PASSWORD CHANGE FEATURES //////////
-    jQuery('#password_form').submit((e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('password_form'))
-        jQuery.ajax({
-            url: '/api/changePassword',
-            method: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-            },
-        }).done((response) => {
-            console.log(response);
-            //jQuery.removeCookie('DoctorToken');
-            //window.location.href = '/login';
-        }).fail((error) => {
-            console.log('errors are ', error)
-        })
-
-
-    })
+    let day = 'monday'
+    function setDay(name){
+        day = name;
+        getDoctorTimings(day)
+    }
 
     ///////////// Doctor Timings://///////////
-    function getDoctorTimings() {
-        const form = document.getElementById('timingsForm');
+    function getDoctorTimings(dayName = 'monday') {
+        const form = document.getElementById('doctorTiming');
         jQuery.ajax({
-            url: '/api/DoctorTimings',
+            url: '/api/DoctorTimings?name='+ dayName,
             method: 'GET',
             contendType: 'application/json',
             async: false,
@@ -410,30 +373,33 @@
             },
         })
             .done((response) => {
-                console.log(response);
+                
                 console.log(form);
-                if (response.length != 0) {
+                if (response.length > 0) {
+                    console.log(response);
                     formDeserialize(form, response[0]);
-                    for (var key in response[0]) {
-                        if (response[0][key] !== true) {
-                            let parent = jQuery("#" + key).parent()
-                            parent.removeClass('switch-success');
-
-                        }
-
-                    }
-
+                    jQuery('#day_name_here').html( 'Available ' + response[0].day)
+                    
                 }
+                else{
+                    jQuery('#day_name_here').html('Notavailable ' + day)
+                    jQuery('#to_time').val('')
+                    jQuery('#from_time').val('')
+                    jQuery('#day').val(day)
+                }
+
             })
             .fail((error) => {
                 console.log(error)
             })
     }
     getDoctorTimings();
-    jQuery('#timingsForm').submit((e) => {
+
+    jQuery('#doctorTiming').submit((e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('timingsForm'))
+        let data = new FormData(document.getElementById('doctorTiming'))
+        data['day'] = day
         jQuery.ajax({
             url: '/api/DoctorTimings/',
             method: 'POST',
@@ -452,6 +418,131 @@
             })
 
     })
+
+    ////////// Update Timings ////////////
+    jQuery('#password_form').submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('password_form'))
+        jQuery.ajax({
+            url: '/api/changePassword',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+            console.log(response);
+            //jQuery.removeCookie('DoctorToken');
+            //window.location.href = '/login';
+            alert('Password change successfull.')
+        }).fail((error) => {
+            let errors = JSON.parse(error.responseText)
+            alert(errors[0])
+        })
+    })
+
+    jQuery('#ConsultationFeeForm').submit((e) => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            const data = new FormData(document.getElementById('ConsultationFeeForm'))
+            jQuery.ajax({
+                url: '/api/changeFee/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            })
+                .done((response) => {
+                    console.log(response);
+                })
+                .fail((error) => {
+                    console.log(error)
+                })
+        })
+
+        jQuery('#DoctorBankDetailsForm').submit((e) => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            const data = new FormData(document.getElementById('DoctorBankDetailsForm'))
+            jQuery.ajax({
+                url: '/api/doctor_bankDetails/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            })
+                .done((response) => {
+                    console.log(response);
+                })
+                .fail((error) => {
+                    console.log(error)
+                })
+        })
+
+        function getDoctorBankDetails() {
+            jQuery.ajax({
+                url: '/api/doctor_bankDetails/',
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            }).done((response) => {
+                console.log(response)
+                const form = document.getElementById("DoctorBankDetailsForm");
+                formDeserialize(form, response[0])
+            }).fail((err) => {
+                console.log(err)
+            })
+        }
+        
+        jQuery('#DoctorBankDetailsForm').submit((e) => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            const data = new FormData(document.getElementById('DoctorBankDetailsForm'))
+            jQuery.ajax({
+                url: '/api/doctor_bankDetails/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            })
+                .done((response) => {
+                    console.log(response);
+                })
+                .fail((error) => {
+                    console.log(error)
+                })
+        })
+
+        function getDoctorBankDetails() {
+            jQuery.ajax({
+                url: '/api/doctor_bankDetails/',
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            }).done((response) => {
+                console.log(response)
+                const form = document.getElementById("DoctorBankDetailsForm");
+                formDeserialize(form, response[0])
+            }).fail((err) => {
+                console.log(err)
+            })
+        }
 
 </script>
 {% endblock %}

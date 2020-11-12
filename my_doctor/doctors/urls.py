@@ -4,7 +4,7 @@ from .api import (DoctorUpdateProfileAPI, GetLoggedDoctor,DoctorTimingsAPI,
                   NewDoctorRegistration, webdoctorViewset, get_settlement_details,
                   get_doctor_bankDetails, doctor_agreement_list, doctorRegistrationAdmin,
                   DoctorTimingsAdminAPI, specificDoctorSettlement,
-                  getAvailableDoctorsForApponment
+                  getAvailableDoctorsForApponment, changeFee, doctor_bankDetails
                   )
 from django.urls import path,include
 from . import views
@@ -20,6 +20,7 @@ router.register('get_settlement_details',get_settlement_details,'get_settlement_
 router.register('doctor_bank_details', get_doctor_bankDetails,'get_settlement_details')
 router.register('doctor_agreement_list', doctor_agreement_list,'get_settlement_details')
 router.register('specificDoctorPaymentList', specificDoctorSettlement, 'specificDoctorSettlement')
+router.register('doctor_bankDetails', doctor_bankDetails,'doctor_bankDetails')
 
 
 urlpatterns = [
@@ -30,5 +31,6 @@ urlpatterns = [
     path('DoctorUpdateProfile',DoctorUpdateProfileAPI.as_view(),name='DoctorUpdateProfile'),
     path('doctor_registrationByAdmin/',doctorRegistrationAdmin.as_view(),name='doctor_registrationByAdmin'),
     path("NewDoctorRegistration", NewDoctorRegistration.as_view(), name="newDoctorRegistration"),
+    path('changeFee/', changeFee.as_view(), name = 'changeFee')
 
 ]
