@@ -22,6 +22,7 @@ class DoctorTimingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorTimings
         fields = '__all__'
+        read_only_fields = ('doctor', )
 
 class AvlDoctorsListSerializer(serializers.ModelSerializer):
     doctor=doctors_infoSerializer()
@@ -137,3 +138,9 @@ class DoctorBankDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorBankDetails
         fields = "__all__"
+
+class DoctorsBankDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorBankDetails
+        fields = ("doctor_id", "account_no", "ifsc_no", "bank_name", "branch_name", "account_holder_name", "upi_id", "phone_no")
+        read_only_fields = ("doctor_id", )

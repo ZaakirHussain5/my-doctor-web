@@ -8,7 +8,7 @@ from knox.models import AuthToken
 from datetime import date
 from specialist_type.models import specialist_type
 import datetime 
-
+from rest_framework.views import APIView
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False)
@@ -40,14 +40,16 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
     serializer_class = DoctorTimingsSerializer
 
     def get_queryset(self):
-        return DoctorTimings.objects.filter(doctor__user=self.request.user)
+        return DoctorTimings.objects.filter(doctor__user=self.request.user, day=self.request.query_params.get('name'))
 
     def perform_create(self, serializer):
+        print(serializer)
         try:
-            DoctorTimings.objects.get(doctor__user=self.request.user).delete()
+            DoctorTimings.objects.get(doctor__user=self.request.user, day=serializer.validated_data['day']).delete()
         except ObjectDoesNotExist:
             pass
-        serializer.save()
+        doctor = doctors_info.objects.get(user = self.request.user)
+        serializer.save(doctor=doctor)
 
 
 class DoctorUpdateProfileAPI(generics.GenericAPIView):
@@ -243,3 +245,28 @@ class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             pass
         serializer.save()
+
+
+
+class changeFee(APIView):
+    def post(self, request, format=None):
+        doctor = doctors_info.objects.get(user=request.user)
+        doctor.consultation_fee = request.data['new_fees']
+        doctor.save()
+        print(doctor)
+        serializer = doctors_listSerializer(doctor)
+        return Response(serializer.data)
+
+
+class doctor_bankDetails(viewsets.ModelViewSet):
+    permissions = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = DoctorsBankDetailsSerializer
+
+    def get_queryset(self):
+        return DoctorBankDetails.objects.filter(doctor_id=doctors_info.objects.get(user=self.request.user))
+
+    def perform_create(self, serializer):
+        serializer.save(doctor_id=doctors_info.objects.get(
+            user=self.request.user))
