@@ -77,7 +77,7 @@ class PatientResgistrationApp(serializers.Serializer):
     height=serializers.DecimalField(max_digits=10,decimal_places=2)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2)
     marital_status=serializers.CharField(required=False)
-    blood_group = serializers.CharField()
+    blood_group = serializers.CharField(required=False)
     ph_no=serializers.CharField()
 
     def create(self, validated_data):
@@ -121,9 +121,12 @@ class UpdateProfile(serializers.Serializer):
             print(validated_data)
             user.username=validated_data['username']
             user.email=validated_data['email']
+            user.save()
+            patient.user = user
             for key,value in validated_data.items():
                 if key!='pat_id':
                     setattr(patient,key,value)
+            
             patient.save()
             return user
         except IntegrityError:

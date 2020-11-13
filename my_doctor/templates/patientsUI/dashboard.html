@@ -4,17 +4,18 @@
 
 {% block content%}
 <div class="ca-content__chatstab">
-    <div class="ca-content__callstab">
+    <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="card" ">
+                        <a href="{% url 'patients:newAppointment' %}">
+                        <div class="card">
                             <div class=" card-body p-0">
                             <div class="ca-call-details-card" style="height: 250px;">
                                 <div class="ca-call-details__left pl-2">
                                     <div class="ca-call-details__pname">
-                                        <div class="mb-3"><a href="{% url 'patients:newAppointment' %}">Book a Consultation</a></div>
+                                        <div class="mb-3">Book a Consultation</div>
                                         <div class="calllist__details--info">
                                             <span>Book a Consultation from your home and get our doctors Online for your
                                                 customized Solution</span>
@@ -27,15 +28,17 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                    <a href="{% url 'patients:appointments' %}">
+                         <div class="card">
                         <div class="card-body p-0">
                             <div class="ca-call-details-card" style="height: 250px;">
                                 <div class="ca-call-details__left pl-2">
 
                                     <div class="ca-call-details__pname">
-                                        <div class="mb-3"><a href="{% url 'patients:appointments' %}">My appointments</a></div>
+                                        <div class="mb-3">My appointments</div>
                                         <div class="calllist__details--info">
                                             <span>Don't miss out any appointments that you have with our experts
                                                 doctors.</span>
@@ -49,20 +52,42 @@
                         </div>
 
                     </div>
+                    </a>
+                   
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="{% url 'patients:medicalRecords' %}">
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="ca-call-details-card" style="height: 250px;">
                                 <div class="ca-call-details__left pl-2">
 
                                     <div class="ca-call-details__pname">
-                                        <div id="orderMedicine">Order Medicine</div>
+                                        <div>Medical Records</div>
                                         <div class="calllist__details--info">
-                                            <span>Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Optio animi facilis hic nam
-                                                at, consequuntur doloremque officia excepturi
-                                                repellendus dolores.</span>
+                                            <span>Maintain all your Medical Recors on our CloudMedical Records </span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-plus-circle-outline mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#" data-toggle="modal" data-target="#CommingSoon">
+                        <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div>Order Medicine</div>
+                                        <div class="calllist__details--info">
+                                            <span>Order Your Medicines Online and get it delicered to your doorstep in no time.</span>
                                         </div>
                                     </div>
                                     <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
@@ -72,8 +97,11 @@
                             </div>
                         </div>
                     </div>
+                    </a>
+                    
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#" data-toggle="modal" data-target="#CommingSoon">
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="ca-call-details-card" style="height: 250px;">
@@ -92,32 +120,32 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <div class="ca-call-details-card" style="height: 250px;">
-                                <div class="ca-call-details__left pl-2">
-
-                                    <div class="ca-call-details__pname">
-                                        <div><a href="{% url 'patients:medicalRecords' %}">Medical Records</a></div>
-                                        <div class="calllist__details--info">
-                                            <span>Maintain all your Medical Recors on our CloudMedical Records </span>
-                                        </div>
-                                    </div>
-                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
-                                        <i class="mdi mdi-plus-circle-outline mdi-48px"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
 </div>
+<div class="modal new-message-dialog" id="CommingSoon" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <h5>Comming Soon..</h5>
+                          
+                    </div>
+                    <div class="modal-body text-center">
+                      <p class="">This Feature is Unavailable at moment it will be at your service at the earliest.</p>
+                    </div>
+                    <div class="modal-footer d-flex flex-wrap align-content-center">
+                        <button type="button" class="btn mfb-component__button--main"
+                        style="width:100%;border-radius:0px" data-dismiss="modal" >ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock %}
 
 {% block scripts %}

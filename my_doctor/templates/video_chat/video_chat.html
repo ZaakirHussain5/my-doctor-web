@@ -1,31 +1,526 @@
+{% load static %}
 <html>
-    <head>
-        <title>A Video Embed</title>
-        <link rel="stylesheet" href="{% static 'patients/assets/vendors/bootstrap/bootstrap.min.css' %}">
-    </head>
-    <body>
-        <div class="row">
-            <div class="col-md-9">
-                <div id="otEmbedContainer" style="width:800px; height:640px">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Dr. Manikanta</h4>
-                    </div>
-                    <div class="card-body">
 
-                    </div>
-                </div>
-            
+<head>
+    <title>A Video Embed</title>
+    <link rel="stylesheet" href="{% static 'patients/assets/vendors/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'video/chat.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'patients/assets/fonts/MaterialDesign/css/materialdesignicons.min.css' %}">
+    <style>
+        .img-fluid {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            align-content: center;
+            padding: 25px 15px;
+        }
+
+        .col-md-9,
+        .col-md-9 {
+            padding: 0;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+        .fa-2x {
+            font-size: 2em;
+        }
+
+        .fa-2x {
+            position: relative;
+            display: table-cell;
+            width: 86px;
+            height: 38px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 40px;
+            padding: 0.5rem;
+        }
+
+
+        .main-menu:hover,
+        nav.main-menu.expanded {
+            width: 250px;
+            overflow: visible;
+        }
+
+        .main-menu {
+            background: #ffffff;
+            border-right: 1px solid #ffffff;
+            position: absolute;
+            top: 65px;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            -webkit-transition: width .05s linear;
+            transition: width .05s linear;
+            -webkit-transform: translateZ(0) scale(1, 1);
+            z-index: 1000;
+        }
+
+        .main-menu>ul {
+            margin: 7px 0;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+            padding-left: 7px;
+        }
+
+        .main-menu li>a {
+            position: relative;
+            display: table;
+            border-collapse: collapse;
+            border-spacing: 0;
+            color: #1f3864;
+            font-family: arial;
+            font-size: 14px;
+            text-decoration: none;
+            -webkit-transform: translateZ(0) scale(1, 1);
+            -webkit-transition: all .1s linear;
+            transition: all .1s linear;
+
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 60px;
+            height: 36px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .main-menu>ul.logout {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .no-touch .scrollable.hover {
+            overflow-y: hidden;
+        }
+
+        .no-touch .scrollable.hover:hover {
+            overflow-y: auto;
+            overflow: visible;
+        }
+
+        a:hover,
+        a:focus {
+            text-decoration: none;
+        }
+
+        nav {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        nav ul,
+        nav li {
+            outline: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-menu li:hover>a,
+        nav.main-menu li.active>a,
+        .dropdown-menu>li>a:hover,
+        .dropdown-menu>li>a:focus,
+        .dropdown-menu>.active>a,
+        .dropdown-menu>.active>a:hover,
+        .dropdown-menu>.active>a:focus,
+        .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+        .dashboard-page nav.dashboard-menu ul li.active a {
+            color: #fff;
+            background-color: #5fa2db;
+        }
+
+        .area {
+            float: left;
+            background: #e2e2e2;
+            width: 100%;
+            height: 100%;
+        }
+
+        @font-face {
+            font-family: 'Titillium Web';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+        }
+
+        ul.timeline {
+            list-style-type: none;
+            position: relative;
+        }
+
+        ul.timeline:before {
+            content: ' ';
+            background: #d4d9df;
+            display: inline-block;
+            position: absolute;
+            left: 29px;
+            width: 2px;
+            height: 100%;
+            z-index: 400;
+        }
+
+        ul.timeline>li {
+            margin: 20px 0;
+            padding-left: 20px;
+            font-size: small;
+        }
+
+        ul.timeline>li:before {
+            content: ' ';
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #22c0e8;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 400;
+        }
+        .list-group .list-group-item{
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="text-left">
+                <img src="{% static 'website/img/logo.png' %}" height="56" style="padding-left:30px" alt="CoolBrand">
+            </div>
+
+            <nav class="main-menu">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home fa-2x"></i>
+                            <span class="nav-text">
+                                Dashboard
+                            </span>
+                        </a>
+
+                    </li>
+                    <li class="has-subnav">
+                        <a href="#">
+                            <i class="fa fa-laptop fa-2x"></i>
+                            <span class="nav-text">
+                                Appointments
+                            </span>
+                        </a>
+
+                    </li>
+                    <li class="has-subnav">
+                        <a href="#">
+                            <i class="fa  {% if user == 'doc'%} fa-cog {% else %} fa-stethoscope {%endif%} fa-2x"></i>
+                            <span class="nav-text">
+                                {% if user == 'doc'%}
+                                Settings
+                                {% else %}
+                                 Medical Records
+                                {%endif%}
+                            </span>
+                        </a>
+
+                    </li>
+                    <li class="has-subnav">
+                        <a href="#">
+                            <i class="fa {% if user == 'doc'%} fa-stethoscope {% else %} fa-bar-chart-o {%endif%} fa-2x"></i>
+                            <span class="nav-text">
+                                {% if user == 'doc'%}
+                                Prescriptions
+                                {% else %}
+                                 Medical Records
+                                {%endif%}
+                               
+                            </span>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-file fa-2x"></i>
+                            <span class="nav-text">
+                                Billing History
+                            </span>
+                        </a>
+                    </li>
+                    {% if user != 'doc'%}
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-edit fa-2x"></i>
+                            <span class="nav-text">
+                                Select a Plan
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+            <div id="otEmbedContainer" style="width:100%; height:580px;padding-left:8%">
             </div>
         </div>
-        
- 
-                    <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=DEFAULT_ROOM"></script>
-                     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
-                <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    
-    </body>
+        <div class="col-md-3">
+            {% if user == 'doc'%}
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-pills d-none" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Details" role="tab"
+                                aria-controls="pills-home" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#History" role="tab"
+                                aria-controls="pills-profile" aria-selected="false">Profile</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="Details" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <h5>Patient Details</h5>
+                            <div class="text-center">
+                                <img src="{% static 'patients/assets/images/user/100/face-01.jpg' %}"
+                                    class="img-fluid img-responsive">
+                                <h4>Naveen</h4>
+                            </div>
+                            <table class="table table-hover ">
+                                <tr>
+                                    <td>Age</td>
+                                    <td>21</td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>5.7 ft</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>85 Kgs</td>
+                                </tr>
+                                <tr>
+                                    <td>Blood Group</td>
+                                    <td>AB+</td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>Florida</td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td>California</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button id="btnViewMore" class="btn btn-primary btn-block" role="tab">
+                                            <i class="fa fa-user"></i> View More
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade " id="History" role="tabpanel">
+<div class="mb-1">
+    <buttton class="btn btn-default" id="btnback">
+                                <i class="fa fa-angle-left"></i> Back
+                            </button>
+</div>
+                            
+                            <ul class="nav nav-pills flex-column nav-pills" id="mySecondTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Cons"
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Consultations</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Pres"
+                                        role="tab" aria-controls="pills-profile" aria-selected="false">Prescriptions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Reps"
+                                        role="tab" aria-controls="pills-profile" aria-selected="false">Reports</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="Cons" role="tabpanel">
+                                    <h5 class="mt-2">Naveen's Previous Consultations</h5>
+                                    <ul class="timeline">
+                                        <li>
+                                            <a target="_blank" href="#">Dr. Jay (Dietatian)</a>
+                                            <a href="#" class="float-right">21 March, 2020</a>
+                                            <p>Suggesting a lean diet plan</p>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="#">Dr. Harish (General
+                                                Physician)</a>
+                                            <a href="#" class="float-right">11 March, 2020</a>
+                                            <p>Tested COVID-19 Positive</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="Pres" role="tabpanel">
+                                    <h5 class="mt-2">Naveen's Previous Prescriptions</h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="float-right">
+                                                <button class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-file"></i> View
+                                                </button>
+                                            </div>
+                                            Dr. Jay (Dietatian) on 12/01/2020
+                                            
+                                        </li>
+                                        <li class="list-group-item text-sm">
+                                             <div class="float-right">
+                                                <button class="btn btn-sm btn-primary">
+                                                   <i class="fa fa-file"></i> View
+                                                </button>
+                                            </div>
+                                            Dr. Sunil (Dermatologists) on 12/01/2020
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="Reps" role="tabpanel">
+                                    <h5 class="mt-2">Naveen's Medical Reports</h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="float-right">
+                                                <button class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-file"></i> View
+                                                </button>
+                                            </div>
+                                            Blood Sugar Test on 12/01/2020
+                                            
+                                        </li>
+                                        <li class="list-group-item text-sm">
+                                             <div class="float-right">
+                                                <button class="btn btn-sm btn-primary">
+                                                   <i class="fa fa-file"></i> View
+                                                </button>
+                                            </div>
+                                            COVID-19 Test  on 12/01/2020
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <h5>Doctor Details</h5>
+                    <div class="text-center">
+                        <img src="{% static 'patients/assets/images/layer-14@2x.png' %}"
+                            class="img-fluid img-responsive">
+                        <h4>Dr. Madhu</h4>
+                        <small>Dermatologists</small>
+                        <br>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <table class="table table-hover ">
+                        <tr>
+                            <td>Consultations</td>
+                            <td>21</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>About</strong>
+                                <p>A passionate Dermatologist with over 5+ years of experience</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="floating-chat">
+            <i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Chat
+            <div class="chat">
+                <div class="header">
+                    <span class="title">
+                        Chat
+                    </span>
+                    <button>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+                <ul class="messages">
+                    <li class="other">Are we dogs??? 🐶</li>
+                    <li class="self">no... we're human</li>
+                    <li class="other">are you sure???</li>
+                    <li class="self">yes.... -___-</li>
+                    <li class="other">if we're not dogs.... we might be monkeys 🐵</li>
+                    <li class="self">i hate you</li>
+                    <li class="other">don't be so negative! here's a banana 🍌</li>
+                    <li class="self">......... -___-</li>
+                </ul>
+                <div class="footer">
+                    <div class="text-box" contenteditable="true" disabled="true"></div>
+                    <button id="sendMessage">send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script
+        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=DEFAULT_ROOM"></script>
+    <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'video/chat.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#end').click(function () {
+                window.location.href = '/api/ratings';
+            })
+
+            $('#btnViewMore').click(function () {
+                $('#myTab a[href="#History"]').tab('show')
+            })
+
+            $('#btnback').click(function () {
+                $('#myTab a[href="#Details"]').tab('show')
+            })
+        })
+    </script>
+
+</body>
+
 </html>

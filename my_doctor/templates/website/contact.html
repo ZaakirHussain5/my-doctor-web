@@ -40,7 +40,7 @@
     <h2 class="white">Reach us at,</h2>
     <p class="white mar-bottom-40">Download the app or call us for complimentary appointment</p>
     <div class="contact-list">
-    <p class="contact mar-bottom-10 white"><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+91 9876543210" class="white">080-4554-9494</a></p>
+    <p class="contact mar-bottom-10 white"><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+91 9876543210" class="white">080-4554 9495</a></p>
     <p class="contact mar-bottom-10 white"><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:abc@example.com" class="white">support@doctor-plus.in</a></p>
     <p class="contact white"><i class="fa fa-map-marker" aria-hidden="true"></i> <b>Doctor Plus</b> <br>
     
@@ -53,55 +53,29 @@
         <div class="row">
             <div class="">
                 <div class="form-group col-xs-6">
-                    <input type="text" placeholder="Your Name" id="id_name" required>
+                    <input type="text" placeholder="Name" id="id_name" required>
                 </div>
                 <div class="form-group col-xs-6">
         
-                    <input type="text" placeholder="Your Email" id="id_email" required>
+                    <input type="text" placeholder="Email" id="id_email" required>
                 </div>
                 <div class="form-group col-xs-6">
         
-                    <input type="tel" placeholder="Your Phone" id="id_ph_no" minlength="10" maxlength="10" size="10" required>
+                    <input type="tel" placeholder="Phone" id="id_ph_no" minlength="10" maxlength="10" size="10" required>
                 </div>
                 <div class="form-group col-xs-6">
         
-                    <input type="tel" placeholder="Blood Group" id="id_blood" minlength="10" maxlength="10" size="10" required>
-                </div>
-                <div class="form-group col-xs-6">
-        
-                    <input type="text" id="id_city" placeholder="Your City">
-                </div>
-                <div class="form-group col-xs-6">
-                    <select id="id_gender">
-                        <option>Gender</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-                <div class="form-group col-xs-6">
-                
-                    <input type="number" id="id_age" placeholder="Age" min="1" max="100">
-                </div>
-                <div class="form-group col-xs-12">
-                    <select id="select-specialist">
-                        <option>Speciality</option>
-                        <option>General Physician</option>
-                        <option>Dermatologist</option>
-                        <option value="">Pediatrician</option>
-                        <option value="">Dietitian</option>
-                        <option value="">Psychologist</option>
-                        <option value="">Gynaecologist</option>
-                    </select>
+                    <input type="text" id="id_city" placeholder="City">
                 </div>
             </div>
             <div class="">
                 <div class="form-group col-xs-12">
         
-                    <textarea id="id_message" placeholder="Your message"></textarea>
+                    <textarea id="id_message" placeholder="message"></textarea>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-btn">
-                        <button type="submit" class="btn">Submit</button>
+                        <button type="submit" class="btn btn-block">Submit</button>
                     </div>
                 </div>
             </div>
@@ -120,15 +94,12 @@
     $("#appointments-main-form").submit(function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
-
+        alert("Thank you!! We have your details, Our representatives will get back to you.");
+        return
         let data = {
             name: $('#id_name').val(),
             email: $('#id_email').val(),
             ph_no: $('#id_ph_no').val(),
-            gender: $('#id_gender').val(),
-            blood_group: $("#id_blood").val(),
-            age: $("#id_age").val(),
-            speciality: $("#select-specialist").val(),
             city: $("#id_city").val(),
             message: $("#id_message").val()
         };
@@ -139,7 +110,7 @@
             contentType: 'application/json',
         }).done((response)=>{
             console.log(response);
-            alert("Your appoinment is booking successful. We are call you soon.");
+            alert("Thank you!! We have your details, Our representatives will get back to you.");
             $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
         })
         .fail((error)=>{

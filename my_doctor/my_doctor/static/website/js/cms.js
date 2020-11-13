@@ -1,5 +1,20 @@
-function submitRegistrationForm(){
+function submitRegistrationForm() {
     let data = {
+        full_name: $('#Name1').val(),
+        username: $('#mob1').val(),
+        ph_no: $('#mob1').val(),
+        email: $('#email').val(),
+        password: $('#password').val(),
+        age: $("#age").val(),
+        gender: $("#gender").val(),
+        blood_group:"Not Specified",
+        height: $("#height").val(),
+        weight: $("#weight").val(),
+        marital_status: 'Not Specified',
+        user_type: 'P'
+    }
+    
+    let tele_data = {
         Full_Name: $('#Name1').val(),
         // user_type: $('#user_type').val(),
         username: $('#mob1').val(),
@@ -13,25 +28,45 @@ function submitRegistrationForm(){
         Weight: $("#weight").val(),
         // marital_status: 'Not Specified'
     }
-    console.log("data is", data);
-    $.ajax({
-        url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register/',
-        method: 'POST',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-    }).done((response)=>{
-            $.cookie('Token', response.token, { expires: 1 })
-            window.location.href = 'patients/dashboard'
-        }).fail((error)=>{
-        console.log(error)
 
+    $.ajax({
+        url: '/api/GeneratePatientID',
+        method: 'GET',
+        contentType: 'application/json',
+    }).done((response) => {
+        data.pat_id = response.pat_id
+        $.ajax({
+            url: '/api/PatientRegInApp',
+            data: JSON.stringify(data),
+            method: 'POST',
+            contentType: 'application/json'
+        }).done((response) => {
+            $.cookie('Token', response.token, { expires: 1 })
+            $.ajax({
+                url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register/',
+                method: 'POST',
+                data: JSON.stringify(tele_data),
+                contentType: 'application/json',
+            }).done((response) => {
+                window.location.href = 'patients/dashboard'
+            }).fail((error) => {
+                console.log(error)
+            })
+        }).fail((error) => {
+            console.log(error);
+        })
+    }).fail((error) => {
+        console.log(error)
     })
+
+    console.log("data is", data);
+
 
 
 }
 
 
-function submitSubscriptionForm (data) {
+function submitSubscriptionForm(data) {
     console.log("Data coming so function is called.", data);
     $.ajax({
         url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/BookAnAppoinment/',
@@ -40,7 +75,7 @@ function submitSubscriptionForm (data) {
         contentType: 'application/json',
     }).done((response) => {
         console.log(response);
-        alert("Got it !! Request received, our medical representative will get back to you at the earliest");
+        alert("Thank you!! We have your details, Our representatives will get back to you.");
         $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
     })
         .fail((error) => {
@@ -64,37 +99,37 @@ function newsLetterSubscription(data) {
         })
 }
 
-$("#newsletter-form").submit(function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        console.log(
-            "Form submitted successfully."
-        )
-        let data = {
-            Subsricbe_To_Newsletter: $('#SubsricbeToNewsletter').val()
-        }
-        newsLetterSubscription(data);
-        
-    })
-    /////////////////////  APPOINMENT FORM SUBMITED /////////////////
-    $("#appointments-main-form").submit(function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
+$("#newsletter-form").submit(function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    console.log(
+        "Form submitted successfully."
+    )
+    let data = {
+        Subsricbe_To_Newsletter: $('#SubsricbeToNewsletter').val()
+    }
+    newsLetterSubscription(data);
 
-        let data = {
-            Your_Name: $('#id_name').val(),
-            Your_Email: $('#id_email').val(),
-            Enter_Phone: $('#id_ph_no').val(),
-            gender: $('#id_gender').val(),
-            Blood_Group: $("#id_blood").val(),
-            Age: $("#id_age").val(),
-            Speciaility: $("#select-specialist").val(),
-            Your_City: $("#id_city").val(),
-            Briefly_Describe_About_Your_Problem: $("#id_message").val()
-        };
-        submitSubscriptionForm(data)
-       
+})
+/////////////////////  APPOINMENT FORM SUBMITED /////////////////
+$("#appointments-main-form").submit(function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-    })
-    
-    $('#submit').click(submitRegistrationForm)
+    let data = {
+        Your_Name: $('#id_name').val(),
+        Your_Email: $('#id_email').val(),
+        Enter_Phone: $('#id_ph_no').val(),
+        gender: $('#id_gender').val(),
+        Blood_Group: $("#id_blood").val(),
+        Age: $("#id_age").val(),
+        Speciaility: $("#select-specialist").val(),
+        Your_City: $("#id_city").val(),
+        Briefly_Describe_About_Your_Problem: $("#id_message").val()
+    };
+    submitSubscriptionForm(data)
+
+
+})
+
+$('#submit').click(submitRegistrationForm)

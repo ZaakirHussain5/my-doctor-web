@@ -18,7 +18,7 @@ def getDoctorToken(request):
     })
 
 def patientVideoChat(request):
-    return render(request,'video_chat/patient_video_ui.html')
+    return render(request,'video_chat/video_chat.html',{"user":"doc"})
 
 def doctorVideoChat(request):
     return render(request,'video_chat/doctor_video_ui.html')

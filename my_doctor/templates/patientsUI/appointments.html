@@ -2,7 +2,7 @@
 {% load static%}
 {% block content %} 
 <div class="ca-content__chatstab"> 
-    <div class="ca-content__callstab">
+    <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
             <div class="container">
                 <div class="card">
@@ -234,7 +234,7 @@
                 url: '/api/getAppoinmentHistory',
                 dataSrc: '',
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
                 },
             },
             columns:[
@@ -286,7 +286,7 @@
                 url: '/api/getUpcomingAppoinment',
                 dataSrc: '',
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
                 },
             },
             columns:[

@@ -3,8 +3,8 @@
 {% block content %}
 <div class="ca-content__chatstab">
 
-    <div class="ca-content__callstab">
-        <div class="conversation-panel__body ps">
+    <div class="ca-content__callstab" style="padding-top: 0;">
+        <div class="conversation-panel__body ps" style="height: calc(100vh - 0.6875rem);">
             <div class="container">
                 <div class="card">
                     <div class="card-header">
@@ -77,47 +77,42 @@
                                     <div class="container">
                                         <div class="form-group row">
                                             <input type="hidden" id="spl-selected">
-                                            <div class="col-md-6 mt-5">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <button type="button" class="btn mfb-component__button--main"
+                                            <div class="offset-md-2 col-md-7">
+                                                
+                                                <div class="" id="dateSelector">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div id="datepicker"></div>
+                                                            <input type="hidden" id="App_date">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                             <button type="button" class="btn mfb-component__button--main"
                                                             style="width:100%; border-radius:30px" id="selectToday">
                                                             Today
                                                         </button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button type="button"
+                                                          <button type="button"
                                                             class="btn mfb-component__button--main mt-1"
                                                             style="width:100%;  border-radius:30px" id="selectTommorow">
                                                             Tommorow
-                                                        </button>
+                                                        </button>  
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control text-center"
+                                                        placeholder="Selected Date" id="dateSelected"
+                                                        style=" border-radius:30px">
+                                                    <button type="button"
+                                                        class="btn btn-block mfb-component__button--main mt-2"
+                                                        style=" width:100%; border-radius:30px"
+                                                        id="btnProceed">Proceed</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <button type="button"
-                                                            class="btn mfb-component__button--main mt-1"
-                                                            style=" width:100%; border-radius:30px" id="selectDate">
-                                                            Select Date
-                                                        </button>
-                                                    </div>
+                                                    
                                                 </div>
 
 
 
-
                                             </div>
-                                            <div class="col-md-6 mt-5" id="dateSelector">
-                                                <div class="container">
-                                                    <div id="datepicker" style="display: none;"></div>
-                                                    <input type="hidden" id="App_date">
-                                                </div>
-                                                <input type="text" class="form-control text-center"
-                                                    placeholder="Selected Date" id="dateSelected"
-                                                    style=" border-radius:30px">
-                                                <button type="button"
-                                                    class="btn btn-block mfb-component__button--main mt-2"
-                                                    style=" width:100%; border-radius:30px"
-                                                    id="btnProceed">Proceed</button>
-                                            </div>
+                                           
 
                                         </div>
                                     </div>
@@ -292,8 +287,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="tab-pane fade" id="Confirmation" role="tabpanel"
                                 aria-labelledby="pills-contact-tab">
@@ -553,9 +546,37 @@
             })
         }
 
+        $('#datepicker').datepicker({
+              format:"dd/mm/yyyy"
+            });
+            $('#datepicker').on('changeDate', function () {
+                $('#App_date').val(
+                    $('#datepicker').datepicker('getFormattedDate')
+                );
+                $('#dateSelected').val(
+                    $('#datepicker').datepicker('getFormattedDate')
+                );
+            });
+
+            $('#datepicker table').removeClass('table-condensed')
+            $('#datepicker table').addClass('table')
+
+            
+
+            $('#selectToday').click(function(){
+                $('#dateSelected').val(
+                    moment(new Date()).format("DD/MM/YYYY")
+                );
+            })
+
+            $('#selectTommorow').click(function(){
+                $('#dateSelected').val(
+                    moment(new Date()).add(1, 'days').calendar().format("DD/MM/YYYY")
+                );
+            })
 
         ///////////// payment ///////////////
-document.getElementById('rzp-button1').onclick = function(e){
+/* document.getElementById('rzp-button1').onclick = function(e){
    var options = {
     "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
     "amount": parseFloat($('#amount').html())*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -606,7 +627,8 @@ document.getElementById('rzp-button1').onclick = function(e){
 var rzp1 = new Razorpay(options);
     rzp1.open();
     e.preventDefault();
-}
-    })
+}*/
+    }) 
+    
 </script>
 {% endblock %}

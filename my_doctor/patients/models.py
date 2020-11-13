@@ -8,7 +8,7 @@ class patient_info(models.Model):
     gender = models.CharField(max_length=25)
     dob = models.CharField(max_length=25,null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
-    blood_group = models.CharField(max_length=5)
+    blood_group = models.CharField(max_length=5, null=True)
     rel_type = models.CharField(max_length=25,null=True)
     relation = models.CharField(max_length=32,null=True)
     ph_no=models.CharField(max_length=15)
@@ -33,7 +33,6 @@ class patient_info(models.Model):
 
 class medical_history(models.Model):
     medical_history=models.CharField(max_length=25)
-
     def __str__(self):
         return self.medical_history
 
