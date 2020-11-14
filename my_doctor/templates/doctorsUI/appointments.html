@@ -207,7 +207,7 @@
     <div class="col-12">
         <div class="page-header ">
             <div class="page-title">
-                <h4 id="title">Upcoming Appointments</h4>
+                <h1 id="title">Upcoming Appointments</h1>
             </div>
         </div>
     </div>
@@ -215,7 +215,7 @@
   <div class="content">
     <div class="card pl-3 pr-3">
         <div class="card-body card-block">
-            <table class="table" id="Appointments">
+            <table class="table" id="UpComingAppointments">
                 <thead>
                     <tr>
                         <th>Slno</th>
@@ -223,7 +223,8 @@
                         <th>Patient</th>
                         <th>Appointment Date</th>
                         <th>Appointment Time</th>
-                        <th>Description</th><th>Actions</th>
+                        <th>Description</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -237,7 +238,7 @@
   <div class="col-12">
       <div class="page-header ">
           <div class="page-title">
-              <h4 id="title">Todays Appointments</h4>
+              <h1 id="title">Todays Appointments</h1>
           </div>
       </div>
   </div>
@@ -245,7 +246,7 @@
 <div class="content">
   <div class="card pl-3 pr-3">
       <div class="card-body card-block">
-          <table class="table" id="Appointments">
+          <table class="table" id="TodayAppointments">
               <thead>
                   <tr>
                       <th>Slno</th>
@@ -267,7 +268,7 @@
   <div class="col-12">
       <div class="page-header ">
           <div class="page-title">
-              <h4 id="title">Previous Appointments</h4>
+              <h1 id="title">Previous Appointments</h1>
           </div>
       </div>
   </div>
@@ -275,7 +276,7 @@
 <div class="content">
   <div class="card pl-3 pr-3">
       <div class="card-body card-block">
-          <table class="table" id="Appointments">
+          <table class="table" id="PreviousAppointments">
               <thead>
                   <tr>
                       <th>Slno</th>
@@ -606,9 +607,87 @@ let dataList = [];
 
 // // })
 // let token = ;
-var table = jQuery('#Appointments').DataTable({
+const upComingtable = jQuery('#UpComingAppointments').DataTable({
             ajax:{
-                url:'/api/getDoctorAppointments',
+                url:'/api/upComingAppoinment',
+                dataSrc:"",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                },
+                
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                  data: "patient_name"
+                },
+                {
+                    data:'appointment_date'
+                },
+                {
+                    data : 'appointment_time'
+                },
+                {
+                    data : 'Description'
+                },
+                {
+                  data:"id"
+                }
+                
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+const todaytable = jQuery('#TodayAppointments').DataTable({
+            ajax:{
+                url:'/api/todaysAppoinment',
+                dataSrc:"",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                },
+                
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                  data: "patient_name"
+                },
+                {
+                    data:'appointment_date'
+                },
+                {
+                    data : 'appointment_time'
+                },
+                {
+                    data : 'Description'
+                },
+                {
+                  data:"id"
+                }
+                
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+const previoustable = jQuery('#PreviousAppointments').DataTable({
+            ajax:{
+                url:'/api/previousAppoinment',
                 dataSrc:"",
                 'beforeSend': function (request) {
                     request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));

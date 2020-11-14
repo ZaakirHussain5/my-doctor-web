@@ -4,6 +4,15 @@ from rest_framework import viewsets, permissions,mixins
 from datetime import date, datetime
 
 
+def getDateFormat():
+    d = date.today()
+    year = '{:02d}'.format(d.year)
+    month = '{:02d}'.format(d.month)
+    day = '{:02d}'.format(d.day)
+    formated_date = '{0}-{1}-{2}'.format(year, month, day)
+
+    return formated_date
+
 class appointmentViewSet(viewsets.ModelViewSet):
     permissions = [
         permissions.IsAuthenticated
@@ -49,6 +58,40 @@ class getUpcomingAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return appointment.objects.filter(consultation_status = 'pending', patient=self.request.user)
+
+
+class upComingAppoinment(viewsets.ModelViewSet):
+    serializer_class = appointmentsListSerializer
+    permission = (
+        permissions.IsAuthenticated
+    )
+
+    def get_queryset(self):
+        dates = getDateFormat()
+        return appointment.objects.filter(consultation_status = 'pending', doctor=self.request.user.Doctors).exclude(appointment_date=dates)
+
+
+class previousAppoinment(viewsets.ModelViewSet):
+    serializer_class = appointmentsListSerializer
+    permission = (
+        permissions.IsAuthenticated
+    )
+
+    def get_queryset(self):
+        return appointment.objects.filter(consultation_status = 'success', doctor=self.request.user.Doctors)
+
+
+class todaysAppoinment(viewsets.ModelViewSet):
+    serializer_class = appointmentsListSerializer
+    permission = (
+        permissions.IsAuthenticated
+    )
+
+    def get_queryset(self):
+        formated_date = getDateFormat()
+        return appointment.objects.filter(consultation_status = 'pending', appointment_date=formated_date,  doctor=self.request.user.Doctors)
+
+
 
 class getDoctorAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     
