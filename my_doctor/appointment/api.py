@@ -39,7 +39,7 @@ class getAppoinmentHistory(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     )
     def get_queryset(self):
-        return appointment.objects.filter(patient = self.request.user).exclude(consultation_status='pending')
+        return appointment.objects.filter(patient = self.request.user).exclude(consultation_status='Pending')
 
 class getUpcomingAppoinment(viewsets.ModelViewSet):
     serializer_class = appointmentsListSerializer
@@ -48,7 +48,7 @@ class getUpcomingAppoinment(viewsets.ModelViewSet):
     )
 
     def get_queryset(self):
-        return appointment.objects.filter(consultation_status = 'pending', patient=self.request.user)
+        return appointment.objects.filter(consultation_status = 'Pending', patient=self.request.user)
 
 class getDoctorAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     

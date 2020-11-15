@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from doctors.models import doctors_info
+from patients.models import patient_info
 from .models import VedioChat
 from opentok import OpenTok,MediaModes
 opentok = OpenTok("46964534", "76ca83ec02f7c0ef904f536a2d0bc251df25d8a4")
@@ -18,10 +19,16 @@ def getDoctorToken(request):
     })
 
 def patientVideoChat(request):
-    return render(request,'video_chat/video_chat.html',{"user":"doc"})
-
-def doctorVideoChat(request):
-    return render(request,'video_chat/doctor_video_ui.html')
+    user = request.GET.get('user')
+    doctor_id = request.GET.get('doctor')
+    patient_id = request.GET.get('patient')
+    session = request.GET.get('session')
+    doctor,patient = None,None
+    if doctor_id is not None:
+        doctor = doctors_info.objects.get(pk=doctor_id)
+    if patient_id is not None:
+        patient = patient_info.objects.get(pk=patient_id)
+    return render(request,'video_chat/video_chat.html',{"user" : user,"doctor":doctor,"patient":patient,"session":session})
 
 def ratings(request):
     return render(request,'video_chat/ratings.html')

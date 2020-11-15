@@ -208,7 +208,8 @@
             height: 20px;
             z-index: 400;
         }
-        .list-group .list-group-item{
+
+        .list-group .list-group-item {
             font-size: small;
         }
     </style>
@@ -249,7 +250,7 @@
                                 {% if user == 'doc'%}
                                 Settings
                                 {% else %}
-                                 Medical Records
+                                Medical Records
                                 {%endif%}
                             </span>
                         </a>
@@ -257,14 +258,15 @@
                     </li>
                     <li class="has-subnav">
                         <a href="#">
-                            <i class="fa {% if user == 'doc'%} fa-stethoscope {% else %} fa-bar-chart-o {%endif%} fa-2x"></i>
+                            <i
+                                class="fa {% if user == 'doc'%} fa-stethoscope {% else %} fa-bar-chart-o {%endif%} fa-2x"></i>
                             <span class="nav-text">
                                 {% if user == 'doc'%}
                                 Prescriptions
                                 {% else %}
-                                 Medical Records
+                                Medical Records
                                 {%endif%}
-                               
+
                             </span>
                         </a>
 
@@ -287,7 +289,7 @@
                         </a>
                     </li>
                     {% endif %}
-                    
+
                 </ul>
             </nav>
             <div id="otEmbedContainer" style="width:100%; height:580px;padding-left:8%">
@@ -312,34 +314,29 @@
                             aria-labelledby="pills-home-tab">
                             <h5>Patient Details</h5>
                             <div class="text-center">
-                                <img src="{% static 'patients/assets/images/user/100/face-01.jpg' %}"
-                                    class="img-fluid img-responsive">
-                                <h4>Naveen</h4>
+                                <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
+                                <h4>{{patient.full_name}}</h4>
                             </div>
                             <table class="table table-hover ">
                                 <tr>
                                     <td>Age</td>
-                                    <td>21</td>
+                                    <td>{{patient.age}}</td>
                                 </tr>
                                 <tr>
                                     <td>Height</td>
-                                    <td>5.7 ft</td>
+                                    <td>{{patient.height}} ft</td>
                                 </tr>
                                 <tr>
                                     <td>Weight</td>
-                                    <td>85 Kgs</td>
+                                    <td>{{patient.weight}} Kgs</td>
                                 </tr>
                                 <tr>
                                     <td>Blood Group</td>
-                                    <td>AB+</td>
+                                    <td>{{patient.blood_group}}</td>
                                 </tr>
                                 <tr>
                                     <td>City</td>
-                                    <td>Florida</td>
-                                </tr>
-                                <tr>
-                                    <td>State</td>
-                                    <td>California</td>
+                                    <td>{{patient.city}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
@@ -351,12 +348,12 @@
                             </table>
                         </div>
                         <div class="tab-pane fade " id="History" role="tabpanel">
-<div class="mb-1">
-    <buttton class="btn btn-default" id="btnback">
-                                <i class="fa fa-angle-left"></i> Back
-                            </button>
-</div>
-                            
+                            <div class="mb-1">
+                                <buttton class="btn btn-default" id="btnback">
+                                    <i class="fa fa-angle-left"></i> Back
+                                    </button>
+                            </div>
+
                             <ul class="nav nav-pills flex-column nav-pills" id="mySecondTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Cons"
@@ -398,12 +395,12 @@
                                                 </button>
                                             </div>
                                             Dr. Jay (Dietatian) on 12/01/2020
-                                            
+
                                         </li>
                                         <li class="list-group-item text-sm">
-                                             <div class="float-right">
+                                            <div class="float-right">
                                                 <button class="btn btn-sm btn-primary">
-                                                   <i class="fa fa-file"></i> View
+                                                    <i class="fa fa-file"></i> View
                                                 </button>
                                             </div>
                                             Dr. Sunil (Dermatologists) on 12/01/2020
@@ -420,15 +417,15 @@
                                                 </button>
                                             </div>
                                             Blood Sugar Test on 12/01/2020
-                                            
+
                                         </li>
                                         <li class="list-group-item text-sm">
-                                             <div class="float-right">
+                                            <div class="float-right">
                                                 <button class="btn btn-sm btn-primary">
-                                                   <i class="fa fa-file"></i> View
+                                                    <i class="fa fa-file"></i> View
                                                 </button>
                                             </div>
-                                            COVID-19 Test  on 12/01/2020
+                                            COVID-19 Test on 12/01/2020
                                         </li>
                                     </ul>
                                 </div>
@@ -443,10 +440,9 @@
                 <div class="card-body">
                     <h5>Doctor Details</h5>
                     <div class="text-center">
-                        <img src="{% static 'patients/assets/images/layer-14@2x.png' %}"
-                            class="img-fluid img-responsive">
-                        <h4>Dr. Madhu</h4>
-                        <small>Dermatologists</small>
+                        <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive">
+                        <h4>{{doctor.full_name}}</h4>
+                        <small>{{doctor.specialist_type}}</small>
                         <br>
                         <i class="fa fa-star text-warning"></i>
                         <i class="fa fa-star text-warning"></i>
@@ -461,7 +457,7 @@
                         </tr>
                         <tr>
                             <td colspan="2"><strong>About</strong>
-                                <p>A passionate Dermatologist with over 5+ years of experience</p>
+                                <p>{{doctor.about}}</p>
                             </td>
                         </tr>
                     </table>
@@ -501,14 +497,47 @@
 
 
     <script
-        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=DEFAULT_ROOM"></script>
+        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
             $('#end').click(function () {
-                window.location.href = '/api/ratings';
+                const urlParams = new URLSearchParams(window.location.search);
+                var id = urlParams.get('session')
+                var user = urlParams.get('user')
+
+                if (user == 'doc') {
+                    $.ajax({
+                        'url': '/api/vedioChatOparetion/' + $(this).attr('data-id') + '/',
+                        'method': 'DELETE',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                        },
+                    }).done((response) => {
+                        console.log(response)
+                        $('#incomingVideoCall').modal('hide')
+                    }).fail((response) => {
+                        console.log(response)
+                    })
+                    window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}`;
+                }
+                else {
+                    $.ajax({
+                        'url': '/api/vedioChatOparetion/' + $(this).attr('data-id') + '/',
+                        'method': 'DELETE',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        },
+                    }).done((response) => {
+                        console.log(response)
+                        $('#incomingVideoCall').modal('hide')
+                    }).fail((response) => {
+                        console.log(response)
+                    })
+                    window.location.href = '/api/ratings';
+                }
             })
 
             $('#btnViewMore').click(function () {

@@ -11,7 +11,7 @@
                         <h4>Book a Consultation in 5 easy Steps</h4>
                     </div>
                     <div class="card-body">
-                        <ul class="nav nav-pills  nav-justified" id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills  nav-justified" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#spl-select"
                                     role="tab" aria-controls="pills-home" aria-selected="true">1. Select Speciality</a>
@@ -37,35 +37,27 @@
                             <div class="tab-pane fade show active" id="spl-select" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
 
-                                <div class="ca-call-details-history spl-list" id="spl-list">
+                                <div class="spl-list" id="spl-list">
                                     <div class="container-fluid">
-                                        {% for spaciality in  specialist %}
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="ca-call-history">
-                                                    <div class="ca-call-history__left">
-                                                        <div class="user-avatar user-avatar-rounded mt-3 img-div">
-                                                            <img class="img-fluid" src={{spaciality.icon.url}} alt="">
-                                                        </div>
-                                                        <div class="ml-2 ca-call-history__left--title text-div">
+                                        <div class="row mt-4">
+                                            {% for spaciality in  specialist %}
 
-                                                            <h5>{{ spaciality.special_type }}</h5>
-                                                            <span class="font-weight-bold text-secondary">
-                                                                {{ spaciality.description }}
-                                                            </span>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="ca-call-history__right">
+                                            <div class="col-md-4 mb-4">
+                                                <div class="">
+                                                    <div class="text-center">
                                                         <button type="button" id="{{spaciality.id}}"
-                                                            class="select btn iconbox btn-solid-info text-white bookAppointment">
-                                                            Select
+                                                            class="select btn iconbox btn-block btn-lg btn-outline-primary bookAppointment ">
+                                                            {{ spaciality.special_type }}
                                                         </button>
                                                     </div>
+                                                    <!-- 
+                                                Select
+                                             -->
                                                 </div>
                                             </div>
+                                            {% endfor %}
                                         </div>
-                                        {% endfor %}
+
 
                                     </div>
 
@@ -78,7 +70,7 @@
                                         <div class="form-group row">
                                             <input type="hidden" id="spl-selected">
                                             <div class="offset-md-2 col-md-7">
-                                                
+
                                                 <div class="" id="dateSelector">
                                                     <div class="row">
                                                         <div class="col-md-8">
@@ -86,33 +78,35 @@
                                                             <input type="hidden" id="App_date">
                                                         </div>
                                                         <div class="col-md-4">
-                                                             <button type="button" class="btn mfb-component__button--main"
-                                                            style="width:100%; border-radius:30px" id="selectToday">
-                                                            Today
-                                                        </button>
-                                                          <button type="button"
-                                                            class="btn mfb-component__button--main mt-1"
-                                                            style="width:100%;  border-radius:30px" id="selectTommorow">
-                                                            Tommorow
-                                                        </button>  
+                                                            <button type="button"
+                                                                class="btn mfb-component__button--main"
+                                                                style="width:100%; border-radius:30px" id="selectToday">
+                                                                Today
+                                                            </button>
+                                                            <button type="button"
+                                                                class="btn mfb-component__button--main mt-1"
+                                                                style="width:100%;  border-radius:30px"
+                                                                id="selectTommorow">
+                                                                Tommorow
+                                                            </button>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <input type="text" class="form-control text-center"
-                                                        placeholder="Selected Date" id="dateSelected"
-                                                        style=" border-radius:30px">
-                                                    <button type="button"
-                                                        class="btn btn-block mfb-component__button--main mt-2"
-                                                        style=" width:100%; border-radius:30px"
-                                                        id="btnProceed">Proceed</button>
+                                                                placeholder="Selected Date" id="dateSelected"
+                                                                style=" border-radius:30px">
+                                                            <button type="button"
+                                                                class="btn btn-block mfb-component__button--main mt-2"
+                                                                style=" width:100%; border-radius:30px"
+                                                                id="btnProceed">Proceed</button>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
 
 
 
                                             </div>
-                                           
+
 
                                         </div>
                                     </div>
@@ -146,13 +140,14 @@
                                                         data-app-date="${$('#date-val').html()}"
                                                         data-time="${item.from_time}" data-fee="${consFee}"
                                                         class="btn iconbox btn-solid-info text-white bookAppointment">
-                                                        Book Appointment
+                                                        Select
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="pills-contact-tab">
                                 <div class="spl-list">
@@ -208,81 +203,79 @@
                                                                 </div>
                                                             </li>
                                                         </ul>
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="spl-list" style="height: 150px;">
-                                                    <ul id="subsPlans" class="list-unstyled">
-                                                        
+                                                <div class="spl-list">
+                                                    <ul class="list-unstyled">
                                                         <li>
                                                             <div class="ps-list">
                                                                 <div class="ps-list__left">
-                                                                    <div class="ps-list__left--icon"><input type="radio"
-                                                                            name="SubsPlan"></div>
-                                                                    <div class="ps-list__left--name">Unlimited for 30
-                                                                        Days</div>
+                                                                    <div class="ps-list__left--icon"></div>
+                                                                    <div class="ps-list__left--name">Consultation Fee
+                                                                    </div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="amount">Rs. 2500.00
+                                                                <div class="ps-list__right" id="cons-fee">300.00
                                                                 </div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="ps-list">
                                                                 <div class="ps-list__left">
-                                                                    <div class="ps-list__left--icon"><input type="radio"
-                                                                            name="SubsPlan"></div>
-                                                                    <div class="ps-list__left--name">Unlimited for 180
-                                                                        Days</div>
+                                                                    <div class="ps-list__left--icon"></div>
+                                                                    <div class="ps-list__left--name">GST Incl.</div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="amount">Rs. 6000.00
+                                                                <div class="ps-list__right" id="GST">5.00
                                                                 </div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="ps-list">
                                                                 <div class="ps-list__left">
-                                                                    <div class="ps-list__left--icon"><input type="radio"
-                                                                            name="SubsPlan"></div>
-                                                                    <div class="ps-list__left--name">Unlimited for 180
-                                                                        Days</div>
+                                                                    <div class="ps-list__left--icon"></div>
+                                                                    <div class="ps-list__left--name">Promo Code
+                                                                    </div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="amount">Rs. 6000.00
+                                                                <div class="ps-list__right" id="consultingAbout">
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Enter Promo Code">
+                                                                        <span class="input-group-btn">
+                                                                            <button type="button"
+                                                                                class="btn btn-primary">
+                                                                                Apply
+                                                                            </button>
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="ps-list">
-                                                                <div class="ps-list__left">
-                                                                    <div class="ps-list__left--icon"><input type="radio"
-                                                                            name="SubsPlan"></div>
-                                                                    <div class="ps-list__left--name">Unlimited for 180
-                                                                        Days</div>
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    Total Payable Amount
                                                                 </div>
-                                                                <div class="ps-list__right" id="amount">Rs. 6000.00
+                                                                <div class="card-body text-center">
+                                                                    <h2>
+                                                                        <i class="mdi mdi-currency-inr"></i>
+                                                                        <span id="total-amt">300.00</span>
+                                                                    </h2>
+                                                                </div>
+                                                                <div class="card-footer">
+                                                                    <button type="button"
+                                                                        class="btn mfb-component__button--main"
+                                                                        style="width:100%;  border-radius:30px" id="rzp-button1">
+                                                                        Pay
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </li>
-
                                                     </ul>
 
                                                 </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Payable Amount
-                                                    </div>
-                                                    <div class="card-body text-center">
-                                                        <h2>
-                                                            <i class="mdi mdi-currency-inr"></i> 300.00
-                                                        </h2>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <button type="button" class="btn mfb-component__button--main"
-                                                            style="width:100%;  border-radius:30px">
-                                                            Pay Securely
-                                                        </button>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -306,8 +299,8 @@
                                                 </div>
                                                 <div class="text-center mt-5">
                                                     <h5>Appointment Confirmed</h5>
-                                                    <p>Your appointment with <strong>Dr. Kumari</strong> has been fixed
-                                                        for <strong>10/12/2020</strong> at <strong>12:00 PM</strong> you
+                                                    <p>Your appointment with <strong id="con-doctor">Dr. Kumari</strong> has been fixed
+                                                        for <strong id="con-app-date">10/12/2020</strong> at <strong id="con-app-time">12:00 PM</strong> you
                                                         will be notified 15 minutes prior your consultation</p>
                                                 </div>
                                                 <div class="card">
@@ -316,7 +309,8 @@
                                                     </div>
                                                     <div class="card-body text-center">
                                                         <h4>
-                                                            <i class="mdi mdi-currency-inr"></i> 450.00
+                                                            <i class="mdi mdi-currency-inr"></i> 
+                                                            <span id="con-app-fee"></span>
                                                         </h4>
                                                     </div>
                                                     <div class="card-footer">
@@ -330,8 +324,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -342,46 +334,51 @@
     </div>
 </div>
 <div class="modal new-message-dialog" id="ConsultationDetails" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                       
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="ca-profile-thumb" style="height: auto;">
-                            <div class="ca-profile-info">
-                                <div class="ca-profile-pic">
-                                    <img class="img-fluid" src="assets/images/user/500/01.jpg" alt="" id="docImage"></div>
-                                <div class="ca-profile-title">
-                                    <h2 class="ca-profile-name"></h2>
-                                </div>
-                            </div>
-                            <div class="ca-overlay"></div>
-                        </div>
-                        <div class="form-group mt-5">
-                            <input type="hidden" id="docName">
-                            <input type="hidden" id="docId">
-                            <input type="hidden" id="appDate">
-                            <input type="hidden" id="time">
-                            <input type="hidden" id="fee">
-                            <h4><label for="ConsultingAbout">Consulting About</label></h4>
-                            <textarea class="form-control" id="ConsultingAbout" rows="10" placeholder="Describe your Problem" style="font-size: medium;"></textarea>
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ca-profile-thumb" style="height: auto;">
+                    <div class="ca-profile-info">
+                        <div class="ca-profile-pic">
+                            <img class="img-fluid" src="assets/images/user/500/01.jpg" alt="" id="docImage"></div>
+                        <div class="ca-profile-title">
+                            <h2 class="ca-profile-name"></h2>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn mfb-component__button--main"
-                        style="width:100%; border-radius:30px" id="ConfirmClick">Confirm</button>
-                    </div>
+                    <div class="ca-overlay"></div>
+                </div>
+                <div class="form-group mt-5">
+                    <input type="hidden" id="docName">
+                    <input type="hidden" id="docId">
+                    <input type="hidden" id="appDate">
+                    <input type="hidden" id="time">
+                    <input type="hidden" id="fee">
+                    <input type="hidden" id="gst">
+                    <h4><label for="ConsultingAbout">Consulting About</label></h4>
+                    <textarea class="form-control" id="ConsultingAbout" rows="10" placeholder="Describe your Problem"
+                        style="font-size: medium;"></textarea>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn mfb-component__button--main" style="width:50%; border-radius:30px"
+                    id="ConfirmClick">Continue</button>
+                <button type="button" class="btn mfb-component__button--main" style="width:50%; border-radius:30px"
+                    id="Skip">Skip</button>
+            </div>
         </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     console.log('Hello world')
     $(document).ready(function () {
@@ -393,10 +390,27 @@
             speciality_type = $(this).attr('id');
             $('#pills-home-tab').removeClass('active');
             $('#spl-select').removeClass('active show');
-
             $('#pills-profile-tab').addClass('active');
             $('#date-selection').addClass('active show');
             console.log(speciality_type)
+        })
+
+        $('#Skip').click(function () {
+            $('#ConsultationDetails').modal('hide')
+            $('#pills-contact-tab').removeClass('active');
+            $('#select-doctor').removeClass('active show');
+            // $('#ConsultationDetails').removeClass('show')
+            $('#pills-payment-tab').addClass('active');
+            $('#payment').addClass('active show');
+            $('#ConsultationDetails').modal('hide')
+            $('#consultingAbout').html('Not Specified')
+            $('#app-date').html($('#dateSelected').val())
+            $('#app-time').html(appointment_time);
+            console.log($('#docFName' + doc_id).html())
+            $('#Doctor').html($('#docFName' + doc_id).html());
+            $('#cons-fee').html($('#fee').val())
+            $('#GST').html($('#gst').val())
+            $('#total-amt').html($('#fee').val())
         })
 
         $('#selectToday').click(function () {
@@ -404,7 +418,6 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             const yyyy = today.getFullYear();
-
             today = mm + '/' + dd + '/' + yyyy;
             $('#dateSelected').val(today)
         })
@@ -418,17 +431,22 @@
         });
         let appointment_time = '';
         let doc_id = '';
-        $('#doctors-list').on('click', '.selectDorctorsd', function(){
+        $('#doctors-list').on('click', '.selectDorctorsd', function () {
             var button = $(this)
             $('#docImage').attr('src', button.attr('data-image'))
             appointment_time = button.attr('data-time')
             doc_id = button.attr('data-doctor-id')
+            $('#doctor-id').val(doc_id)
             $('#ConsultationDetails').modal('show')
-            
+            $('#fee').val(button.attr('data-fee'))
+            $('#gst').val(button.attr('data-gst'))
         });
 
-        $('#ConfirmClick').click(()=>{
-            
+        $('#ConfirmClick').click(() => {
+            if ($('#ConsultingAbout').val() == '') {
+                toastr.error("", "Describe your Problem", { positionClass: "toast-top-center" })
+                return;
+            }
             $('#pills-contact-tab').removeClass('active');
             $('#select-doctor').removeClass('active show');
             // $('#ConsultationDetails').removeClass('show')
@@ -438,12 +456,24 @@
             $('#consultingAbout').html($('#ConsultingAbout').val())
             $('#app-date').html($('#dateSelected').val())
             $('#app-time').html(appointment_time);
-            console.log($('#docFName'+doc_id).html())
-            $('#Doctor').html($('#docFName'+doc_id).html());
-            get_subcription_plan()
+            console.log($('#docFName' + doc_id).html())
+            $('#Doctor').html($('#docFName' + doc_id).html());
+            $('#cons-fee').html($('#fee').val())
+            $('#GST').html($('#gst').val())
+            $('#total-amt').html($('#fee').val())
         })
+        function tConvert(time) {
+            // Check correct time format and split into components
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-        
+            if (time.length > 1) { // If time format correct
+                time = time.slice(1);  // Remove full string match value
+                time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(''); // return adjusted time or original string
+        }
+
         $('#btnProceed').click(() => {
             let date = $('#dateSelected').val()
             $.ajax({
@@ -460,6 +490,8 @@
                 for (let i = 0; i < response.length; i++) {
                     let data = response[i];
                     console.log(data)
+                    var consultation_fee = data.doctor.commission_type == "Percent" ? parseFloat(data.doctor.consultation_fee) + (parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) : parseFloat(data.doctor.consultation_fee) + parseFloat(data.doctor.commission_val);
+                    var gst = data.doctor.commission_type == "Percent" ? ((data.doctor.consultation_fee * (data.doctor.commission_val / 100)) * (5 / 100)) : data.doctor.commission_val * (5 / 100)
                     let strings = `
                     <div class="card">
                         <div class="card-body">
@@ -472,10 +504,10 @@
                                     <div class="ml-2 ca-call-history__left--title">
                                         <div id='docFName${data.doctor.id}'>${data.doctor.full_name}</div>
                                         <span class="font-weight-bold text-success">Available Time :
-                                            ${data.from_time}</span>
+                                            ${tConvert(data.from_time)}</span>
                                         <br>
                                         <span class="font-weight-bold text-success">Consultation Fee :
-                                            ${data['doctor']['consultation_fee']}/-</span>
+                                            ${consultation_fee}/-</span>
                                     </div>
                                 </div>
                                 <div class="ca-call-history__right">
@@ -483,10 +515,10 @@
                                         data-doctor-id="${data.doctor.id}"
                                         data-image="${data.doctor.profile_pic}"
                                         data-app-date="${$('#date-val').html()}"
-                                        data-time="${data.from_time}" data-fee="${data['doctor']['consultation_fee']}"
+                                        data-time="${data.from_time}" data-fee="${consultation_fee.toFixed(2)}" data-gst="${gst.toFixed(2)}"
                                         
                                         class="btn selectDorctorsd iconbox btn-solid-info text-white bookAppointment">
-                                        Book Appointment
+                                        Select
                                     </button>
                                 </div>
                             </div>
@@ -495,140 +527,103 @@
                     `;
                     doctor_list += strings;
                 }
-                $('#doctors-list').html(doctor_list)
+                $('#doctors-list').html(doctor_list + `
+                <p class="text-center">
+                                    Couldn't Find your Doctor ?? we can help you with that, Call us at <a href="tel:080-45549495">080-45549495</a>
+                                </p>
+                `)
             }).fail((err) => {
                 console.log(err)
             })
         })
 
-        function get_subcription_plan(){
-            let li = `<li>
-                        <div class="ps-list">
-                            <div class="ps-list__left">
-                                <div class="ps-list__left--icon">
-                                    <input chacked=true type="radio" name="SubsPlan">
-                                </div>
-                                <div class="ps-list__left--name">One Time
-                                    Consultation</div>
-                            </div>
-                            <div class="ps-list__right" id="amount">Rs 300.00</div>
-                        </div>
-                    </li>`;
-
-            $.ajax({
-                'url': '/api/subscription_plans',
-                'contentType': 'application/json',
-                'async': false,
-                'method': 'GET'
-            }).done((response)=>{
-                console.log(response)
-                for(let i=0; i < response.length; i++){
-                    let data = response[i];
-                    let make_li = `
-                    <li>
-                        <div class="ps-list">
-                            <div class="ps-list__left">
-                                <div class="ps-list__left--icon">
-                                    <input chacked=true type="radio" name="SubsPlan">
-                                </div>
-                                <div class="ps-list__left--name">${data.plan_name}</div>
-                            </div>
-                            <div class="ps-list__right" id="amount">Rs ${data.plan_price}</div>
-                        </div>
-                    </li>
-                    
-                    `;
-                    li += make_li;
-                }
-                $('#subsPlans').html(li)
-            }).fail((error)=>{
-                console.log(error)
-            })
-        }
-
         $('#datepicker').datepicker({
-              format:"dd/mm/yyyy"
-            });
-            $('#datepicker').on('changeDate', function () {
-                $('#App_date').val(
-                    $('#datepicker').datepicker('getFormattedDate')
-                );
-                $('#dateSelected').val(
-                    $('#datepicker').datepicker('getFormattedDate')
-                );
-            });
+            format: "dd/mm/yyyy"
+        });
+        $('#datepicker').on('changeDate', function () {
+            $('#App_date').val(
+                $('#datepicker').datepicker('getFormattedDate')
+            );
+            $('#dateSelected').val(
+                $('#datepicker').datepicker('getFormattedDate')
+            );
+        });
 
-            $('#datepicker table').removeClass('table-condensed')
-            $('#datepicker table').addClass('table')
+        $('#datepicker table').removeClass('table-condensed')
+        $('#datepicker table').addClass('table')
 
-            
 
-            $('#selectToday').click(function(){
-                $('#dateSelected').val(
-                    moment(new Date()).format("DD/MM/YYYY")
-                );
-            })
 
-            $('#selectTommorow').click(function(){
-                $('#dateSelected').val(
-                    moment(new Date()).add(1, 'days').calendar().format("DD/MM/YYYY")
-                );
-            })
+        $('#selectToday').click(function () {
+            $('#dateSelected').val(
+                moment(new Date()).format("DD/MM/YYYY")
+            );
+        })
+
+        $('#selectTommorow').click(function () {
+            $('#dateSelected').val(
+                moment(new Date()).add(1, 'days').calendar().format("DD/MM/YYYY")
+            );
+        })
 
         ///////////// payment ///////////////
-/* document.getElementById('rzp-button1').onclick = function(e){
-   var options = {
-    "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
-    "amount": parseFloat($('#amount').html())*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Doctor Plus",
-    "description": "Online Doctor Appointment",
-    "image": "{% static 'assets/img/login.jpg'%}",
-    "handler": function (response) {
-            
-        // implement in booking appoinment
-        var payment_id = response.razorpay_payment_id;
-            var data = {
-                appointment_date:  $('#app-date').html(),
-                appointment_time: $('#app-time').html(),
-                doctor: $('#doctor-id').val(),
-                Description:  $('#consultingAbout').html(),
-                consultation_status: "Pending",
-                payment_type: "UPI",
-                payment_id: payment_id,
-                paid_amount: $('#amount').html()
-            };
-            // '/Authorization Token {value}/appoinments/'
-            $.ajax({
-                'url': '/api/appointments/',
-                'method': 'POST',
-                'contentType': 'application/json',
-                'data': JSON.stringify(data),
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+        document.getElementById('rzp-button1').onclick = function (e) {
+            var options = {
+                "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
+                "amount": parseFloat($('#total-amt').html()) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Doctor Plus",
+                "description": "Online Doctor Appointment",
+                "image": "{% static 'website/img/logo.png' %}",
+                "handler": function (response) {
+                    console.log(response)
+                    // implement in booking appoinment
+                    var payment_id = response.razorpay_payment_id;
+                    var data = {
+                        appointment_date: $('#app-date').html(),
+                        appointment_time: $('#app-time').html(),
+                        doctor: $('#doctor-id').val(),
+                        Description: $('#consultingAbout').html(),
+                        consultation_status: "Pending",
+                        payment_type: "UPI",
+                        payment_id: payment_id,
+                        paid_amount: $('#total-amt').html()
+                    };
+                    // '/Authorization Token {value}/appoinments/'
+                    $.ajax({
+                        'url': '/api/appointments/',
+                        'method': 'POST',
+                        'contentType': 'application/json',
+                        'data': JSON.stringify(data),
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        },
+                    }).done((response) => {
+                        console.log(response);
+                        toastr.success("Appointmnt booked Successfully", "Success", { positionClass: "toast-top-center" })
+                        $('#con-doctor').html($('#Doctor').html())
+                        $('#summaryProfile').attr('src',$('#docImage').attr('src'))
+                        $('#con-app-time').html(response.appointment_time)
+                        $('#con-app-date').html(response.appointment_date)
+                        $('#con-app-fee').html(response.paid_amount)
+                        $('#myTab a[href="#Confirmation"]').tab('show')
+
+                    }).fail((err, error, wrong) => {
+                        console.log(err)
+                    })
                 },
-            }).done((response) => {
-                   console.log(response);
-                   setTimeout(function(){
-                       window.location.href='/patients/dashboard'
-                   },200)
-                   toastr.success("Appointmnt booked Successfully","Success",{positionClass:"toast-top-center"})
-            }).fail((err, error, wrong) => {
-                console.log(err)
-            })
-        },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#007bff"
-    }
-};
-var rzp1 = new Razorpay(options);
-    rzp1.open();
-    e.preventDefault();
-}*/
-    }) 
-    
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#007bff"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+    })
+
 </script>
 {% endblock %}

@@ -379,10 +379,10 @@
                     console.log(response);
                     formDeserialize(form, response[0]);
                     jQuery('#day_name_here').html( 'Available ' + response[0].day)
-                    
+                    jQuery('#available').prop('checked',true)
                 }
                 else{
-                    jQuery('#day_name_here').html('Notavailable ' + day)
+                    jQuery('#day_name_here').html('Available ' + day)
                     jQuery('#to_time').val('')
                     jQuery('#from_time').val('')
                     jQuery('#day').val(day)

@@ -163,8 +163,8 @@
                     x.loop = true;
                     x.play()
                     jQuery('#hangupBtn').attr('data-id', list[0].id)
-                    jQuery('#PatientName').html(list[0].patient_name)
-                    jQuery('#answerCall').attr('href', `/api/DoctorVideoUI?session_id=${list[0].Call_session}&conf_id=${ list[0].id}`)
+                    jQuery('#PatientName').html(list[0].caller_name)
+                    jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}`)
                     jQuery('#incomingVideoCall').modal('show')
                 }
                 else
@@ -191,9 +191,9 @@
             })
         })
 
-        /* setInterval(function () {
+        setInterval(function () {
             checkForCall();
-        }, 2000);  */
+        }, 2000); 
     </script>
 </body>
 <!-- Sidebar -->

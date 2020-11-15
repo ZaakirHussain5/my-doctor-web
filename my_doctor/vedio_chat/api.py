@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from .models import VedioChat
 from .serializers import VedioChatSerializer
 from doctors.models import doctors_info
-from opentok import OpenTok,MediaModes
-opentok = OpenTok("46964534", "76ca83ec02f7c0ef904f536a2d0bc251df25d8a4")
+from patients.models import patient_info
 
 class vedioChatOparetion(viewsets.ModelViewSet):
     permission_classes = [
@@ -22,21 +21,30 @@ class vedioChatOparetion(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         return serializer.save()
 
-class InitiateCallAPI(generics.GenericAPIView):
+class CallDoctorAPI(generics.GenericAPIView):
   serializer_class = VedioChatSerializer
 
   def post(self, request, *args, **kwargs):
-    doctor_id = self.request.query_params.get('doctor_id',None)
-    session = opentok.create_session(media_mode=MediaModes.routed)
-    session_id = session.session_id
-    token = session.generate_token()
+    doctor_id = request.query_params.get('doctor_id',None)
     doctor = doctors_info.objects.get(id=doctor_id)
-    serializer = self.get_serializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    user = serializer.save(Call_from=self.request.user,Call_for = doctor.user,Call_session=session_id)
+    video = VedioChat.objects.create(Call_from=request.user,Call_for=doctor.user)
+    video.save()
     return Response({
-      "session_id": session_id,
-      "token": token
+      "Message":"Call initiated",
+      "id":video.id
+    })
+
+class CallPatientAPI(generics.GenericAPIView):
+  serializer_class = VedioChatSerializer
+
+  def post(self, request, *args, **kwargs):
+    patient_id = request.query_params.get('patient',None)
+    patient = patient_info.objects.get(id=patient_id)
+    video = VedioChat.objects.create(Call_from=request.user,Call_for=patient.user)
+    video.save()
+    return Response({
+      "Message":"Call initiated",
+      "id":video.id
     })
 
 

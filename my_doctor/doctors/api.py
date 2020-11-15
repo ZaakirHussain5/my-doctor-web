@@ -128,7 +128,7 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
     def get_queryset(self):
         date = self.request.query_params.get('date')
         specialist_id = self.request.query_params.get('id')
-        month, day, year = date.split('/')
+        day, month, year = date.split('/')
         print(month, day, year)
         day_name = datetime.date(int(year), int(month), int(day))
         day_name = day_name.strftime("%A").lower()
