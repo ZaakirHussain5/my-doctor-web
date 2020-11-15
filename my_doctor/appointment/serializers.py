@@ -22,4 +22,4 @@ class appointmentsListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = appointment
-        fields = ('id','doctor','patient','patient_name','patient_age','patient_gender','patient_pic','appointment_date','appointment_time','Description')
+        fields = ('id','doctor','patient','patient_name','patient_age','patient_gender','patient_pic','appointment_date','appointment_time','Description','pat_id')

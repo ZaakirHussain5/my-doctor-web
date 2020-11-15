@@ -147,7 +147,7 @@
     {% block scripts%} {% endblock %}
     <script>
         function checkForCall() {
-            var x = document.getElementById("myAudio");
+            
             jQuery.ajax({
                 'url': '/api/vedioChatOparetion/?user=doc',
                 'contentType': 'application/json',
@@ -159,6 +159,7 @@
             }).done((response) => {
                 console.log(response)
                 var list = response;
+                var x = document.getElementById("myAudio");
                 if (list && list.length > 0) {
                     x.loop = true;
                     x.play()
@@ -169,7 +170,6 @@
                 }
                 else
                 {
-                    x.stop()
                     jQuery('#incomingVideoCall').modal('hide')
                 }
             });
@@ -185,6 +185,9 @@
                 },
             }).done((response) => {
                 console.log(response)
+                var x = document.getElementById("myAudio");
+                x.pause();
+                x.currentTime = 0;
                 jQuery('#incomingVideoCall').modal('hide')
             }).fail((response) => {
                 console.log(response)

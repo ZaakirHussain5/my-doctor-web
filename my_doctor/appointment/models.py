@@ -20,6 +20,10 @@ class appointment(models.Model):
     Modified_by = models.CharField(max_length=25, null=True)
 
     @property
+    def pat_id(self):
+        return patient_info.objects.get(user__id=self.patient.id).id
+
+    @property
     def patient_name(self):
         return patient_info.objects.get(user__id=self.patient.id).full_name
     

@@ -68,7 +68,7 @@ class upComingAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         dates = getDateFormat()
-        return appointment.objects.filter(consultation_status = 'pending', doctor=self.request.user.Doctors).exclude(appointment_date=dates)
+        return appointment.objects.filter(consultation_status = 'Pending', doctor=self.request.user.Doctors).exclude(appointment_date=dates)
 
 
 class previousAppoinment(viewsets.ModelViewSet):
@@ -89,7 +89,7 @@ class todaysAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         formated_date = getDateFormat()
-        return appointment.objects.filter(consultation_status = 'pending', appointment_date=formated_date,  doctor=self.request.user.Doctors)
+        return appointment.objects.filter(consultation_status = 'Pending', appointment_date=formated_date,  doctor=self.request.user.Doctors)
 
 
 
