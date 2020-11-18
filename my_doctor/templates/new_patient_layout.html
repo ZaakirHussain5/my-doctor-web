@@ -33,7 +33,7 @@
                 <div class="ca-sidebar">
                     <div class="ca-sidebar__header">
                         <div class="ca-userprofile" data-toggle="modal" data-target="#viewProfileModal">
-                            <a href="javascript:;">
+                            <a href="/">
                                 <img src="{% static 'website/img/logo.png' %}" alt="">
                             </a>
                         </div>
@@ -279,6 +279,7 @@
                 formDeserialize(profileForm, response);
             
             })
+            localStorage.setItem('login_name',response.full_name)
             formDeserialize(profileForm, response);
             $('#conversation_doc').html(response.full_name)
             $('#Profile-pic').attr('src',response.profile_pic)

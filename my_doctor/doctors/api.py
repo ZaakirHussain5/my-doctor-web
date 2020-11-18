@@ -40,7 +40,11 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
     serializer_class = DoctorTimingsSerializer
 
     def get_queryset(self):
-        return DoctorTimings.objects.filter(doctor__user=self.request.user, day=self.request.query_params.get('name'))
+        queryset = DoctorTimings.objects.filter(doctor__user=self.request.user)
+        day = self.request.query_params.get('name')
+        if day is not None :
+            queryset = DoctorTimings.objects.filter(doctor__user=self.request.user, day=self.request.query_params.get('name'))
+        return queryset   
 
     def perform_create(self, serializer):
         print(serializer)

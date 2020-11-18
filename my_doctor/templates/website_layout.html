@@ -26,7 +26,64 @@
 <!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
  -->
+
  
+ <style>
+    /* Style The Dropdown Button */
+   
+    .modal {
+    text-align: center;
+  }
+  
+  @media screen and (min-width: 768px) { 
+    .modal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  }
+  
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    
+    </style>
  <style>
      .header_menu .navbar.navbar-default .nav.navbar-nav li a{
          padding-top:18px;
@@ -162,7 +219,29 @@ section.breadcrumb{
 <a href="#"></a>
 </div>
 
-
+<div id="app-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Download the App</h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <p class="">For more personalized experience download our app from most trusted app platform google play store</p>
+                  <a target="_blank" href="https://play.google.com/store/apps">
+                    <img src="{%static '/images/google-play-badge.png'%}" height="94" class="float-right" alt="">
+                </a>
+              </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
 <script src="{% static 'website/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
 <script src="{% static 'website/js/bootstrap.min.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
@@ -178,6 +257,30 @@ section.breadcrumb{
 
 {% endblock %}
 <script>
-//document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    $(document).ready(function(){
+        var cookie = $.cookie('Token')
+        if(cookie && cookie!=''){
+            $('#loginItem').html(`
+            <div class="dropdown"> 
+            <a href="#" class="dropbtn"><i class="fa fa-user"></i> ${localStorage.getItem('login_name')} <span class="caret"></span></a>
+            <div class="dropdown-content">
+                <button id="btnGotoDashboard" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
+                <button id="btnLogout" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
+            </div>
+            </div>
+            `)
+            $('#registerItem').remove()
+        }
+
+        $('#btnGotoDashboard').click(function(){
+            window.location.href='/patients/dashboard'
+        })
+
+        $('#btnLogout').click(function(){
+            $.cookie('Token','')
+            window.location.href = '/'
+        })
+    })
 </script>
 </html>

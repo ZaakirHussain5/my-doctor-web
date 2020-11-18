@@ -17,16 +17,16 @@
     <li><a href="{% url 'website:index'%}#tab">Speciality |</a></li>
     <li><a href="{% url 'website:plans'%}">Plans |</a></li>
     <li><a href="{% url 'website:aboutus'%}">About Us |</a></li>
-    <li>
+    <li id="loginItem">
     <a href="{% url 'website:login'%}"><i class="fa fa-sign-in"></i> Login</a>
     </li>
    
-    <li class="download-app">
+    <li id="registerItem" class="download-app">
     <a href="/PatientRegistration">Registration </a>
     </li>
      
     <li class="download-app">
-    <a href="#">Download the App </a>
+    <a href="#" data-toggle="modal" data-target="#app-modal">Download the App </a>
     </li>
     </ul>
     </div>
