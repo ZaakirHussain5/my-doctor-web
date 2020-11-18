@@ -9,4 +9,6 @@ class PatientSubscriptionSerializers(serializers.ModelSerializer):
     class Meta:
         model = PatientSubscription
         fields = "__all__"
+        read_only_fields = ('user', )
+        depth =1
 

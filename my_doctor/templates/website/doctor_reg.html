@@ -139,6 +139,8 @@ outreach program a success.</p><br>
                 let formdata = new FormData(form);
                 formdata.append('username', response.doctorId);
                 formdata.append('web_registration', true);
+                formdata.append('gender', 'Male')
+                formdata.append('about', "Nothing sppecial")
                 $.ajax({
                   url: '/api/NewDoctorRegistration',
                   method: 'POST',
