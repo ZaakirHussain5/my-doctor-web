@@ -1,7 +1,7 @@
 from rest_framework import routers
 from .api import (PatientUpdateProfileAPI, GetLoggedPatient,patient_infoViewSet,PatientResgistrationAPI,
     medical_historyViewSet,groupsViewSet,PatientResgistrationAppAPI, PatientEmail, PasswordChange,
-    PatientBillingHistorys
+    PatientBillingHistorys, patientData
 
 )
 from django.urls import path,include
@@ -14,6 +14,7 @@ router.register('medical_history', medical_historyViewSet, 'medical_history')
 router.register('groups', groupsViewSet, 'groups')
 router.register('PatientBillingHistory', PatientBillingHistorys, 'PatientBillingHistory')
 
+
 urlpatterns = [
     path('',include(router.urls)),
     path('PatientRegistration',PatientResgistrationAPI.as_view(),name='PatientRegistration'),
@@ -23,4 +24,5 @@ urlpatterns = [
     path('PatientUpdateProfile',PatientUpdateProfileAPI.as_view(),name='PatientUpdateProfile'),
     path('getEmail', PatientEmail.as_view(), name='PatientEmail'),
     path('changePassword', PasswordChange.as_view(), name='Password_change'),
+    path('detailsOfPatient', patientData, name="FullDetails")
 ]

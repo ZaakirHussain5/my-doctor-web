@@ -10,6 +10,7 @@ class doctors_infoSerializer(serializers.ModelSerializer):
         model = doctors_info
         fields = '__all__'
 
+        
 
 class doctors_listSerializer(serializers.ModelSerializer):
     user = UserAuthSerializer()
