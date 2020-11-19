@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
 
 from .serializers import ( 
     UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,
@@ -14,6 +15,8 @@ from accounts.serializers import UserAuthSerializer
 from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
 from django.contrib.auth.models import User
+from appointment.models import appointment
+from appointment.serializers import appointmentSerializer
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.all()
@@ -140,3 +143,17 @@ class PatientBillingHistorys(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return serializer
+
+
+@api_view(['GET'])
+def patientData(request):
+    pat_id = request.query_params.get('id')
+    print(pat_id)
+    patient = patient_info.objects.get(id=id)
+    appointment = appointment.objects.filter(patient=patient)
+    data = {
+        "pat_details": patient_infoSerializer(patient).data,
+        "appoinmentHistory": appointmentSerializer(appointment)
+    }
+
+    return HttpResponse(data)

@@ -27,9 +27,10 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                             data-parent="#accordion">
                             <div class="card-body">
-                                <table class="table table-bordered table-hover">
+                                <table id="patientResult" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Sl No.</th>
                                             <th>Patient ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
@@ -53,9 +54,10 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <table class="table table-bordered table-hover">
+                                <table id="doctorResult" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Sl No.</th>
                                             <th>Doctor ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
@@ -76,5 +78,98 @@
   
   {% endblock %} 
   {% block scripts %}
- 
+ <script>
+     jQuery(document).ready(function($){
+
+        $('#patientResult').DataTable({
+             ajax:{
+                 url:'/searchAPI?q={{search_term}}',
+                 dataSrc:"patients"
+             },
+             responsive: true,
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data:'pat_id',
+                },
+                {
+                    data:'full_name'
+                },
+                {
+                    data : 'user.email'
+                },
+                {
+                    data : 'ph_no'
+                },
+                {
+                    data:'id',
+                    render: function (data,type,row) {
+                          return `
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-success btn-sm">
+                                    <i class="fa fa-tasks"></i>
+                                </button>`
+                      }
+                }
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+         })
+
+
+         $('#doctorResult').DataTable({
+             ajax:{
+                 url:'/searchAPI?q={{search_term}}',
+                 dataSrc:"doctors"
+             },
+             responsive: true,
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data:'Registration_Number',
+                },
+                {
+                    data:'full_name'
+                },
+                {
+                    data : 'user.email'
+                },
+                {
+                    data : 'phone_number'
+                },
+                {
+                    data:'id',
+                    render: function (data,type,row) {
+                          return `
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-success btn-sm">
+                                    <i class="fa fa-tasks"></i>
+                                </button>`
+                      }
+                }
+            ],
+              language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+         })
+
+
+         
+
+
+     })
+ </script>
   {% endblock %}

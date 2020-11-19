@@ -53,8 +53,8 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="float-right ml-2">
-                        <h5> Dr. Kushal</h5>
-                        <small>Dermatolists</small>
+                        <h5 id="doctorName"> </h5>
+                        <small id="doctorSpecialist"></small>
                     </div>
                     <div class="user-area dropdown float-right">
                 
@@ -192,7 +192,24 @@
 
         setInterval(function () {
             checkForCall();
-        }, 200000); 
+        }, 2000); 
+
+
+        jQuery.ajax({
+            url: '/api/getLoggedInDoctor',
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+            console.log(response)
+            jQuery('#doctorName').html(response.full_name)
+            jQuery('#doctorSpecialist').html(response.specialist_type)
+        }).fail((error) => {
+            console.log(error);
+        });
     </script>
 </body>
 <!-- Sidebar -->
