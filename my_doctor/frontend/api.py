@@ -9,7 +9,7 @@ import json
 
 @api_view(['GET'])
 def SearchAPI(request):
-    requested_text = request.GET.get('search')
+    requested_text = request.query_params.get('q')
     matched_doctor = doctors_info.objects.filter(Q(Registration_Number__icontains = requested_text) | Q(phone_number__icontains=requested_text) | Q(full_name__icontains=requested_text))
     matched_patient = patient_info.objects.filter( Q(pat_id__icontains = requested_text) | Q(ph_no__icontains=requested_text) | Q(full_name__icontains=requested_text))
 

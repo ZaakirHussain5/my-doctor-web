@@ -12,7 +12,8 @@ class MySubscriptionPlans(viewsets.ModelViewSet):
     serializer_class = PatientSubscriptionSerializers
 
     def get_queryset(self):
-        return self.request.user.patientSubscription.all()
+        print(self.request.user)
+        return PatientSubscription.objects.filter(user=self.request.user, is_active=True)
 
     def perform_create(self, serializer):
         subs_plan = subscription_plans.objects.get(id=self.request.data.get('plan'))

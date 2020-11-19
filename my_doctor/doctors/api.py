@@ -35,7 +35,7 @@ class DoctorRegisterAPI(generics.GenericAPIView):
 
 class DoctorTimingsAPI(viewsets.ModelViewSet):
     permissions = [
-        permissions.IsAuthenticated
+        permissions.AllowAny
     ]
     serializer_class = DoctorTimingsSerializer
 
@@ -54,6 +54,7 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
             pass
         doctor = doctors_info.objects.get(user = self.request.user)
         serializer.save(doctor=doctor)
+
 
 
 class DoctorUpdateProfileAPI(generics.GenericAPIView):
@@ -231,7 +232,7 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
 
 class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
     permissions = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = DoctorTimingsSerializer
 
@@ -249,6 +250,7 @@ class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             pass
         serializer.save()
+
 
 
 

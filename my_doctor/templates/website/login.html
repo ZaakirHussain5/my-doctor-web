@@ -73,9 +73,9 @@
                 <input type="text" class="form-control" id="Name1" placeholder="Phone Number or Patient ID">
             </div>
             <div class=" form-group col-12 col-sm-12">
-            <div class="col-xs-6"><label for="email1">Password</label></div>
-               <div class="col-xs-6" style="text-align: end;color: #3a85f5;"><a href="">Show</a></div>
-                <input type="password" class="form-control" id="email1" placeholder="Enter password">
+            <div class="col-xs-6"><label for="passwordVal">Password</label></div>
+               <div class="col-xs-6" style="text-align: end;color: #3a85f5;"><span id="changeType">Show</span></div>
+                <input type="password" class="form-control" id="passwordVal" placeholder="Enter password">
             </div>
             <div class="col-12 col-sm-12">
 <div class="checkbox-outer">
@@ -198,7 +198,7 @@
             e.stopImmediatePropagation();
             const data = {
                 username: $('#Name1').val(),
-                password: $('#email1').val(),
+                password: $('#passwordVal').val(),
                 user_type: $('#user_type').val()
             };
             console.log(data);
@@ -226,6 +226,13 @@
                     alert(err.responseJSON.non_field_errors[0])
                 })
 
+        })
+
+        $('#changeType').click(function(){
+            let val = $('#passwordVal').val()
+            console.log(val)
+            $('#passwordVal').prop("type", "text");
+            $('#passwordVal').val(val)
         })
 
     })

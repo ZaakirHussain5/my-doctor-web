@@ -524,27 +524,7 @@
             })
         }
         
-        jQuery('#DoctorBankDetailsForm').submit((e) => {
-            e.preventDefault()
-            e.stopImmediatePropagation()
-            const data = new FormData(document.getElementById('DoctorBankDetailsForm'))
-            jQuery.ajax({
-                url: '/api/doctor_bankDetails/',
-                method: 'POST',
-                data: data,
-                contentType: false,
-                processData: false,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                },
-            })
-                .done((response) => {
-                    console.log(response);
-                })
-                .fail((error) => {
-                    console.log(error)
-                })
-        })
+        
 
         function getDoctorBankDetails() {
             jQuery.ajax({
@@ -563,7 +543,7 @@
             })
         }
 
-        jQuery('#Timings').DataTable({
+        let table = jQuery('#Timings').DataTable({
             ajax:{
                 url:'/api/DoctorTimings',
                 dataSrc:"",
@@ -609,7 +589,56 @@
             }
             return time.join(''); // return adjusted time or original string
         }
-
+        
+        jQuery('#DoctorBankDetailsForm').submit((e) => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            const data = new FormData(document.getElementById('DoctorBankDetailsForm'))
+            jQuery.ajax({
+                url: '/api/doctor_bankDetails/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            })
+                .done((response) => {
+                    console.log(response);
+                    table.ajax.reload()
+                    alert("You timing is changed")
+                })
+                .fail((error) => {
+                    console.log(error)
+                })
+        })
+        
+        jQuery('#Timings').on('click', '.delete', function () {
+        var id = jQuery(this).attr('data-id')  
+        bootbox.confirm({
+              message: "Are you sure to delete the timing permenently?",
+              callback: function (result) {
+                  if(result){
+                      jQuery.ajax({
+                          url:`/api/DoctorTimings/${id}/`,
+                          method: 'DELETE',
+                          beforeSend: function(request){
+                            request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                          },
+                          success:function(){
+                              table.ajax.reload()
+                              toastr.success("Deleted Successfully","Success",{positionClass:'toast-top-center'})
+                          },
+                          error:function(err){
+                              console.log(err)
+                              toastr.error("Deletion Failed","Error",{positionClass:'toast-top-center'})
+                          }
+                      })
+                  }
+              }
+          });
+      })
 
 </script>
 {% endblock %}

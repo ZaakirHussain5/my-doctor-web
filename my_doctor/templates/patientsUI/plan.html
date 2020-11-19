@@ -1,40 +1,46 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
-{% block content %} 
+{% block content %}
 <div class="ca-content__chatstab">
-                        
+
     <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
             <div class="container">
-                <div class="card">
+                <div class="card" >
                     <div class="card-header">
                         <h4>Select a Plan</h4>
                     </div>
                     <div class="card-body">
-                        <div id="all_plans" class="row">
-                    <!--  PLANS LIST WILL COME HERE  BY AJAX -->
+                        <div id="all_plans" class="row text-center">
+                            <!--  PLANS LIST WILL COME HERE  BY AJAX -->
+                            <div class="mx-auto">
+                                <p>You have activated <b id="plan_name"> </b> subscription plan.</p>
+                                <h3>All benifit are:</h3>
+                                <ul id="benifits">
+                                   
+                                </ul>
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
-</div>
+    </div>
 </div>
 <div id="select-subplan" class="modal fade" role="dialog">
     <div class="modal-dialog modal-xl">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="heading">One Month Unlimited</h5>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
-        </div>
-        <div class="modal-body">
-          <div class="row">
-              <div class="col-md-6">
-                        <ul class="list-group">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="heading">One Month Unlimited</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul id="listOfBenefit" class="list-group">
                             <li class="list-group-item text-center font-weight-bold">Benifits</li>
                             <li class="list-group-item">For Individual</li>
                             <li class="list-group-item">Unlimited consultations for 30 Days</li>
@@ -49,7 +55,7 @@
                                         <div class="ps-list__left--icon"></div>
                                         <div class="ps-list__left--name">Subscription valid From</div>
                                     </div>
-                                    <div class="ps-list__right" id="GST">18/11/2020
+                                    <div class="ps-list__right" id="validFromDate">
                                     </div>
                                 </div>
                             </li>
@@ -59,100 +65,129 @@
                                         <div class="ps-list__left--icon"></div>
                                         <div class="ps-list__left--name">Subscription valid Till</div>
                                     </div>
-                                    <div class="ps-list__right" id="GST">18/12/2020
+                                    <div class="ps-list__right" id="subscriptionValidTills">18/12/2020
                                     </div>
                                 </div>
                             </li>
                         </ul>
-              </div>
-              <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="font-weight-bold">Payment Summary</h6>
                     </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li>
-                                <div class="ps-list">
-                                    <div class="ps-list__left">
-                                        <div class="ps-list__left--icon"></div>
-                                        <div class="ps-list__left--name">Subscription Fee</div>
-                                    </div>
-                                    <div class="ps-list__right" id="GST">2500.00
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="ps-list">
-                                    <div class="ps-list__left">
-                                        <div class="ps-list__left--icon"></div>
-                                        <div class="ps-list__left--name">GST</div>
-                                    </div>
-                                    <div class="ps-list__right" id="GST">125.00
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <div class="card-header">
-                                        Total Payable Amount
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <h2>
-                                            <i class="mdi mdi-currency-inr"></i>
-                                            <span id="total-amt">2650.00</span>
-                                        </h2>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="button"
-                                            class="btn mfb-component__button--main"
-                                            style="width:100%;  border-radius:30px" id="rzp-button1">
-                                            Pay Now
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="font-weight-bold">Payment Summary</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <div class="ps-list">
+                                            <div class="ps-list__left">
+                                                <div class="ps-list__left--icon"></div>
+                                                <div class="ps-list__left--name">Subscription Fee</div>
+                                            </div>
+                                            <div class="ps-list__right" id="subscriptionrice">2500.00
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="ps-list">
+                                            <div class="ps-list__left">
+                                                <div class="ps-list__left--icon"></div>
+                                                <div class="ps-list__left--name">GST</div>
+                                            </div>
+                                            <div class="ps-list__right" id="subscriptionrice_gst">125.00
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Total Payable Amount
+                                            </div>
+                                            <div class="card-body text-center">
+                                                <h2>
+                                                    <i class="mdi mdi-currency-inr"></i>
+                                                    <span id="total-amt">2650.00</span>
+                                                </h2>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="button" class="btn mfb-component__button--main"
+                                                    style="width:100%;  border-radius:30px" id="rzp-button1">
+                                                    Pay Now
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-              </div>
-          </div>
+            </div>
         </div>
-      </div>
-  
+
     </div>
-  </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
         // VARIABLES...
         let dataList = [];
         let old_active_id = null;
 
+        function getMyActiveSubscriptionPlane(){
+            $.ajax({
+                'url': '/api/MySubscriptionPlans',
+                'contentType': 'application/json',
+                'async': false,
+                'method': 'GET',
+                beforeSend: function(xhr){
+                    return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
+                }
+            }).done((response) => {
+                if(response.length > 0){
+                    console.log(response[0]['plan'])
+                    $('#plan_name').html(response[0]['plan']['plan_name'])
+                    let benifit_lists = ''
+                    let data = response[0]['plan']['benifits_list'].split(',');
+                    console.log(data)
+                    for(let i=0; i < data.length; i++){
+                        let lis = `<li class="list-group-item"> ${data[i]}</li>`;
+                        benifit_lists += lis;
+                    }
 
-        function getAppoinmentList(){
+                    $('#benifits').html(benifit_lists)
+                    return
+                }
+                getPlaneBenefitData()
+            })
+        }
+        getMyActiveSubscriptionPlane();  
+
+
+        function getPlaneBenefitData() {
             $.ajax({
                 'url': '/api/subscription_plans',
                 'contentType': 'application/json',
                 'async': false,
                 'method': 'GET'
-            }).done((response)=>{
+            }).done((response) => {
                 console.log(response)
                 let all_plans = '';
-                for(let i=0; i<response.length; i++){
+                for (let i = 0; i < response.length; i++) {
                     let data = response[i];
                     let li = makeListOfPlanBenifits(data.benifits_list)
                     let cardsData = `
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <h4>${data.plan_name}</h4>
                             </div>
                             <div class="card-body">
-                                <ul class="list-group ">
+                                <ul class="list-group " style="overflow-y: auto; height: 10rem;">
                                     ${li}
                                 </ul>
                             </div>
@@ -164,7 +199,7 @@
                                         </h2>
                                     </div>
                                 </div>
-                                <button type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px" data-toggle="modal" data-target="#select-subplan">
+                                <button type="button" data-plan='${JSON.stringify(data)}' class="btn mfb-component__button--main" style="width:100%;  border-radius:30px" data-toggle="modal" data-target="#select-subplan">
                                     Select Plan
                                     </button>
                             </div>
@@ -174,22 +209,100 @@
                     all_plans += cardsData;
                 }
                 $('#all_plans').html(all_plans)
-            }).fail((err)=>{console.log(err)})
-            
+            }).fail((err) => { console.log(err) })
+
         }
-        getAppoinmentList()
-        
-        function makeListOfPlanBenifits(name){
+
+        function makeListOfPlanBenifits(name) {
             let splitedName = name.split(',');
             let finalLi = '';
-            for(let x = 0; x < splitedName.length; x++){
+            for (let x = 0; x < splitedName.length; x++) {
                 let li = `<li class="text-center font-weight-bold list-group-item">
                                         ${splitedName[x]}
                                     </li>`;
                 finalLi += li;
             }
             return finalLi;
-        } 
+        }
+        let plan_id = '';
+        
+        $('#select-subplan').on('show.bs.modal', function (event) {
+            var myVal = $(event.relatedTarget).data('plan');
+            plan_id = myVal['id'];
+
+            let binifits = myVal['benifits_list'].split(',');
+            let lis = `<li class="list-group-item text-center font-weight-bold">Benifits</li>`;
+            let plan_prices = myVal['plan_price']
+            let gst = plan_prices * (0.05);
+            let grossTotal = plan_prices + gst;
+            
+            for(let i =0; i < binifits.length; i++){
+                let li = `
+                    <li class="list-group-item">${binifits[i]}</li>
+                `;
+                lis += li;
+            }
+            $('#listOfBenefit').html(lis);
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            let subscriptionValidTill = new Date(today.getFullYear(), today.getMonth(), today.getDate() + myVal['validity'])
+            console.log(subscriptionValidTill)
+            let valid_till =  String(subscriptionValidTill.getDate()).padStart(2, '0') + '/' + String(subscriptionValidTill.getMonth() + 1).padStart(2, '0') + '/' + subscriptionValidTill.getFullYear();
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#validFromDate').html(today)
+            $('#subscriptionValidTills').html(valid_till)
+            $('#subscriptionrice').html(plan_prices)
+            $('#subscriptionrice_gst').html(gst)
+            $('#total-amt').html(grossTotal)
+        
+        })
+
+        document.getElementById('rzp-button1').onclick = function (e) {
+            var options = {
+                "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
+                "amount": parseFloat($('#total-amt').html()) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Doctor Plus",
+                "description": "Active subscription plane.",
+                "image": "{% static 'website/img/logo.png' %}",
+                "handler": function (response) {
+                    console.log(response)
+                    // implement in booking appoinment
+                    var payment_id = response.razorpay_payment_id;
+                    var data = {
+                        plan: plan_id,
+                        is_active: true
+                    };
+                    // '/Authorization Token {value}/appoinments/'
+                    $.ajax({
+                        'url': '/api/MySubscriptionPlans/',
+                        'method': 'POST',
+                        'contentType': 'application/json',
+                        'data': JSON.stringify(data),
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        },
+                    }).done((response) => {
+                        console.log(response);
+                        alert("Your subscription is activated.")
+
+                    }).fail((err, error, wrong) => {
+                        console.log(err)
+                    })
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#007bff"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
 
     })
 </script>
