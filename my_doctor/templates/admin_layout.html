@@ -39,7 +39,8 @@
                         <div class="form-inline">
                             <form class="search-form">
                                 <input class="form-control mr-sm-2" type="text" placeholder="Search ..."
-                                    aria-label="Search">
+                                    aria-label="Search" id="searchInput">
+                                    <button class="search" type="button" style="right: 45px;" id="searchBtn"><i class="fa fa-search"></i></button>
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
                         </div>
@@ -103,10 +104,16 @@
             jQuery('#' + liName).addClass('heighlight')
         }
 
+        jQuery(document).ready(function($){
+            $('#searchBtn').click(function(){
+                if($('#searchInput').val()==''){
+                    toastr.warning('','Enter the search term',{positionClass:"toast-top-center"})
+                    return
+                }
+                window.location.href='/search?term='+$('#searchInput').val()
+            })
+        })
     </script>
     {% block scripts%} {% endblock %}
 </body>
-<!-- Sidebar -->
-
-
 </html>

@@ -260,13 +260,27 @@ section.breadcrumb{
     document.addEventListener('contextmenu', event => event.preventDefault());
     $(document).ready(function(){
         var cookie = $.cookie('Token')
+        var d_cookie = $.cookie('DoctorToken')
         if(cookie && cookie!=''){
             $('#loginItem').html(`
             <div class="dropdown"> 
             <a href="#" class="dropbtn"><i class="fa fa-user"></i> ${localStorage.getItem('login_name')} <span class="caret"></span></a>
             <div class="dropdown-content">
-                <button id="btnGotoDashboard" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
-                <button id="btnLogout" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
+                <button id="btnGotoDashboard" data-user="patients" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
+                <button id="btnLogout" data-token="Token" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
+            </div>
+            </div>
+            `)
+            $('#registerItem').remove()
+        }
+
+        if(d_cookie && d_cookie!=''){
+            $('#loginItem').html(`
+            <div class="dropdown"> 
+            <a href="#" class="dropbtn"><i class="fa fa-user-md"></i> Dr. ${localStorage.getItem('login_name')} <span class="caret"></span></a>
+            <div class="dropdown-content">
+                <button id="btnGotoDashboard" data-user="doctors" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
+                <button id="btnLogout" data-token="DoctorToken" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
             </div>
             </div>
             `)
@@ -274,11 +288,11 @@ section.breadcrumb{
         }
 
         $('#btnGotoDashboard').click(function(){
-            window.location.href='/patients/dashboard'
+            window.location.href=`/${$(this).attr('data-user')}/dashboard`
         })
 
         $('#btnLogout').click(function(){
-            $.cookie('Token','')
+            $.cookie($(this).attr('data-token'),'')
             window.location.href = '/'
         })
     })
