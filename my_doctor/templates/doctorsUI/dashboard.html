@@ -290,7 +290,7 @@
             console.log('response response', response);
             formDeserialize(form, response.user);
             formDeserialize(form,response)
-
+            localStorage.setItem('login_name',response.full_name)
         }).fail((error) => {
             console.log(error);
         });

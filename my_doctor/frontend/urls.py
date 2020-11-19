@@ -23,11 +23,11 @@ urlpatterns=[
     path('viewDoctorPayments', views.viewDoctorPayment, name="viewDoctorPayments"),
     path('reminders', views.reminders, name="reminders"),
     path('subscription_plans', views.subscription_plans, name="subscription_plans"),
-    path('searching', SearchAPI, name="searching"),
+    path('searchAPI', SearchAPI, name="searchAPI"),
     path('doctorAgreement', views.doctorAgreement, name="doctorAgreement"),
     path('doctorBankDetails', views.doctorBankDetails, name="doctorBankDetails"),
     path('doctorTimings', views.doctorTimings, name="doctorTimings"),
     path('doctorBillPayments', views.doctorBillPayments, name="doctorBillPayments"),
     path('Prescription', views.prescription, name="Prescription"),
-
+    path('search',views.searchUI,name="search")
 ]

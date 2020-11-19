@@ -91,3 +91,6 @@ def doctorBillPayments(request):
 
 def prescription(request):
     return render(request, 'frontend/prescriptions.html')
+
+def searchUI(request):
+    return render(request, 'frontend/search.html',{"search_term":request.GET.get('term')})
