@@ -10,7 +10,7 @@ class appointment(models.Model):
     doctor = models.ForeignKey(doctors_info,on_delete=models.CASCADE)
     patient = models.ForeignKey(User,related_name='appointments',on_delete=models.SET_NULL,null=True)
     Description = models.CharField(max_length=32, null=True)
-    paid_amount = models.IntegerField()
+    paid_amount = models.DecimalField(max_digits=10,decimal_places=2)
     consultation_status = models.CharField(max_length=25, null=True)
     payment_type = models.CharField(max_length=25, null=True)
     payment_id = models.CharField(max_length=25, null=True)
