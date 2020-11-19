@@ -94,3 +94,7 @@ def prescription(request):
 
 def searchUI(request):
     return render(request, 'frontend/search.html',{"search_term":request.GET.get('term')})
+
+def mis_reports(request):
+    return render(request, 'frontend/mis_reports.html')
+

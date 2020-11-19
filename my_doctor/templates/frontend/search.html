@@ -27,7 +27,7 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                             data-parent="#accordion">
                             <div class="card-body">
-                                <table id="patientResult" class="table table-bordered table-hover">
+                                <table id="patientResult" class="table table-bordered table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Sl No.</th>
@@ -52,9 +52,9 @@
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <table id="doctorResult" class="table table-bordered table-hover">
+                                <table id="doctorResult" class="table table-bordered table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Sl No.</th>
@@ -135,7 +135,7 @@
                     data:'id'
                 },
                 {
-                    data:'Registration_Number',
+                    data:'user.username',
                 },
                 {
                     data:'full_name'

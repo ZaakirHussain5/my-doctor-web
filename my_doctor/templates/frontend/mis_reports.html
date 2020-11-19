@@ -1,0 +1,137 @@
+{% extends 'admin_layout.html' %} {% block content %}
+<div class="breadcrumbs">
+    <div class="col-12">
+        <div class="page-header text-center">
+            <div class="page-title">
+                <h1 id="title">Payments and Settlements</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+                    <ul class="nav nav-pills nav-justified" style="width: 100%;" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list" role="tab"
+                                aria-controls="pills-home" aria-selected="true">Recipts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab"
+                                aria-controls="pills-profile" aria-selected="false">Payments</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="list" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <div class="mt-3">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            Consultations
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="patientResult" class="table table-bordered table-hover"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date & time</th>
+                                                    <th>Inv No.</th>
+                                                    <th>Doctor</th>
+                                                    <th>Patient</th>
+                                                    <th>Rd. Amt.</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            Subscriptions
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="doctorResult" class="table table-bordered table-hover"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Patient ID</th>
+                                                    <th>Patient Name</th>
+                                                    <th>Plan</th>
+                                                    <th>Validity</th>
+                                                    <th>Rd. Amt.</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="mt-3">
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            Doctor Payments
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="doctorResult" class="table table-bordered table-hover"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl No.</th>
+                                                    <th>Doctor ID</th>
+                                                    <th>Name</th>
+                                                    <th>Consultations Count</th>
+                                                    <th>Total Amt.</th>
+                                                    <th>Paid Amount</th>
+                                                    <th>Balance</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            Other Payments
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="doctorResult" class="table table-bordered table-hover"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl No.</th>
+                                                    <th>Bill Type</th>
+                                                    <th>Billed Date</th>
+                                                    <th>Paid Date</th>
+                                                    <th>Paid by</th>
+                                                    <th>Bill Amount</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+<script>
+    DoHeighLight('Administration', 'mis_reports')
+</script>
+{% endblock %}

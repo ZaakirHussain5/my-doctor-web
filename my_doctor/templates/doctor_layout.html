@@ -60,7 +60,7 @@
                 
                         <a href="#">
                 
-                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}" alt="User Avatar" id="profileImage">
                 
                         </a>
                 
@@ -205,8 +205,9 @@
             },
         }).done((response) => {
             console.log(response)
-            jQuery('#doctorName').html(response.full_name)
+            jQuery('#doctorName').html('Dr. '+response.full_name)
             jQuery('#doctorSpecialist').html(response.specialist_type)
+            jQuery('#profileImage').attr('src',response.profile_pic)
         }).fail((error) => {
             console.log(error);
         });
