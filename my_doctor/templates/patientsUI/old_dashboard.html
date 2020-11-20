@@ -1,0 +1,204 @@
+{% extends 'patients_layout.html'%}
+{% load static%}
+
+
+{% block content%}
+<div class="ca-content__chatstab">
+    <div class="ca-content__callstab" style="padding-top: 0;">
+        <div class="conversation-panel__body ps">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <a href="{% url 'patients:newAppointment' %}">
+                        <div class="card">
+                            <div class=" card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+                                    <div class="ca-call-details__pname">
+                                        <div class="mb-3">Book a Consultation</div>
+                                        <div class="calllist__details--info">
+                                            <span>Book a Consultation from your home and get our doctors Online for your
+                                                customized Solution</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-stethoscope mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="{% url 'patients:appointments' %}">
+                         <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div class="mb-3">My appointments</div>
+                                        <div class="calllist__details--info">
+                                            <span>Don't miss out any appointments that you have with our experts
+                                                doctors.</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-clock-outline mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </a>
+                   
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="{% url 'patients:medicalRecords' %}">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div>Medical Records</div>
+                                        <div class="calllist__details--info">
+                                            <span>Maintain all your Medical Recors on our CloudMedical Records </span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-plus-circle-outline mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#" data-toggle="modal" data-target="#CommingSoon">
+                        <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div>Order Medicine</div>
+                                        <div class="calllist__details--info">
+                                            <span>Order Your Medicines Online and get it delicered to your doorstep in no time.</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-medical-bag mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#" data-toggle="modal" data-target="#CommingSoon">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="ca-call-details-card" style="height: 250px;">
+                                <div class="ca-call-details__left pl-2">
+
+                                    <div class="ca-call-details__pname">
+                                        <div>Book a Diagnostics</div>
+                                        <div class="calllist__details--info">
+                                            <span>Book a Diagnostic to Determine your Better Health</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-avatar  user-avatar-xl user-avatar-rounded online">
+                                        <i class="mdi mdi-thermometer mdi-48px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal new-message-dialog" id="CommingSoon" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <h5>Comming Soon..</h5>
+                          
+                    </div>
+                    <div class="modal-body text-center">
+                      <p class="">This Feature is Unavailable at moment it will be at your service at the earliest.</p>
+                    </div>
+                    <div class="modal-footer d-flex flex-wrap align-content-center">
+                        <button type="button" class="btn mfb-component__button--main"
+                        style="width:100%;border-radius:0px" data-dismiss="modal" >ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+
+
+<script>
+    $(document).ready(function(){
+        $('#caMainTab a[href="{% url "patients:dashboard"%}"]').addClass('active')
+
+        $('#orderMedicine').click(()=>{
+            alert("This featurs is not available now.")
+        })
+        // geturl = '/api/getLoggedInPatient/'
+        // get a object and need to bind with the profile form
+        function getAllSubscriptionPlan(){
+            $.ajax({
+                url: `/api/subscription_plans`,
+                method: 'GET',
+                contentType: "application/json"
+            }).done((response)=>{
+                let liList = '';
+                for(let i=0; i < response.length; i++){
+                    let li = `
+                        <li>
+                            <div class="calllist bg-info text-white">
+                                <div class="user-avatar user-avatar-rounded">
+                                    <!--<img src="{% static 'patients/assets/images/user/layer-3.png' %}" alt="">-->
+                                </div>
+                                <div class="calllist__details">
+                                    <div class="calllist__details--name">${response[i]['plan_name']} for ${response[i]['validity']} days.</div>
+                                    
+                                </div>
+
+                                <div class="calllist__actions">
+                                    <div class="iconbox btn-hovered-light">
+                                        <i class="iconbox__icon mdi mdi-currency-inr"></i> ${response[i]['plan_price']}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    liList += li
+                }
+                $('#subscriptionPlans').html(liList);
+            
+            }).fail((err)=>{
+                console.log(err);
+            })
+        }
+        getAllSubscriptionPlan()
+
+    })
+
+
+</script>
+{% endblock %}

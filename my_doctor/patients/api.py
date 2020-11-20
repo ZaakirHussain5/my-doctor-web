@@ -1,7 +1,6 @@
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
-
 from .serializers import ( 
     UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,
     PatientResgistrationSerializer,medical_historySerializer,

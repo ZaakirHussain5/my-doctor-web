@@ -14,12 +14,12 @@
                         <table id="billingHistory" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>
-                                        slno
-                                    </th>
-                                    <th>Description</th>
-                                    <th>Amount</th>
                                     <th>Date</th>
+                                    <th>Inv No.</th>
+                                    <th>Doctor</th>
+                                    <th>Speciality</th>
+                                    <th>Fee paid</th>
+                                    <th>Refund</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -39,7 +39,8 @@
 {% block scripts %}
 <script>
     $(document).ready(function(){
-        let table = $('#billingHistory').DataTable({
+        $('#billingHistory').DataTable()
+       /*  let table = $('#billingHistory').DataTable({
             ajax: {
                 url: '/api/PatientBillingHistory/',
                 dataSrc: "",
@@ -81,7 +82,7 @@
                 $("td:first", nRow).html(iDisplayIndex + 1);
                 return nRow;
             }
-        })
+        }) */
     })
 </script>
 {% endblock %}

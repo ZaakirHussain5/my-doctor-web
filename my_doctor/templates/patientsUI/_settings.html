@@ -32,12 +32,6 @@
                                             <div class="settingmenu__name">Wallet</div>
                                         </div>
                                     </a>
-                                   <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#v-pills-theme" role="tab" aria-controls="v-pills-theme" aria-selected="false">
-                                        <div class="settingmenu">
-                                            <div class="settingmenu__icon"><i class="mdi mdi-palette-outline"></i></div>
-                                            <div class="settingmenu__name">Theme</div>
-                                        </div>
-                                    </a>
                                 </div>
                             </div>
                             <div class="col-8 settings-nav-content">
@@ -57,46 +51,53 @@
                                                 <div class="ca-profile-actions">
                                                     <div class="iconbox-group">
                                                         <label for="profile_pic" class="iconbox mfb-component__button--main ion-plus-round">
-                                                            <i class="iconbox__icon mdi mdi-pencil-outline" style="margin: 5!important;"></i>
+                                                            <i class="iconbox__icon mdi mdi-camera" style="
+                                                            padding-top: 10px;
+                                                            padding-left: 9px;
+                                                        "></i>
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="ca-overlay"></div>
                                             </div>
-                                            <div class="card">
+                                            <div class="card mt-5">
                                                 <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="full_name" class="form-control-label">Name</label>
+                                                                <input type="text" class="form-control" name="full_name" placeholder="Your Name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="form-control-label">Phone Number</label>
+                                                                <input type="text" class="form-control" name="ph_no" placeholder="Your Phone Number" id="ph_no">
+                                                                <input type="hidden" name="username" id="username">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="email" class="form-control-label">Email</label>
+                                                                <input type="email" class="form-control" name="email" placeholder="Your Email Address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="email" class="form-control-label">Blood Group</label>
+                                                                <input type="text" class="form-control" name="blood_group" placeholder="Your Blood Group">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="email" class="form-control-label">Age</label>
+                                                                <input type="text" class="form-control" name="age" placeholder="Your Age">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="email" class="form-control-label">Weight</label>
+                                                                <input type="text" class="form-control" name="weight" placeholder="Your Weight">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 <input type="hidden" name="gender">
+                                                    
+                                                    
                                                     <div class="form-group">
-                                                        <label for="full_name" class="form-control-label">Name</label>
-                                                        <input type="text" class="form-control" name="full_name" placeholder="Your Name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="username" class="form-control-label">Phone Number</label>
-                                                        <input type="text" class="form-control" name="ph_no" placeholder="Your Phone Number" id="ph_no">
-                                                        <input type="hidden" name="username" id="username">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="form-control-label">Email</label>
-                                                        <input type="email" class="form-control" name="email" placeholder="Your Email Address">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="form-control-label">Blood Group</label>
-                                                        <input type="text" class="form-control" name="blood_group" placeholder="Your Blood Group">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="form-control-label">Age</label>
-                                                        <input type="text" class="form-control" name="age" placeholder="Your Age">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="form-control-label">Height</label>
-                                                        <input type="text" class="form-control" name="height" placeholder="Your Height">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="form-control-label">Weight</label>
-                                                        <input type="text" class="form-control" name="weight" placeholder="Your Weight">
-                                                    </div>
-                                                    <div class="form-group float-right">
-                                                        <button type="submit" class="btn float-right mfb-component__button--main" style="width:190px; border-radius:0px">
+                                                        <button type="submit" class="btn mfb-component__button--main btn-block" style="width:100%; border-radius:20px">
                                                             Update Profile
                                                         </button>
                                                     </div>
@@ -164,15 +165,13 @@
 
 
                                                             <button
-                                                              class="btn btn-active text-light pull-right "
+                                                              class="btn btn-primary btn-block pull-right "
                                                               type="submit"
                                                               style="
-                                                                background: #c2405a;
                                                                 border-radius: 20px;
-                                                                border: 1px solid #c2405a;
                                                               "
                                                             >
-                                                              Update
+                                                              Update Password
                                                             </button>
                                                     </form>
                                                 </div>

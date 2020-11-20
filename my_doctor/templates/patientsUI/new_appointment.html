@@ -538,7 +538,8 @@
         })
 
         $('#datepicker').datepicker({
-            format: "dd/mm/yyyy"
+            format: "dd/mm/yyyy",
+            startDate:"+0d"
         });
         $('#datepicker').on('changeDate', function () {
             $('#App_date').val(

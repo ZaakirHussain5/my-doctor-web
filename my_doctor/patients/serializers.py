@@ -68,17 +68,16 @@ class PatientResgistrationSerializer(serializers.Serializer):
 class PatientResgistrationApp(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
-    email = serializers.CharField(required=False)
+    email = serializers.CharField(required=False,allow_blank=True,allow_null=True)
     pat_id = serializers.CharField()
     full_name = serializers.CharField()
-    gender = serializers.CharField()
-    dob = serializers.CharField(required=False)
-    age = serializers.IntegerField(required=False)
-    height=serializers.DecimalField(max_digits=10,decimal_places=2)
-    weight=serializers.DecimalField(max_digits=10,decimal_places=2)
-    marital_status=serializers.CharField(required=False)
-    blood_group = serializers.CharField(required=False)
-    ph_no=serializers.CharField()
+    gender = serializers.CharField(required=False,allow_blank=True,allow_null=True)
+    dob = serializers.CharField(required=False,allow_blank=True,allow_null=True)
+    age = serializers.CharField(required=False,allow_blank=True,allow_null=True)
+    height=serializers.CharField(required=False,allow_blank=True,allow_null=True)
+    weight=serializers.CharField(required=False,allow_blank=True,allow_null=True)
+    marital_status=serializers.CharField(required=False,allow_blank=True,allow_null=True)
+    blood_group = serializers.CharField(required=False,allow_blank=True,allow_null=True)
 
     def create(self, validated_data):
         try:
@@ -89,7 +88,7 @@ class PatientResgistrationApp(serializers.Serializer):
             gender=validated_data['gender'],
             age=validated_data['age'],
             blood_group=validated_data['blood_group'],
-            ph_no=validated_data['ph_no'],
+            ph_no=validated_data['username'],
             height=validated_data['height'],
             weight=validated_data['weight'],
             marital_status=validated_data['marital_status'])

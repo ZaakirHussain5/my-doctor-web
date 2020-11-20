@@ -13,7 +13,6 @@ function submitRegistrationForm() {
         marital_status: 'Not Specified',
         user_type: 'P'
     }
-    
     let tele_data = {
         Full_Name: $('#Name1').val(),
         // user_type: $('#user_type').val(),
@@ -29,6 +28,7 @@ function submitRegistrationForm() {
         // marital_status: 'Not Specified'
     }
 
+    if($())
     $.ajax({
         url: '/api/GeneratePatientID',
         method: 'GET',
@@ -132,4 +132,4 @@ $("#appointments-main-form").submit(function (e) {
 
 })
 
-$('#submit').click(submitRegistrationForm)
+$('#patientRegistration').submit(submitRegistrationForm)

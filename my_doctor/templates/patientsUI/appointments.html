@@ -49,6 +49,99 @@
         </div>
 </div>
 </div>
+<div class="modal new-message-dialog" id="editApp" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <h5>Edit Appointment</h5>
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-wrap align-content-center" style="justify-content: center;">
+                            <ul class="nav nav-pills my-3" id="caCallsTabInside" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="all-calls-tab" data-toggle="pill" href="#cancel-app"
+                                        role="tab" aria-controls="all-calls" aria-selected="false">Cancel</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " id="missed-calls-tab" data-toggle="pill" href="#resc-app"
+                                        role="tab" aria-controls="missed-calls" aria-selected="true">Reschedule</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane  fade show active" id="cancel-app" role="tabpanel"
+                                aria-labelledby="pills-contact-tab">
+                                 <form id="mediaclForms">
+                            <div class="form-group">
+                                <label for="ConsultingAbout">Reason</label>
+                                <textarea name="description" class="form-control" id="ConsultingAbout" rows="7" placeholder="Describe your Reason" style="font-size: medium;"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn mfb-component__button--main"
+                                style="width:100%; border-radius:30px" id="ConfirmClick">Cancel Appointment</button>
+                            </div>
+                        </form>
+                            </div>
+                            <div class="tab-pane  fade" id="resc-app" role="tabpanel"
+                            aria-labelledby="pills-contact-tab">
+                          
+                                <div class="row">
+                                    <div class="col-md-7 text-center">
+                                        <div class="ca-profile-thumb" style="height: auto;">
+                                        <div class="ca-profile-info">
+                                    <div class="ca-profile-pic"><img class="img-fluid"
+                                            id="summaryProfile" src="http://127.0.0.1:8000/media/group-12x_CENyikq.png"
+                                            alt=""></div>
+                                     </div>
+                                     <div class="ca-overlay"></div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-5 text-center mt-5">
+                                        <h5>Dr. Das</h5>
+                                        <p>Dietitian</p>
+                                    </div>
+                                </div>
+                                
+
+                               
+                            <div class="form-group mt-5">
+                                <label>Select Date</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary">
+                                            Check Availablity
+                                        </button>
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group text-center">
+                                <strong class="text-primary">
+                                    <i class="mdi mdi-check-circle-outline"></i> Doctor Available at 12:00 PM on 12/08/2020
+                                </strong>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" style="width:100%; border-radius:30px" class="btn btn-primary btn-block">
+                                    Book Appointment
+                                </button>
+                            </div>
+                        </div>
+                            </div>
+                       
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -176,7 +269,7 @@
                                     <small class="">Call</small>
                             </div>
                             <div class="col-md-6 text-center">
-                                <button type='button' class='btn btn-primary btn-sm' style="border-radius:50%">
+                                <button type='button' class='btn btn-primary btn-sm' style="border-radius:50%" data-toggle="modal" data-target="#editApp">
                                         <i class="mdi mdi-square-edit-outline text-light"></i>
                                 </button><br>
                                 <small class="">Edit</small>

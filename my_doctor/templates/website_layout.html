@@ -129,7 +129,7 @@ section.breadcrumb{
     <div class="col-md-5">
         <ul>
     <li><a href="{% url 'website:features'%}">How it works</a></li>
-    <li><a href="{% url 'website:specialty'%}">Speciality</a></li>
+    <li><a href="{% url 'website:index'%}#tab">Speciality</a></li>
     <li><a href="{% url 'website:plans'%}">Plans</a></li>
 </ul>
     </div>
@@ -188,10 +188,10 @@ section.breadcrumb{
       <div class="col-md-6 col-sm-12">
           <div class="header-links">
 <ul>
-<li><a href="#" style="color: #3b5998 ;font-size: 25px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-<li><a href="#" style="color: #00acee  ;font-size: 25px;"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+<li><a href="https://www.facebook.com/doctorplusofficial" target="_blank" style="color: #3b5998 ;font-size: 25px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+<li><a href="https://twitter.com/doctorplus20" target="_blank"  style="color: #00acee  ;font-size: 25px;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+<li><a href="https://instagram.com/doctorplusofficial?igshid=12kagc16b2hg2" target="_blank"  style="color: #00acee  ;font-size: 25px;"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+<li><a href="https://www.linkedin.com/company/doctorplusofficial" target="_blank"  style="color: #00acee  ;font-size: 25px;"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 </ul>
 </div>
       </div>
@@ -262,9 +262,20 @@ section.breadcrumb{
         var cookie = $.cookie('Token')
         var d_cookie = $.cookie('DoctorToken')
         if(cookie && cookie!=''){
-            $('#loginItem').html(`
+          const profileForm = document.getElementById('profile-form');
+        $.ajax({
+            url: '/api/getLoggedInPatient',
+            method: 'GET',
+            contendType: 'application/json',
+            'async': false,
+            'method': 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+            },
+        }).done((response)=>{
+           $('#loginItem').html(`
             <div class="dropdown"> 
-            <a href="#" class="dropbtn"><i class="fa fa-user"></i> ${localStorage.getItem('login_name')} <span class="caret"></span></a>
+            <a href="#" class="dropbtn"><i class="fa fa-user"></i> ${response.full_name} <span class="caret"></span></a>
             <div class="dropdown-content">
                 <button id="btnGotoDashboard" data-user="patients" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
                 <button id="btnLogout" data-token="Token" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
@@ -272,12 +283,25 @@ section.breadcrumb{
             </div>
             `)
             $('#registerItem').remove()
+        }).fail(function(err){
+          console.log(err)
+        })
+            
         }
 
         if(d_cookie && d_cookie!=''){
-            $('#loginItem').html(`
+          jQuery.ajax({
+            url: '/api/getLoggedInDoctor',
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+          $('#loginItem').html(`
             <div class="dropdown"> 
-            <a href="#" class="dropbtn"><i class="fa fa-user-md"></i> Dr. ${localStorage.getItem('login_name')} <span class="caret"></span></a>
+            <a href="#" class="dropbtn"><i class="fa fa-user-md"></i> Dr. ${response.full_name} <span class="caret"></span></a>
             <div class="dropdown-content">
                 <button id="btnGotoDashboard" data-user="doctors" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
                 <button id="btnLogout" data-token="DoctorToken" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
@@ -285,6 +309,10 @@ section.breadcrumb{
             </div>
             `)
             $('#registerItem').remove()
+        }).fail((error) => {
+            console.log(error);
+        });
+            
         }
 
         $('#btnGotoDashboard').click(function(){

@@ -207,7 +207,7 @@
             console.log(response)
             jQuery('#doctorName').html('Dr. '+response.full_name)
             jQuery('#doctorSpecialist').html(response.specialist_type)
-            jQuery('#profileImage').attr('src',response.profile_pic)
+            jQuery('#profileImage').attr('src',!response.profile_pic||response.profile_pic==''?'/media/logos/anonymous-user.png':response.profile_pic)
         }).fail((error) => {
             console.log(error);
         });
