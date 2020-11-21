@@ -636,37 +636,44 @@
   })
 
   const previoustable = jQuery('#PreviousAppointments').DataTable({
-    ajax: {
-      url: '/api/getAllAppoitnements?status=Completed',
-      dataSrc: "",
+      ajax: {
+        url: '/api/getAllAppoitnements?status=Completed',
+        dataSrc: "",
 
-    },
-    columns: [
-      {
-        data: 'appointment_date'
       },
-      {
-        data: 'appointment_time'
-      },
-      {
-        data: "doctor.full_name",
-        render:function(data,type,app){
-          if(app.doctor.is_loggedin==true){
-            return '<i class="fa fa-circle text-success"></i> ' + data
-          }else{
-            return '<i class="fa fa-circle text-danger"></i> ' + data
+      columns: [
+        {
+          data: 'appointment_date'
+        },
+        {
+          data: 'appointment_time'
+        },
+        {
+          data: "doctor.full_name",
+          render: function (data, type, app) {
+            if (app.doctor.is_loggedin == true) {
+              return '<i class="fa fa-circle text-success"></i> ' + data
+            } else {
+              return '<i class="fa fa-circle text-danger"></i> ' + data
+            }
+
           }
-          
+        },
+        {
+          data: "patient_login_status",
+          render: function (data, type, app) {
+            if (data == true) {
+              return '<i class="fa fa-circle text-success"></i> ' + app.patient_name
+            } else {
+              return '<i class="fa fa-circle text-danger"></i> ' + app.patient_name
+            }
+          }
+        },
+        {
+          data: 'Description'
         }
-      },
-      {
-        data: "patient_name"
-      },
-      {
-        data: 'Description'
-      }
-    ]
-  })
+      ]
+    })
 
   jQuery('#UpComingAppointments').on('click', '.call', function () {
     var button = jQuery(this)

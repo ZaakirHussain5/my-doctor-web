@@ -156,3 +156,11 @@ def patientData(request):
     }
 
     return HttpResponse(data)
+
+class PatientLogout(generics.GenericAPIView):
+    def post(self, request):
+        if request.user is not None:
+            patient = patient_info.objects.get(
+                user=request.user).update(is_logged_in=False)
+            patient.save()
+            return Response({})

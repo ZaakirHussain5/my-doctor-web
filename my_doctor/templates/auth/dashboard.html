@@ -129,35 +129,51 @@
           <div class="card">
               <div class="card-body">
                   <div class="row">
-                      <div class="col-sm-4">
-                          <h4 class="card-title mb-0">Earnings</h4>
-                          <div class="small text-muted">October 2017</div>
+                      <div class="col-sm-12 text-center">
+                          <h4 class="card-title mb-0">Performance Snapshot</h4>
+                          <div class="small text-muted mb-4">October 2017</div>
                       </div>
-                      <!--/.col-->
-                      <div class="col-sm-8 hidden-sm-down">
-                          <button type="button" class="btn btn-primary float-right bg-flat-color-1"><i class="fa fa-cloud-download"></i></button>
-                          <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
-                              <div class="btn-group mr-3" data-toggle="buttons" aria-label="First group">
-                                  <label class="btn btn-outline-secondary">
-                                      <input type="radio" name="options" id="option1"> Day
-                                  </label>
-                                  <label class="btn btn-outline-secondary active">
-                                      <input type="radio" name="options" id="option2" checked=""> Month
-                                  </label>
-                                  <label class="btn btn-outline-secondary">
-                                      <input type="radio" name="options" id="option3"> Year
-                                  </label>
-                              </div>
-                          </div>
-                      </div>
-                      <!--/.col-->
-
-
                   </div>
                   <!--/.row-->
-                  <div class="chart-wrapper mt-4">
-                      <canvas id="trafficChart" style="height:200px;" height="200"></canvas>
+                  <div class="row">
+                      <div class="col-md-8 offset-md-2">
+                          <div class="input-group">
+                              <input type="date" class="form-control" id="">
+                              <span class="input-group-addon">
+                                  to
+                              </span>
+                              <input type="date" class="form-control" id="">
+                              <span class="input-group-btn">
+                                  <button type="button" class="btn btn-primary">
+                                  Get Data
+                                </button>
+                              </span>
+                          </div>
+                      <table class="table table-bordered table-hover">
+                          <tr>
+                              <th>Appointments</th>
+                              <td class="text-right">24</td>
+                          </tr>
+                          <tr>
+                            <th>Fees Collected</th>
+                            <td class="text-right">2,099</td>
+                        </tr>
+                        <tr>
+                            <th>Commission</th>
+                            <td class="text-right">120.00</td>
+                        </tr>
+                        <tr>
+                            <th>Doctors Payouts</th>
+                            <td class="text-right">320.00</td>
+                        </tr>
+                        <tr>
+                            <th>Refunds</th>
+                            <td class="text-right">450.00</td>
+                        </tr>
+                      </table>
                   </div>
+                  </div>
+                  
 
               </div>
           </div>

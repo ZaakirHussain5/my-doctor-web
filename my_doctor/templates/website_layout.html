@@ -320,6 +320,7 @@ section.breadcrumb{
         })
 
         $('#btnLogout').click(function(){
+            
             $.cookie($(this).attr('data-token'),'')
             window.location.href = '/'
         })

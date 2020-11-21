@@ -28,7 +28,8 @@ function submitRegistrationForm() {
         // marital_status: 'Not Specified'
     }
 
-    if($())
+    $('#preloader').show()
+
     $.ajax({
         url: '/api/GeneratePatientID',
         method: 'GET',
@@ -48,14 +49,18 @@ function submitRegistrationForm() {
                 data: JSON.stringify(tele_data),
                 contentType: 'application/json',
             }).done((response) => {
+                $('#preloader').hide()
                 window.location.href = 'patients/dashboard'
             }).fail((error) => {
+                $('#preloader').hide()
                 console.log(error)
             })
         }).fail((error) => {
+            $('#preloader').hide()
             console.log(error);
         })
     }).fail((error) => {
+        $('#preloader').hide()
         console.log(error)
     })
 

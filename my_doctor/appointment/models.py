@@ -28,6 +28,10 @@ class appointment(models.Model):
         return patient_info.objects.get(user__id=self.patient.id).full_name
     
     @property
+    def patient_login_status(self):
+        return patient_info.objects.get(user__id=self.patient.id).is_logged_in
+    
+    @property
     def patient_age(self):
         return patient_info.objects.get(user__id=self.patient.id).age
     
