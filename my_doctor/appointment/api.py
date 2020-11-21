@@ -110,6 +110,14 @@ class getAllAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = appointmentsListSerializer
 
     def get_queryset(self):
-        return appointment.objects.all()
+        queryset = appointment.objects.all()
+        status = self.request.query_params.get('status',None)
+        now = self.request.query_params.get('now',None)
+        formated_date = getDateFormat()
+        if status is not None:
+            queryset =  appointment.objects.filter(consultation_status=status).exclude(appointment_date=formated_date)
+        if now is not None:
+            queryset =  appointment.objects.filter(consultation_status=status,appointment_date=formated_date)
+        return queryset
 
 

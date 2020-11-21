@@ -30,5 +30,6 @@ urlpatterns=[
     path('doctorBillPayments', views.doctorBillPayments, name="doctorBillPayments"),
     path('Prescription', views.prescription, name="Prescription"),
     path('search',views.searchUI,name="search"),
-    path('mis_reports',views.mis_reports,name="mis_reports")
+    path('mis_reports',views.mis_reports,name="mis_reports"),
+    path('appointments',views.appointments,name="appointments"),
 ]

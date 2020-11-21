@@ -98,3 +98,6 @@ def searchUI(request):
 def mis_reports(request):
     return render(request, 'frontend/mis_reports.html')
 
+def appointments(request):
+    return render(request, 'frontend/appointments.html')
+
