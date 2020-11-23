@@ -600,7 +600,7 @@
                         },
                     }).done((response) => {
                         console.log(response);
-                        toastr.success("Appointmnt booked Successfully", "Success", { positionClass: "toast-top-center" })
+                        toastr.success("Appointment booked Successfully", "Success", { positionClass: "toast-top-center" })
                         $('#con-doctor').html($('#Doctor').html())
                         $('#summaryProfile').attr('src',$('#docImage').attr('src'))
                         $('#con-app-time').html(response.appointment_time)
