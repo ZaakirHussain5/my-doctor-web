@@ -21,13 +21,14 @@
                     <thead>
                         <tr>
                             <th>Sl No</th>
-                            <th>Patient ID</th>
                             <th>Reg Date</th>
+                            <th>Patient ID</th>
                             <th>Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Phone No.</th>
-                            <th>View Details</th>
+                            <!-- <th>Age</th> -->
+                            <!-- <th>Gender</th> -->
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,25 +160,28 @@
                     data: 'id'
                 },
                 {
-                    data:'pat_id',
-                },
-                {
                     data: "created_at",
                     render: function(data){
                         return $.format.date(data, "dd-MM-yyyy");
                     }
                 },
                 {
+                    data:'pat_id',
+                },
+                {
                     data:'full_name'
                 },
-                {
-                    data:'age'
-                },
-                {
-                    data : 'gender'
-                },
+                // {
+                //     data:'age'
+                // },
+                // {
+                //     data : 'gender'
+                // },
                 {
                     data : 'ph_no'
+                },
+                {
+                    data: 'user.email'
                 },
                 {
                     data:'id',
@@ -188,9 +192,10 @@
                       }
                 }
             ],
-              language: {
+            language: {
                   lengthMenu: "_MENU_",
                   search: "",
+                  searchPlaceholder: "Search..."
               },
               fnRowCallback: function (nRow, aData, iDisplayIndex) {
                   $("td:first", nRow).html(iDisplayIndex + 1);

@@ -17,6 +17,16 @@ class doctors_infoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = doctors_infoSerializer
 
+class doctor_info_adminViewSet(viewsets.ModelViewSet):
+    serializer_class = doctors_listSerializer
+    permissions = [
+        permissions.AllowAny
+    ]
+
+    def get_queryset(self):
+        id = self.request.query_params.get('id')
+        return doctors_info.objects.filter(id= id)
+
 
 class DoctorRegisterAPI(generics.GenericAPIView):
     serializer_class = DoctorRegistration
@@ -40,7 +50,9 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
     serializer_class = DoctorTimingsSerializer
 
     def get_queryset(self):
+        
         queryset = DoctorTimings.objects.filter(doctor__user=self.request.user)
+
         day = self.request.query_params.get('name')
         if day is not None :
             queryset = DoctorTimings.objects.filter(doctor__user=self.request.user, day=self.request.query_params.get('name'))
@@ -55,6 +67,7 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
         doctor = doctors_info.objects.get(user = self.request.user)
         serializer.save(doctor=doctor)
 
+    
 
 
 class DoctorUpdateProfileAPI(generics.GenericAPIView):
@@ -68,6 +81,25 @@ class DoctorUpdateProfileAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save(loggedInuser=self.request.user.id)
+        print(user)
+        return Response({
+            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        })
+
+
+class DoctorUpdateProfileAdminAPI(generics.GenericAPIView):
+    serializer_class = UpdateProfile
+
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        doctor_obj = doctors_info.objects.get(id=request.data['id'])
+        user = serializer.save(loggedInuser=doctor_obj.user.id)
         print(user)
         return Response({
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
@@ -251,12 +283,55 @@ class DoctorTimingsAdminAPI(viewsets.ModelViewSet):
             pass
         serializer.save()
 
+class DoctorTimingsApiView(viewsets.ModelViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = DoctorTimingsSerializer
 
+    def get_queryset(self):
+        
+        doctor_id = self.request.query_params.get('id', None)
+        if doctor_id:
+            doctor = doctors_info.objects.get(id=doctor_id)
+            queryset = DoctorTimings.objects.filter(doctor=doctor)
+        day = self.request.query_params.get('name')
+        if day is not None :
+            queryset = DoctorTimings.objects.filter(doctor=doctor, day=self.request.query_params.get('name'))
+        return queryset 
+
+    def perform_create(self, serializer):
+        print(serializer)
+        doctor = doctors_info.objects.get(id = self.request.data['doctor_id'])
+
+        try:
+            DoctorTimings.objects.get(doctor=doctor, day=serializer.validated_data['day']).delete()
+        except ObjectDoesNotExist:
+            pass
+        serializer.save(doctor=doctor)
+
+    def destroy(self, request, pk=None):
+        if pk is not None:
+            doctor_timings = DoctorTimings.objects.get(id=pk)
+            doctor_timings.delete()
+            return Response({'ok': 'ok'})
+    
 
 
 class changeFee(APIView):
     def post(self, request, format=None):
         doctor = doctors_info.objects.get(user=request.user)
+        doctor.consultation_fee = request.data['new_fees']
+        doctor.save()
+        print(doctor)
+        serializer = doctors_listSerializer(doctor)
+        return Response(serializer.data)
+
+
+class changeFeeByAdmin(APIView):
+    def post(self, request, format=None):
+        doctor_id = request.POST.get('doctor_id')
+        doctor = doctors_info.objects.get(id=doctor_id)
         doctor.consultation_fee = request.data['new_fees']
         doctor.save()
         print(doctor)

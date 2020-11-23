@@ -5,7 +5,7 @@ class patient_info(models.Model):
     user = models.OneToOneField(User,related_name='patients',on_delete=models.CASCADE)
     pat_id = models.CharField(max_length=15,unique=True)
     full_name = models.CharField(max_length=30)
-    gender = models.CharField(max_length=25)
+    gender = models.CharField(max_length=25, blank=True, null=True)
     dob = models.CharField(max_length=25,null=True, blank=True)
     age = models.CharField(max_length=2,null=True, blank=True)
     blood_group = models.CharField(max_length=5, null=True)

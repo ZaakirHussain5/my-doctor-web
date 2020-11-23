@@ -32,7 +32,7 @@ class DoctorPrescriptionAPI(viewsets.ModelViewSet):
 
     def perform_destroy(self, serializer):
         serializer.delete()
-        return HttpREsponse({"ok":"ok"})
+        return HttpResponse({"ok":"ok"})
 
 
 class DoctorPrescriptionAPIDelete(viewsets.ModelViewSet):

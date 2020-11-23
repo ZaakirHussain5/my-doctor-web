@@ -314,7 +314,11 @@
                             aria-labelledby="pills-home-tab">
                             <h5>Patient Details</h5>
                             <div class="text-center">
+                                {% if patient.profile_pic%}
                                 <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
+                                {% else %}
+                                <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
+                                {% endif %}
                                 <h4>{{patient.full_name}}</h4>
                             </div>
                             <table class="table table-hover ">

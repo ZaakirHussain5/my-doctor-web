@@ -2,64 +2,66 @@
 {% load static %} {% block content %}
 <style>
     #list {
-    height: 17em;
-    line-height: 2em;
-    padding: 0;
-    margin: 0;
-    overflow: scroll;
-    overflow-x: hidden;
-}
+        height: 17em;
+        line-height: 2em;
+        padding: 0;
+        margin: 0;
+        overflow-y: auto;
+        /* overflow-x: hidden; */
+    }
 </style>
-  <div class="breadcrumbs">
-      <div class="col-12">
-          <div class="page-header">
-              <div class="page-title text-center">
-                  <h2 id="title">New Patient Registration</h2>
-              </div>
-          </div>
-      </div>
+<div class="breadcrumbs">
+    <div class="col-12">
+        <div class="page-header">
+            <div class="page-title text-center">
+                <h2 id="title">New Patient Registration</h2>
+            </div>
+        </div>
     </div>
-    <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="form" aria-selected="true">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#plist" role="tab" aria-controls="list" aria-selected="false">Home</a>
-        </li>
-      </ul>
-    <div class="tab-content" id="myTabContent"> 
-        <div class="tab-pane fade" id="plist" role="tabpanel" aria-labelledby="list">
-            <div class="content">
-                <div class="card pl-3 pr-3">
-                    <div class="card-body card-block">
-                        <table class="table table-bodered" style="width:100%" id="patients">
-                            <thead>
-                                <tr>
-                                    <th>Slno</th>
-                                    <th>Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Phone No.</th>
-                                    <th>View Details </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer">
-                        <div class="pull-left">
-                            <button type="button" id="newPatient" class="btn btn-primary btn-sm">
-                                <i class="fa fa-arrow-left"></i> Patient Registration
-                            </button>
-                        </div>
+</div>
+<ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab"
+            aria-controls="form" aria-selected="true">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#plist" role="tab" aria-controls="list"
+            aria-selected="false">Home</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="plist" role="tabpanel" aria-labelledby="list">
+        <div class="content">
+            <div class="card pl-3 pr-3">
+                <div class="card-body card-block">
+                    <table class="table table-bodered" style="width:100%" id="patients">
+                        <thead>
+                            <tr>
+                                <th>Slno</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Phone No.</th>
+                                <th>View Details </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="pull-left">
+                        <button type="button" id="newPatient" class="btn btn-primary btn-sm">
+                            <i class="fa fa-arrow-left"></i> Patient Registration
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="form">
-            <div class="content">
-                <form id="pat_form" class="form-horizontal">
+    </div>
+    <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="form">
+        <div class="content">
+            <form id="pat_form" class="form-horizontal">
                 <div class="card pl-3 pr-3">
                     <div class="card-body card-block">
                         <input type="hidden" name="id" id="patn_id">
@@ -69,7 +71,7 @@
                         <input type="hidden" name="medical_history" id="medical_history">
                         <input type="hidden" name="groups" id="groups">
                         <div class="row">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="wrap-custom-file">
@@ -81,14 +83,15 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-6">
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Patient
-                                            ID</label></div>
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label">Patient
+                                            ID<span class="text-danger h5">*</span></label></div>
                                     <div class="col-12 col-md-8">
                                         <div class="input-group">
-                                            <input type="text" id="pat_id" name="pat_id" placeholder="Patient ID"
+                                            <input type="text" id="pat_id" required name="pat_id" placeholder="Patient ID"
                                                 class="form-control" readonly="readonly">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-info" id="generate">
@@ -99,31 +102,32 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Patient
-                                            Name</label></div>
-                                    <div class="col-12 col-md-8"><input type="text" id="full_name" name="full_name"
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label">Patient
+                                            Name<span class="text-danger h5">*</span></label></div>
+                                    <div class="col-12 col-md-8"><input type="text" required id="full_name" name="full_name"
                                             placeholder="Select Patient Name" class="form-control"></div>
                                 </div>
-            
+
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">Gender</label></div>
+                                            class=" form-control-label">Gender</label></div>
                                     <div class="col-12 col-md-8">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" value="male" id="genderMale"
-                                                value="option1">
+                                            <input class="form-check-input" type="radio" name="gender" value="male"
+                                                id="genderMale" value="option1">
                                             <label class="form-check-label" for="genderMale">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" value="female" id="genderFemale"
-                                                value="option1">
+                                            <input class="form-check-input" type="radio" name="gender" value="female"
+                                                id="genderFemale" value="option1">
                                             <label class="form-check-label" for="genderFemale">Female</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <div class="col col-md-4">
-                                        <label for="hf-email" class="form-control-label float-right">DOB</label>
+                                        <label for="hf-email" class="form-control-label">DOB</label>
                                     </div>
                                     <div class="col-12 col-md-8">
                                         <div class="row form-group">
@@ -134,22 +138,24 @@
                                         </div><br>
                                         <div class="col"><h4>Or</h4></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-4">
-                                        <label for="hf-email" class="form-control-label float-right">Age</label>
+                                        <label for="hf-email" class="form-control-label">Age</label>
                                     </div>
                                     <div class="col-12 col-md-8">
                                         <div class="row form-group">
                                             <div class="col col-sm-8 col-md-12">
-                                                <input type="number" targate="Your age" id="pat_age" placeholder="Age" class="form-control" name="age">
+                                                <input type="number" targate="Your age" id="pat_age" placeholder="Age"
+                                                    class="form-control" name="age">
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Blood
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label">Blood
                                             Group</label></div>
                                     <div class="col-12 col-md-8">
                                         <select name="blood_group" id="blood_group" class="form-control">
@@ -167,7 +173,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">Family</label></div>
+                                            class=" form-control-label">Family</label></div>
                                     <div class="col-12 col-md-8">
                                         <div class="input-group">
                                             <div class="input-group-btn">
@@ -177,35 +183,39 @@
                                                     <option value="Spouse">Spouse</option>
                                                 </select>
                                             </div>
-                                            <input type="text" id="input1-group2" id="relation" name="relation" placeholder="Relation Name"
-                                                class="form-control">
+                                            <input type="text" id="input1-group2" id="relation" name="relation"
+                                                placeholder="Relation Name" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <h3 class="pb-3">Contact Details</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="pb-3 ml-4">Contact Details</h3>
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Primary
-                                            Mobile No.</label></div>
-                                    <div class="col-12 col-md-8"><input type="text" id="ph_no" name="ph_no"
-                                            placeholder="Enter Primary Phone No." class="form-control"></div>
+                                    <div class="col col-md-4">
+                                        <label for="hf-email" class=" form-control-label ml-5">Mobile1<span class="text-danger h5">*</span></label>
+                                    </div>
+                                    <div class="col-12 col-md-8"><input type="text" id="ph_no" required name="ph_no"
+                                            placeholder="Enter mobile1" class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">Secondary Mobile No.</label></div>
+                                            class=" form-control-label ml-5">Mobile 2</label></div>
                                     <div class="col-12 col-md-8"><input type="text" id="s_ph_no" name="s_ph_no"
-                                            placeholder="Enter Secondary Phone No." class="form-control"></div>
+                                            placeholder="Enter mobile2" class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Email
-                                            ID</label></div>
-                                    <div class="col-12 col-md-8"><input type="text" id="email" name="email"
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label ml-5">Email
+                                            ID<span class="text-danger h5">*</span></label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="email" required name="email"
                                             placeholder="Enter Email ID" class="form-control"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">Preffered Language</label></div>
+                                            class=" form-control-label ml-5">Preffered Language</label></div>
                                     <div class="col-12 col-md-8">
-                                        <select name="pref_lang" id="pref_lang" required class="form-control">
+                                        <select name="pref_lang" id="pref_lang" class="form-control">
                                             <option value="">Select Preffered Language</option>
                                             <option value="A+">English (Practice Default)</option>
                                             <option value="B+">Kannada (Practice Default)</option>
@@ -214,39 +224,54 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email" class=" form-control-label float-right">Street
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label ml-5">Street
                                             Address</label></div>
-                                    <div class="col-12 col-md-8"><input type="text" id="street_address" name="street_address"
-                                            placeholder="Enter Street Address" class="form-control"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">Locality</label></div>
-                                    <div class="col-12 col-md-8"><input type="text" id="locality" name="locality"
-                                            placeholder="Enter Locality" class="form-control"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">City</label></div>
-                                    <div class="col-12 col-md-8"><input type="text" id="city" name="city" placeholder="Entery City"
+                                    <div class="col-12 col-md-8"><input type="text" id="street_address"
+                                            name="street_address" placeholder="Enter Street Address"
                                             class="form-control"></div>
                                 </div>
+                                <!-- <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label">Locality</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="locality" name="locality"
+                                            placeholder="Enter Locality" class="form-control"></div>
+                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
-                                            class=" form-control-label float-right">Pincode</label></div>
+                                            class=" form-control-label ml-5">City</label></div>
+                                    <div class="col-12 col-md-8"><input type="text" id="city" name="city"
+                                            placeholder="Entery City" class="form-control"></div>
+                                </div>
+                                <!-- <div class="row form-group">
+                                    <div class="col col-md-4"><label for="hf-email"
+                                            class=" form-control-label">Pincode</label></div>
                                     <div class="col-12 col-md-8"><input type="text" id="pincode" name="pincode"
                                             placeholder="Enter Pincode" class="form-control"></div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-sm btn-link pull-right" data-toggle="modal"
-                                data-target="#MedicalHistory">Add New</button>
-            
-                                <h3 class="pb-3">Medical History</h3>
-                                <ul id="list" class="list mhc-list">
-                                   
-                                </ul>
-                                <!-- <h3 class="pb-3 pt-3">Other History</h3>
+                        </div>
+                        <div class="col-12">
+                            <!-- <button type="button" class="btn btn-sm btn-link pull-right border" data-toggle="modal"
+                                data-target="#MedicalHistory">Add New</button> -->
+
+                            <h3 class="pb-3">Medical History</h3>
+                            <div class="row">
+                                <div class="row col-12">
+
+                                    <input type="text" id="medicalHistory" class="form-control col-9 ml-5" placeholder="Enter medical history">
+                                    <div class="col-2">
+                                        <p class="btn btn-active text-light btn-primary" id="ADDNEW">Add New</p>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul id="list" class="list mhc-list ml-5">
+                                        
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            <!-- <h3 class="pb-3 pt-3">Other History</h3>
                                 <textarea class="form-control" rows="3" name="other_history" id="other_history"></textarea>
                                 <button type="button" class="btn btn-sm btn-link pull-right" data-toggle="modal"
                                 data-target="#Medicalgroup">Add New</button>
@@ -254,8 +279,8 @@
 
                                 <ul id="list" class="list mgc-list">
                                 </ul> -->
-                            </div>
                         </div>
+
                     </div>
                     <div class="card-footer">
                         <div class="pull-left">
@@ -271,219 +296,239 @@
                                 <i class="fa fa-ban"></i> Reset
                             </button>
                         </div>
-            
+
                     </div>
                 </div>
-                </form>
-            </div>
+            </form>
         </div>
-       
     </div>
-    <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                  <div class="row p-3">
-                      <div class="col-md-6">
-                          <div class="form-group">
-                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
-                          </div>
+
+</div>
+<div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row p-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center"
+                                style="height:120px;width:120px;margin-left: 7rem;" alt="">
+                        </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Patient ID</label>
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static"></p>
                             </div>
+
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Patient
+                                    Name</label></div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">Praveen</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Blood Group</label>
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">AB-</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Gender/Age</label>
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">Male/42</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Family</label>
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">Father/Naveen</p>
                             </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Primary Mobile
+                                    No.</label></div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">+91 9899887787</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Secondary Mobile
+                                    No.</label></div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">+91 9899887715</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Email ID</label>
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">praveen@gmail.com</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Preffered
+                                    Language</label></div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">English (Practice Default)</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Street
+                                    Address</label></div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">#1234 Unknown Street</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">Locality</label>
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">Unknown Locality</p>
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
+                            <div class="col col-md-6"><label class=" form-control-label">City</label></div>
                             <div class="col-12 col-md-6">
                                 <p class="form-control-static">Unknown City</p>
                             </div>
                         </div>
-                        
-                      </div>
-                  </div>
-          
-                </div>
-                <div class="modal-footer">
-                    <a href="/newAppointment" class="btn btn-primary">
-                        Book Appointmnet
-                    </a>
-                    <button type="button" data-dismiss="modal" class="btn btn-danger">
-                      Cancel
-                  </button>
-                </div>
-              </div>
-              
-          </div>
-        </div>
-        <div class="modal fade" id="MedicalHistory" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="scrollmodalLabel">Medical History</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                     <div class="form-group">
-                         <label for="medicalHistoryInput" class="form-control-label"></label>
-                         <div class="input-group">
-                            <input type="text" placeholder="Enter Medical History Item" class="form-control" id="medicalHistoryInput" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List" id="add_medical_history">
-                                    <i class="fa fa-plus-circle"></i>
-                                </button>
-                            </span>
-                         </div>
-                     </div>
-                     <div class="form-group">
-                        <ul id="list" class="list-group list-group-flush mh-list">
-                           
-                        </ul>
-                     </div>
-              
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-danger">
-                          Close
-                      </button>
-                    </div>
-                  </div>
-                  
-              </div>
-            </div>
 
-            <div class="modal fade" id="Medicalgroup" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scrollmodalLabel">Medical Group</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                         <div class="form-group">
-                             <label for="medicalgroupInput" class="form-control-label"></label>
-                             <div class="input-group">
-                                <input type="text" placeholder="Enter Medical Group Item" class="form-control" id="medicalgroupInput" />
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List" id="add_medical_group">
-                                        <i class="fa fa-plus-circle"></i>
-                                    </button>
-                                </span>
-                             </div>
-                         </div>
-                         <div class="form-group">
-                            <ul id="list" class="list-group list-group-flush mg-list">
-                               
-                            </ul>
-                         </div>
-                  
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-danger">
-                              Close
-                          </button>
-                        </div>
-                      </div>
-                      
-                  </div>
+                    </div>
                 </div>
-    
-  
-  {% endblock %} 
-  {% block scripts %}
-  <script>
-    jQuery(document).ready(function($){
-        $('#newPatient').click(function(){
-          $('#title').html('New Patient')
-          $('#myTab a[href="#form"]').tab('show')
+
+            </div>
+            <div class="modal-footer">
+                <a href="/newAppointment" class="btn btn-primary">
+                    Book Appointmnet
+                </a>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- <div class="modal fade" id="MedicalHistory" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Medical History</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="medicalHistoryInput" class="form-control-label"></label>
+                    <div class="input-group">
+                        <input type="text" placeholder="Enter Medical History Item" class="form-control"
+                            id="medicalHistoryInput" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List"
+                                id="add_medical_history">
+                                <i class="fa fa-plus-circle"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ul id="list" class="list-group list-group-flush mh-list">
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-danger">
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+<div class="modal fade" id="Medicalgroup" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Medical Group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="medicalgroupInput" class="form-control-label"></label>
+                    <div class="input-group">
+                        <input type="text" placeholder="Enter Medical Group Item" class="form-control"
+                            id="medicalgroupInput" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info" data-toggle="tooltip" title="Add to List"
+                                id="add_medical_group">
+                                <i class="fa fa-plus-circle"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ul id="list" class="list-group list-group-flush mg-list">
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-danger">
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+<script>
+    jQuery(document).ready(function ($) {
+        $('#newPatient').click(function () {
+            $('#title').html('New Patient')
+            $('#myTab a[href="#form"]').tab('show')
         })
-        
-        $('#listPatients').click(function(){
-          $('#title').html('Patients List')
-          $('#myTab a[href="#plist"]').tab('show')
+
+        $('#listPatients').click(function () {
+            $('#title').html('Patients List')
+            $('#myTab a[href="#plist"]').tab('show')
         })
-        
-        $('#generate').click(function(){
-            $.getJSON('/api/GeneratePatientID',{},function(data){
+
+        $('#generate').click(function () {
+            $.getJSON('/api/GeneratePatientID', {}, function (data) {
                 $('#pat_id').val(data.pat_id)
             })
         })
 
-        $('#password').val(rand(1000,9999))
-        $('#ph_no').change(function(){
+        $('#password').val(rand(1000, 9999))
+        $('#ph_no').change(function () {
             $('#username').val($(this).val())
         })
 
@@ -492,158 +537,159 @@
             return Math.floor(randomNum);
         }
 
-        function loadHistoryList() {
-            $.getJSON('/api/medical_history', {}, function (data) {
-                var items = '',checkItems ='';
-                $.each(data, function (i, item) {
-                    items += ` <li class="list-group-item">
-                               ${item.medical_history}<button type="button" data-mh-id="${item.id}" class="btn btn-danger btn-sm pull-right mh-delete" >
-                                     <i class="fa fa-trash"></i>
-                                </button>
-                            </li>`
-                    checkItems+=` <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="medical_history"
-                                                id="${item.medical_history}" value="${item.medical_history}">
-                                            <label class="form-check-label" for="${item.medical_history}">${item.medical_history}</label>
-                                        </div>
-                                    </li>`
-                })
-                $('.mh-list').html(items)
-                $('.mhc-list').html(checkItems)
-            })
-        }        
+        
+        $('#ADDNEW').click(function(){
+            let val = $('#medicalHistory').val();
+            let newHistory = $('#medical_history').val() != '' ? $('#medical_history').val() + ',' + val : val;
+            $('#medical_history').val(newHistory);
+            loadgroupList(val);
+            $('#medicalHistory').val('')
 
-        $('.mh-list').on('click', '.mh-delete', function () {
-            var id = $(this).attr('data-mh-id')
-            $.ajax({
-                url: `/api/medical_history/${id}/`,
-                method: 'DELETE',
-                contentType: 'application/json',
-                success: function (data) {
-                    loadHistoryList();
-                },
-                error: function (data) {
-                    console.log(data);
-                    toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
-                }
-            })
         })
+        // function loadHistoryList() {
+        //     $.getJSON('/api/medical_history', {}, function (data) {
+        //         var items = '', checkItems = '';
+        //         $.each(data, function (i, item) {
+        //             items += ` <li class="list-group-item">
+        //                        ${item.medical_history}<button type="button" data-mh-id="${item.id}" class="btn btn-danger btn-sm pull-right mh-delete" >
+        //                              <i class="fa fa-trash"></i>
+        //                         </button>
+        //                     </li>`
+        //             checkItems += ` <li>
+        //                                 <div class="form-check form-check-inline">
+        //                                     <input class="form-check-input" type="checkbox" name="medical_historylist"
+        //                                         id="${item.medical_history}" value="${item.medical_history}">
+        //                                     <label class="form-check-label" for="${item.medical_history}">${item.medical_history}</label>
+        //                                 </div>
+        //                             </li>`
+        //         })
+        //         $('.mh-list').html(items)
+        //         $('.mhc-list').html(checkItems)
+        //     })
+        // }
+
+        // $('.mh-list').on('click', '.mh-delete', function () {
+        //     var id = $(this).attr('data-mh-id')
+        //     $.ajax({
+        //         url: `/api/medical_history/${id}/`,
+        //         method: 'DELETE',
+        //         contentType: 'application/json',
+        //         success: function (data) {
+        //             loadHistoryList();
+        //         },
+        //         error: function (data) {
+        //             console.log(data);
+        //             toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
+        //         }
+        //     })
+        // })
 
 
-        loadgroupList();
-        $('#add_medical_group').click(function(){
-            var mhItem=$('#medicalgroupInput').val()
-            if(mhItem && mhItem!=''){
-                $.ajax({
-                    url:'/api/groups/',
-                    method:'POST',
-                    data:JSON.stringify({groups:mhItem}),
-                    contentType:'application/json',
-                    success:function(data){
-                        loadgroupList();
-                        $('#medicalgroupInput').val('')
-                    },
-                    error:function(data){
-                        console.log(data);
-                        toastr.error("","Adding Failed",{positionClass:'toast-top-center'})
-                    }
-                })
-            }
-        })
+        // loadgroupList();
+        // $('#add_medical_group').click(function () {
+        //     var mhItem = $('#medicalgroupInput').val()
+        //     if (mhItem && mhItem != '') {
+        //         $.ajax({
+        //             url: '/api/groups/',
+        //             method: 'POST',
+        //             data: JSON.stringify({ groups: mhItem }),
+        //             contentType: 'application/json',
+        //             success: function (data) {
+        //                 loadgroupList();
+        //                 $('#medicalgroupInput').val('')
+        //             },
+        //             error: function (data) {
+        //                 console.log(data);
+        //                 toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
+        //             }
+        //         })
+        //     }
+        // })
 
 
-        function loadgroupList() {
-            $.getJSON('/api/groups', {}, function (data) {
-                var items = '',checkItems ='';
-                $.each(data, function (i, item) {
-                    items += ` <li class="list-group-item">
-                               ${item.groups}<button type="button" data-mh-id="${item.id}" class="btn btn-danger btn-sm pull-right mh-delete" >
-                                     <i class="fa fa-trash"></i>
-                                </button>
-                            </li>`
-                    checkItems+=` <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="groups"
-                                                id="${item.groups}" value="${item.groups}">
-                                            <label class="form-check-label" for="${item.groups}">${item.groups}</label>
-                                        </div>
-                                    </li>`
-                })
-                $('.mg-list').html(items)
-                $('.mgc-list').html(checkItems)
-            })
-        }        
+        function loadgroupList(data) {
+            var items = '', checkItems = '';
+                checkItems += ` <li>
+                                    <div class="form-check form-check-inline">
+                                        
+                                        <label class="form-check-label" for="${data}">${data}</label>
+                                    </div>
+                                </li>`
+           
+            let latestList = $('#list').html() + checkItems
+            $('#list').html(latestList)
+        
+        }
 
-        $('.mg-list').on('click', '.mh-delete', function () {
-            var id = $(this).attr('data-mh-id')
-            $.ajax({
-                url: `/api/groups/${id}/`,
-                method: 'DELETE',
-                contentType: 'application/json',
-                success: function (data) {
-                    loadgroupList();
-                },
-                error: function (data) {
-                    console.log(data);
-                    toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
-                }
-            })
-        })
+        // $('.mg-list').on('click', '.mh-delete', function () {
+        //     var id = $(this).attr('data-mh-id')
+        //     $.ajax({
+        //         url: `/api/groups/${id}/`,
+        //         method: 'DELETE',
+        //         contentType: 'application/json',
+        //         success: function (data) {
+        //             loadgroupList();
+        //         },
+        //         error: function (data) {
+        //             console.log(data);
+        //             toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
+        //         }
+        //     })
+        // })
 
 
-        loadHistoryList();
-        $('#add_medical_history').click(function(){
-            var mhItem=$('#medicalHistoryInput').val()
-            if(mhItem && mhItem!=''){
-                $.ajax({
-                    url:'/api/medical_history/',
-                    method:'POST',
-                    data:JSON.stringify({medical_history:mhItem}),
-                    contentType:'application/json',
-                    success:function(data){
-                        loadHistoryList();
-                        $('#medicalHistoryInput').val('')
-                    },
-                    error:function(data){
-                        console.log(data);
-                        toastr.error("","Adding Failed",{positionClass:'toast-top-center'})
-                    }
-                })
-            }
-        })
-    
+        // loadHistoryList();
+        // $('#add_medical_history').click(function () {
+        //     var mhItem = $('#medicalHistoryInput').val()
+        //     if (mhItem && mhItem != '') {
+        //         $.ajax({
+        //             url: '/api/medical_history/',
+        //             method: 'POST',
+        //             data: JSON.stringify({ medical_history: mhItem }),
+        //             contentType: 'application/json',
+        //             success: function (data) {
+        //                 loadHistoryList();
+        //                 $('#medicalHistoryInput').val('')
+        //             },
+        //             error: function (data) {
+        //                 console.log(data);
+        //                 toastr.error("", "Adding Failed", { positionClass: 'toast-top-center' })
+        //             }
+        //         })
+        //     }
+        // })
+
 
 
         var table = $('#patients').DataTable({
-            ajax:{
-                url:'/api/patient_info',
-                dataSrc:""
+            ajax: {
+                url: '/api/patient_info',
+                dataSrc: ""
             },
-            columns:[
+            columns: [
                 {
-                    data:'id'
+                    data: 'id'
                 },
                 {
-                    data:'full_name',
-                    
+                    data: 'full_name',
+
 
                 },
                 {
-                    data:'age'
+                    data: 'age'
 
                 },
                 {
-                    data:'gender'
+                    data: 'gender'
 
                 },
                 {
                     data: 'ph_no'
                 },
                 {
-                    data:'id',
-                    render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-pat='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                    data: 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-pat='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
                                             <i class="fa fa-tasks"></i>
                                         </button>
                                 <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
@@ -652,66 +698,67 @@
                     }
                 }
 
-            ],language: {
-                  lengthMenu: "_MENU_",
-                  search: "",
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
-              }
+            ], language: {
+                lengthMenu: "_MENU_",
+                search: "",
+                searchPlaceholder: "Search..."
+            },
+            fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
+            }
         })
 
         crudOperations({
-              url:'/api/PatientRegistration',
-              put_url: '/api/patient_info/',
-              table_id:'#patients',
-              id_selector:'#patn_id',
-              form_id:'#pat_form',
-              table:table,
-              entity:'patient',
-              tabs:true
+            url: '/api/PatientRegistration',
+            put_url: '/api/patient_info/',
+            table_id: '#patients',
+            id_selector: '#patn_id',
+            form_id: '#pat_form',
+            table: table,
+            entity: 'patient',
+            tabs: true
         })
 
 
-    $('#patientDetails').on('show.bs.modal', function (event) {
-        var myVal = $(event.relatedTarget).data('pat');
-        console.log(myVal)
+        $('#patientDetails').on('show.bs.modal', function (event) {
+            var myVal = $(event.relatedTarget).data('pat');
+            console.log(myVal)
 
-        let gender_age = myVal.gender + '/' + myVal.age;
+            let gender_age = myVal.gender + '/' + myVal.age;
 
 
-        let rel_type_relation = myVal.rel_type + '/' + myVal.relation;
-        if(myVal.rel_type == null && myVal.relation == null){
-            rel_type_relation = '';
-        }
-        else if(myVal.rel_type != null && myVal.relation == null){
-            rel_type_relation = myVal.rel_type
-        }
-        else if(myVal.rel_type == null && myVal.relation != null){
-            rel_type_relation = myVal.relation
-        }else{
-            rel_type_relation = myVal.rel_type + '/' + myVal.relation
-        }
-        let ps = $(this).find('p');
-        let valList = [myVal.pat_id, myVal.full_name, myVal.blood_group, gender_age, rel_type_relation, myVal.ph_no, myVal.s_ph_no, myVal.user.email, myVal.pref_lang, myVal.street_address, myVal.locality, myVal.city]
-        for(var i=0; i < ps.length; i++){
+            let rel_type_relation = myVal.rel_type + '/' + myVal.relation;
+            if (myVal.rel_type == null && myVal.relation == null) {
+                rel_type_relation = '';
+            }
+            else if (myVal.rel_type != null && myVal.relation == null) {
+                rel_type_relation = myVal.rel_type
+            }
+            else if (myVal.rel_type == null && myVal.relation != null) {
+                rel_type_relation = myVal.relation
+            } else {
+                rel_type_relation = myVal.rel_type + '/' + myVal.relation
+            }
+            let ps = $(this).find('p');
+            let valList = [myVal.pat_id, myVal.full_name, myVal.blood_group, gender_age, rel_type_relation, myVal.ph_no, myVal.s_ph_no, myVal.user.email, myVal.pref_lang, myVal.street_address, myVal.locality, myVal.city]
+            for (var i = 0; i < ps.length; i++) {
 
-            ps[i].innerHTML = valList[i]    
-            
-            ;
-        }
-        $(this).find('img').attr('src', myVal.profile_pic);
-        $(this).find('a').attr('href', '/newAppointment?patient='+ myVal.id)
-        
-    })
+                ps[i].innerHTML = valList[i]
 
-    
+                    ;
+            }
+            $(this).find('img').attr('src', myVal.profile_pic);
+            $(this).find('a').attr('href', '/newAppointment?patient=' + myVal.id)
+
+        })
 
 
 
 
-     DoHeighLight('PatientsDropDown', 'NewPatient')
+
+
+        DoHeighLight('PatientsDropDown', 'NewPatient')
 
 
     })
@@ -725,4 +772,4 @@
 
 
 </script>
-  {% endblock %}
+{% endblock %}

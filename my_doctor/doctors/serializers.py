@@ -37,31 +37,31 @@ class DoctorRegistration(serializers.Serializer):
     email = serializers.CharField()
     full_name = serializers.CharField()
     phone_number = serializers.CharField(max_length=15)
-    commission_val=serializers.DecimalField(max_digits=10,decimal_places=2,default=2)
-    commission_type=serializers.CharField(max_length=15,default='Percent')
+    commission_val=serializers.DecimalField(max_digits=10,decimal_places=2,default=2, required=False)
+    commission_type=serializers.CharField(max_length=15,default='Percent', required=False)
     Registration_Number = serializers.CharField(max_length=25)
-    specialist_type = serializers.CharField(max_length=25)
-    rating = serializers.IntegerField(default=0)
-    consultation_fee = serializers.DecimalField(max_digits=10,decimal_places=2,default=0)
-    about  = serializers.CharField(max_length=500)
-    profile_pic = serializers.FileField()
-    mou_file = serializers.FileField()
+    specialist_type = serializers.CharField(max_length=25, required=False)
+    rating = serializers.IntegerField(default=0, required=False)
+    consultation_fee = serializers.DecimalField(max_digits=10,decimal_places=2,default=0, required=False)
+    about  = serializers.CharField(max_length=500, required=False)
+    profile_pic = serializers.FileField(required=False)
+    mou_file = serializers.FileField(required=False)
 
     def create(self, validated_data):
         try:
           user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
           details = doctors_info.objects.create(user=user,
           phone_number=validated_data['phone_number'],
-          commission_val=validated_data['commission_val'],
-          commission_type=validated_data['commission_type'],
-          consultation_fee=validated_data['consultation_fee'],
-          rating=validated_data['rating'],
-          Registration_Number=validated_data['Registration_Number'],
-          about=validated_data['about'],
-          specialist_type=validated_data['specialist_type'],
-          profile_pic=validated_data['profile_pic'],
+          commission_val=validated_data.get('commission_val', None),
+          commission_type=validated_data.get('commission_type', None),
+          consultation_fee=validated_data.get('consultation_fee', None),
+          rating=validated_data.get('rating', None),
+          Registration_Number=validated_data.get('Registration_Number', None),
+          about=validated_data.get('about', None),
+          specialist_type=validated_data.get('specialist_type', None),
+          profile_pic=validated_data.get('profile_pic', None),
           full_name=validated_data['full_name'],
-          mou_file=validated_data['mou_file'],is_active=True)
+          mou_file=validated_data.get('mou_file', None),is_active=True)
           details.save()
           return user
         except IntegrityError:
@@ -78,7 +78,7 @@ class UpdateProfile(serializers.Serializer):
     Registration_Number = serializers.CharField(max_length=25)
     specialist_type = serializers.CharField(max_length=25)
     consultation_fee = serializers.DecimalField(max_digits=10,decimal_places=2,default=0)
-    about  = serializers.CharField(max_length=500)
+    about  = serializers.CharField(max_length=500, required = False)
     profile_pic = serializers.FileField( required = False)
 
     def create(self, validated_data):

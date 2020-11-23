@@ -24,6 +24,16 @@ def Doctors(request):
         "specialist_types":specialist_type.objects.all()
     })
 
+def DoctorsLists(request):
+    return render(request, 'frontend/DoctorsLists.html', {
+        "specialist_types":specialist_type.objects.all()
+    })
+
+    
+def doctor_info(request, id):
+    return render(request, 'frontend/doctorInfo.html', {'id': id})
+
+
 def Executives(request):
     return render(request,'frontend/Executives.html')
 

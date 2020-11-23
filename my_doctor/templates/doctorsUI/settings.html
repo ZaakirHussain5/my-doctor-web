@@ -431,6 +431,7 @@
         })
             .done((response) => {
                 console.log(response);
+                table.ajax.reload()
             })
             .fail((error) => {
                 console.log(error)
@@ -453,10 +454,9 @@
                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
             },
         }).done((response) => {
-            console.log(response);
-            //jQuery.removeCookie('DoctorToken');
-            //window.location.href = '/login';
-            alert('Password change successfull.')
+            toastr.success('Password change successfull.', 'success', {
+                        positionClass: "toast-top-center"
+                    })
         }).fail((error) => {
             let errors = JSON.parse(error.responseText)
             alert(errors[0])
@@ -478,7 +478,9 @@
                 },
             })
                 .done((response) => {
-                    console.log(response);
+                    toastr.success('Consultation fees updated.', 'Success', {
+                        positionClass: "toast-top-center"
+                    })
                 })
                 .fail((error) => {
                     console.log(error)
@@ -500,7 +502,9 @@
                 },
             })
                 .done((response) => {
-                    console.log(response);
+                    toastr.success("Your bankdetails updated successfully.", 'success', {
+                        positionClass: "toast-top-center"
+                    })
                 })
                 .fail((error) => {
                     console.log(error)

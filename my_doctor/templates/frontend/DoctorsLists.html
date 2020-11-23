@@ -11,21 +11,21 @@
     </div>
     <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link " id="pills-home-tab" data-toggle="pill" href="#list" role="tab" aria-controls="pills-home" aria-selected="false">Home</a>
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a>
+          <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
         </li>
       </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="pills-home-tab">
            <div class="content">
         <div class="card pl-3 pr-3">
             <div class="card-body card-block">
                 <div class="form-group">
-                    <button type="button" id="newDoctor" class="btn btn-primary">
-                         Back to form <i class="fa fa-arrow-right"></i>
-                    </button>
+                    <a href="{% url 'frontend:Doctors' %}" id="newDoctor" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Add a new Doctor
+                    </a>
                 </div>
                 <table class="table" id="Doctors" style="width: 100%;">
                     <thead>
@@ -44,7 +44,7 @@
         </div>
     </div>
         </div>
-        <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="pills-home-tab">
             
                 <div class="content">
                     <form class="form-horizontal" id="doc_form">
@@ -160,9 +160,9 @@
                             </div>
                             <div class="card-footer">
                                 <div class="pull-left">
-                                    <a href="{% url 'frontend:doctor_list' %}" id="listDoctors" class="btn btn-primary btn-sm">
+                                    <button type="button" id="listDoctors" class="btn btn-primary btn-sm">
                                         <i class="fa fa-arrow-left"></i> Back to List
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary btn-sm">
@@ -234,9 +234,9 @@
                     data:'id',
                     render: function (data,type,row) {
                           return `
-                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
-                                    <i class="fa fa-trash"></i>
-                                </button>`
+                                <a href='/DoctorInfo/${data}' data-id='${data}' class="btn btn-link">
+                                    View
+                                </a>`
                       }
                 }
             ],

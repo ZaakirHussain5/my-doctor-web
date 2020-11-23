@@ -1,49 +1,56 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Doctor Plus - Doctor</title>
 
-        <link rel="stylesheet" href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/selectFX/css/cs-skin-elastic.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
-        
-        <link
-  rel="stylesheet"
-  href="{% static 'assets/css/b4vtabs.css' %}"
-/>
-        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/file.css' %}">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'></head>
+<head>
+    <title>Doctor Plus - Doctor</title>
+
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/selectFX/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/b4vtabs.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/file.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+</head>
 <style>
-    aside.left-panel{
+    aside.left-panel {
         background-color: #ffffff;
     }
-    .navbar .navbar-nav li > a{
+
+    .navbar .navbar-nav li>a {
         background-color: #ffffff;
-        color: #000000!important;
+        color: #000000 !important;
     }
+
     .navbar .navbar-nav li.active .menu-icon,
-      .navbar .navbar-nav li:hover,
-      .navbar .navbar-nav li {
-        color: #000000 !important; }
-    .navbar{
+    .navbar .navbar-nav li:hover,
+    .navbar .navbar-nav li {
+        color: #000000 !important;
+    }
+
+    .navbar {
         background-color: #ffffff;
         color: #000000 !important;
     }
-    .navbar .navbar-nav li > a .menu-icon{
+
+    .navbar .navbar-nav li>a .menu-icon {
         color: #000000 !important;
     }
-    .navbar .navbar-nav li > a:hover,
-        .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #000 !important; }
+
+    .navbar .navbar-nav li>a:hover,
+    .navbar .navbar-nav li>a:hover .menu-icon {
+        color: #000 !important;
+    }
 </style>
-        <body >
+
+<body>
     {% include 'partials/_docNavbar.html'%}
     <div id="right-panel" class="right-panel">
         <header id="header" class="header">
@@ -57,15 +64,16 @@
                         <small id="doctorSpecialist"></small>
                     </div>
                     <div class="user-area dropdown float-right">
-                
+
                         <a href="#">
-                
-                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}" alt="User Avatar" id="profileImage">
-                
+
+                            <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}"
+                                alt="User Avatar" id="profileImage">
+
                         </a>
-                
+
                     </div>
-                
+
                     <div class="language-select dropdown" id="language-select">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
                             aria-expanded="true">
@@ -77,53 +85,55 @@
                             <i class="fa fa-sign-out"></i>
                         </a>
                     </div>
-                
+
                 </div>
             </div>
-      
-      
+
+
         </header>
         {% block content%} {% endblock %}
-        </div>
-        <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingVideoCall" tabindex="-1" role="dialog" aria-labelledby="incomingVideoCall" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="text-center">
-                            <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                                <img src="/media/logos/anonymous-user.png" alt="">
-                            </div>
-                            <div class="userprofile-name">
-                                <span>Incoming Call</span>
-                                <h4 id="PatientName"></h4>
-                            </div>
+    </div>
+    <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingVideoCall" tabindex="-1" role="dialog"
+        aria-labelledby="incomingVideoCall" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="user-avatar user-avatar-rounded user-avatar-xl">
+                            <img src="/media/logos/anonymous-user.png" alt="">
+                        </div>
+                        <div class="userprofile-name">
+                            <span>Incoming Call</span>
+                            <h4 id="PatientName"></h4>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-danger btn-block" id="hangupBtn"><i class="fa fa-phone" style="transform: rotate(140deg)"></i> Ignore</button>
-                            </div>
-                            <div class="col">
-                                <a id="answerCall" class="btn btn-success btn-block" ><i class="fa fa-phone"> Accept</i></a>
-                            </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-danger btn-block" id="hangupBtn"><i class="fa fa-phone"
+                                    style="transform: rotate(140deg)"></i> Ignore</button>
+                        </div>
+                        <div class="col">
+                            <a id="answerCall" class="btn btn-success btn-block"><i class="fa fa-phone"> Accept</i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <audio id="myAudio">
-            <source src="{% static 'video/skype_ringtone.mp3' %}" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-          
+    <audio id="myAudio">
+        <source src="{% static 'video/skype_ringtone.mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
     <script src="{% static 'assets/js/toastr.min.js' %}"></script>
     <script src="{% static 'assets/js/file.js' %}"></script>
     <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
-    
+
     <script src="{% static 'vendors/popper.js/dist/umd/popper.min.js'%}"></script>
     <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
     <script src="{% static 'assets/js/main.js'%}"></script>
@@ -143,7 +153,7 @@
     {% block scripts%} {% endblock %}
     <script>
         function checkForCall() {
-            
+
             jQuery.ajax({
                 'url': '/api/vedioChatOparetion/?user=doc',
                 'contentType': 'application/json',
@@ -164,8 +174,7 @@
                     jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}`)
                     jQuery('#incomingVideoCall').modal('show')
                 }
-                else
-                {
+                else {
                     jQuery('#incomingVideoCall').modal('hide')
                 }
             });
@@ -174,7 +183,7 @@
 
         jQuery('#hangupBtn').click(function () {
             jQuery.ajax({
-                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') +'/',
+                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
                 'method': 'DELETE',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
@@ -190,10 +199,13 @@
             })
         })
 
-        setInterval(function () {
-            checkForCall();
-        }, 2000); 
-
+        // setInterval(function () {
+        //     checkForCall();
+        // }, 2000); 
+        setTimeout(function () {
+            jQuery.removeCookie('DoctorToken', { path: '/' })
+            window.location.href = '/'
+        }, 3600000)
 
         jQuery.ajax({
             url: '/api/getLoggedInDoctor',
@@ -205,9 +217,9 @@
             },
         }).done((response) => {
             console.log(response)
-            jQuery('#doctorName').html('Dr. '+response.full_name)
+            jQuery('#doctorName').html('Dr. ' + response.full_name)
             jQuery('#doctorSpecialist').html(response.specialist_type)
-            jQuery('#profileImage').attr('src',!response.profile_pic||response.profile_pic==''?'/media/logos/anonymous-user.png':response.profile_pic)
+            jQuery('#profileImage').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
         }).fail((error) => {
             console.log(error);
         });

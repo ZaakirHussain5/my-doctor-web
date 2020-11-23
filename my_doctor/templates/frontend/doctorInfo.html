@@ -1,0 +1,595 @@
+{% extends 'admin_layout.html' %} {% block content %}
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <form id="profile_form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="wrap-custom-file">
+                        <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                        <label for="image1">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <input type="text" id="username" name="username" placeholder="Doctor ID"
+                                    class="form-control" readonly="readonly">
+                            </div>
+                        </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="full-name" class=" form-control-label float-right">
+                                    NAME</label></div>
+                                <div class="col-12 col-md-8"><input type="text" id="full-name" name="full_name"
+                                        placeholder="Full Name" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">PHONE
+                                        </label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="ph_no" name="phone_number" placeholder="Phone Number"
+                                        class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="id" class="form-control-label float-right">SPECIALITY</label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="specialist_type" name="specialist_type" placeholder="Specialist type"
+                                        class="form-control" readonly="readonly">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="email" class=" form-control-label float-right">EMAIL
+                                        </label>
+                                </div>
+                                <div class="col-12 col-md-8"><input type="email" id="email" name="email"
+                                        placeholder="Email Address" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="email" class=" form-control-label float-right">FEES
+                                        </label>
+                                </div>
+                                <div class="col-12 col-md-8"><input type="text" id="fees" name="consultation_fee"
+                                        placeholder="Email Address" class="form-control"></div>
+                            </div>
+                        </div>
+                        
+                    <input type="hidden" name="Registration_Number">
+                    
+                    <div class="row form-group">
+                        <div class="col-12 col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Update Profile
+                            </button>
+                            <!-- <button type="reset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-ban"></i> Reset
+                            </button> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+            <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#home" role="tab"
+                        aria-controls="pills-home" aria-selected="false">Consultation Fee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#agreement" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Agreement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#timings" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Timings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#bankdetails" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Bankdetails</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#settlements" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Settlements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#notes" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Notes</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" style="padding-top: 3%;">
+                <div id="home" class="tab-pane fade in active show">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <form id="ConsultationFeeForm">
+                                    <div class="row form-group">
+                                        <div class="col col-md-5"><label for="old_password" class="form-control-label float-right">
+                                                Current Consultation Fee</label></div>
+                                        <div class="col-12 col-md-7">
+                                            <input type="number" id="consultation_fee" name="consultation_fee" placeholder="Current Cunsultation Fee"
+                                                class="form-control" value="500.00">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
+                                                New Consultation Fee</label></div>
+                                        <div class="col-12 col-md-7"><input type="number"  id="new_fee" name="new_fees" placeholder="Enter New Cunsultation Fee" class="form-control">
+                                        </div>
+                                    </div>
+                                <div class="row form-group">
+                                    <div class="col-md-7 offset-md-5 ">
+                                            <button type="submit" class="btn btn-primary btn-sm ju">
+                                                <i class="fa fa-inr"></i> Update Consultation Fee
+                                            </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="agreement" class="tab-pane fade">
+                    <h3>Menu 1</h3>
+                    <p>Some content in menu 1.</p>
+                </div>
+                <div id="timings" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card-header">
+                                <h5>Select Day</h5>
+                            </div>
+                            <ul class="nav nav-tabs nav-pills left-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#tab-panel-1" data-toggle="tab" onclick="setDay('monday')">Monday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab-panel-2" data-toggle="tab" onclick="setDay('tuesday')">Tuesday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('wednesday')">Wednesday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('thursday')">Thursday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('friday')" >Friday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('saturday')" >Saturday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab-panel-3" data-toggle="tab" onclick="setDay('sunday')" >Sunday</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-header">
+                                <h5>Update Availablity</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="doctorTiming">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class=" form-group col">
+                                                    <label style="vertical-align: middle"
+                                                        class="switch switch-default switch-pill switch-success mr-2">
+                                                        <input type="checkbox" id="available" name="available"
+                                                            data-id='${row.id}' class="switch-input active">
+                                                        <input type="hidden" id="day" name="day" value='monday'>
+                                                        <span class="switch-label"></span>
+                                                        <span id="thuday" class="switch-handle"></span>
+                                                    </label> <span id="day_name_here"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="from_time" class=" form-control-label">From</label>
+                                                <input type="time" id="from_time" name="from_time"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class=" form-group">
+                                                <label for="to_time" class=" form-control-label">To</label>
+                                                <input type="time" id="to_time" name="to_time"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <button type="submit" class="btn btn-primary btn-sm float-right">
+                                                <i class="fa fa-dot-circle-o"></i> Update Timings
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover" id="Timings" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="bankdetails" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-10 ">
+                            <form id="DoctorBankDetailsForm">
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="account_no"
+                                            class="form-control-label float-right">
+                                            A/c No.</label></div>
+                                    <div class="col-12 col-md-7">
+                                        <input type="number" id="account_no" name="account_no"
+                                            placeholder="Enter yout Account Number" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="account_holder_name"
+                                            class=" form-control-label float-right">
+                                            A/c Holder Name</label></div>
+                                    <div class="col-12 col-md-7"><input type="text" id="account_holder_name"
+                                            name="account_holder_name"
+                                            placeholder="Enter the Name Linked with the Account"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="bank_name"
+                                            class=" form-control-label float-right">
+                                            Bank Name</label></div>
+                                    <div class="col-12 col-md-7"><input type="text" id="bank_name"
+                                            name="bank_name" placeholder="Enter the Bank Name"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="branch_name"
+                                            class=" form-control-label float-right">
+                                            Branch Name</label></div>
+                                    <div class="col-12 col-md-7"><input type="text" id="branch_name"
+                                            name="branch_name" placeholder="Enter the Branch Name"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="ifsc_no"
+                                            class=" form-control-label float-right">
+                                            IFSC</label></div>
+                                    <div class="col-12 col-md-7"><input type="text" id="ifsc_no" name="ifsc_no"
+                                            placeholder="Enter the IFSC" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="upi_id"
+                                            class=" form-control-label float-right">
+                                            UPI ID</label></div>
+                                    <div class="col-12 col-md-7"><input type="text" id="upi_id" name="upi_id"
+                                            placeholder="Enter UPI ID" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="phone_no"
+                                            class=" form-control-label float-right">
+                                            Phone Number</label></div>
+                                    <div class="col-12 col-md-7"><input type="number" id="phone_no"
+                                            name="phone_no" placeholder="Enter the Phone Number"
+                                            class="form-control">
+                                        <small>Phone Number which is linked with Google Pay,Phone pe or other
+                                            UPI apps.</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-7 offset-md-5">
+                                        <button type="submit" class="btn btn-primary btn-sm ju">
+                                            <i class="fa fa-building"></i> Update Details
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="settlements" class="tab-pane fade">
+                    <h3>settlements</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="notes" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+    function formDeserialize(form, data) {
+        const entries = (new URLSearchParams(data)).entries();
+        for (const [key, val] of entries) {
+            const input = form.elements[key];
+            if (input != undefined) {
+                if (input.type == 'file') {
+                    if (val) {
+                        var $file = jQuery('#' + input.id),
+                            $label = $file.next('label'),
+                            $labelText = $label.find('span'),
+                            labelDefault = $labelText.text();
+                        var filename = val.split('/').pop()
+                        if (filename) {
+                            $label
+                                .addClass('file-ok')
+                                .css('background-image', 'url(' + val + ')');
+                            $labelText.text('Click here to change pic');
+                        } else {
+                            $label.removeClass('file-ok');
+                            $labelText.text(labelDefault);
+                        }
+                    }
+
+                } else {
+
+                    switch (input.type) {
+                        case 'checkbox':
+                            input.checked = !!val;
+                            break;
+                        case 'select-one':
+                            if (val)
+                                input.value = val;
+                            else
+                                input.selectedIndex = 0;
+
+                            break;
+                        default:
+                            input.value = val;
+                            break;
+
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    const doctor_id = {{id}};
+    console.log(doctor_id)
+    function getDataa() {
+        const form = document.getElementById('profile_form');
+        jQuery.ajax({
+            url: '/api/doctor_info_admin?id='+ doctor_id,
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+           
+        }).done((response) => {
+            console.log('response response', response);
+            formDeserialize(form, response[0].user);
+            formDeserialize(form,response[0])
+            jQuery('#consultation_fee').val(response[0]['consultation_fee'])
+        }).fail((error) => {
+            console.log(error);
+        });
+    }
+    getDataa()
+    // doctor form update
+    jQuery("#profile_form").submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const data = new FormData(document.getElementById('profile_form'))
+        data.append('id', doctor_id)
+        console.log(data);
+        jQuery.ajax({
+            url: '/api/DoctorUpdateProfileAdminAPI',
+            data: data,
+            method: 'POST',
+            contentType: false,
+            processData: false,
+           
+        })
+            .done((response) => {
+                console.log("postrequest response -", response);
+                jQuery.removeCookie('DoctorToken');
+                jQuery.cookie('DoctorToken', response.token, { expires: 1 })
+                toastr.success("Your details have been Updated Successfully","Profile Updated",{positionClass:"toast-top-center"})
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    })
+
+
+    jQuery('#ConsultationFeeForm').submit((e) => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            let data = new FormData(document.getElementById('ConsultationFeeForm'));
+            data.append('doctor_id', doctor_id)
+            jQuery.ajax({
+                url: '/api/changeFeeByAdmin/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            })
+                .done((response) => {
+                    toastr.success('Consultation fees updated.', 'Success', {
+                        positionClass: "toast-top-center"
+                    })
+                })
+                .fail((error) => {
+                    console.log(error)
+                })
+        })
+
+
+        let day = 'monday'
+    function setDay(name){
+        day = name;
+        getDoctorTimings(day)
+    }
+
+    ///////////// Doctor Timings://///////////
+    function getDoctorTimings(dayName = 'monday') {
+        const form = document.getElementById('doctorTiming');
+        jQuery.ajax({
+            url: '/api/DoctorTimingsApiView?name='+ dayName +'&id='+ doctor_id,
+            method: 'GET',
+            contendType: 'application/json',
+            async: false,
+           
+        })
+            .done((response) => {
+                
+                console.log(form);
+                if (response.length > 0) {
+                    console.log(response);
+                    formDeserialize(form, response[0]);
+                    jQuery('#day_name_here').html( 'Available ' + response[0].day)
+                    jQuery('#available').prop('checked',true)
+                }
+                else{
+                    jQuery('#available').prop('checked',false)
+                    jQuery('#day_name_here').html('Available ' + day)
+                    jQuery('#to_time').val('')
+                    jQuery('#from_time').val('')
+                    jQuery('#day').val(day)
+                }
+
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+    }
+    getDoctorTimings();
+
+    jQuery('#doctorTiming').submit((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        let data = new FormData(document.getElementById('doctorTiming'))
+        data['day'] = day
+        data.append('doctor_id', doctor_id)
+        jQuery.ajax({
+            url: '/api/DoctorTimingsApiView/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            
+        })
+            .done((response) => {
+                console.log(response);
+                table.ajax.reload()
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+
+    })
+
+    let table = jQuery('#Timings').DataTable({
+            ajax:{
+                url:'/api/DoctorTimingsApiView?id='+ doctor_id,
+                dataSrc:"",
+                
+            },
+            columns:[
+                {
+                    data:"day"
+                },
+                {
+                    data:"from_time",
+                    render : function(data){
+                        return tConvert(data)
+                    }
+                },
+                {
+                    data:"to_time",
+                    render : function(data){
+                        return tConvert(data)
+                    }
+                },
+                {
+                    data:"id",
+                    render:function(data){
+                        return `<button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                    }
+                }
+            ]
+        })
+
+        function tConvert(time) {
+            // Check correct time format and split into components
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+            if (time.length > 1) { // If time format correct
+                time = time.slice(1);  // Remove full string match value
+                time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(''); // return adjusted time or original string
+        }
+
+        jQuery('#Timings').on('click', '.delete', function () {
+        var id = jQuery(this).attr('data-id')  
+        bootbox.confirm({
+              message: "Are you sure to delete the timing permenently?",
+              callback: function (result) {
+                  if(result){
+                      jQuery.ajax({
+                          url:`/api/DoctorTimingsApiView/${id}/`,
+                          method: 'DELETE',
+                         
+                          success:function(){
+                              table.ajax.reload()
+                              toastr.success("Deleted Successfully","Success",{positionClass:'toast-top-center'})
+                          },
+                          error:function(err){
+                              console.log(err)
+                              toastr.error("Deletion Failed","Error",{positionClass:'toast-top-center'})
+                          }
+                      })
+                  }
+              }
+          });
+      })
+
+</script>
+{% endblock %}

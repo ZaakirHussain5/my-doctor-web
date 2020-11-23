@@ -930,7 +930,7 @@
   transition: all 0.3s ease; }
 
 body {
-  background: #f1f2f7;
+  background: #fff;
   display: table;
   font-family: 'Open Sans' sans-serif !important;
   font-size: 16px;
@@ -1002,7 +1002,7 @@ textarea {
   width: 100%; }
 
 aside.left-panel {
-  background: #20a8d8;
+  /* background: #20a8d8; */
   display: table-cell;
   height: 100vh;
   min-height: 100%;
@@ -1013,7 +1013,7 @@ aside.left-panel {
   transition: width 0.3s ease; }
 
 .navbar {
-  background: #20a8d8;
+  /* background: #20a8d8; */
   border-radius: 0;
   border: none;
   display: block;
@@ -1077,7 +1077,7 @@ aside.left-panel {
         display: none; }
       .navbar .navbar-nav li > a {
         background: none !important;
-        color: #ffffff !important;
+        color: #050505 !important;
         display: inline-block;
         font-family: 'Open Sans';
         font-size: 14px;
@@ -1087,10 +1087,11 @@ aside.left-panel {
         width: 100%; }
         .navbar .navbar-nav li > a:hover,
         .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #fff !important; }
+          color: rgb(8, 8, 8) !important; }
         .navbar .navbar-nav li > a .menu-icon {
-          color: #ffffff;
+          color: #0f0f0f;
           float: left;
+          padding-left: 10%;
           margin-top: 8px;
           width: 55px;
           text-align: left;
@@ -1122,7 +1123,7 @@ aside.left-panel {
           .navbar .navbar-nav li.menu-item-has-children a:hover:before {
             color: #fff; }
         .navbar .navbar-nav li.menu-item-has-children .sub-menu {
-          background: #20a8d8;
+          /* background: #20a8d8; */
           border: none;
           box-shadow: none;
           overflow-y: hidden;

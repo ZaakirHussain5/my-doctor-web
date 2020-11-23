@@ -13,11 +13,11 @@ class patient_infoSerializer(serializers.ModelSerializer):
 class PatientResgistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
-    email = serializers.CharField(required=False)
+    email = serializers.CharField()
     pat_id = serializers.CharField()
     full_name = serializers.CharField()
-    gender = serializers.CharField()
-    dob = serializers.CharField(allow_blank=True,allow_null=True)
+    gender = serializers.CharField(required=False)
+    # dob = serializers.CharField(allow_blank=True,allow_null=True)
     age = serializers.IntegerField(required=False)
     blood_group = serializers.CharField(allow_blank=True,allow_null=True)
     rel_type = serializers.CharField(allow_blank=True,allow_null=True)
@@ -26,13 +26,13 @@ class PatientResgistrationSerializer(serializers.Serializer):
     s_ph_no=serializers.CharField(allow_blank=True,allow_null=True)
     pref_lang = serializers.CharField(allow_blank=True,allow_null=True)
     street_address = serializers.CharField(allow_blank=True,allow_null=True)
-    locality = serializers.CharField(allow_blank=True,allow_null=True)
+    # locality = serializers.CharField(allow_blank=True,allow_null=True)
     city = serializers.CharField(allow_blank=True,allow_null=True)
-    pincode=serializers.CharField(allow_blank=True,allow_null=True)
+    # pincode=serializers.CharField(allow_blank=True,allow_null=True)
     medical_history = serializers.CharField(allow_blank=True,allow_null=True)
     other_history=serializers.CharField(required=False, allow_blank=True, allow_null=True)
     groups=serializers.CharField(allow_blank=True,allow_null=True)
-    profile_pic=serializers.FileField(allow_null=True)
+    profile_pic=serializers.FileField(required=False)
 
     def create(self, validated_data):
         try:
@@ -40,27 +40,29 @@ class PatientResgistrationSerializer(serializers.Serializer):
             patient_details = patient_info.objects.create(user=user,
             pat_id=validated_data['pat_id'],
             full_name=validated_data['full_name'],
-            gender=validated_data['gender'],
-            dob=validated_data['dob'],
-            age=validated_data['age'],
-            blood_group=validated_data['blood_group'],
-            rel_type=validated_data['rel_type'],
-            relation=validated_data['relation'],
+            gender=validated_data.get('gender', None),
+            dob=validated_data.get('dob', None),
+            age=validated_data.get('age', None),
+            blood_group=validated_data.get('blood_group', None),
+            rel_type=validated_data.get('rel_type', None),
+            relation=validated_data.get('relation', None),
             ph_no=validated_data['ph_no'],
-            s_ph_no=validated_data['s_ph_no'],
-            pref_lang=validated_data['pref_lang'],
-            street_address = validated_data['street_address'],
-            locality = validated_data['locality'],
-            city = validated_data['city'],
-            pincode = validated_data['pincode'],
-            medical_history = validated_data['medical_history'],
-            groups = validated_data['groups'],
-            profile_pic = validated_data['profile_pic'])
+            s_ph_no=validated_data.get('s_ph_no',None),
+            pref_lang=validated_data.get('pref_lang', None),
+            street_address = validated_data.get('street_address', None),
+            locality = validated_data.get('locality', None),
+            city = validated_data.get('city', None),
+            pincode = validated_data.get('pincode', None),
+            medical_history = validated_data.get('medical_history', None),
+            groups = validated_data.get('groups', None),
+            profile_pic = validated_data.get('profile_pic', None),
+            other_history = validated_data.get('other_history', None)
+            )
             patient_details.save()
-            if "other_history" in validated_data:
-                other_history = validated_data['other_history']
-                patient_details.other_history = other_history
-                patient_details.save()
+            # if "other_history" in validated_data:
+            #     other_history = validated_data['other_history']
+            #     patient_details.other_history = other_history
+            #     patient_details.save()
             return user
         except IntegrityError:
             raise serializers.ValidationError("User Already Exists")

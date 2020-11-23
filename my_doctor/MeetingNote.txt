@@ -1,0 +1,37 @@
+
+Patient Dashboard
+[] Update Profile - Display Success Message (DONE)
+[] Auto logout - After 1 hour inactivity (DONE)
+[] Appointment chart - Error is safari browser *** Zakir ***
+
+Doctor Dashboard
+[] Update day and Time - Make table update instant (DONE)
+[] Consultation Fee - Display Success Message (DONE)
+[] Auto logout - After 1 hour inactivity (DONE)
+
+Admin Dashboard : PATIENTS
+[] New patient register - Error. (name, mobile, email only required field ) (DONE)
+[] View patients - Search box description (table search)(top search need to remove)(DONE)
+[] View Patients - Add column - Prescriptions
+[] View Patients - Remove extra search icon on top of screen. (done)
+[] View Patients - Remove sub heading “Consultation list”
+[] Remove sub heading “Prescriptions list”
+
+Admin Dash board: DOCTORS
+[] Doctors List - Add column - MOU
+[] Doctor list - Action buttons (View, Edit, Delete)
+[] New doctor registration - Error ( name, password, email, phone no, registration no,)(DONE)
+[] View Doctors - Follow design of Image (Doc plus Group)
+
+
+
+*******************************************************************************************************
+admin Dashboard: patient registration
+    1. add * for madetory fields
+    2. text left alingment 
+    3. Medical history design change
+    4. remove dob field
+    5. remove locality, pincode  field
+    6. text change => primary mobile NO = Mobile 1
+                => secoendry mobile No = Mobile 2
+    
