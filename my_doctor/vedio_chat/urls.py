@@ -1,4 +1,4 @@
-from .api import vedioChatOparetion,CallDoctorAPI,CallPatientAPI
+from .api import vedioChatOparetion,CallDoctorAPI,CallPatientAPI,AnswerCallAPI
 from rest_framework import routers
 from django.urls import path, include
 from . import views
@@ -14,5 +14,6 @@ urlpatterns = [
     path('CallDoctor',CallDoctorAPI.as_view(),name='DVideoCall'),
     path('CallPatient',CallPatientAPI.as_view(),name='PVideoCall'),
     path('VideoCall',views.patientVideoChat,name="video_chat"),
-    path('ratings',views.ratings,name='ratings')
+    path('ratings',views.ratings,name='ratings'),
+    path('answer_call',AnswerCallAPI.as_view(),name='answer_call')
 ]

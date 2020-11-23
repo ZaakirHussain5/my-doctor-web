@@ -91,21 +91,16 @@
                 <div class="modal-body">
                     <div class="text-center">
                         <div class="user-avatar user-avatar-rounded user-avatar-xl">
-                            <img src="/media/logos/anonymous-user.png" alt="">
+                            <img src="assets/images/user/250/01.jpg" alt="">
                         </div>
                         <div class="userprofile-name">
                             <span>Incoming Call</span>
                             <h4 id="DoctorName"></h4>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col">
-                            <button class="btn btn-danger btn-block" id="hangupBtn"><i class="fa fa-phone" style="transform: rotate(140deg)"></i> Ignore</button>
-                        </div>
-                        <div class="col">
-                            <a id="answerCall" class="btn btn-success btn-block" ><i class="fa fa-phone"> Accept</i></a>
+
+                        <div class="call-actions">
+                            <button type="button" class="call-hangup" id="hangupBtn"><i class="mdi mdi-phone-hangup"></i></button>
+                            <button type="button" class="call-pickup" id="answerCall"><i class="mdi mdi-video-outline"></i></button>
                         </div>
                     </div>
                 </div>
@@ -321,7 +316,6 @@ $('#password_form').submit((e)=>{
                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
             },
         }).done((response) => {
-            console.log(response)
             var list = response;
             var x = document.getElementById("myAudio");
             if (list && list.length > 0) {
@@ -329,7 +323,8 @@ $('#password_form').submit((e)=>{
                 x.play()
                 jQuery('#hangupBtn').attr('data-id', list[0].id)
                 jQuery('#DoctorName').html(list[0].caller_name)
-                jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}`)
+                jQuery('#answerCall').attr('data-session',list[0].id)
+                jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}`)
                 jQuery('#incomingVideoCall').modal('show')
             }
             else
@@ -339,6 +334,24 @@ $('#password_form').submit((e)=>{
         });
 
     }
+
+    $('#answerCall').click(function(){
+        var button = $(this)
+        $.ajax({
+            url:'/api/answer_call?session_id='+button.attr('data-session'),
+            method:'POST',
+            'beforeSend': function (request) {
+                request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+            },
+            success:function(response){
+                window.location.href = button.attr('data-url')
+            },
+            error:function(error){
+                console.log(error)
+            }
+        })
+    })
+
 
     jQuery('#hangupBtn').click(function () {
         jQuery.ajax({

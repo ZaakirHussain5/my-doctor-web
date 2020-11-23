@@ -49,7 +49,7 @@
         <header id="header" class="header">
             <div class="header-menu">
                 <div class="col-md-4 mt-2">
-                    <h5>Good Afternoon!</h5>
+                    <h5 id="greeting">Good Afternoon!</h5>
                 </div>
                 <div class="col-sm-8">
                     <div class="float-right ml-2">
@@ -142,8 +142,26 @@
     <script src="{% static 'assets/js/crud.js'%}"></script>
     {% block scripts%} {% endblock %}
     <script>
+        var thehours = new Date().getHours();
+        var themessage;
+        var morning = ('Good morning!');
+        var afternoon = ('Good afternoon!');
+        var evening = ('Good evening!');
+
+        if (thehours >= 0 && thehours < 12) {
+            themessage = morning;
+
+        } else if (thehours >= 12 && thehours < 17) {
+            themessage = afternoon;
+
+        } else if (thehours >= 17 && thehours < 24) {
+            themessage = evening;
+        }
+
+        jQuery('#greeting').html(themessage);
+
         function checkForCall() {
-            
+
             jQuery.ajax({
                 'url': '/api/vedioChatOparetion/?user=doc',
                 'contentType': 'application/json',
@@ -164,8 +182,7 @@
                     jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}`)
                     jQuery('#incomingVideoCall').modal('show')
                 }
-                else
-                {
+                else {
                     jQuery('#incomingVideoCall').modal('hide')
                 }
             });
@@ -174,7 +191,7 @@
 
         jQuery('#hangupBtn').click(function () {
             jQuery.ajax({
-                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') +'/',
+                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
                 'method': 'DELETE',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
@@ -192,7 +209,7 @@
 
         setInterval(function () {
             checkForCall();
-        }, 2000); 
+        }, 2000);
 
 
         jQuery.ajax({
@@ -205,9 +222,9 @@
             },
         }).done((response) => {
             console.log(response)
-            jQuery('#doctorName').html('Dr. '+response.full_name)
+            jQuery('#doctorName').html('Dr. ' + response.full_name)
             jQuery('#doctorSpecialist').html(response.specialist_type)
-            jQuery('#profileImage').attr('src',!response.profile_pic||response.profile_pic==''?'/media/logos/anonymous-user.png':response.profile_pic)
+            jQuery('#profileImage').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
         }).fail((error) => {
             console.log(error);
         });

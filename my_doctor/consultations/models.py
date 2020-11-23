@@ -14,6 +14,7 @@ class consultations(models.Model):
     video_audio_rating = models.IntegerField()
     consultation_rating = models.IntegerField()
     overall_rating = models.IntegerField()
+    problem=models.CharField(max_length=250,default='Not Specified')
     message = models.CharField(max_length=500, null=True)
     duration = models.CharField(max_length=100)
     consultation_amt = models.DecimalField(max_digits=10,decimal_places=2)

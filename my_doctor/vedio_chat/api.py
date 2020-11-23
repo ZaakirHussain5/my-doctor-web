@@ -12,10 +12,10 @@ class vedioChatOparetion(viewsets.ModelViewSet):
     serializer_class = VedioChatSerializer
 
     def get_queryset(self):
-        queryset = VedioChat.objects.all()
+        queryset = VedioChat.objects.filter(is_answered=False)
         user = self.request.query_params.get('user', None)
         if user is not None:
-            queryset = self.request.user.call_for.all()
+            queryset = self.request.user.call_for.filter(is_answered=False)
         return queryset
     
     def perform_create(self,serializer):
@@ -31,6 +31,20 @@ class CallDoctorAPI(generics.GenericAPIView):
     video.save()
     return Response({
       "Message":"Call initiated",
+      "id":video.id
+    })
+
+
+class AnswerCallAPI(generics.GenericAPIView):
+  serializer_class = VedioChatSerializer
+  
+  def post(self, request, *args, **kwargs):
+    session_id = request.query_params.get('session_id',None)
+    video = VedioChat.objects.get(id=session_id)
+    video.is_answered = True
+    video.save()
+    return Response({
+      "Message":"Call Answered",
       "id":video.id
     })
 
