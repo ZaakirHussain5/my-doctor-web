@@ -271,4 +271,4 @@ Admin Dashboard::
     1. complete all the changes from the pdf sent by tejas.
     2. payments and settlements page api and functionality 
     3. implement text chat in video call module (template=/video_chat/video_chat.html)
-    
+    4. list consultations, prescriptions, patient_medical_recoard in video ui 

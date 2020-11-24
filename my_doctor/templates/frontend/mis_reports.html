@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %} {% block content %}
+{% extends 'admin_layout.html' %} {% block content %} {% load static %}
 <div class="breadcrumbs">
     <div class="col-12">
         <div class="page-header text-center">
@@ -16,7 +16,7 @@
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list" role="tab"
                                 aria-controls="pills-home" aria-selected="true">Recipts</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" onclick="getDotorsettlement()">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab"
                                 aria-controls="pills-profile" aria-selected="false">Payments</a>
                         </li>
@@ -32,12 +32,12 @@
                                         </h5>
                                     </div>
                                     <div class="card-body">
-                                        <table id="patientResult" class="table table-bordered table-hover"
+                                        <table id="consultation" class="table table-bordered table-hover"
                                             style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Date & time</th>
-                                                    <th>Inv No.</th>
+                                                    <th>Inv No.</th> 
                                                     <th>Doctor</th>
                                                     <th>Patient</th>
                                                     <th>Rd. Amt.</th>
@@ -54,7 +54,7 @@
                                         </h5>
                                     </div>
                                     <div class="card-body">
-                                        <table id="doctorResult" class="table table-bordered table-hover"
+                                        <table id="Subscriptions" class="table table-bordered table-hover"
                                             style="width:100%">
                                             <thead>
                                                 <tr>
@@ -86,12 +86,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>Sl No.</th>
-                                                    <th>Doctor ID</th>
+                                                    <th>Dr. ID</th>
                                                     <th>Name</th>
-                                                    <th>Consultations Count</th>
+                                                    <th>Cons. Count</th>
                                                     <th>Total Amt.</th>
-                                                    <th>Paid Amount</th>
+                                                    <th>Payback Amt.</th>
                                                     <th>Balance</th>
+                                                    <th>Paid Amt.</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -105,7 +106,7 @@
                                         </h5>
                                     </div>
                                     <div class="card-body">
-                                        <table id="doctorResult" class="table table-bordered table-hover"
+                                        <table id="otherPayments" class="table table-bordered table-hover"
                                             style="width:100%">
                                             <thead>
                                                 <tr>
@@ -127,11 +128,337 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="settlementDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Settlement Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row p-3">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="doctor's img">
+                          </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Registration No.</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Full Name</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-6"><label class=" form-control-label float-right">Phone No.</label></div>
+                            <div class="col-12 col-md-6">
+                                <p class="form-control-static"></p>
+                            </div>
+                        </div>
+                        
+                      </div>
+                      <div class="col-md-6">
+                        <form id="PaymentForm">
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="balance" class="form-control-label float-right">Payable Balance</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="balance" name="balance" placeholder="Doctor ID" class="form-control" 
+                                        readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="paid_amount" class="form-control-label float-right">Paid Balance</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="paid_amount" name="paid_amount" placeholder="Doctor ID" class="form-control">
+                                    <input type="hidden" id="doctor_id" name="doctor_id" placeholder="Doctor ID" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="bank_trans_id" class="form-control-label float-right">Bank Transaction Id</label></div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="bank_trans_id" name="bank_trans_id" placeholder="" class="form-control"
+                                        >
+                                </div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-active btn-success">Make payment</button>
+                        </form>
 
+                      </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button id="closePopUP" type="button" data-dismiss="modal" class=" btn btn-danger">
+                      Close
+                  </button>
+                </div>
+              </div>
+
+          </div>
+        </div>
 
 {% endblock %}
 {% block scripts %}
 <script>
-    DoHeighLight('Administration', 'mis_reports')
+    DoHeighLight('Administration', 'mis_reports');
+
+    let doctorResult = null;
+
+    let consultationsTable = jQuery('#consultation').DataTable({
+            ajax:{
+                url:'/api/getAllConsultations',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data: 'consultation_date_time',
+                    render: function(data){
+                        console.log(data)
+                        return jQuery.format.date(data, "dd/MM/yyyy")
+                    }
+                },
+                {
+                    data:'inv_number'
+                },
+                {
+                    data : 'doctor_id.full_name'
+                },
+                {
+                    data : 'patient_name'
+                },
+                {
+                    data : 'consultation_amt'
+                },
+
+                {
+                    data : 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}'>
+                            Details
+                                </button>`
+                    }
+                },
+                
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              
+        })
+    let subscriptionsTable = jQuery('#Subscriptions').DataTable({
+            ajax:{
+                url:'/api/allSubscription_plans',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data: 'start_date',
+                    render: function(data){
+                        console.log(data)
+                        return jQuery.format.date(data, "dd/MM/yyyy")
+                    }
+                },
+                {
+                    data:'patient.pat_id'
+                },
+                {
+                    data : 'patient.full_name'
+                },
+                {
+                    data : 'plan.plan_name'
+                },
+                {
+                    data : 'plan.validity'
+                },
+                {
+                    data: 'plan.plan_price'
+                },
+                {
+                    data : 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}'>
+                            Details
+                                </button>`
+                    }
+                },
+                
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              
+        })
+    function getDotorsettlement(){
+
+        doctorResult = jQuery('#doctorResult').DataTable({
+            ajax:{
+                url:'/api/doctor_paymentlist',
+                dataSrc:""
+            },
+            
+            columns:[
+                {
+                    data: 'id'
+                },
+                // {
+                //     data: 'start_date',
+                //     render: function(data){
+                //         console.log(data)
+                //         return jQuery.format.date(data, "dd/MM/yyyy")
+                //     }
+                // },
+                {
+                    data: 'doctor.Registration_Number'
+                },
+                {
+                    data:'doctor.full_name'
+                },
+                {
+                    data : 'consultations_count'
+                },
+                {
+                    data : 'total_amt'
+                },
+                {
+                    data : 'amount_payable'
+                },
+                {
+                    data: 'balance'
+                },
+                {
+                    data: 'paid_amount'
+                },
+                {
+                    data : 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#settlementDetails">
+                                Make Payments
+                                </button>`
+                    }
+                },
+                
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+              
+        })
+        
+        let otherPayments = jQuery('#otherPayments').DataTable({
+            ajax:{
+                url:'/api/CheckBillPayments',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data: 'id'
+                },
+                // {
+                //     data: 'start_date',
+                //     render: function(data){
+                //         console.log(data)
+                //         return jQuery.format.date(data, "dd/MM/yyyy")
+                //     }
+                // },
+                {
+                    data: 'bill_type'
+                },
+                {
+                    data:'bill_date'
+                },
+                {
+                    data : 'paid_date'
+                },
+                {
+                    data : 'paid_by'
+                },
+                {
+                    data : 'bill_amount'
+                },
+                {
+                    data : 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" class="btn btn-danger btn-sm" data-doct='${JSON.stringify(row)}'>
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                    }
+                },
+                
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+              
+        })
+    }
+
+    jQuery('#settlementDetails').on('show.bs.modal', function (event) {
+        var myVal = jQuery(event.relatedTarget).data('doct');
+        console.log(myVal)
+        if(myVal.balance >0){
+            jQuery(this).find('img').attr('src', myVal.doctor.profile_pic);
+
+            let valList = [myVal.doctor.Registration_Number, myVal.doctor.full_name, myVal.doctor.phone_number, myVal.doctor.specialist_type, myVal.doctor.consultation_fee]
+            console.log(valList)
+            let inputList = jQuery(this).find('input');
+            let ps = jQuery(this).find('p');
+            console.log(ps.length)
+            for(var i=0; i < ps.length; i++){
+                ps[i].innerHTML = valList[i]    
+            }
+            jQuery('#balance').val(myVal.balance)
+            jQuery('#paid_amount').val(myVal.balance)
+            jQuery('#doctor_id').val(myVal.doctor.id)
+        }else{
+            alert('There has not any amount to pay.')
+            event.preventDefault()}
+    })
+
+    jQuery('#PaymentForm').submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        let form = new FormData(document.getElementById('PaymentForm'));
+        jQuery.ajax({
+            url: '/api/get_settlement_details/',
+            method : 'POST',
+            data: form,
+            contentType: false,
+            processData: false  
+
+        }).done((response)=>{
+            console.log("Settlement", response)
+            document.getElementById('closePopUP').click();
+            doctorResult.ajax.reload()
+        }).error((err)=>{
+            console.log(err)
+        })
+
+
+    })
 </script>
 {% endblock %}

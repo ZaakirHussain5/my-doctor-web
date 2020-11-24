@@ -10,5 +10,6 @@ class doctor_payments(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_modied = models.DateTimeField(auto_now=True)
     balance = models.FloatField(default=00.00)
+    paid_amount = models.FloatField(default=0.00)
     def __str__(self):
         return str(self.doctor)

@@ -47,14 +47,14 @@ class LoginSerializer(serializers.Serializer):
       try:
         user_type = data['user_type']
         if user_type == 'P':
-          patDetails = patient_info.objects.get(user__id = user.id)
+          patDetails = patient_info.objects.get(user__id = user.id, is_active=True)
           patDetails.is_logged_in = True
           patDetails.save()
           if patDetails :
             return user
         if user_type == 'D':
-          patDetails = doctors_info.objects.get(user__id = user.id)
-          if patDetails :
+          patDetails = doctors_info.objects.get(user__id = user.id, is_active=True)
+          if patDetails:
             patDetails.is_loggedin = True
             patDetails.save()
             return user

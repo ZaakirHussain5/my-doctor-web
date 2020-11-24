@@ -16,3 +16,7 @@ class patient_medical_records(models.Model):
 
     def __str__(self):
         return str(self.patient)
+
+    @property
+    def format_last_modified(self):
+        return self.Last_modied.date()

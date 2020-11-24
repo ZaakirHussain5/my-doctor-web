@@ -57,10 +57,7 @@
                                             </div>
                                             {% endfor %}
                                         </div>
-
-
                                     </div>
-
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="date-selection" role="tabpanel"
@@ -314,10 +311,10 @@
                                                         </h4>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="button" class="btn mfb-component__button--main"
+                                                        <a href="/patients/patients" class="btn mfb-component__button--main"
                                                             style="width:100%;  border-radius:30px">
                                                             Done
-                                                        </button>
+                                                    </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -507,7 +504,7 @@
                                             ${tConvert(data.from_time)}</span>
                                         <br>
                                         <span class="font-weight-bold text-success">Consultation Fee :
-                                            ${consultation_fee}/-</span>
+                                            ${consultation_fee}</span>
                                     </div>
                                 </div>
                                 <div class="ca-call-history__right">
@@ -590,6 +587,8 @@
                         payment_id: payment_id,
                         paid_amount: $('#total-amt').html()
                     };
+                    
+
                     // '/Authorization Token {value}/appoinments/'
                     $.ajax({
                         'url': '/api/appointments/',
@@ -601,20 +600,26 @@
                         },
                     }).done((response) => {
                         console.log(response);
-                        toastr.success("Appointmnt booked Successfully", "Success", { positionClass: "toast-top-center" })
+                        toastr.success("Appointment booked Successfully", "Success", { positionClass: "toast-top-center" })
                         $('#con-doctor').html($('#Doctor').html())
                         $('#summaryProfile').attr('src',$('#docImage').attr('src'))
                         $('#con-app-time').html(response.appointment_time)
                         $('#con-app-date').html(response.appointment_date)
                         $('#con-app-fee').html(response.paid_amount)
                         $('#myTab a[href="#Confirmation"]').tab('show')
-
+                        $.ajax({
+                            url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#ph_no').val()}`,
+                            method: 'GET',
+                            success: function (response) {
+                                console.log(response)
+                            }
+                        })
                     }).fail((err, error, wrong) => {
                         console.log(err)
                     })
                 },
                 "notes": {
-                    "address": "Razorpay Corporate Office"
+                    "address": "B&S Associates No:1, Subbiaha Reddy block, Metro Station, Ulsoor, Bangalore - 560038"
                 },
                 "theme": {
                     "color": "#007bff"

@@ -8,7 +8,7 @@ class doctors_info(models.Model):
     commission_val=models.DecimalField(max_digits=10,decimal_places=2,default=2)
     commission_type=models.CharField(max_length=15,default='Percent', null=True)
     gender=models.CharField(max_length=6, default='male', null = True)
-    Registration_Number = models.CharField(max_length=25)
+    Registration_Number = models.CharField(max_length=25, default='')
     specialist_type = models.CharField(max_length=25, null=True)
     rating = models.IntegerField(default=0)
     consultation_fee = models.DecimalField(max_digits=10,decimal_places=2,default=0)
@@ -55,3 +55,9 @@ class DoctorBankDetails(models.Model):
     account_holder_name = models.CharField(max_length=50)
     upi_id = models.CharField(max_length = 50, null=True, blank=True)
     phone_no = models.IntegerField(default=00)
+    blank_cheque = models.FileField(null=True, blank=True)
+
+
+class Doctornotes(models.Model):
+    doctor = models.ForeignKey(doctors_info, on_delete=models.CASCADE)
+    notes = models.TextField()

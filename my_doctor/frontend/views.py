@@ -111,3 +111,6 @@ def mis_reports(request):
 def appointments(request):
     return render(request, 'frontend/appointments.html')
 
+def patients_details(request, id=None):
+    return render(request, 'frontend/patientsInfo.html', {'id': id})
+

@@ -7,7 +7,7 @@ function submitRegistrationForm() {
         password: $('#password').val(),
         age: $("#age").val(),
         gender: $("#gender").val(),
-        blood_group:"Not Specified",
+        blood_group: "Not Specified",
         height: $("#height").val(),
         weight: $("#weight").val(),
         marital_status: 'Not Specified',
@@ -28,41 +28,69 @@ function submitRegistrationForm() {
         // marital_status: 'Not Specified'
     }
 
-    $('#preloader').show()
+    $('#submit').html(`
+    <i class="fas fa-spinner fa-spin"></i> Your Dashboard is getting Ready...
+    `)
 
+    $('#submit').attr('disabled', 'disabled')
+
+    if ($('#OTP').val() == '') {
+        alert('Enter The OTP')
+        return
+    }
     $.ajax({
-        url: '/api/GeneratePatientID',
-        method: 'GET',
-        contentType: 'application/json',
-    }).done((response) => {
-        data.pat_id = response.pat_id
+        url: 'https://teleduce.corefactors.in/validate-otp/a224db72-cafb-4cce-93ab-3d7f950c92e2/',
+        data: {
+            mobile: $('#mob1').val(),
+            otp: $('#OTP').val()
+        }
+    }).done(function (response) {
+        console.log(response)
+        if (response.response_code != "8000") {
+            alert('Invalid OTP Please Check the OTP and Try Again')
+            $('#submit').html('Register')
+            $('#submit').removeAttr('disabled')
+            return
+        }
+
         $.ajax({
-            url: '/api/PatientRegInApp',
-            data: JSON.stringify(data),
-            method: 'POST',
-            contentType: 'application/json'
+            url: '/api/GeneratePatientID',
+            method: 'GET',
+            contentType: 'application/json',
         }).done((response) => {
-            $.cookie('Token', response.token, { expires: 1 })
+            data.pat_id = response.pat_id
             $.ajax({
-                url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register/',
+                url: '/api/PatientRegInApp',
+                data: JSON.stringify(data),
                 method: 'POST',
-                data: JSON.stringify(tele_data),
-                contentType: 'application/json',
+                contentType: 'application/json'
             }).done((response) => {
-                $('#preloader').hide()
-                window.location.href = 'patients/dashboard'
+                $.cookie('Token', response.token, { expires: 1 })
+                $.ajax({
+                    url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register/',
+                    method: 'POST',
+                    data: JSON.stringify(tele_data),
+                    contentType: 'application/json',
+                }).done((response) => {
+                    window.location.href = 'patients/dashboard'
+                }).fail((error) => {
+                    $('#submit').html('Register')
+                    $('#submit').removeAttr('disabled')
+                    console.log(error)
+                })
             }).fail((error) => {
-                $('#preloader').hide()
-                console.log(error)
+                $('#submit').html('Register')
+                $('#submit').removeAttr('disabled')
+                console.log(error);
             })
         }).fail((error) => {
-            $('#preloader').hide()
-            console.log(error);
+            $('#submit').html('Register')
+            $('#submit').removeAttr('disabled')
+            console.log(error)
         })
-    }).fail((error) => {
-        $('#preloader').hide()
-        console.log(error)
     })
+
+
 
     console.log("data is", data);
 

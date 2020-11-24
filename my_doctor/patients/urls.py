@@ -1,7 +1,7 @@
 from rest_framework import routers
 from .api import (PatientUpdateProfileAPI, GetLoggedPatient,patient_infoViewSet,PatientResgistrationAPI,
     medical_historyViewSet,groupsViewSet,PatientResgistrationAppAPI, PatientEmail, PasswordChange,
-    PatientBillingHistorys, patientData
+    PatientBillingHistorys, patientData, SpecificPatient_infoViewSet, 
 
 )
 from django.urls import path,include
@@ -10,6 +10,8 @@ from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 router.register('patient_info', patient_infoViewSet, 'patient_info')
+
+router.register('SpecificPatient_infoViewSet', SpecificPatient_infoViewSet, 'SpecificPatient_infoViewSet')
 router.register('medical_history', medical_historyViewSet, 'medical_history')
 router.register('groups', groupsViewSet, 'groups')
 router.register('PatientBillingHistory', PatientBillingHistorys, 'PatientBillingHistory')

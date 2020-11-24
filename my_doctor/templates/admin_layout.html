@@ -18,11 +18,19 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <style>
-    .heighLight {
+    /* .heighLight {
         border-color: white;
         border-top-color: white;
         color: white;
         /* background-color: #74B9FF; */
+    
+    .heighLight{
+        /* clip-path: polygon(79% 38%, 100% 54%, 79% 72%, 0 73%, 0% 38%); */
+        border: 2px solid black;
+        padding: 10px;
+    }
+    th, td{
+        font-size: small;
     }
 </style>
 </head>
@@ -102,6 +110,8 @@
             jQuery('#' + dropdownName + ' a').attr("aria-expanded", "true");
             jQuery('#' + dropdownName + ' ul').addClass('show');
             jQuery('#' + liName).addClass('heighlight')
+            
+
         }
 
         jQuery(document).ready(function($){

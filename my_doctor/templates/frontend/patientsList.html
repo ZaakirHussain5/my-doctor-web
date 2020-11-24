@@ -186,9 +186,14 @@
                 {
                     data:'id',
                     render: function (data,type,row) {
-                          return `<button type="button" class="btn btn-circle  btn-success btn-sm" data-pat='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
-                                    <i class="fa fa-tasks"></i>
-                                </button>`
+                          return `<a href="/patientDetails/${data}" class="btn border-0 btn-link btn-success btn-sm">
+                                    View
+                                </a>
+                                    <button type='button' data-id='${data}' class="delete btn btn-active btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+
+                                `
                       }
                 }
             ],
@@ -204,7 +209,15 @@
         })
 
         
-
+        crudOperations({
+              put_url: '/api/patient_info/',
+              table_id:'#Patients',
+              id_selector:'#exe_id',
+              form_id:'#exe_form',
+              table:table,
+              entity:'patient deleted',
+              tabs:true
+        })
 
         $('#patientDetails').on('show.bs.modal', function (event) {
         var myVal = $(event.relatedTarget).data('pat');

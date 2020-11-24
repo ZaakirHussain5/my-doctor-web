@@ -34,4 +34,6 @@ urlpatterns=[
     path('search',views.searchUI,name="search"),
     path('mis_reports',views.mis_reports,name="mis_reports"),
     path('appointments',views.appointments,name="appointments"),
+    path('patientDetails/<id>', views.patients_details, name="patient_details"),
+    
 ]

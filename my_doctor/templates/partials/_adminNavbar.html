@@ -8,7 +8,7 @@
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul  class="nav navbar-nav">
                 <li id='dashboard' class="border border-primary mb-3" style="color: black;">
                     <a href="{% url 'frontend:adminDashboard' %}" data-toggle="tooltip" data-placement="right" title="Dashboard"> <i class="menu-icon fa fa-dashboard"></i><b>Dashboard</b> </a>
                 </li>
@@ -28,8 +28,8 @@
                 <li id="DoctorDropDown" class="menu-item-has-children dropdown show">
                     <a href="#" class="dropdown-toggle show border border-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-md"></i><b>Doctors</b></a>
                     <ul class="sub-menu children dropdown-menu show">
-                        <li id="DoctorList"><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Register Doctor</a></li>
-                        <li id="DoctorList"><i class="fa fa-tasks"></i><a href="{% url 'frontend:doctor_list' %}">Doctor List</a></li>
+                        <li id="DoctorList" class=""><i class="fa fa-tasks"></i><a href="{% url 'frontend:Doctors' %}">Register Doctor</a></li>
+                        <li id="DoctorLists"><i class="fa fa-tasks"></i><a href="{% url 'frontend:doctor_list' %}">Doctor List</a></li>
                         <li id="webDoctorList"><i class="fa fa-tasks"></i><a href="{% url 'frontend:webDoctorList' %}">Pending Registration</a></li>
                         <!-- <li id="doctorAgreement"><i class="fa fa-file-text-o"></i><a href="{%  url 'frontend:doctorAgreement' %}">Doctors Agreement</a></li>
                         <li id="doctorBankDetails"><i class="fa fa-file-text-o"></i><a href="{% url 'frontend:doctorBankDetails' %}">Doctors Bank Details</a></li>
@@ -55,7 +55,7 @@
                     </ul>
                 </li>
 
-                <li id='dashboard' class="border border-primary">
+                <li id='appointments' class="border border-primary">
                     <a href="{% url 'frontend:appointments' %}" data-toggle="tooltip" data-placement="right" title="stethoscope"> <i class="menu-icon fa fa-stethoscope"></i> <b>Appointments List</b></a>
                 </li>
                     

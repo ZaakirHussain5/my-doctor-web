@@ -1,6 +1,6 @@
 {% extends 'admin_layout.html' %} {% block content %}
 <div class="content">
-    <div class="card pl-3 pr-3">
+    <div class="card p-5">
         <form id="profile_form">
             <div class="row">
                 <div class="col-md-2">
@@ -63,7 +63,7 @@
                                 <div class="col col-md-4"><label for="email" class=" form-control-label float-right">FEES
                                         </label>
                                 </div>
-                                <div class="col-12 col-md-8"><input type="text" id="fees" name="consultation_fee"
+                                <div class="col-12 col-md-8"><input type="text" id="Confees" name="consultation_fee"
                                         placeholder="Email Address" class="form-control"></div>
                             </div>
                         </div>
@@ -104,15 +104,15 @@
                     <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#timings" role="tab"
                         aria-controls="pills-profile" aria-selected="true">Timings</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="getDoctorBankDetails()">
                     <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#bankdetails" role="tab"
                         aria-controls="pills-profile" aria-selected="true">Bankdetails</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="getSettleMentData()">
                     <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#settlements" role="tab"
                         aria-controls="pills-profile" aria-selected="true">Settlements</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="getNotes()">
                     <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#notes" role="tab"
                         aria-controls="pills-profile" aria-selected="true">Notes</a>
                 </li>
@@ -308,6 +308,18 @@
                                         <small>Phone Number which is linked with Google Pay,Phone pe or other
                                             UPI apps.</small>
                                     </div>
+                                    
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-5"><label for="blank_cheque"
+                                            class=" form-control-label float-right">
+                                            Cancle Cheque Photo</label></div>
+                                    <div class="col-12 col-md-7"><input type="file" id="blank_cheque"
+                                            name="blank_cheque" placeholder="Enter the Phone Number"
+                                            class="form-control">
+                                        <small>You can provide us a cancle cheque for bankdetails confirmation.</small>
+                                    </div>
+
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-md-7 offset-md-5">
@@ -322,12 +334,24 @@
                     </div>
                 </div>
                 <div id="settlements" class="tab-pane fade">
-                    <h3>settlements</h3>
-                    <p>Some content in menu 2.</p>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover" id="DoctorSettlement" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Paid Date</th>
+                                    <th>Paid Amount</th>
+                                    <th>Transaction ID</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
                 <div id="notes" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                    <form id="doctorNotes">
+                        <textarea class="form-control" rows='10' id="notess" name="notes" columns="50" placeholder="Add notes for the doctor..."></textarea>
+                        <button type="submit" class="btn btn-active pull-right">Add notes</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -443,14 +467,13 @@
                 data: data,
                 contentType: false,
                 processData: false,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-                },
+                
             })
                 .done((response) => {
                     toastr.success('Consultation fees updated.', 'Success', {
                         positionClass: "toast-top-center"
                     })
+                    jQuery('#Confees').val(response['consultation_fee'])
                 })
                 .fail((error) => {
                     console.log(error)
@@ -590,6 +613,116 @@
               }
           });
       })
+      /////////////////// BANK DETAILS /////////////////////
+    jQuery('#DoctorBankDetailsForm').submit((e) => {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        let data = new FormData(document.getElementById('DoctorBankDetailsForm'));
+        data.append('doctor_id', doctor_id)
+        jQuery.ajax({
+            url: '/api/doctor_bankDetailsAdminView/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            
+        })
+            .done((response) => {
+                console.log(response);
+                // table.ajax.reload()
+                // alert("You timing is changed")
+                toastr.success("Bank details updated successfully","Success",{positionClass:'toast-top-center'})
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+    })
 
+    function getDoctorBankDetails() {
+            jQuery.ajax({
+                url: '/api/doctor_bankDetailsAdminView?id='+ doctor_id,
+                method: 'GET',
+                contentType: 'application/json',
+                
+            }).done((response) => {
+                console.log(response)
+                const form = document.getElementById("DoctorBankDetailsForm");
+                formDeserialize(form, response[0])
+            }).fail((err) => {
+                console.log(err)
+            })
+        }
+
+    /////////////// DOCTOR SETTLEMENT /////////////
+    function getSettleMentData(){
+
+        jQuery('#DoctorSettlement').DataTable({
+            ajax:{
+                url:'/api/get_settlement_details?id='+ doctor_id,
+                dataSrc:"",
+                
+            },
+            columns:[
+                {
+                    data:"paid_date",
+                    // render : function(data){
+                    //     return tConvert(data)
+                    // }
+                },
+                
+                {
+                    data:"paid_amount",
+                    
+                },
+                
+                {
+                    data:"bank_trans_id",
+                    // render:function(data){
+                    //     return `<button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                    //                 <i class="fa fa-trash"></i>
+                    //             </button>`
+                    // }
+                }
+            ]
+        })
+    }
+
+    function getNotes(){
+        jQuery.ajax({
+                url: '/api/doctor_notesView?id='+ doctor_id,
+                method: 'GET',
+                contentType: 'application/json',
+                
+            }).done((response) => {
+                console.log('Notes', response[0]['notes'])
+                jQuery('#notess').val(response[0]['notes'])
+            }).fail((err) => {
+                console.log(err)
+            })
+    }
+
+    jQuery('#doctorNotes').submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation()
+        let data = new FormData(document.getElementById('doctorNotes'));
+        data.append('doctor_id', doctor_id)
+        jQuery.ajax({
+            url: '/api/doctor_notesView/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            
+        })
+            .done((response) => {
+                console.log(response);
+                // table.ajax.reload()
+                // alert("You timing is changed")
+                toastr.success("Notes added successfully.","Success",{positionClass:'toast-top-center'})
+            })
+            .fail((error) => {
+                console.log(error)
+            })
+    })
 </script>
 {% endblock %}

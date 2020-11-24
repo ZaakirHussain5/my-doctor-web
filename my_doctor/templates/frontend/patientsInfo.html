@@ -1,0 +1,230 @@
+{% extends 'admin_layout.html' %} {% block content %}
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <form id="patientProfile_form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="wrap-custom-file">
+                        <input type="file" name="profile_pic" id="image1" accept=".gif, .jpg, .png" />
+                        <label for="image1">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row form-group">
+                        <div class="col col-md-4"><label for="full_name" class="form-control-label float-right">Name</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <input type="text" id="full_name" name="full_name" placeholder="Doctor ID"
+                                class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-4"><label for="ph_no" class=" form-control-label float-right">
+                            Mobile</label></div>
+                        <div class="col-12 col-md-8"><input type="text" id="ph_no" name="ph_no"
+                                placeholder="Mobile" class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-4"><label for="email" class=" form-control-label float-right">EMAIL
+                                </label>
+                        </div>
+                        <div class="col-12 col-md-8"><input type="email" id="email" name="email"
+                                placeholder="Email" class="form-control" readonly="readonly"></div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-4"><label for="age" class=" form-control-label float-right">Age
+                                </label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <input type="text" id="age" name="age" placeholder="Age"
+                                class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-4"><label for="city" class="form-control-label float-right">City</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <input type="text" id="city" name="city" placeholder="City"
+                                class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+                        
+                    <div class="row form-group">
+                        <div class="col col-md-4"><label for="street_address" class=" form-control-label float-right">Address
+                                </label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <input type="text" id="street_address" name="street_address"
+                                placeholder="Address" class="form-control" readonly="readonly"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2>Medical History</h2>
+                <ul id="MedicalRecord" class="ml-5">
+                </ul>
+
+            </div>
+            <div class="col-md-8">
+                <h2>Consultations</h2>
+                <table class="table" id="consultation" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Date</th>
+                            <th>Inv. No</th>
+                            <th>Doctor</th>
+                            <th>Patient</th>
+                            <th>Cons. Rating</th>
+                            <th>Paid Amt.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+<script>
+    const patient_id = {{ id }};
+
+    function formDeserialize(form, data) {
+        const entries = (new URLSearchParams(data)).entries();
+        for (const [key, val] of entries) {
+            const input = form.elements[key];
+            if (input != undefined) {
+                if (input.type == 'file') {
+                    if (val) {
+                        var $file = jQuery('#' + input.id),
+                            $label = $file.next('label'),
+                            $labelText = $label.find('span'),
+                            labelDefault = $labelText.text();
+                        var filename = val.split('/').pop()
+                        if (filename) {
+                            $label
+                                .addClass('file-ok')
+                                .css('background-image', 'url(' + val + ')');
+                            // $labelText.text('Click here to change pic');
+                        } else {
+                            $label.removeClass('file-ok');
+                            $labelText.text(labelDefault);
+                        }
+                    }
+
+                } else {
+
+                    switch (input.type) {
+                        case 'checkbox':
+                            input.checked = !!val;
+                            break;
+                        case 'select-one':
+                            if (val)
+                                input.value = val;
+                            else
+                                input.selectedIndex = 0;
+
+                            break;
+                        default:
+                            if (val && val != 'null'){
+                                input.value = val;
+                            }
+                            else{
+                                input.value = 'no data'
+                            }
+                            break;
+
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    function get_patientDetails(){
+        jQuery.ajax({
+                url: '/api/SpecificPatient_infoViewSet?pat_id='+ patient_id,
+                method: 'GET',
+                contentType: 'application/json',
+                
+            }).done((response) => {
+                console.log(response)
+                const form = document.getElementById('patientProfile_form')
+                formDeserialize(form, response[0].user);
+                formDeserialize(form,response[0])
+                let medicalRecord = response[0]['medical_history'];
+                if(medicalRecord !== ''){
+                    medicalRecord = medicalRecord.split(',')
+                    let lis = '';
+                    for(let i =0; i < medicalRecord.length; i++){
+                        let li = `<li>${medicalRecord[i]}</li>`;
+                        lis += li;
+                    }
+                    jQuery('#MedicalRecord').html(lis);
+                }
+            }).fail((err) => {
+                console.log(err)
+            })
+    }
+    get_patientDetails()
+
+    var table = jQuery('#consultation').DataTable({
+            ajax:{
+                url:'/api/specific_patient_consultations?pat_id='+ patient_id,
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data: 'consultation_date_time',
+                    render: function(data){
+                        return jQuery.format.date(data, "dd/MM/yyyy")
+                    }
+                },
+                {
+                    data:'inv_number'
+                },
+                {
+                    data : 'doctor_id.full_name'
+                },
+                {
+                    data : 'patient_name'
+                },
+                {
+                    data : 'consultation_rating'
+                },
+
+                {
+                    data : 'consultation_amt'
+                },
+                
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  jQuery("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+</script>
+{% endblock %}

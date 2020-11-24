@@ -18,11 +18,31 @@ from appointment.models import appointment
 from appointment.serializers import appointmentSerializer
 
 class patient_infoViewSet(viewsets.ModelViewSet):
-    queryset = patient_info.objects.all()
+    queryset = patient_info.objects.filter(is_active=True)
     permissions = [
         permissions.AllowAny
     ]
     serializer_class = patient_infoSerializer
+
+    def perform_destroy(self, serializer):
+        serializer.is_active = False
+        serializer.save()
+        return 
+
+
+
+class SpecificPatient_infoViewSet(viewsets.ModelViewSet):
+    
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = patient_infoSerializer
+
+    def get_queryset(self):
+        pat_id = self.request.query_params.get('pat_id')
+        return patient_info.objects.filter(id = pat_id)
+
+
 
 class PatientResgistrationAPI(generics.GenericAPIView):
     serializer_class = PatientResgistrationSerializer

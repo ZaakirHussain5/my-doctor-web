@@ -26,7 +26,7 @@
         }
 
         @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-        }
+        
 
         @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
@@ -315,11 +315,11 @@
                             <h5>Patient Details</h5>
                             <div class="text-center">
                                 {% if patient.profile_pic%}
-                                <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
-                                {% else %}
-                                <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
-                                {% endif %}
-                                <h4>{{patient.full_name}}</h4>
+                        <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
+                        {% else %}
+                        <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
+                        {% endif %}
+                                 <h4>{{patient.full_name}}</h4>
                             </div>
                             <table class="table table-hover ">
                                 <tr>
@@ -328,7 +328,7 @@
                                 </tr>
                                 <tr>
                                     <td>Height</td>
-                                    <td>{{patient.height}} ft</td>
+                                    <td>{{patient.height}} cm</td>
                                 </tr>
                                 <tr>
                                     <td>Weight</td>
@@ -374,63 +374,54 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="Cons" role="tabpanel">
-                                    <h5 class="mt-2">Naveen's Previous Consultations</h5>
+                                    <h5 class="mt-2">{{patient.full_name}}'s Previous Consultations</h5>
                                     <ul class="timeline">
+                                        {% for consultation_list in consultation_lists %}
                                         <li>
-                                            <a target="_blank" href="#">Dr. Jay (Dietatian)</a>
-                                            <a href="#" class="float-right">21 March, 2020</a>
-                                            <p>Suggesting a lean diet plan</p>
+                                            <a target="_blank" href="#">{{consultation_list.doctor_id.full_name}} ({{ consultation_list.doctor_id.specialist_type}})</a>
+                                            <a href="#" class="float-right">{{ consultation_list.format_date }}</a>
+                                            <p>{{ consultation_list.message }}</p>
                                         </li>
-                                        <li>
-                                            <a target="_blank" href="#">Dr. Harish (General
-                                                Physician)</a>
-                                            <a href="#" class="float-right">11 March, 2020</a>
-                                            <p>Tested COVID-19 Positive</p>
-                                        </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="tab-pane fade" id="Pres" role="tabpanel">
-                                    <h5 class="mt-2">Naveen's Previous Prescriptions</h5>
+                                    <h5 class="mt-2">{{patient.full_name}}'s Previous Prescriptions</h5>
                                     <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <div class="float-right">
-                                                <button class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-file"></i> View
-                                                </button>
-                                            </div>
-                                            Dr. Jay (Dietatian) on 12/01/2020
+                                        {% for records in  medical_records %}
+                                            {% if records.is_prescription %}
+                                            <li class="list-group-item">
+                                                <div class="float-right">
+                                                    <a href="{{ records.record_files.url }}" target= _blank class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-file"></i> View
+                                                    </a>
+                                                </div>
+                                                {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on {{records.format_last_modified}}
 
-                                        </li>
-                                        <li class="list-group-item text-sm">
-                                            <div class="float-right">
-                                                <button class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-file"></i> View
-                                                </button>
-                                            </div>
-                                            Dr. Sunil (Dermatologists) on 12/01/2020
-                                        </li>
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
                                     </ul>
                                 </div>
                                 <div class="tab-pane fade" id="Reps" role="tabpanel">
-                                    <h5 class="mt-2">Naveen's Medical Reports</h5>
+                                    <h5 class="mt-2">{{ patient.full_name }}'s Medical Reports</h5>
                                     <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <div class="float-right">
-                                                <button class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-file"></i> View
-                                                </button>
-                                            </div>
-                                            Blood Sugar Test on 12/01/2020
-
-                                        </li>
-                                        <li class="list-group-item text-sm">
-                                            <div class="float-right">
-                                                <button class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-file"></i> View
-                                                </button>
-                                            </div>
-                                            COVID-19 Test on 12/01/2020
-                                        </li>
+                                        {% for records in medical_records %}
+                                            {% if records.is_prescription == False %}
+                                            <li class="list-group-item">
+                                                {% if records.record_files %}
+                                                <div class="float-right">
+                                                        <a href="{{records.record_files.url }}" target="_blank" class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-file"></i> View
+                                                        </a>
+                                                    </div>
+                                                    {% endif %}
+                                                    {{ records.description }} 
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -444,7 +435,11 @@
                 <div class="card-body">
                     <h5>Doctor Details</h5>
                     <div class="text-center">
+                        {% if doctor.profile_pic%}
                         <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive">
+                        {% else %}
+                        <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive">
+                        {% endif %}
                         <h4>{{doctor.full_name}}</h4>
                         <small>{{doctor.specialist_type}}</small>
                         <br>

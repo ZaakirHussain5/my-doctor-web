@@ -4,7 +4,7 @@
       <div class="col-12">
           <div class="page-header">
               <div class="page-title text-center">
-                  <h2 id="title">Doctors List</h2>
+                  <h2 id="title">New Doctor Registration</h2>
               </div>
           </div>
       </div>
@@ -13,37 +13,10 @@
         <li class="nav-item">
           <a class="nav-link " id="pills-home-tab" data-toggle="pill" href="#list" role="tab" aria-controls="pills-home" aria-selected="false">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#form" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a>
-        </li>
+        
       </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="pills-home-tab">
-           <div class="content">
-        <div class="card pl-3 pr-3">
-            <div class="card-body card-block">
-                <div class="form-group">
-                    <button type="button" id="newDoctor" class="btn btn-primary">
-                         Back to form <i class="fa fa-arrow-right"></i>
-                    </button>
-                </div>
-                <table class="table" id="Doctors" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>slno</th>
-                            
-                            <th>Specialist Type</th>
-                            <th>Name</th>
-                            <th>Phone No.</th>
-                            <th>Consultation Fee</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-        </div>
+        
         <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="pills-home-tab">
             
                 <div class="content">
@@ -99,7 +72,7 @@
                                         
                                         
                                         <div class="form-group">
-                                            <label for="hf-email" class=" form-control-label">Phone No.</label>
+                                            <label for="hf-email" class=" form-control-label">Phone No.<span class="text-danger h5">*</span></label>
                                             <input type="text" id="phone_number" name="phone_number" placeholder="Select Phone Number"
                                                 class="form-control">
                                         </div>
@@ -202,66 +175,39 @@
             })
         })
 
-        var table = $('#Doctors').DataTable({
-            ajax:{
-                url:'/api/doctors_info',
-                dataSrc:""
-            },
-            responsive: true,
-            columns:[
-                {
-                    data:'id'
-                },
-                // {
-                //     data:'profile_pic',
-                //     render:function(data){
-                //         return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                //     }
-                // },
-                {
-                    data:'specialist_type'
-                },
-                {
-                    data:'full_name'
-                },
-                {
-                    data : 'phone_number'
-                },
-                {
-                    data : 'consultation_fee'
-                },
-                {
-                    data:'id',
-                    render: function (data,type,row) {
-                          return `
-                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
-                                    <i class="fa fa-trash"></i>
-                                </button>`
-                      }
-                }
-            ],
-              language: {
-                  lengthMenu: "_MENU_",
-                  search: "",
-                  searchPlaceholder: "Search..."
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
-              }
-        })
-
-        crudOperations({
-              url:'/api/DoctorRegistration/',
-              put_url: '/api/doctors_info/',
-              table_id:'#Doctors',
-              id_selector:'#doc_id',
-              form_id:'#doc_form',
-              table:table,
-              entity:'Doctor',
-              tabs:true
-        })
+        // crudOperations({
+        //       url:'/api/DoctorRegistration/',
+        //       put_url: '/api/doctors_info/',
+        //       id_selector:'#doc_id',
+        //       form_id:'#doc_form',
+        //       table:table,
+        //       entity:'Doctor',
+        //       tabs:true
+        // })
         
+        jQuery('#doc_form').submit( function(e){
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            let data = new FormData(document.getElementById('doc_form'));
+            // data.append('doctor_id', doctor_id)
+            jQuery.ajax({
+                url: '/api/DoctorRegistration/',
+                method: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                
+            })
+                .done((response) => {
+                    console.log(response);
+                    // table.ajax.reload()
+                    // alert("You timing is changed")
+                    toastr.success("Bank details updated successfully","Success",{positionClass:'toast-top-center'})
+                })
+                .fail((error) => {
+                    console.log(error)
+                })
+    })
         DoHeighLight('DoctorDropDown', 'DoctorList')
     })
 </script>

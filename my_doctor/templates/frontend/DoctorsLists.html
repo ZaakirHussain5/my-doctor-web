@@ -236,7 +236,11 @@
                           return `
                                 <a href='/DoctorInfo/${data}' data-id='${data}' class="btn btn-link">
                                     View
-                                </a>`
+                                </a>
+                                <button type='button' data-id='${data}' class="delete btn btn-active btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                `
                       }
                 }
             ],
@@ -262,7 +266,7 @@
               tabs:true
         })
         
-        DoHeighLight('DoctorDropDown', 'DoctorList')
+        DoHeighLight('DoctorDropDown', 'DoctorLists')
     })
 </script>
   {% endblock %}

@@ -35,3 +35,11 @@ admin Dashboard: patient registration
     6. text change => primary mobile NO = Mobile 1
                 => secoendry mobile No = Mobile 2
     
+........................................../ 24/11/2020 ......................
+1. delete button in patient and doctoor list (done)
+2. hightlight in navbar 
+3. doctor timing update will be as AM/PM
+4. bank details update need to add a file field (done)
+5. payments/settlements => button change to details (done)
+6. payments/settlements => payment tab => button change to make payments (done)
+7. 

@@ -1,5 +1,5 @@
 from .serializers import *
-from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails
+from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
@@ -11,11 +11,16 @@ import datetime
 from rest_framework.views import APIView
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
-    queryset = doctors_info.objects.filter(web_registration=False)
+    queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
     permissions = [
         permissions.AllowAny
     ]
     serializer_class = doctors_infoSerializer
+
+    def perform_destroy(self, serializer):
+        serializer.is_active = False
+        serializer.save()
+        return
 
 class doctor_info_adminViewSet(viewsets.ModelViewSet):
     serializer_class = doctors_listSerializer
@@ -209,7 +214,12 @@ class get_settlement_details(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = settlement_detailsSerializer
-    queryset = settlement_details.objects.all()
+    def get_queryset(self):
+        doctor_id = self.request.query_params.get('id')
+        return  settlement_details.objects.filter(doctor_id__id = doctor_id)
+
+    # def perform_create(self, serializer):
+    #     details = settlement_details.objects.get(doctor_id__id=self.request.data['doctor_id'])
 
 
 class specificDoctorSettlement(viewsets.ModelViewSet):
@@ -351,3 +361,47 @@ class doctor_bankDetails(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(doctor_id=doctors_info.objects.get(
             user=self.request.user))
+
+
+class doctor_bankDetailsAdminView(viewsets.ModelViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = DoctorsBankDetailsSerializer
+
+    def get_queryset(self):
+        doctor_id = self.request.query_params.get('id')
+        return DoctorBankDetails.objects.filter(doctor_id=doctors_info.objects.get(id=doctor_id))
+
+    def perform_create(self, serializer):
+        doctor_ids = self.request.data.get('doctor_id')
+        print(doctor_ids)
+        try:
+            DoctorBankDetails.objects.get(doctor_id=doctors_info.objects.get(id=doctor_ids)).delete()
+        except:
+            pass
+
+        serializer.save(doctor_id=doctors_info.objects.get(
+            id=doctor_ids))
+
+
+
+class doctor_notesView(viewsets.ModelViewSet):
+    serializer_class = DoctornotesSerializer
+    permissions = [
+        permissions.AllowAny
+    ]
+
+    def get_queryset(self):
+        doctor_id = self.request.query_params.get('id')
+        return Doctornotes.objects.filter(doctor=doctors_info.objects.get(id=doctor_id))
+
+    def perform_create(self, serializer):
+        doctor_is = self.request.data.get('doctor_id')
+        doctor_info = doctors_info.objects.get(id=doctor_is)
+        try: 
+            Doctornotes.objects.get(doctor=doctor_info).delete()
+        except:
+            pass
+
+        serializer.save(doctor = doctor_info)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import doctors_info,DoctorTimings, settlement_details, DoctorBankDetails
+from .models import doctors_info,DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.views.defaults import bad_request
@@ -140,8 +140,16 @@ class DoctorBankDetailsSerializer(serializers.ModelSerializer):
         model = DoctorBankDetails
         fields = "__all__"
 
+
 class DoctorsBankDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorBankDetails
-        fields = ("doctor_id", "account_no", "ifsc_no", "bank_name", "branch_name", "account_holder_name", "upi_id", "phone_no")
+        fields = ("doctor_id", "account_no", "ifsc_no", "bank_name", "branch_name", "account_holder_name", "upi_id", "phone_no", 'blank_cheque')
         read_only_fields = ("doctor_id", )
+
+
+class DoctornotesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctornotes
+        fields= '__all__'
+        read_only_fields = ('doctor', )

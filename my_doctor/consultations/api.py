@@ -2,6 +2,7 @@ from .serializers import consultationsSerializer,getAllConsultationsSerializer
 from .models import consultations
 from rest_framework import viewsets, permissions , mixins
 from doctors.models import doctors_info
+from patients.models import patient_info
 
 
 class consultationsViewSet(viewsets.ModelViewSet):
@@ -14,7 +15,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
-        print(self.request.data)
+        
         doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
         cons_fee = self.request.data['consultation_amt']
         share_type = doctor.commission_type
@@ -43,7 +44,6 @@ class getPatientConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = getAllConsultationsSerializer
 
     def get_queryset(self):
-         print(self.request.user.consultations.all())
          return self.request.user.consultations.all()
 
 class getDoctorConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -55,3 +55,14 @@ class getDoctorConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
    
     def get_queryset(self):
         return consultations.objects.filter(doctor_id__user=self.request.user)
+
+
+class specific_patient_consultations(viewsets.ModelViewSet):
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = getAllConsultationsSerializer
+
+    def get_queryset(self):
+        pat_id = self.request.query_params.get('pat_id')
+        return consultations.objects.filter(patient= patient_info.objects.get(id=pat_id).user)
