@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     'online_enquiry',
     'reminders',
     'bill_payments',
-    'vedio_chat'
+    'vedio_chat',
+    'promo_codes'
 ]
 
 MIDDLEWARE = [
@@ -74,7 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'my_doctor.urls'

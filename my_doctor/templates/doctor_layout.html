@@ -218,9 +218,9 @@
             })
         })
 
-        // setInterval(function () {
-        //     checkForCall();
-        // }, 2000); 
+        setInterval(function () {
+            checkForCall();
+        }, 2000); 
         setTimeout(function () {
             jQuery.removeCookie('DoctorToken', { path: '/' })
             window.location.href = '/'

@@ -374,9 +374,9 @@ $('#password_form').submit((e)=>{
         })
     })
 
-    // setInterval(function () {
-    //     checkForCall();
-    // }, 2000); 
+    setInterval(function () {
+        checkForCall();
+    }, 2000); 
 
     setTimeout(function () {
         jQuery.removeCookie('Token', { path: '/' })
