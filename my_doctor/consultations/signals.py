@@ -22,5 +22,7 @@ def save_doctor_payment(sender, instance, **kwargs):
         payable = total_amount - commission_amount
         if balance:
             balance = float(balance) + float(payable)
+        else:
+            balance = payable            
     doc_count = consultations.objects.filter(doctor_id = instance.doctor_id).count()
     payments = doctor_payments.objects.filter(doctor = instance.doctor_id).update(total_amt=total_amount, consultations_count=doc_count, comm_amt=commission_amount, amount_payable=payable, balance=balance)

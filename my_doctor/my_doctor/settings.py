@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     'online_enquiry',
     'reminders',
     'bill_payments',
-    'vedio_chat'
+    'vedio_chat',
+    'promo_codes'
 ]
 
 MIDDLEWARE = [
