@@ -310,13 +310,15 @@
                             $labelText = $label.find('span'),
                             labelDefault = $labelText.text();
                         var filename = val.split('/').pop()
-                        if (filename) {
+                        if (filename && filename != 'null' && filename != '') {
                             $label
                                 .addClass('file-ok')
                                 .css('background-image', 'url(' + val + ')');
                             $labelText.text('Click here to change pic');
                         } else {
-                            $label.removeClass('file-ok');
+                            $label
+                                .addClass('file-ok')
+                                .css('background-image', 'url(/media/logos/anonymous-user.png)');
                             $labelText.text(labelDefault);
                         }
                     }

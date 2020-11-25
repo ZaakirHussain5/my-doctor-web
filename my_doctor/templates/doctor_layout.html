@@ -76,15 +76,15 @@
                     </div>
 
                     <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
+                        <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
                             aria-expanded="true">
                             <i class="fa fa-bell"></i>
                         </a>
                     </div>
                     <div class="language-select dropdown" id="language-select">
-                        <a href="/login">
+                        <button class="btn btn-default btn-sm" id="btnLogout">
                             <i class="fa fa-sign-out"></i>
-                        </a>
+                        </button>
                     </div>
 
                 </div>
@@ -190,7 +190,7 @@
                     x.play()
                     jQuery('#hangupBtn').attr('data-id', list[0].id)
                     jQuery('#PatientName').html(list[0].caller_name)
-                    jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}`)
+                    jQuery('#answerCall').attr('href', `/api/VideoCall?session=jQuery{list[0].id}&user=doc&patient=jQuery{list[0].caller_ID}`)
                     jQuery('#incomingVideoCall').modal('show')
                 }
                 else {
@@ -242,6 +242,24 @@
         }).fail((error) => {
             console.log(error);
         });
+
+        jQuery('#btnLogout').click(function(){
+            
+            jQuery.ajax({
+                url:'/api/DoctorLogout',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+                method:'POST',
+                contendType: 'application/json',
+                async: false,
+                success:function(response){
+                   
+                    jQuery.cookie('DoctorToken','', { path: '/' }) 
+                    window.location.href = '/'
+                }
+            })
+        })
     </script>
 </body>
 <!-- Sidebar -->

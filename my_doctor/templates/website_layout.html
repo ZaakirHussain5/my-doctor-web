@@ -320,9 +320,23 @@ section.breadcrumb{
         })
 
         $('#btnLogout').click(function(){
-            
-            $.cookie($(this).attr('data-token'),'')
-            window.location.href = '/'
+            var button = $(this)
+            var post_url = button.attr('data-token') == 'Token' ? '/api/PatientLogout' : '/api/DoctorLogout';
+            $.ajax({
+                url:post_url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie(button.attr('data-token')));
+                },
+                method:'POST',
+                contendType: 'application/json',
+                async: false,
+                success:function(response){
+                    $.cookie(button.attr('data-token'),'', { path: '/' })
+                    window.location.href = '/'
+                },error:function(err){
+                    console.log(err);
+                }
+            })
         })
     })
 </script>

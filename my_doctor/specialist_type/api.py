@@ -11,9 +11,3 @@ class specialist_typeViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = specialist_typeSerializer
 
-class dactivate_Specialist(generics.UpdateAPIView):
-    queryset = specialist_type.objects.all()
-    serializer_class = specialist_typeSerializer
-    permissions = [
-        permissions.AllowAny
-    ]

@@ -32,6 +32,12 @@
                                             <div class="settingmenu__name">Wallet</div>
                                         </div>
                                     </a>
+                                    <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Family-Details" role="tab" aria-controls="v-pills-theme" aria-selected="false">
+                                        <div class="settingmenu">
+                                            <div class="settingmenu__icon"><i class="mdi mdi-account-multiple"></i></div>
+                                            <div class="settingmenu__name">Family</div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-8 settings-nav-content">
@@ -179,32 +185,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-theme" role="tabpanel" aria-labelledby="v-pills-theme-tab">
-                                        <div class="settings-inside-wrapper">
-                                            <h6 class="border-bottom pb-2">Light Theme</h6>
-                                            <a href="javascript:;" data-theme="light-default-theme" class="theme default-theme selected"></a>
-                                            <a href="javascript:;" data-theme="light-purple-theme" class="theme purple-theme"></a>
-                                            <a href="javascript:;" data-theme="light-pink-theme" class="theme pink-theme"></a>
-                                            <a href="javascript:;" data-theme="light-green-theme" class="theme green-theme"></a>
-                                            <a href="javascript:;" data-theme="light-red-theme" class="theme red-theme"></a>
-                                            <a href="javascript:;" data-theme="light-orange-theme" class="theme orange-theme"></a>
-                                            <a href="javascript:;" data-theme="light-blue-theme" class="theme blue-theme"></a>
-                                            <a href="javascript:;" data-theme="light-darkblue-theme" class="theme darkblue-theme"></a>
-                                            <a href="javascript:;" data-theme="light-lightpink-theme" class="theme lightpink-theme"></a>
-                    
-                                            <h6 class="border-bottom py-3">Dark Theme</h6>
-                                            <a href="javascript:;" data-theme="dark-default-theme" class="theme default-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-purple-theme" class="theme purple-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-pink-theme" class="theme pink-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-green-theme" class="theme green-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-red-theme" class="theme red-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-orange-theme" class="theme orange-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-blue-theme" class="theme blue-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-darkblue-theme" class="theme darkblue-theme"></a>
-                                            <a href="javascript:;" data-theme="dark-lightpink-theme" class="theme lightpink-theme"></a>
-                                
-                                        </div>
-                                    </div>
                                     <div class="tab-pane fade" id="Wallet-Details" role="tabpanel" aria-labelledby="v-pills-theme-tab">
                                         <div class="card">
                                             <div class="card-header">
@@ -239,289 +219,62 @@
                                                     </div>
                                                 </div>
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-audiovideo" role="tabpanel" aria-labelledby="v-pills-audiovideo-tab">
-                                        <div class="accordion settings-accordion accordion-arrow-toggler accordion-ungrouped" id="audioVideoAcc">
-                                            <div class="card">
-                                                <div class="card-header" id="audioVideoAccHead1">
-                                                    <div class="card-title" data-toggle="collapse" role="button" data-target="#audioVideoAcc1" aria-expanded="true" aria-controls="audioVideoAcc1">
-                                                        Audio
+                                    <div class="tab-pane fade" id="Family-Details" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
+                                        <div class="accordion settings-accordion accordion-arrow-toggler accordion-ungrouped" id="privacySecurity">
+                                             <div class="card">
+                                                <div class="card-header" id="newFamilyNumberHead">
+                                                    <div class="card-title collapsed" role="button" data-toggle="collapse" data-target="#newFamilyNumber"
+                                                        aria-expanded="false" aria-controls="newFamilyNumber">
+                                                        Add a Family Member
                                                     </div>
                                                 </div>
-                                        
-                                                <div id="audioVideoAcc1" class="collapse show" aria-labelledby="headingOne" data-parent="#audioVideoAcc">
+                                                <div id="newFamilyNumber" class="collapse" aria-labelledby="privacySecurity3" data-parent="#privacySecurity">
                                                     <div class="card-body">
-                                                        <div class="setting-sunheading">Audio configurations</div>
-
-                                                        <ul class="list-unstyled ca-setting-list">
-                                                            <li>
-                                                                <div class="ca-setting-type">
-                                                                    <div class="ca-setting-name">
-                                                                        <div class="ca-setting-name-main">Input</div>
-                                                                        <div class="ca-setting-name-sub">Select who can see your profile picture</div>
-                                                                    </div>
-                                                                    <div class="ca-setting-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="audioDropdownSettings1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                Microphone
-                                                                            </a>
-                                                                            
-                                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="audioDropdownSettings1">
-                                                                                <a class="dropdown-item" href="javascript:;">Default Device </a>
-                                                                                <a class="dropdown-item" href="javascript:;">Microphone</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Stereo mix</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12">
+                                                                <label for="mem_name">Name</label>
+                                                                <input type="text" class="form-control" placeholder="Enter the Member Name" id="mem_name">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label for="mem_rel">Relation</label>
+                                                                <select id="mem_rel" class="form-control">
+                                                                    <option value="">Select Member Relation</option>
+                                                                    <option value="Spouse">Spouse</option>
+                                                                    <option value="Child">Child</option>
+                                                                    <option value="Adult">Adult</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label for="Name">Age</label>
+                                                                <input type="number" id="mem_age" class="form-control" placeholder="Enter the Member Age">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <button id="add_patient_family_btn" type="button" class="btn btn-primary btn-block">
+                                                                    Add Member
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card">
-                                                <div class="card-header" id="audioVideoAccHead2">
-                                                    <div class="card-title collapsed" role="button"  data-toggle="collapse" data-target="#audioVideoAcc2"
-                                                        aria-expanded="false" aria-controls="audioVideoAcc2">
-                                                        Video
+                                                <div class="card-header" id="FamilyMembershead">
+                                                    <div class="card-title collapsed" role="button" data-toggle="collapse" data-target="#FamilyMembers"
+                                                        aria-expanded="false" aria-controls="FamilyMembers">
+                                                        Family Members
                                                     </div>
                                                 </div>
-                                                <div id="audioVideoAcc2" class="collapse" aria-labelledby="headingTwo" data-parent="#audioVideoAcc">
+                                                <div id="FamilyMembers" class="collapse show" aria-labelledby="privacySecurity3" data-parent="#privacySecurity">
                                                     <div class="card-body">
-                                                        <div class="setting-sunheading">Video configurations</div>
-
-                                                        <ul class="list-unstyled ca-setting-list">
-                                                            <li>
-                                                                <div class="ca-setting-type">
-                                                                    <div class="ca-setting-name">
-                                                                        <div class="ca-setting-name-main">Input</div>
-                                                                        <div class="ca-setting-name-sub">Select who can see your profile picture</div>
-                                                                    </div>
-                                                                    <div class="ca-setting-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="audioDropdownSettings2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                UHD webcam
-                                                                            </a>
-                                                                            
-                                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="audioDropdownSettings2">
-                                                                                <a class="dropdown-item" href="javascript:;">Default webcam </a>
-                                                                                <a class="dropdown-item" href="javascript:;">HD webcam </a>
-                                                                                <a class="dropdown-item" href="javascript:;">UHD webcam </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
+                                                        <ul class="list-unstyled" id="FamilyDetails">
+                                                            
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="v-pills-media" role="tabpanel" aria-labelledby="v-pills-media-tab">
-                                        <div class="accordion settings-accordion accordion-arrow-toggler accordion-ungrouped" id="mediaAcc">
-                                            <div class="card">
-                                                <div class="card-header" id="mediaAccHead1">
-                                                    <div class="card-title" data-toggle="collapse" role="button" data-target="#mediaAcc1" aria-expanded="true" aria-controls="mediaAcc1">
-                                                        Backups
-                                                    </div>
-                                                </div>
-                                        
-                                                <div id="mediaAcc1" class="collapse show" aria-labelledby="headingOne" data-parent="#mediaAcc">
-                                                    <div class="card-body">
-                                                        <div class="setting-sunheading">Backups configurations</div>
 
-                                                        <ul class="list-unstyled ca-setting-list">
-                                                            <li>
-                                                                <div class="ca-setting-type">
-                                                                    <div class="ca-setting-name">
-                                                                        <div class="ca-setting-name-main">Backup Type</div>
-                                                                        <div class="ca-setting-name-sub">Select that how you want to take backup</div>
-                                                                    </div>
-                                                                    <div class="ca-setting-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="backupDropdownSettings1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                Auto
-                                                                            </a>
-                                                                            
-                                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="backupDropdownSettings1">
-                                                                                <a class="dropdown-item" href="javascript:;">Auto</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Manual</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="ca-setting-type">
-                                                                    <div class="ca-setting-name">
-                                                                        <div class="ca-setting-name-main">Backup Schedule</div>
-                                                                        <div class="ca-setting-name-sub">Select span of the backup time</div>
-                                                                    </div>
-                                                                    <div class="ca-setting-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="backupDropdownSettings2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                Every Day
-                                                                            </a>
-                                                                            
-                                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="backupDropdownSettings2">
-                                                                                <a class="dropdown-item" href="javascript:;">Every Day</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Every Week</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Every Month</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="ca-setting-type">
-                                                                    <div class="ca-setting-name">
-                                                                        <div class="ca-setting-name-main">Delete Old Media</div>
-                                                                        <div class="ca-setting-name-sub">Delete media automatically after period of time</div>
-                                                                    </div>
-                                                                    <div class="ca-setting-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="backupDropdownSettings3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                Never
-                                                                            </a>
-                                                                            
-                                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="backupDropdownSettings3">
-                                                                                <a class="dropdown-item" href="javascript:;">Never</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Every Week</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Every Month</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Every Year</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-
-                                                        <div class="setting-sunheading mt-5 mb-3">Backups items</div>
-
-                                                        <ul class="list-unstyled">
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Chat</div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox" checked="">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Images </div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox" checked="">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Videos </div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Documents</div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox" checked="">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="mediaAccHead2">
-                                                    <div class="card-title collapsed" role="button" data-toggle="collapse" data-target="#mediaAcc2"
-                                                        aria-expanded="false" aria-controls="mediaAcc2">
-                                                        Media Settings
-                                                    </div>
-                                                </div>
-                                                <div id="mediaAcc2" class="collapse" aria-labelledby="headingTwo" data-parent="#mediaAcc">
-                                                    <div class="card-body">
-                                                        <div class="setting-sunheading mb-3">Auto Download Media</div>
-
-                                                        <ul class="list-unstyled">
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Images </div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox" checked="">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Videos </div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="setting-list">
-                                                                    <div class="setting-list-name">Documents</div>
-                                                                    <div class="setting-list-switch">
-                                                                        <label class="material-switch">
-                                                                            <input type="checkbox" checked="">
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-
-                                                        <div class="setting-sunheading mt-5 mb-3">Media configuration</div>
-
-                                                        <ul class="list-unstyled ca-setting-list">
-                                                            <li>
-                                                                <div class="ca-setting-type">
-                                                                    <div class="ca-setting-name">
-                                                                        <div class="ca-setting-name-main">Image Quality</div>
-                                                                        <div class="ca-setting-name-sub">Choose media quality you want to send</div>
-                                                                    </div>
-                                                                    <div class="ca-setting-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="mediaDropdownSettings1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                Original
-                                                                            </a>
-                                                                            
-                                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="mediaDropdownSettings1">
-                                                                                <a class="dropdown-item" href="javascript:;">Good</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Excellent</a>
-                                                                                <a class="dropdown-item" href="javascript:;">Original</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>

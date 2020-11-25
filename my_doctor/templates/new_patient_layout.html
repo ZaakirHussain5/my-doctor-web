@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div> 
-                            <div class="action-icon pr-4" >
+                            <div class="action-icon pr-4" id="btnLogout">
                                 <i class="mdi mdi-logout mdi-24px"></i>
                             </div>                                      
                         </div>
@@ -142,161 +142,181 @@
 
     {% endblock %}
     <script>
-        $(document).ready(function(){
-        function formDeserialize(form, data) {
-        const entries = (new URLSearchParams(data)).entries();
-        for (const [key, val] of entries) {
-            const input = form.elements[key];
-            if (input != undefined) {
-                if (input.type == 'file') {
-                    if (val) {
-                        var $file = jQuery('#' + input.id),
-                            $label = $file.next('img'),
-                            $labelText = $label.find('span'),
-                            labelDefault = $labelText.text();
-                        var filename = val.split('/').pop()
-                        if (filename) {
-                            $label
-                                .addClass('file-ok')
-                                .attr('src', val);
-                            $labelText.text(filename);
-                        } else {
-                            $label.removeClass('file-ok');
-                            $labelText.text(labelDefault);
-                        }
-                    }
-                    
-                } else {
-    
-                    switch (input.type) {
-                        case 'checkbox':
-                            input.checked = !!val;
-                            break;
-                        case 'select-one':
-                            if (val)
-                                input.value = val;
-                            else
-                                input.selectedIndex = 0;
-    
-                            break;
-                        default:
-                            input.value = val;
-                            break;
-    
-                    }
-    
-                }
-            }
-    
-        }
-    }
-    function previewFile(input){
-        var file = $("input[type=file]").get(0).files[0];
- 
-        if(file){
-            var reader = new FileReader();
- 
-            reader.onload = function(){
-                $("#previewImg").attr("src", reader.result);
-            }
- 
-            reader.readAsDataURL(file);
-        }
-    }
-    $('#profile_pic').change(function(){
-        previewFile(this);
-    })
-
-    function getPatientData(){
-        const profileForm = document.getElementById('profile-form');
-        $.ajax({
-            url: '/api/getLoggedInPatient',
-            method: 'GET',
-            contendType: 'application/json',
-            'async': false,
-            'method': 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-            },
-        }).done((response)=>{
+        $('#btnLogout').click(function () {
             $.ajax({
-                url: "/api/getEmail",
-                method: 'GET',
-                contendType: 'application/json',
-                async: false,
-                method: 'GET',
+                url: '/api/PatientLogout',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-            },
-            }).done((response)=>{
-                formDeserialize(profileForm, response);
-            
+                },
+                method: 'POST',
+                contendType: 'application/json',
+                async: false,
+                success: function (response) {
+                    console.log(response)
+                    $.cookie('Token', '', { path: '/' })
+                    window.location.href = '/'
+                }, error: function (err) {
+                    console.log(err);
+                }
             })
-            localStorage.setItem('login_name',response.full_name)
-            formDeserialize(profileForm, response);
-            $('#conversation_doc').html(response.full_name)
-            $('#Profile-pic').attr('src',!response.profile_pic||response.profile_pic==''?'/media/logos/anonymous-user.png':response.profile_pic)
-            $('#username').val($('#ph_no').val())
         })
-    }
-    getPatientData()
 
-$('#ph_no').change(function(){
+        $(document).ready(function () {
+            function formDeserialize(form, data) {
+                const entries = (new URLSearchParams(data)).entries();
+                for (const [key, val] of entries) {
+                    const input = form.elements[key];
+                    if (input != undefined) {
+                        if (input.type == 'file') {
+                            if (val) {
+                                var $file = jQuery('#' + input.id),
+                                    $label = $file.next('img'),
+                                    $labelText = $label.find('span'),
+                                    labelDefault = $labelText.text();
+                                var filename = val.split('/').pop()
+                                if (filename && filename != 'null' && filename != '') {
+                                    $label
+                                        .addClass('file-ok')
+                                        .attr('src', val);
+                                    $labelText.text(filename);
+                                } else {
+                                    $label
+                                        .addClass('file-ok')
+                                        .attr('src', '/media/logos/anonymous-user.png');
+                                    $labelText.text(labelDefault);
+                                }
+                            }
 
-    $('#username').val($(this).val())
-})
- 
+                        } else {
 
-    $("#profile-form").submit((e)=>{
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('profile-form'))
-        console.log(data);
-        $.ajax({
-        url: '/api/PatientUpdateProfile',
-        data:data,
-        method: 'POST',
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-        },
-    }).done((response)=>{
-        console.log("postrequest response -", response);
-        toastr.success('Your profile updated successfully.', 'Success', {
+                            switch (input.type) {
+                                case 'checkbox':
+                                    input.checked = !!val;
+                                    break;
+                                case 'select-one':
+                                    if (val)
+                                        input.value = val;
+                                    else
+                                        input.selectedIndex = 0;
+
+                                    break;
+                                default:
+                                    input.value = val;
+                                    break;
+
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
+
+            function previewFile(input) {
+                var file = $("input[type=file]").get(0).files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function () {
+                        $("#previewImg").attr("src", reader.result);
+                    }
+
+                    reader.readAsDataURL(file);
+                }
+            }
+            $('#profile_pic').change(function () {
+                previewFile(this);
+            })
+
+            function getPatientData() {
+                const profileForm = document.getElementById('profile-form');
+                $.ajax({
+                    url: '/api/getLoggedInPatient',
+                    method: 'GET',
+                    contendType: 'application/json',
+                    'async': false,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    },
+                }).done((response) => {
+                    $.ajax({
+                        url: "/api/getEmail",
+                        method: 'GET',
+                        contendType: 'application/json',
+                        async: false,
+                        method: 'GET',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        },
+                    }).done((response) => {
+                        formDeserialize(profileForm, response);
+
+                    })
+                    localStorage.setItem('login_name', response.full_name)
+                    formDeserialize(profileForm, response);
+                    $('#conversation_doc').html(response.full_name)
+                    $('#Profile-pic').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
+                    $('#username').val($('#ph_no').val())
+                }).fail(function (res) {
+                    console.log(res)
+                })
+            }
+            getPatientData()
+
+            $('#ph_no').change(function () {
+
+                $('#username').val($(this).val())
+            })
+
+
+            $("#profile-form").submit((e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                const data = new FormData(document.getElementById('profile-form'))
+                console.log(data);
+                $.ajax({
+                    url: '/api/PatientUpdateProfile',
+                    data: data,
+                    method: 'POST',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    },
+                }).done((response) => {
+                    console.log("postrequest response -", response);
+                    toastr.success('Your profile updated successfully.', 'Success', {
                         positionClass: "toast-top-center"
                     })
-    }).fail((error)=>{
-        console.log(error);
-    })
-    })
+                }).fail((error) => {
+                    console.log(error);
+                })
+            })
 
-$('#password_form').submit((e)=>{
-    console.log('password form submit');
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('password_form'))
-       $.ajax({
-            url: '/api/changePassword',
-            method: 'POST',
-            data: data,
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-           },
-        }).done((response)=>{
-           console.log(response);
-           window.location.href = '/login'
-        }).fail((error)=>{
-           console.log('errors are ', error)
-      })
-
-
-    })
+            $('#password_form').submit((e) => {
+                console.log('password form submit');
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                const data = new FormData(document.getElementById('password_form'))
+                $.ajax({
+                    url: '/api/changePassword',
+                    method: 'POST',
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    },
+                }).done((response) => {
+                    console.log(response);
+                }).fail((error) => {
+                    console.log('errors are ', error)
+                })
 
 
-    
+            })
 
 
 
@@ -304,85 +324,170 @@ $('#password_form').submit((e)=>{
 
 
 
-    })
+
+
+
+        })
     </script>
+    <script>
+        function checkForCall() {
 
-<script>
-    function checkForCall() {
-        
-        jQuery.ajax({
-            'url': '/api/vedioChatOparetion/?user=pat',
-            'contentType': 'application/json',
-            'async': false,
-            'method': 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
-            },
-        }).done((response) => {
-            var list = response;
-            var x = document.getElementById("myAudio");
-            if (list && list.length > 0) {
-                x.loop = true;
-                x.play()
-                jQuery('#hangupBtn').attr('data-id', list[0].id)
-                jQuery('#DoctorName').html(list[0].caller_name)
-                jQuery('#answerCall').attr('data-session',list[0].id)
-                jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}`)
-                jQuery('#incomingVideoCall').modal('show')
-            }
-            else
-            {
+            jQuery.ajax({
+                'url': '/api/vedioChatOparetion/?user=pat',
+                'contentType': 'application/json',
+                'async': false,
+                'method': 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                },
+            }).done((response) => {
+                var list = response;
+                var x = document.getElementById("myAudio");
+                if (list && list.length > 0) {
+                    x.loop = true;
+                    x.play()
+                    jQuery('#hangupBtn').attr('data-id', list[0].id)
+                    jQuery('#DoctorName').html(list[0].caller_name)
+                    jQuery('#answerCall').attr('data-session', list[0].id)
+                    jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}`)
+                    jQuery('#incomingVideoCall').modal('show')
+                }
+                else {
+                    jQuery('#incomingVideoCall').modal('hide')
+                }
+            });
+
+        }
+
+        $('#answerCall').click(function () {
+            var button = $(this)
+            $.ajax({
+                url: '/api/answer_call?session_id=' + button.attr('data-session'),
+                method: 'POST',
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                },
+                success: function (response) {
+                    window.location.href = button.attr('data-url')
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+
+        jQuery('#hangupBtn').click(function () {
+            jQuery.ajax({
+                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
+                'method': 'DELETE',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                },
+            }).done((response) => {
+                console.log(response)
+                var x = document.getElementById("myAudio");
+                x.pause();
+                x.currentTime = 0;
                 jQuery('#incomingVideoCall').modal('hide')
-            }
-        });
-
-    }
-
-    $('#answerCall').click(function(){
-        var button = $(this)
-        $.ajax({
-            url:'/api/answer_call?session_id='+button.attr('data-session'),
-            method:'POST',
-            'beforeSend': function (request) {
-                request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
-            },
-            success:function(response){
-                window.location.href = button.attr('data-url')
-            },
-            error:function(error){
-                console.log(error)
-            }
+            }).fail((response) => {
+                console.log(response)
+            })
         })
-    })
 
+        setInterval(function () {
+            checkForCall();
+        }, 2000);
 
-    jQuery('#hangupBtn').click(function () {
-        jQuery.ajax({
-            'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') +'/',
-            'method': 'DELETE',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
-            },
-        }).done((response) => {
-            console.log(response)
-            var x = document.getElementById("myAudio");
-            x.pause();
-            x.currentTime = 0;
-            jQuery('#incomingVideoCall').modal('hide')
-        }).fail((response) => {
-            console.log(response)
+        setTimeout(function () {
+            jQuery.removeCookie('Token', { path: '/' })
+            window.location.href = '/'
+        }, 3600000)
+    </script>
+    <script>
+        //Family Details Scripts
+        $(document).ready(function(){
+            loadFamilyMembers();
+            function loadFamilyMembers(){
+                $.ajax({
+                    url:'/api/patient_family',
+                    method:'GET',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                    },
+                }).done(function(data){
+                    var listItems = ''
+                    $('#FamilyMembers').collapse('show')
+                    $.each(data,function(i,item){
+                        listItems+=`
+                        <li>
+                            <div class="contactlist">
+                                <div class="user-avatar user-avatar-rounded online">
+                                    <img src="/media/logos/anonymous-user.png" alt="">
+                                </div>
+                                <div class="contactlist__details">
+                                    <div class="contactlist__details--name">${item.member_name}</div>
+                                        <div class="calllist__details--info pt-2">
+                                            <span>${item.member_relation} </span>
+                                        </div>
+                                    </div>
+                                <div class="contactlist__actions">
+                                    <div class="iconbox btn-solid-danger delete-family-member" data-id="${item.id}"  data-toggle="tooltip" data-placement="top" title="Remove">
+                                        <i class="iconbox__icon mdi mdi-trash-can"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        `
+                    })
+                    $('#FamilyDetails').html(listItems)
+                })
+            }
+
+            $('#FamilyDetails').on('click','.delete-family-member',function(){
+                var button = $(this)
+                $.ajax({
+                    url:`/api/patient_family/${button.attr('data-id')}`,
+                    method:'DELETE',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                    },
+                    contentType:'application/json'
+                }).done(function(response){
+                    loadFamilyMembers();
+                    toastr.success("Family Member Removed Successfully","Success",{positionClass:"toast-top-center"})
+                }).fail(function(response){
+                    console.log(response)
+                })
+            })
+
+            $('#add_patient_family_btn').click(function(){
+                var data = {
+                    member_name:$('#mem_name').val(),
+                    member_age:$('#mem_age').val(),
+                    member_relation:$('#mem_rel').val()
+                }
+                $.ajax({
+                    url:'/api/patient_family/',
+                    data:JSON.stringify(data),
+                    method:'POST',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                    },
+                    contentType:'application/json'
+                }).done(function(response){
+                    loadFamilyMembers();
+                    $('#mem_name').val('')
+                    $('#mem_age').val('')
+                    $('#mem_rel').val('')
+                    
+                    toastr.success("Family Member Added Successfully","Success",{positionClass:"toast-top-center"})
+                }).fail(function(response){
+                    console.log(response)
+                })
+            })
         })
-    })
-
-    setInterval(function () {
-        checkForCall();
-    }, 2000); 
-
-    setTimeout(function () {
-        jQuery.removeCookie('Token', { path: '/' })
-        window.location.href = '/'
-    }, 3600000)
-</script>
+    </script>
 </body>
 
 </html>

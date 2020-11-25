@@ -158,9 +158,10 @@
                             <div class="card-header">
                                 <h5>Select Day</h5>
                             </div>
-                            <ul class="nav nav-tabs nav-pills left-tabs">
+                            <ul class="nav flex-column nav-pills">
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#tab-panel-1" data-toggle="tab" onclick="setDay('monday')">Monday</a>
+                                    
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab-panel-2" data-toggle="tab" onclick="setDay('tuesday')">Tuesday</a>
@@ -189,28 +190,15 @@
                             <div class="card-body">
                                 <form id="doctorTiming">
                                     <div class="row">
+                                         <input type="hidden" id="day" name="day" value='monday'>
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class=" form-group col">
-                                                    <label style="vertical-align: middle"
-                                                        class="switch switch-default switch-pill switch-success mr-2">
-                                                        <input type="checkbox" id="available" name="available"
-                                                            data-id='${row.id}' class="switch-input active">
-                                                        <input type="hidden" id="day" name="day" value='monday'>
-                                                        <span class="switch-label"></span>
-                                                        <span id="thuday" class="switch-handle"></span>
-                                                    </label> <span id="day_name_here"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
                                             <div class=" form-group">
                                                 <label for="from_time" class=" form-control-label">From</label>
                                                 <input type="time" id="from_time" name="from_time"
                                                     class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class=" form-group">
                                                 <label for="to_time" class=" form-control-label">To</label>
                                                 <input type="time" id="to_time" name="to_time"
@@ -218,7 +206,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 ">
-                                            <button type="submit" class="btn btn-primary btn-sm float-right">
+                                            <button type="submit" class="btn btn-primary btn-block btn-sm float-right">
                                                 <i class="fa fa-dot-circle-o"></i> Update Timings
                                             </button>
                                         </div>
@@ -538,6 +526,7 @@
             .done((response) => {
                 console.log(response);
                 table.ajax.reload()
+                toastr.success("Timings Updated Successfully","Success",{positionClass:'toast-top-centre'})
             })
             .fail((error) => {
                 console.log(error)
