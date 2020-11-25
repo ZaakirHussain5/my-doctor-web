@@ -104,18 +104,9 @@ class UpdateProfile(serializers.Serializer):
     username = serializers.CharField()
     email = serializers.CharField(allow_null=True,allow_blank=True)
     full_name = serializers.CharField()
-<<<<<<< HEAD
-    gender = serializers.CharField(required=False)
-    age = serializers.IntegerField(required=False)
-    height=serializers.DecimalField(max_digits=10,decimal_places=2, required=False)
-    weight=serializers.DecimalField(max_digits=10,decimal_places=2, required=False)
-    marital_status=serializers.CharField(required=False)
-    blood_group = serializers.CharField(required=False)
-=======
     age = serializers.IntegerField(required=False)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2,required=False)
     blood_group = serializers.CharField()
->>>>>>> 587a9a4a60d2744ba5b317f297df26425e4b6cf7
     ph_no=serializers.CharField()
     loggedInuser=serializers.IntegerField(required=False)
     profile_pic=serializers.FileField(required=False)
