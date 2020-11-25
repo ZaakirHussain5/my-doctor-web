@@ -263,7 +263,7 @@
                         return `
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <button type="button" class="btn btn-danger btn-sm call" data-doctor="${app.doctor.id}" style="border-radius:50%">
+                                <button type="button" class="btn btn-danger btn-sm call" data-const="${app.id}" data-doctor="${app.doctor.id}" style="border-radius:50%">
                                     <i class="mdi mdi-video text-light"></i>
                                     </button><br>
                                     <small class="">Call</small>
@@ -291,13 +291,13 @@
         $('#upcoming').on('click','.call',function(){
             var button = $(this)
             $.ajax({
-                url:'/api/CallDoctor?doctor_id='+button.attr('data-doctor'),
+                url:`/api/CallDoctor?doctor_id=${button.attr('data-doctor')}&const=${button.attr('data-const')}`,
                 method:'POST',
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
                 },
                 success:function(response){
-                    window.location.href=`/api/VideoCall?user=pat&session=+${response.id}&doctor=${button.attr('data-doctor')}`
+                    window.location.href=`/api/VideoCall?user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
                 error:function(response){
                     console.log(response)

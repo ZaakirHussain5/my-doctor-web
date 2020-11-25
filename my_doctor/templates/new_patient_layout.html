@@ -54,7 +54,7 @@
                         </div>
                         <div class="conversation__actions">
                             <div class="action-icon pr-4"  data-toggle="modal" data-target="#outGoingCall">
-                                <i class="mdi mdi-bell-ring-outline mdi-24px"></i>
+                                <i  class="mdi mdi-bell-ring-outline mdi-24px"></i>
                             </div>
                             <div class="iconbox-dropdown dropdown">
                                 <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +67,7 @@
                                 </div>
                             </div> 
                             <div class="action-icon pr-4" >
-                                <i class="mdi mdi-logout mdi-24px"></i>
+                                <i onclick="logout()" class="mdi mdi-logout mdi-24px"></i>
                             </div>                                      
                         </div>
                     </div>
@@ -327,7 +327,7 @@ $('#password_form').submit((e)=>{
                 jQuery('#hangupBtn').attr('data-id', list[0].id)
                 jQuery('#DoctorName').html(list[0].caller_name)
                 jQuery('#answerCall').attr('data-session',list[0].id)
-                jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}`)
+                jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`)
                 jQuery('#incomingVideoCall').modal('show')
             }
             else
@@ -377,10 +377,12 @@ $('#password_form').submit((e)=>{
     setInterval(function () {
         checkForCall();
     }, 2000); 
-
-    setTimeout(function () {
+    function logout(){
         jQuery.removeCookie('Token', { path: '/' })
         window.location.href = '/'
+    }
+    setTimeout(function () {
+        logout()
     }, 3600000)
 </script>
 </body>

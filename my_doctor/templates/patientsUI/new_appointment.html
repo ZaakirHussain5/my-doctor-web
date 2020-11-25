@@ -115,7 +115,8 @@
                                 <div class="ca-call-details-history" id="doctors-list">
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="ca-call-history">
+                                            <p class="text-danger">Please select your speciality and appoinment date first.</p>
+                                            <!-- <div class="ca-call-history">
                                                 <div class="ca-call-history__left">
                                                     <div class="user-avatar user-avatar-rounded">
                                                         <img class="img-fluid" src="assets/images/layer-14@2x.png"
@@ -140,7 +141,7 @@
                                                         Select
                                                     </button>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +162,7 @@
                                                                         <div class="ps-list__left--icon"></div>
                                                                         <div class="ps-list__left--name">Doctor</div>
                                                                     </div>
-                                                                    <div class="ps-list__right" id="Doctor">Dr. Kumari
+                                                                    <div class="ps-list__right" id="Doctor">
                                                                     </div>
                                                                     <input type="hidden" id="doctor-id">
                                                                 </div>
@@ -173,7 +174,7 @@
                                                                         <div class="ps-list__left--name">Appointment
                                                                             Date</div>
                                                                     </div>
-                                                                    <div class="ps-list__right" id="app-date">10/12/2020
+                                                                    <div class="ps-list__right" id="app-date">
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -184,7 +185,7 @@
                                                                         <div class="ps-list__left--name">Appointment
                                                                             Time</div>
                                                                     </div>
-                                                                    <div class="ps-list__right" id="app-time">12:00 AM
+                                                                    <div class="ps-list__right" id="app-time">
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -195,8 +196,7 @@
                                                                         <div class="ps-list__left--name">Description
                                                                         </div>
                                                                     </div>
-                                                                    <div class="ps-list__right" id="consultingAbout">For
-                                                                        cold and Cough</div>
+                                                                    <div class="ps-list__right" id="consultingAbout"></div>
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -214,7 +214,7 @@
                                                                     <div class="ps-list__left--name">Consultation Fee
                                                                     </div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="cons-fee">300.00
+                                                                <div class="ps-list__right" id="cons-fee">
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -224,8 +224,7 @@
                                                                     <div class="ps-list__left--icon"></div>
                                                                     <div class="ps-list__left--name">GST Incl.</div>
                                                                 </div>
-                                                                <div class="ps-list__right" id="GST">5.00
-                                                                </div>
+                                                                <div class="ps-list__right" id="GST">  </div>
                                                             </div>
                                                         </li>
                                                         <li>
@@ -257,7 +256,7 @@
                                                                 <div class="card-body text-center">
                                                                     <h2>
                                                                         <i class="mdi mdi-currency-inr"></i>
-                                                                        <span id="total-amt">300.00</span>
+                                                                        <span id="total-amt"></span>
                                                                     </h2>
                                                                 </div>
                                                                 <div class="card-footer">
@@ -410,22 +409,28 @@
             $('#total-amt').html($('#fee').val())
         })
 
-        $('#selectToday').click(function () {
-            let today = new Date();
-            const dd = String(today.getDate()).padStart(2, '0');
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            const yyyy = today.getFullYear();
-            today = mm + '/' + dd + '/' + yyyy;
-            $('#dateSelected').val(today)
-        })
+        // $('#selectToday').click(function () {
+        //     let today = new Date();
+        //     const dd = String(today.getDate()).padStart(2, '0');
+        //     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        //     const yyyy = today.getFullYear();
+        //     today = mm + '/' + dd + '/' + yyyy;
+        //     $('#dateSelected').val(today)
+        // })
 
-        const nextDate = () => {
-            const date = new Date();
-            return new Date(date.setDate(date.getDate() + 1)).toLocaleDateString();
-        };
-        $('#selectTommorow').click(() => {
-            $('#dateSelected').val(nextDate())
-        });
+        // const nextDate = () => {
+        //     const date = new Date();
+        //     let tomorrowDate = new Date(date.setDate(date.getDate() + 1));
+        //     console.log(tomorrowDate)
+        //     const dd = String(tomorrowDate.getDate()).padStart(2, '0');
+        //     const mm = String(tomorrowDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        //     const yyyy = tomorrowDate.getFullYear();
+        //     tomorrowDate = mm + '/' + dd + '/' + yyyy;
+        //     return tomorrowDate
+        // };
+        // $('#selectTommorow').click(() => {
+        //     $('#dateSelected').val(nextDate())
+        // });
         let appointment_time = '';
         let doc_id = '';
         $('#doctors-list').on('click', '.selectDorctorsd', function () {
@@ -478,6 +483,7 @@
                 method: 'GET',
                 contentType: 'Application/json'
             }).done((response) => {
+                console.log(response)
                 $('#pills-profile-tab').removeClass('active');
                 $('#date-selection').removeClass('active show');
 
@@ -560,7 +566,7 @@
 
         $('#selectTommorow').click(function () {
             $('#dateSelected').val(
-                moment(new Date()).add(1, 'days').calendar().format("DD/MM/YYYY")
+                moment(new Date()).add(1, 'days').format("DD/MM/YYYY")
             );
         })
 

@@ -465,7 +465,9 @@
             {% endif %}
         </div>
         <div class="floating-chat">
-            <i class="fa fa-comments" aria-hidden="true"></i> Chat
+            <div class="chat-btn">
+                <i class="fa fa-comments" aria-hidden="true"></i> Chat
+            </div>
             <div class="chat">
                 <div class="header">
                     <span class="title">
@@ -476,9 +478,8 @@
                     </button>
 
                 </div>
-                <ul class="messages">
-                    <li class="other">Can You Here Me?</li>
-                    <li class="self">Yes</li>
+                <ul id="messagess" class="messages">
+                    
                 </ul>
                 <div class="footer">
                     <div class="text-box" contenteditable="true" disabled="true"></div>
@@ -486,6 +487,7 @@
                 </div>
             </div>
         </div>
+        <button id="end" class="btn btn-active btn-danger ml-5">End call</button>
     </div>
 
 
@@ -493,9 +495,37 @@
         src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
+    <script>
+        const user = '{{user}}';
+        const session = '{{ session }}';
+        const appoinment = '{{ appointment }}';
+        const doctor_id = '{{doctor.id}}';
+    </script>
     <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
+            let consultation_id = '';
+            if(user == 'pat'){
+                data={
+                    appoinment_id: appoinment,
+                    doctor_id: doctor_id
+                };
+
+                $.ajax({
+                    url: '/api/consultations/',
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    }
+                }).done((response)=>{
+                    consultation_id = response.id
+                }).fail((err)=>{
+                    console.log(err)
+                })
+            }
             $('#end').click(function () {
                 const urlParams = new URLSearchParams(window.location.search);
                 var id = urlParams.get('session')
@@ -529,7 +559,7 @@
                     }).fail((response) => {
                         console.log(response)
                     })
-                    window.location.href = '/api/ratings';
+                    window.location.href = '/api/ratings?consultation='+ consultation_id;
                 }
             })
 

@@ -12,8 +12,9 @@ class consultant_chatViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = consultant_chat.objects.all()
-        cons_id = self.request.query_params.get('cons_id', None)
+        cons_id = self.request.query_params.get('session', None)
+        print(cons_id)
         if cons_id is not None:
-            queryset = consultant_chat.objects.filter(consultation_id=cons_id)
-            
+            queryset = consultant_chat.objects.filter(session_id=cons_id)
+            print(queryset)
         return queryset 

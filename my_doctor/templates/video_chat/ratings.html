@@ -176,19 +176,19 @@
             <!-- Rating Stars Box -->
             <div class='rating-stars text-center'>
                 <ul id='stars'>
-                    <li class='star' title='Poor' data-value='1'>
+                    <li class='star' title='Poor' data-name="doctor_consultation" data-value='1'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Fair' data-value='2'>
+                    <li class='star' title='Fair' data-name="doctor_consultation" data-value='2'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Good' data-value='3'>
+                    <li class='star' title='Good' data-name="doctor_consultation" data-value='3'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Excellent' data-value='4'>
+                    <li class='star' title='Excellent' data-name="doctor_consultation" data-value='4'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='WOW!!!' data-value='5'>
+                    <li class='star' title='WOW!!!' data-name="doctor_consultation" data-value='5'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
                 </ul>
@@ -208,19 +208,19 @@
             <!-- Rating Stars Box -->
             <div class='rating-stars text-center'>
                 <ul id='stars'>
-                    <li class='star' title='Poor' data-value='1'>
+                    <li class='star' title='Poor' data-name="audio_vedio" data-value='1'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Fair' data-value='2'>
+                    <li class='star' title='Fair' data-name="audio_vedio" data-value='2'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Good' data-value='3'>
+                    <li class='star' title='Good' data-name="audio_vedio" data-value='3'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Excellent' data-value='4'>
+                    <li class='star' title='Excellent' data-name="audio_vedio" data-value='4'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='WOW!!!' data-value='5'>
+                    <li class='star' title='WOW!!!' data-name="audio_vedio" data-value='5'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
                 </ul>
@@ -239,19 +239,19 @@
             <!-- Rating Stars Box -->
             <div class='rating-stars text-center'>
                 <ul id='stars'>
-                    <li class='star' title='Poor' data-value='1'>
+                    <li class='star' title='Poor' data-name="all_exprience" data-value='1'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Fair' data-value='2'>
+                    <li class='star' title='Fair' data-name="all_exprience" data-value='2'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Good' data-value='3'>
+                    <li class='star' title='Good' data-name="all_exprience" data-value='3'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='Excellent' data-value='4'>
+                    <li class='star' title='Excellent' data-name="all_exprience" data-value='4'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
-                    <li class='star' title='WOW!!!' data-value='5'>
+                    <li class='star' title='WOW!!!' data-name="all_exprience" data-value='5'>
                         <i class='fa fa-star fa-fw'></i>
                     </li>
                 </ul>
@@ -260,8 +260,8 @@
     
             <div class="form-group text-center">
                      <h4> Write Something</h4>
-            <textarea class="form-control" name="Message" rows="10" placeholder="Write your Message"></textarea>
-            <button type="button" class="btn btn-primary btn-block mt-3">Submit</button>
+            <textarea class="form-control" name="Message" rows="10" id="message" placeholder="Write your Message"></textarea>
+            <button id="submit" type="button" class="btn btn-primary btn-block mt-3">Submit</button>
             </div>
         </section>
     
@@ -271,6 +271,7 @@
         <script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
         <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
         <script>
+            const consultation = {{ consultation }}
             $(document).ready(function () {
 
                 /* 1. Visualizing things on Hover - See next part for action on click */
@@ -293,18 +294,32 @@
                     });
                 });
 
-
+                let quality = 0;
+                let doctor = 0;
+                let all = 0;
                 /* 2. Action to perform on click */
                 $('#stars li').on('click', function () {
                     var onStar = parseInt($(this).data('value'), 10); // The star currently selected
                     var stars = $(this).parent().children('li.star');
+                    var name = $(this).data('name')
+                    if(name == 'doctor_consultation'){
+                        doctor = onStar
+                    }
+                    if(name == 'audio_vedio'){
+                        quality = onStar;
+                    }
+                    if(name == 'all_exprience'){
+                        all = onStar
+                    }
 
                     for (i = 0; i < stars.length; i++) {
                         $(stars[i]).removeClass('selected');
+                        vedio = i;
                     }
 
                     for (i = 0; i < onStar; i++) {
                         $(stars[i]).addClass('selected');
+                        vedio = i;
                     }
 
                     // JUST RESPONSE (Not needed)
@@ -320,7 +335,19 @@
 
                 });
 
-
+                $('#submit').click(function(){
+                    let data = {video_audio_rating: quality, overall_rating: all, consultation: consultation, consultation_rating: doctor, message: $('#message').val()}
+                    console.log(data)
+                    $.ajax({
+                        url: `/api/consultations/${consultation}/`,
+                        method: 'PUT',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json'
+                    }).done((response)=>{
+                        console.log(response);
+                        window.location.href = '/patients/dashboard'
+                    }).fail((err)=>{console.log(err)})
+                })
             });
 
 
@@ -328,6 +355,8 @@
                 $('.success-box').fadeIn(200);
                 $('.success-box div.text-message').html("<span>" + msg + "</span>");
             }
+
+
         </script>
     </body>
 </html>

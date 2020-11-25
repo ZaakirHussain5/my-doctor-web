@@ -3,6 +3,8 @@ from .models import consultations
 from rest_framework import viewsets, permissions , mixins
 from doctors.models import doctors_info
 from patients.models import patient_info
+from appointment.models import appointment as appointmentTable
+from django.db.models import Sum
 
 
 class consultationsViewSet(viewsets.ModelViewSet):
@@ -17,12 +19,29 @@ class consultationsViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         
         doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
-        cons_fee = self.request.data['consultation_amt']
+        appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
+        appointment.consultation_status="Completed"
+        cons_fee = appointment.paid_amount
+        appointment.save()
         share_type = doctor.commission_type
         share_val = doctor.commission_val
         if share_type == 'Pencent':
             share_val = cons_fee * (share_val/100)
-        serializer.save(patient_id=self.request.user.id, comp_share=share_val)
+        
+        serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+
+    def perform_update(self, serializer):
+        serializer.save()
+        # print(serializer.doctor_consulataions)
+        doctor = consultations.objects.get(id=self.request.data['consultation']).doctor_id
+        consultation = consultations.objects.filter(doctor_id=doctor)
+        total_rating = consultation.aggregate(Sum('consultation_rating'))
+        doctor.rating = float(total_rating['consultation_rating__sum'] / consultation.count()) 
+        doctor.save()
+        return 
+
+
+
 
 class getAllConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     permissions = [

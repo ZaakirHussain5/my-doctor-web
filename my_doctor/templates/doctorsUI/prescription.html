@@ -21,7 +21,9 @@
                         <div class="row form-group">
                             <label for="patient" class=" form-control-label">Patient</label>
                             <select id="patient" name="patient" class="form-control">
+                                {% if select_required == False %}
                                 <option value="">Select Patient</option>
+                                {% endif %}
                                 {% for patient in patients %}
                                 <option value="{{patient.user.id}}">{{patient.pat_id}}-{{patient.full_name}}
                                 </option>
