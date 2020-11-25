@@ -16,37 +16,21 @@
             <div class="card-body card-block">
                     <div class="row">
                         <input type="hidden" name="id" id="spl_id">
-                        <div class="col-md-4 offset-md-2">
-                                    <div class="wrap-custom-file" style="margin-left: 5rem;">
-                                        <input type="file" name="icon" id="image1" accept=".gif, .jpg, .png" />
-                                        <label for="image1">
-                                            <span>Select Image</span>
-                                            <i class="fa fa-plus-circle"></i>
-                                        </label>
-                                    </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="row form-group">
                                 <label for="hf-email" class=" form-control-label">Specialist Type</label>
-                                <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Specialist Type" class="form-control">
-                            </div>
-                            <div class="row form-group">
-                                <label for="hf-email" class=" form-control-label">Description</label>
-                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="Enter Descrition"></textarea>
+                                <div class="input-group">
+                                    <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Specialist Type" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Specialist Type</span>
+                                        </button>
+                                    </span>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
-            </div>
-            <div class="card-footer">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-sm" >
-                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Specialist Type</span> 
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Reset
-                    </button>
-                </div>
-                
             </div>
         </div> 
     </form>
@@ -59,9 +43,7 @@
                     <thead>
                         <tr>
                             <th>Slno</th>
-                            <th>Image</th>
                             <th>Specialist Type</th>
-                            <th>is Active?</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -90,19 +72,7 @@
                       data: "id"
                   },
                   {
-                      data: "icon",
-                      render: function (data) {
-                          return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                      }
-                  },
-                  {
                       data: "special_type"
-                  },
-                  {
-                      data: 'is_active',
-                      render: function (data,type,row) {
-                          return `<label style="vertical-align: middle" class="switch switch-default switch-pill switch-success mr-2"><input type="checkbox" data-id='${row.id}' class="switch-input active" ${data==true ? "checked='true'" : ""} > <span class="switch-label"></span> <span class="switch-handle"></span></label>`
-                      }
                   },
                   {
                       data: 'id',

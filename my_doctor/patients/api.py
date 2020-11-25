@@ -5,9 +5,9 @@ from .serializers import (
     UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,
     PatientResgistrationSerializer,medical_historySerializer,
     groupsSerializer,PatientResgistrationApp, UserEmail,
-    PatientBillingHistorySerializer,
+    PatientBillingHistorySerializer,patient_family_membersSerializer
 )
-from .models import (patient_info,medical_history,groups, PatientBillingHistory)
+from .models import (patient_info,medical_history,groups, PatientBillingHistory,patient_family_members)
 from rest_framework import viewsets, permissions,generics
 from rest_framework.response import Response
 from accounts.serializers import UserAuthSerializer
@@ -27,7 +27,21 @@ class patient_infoViewSet(viewsets.ModelViewSet):
     def perform_destroy(self, serializer):
         serializer.is_active = False
         serializer.save()
-        return 
+        return
+
+class patient_family_membersViewset(viewsets.ModelViewSet):
+    serializer_class = patient_family_membersSerializer
+    permission_classes=[
+        permissions.IsAuthenticated
+    ]
+
+    def get_queryset(self):
+        return patient_family_members.objects.filter(patient__user=self.request.user)
+
+    def perform_create(self,serializer):
+        patient = patient_info.objects.get(user=self.request.user)
+        serializer.save(patient=patient)
+        
 
 
 
@@ -181,6 +195,7 @@ class PatientLogout(generics.GenericAPIView):
     def post(self, request):
         if request.user is not None:
             patient = patient_info.objects.get(
-                user=request.user).update(is_logged_in=False)
+                user=request.user)
+            patient.is_logged_in=False
             patient.save()
             return Response({})

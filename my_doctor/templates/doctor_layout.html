@@ -76,15 +76,15 @@
                     </div>
 
                     <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
+                        <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
                             aria-expanded="true">
                             <i class="fa fa-bell"></i>
                         </a>
                     </div>
                     <div class="language-select dropdown" id="language-select">
-                        <a href="/login">
+                        <button class="btn btn-default btn-sm" id="btnLogout">
                             <i class="fa fa-sign-out"></i>
-                        </a>
+                        </button>
                     </div>
 
                 </div>
@@ -243,6 +243,24 @@
         }).fail((error) => {
             console.log(error);
         });
+
+        jQuery('#btnLogout').click(function(){
+            
+            jQuery.ajax({
+                url:'/api/DoctorLogout',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+                method:'POST',
+                contendType: 'application/json',
+                async: false,
+                success:function(response){
+                   
+                    jQuery.cookie('DoctorToken','', { path: '/' }) 
+                    window.location.href = '/'
+                }
+            })
+        })
     </script>
 </body>
 <!-- Sidebar -->

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import patient_info,medical_history,groups, PatientBillingHistory
+from .models import patient_info,medical_history,groups, PatientBillingHistory,patient_family_members
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
@@ -102,21 +102,26 @@ class PatientResgistrationApp(serializers.Serializer):
 
 class UpdateProfile(serializers.Serializer):
     username = serializers.CharField()
-    email = serializers.CharField()
+    email = serializers.CharField(allow_null=True,allow_blank=True)
     full_name = serializers.CharField()
+<<<<<<< HEAD
     gender = serializers.CharField(required=False)
     age = serializers.IntegerField(required=False)
     height=serializers.DecimalField(max_digits=10,decimal_places=2, required=False)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2, required=False)
     marital_status=serializers.CharField(required=False)
     blood_group = serializers.CharField(required=False)
+=======
+    age = serializers.IntegerField(required=False)
+    weight=serializers.DecimalField(max_digits=10,decimal_places=2,required=False)
+    blood_group = serializers.CharField()
+>>>>>>> 587a9a4a60d2744ba5b317f297df26425e4b6cf7
     ph_no=serializers.CharField()
     loggedInuser=serializers.IntegerField(required=False)
     profile_pic=serializers.FileField(required=False)
 
     def create(self, validated_data):
         try:
-            
             user = User.objects.get(id=validated_data["loggedInuser"])
             patient = patient_info.objects.get(user__id=user.id)
             print(validated_data)
@@ -143,6 +148,11 @@ class medical_historySerializer(serializers.ModelSerializer):
 class groupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = groups
+        fields = '__all__'
+
+class patient_family_membersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = patient_family_members
         fields = '__all__'
 
 class UserEmail(serializers.ModelSerializer):

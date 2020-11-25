@@ -184,7 +184,8 @@ class DoctorLogout(generics.GenericAPIView):
     def post(self, request):
         if request.user is not None:
             doctor = doctors_info.objects.get(
-                user=request.user).update(is_loggedin=False)
+                user=request.user)
+            doctor.is_loggedin=False
             doctor.save()
             return Response({})
 

@@ -51,3 +51,15 @@ class PatientBillingHistory(models.Model):
     date = models.DateTimeField(auto_now_add = True)
     status=models.CharField(max_length=50)
     description = models.CharField(max_length=100)
+
+class patient_family_members(models.Model):
+    patient = models.ForeignKey(patient_info,related_name="Family", on_delete=models.CASCADE,null=True)
+    member_name = models.CharField(max_length=50)
+    member_relation = models.CharField(max_length=50)
+    member_age=models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.member_name
+
