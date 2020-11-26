@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from patients.models import patient_info
+
 def dashboard(request):
     return render(request,'doctorsUI/dashboard.html')
 

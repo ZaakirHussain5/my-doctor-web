@@ -5,6 +5,37 @@ from doctors.models import doctors_info
 from patients.models import patient_info
 from appointment.models import appointment as appointmentTable
 from django.db.models import Sum
+from datetime import date as dates
+
+
+
+def getDateFormat(date_time):
+    date = date_time.split('-')
+    year = int(date[0])
+    month = int(date[1])
+    day = int(date[2])
+    d = dates( year, month, day )
+    # year = '{:02d}'.format(d.year)
+    # month = '{:02d}'.format(d.month)
+    # day = '{:02d}'.format(d.day)
+    # formated_date = '{0}-{1}-{2}'.format(year, month, day)
+
+    return d
+
+def today_collected_commision():
+    date = dates.today()
+    print(date)
+    appointments = consultations.objects.filter(consultation_date_time__date= date).aggregate(Sum('comp_share'))
+    
+    return appointments
+
+
+def range_of_collected_comission(from_date, to_date):
+    from_times = getDateFormat(from_date)
+    to_times = getDateFormat(to_date)
+    total_commision = consultations.objects.filter(consultation_date_time__date__range=(from_times, to_times)).aggregate(Sum('comp_share'))
+    return total_commision
+
 
 
 class consultationsViewSet(viewsets.ModelViewSet):
