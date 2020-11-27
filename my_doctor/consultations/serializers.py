@@ -8,6 +8,7 @@ class consultationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = consultations
         fields = '__all__'
+        read_only_fields = ('patient', 'doctor_id', 'comp_share', 'consultation_amt', 'duration')
 
 class getAllConsultationsSerializer(serializers.ModelSerializer):
     doctor_id = doctors_infoSerializer()

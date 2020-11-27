@@ -617,7 +617,7 @@
       {
         data: "id",
         render: function (data, type, app) {
-          return `<button type="button" class="btn btn-primary btn-sm call" data-patient="${app.pat_id}">
+          return `<button type="button" class="btn btn-primary btn-sm call" data-const="${app.id}" data-patient="${app.pat_id}">
                                     <i class="fa fa-video-camera"></i> Call
                                     </button><br>
                     `
@@ -716,13 +716,13 @@
   jQuery('#UpComingAppointments').on('click', '.call', function () {
     var button = jQuery(this)
     jQuery.ajax({
-      url: '/api/CallPatient?patient=' + button.attr('data-patient'),
+      url: `/api/CallPatient?patient=${button.attr('data-patient')}&const=${button.attr('data-const')}`,
       method: 'POST',
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
       success: function (response) {
-        window.location.href = `/api/VideoCall?user=doc&session=${response.id}&patient=${button.attr('data-patient')}`
+        window.location.href = `/api/VideoCall?user=doc&session=${response.id}&patient=${button.attr('data-patient')}&appointment=${button.attr('data-const')}`
       },
       error: function (response) {
         console.log(response)

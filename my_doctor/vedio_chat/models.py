@@ -9,6 +9,7 @@ class VedioChat(models.Model):
     Call_from = models.ForeignKey(User, related_name="call_from", on_delete=models.CASCADE,null=True,blank=True)
     Call_for = models.ForeignKey(User, related_name="call_for", on_delete=models.CASCADE,null=True,blank=True)
     is_answered = models.BooleanField(default=False)
+    appoinment_id = models.IntegerField(default=0)
 
     @property
     def caller_name(self):

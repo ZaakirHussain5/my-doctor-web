@@ -35,16 +35,22 @@ def patientVideoChat(request):
         print(patient)
         consulation_list = consultations.objects.filter(patient=patient.user)
         medical_record = patient_medical_records.objects.filter(patient=patient.user)
+        context['medical_records'] = medical_record
+        context['consultation_lists'] = consulation_list
+    # else:
+    #     context['medical_records'] = []
+    #     context['consultation_lists'] = []
 
     context['user'] =  user
     context['doctor']=doctor
     context['patient'] = patient
     context['session'] = session
-    context['medical_records'] = medical_record
-    context['consultation_lists'] = consulation_list
+    context['appointment'] = request.GET.get('appointment', None)
+    
     return render(request,'video_chat/video_chat.html', context)
 
 def ratings(request):
-    return render(request,'video_chat/ratings.html')
+
+    return render(request,'video_chat/ratings.html', {'consultation': request.GET.get('consultation')})
 
 

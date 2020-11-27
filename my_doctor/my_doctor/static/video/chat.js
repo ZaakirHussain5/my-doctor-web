@@ -14,7 +14,7 @@ element.click(openElement);
 function openElement() {
     var messages = element.find('.messages');
     var textInput = element.find('.text-box');
-    element.find('>i').hide();
+    $('.chat-btn').hide();
     element.addClass('expand');
     element.find('.chat').addClass('enter');
     var strLength = textInput.val().length * 2;
@@ -27,7 +27,7 @@ function openElement() {
 
 function closeElement() {
     element.find('.chat').removeClass('enter').hide();
-    element.find('>i').show();
+    $('.chat-btn').show();
     element.removeClass('expand');
     element.find('.header button').off('click', closeElement);
     element.find('#sendMessage').off('click', sendNewMessage);
@@ -54,18 +54,19 @@ function createUUID() {
 }
 
 function sendNewMessage() {
+
     var userInput = $('.text-box');
-    var newMessage = userInput.html().replace(/\<div\>|\<br.*?\>/ig, '\n').replace(/\<\/div\>/g, '').trim().replace(/\n/g, '<br>');
+    var newMessage = userInput.html();
 
     if (!newMessage) return;
 
     var messagesContainer = $('.messages');
 
-    messagesContainer.append([
-        '<li class="self">',
-        newMessage,
-        '</li>'
-    ].join(''));
+    // messagesContainer.append([
+    //     '<li class="self">',
+    //     newMessage,
+    //     '</li>'
+    // ].join(''));
 
     // clean out old message
     userInput.html('');
@@ -75,6 +76,65 @@ function sendNewMessage() {
     messagesContainer.finish().animate({
         scrollTop: messagesContainer.prop("scrollHeight")
     }, 250);
+    sendMessageAjax(newMessage);
+}
+
+function sendMessageAjax(message){
+    
+    let data = {
+        'user': user,
+        'message': message,
+        'session_id': session
+    }
+    $.ajax({
+        url: '/api/consultant_chats/',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json'
+    }).done((response)=>{
+        console.log(response)
+    }).fail((err)=>{
+        console.log(err);
+    })
+}
+
+function getMyMessage(){
+    $.ajax({
+        url: '/api/consultant_chats?session='+ session,
+        method: 'GET',
+        contentType: 'application/json'
+    }).done((response)=>{
+        console.log(response)
+        serializedMessage(response)
+    }).fail((err)=>{
+        console.log(err);
+    })
+}
+getMyMessage()
+setInterval(function(){
+    getMyMessage();
+}, 1000)
+
+let totalMessage = 0
+function serializedMessage(arrOfMessage){
+    let lis = '';
+    console.log(totalMessage, arrOfMessage.length)
+    let subarry = arrOfMessage.slice(totalMessage, arrOfMessage.length);
+    console.log(subarry)
+    totalMessage = arrOfMessage.length;
+    for(var i =0; i < subarry.length; i++){
+        let message = subarry[i];
+        if(user == message.user){
+            let li = `<li class="self">${message.message}</li>`;
+            lis += li
+        }
+        else{
+            let li = `<li class="other">${message.message}</li>`;
+            lis += li
+        }
+    }
+    $('#messagess').append(lis);
+
 }
 
 function onMetaAndEnter(event) {

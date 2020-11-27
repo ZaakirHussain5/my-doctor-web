@@ -82,7 +82,7 @@ outreach program a success.</p><br>
     <input type="text" placeholder="Name" name="full_name" required id="Name1">
     </div>
     <div class="form-group col-xs-12">
-    <input type="text" placeholder="Medical ID" name="Registration_number" required>
+    <input type="text" placeholder="Medical ID" id="medical_id" name="Registration_number" required>
     </div>
     <div class="form-group col-xs-12">
         <select id="select-specialist" name="specialist_type" required>
@@ -161,64 +161,6 @@ outreach program a success.</p><br>
 
     })
 
-    $("#doctorRegistration").submit((e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-
-        if ($('#OTP').val() == '') {
-            alert('Enter The OTP')
-            return
-        }
-        $.ajax({
-            url: 'https://teleduce.corefactors.in/validate-otp/a224db72-cafb-4cce-93ab-3d7f950c92e2/',
-            data: {
-                mobile: $('#mob1').val(),
-                otp: $('#OTP').val()
-            }
-        }).done(function (response) {
-            console.log(response)
-            if (response.response_code != "8000") {
-                alert('Invalid OTP Please Check the OTP and Try Again')
-                $('#submit').html('Register')
-                $('#submit').removeAttr('disabled')
-                return
-            }
-
-            $.ajax({
-                url: '/api/GenerateDoctorID',
-                method: 'GET',
-                contentType: 'application/json'
-            }).done((response) => {
-                console.log("response ", response);
-
-                let form = document.getElementById("doctorRegistration");
-                let formdata = new FormData(form);
-                formdata.append('username', response.doctorId);
-                formdata.append('web_registration', true);
-                formdata.append('gender', 'Male')
-                formdata.append('about', "Nothing sppecial")
-                $.ajax({
-                    url: '/api/NewDoctorRegistration',
-                    method: 'POST',
-                    data: formdata,
-                    contentType: false,
-                    processData: false,
-                }).done((response) => {
-                    alert('Thank you !! Doctors registration process is under way, We shall get back to you shortly.');
-                    $('#doctorRegistration').trigger('reset');
-                    setTimeout(function () {
-                        window.location.href = '/media/DoctorsAgreement.pdf'
-                    }, 2000)
-                }).fail((error) => {
-                    console.log(error);
-                })
-            })
-        })
-
-
-
-
-
-    })
+    
 </script>
 {% endblock %}

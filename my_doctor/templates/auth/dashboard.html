@@ -138,13 +138,13 @@
                   <div class="row">
                       <div class="col-md-8 offset-md-2">
                           <div class="input-group">
-                              <input type="date" class="form-control" id="">
+                              <input type="date" class="form-control" id="fromDate">
                               <span class="input-group-addon">
                                   to
                               </span>
-                              <input type="date" class="form-control" id="">
+                              <input type="date" class="form-control" id="to_date">
                               <span class="input-group-btn">
-                                  <button type="button" class="btn btn-primary">
+                                  <button type="button" onclick="getFilteredData()" class="btn btn-primary">
                                   Get Data
                                 </button>
                               </span>
@@ -152,23 +152,23 @@
                       <table class="table table-bordered table-hover">
                           <tr>
                               <th>Appointments</th>
-                              <td class="text-right">24</td>
+                              <td class="text-right" id="total_appointments">{{ total_appointment }}</td>
                           </tr>
                           <tr>
                             <th>Fees Collected</th>
-                            <td class="text-right">2,099</td>
+                            <td class="text-right" id="fees">{{ fees }}</td>
                         </tr>
                         <tr>
                             <th>Commission</th>
-                            <td class="text-right">120.00</td>
+                            <td class="text-right" id="commision">{{ commision }}</td>
                         </tr>
                         <tr>
                             <th>Doctors Payouts</th>
-                            <td class="text-right">320.00</td>
+                            <td class="text-right" id="doctors_paid">{{ doctor_paid }}</td>
                         </tr>
                         <tr>
                             <th>Refunds</th>
-                            <td class="text-right">450.00</td>
+                            <td class="text-right">00.00</td>
                         </tr>
                       </table>
                   </div>
@@ -197,7 +197,29 @@
         })
 
         jQuery('#dashboard').addClass('heighLight')
-
+        function getFilteredData(){
+            let from_date = jQuery('#fromDate').val()
+            let to_date = jQuery('#to_date').val()
+            // console.log(from_date, to_date)
+            let from_date_inDateFormat = new Date(from_date)
+            let to_date_inDateDormat = new Date(to_date)
+            let difference_in_time = (to_date_inDateDormat.getTime() - from_date_inDateFormat.getTime()) / (1000 * 3600 * 24)
+            if(difference_in_time > 0){
+                jQuery.ajax({
+                    url: '/getSnapshots?from='+ from_date + '&to='+ to_date,
+                    method: 'GET',
+                    contentType: 'application/json'
+                }).done((response)=>{
+                    console.log(response);
+                    jQuery('#total_appointments').html(response['appointments_count'])
+                    jQuery('#doctors_paid').html(response['doctor_payout'] == null ? '0.00' : response['doctor_payout'])
+                    jQuery('#fees').html(response['fees'] == null? '0.00' : response['fees'])
+                    jQuery('#commision').html(response['commisions'] == null ? '0.00' : response['commisions'])
+                }).fail((err)=>{
+                    console.log(err)
+                })
+            }
+        }
     </script>
 
 {% endblock %}

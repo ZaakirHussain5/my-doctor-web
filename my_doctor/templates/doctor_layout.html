@@ -190,7 +190,7 @@
                     x.play()
                     jQuery('#hangupBtn').attr('data-id', list[0].id)
                     jQuery('#PatientName').html(list[0].caller_name)
-                    jQuery('#answerCall').attr('href', `/api/VideoCall?session=jQuery{list[0].id}&user=doc&patient=jQuery{list[0].caller_ID}`)
+                    jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`)
                     jQuery('#incomingVideoCall').modal('show')
                 }
                 else {
@@ -221,6 +221,7 @@
         setInterval(function () {
             checkForCall();
         }, 2000); 
+        
         setTimeout(function () {
             jQuery.removeCookie('DoctorToken', { path: '/' })
             window.location.href = '/'

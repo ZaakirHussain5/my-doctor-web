@@ -91,33 +91,7 @@
 {%endblock%}
 {% block scripts %}
 <script type="text/javascript">
-    $("#appointments-main-form").submit(function(e){
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        alert("Thank you!! We have your details, Our representatives will get back to you.");
-        return
-        let data = {
-            name: $('#id_name').val(),
-            email: $('#id_email').val(),
-            ph_no: $('#id_ph_no').val(),
-            city: $("#id_city").val(),
-            message: $("#id_message").val()
-        };
-        $.ajax({
-            url: '/api/onlineEnquiry/',
-            method: 'POST',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-        }).done((response)=>{
-            console.log(response);
-            alert("Thank you!! We have your details, Our representatives will get back to you.");
-            $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
-        })
-        .fail((error)=>{
-            console.log(error)
-        })
-
-    })
+    
 </script>
 
 {% endblock %}

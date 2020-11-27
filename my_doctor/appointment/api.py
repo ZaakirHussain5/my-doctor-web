@@ -2,7 +2,29 @@ from .serializers import appointmentSerializer,appointmentsListSerializer
 from .models import appointment
 from rest_framework import viewsets, permissions,mixins
 from datetime import date, datetime
+from django.db.models import Sum
 
+
+def today_total_appointment():
+    date = getDateFormat()
+    print(date)
+    appointments = appointment.objects.filter(appointment_date= date)
+    total_fees_collected = appointments.aggregate(Sum('paid_amount'))
+    obj = {
+        'total_count': appointments.count(),
+        'total_fees': total_fees_collected
+    }
+    return obj
+
+
+def get_a_range_appointment(from_date, to_date):
+    total_appointmetns = appointment.objects.filter(appointment_date__range=(from_date, to_date))
+    total_fees_collected = total_appointmetns.aggregate(Sum('paid_amount'))
+    obj = {
+        'total_count': total_appointmetns.count(),
+        'total_fees': total_fees_collected
+    }
+    return obj 
 
 def getDateFormat():
     d = date.today()

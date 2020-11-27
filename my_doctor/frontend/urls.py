@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from . import views
-from .api import SearchAPI
+from .api import SearchAPI, snap_shots
 
 router = routers.DefaultRouter()
 
@@ -35,5 +35,6 @@ urlpatterns=[
     path('mis_reports',views.mis_reports,name="mis_reports"),
     path('appointments',views.appointments,name="appointments"),
     path('patientDetails/<id>', views.patients_details, name="patient_details"),
+    path('getSnapshots', snap_shots, name="getSnapshots")
     
 ]

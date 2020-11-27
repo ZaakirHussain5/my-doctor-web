@@ -4,6 +4,9 @@ from specialist_type.models import specialist_type
 from patients.models import patient_info
 from doctors.models import doctors_info
 from consultations.models import consultations
+from appointment.api import today_total_appointment
+from doctor_payments.api import today_total_doctor_paid
+from consultations.api import today_collected_commision
 
 def login(request):
     user_type = ""
@@ -14,7 +17,23 @@ def login(request):
     return render(request,'auth/login.html', context = { "user_type":user_type})
 
 def dashboard(request):
-    return render(request,'auth/dashboard.html')
+    context = {}
+    today_doctor_paid = today_total_doctor_paid()
+    print(today_doctor_paid)
+    if today_doctor_paid['paid_amount__sum' ] is None:
+        context['doctor_paid'] = 0.00
+    else:
+        context['doctor_paid'] = today_doctor_paid['paid_amount__sum']
+    appointments_count_and_fees = today_total_appointment()
+    print(appointments_count_and_fees['total_fees']['paid_amount__sum'])
+    context['total_appointment'] = appointments_count_and_fees['total_count']
+    context['fees'] = appointments_count_and_fees['total_fees']['paid_amount__sum']
+    todays_commision = today_collected_commision()
+    if todays_commision['comp_share__sum'] is None:
+        context['commision'] = 0.00
+    else:
+        context['commision'] = todays_commision['comp_share__sum']
+    return render(request,'auth/dashboard.html', context)
 
 def specialists(request):
     return render(request,'frontend/specialists.html')

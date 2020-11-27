@@ -15,7 +15,6 @@ function submitRegistrationForm() {
     }
     let tele_data = {
         Full_Name: $('#Name1').val(),
-        // user_type: $('#user_type').val(),
         username: $('#mob1').val(),
         Phone_Number: $('#mob1').val(),
         Email_Address: $('#email').val(),
@@ -67,12 +66,18 @@ function submitRegistrationForm() {
             }).done((response) => {
                 $.cookie('Token', response.token, { expires: 1 })
                 $.ajax({
-                    url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register/',
+                    url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register_patient/',
                     method: 'POST',
                     data: JSON.stringify(tele_data),
                     contentType: 'application/json',
                 }).done((response) => {
-                    window.location.href = 'patients/dashboard'
+                    toastr.success("Your registration successfull. You can get our service.", 'Success', {
+                        positionClass: "toast-top-center"
+                    })
+                    setTimeout(function(){
+                        window.location.href = 'patients/dashboard'
+                    }, 2000)
+                    
                 }).fail((error) => {
                     $('#submit').html('Register')
                     $('#submit').removeAttr('disabled')
@@ -116,15 +121,18 @@ function submitSubscriptionForm(data) {
         })
 }
 
-function newsLetterSubscription(data) {
+function newsLetterSubscription(url, data, message) {
     $.ajax({
-        url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Newsletter/',
+        url: url,
         method: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
     }).done((response) => {
         console.log(response);
-        alert("You are now registered for important updates and newsletters");
+        toastr.success(message, 'Success', {
+            positionClass: "toast-top-center"
+        })
+        
         $("#newsletter-form").find("input[type=email]").val("")
     })
         .fail((error) => {
@@ -135,34 +143,148 @@ function newsLetterSubscription(data) {
 $("#newsletter-form").submit(function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
+    const url = 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Newsletter/';
+    const message = 'You are now registered for important updates and newsletters.';
     console.log(
         "Form submitted successfully."
     )
     let data = {
         Subsricbe_To_Newsletter: $('#SubsricbeToNewsletter').val()
     }
-    newsLetterSubscription(data);
+    newsLetterSubscription(url, data, message);
 
 })
 /////////////////////  APPOINMENT FORM SUBMITED /////////////////
-$("#appointments-main-form").submit(function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+// $("#appointments-main-form").submit(function (e) {
+//     e.preventDefault();
+//     e.stopImmediatePropagation();
 
-    let data = {
-        Your_Name: $('#id_name').val(),
-        Your_Email: $('#id_email').val(),
-        Enter_Phone: $('#id_ph_no').val(),
-        gender: $('#id_gender').val(),
-        Blood_Group: $("#id_blood").val(),
-        Age: $("#id_age").val(),
-        Speciaility: $("#select-specialist").val(),
-        Your_City: $("#id_city").val(),
-        Briefly_Describe_About_Your_Problem: $("#id_message").val()
-    };
-    submitSubscriptionForm(data)
+//     let data = {
+//         Your_Name: $('#id_name').val(),
+//         Your_Email: $('#id_email').val(),
+//         Enter_Phone: $('#id_ph_no').val(),
+//         gender: $('#id_gender').val(),
+//         Blood_Group: $("#id_blood").val(),
+//         Age: $("#id_age").val(),
+//         Speciaility: $("#select-specialist").val(),
+//         Your_City: $("#id_city").val(),
+//         Briefly_Describe_About_Your_Problem: $("#id_message").val()
+//     };
+//     submitSubscriptionForm(data)
 
 
-})
+// })
 
 $('#patientRegistration').submit(submitRegistrationForm)
+
+
+////// CONTACT US FORM /////////////
+$("#appointments-main-form").submit(function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    console.log('called')
+    // alert("Thank you!! We have your details, Our representatives will get back to you.");
+    const url = 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Contact_us/';
+    const message = `Thank you!! We have your details, Our representatives will get back to you.`;
+    let data = {
+        name: $('#id_name').val(),
+        email: $('#id_email').val(),
+        ph_no: $('#id_ph_no').val(),
+        city: $("#id_city").val(),
+        message: $("#id_message").val()
+    };
+    let cms_data = {
+        Phone_number: data.ph_no,
+        City: data.city,
+        Message: data.message,
+        Email: data.email,
+        Name: data.name
+    }
+    console.log(cms_data)
+    $.ajax({
+        url: '/api/onlineEnquiry/',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+    }).done((response)=>{
+        console.log(response);
+        // alert("");
+       
+        newsLetterSubscription(url, cms_data, message)
+        $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
+    })
+    .fail((error)=>{
+        console.log(error)
+    })
+    
+})
+
+
+
+////////// DOCTOR REGISTRATION SUBMIT FORM ///////////////
+$("#doctorRegistration").submit((e) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const message = 'Thank you doctor !! Registration request received, Kindly review and sign the MOU. We shall get back to you shortly';
+    const url = `https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register_doctor/`
+    
+    if ($('#OTP').val() == '') {
+        alert('Enter The OTP')
+        return
+    }
+    $.ajax({
+        url: 'https://teleduce.corefactors.in/validate-otp/a224db72-cafb-4cce-93ab-3d7f950c92e2/',
+        data: {
+            mobile: $('#mob1').val(),
+            otp: $('#OTP').val()
+        }
+    }).done(function (response) {
+        console.log(response)
+        if (response.response_code != "8000") {
+            alert('Invalid OTP Please Check the OTP and Try Again')
+            $('#submit').html('Register')
+            $('#submit').removeAttr('disabled')
+            return
+        }
+
+        $.ajax({
+            url: '/api/GenerateDoctorID',
+            method: 'GET',
+            contentType: 'application/json'
+        }).done((response) => {
+            console.log("response ", response);
+
+            let form = document.getElementById("doctorRegistration");
+            let formdata = new FormData(form);
+            formdata.append('username', response.doctorId);
+            formdata.append('web_registration', true);
+            formdata.append('gender', 'Male')
+            formdata.append('about', "Nothing sppecial")
+            const cms_data={
+                Phone_number : $('mob1').val(),
+                City : $('#city').val(),
+                Name : $('#Name1').val(),
+                Medical_ID : $('#medical_id').val(),
+                Email : $('#email').val(),
+                speciality : $('#select-specialist').val()
+            }
+
+            $.ajax({
+                url: '/api/NewDoctorRegistration',
+                method: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+            }).done((response) => {
+                // alert();
+                newsLetterSubscription(url, cms_data, message)
+                $('#doctorRegistration').trigger('reset');
+                setTimeout(function () {
+                    window.location.href = '/media/DoctorsAgreement.pdf'
+                }, 2000)
+            }).fail((error) => {
+                console.log(error);
+            })
+        })
+    })
+})

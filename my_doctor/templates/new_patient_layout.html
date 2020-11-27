@@ -55,7 +55,7 @@
                         </div>
                         <div class="conversation__actions">
                             <div class="action-icon pr-4"  data-toggle="modal" data-target="#outGoingCall">
-                                <i class="mdi mdi-bell-ring-outline mdi-24px"></i>
+                                <i  class="mdi mdi-bell-ring-outline mdi-24px"></i>
                             </div>
                             <div class="iconbox-dropdown dropdown">
                                 <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -330,33 +330,36 @@
 
         })
     </script>
-    <script>
-        function checkForCall() {
+   
 
-            jQuery.ajax({
-                'url': '/api/vedioChatOparetion/?user=pat',
-                'contentType': 'application/json',
-                'async': false,
-                'method': 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
-                },
-            }).done((response) => {
-                var list = response;
-                var x = document.getElementById("myAudio");
-                if (list && list.length > 0) {
-                    x.loop = true;
-                    x.play()
-                    jQuery('#hangupBtn').attr('data-id', list[0].id)
-                    jQuery('#DoctorName').html(list[0].caller_name)
-                    jQuery('#answerCall').attr('data-session', list[0].id)
-                    jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}`)
-                    jQuery('#incomingVideoCall').modal('show')
-                }
-                else {
-                    jQuery('#incomingVideoCall').modal('hide')
-                }
-            });
+<script>
+    function checkForCall() {
+        
+        jQuery.ajax({
+            'url': '/api/vedioChatOparetion/?user=pat',
+            'contentType': 'application/json',
+            'async': false,
+            'method': 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+            },
+        }).done((response) => {
+            var list = response;
+            var x = document.getElementById("myAudio");
+            if (list && list.length > 0) {
+                x.loop = true;
+                x.play()
+                jQuery('#hangupBtn').attr('data-id', list[0].id)
+                jQuery('#DoctorName').html(list[0].caller_name)
+                jQuery('#answerCall').attr('data-session',list[0].id)
+                jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`)
+                jQuery('#incomingVideoCall').modal('show')
+            }
+            else
+            {
+                jQuery('#incomingVideoCall').modal('hide')
+            }
+        });
 
         }
 

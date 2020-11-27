@@ -27,7 +27,8 @@ class CallDoctorAPI(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     doctor_id = request.query_params.get('doctor_id',None)
     doctor = doctors_info.objects.get(id=doctor_id)
-    video = VedioChat.objects.create(Call_from=request.user,Call_for=doctor.user)
+    appoinment = request.query_params.get('const', None)
+    video = VedioChat.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment)
     video.save()
     return Response({
       "Message":"Call initiated",
@@ -53,8 +54,9 @@ class CallPatientAPI(generics.GenericAPIView):
 
   def post(self, request, *args, **kwargs):
     patient_id = request.query_params.get('patient',None)
+    appoinment = request.query_params.get('const',None)
     patient = patient_info.objects.get(id=patient_id)
-    video = VedioChat.objects.create(Call_from=request.user,Call_for=patient.user)
+    video = VedioChat.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment)
     video.save()
     return Response({
       "Message":"Call initiated",

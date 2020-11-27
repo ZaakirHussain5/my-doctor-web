@@ -10,7 +10,7 @@ class doctors_info(models.Model):
     gender=models.CharField(max_length=6, default='male', null = True)
     Registration_Number = models.CharField(max_length=25, default='')
     specialist_type = models.CharField(max_length=25, null=True)
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
     consultation_fee = models.DecimalField(max_digits=10,decimal_places=2,default=0)
     profile_pic = models.FileField(max_length=355, null=True)
     mou_file = models.FileField(null=True)

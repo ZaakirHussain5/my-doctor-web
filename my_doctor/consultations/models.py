@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 from doctors.models import doctors_info
 from patients.models import patient_info
 from doctor_payments.models import doctor_payments
+from django.db.models import Max
+
+def generateId():
+    import datetime
+    now = datetime.datetime.now()
+    uid = consultations.objects.aggregate(Max('id'))
+    uid = uid['id__max'] 
+    if uid == None:
+        uid = 0
+    return 'DPINV'+ str(now.year) + str(uid+1)
 
 
 class consultations(models.Model):
@@ -10,13 +20,13 @@ class consultations(models.Model):
     patient = models.ForeignKey(User,related_name='consultations',on_delete=models.SET_NULL,null=True)
     consultation_date_time = models.DateTimeField(auto_now_add=True)
     subscription_based = models.BooleanField(default=False)
-    inv_number  = models.CharField(max_length=25, null=True)
-    video_audio_rating = models.IntegerField()
-    consultation_rating = models.IntegerField()
-    overall_rating = models.IntegerField()
+    inv_number  = models.CharField(max_length=25,default=generateId)
+    video_audio_rating = models.IntegerField(default=0)
+    consultation_rating = models.IntegerField(default=0)
+    overall_rating = models.IntegerField(default=0)
     problem=models.CharField(max_length=250,default='Not Specified')
     message = models.CharField(max_length=500, null=True)
-    duration = models.CharField(max_length=100)
+    duration = models.CharField(max_length=100, blank='')
     consultation_amt = models.DecimalField(max_digits=10,decimal_places=2)
     comp_share = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
