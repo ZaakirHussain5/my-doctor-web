@@ -4,11 +4,29 @@
     <nav class="navbar navbar-default">
     <div class="container">
     
-    <div class="navbar-header">
+    <div class="navbar-header visible-lg visible-md visible-sm">
+    
     <a class="navbar-brand" href="{% url 'website:index'%}">
     <img src="{% static 'website/img/logo.png' %}" alt="logo1">
     <img src="{% static 'website/img/logo.png' %}" alt="logo1">
     </a>
+
+    </div>
+
+    <div class="navbar-header mob-nav visible-xs">
+        <div class="row">
+            <div class="col-xs-8">
+                <a class="navbar-brand" href="{% url 'website:index'%}">
+                    <img src="{% static 'website/img/logo.png' %}" alt="logo1">
+                    <img src="{% static 'website/img/logo.png' %}" alt="logo1">
+                </a>
+            </div>
+            <div class="col-xs-4">
+                <div id="loginItem" style="position: absolute;top:27px">
+                    <a href="{% url 'website:login'%}"><i class="fa fa-sign-in"></i> Login</a>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="collapse navbar-collapse mar-top-15" id="bs-example-navbar-collapse-1">

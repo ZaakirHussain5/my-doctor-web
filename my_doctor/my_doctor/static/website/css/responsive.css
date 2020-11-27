@@ -1,3 +1,6 @@
+footer #Cert1{
+  display:none;
+}
 @media(max-width:1440px){section.slider{padding: 9% 0 0 0 !important;}section.slider #x_023_animated_layers {height: auto;}#web{display: none;}#x_023_animated_layers,#x_023_animated_layers>.carousel-inner,#x_023_animated_layers>.carousel-inner>.item{overflow:hidden;height:575px;}}
 @media(max-width:1024px){section.slider {
     padding: 9% 0 0 0 !important;
@@ -15,7 +18,6 @@
     width: 100%;top: 105px;right: 15px;}.header-links {
       float: left;
       padding: 12px 0;
-      margin-left: 50%;
   }.video iframe {
     position: absolute;
     margin: 0 0 0 21px;
@@ -65,7 +67,70 @@ a.btn, button.btn{font-size: 16px;}
     font-size: 49px !important;
     line-height: 50px !important;}
 }
-@media(max-width:768px){.download-app{display: flex !important;margin:15px !important;}.slicknav_btn.slicknav_collapsed:before {color: #000;
+@media(max-width:768px){
+  .sec-list{
+    padding-top:15px;
+  }
+  .dropdown-content{
+    position: relative !important;
+    right:40px;
+  }
+  footer h3{
+    padding-bottom: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  footer #logo,footer #Cert{
+    display:none;
+  }
+ .login {
+    padding: 0!important;
+  }
+  .login-form,#loging_in{
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+  .checkbox-outer{
+    font-size:14px
+  }
+  .breadcrumb-outer span{
+    top:-6px !important;
+  }
+
+  footer #Cert1{
+    display:block;
+    margin-top: 5px;
+  }
+  footer #newsletter-form{
+    display:flex
+  }
+  footer #newsletter-form .fbtn{
+    background-color: #ffffff;
+  }
+  footer #newsletter-form input{
+    padding-right: 0 !important;
+  }
+  footer .footer-contact{
+    margin-bottom: 0 !important;
+  }
+  footer #newsletter-form button .btn{
+    padding:7px !important;
+  }
+
+  footer ul li{
+    line-height: 13px;
+  }
+  .breadcrumb-outer{
+    padding-top:54px !important;
+    margin-bottom: 4px !important;
+    text-align: left !important;
+  }
+  .form-title{
+    padding:0 !important;
+  }
+  .login .login-form{
+    margin-top:0
+  }
+  .download-app{display: flex !important;margin:15px !important;}.slicknav_btn.slicknav_collapsed:before {color: #000;
 }#x_023_animated_layers,#x_023_animated_layers>.carousel-inner,#x_023_animated_layers>.carousel-inner>.item{overflow:hidden;height:345px;}.slider h3{font-size: 45px !important;}.slider h4 {font-size: 25px !important;}section.slider .x_023_animated_layers_txt {left: 4%;width: 50%;}a.btn, button.btn{font-size: 15px;}.batch {top: 405px !important;}.batch img {width: 150px !important;margin: 0 0 0 30% !important;}.batch h5{font-size: 15px !important;}.footer .heading {float:  none;text-align: center;}.footer .f-contact-inner {display: block !important;}#web{display: block;}#tab{display: none;}.service-icon{width: 65px;height: 65px;}.appointment .section-title {width: 100%;right: 0;}.appointment-image {top: 15px;}.appointment-image {
   top: 15px;
   right: 0;
@@ -172,7 +237,7 @@ footer{
     box-shadow: none;
 }
     section.slider #x_023_animated_layers {height: auto;}section.slider .x_023_animated_layers_txt {top: 18%;left:0;width: 100%;padding: 0 10px;}.slider h3 {font-size: 40px !important;    line-height: 25px !important;}.slider h4 {
-  font-size: 19px !important;}a.btn, button.btn {font-size: 13px;padding: 8px;z-index: 1;    margin: 10px !important;
+  font-size: 19px !important;}a.btn, button.btn {font-size: 13px;padding: 7px;z-index: 1;    margin: 10px !important;
     float: left;}.batch {top: 310px !important;}.batch img {width: 100px !important;margin: 0 0 0 72% !important;}#x_023_animated_layers>.carousel-inner>.item>img{width: 100%;margin: auto;height: 75% !important;opacity: 0.4;}section.slider #x_023_animated_layers {height: auto;}.slicknav_btn.slicknav_open:before, .slicknav_btn.slicknav_collapsed:before {
       color: #000;}.footer .heading {float: none;text-align: center !important;}.footer .f-contact h3, .footer .f-contact h4 {margin-bottom: 0;text-transform: capitalize;font-weight: bold;text-align: center;}.footer .f-contact-inner {display: contents !important;}.appointment-image {
         height: 100%;
@@ -249,7 +314,16 @@ section.slider {
 }
 .nav-tabs.nav-justified>li {
     float: none;
-    width: 49%;
+    width: 100% !important;
+}
+.nav-tabs.nav-justified {
+  display:flex;
+}
+.register .nav-tabs .nav-item a,.register .nav-tabs{
+  width: 100%!important;
+}
+.nav-tabs.nav-justified>li>a{
+  margin-bottom: 1px!important;
 }
   .login-form form {
     padding: 30px 0% !important;
@@ -258,7 +332,7 @@ section.slider {
     box-shadow: none;
 }  
 .form-title {
-    padding: 20px 0% !important;
+    padding: 0px 0% !important;
     text-align: left;
     border: none;
     box-shadow: none;
