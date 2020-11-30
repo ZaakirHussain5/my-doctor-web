@@ -28,7 +28,7 @@ function submitRegistrationForm() {
     }
 
     $('#submit').html(`
-    <i class="fas fa-spinner fa-spin"></i> Your Dashboard is getting Ready...
+    <i class="fa fa-spinner fa-spin"></i> Your Dashboard is getting Ready...
     `)
 
     $('#submit').attr('disabled', 'disabled')

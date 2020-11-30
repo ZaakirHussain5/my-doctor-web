@@ -18,46 +18,108 @@
                                         role="tab" aria-controls="all-calls" aria-selected="false">Prescriptions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="missed-calls-tab" data-toggle="pill" href="#reports-tab"
-                                        role="tab" aria-controls="missed-calls" aria-selected="true">Reports</a>
+                                    <a class="nav-link active" id="missed-calls-tab" data-toggle="pill"
+                                        href="#reports-tab" role="tab" aria-controls="missed-calls"
+                                        aria-selected="true">Reports</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane  fade" id="prescriptions-tab" role="tabpanel"
                                 aria-labelledby="pills-contact-tab">
-                                <table id="tbl-prescription" class="table table-hover" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                slno
-                                            </th>
-                                            
-                                            <th>Description</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="tab-pane show active fade" id="reports-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
-                               
-                                <table id="reports" class="table table-hover" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>Slno</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <div class="mob-list">
+                                    <div class="sidebar-userlist ps ps--active-y">
+                                        <ul class="list-unstyled prescriptionList">
+                                            <li>
+                                                <div class="calllist">
+                                                    <div class="calllist__details">
+                                                        <div class="calllist__details--name">Description</div>
+                                                    </div>
 
-                                    </tbody>
-                                </table>
+                                                    <div class="calllist__actions">
+                                                        <div class="iconbox btn-hovered-light">
+                                                            <span>Actions</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="calllist">
+                                                    <div class="calllist__details">
+                                                        <div class="calllist__details--name">Lorem, ipsum dolor sit amet
+                                                            consectetur adipisicing elit. Animi, illum eius consequuntur
+                                                            obcaecati quam eaque maxime quisquam optio quasi doloribus.
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="calllist__actions">
+                                                        <div class="iconbox btn-hovered-light">
+                                                            <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane show active fade" id="reports-tab" role="tabpanel"
+                                aria-labelledby="pills-contact-tab">
+                                <div class="mob-list">
+                                    <div class="sidebar-userlist ps ps--active-y">
+                                        <ul class="list-unstyled medical_records_list">
+                                            <li>
+                                                <div class="calllist">
+                                                    <div class="calllist__details">
+                                                        <div class="calllist__details--name">Title</div>
+                                                    </div>
+                                                    <div class="calllist__details">
+                                                        <div class="calllist__details--name">Description</div>
+                                                    </div>
+
+                                                    <div class="calllist__actions">
+                                                        <div class="iconbox btn-hovered-light">
+                                                            <span>Actions</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="calllist">
+                                                    <div class="calllist__details"
+                                                        style="padding: 0 20px 0 0 !important;">
+                                                        <div class="calllist__details--name">Lorem ipsum dolor sit amet
+                                                            consectetur adipisicing elit. Quasi ipsam harum iure!</div>
+                                                    </div>
+                                                    <div class="calllist__details">
+                                                        <div class="calllist__details--name">Lorem, ipsum dolor sit amet
+                                                            consectetur adipisicing elit. Animi, illum eius consequuntur
+                                                            obcaecati quam eaque maxime quisquam optio quasi doloribus.
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="calllist__actions"
+                                                        style="display: contents !important;">
+                                                        <div class="iconbox btn-hovered-light">
+                                                            <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                                        </div>
+                                                        <div class="iconbox btn-hovered-light">
+                                                            <i class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="float-right">
-                                    <button data-toggle="modal" data-target="#newReport" type="button" class="btn btn-primary">
+                                    <button data-toggle="modal" data-target="#newReport" type="button"
+                                        class="btn btn-primary">
                                         Upload New Report
-                                     </button>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -71,131 +133,242 @@
     </div>
 </div>
 <div class="modal new-message-dialog" id="newReport" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                            <h5>New Report</h5>
-                       
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        
-                    </div>
-                    <div class="modal-body">
-                        <form id="mediaclForms">
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>New Report</h5>
 
-                            <div class="form-group">
-                               <label for="RecordType">Report Title</label>
-                               <input name="record_type" type="text" class="form-control" placeholder="Enter Report title">
-                            </div>
-                            <div class="form-group">
-                                <label for="RecordType">Report Files</label>
-                                <input type="file" name="record_files" class="form-control">
-                             </div>
-                            <div class="form-group">
-                                <label for="ConsultingAbout">Description</label>
-                                <textarea name="description" class="form-control" id="ConsultingAbout" rows="7" placeholder="Describe your Problem" style="font-size: medium;"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn mfb-component__button--main"
-                                style="width:100%; border-radius:30px" id="ConfirmClick">Add Report</button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
             </div>
+            <div class="modal-body">
+                <form id="mediaclForms">
+
+                    <div class="form-group">
+                        <label for="RecordType">Report Title</label>
+                        <input name="record_type" type="text" class="form-control" placeholder="Enter Report title">
+                    </div>
+                    <div class="form-group">
+                        <label for="RecordType">Report Files</label>
+                        <input type="file" name="record_files" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ConsultingAbout">Description</label>
+                        <textarea name="description" class="form-control" id="ConsultingAbout" rows="7"
+                            placeholder="Describe your Problem" style="font-size: medium;"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn mfb-component__button--main"
+                            style="width:100%; border-radius:30px" id="ConfirmClick">Add Report</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
 <script>
     $(document).ready(function () {
-        let prescription = $('#tbl-prescription').DataTable({
-            ajax: {
-                url: '/api/PatientPrescription/',
-                dataSrc: "",
-                'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
-                },
-            },
-            columns: [
-                {
-                    data: 'id'
-                },
-                {
-                    data: 'description'
-                },
-                {
-                    data: 'id',
-                    render: function (data, type, row) {
-                        return `<button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
-                                    <i class="fa fa-user-md"></i>View Details
-                                </button>`
-                    }
-                }
+        // let prescription = $('#tbl-prescription').DataTable({
+        //     ajax: {
+        //         url: '/api/PatientPrescription/',
+        //         dataSrc: "",
+        //         'beforeSend': function (request) {
+        //             request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+        //         },
+        //     },
+        //     columns: [
+        //         {
+        //             data: 'id'
+        //         },
+        //         {
+        //             data: 'description'
+        //         },
+        //         {
+        //             data: 'id',
+        //             render: function (data, type, row) {
+        //                 return `<button type="button" class="btn btn-success btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+        //                             <i class="fa fa-user-md"></i>View Details
+        //                         </button>`
+        //             }
+        //         }
 
-            ],
-            language: {
-                lengthMenu: "_MENU_",
-                search: "",
-            },
-            fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                $("td:first", nRow).html(iDisplayIndex + 1);
-                return nRow;
+        //     ],
+        //     language: {
+        //         lengthMenu: "_MENU_",
+        //         search: "",
+        //     },
+        //     fnRowCallback: function (nRow, aData, iDisplayIndex) {
+        //         $("td:first", nRow).html(iDisplayIndex + 1);
+        //         return nRow;
+        //     }
+
+        // })
+
+        // let report = $('#reports').DataTable({
+        //     ajax: {
+        //         url: '/api/PatientRecordAPI/',
+        //         dataSrc: "",
+        //         'beforeSend': function (request) {
+        //             request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+        //         },
+        //     },
+        //     columns: [
+        //         {
+        //             data: 'id'
+        //         },
+        //         {
+        //             data: 'record_type'
+        //         },
+        //         {
+        //             data: 'description'
+        //         },
+
+        //         {
+        //             data: 'id',
+        //             render: function (data, type, row) {
+        //                 console.log(row)
+        //                 return `<a href="${row.record_files}" target="_blank" class=" btn btn-success btn-sm">
+        //                             <i class="mdi mdi-file text-light"></i>
+        //                             </a>
+        //                             <button type='button' class='btn btn-danger btn-sm'>
+        //                                 <i class="mdi mdi-trash-can-outline text-light"></i>
+
+        //                         </button>`
+        //             }
+        //         }
+
+        //     ],
+        //     language: {
+        //         lengthMenu: "_MENU_",
+        //         search: "",
+        //     },
+        //     fnRowCallback: function (nRow, aData, iDisplayIndex) {
+        //         $("td:first", nRow).html(iDisplayIndex + 1);
+        //         return nRow;
+        //     }
+
+        // })
+
+        $.ajax({
+            url: '/api/PatientPrescription',
+            method: 'GET',
+            contentType: 'application/json',
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
             }
+        }).done((response) => {
+            let lis = `
+            <li>
+                <div class="calllist">
+                    <div class="calllist__details">
+                        <div class="calllist__details--name">Description</div>
+                    </div>
 
+                    <div class="calllist__actions">
+                        <div class="iconbox btn-hovered-light">
+                            <span>Actions</span>
+                        </div>
+                    </div>
+                </div>
+            </li>`
+            ;
+            console.log(response)
+            response.map(index => lis += `<li>
+                <div class="calllist">
+                    <div class="calllist__details">
+                        <div class="calllist__details--name">${index.description}</div>
+                        
+                    </div>
+
+                    <div class="calllist__actions">
+                        <div class="iconbox btn-hovered-light">
+                            <a href="${index.record_files}" target="_blank" ><i class="iconbox__icon mdi mdi-file text-primary"></i></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li>`)
+
+            $('.prescriptionList').html(lis)
+        }).fail((err) => {
+            console.log(err)
         })
 
-        let report = $('#reports').DataTable({
-            ajax: {
-                url: '/api/PatientRecordAPI/',
-                dataSrc: "",
-                'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
-                },
-            },
-            columns: [
-                {
-                    data: 'id'
-                },
-                {
-                    data: 'record_type'
-                },
-                {
-                    data: 'description'
-                },
 
-                {
-                    data: 'id',
-                    render: function (data, type, row) {
-                        console.log(row)
-                        return `<a href="${row.record_files}" target="_blank" class=" btn btn-success btn-sm">
-                                    <i class="mdi mdi-file text-light"></i>
-                                    </a>
-                                    <button type='button' class='btn btn-danger btn-sm'>
-                                        <i class="mdi mdi-trash-can-outline text-light"></i>
-                                    
-                                </button>`
-                    }
-                }
 
-            ],
-            language: {
-                lengthMenu: "_MENU_",
-                search: "",
-            },
-            fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                $("td:first", nRow).html(iDisplayIndex + 1);
-                return nRow;
+        $.ajax({
+            url: '/api/patient-medical-records',
+            method: 'GET',
+            contentType: 'application/json',
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
             }
+        }).done((response)=>{
+            console.log(response)
+            let lis = `
+                <li>
+                    <div class="calllist">
+                        <div class="calllist__details">
+                            <div class="calllist__details--name">Title</div>
+                        </div>
+                        <div class="calllist__details">
+                            <div class="calllist__details--name">Description</div>
+                        </div>
+                        <div class="calllist__actions">
+                            <div class="iconbox btn-hovered-light">
+                                <span>Actions</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>`;
+            
+            response.map(index=>{
+                lis += `
+                <li>
+                    <div class="calllist">
+                        <div class="calllist__details"
+                            style="padding: 0 20px 0 0 !important;">
+                            <div class="calllist__details--name">${index.record_type}</div>
+                        </div>
+                        <div class="calllist__details">
+                            <div class="calllist__details--name">${index.description}</div>
+
+                        </div>
+
+                        <div class="calllist__actions"
+                            style="display: contents !important;">
+                            <div class="iconbox btn-hovered-light">
+                                <a href="${index.record_files}" target="_blank">
+                                    <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                </a>
+                            </div>
+                            <div class="iconbox btn-hovered-light">
+                                <i class="iconbox__icon mdi mdi-delete text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                `
+            })
+            $('.medical_records_list').html(lis)
 
         })
+        .fail(err=>{
+            console.log(err)
+        })
+
+
 
 
         ////////////////// MEDICAL REPORT SUBMITING //////////////////
-        $('#mediaclForms').submit((e)=>{
+        $('#mediaclForms').submit((e) => {
             e.preventDefault(); //pick my call
             e.stopImmediatePropagation();
             let data = new FormData(document.getElementById('mediaclForms'))
@@ -204,17 +377,45 @@
                 method: 'POST',
                 data: data,
                 contentType: false,
-                processData:false,
-                beforeSend: function(xhr){
+                processData: false,
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
 
-            }).done((response)=>{
+            }).done((response) => {
                 console.log(response)
-                report.ajax.reload()
+                let lis = `
+                <li>
+                    <div class="calllist">
+                        <div class="calllist__details"
+                            style="padding: 0 20px 0 0 !important;">
+                            <div class="calllist__details--name">${response.record_type}</div>
+                        </div>
+                        <div class="calllist__details">
+                            <div class="calllist__details--name">${response.description}</div>
+
+                        </div>
+
+                        <div class="calllist__actions"
+                            style="display: contents !important;">
+                            <div class="iconbox btn-hovered-light">
+                                <a href="${response.record_files}" target="_blank">
+                                    <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                </a>
+                            </div>
+                            <div class="iconbox btn-hovered-light">
+                                <i class="iconbox__icon mdi mdi-delete text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                `;
+                let previous = $('.medical_records_list').html()
+                $('.medical_records_list').html(previous + lis)
+
                 $('#newReport').removeClass('active')
                 $('#newReport').modal('hide')
-            }).fail((error)=>{
+            }).fail((error) => {
                 console.log(error);
             })
         })

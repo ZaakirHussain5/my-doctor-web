@@ -70,7 +70,7 @@ transition-duration: .3s;
     box-shadow: inset 0 0 0.8125rem 0.1875rem rgba(0,0,0,.125);
 }
 .card{
-margin: 10px;
+margin: 45px 10px;
 }
 .ca-content__callstab .ca-call-details-card {
     padding: 5px;
@@ -95,6 +95,32 @@ margin: 10px;
   position: relative;
   top: -24px;
 }
+.ca-sidebar__header .img1 .fliph{
+display: none;
+}
+.image_2{
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    }
+.image_1{
+    opacity: 1;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    }
+.image_1.fliph{
+    opacity: 0;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    }
+.image_2.fliph{
+    opacity: 1;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    padding: 15px 0;
+    }
+   
 @media(max-width:1024px){
     .ca-main-wrapper .ca-sidebar-wrapper.fliph {
         max-width: 8% !important; 
@@ -116,10 +142,48 @@ margin: 10px;
     .ca-main-wrapper .ca-sidebar-wrapper.fliph .mfb-component--br .mfb-component__list [data-mfb-label]:after {
         display: none;
     }
+    .ca-main-wrapper .ca-content-wrapper {
+        overflow: auto;
+        height: calc(130vh - 9.6875rem);
+    }
+    .ca-call-history__right{
+        padding-left: 0;
+    }
 }
 @media only screen and (max-width: 768px){
+    .ca-call-history__right
+    {
+        position: relative;
+    text-align: center;
+    padding: 10px 0 0 0;
+    }
+    .ca-call-details-card{
+        height : 130px !important;
+    }
+    
+    .card {
+        margin:0px -11px !important;
+    }
+    .home-card{
+        margin:9px 10px !important;
+    }
+    h4{
+        font-size : 20px;
+        font-weight: bold;
+    }
+    .container{
+        padding:0 !important;
+    }
+    .ps-list{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .modal-backdrop{
+        z-index: 1;
+    }
+    
   .conversation-panel__body {
-    height: calc(130vh - 9.6875rem);
+    height: calc(123vh - 9.6875rem);
 }
     .theme-customizer {
     z-index: 1099;
@@ -134,6 +198,8 @@ margin: 10px;
     visibility: visible;
     transition-timing-function: ease-in-out;
     transition-duration: .3s;
+    overflow: auto;
+    height: calc(130vh - 9.6875rem);
     /* transition-property: left,visibility; */
 }
 .ca-main-wrapper .ca-sidebar-wrapper.fliph, .ca-main-wrapper .ca-sidebar-wrapper.fliph .iconbox-group{
@@ -191,10 +257,62 @@ transition-duration: .3s;
 .back2homepage {
     display: block;
 }
+
+.image_2{
+    position: absolute;
+    opacity: 1;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+            padding: 15px 0;
+    }
+.image_1{
+    opacity: 0;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    }
+.image_1.fliph{
+    opacity: 1;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    }
+.image_2.fliph{
+    opacity: 0;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    padding: 15px 0;
+    }
 }
 @media only screen and (max-width: 425px){
+    .list-unstyled .mdi:before, .mdi-set{
+        font-size: 1.2rem !important;
+    }
+    .iconbox__icon
+    {
+        width: 1.3rem !important;
+    }
+    .user-avatar .mdi:before{
+        font-size:2rem !important;
+      }
+    .datepicker-inline{
+        width:100% !important;
+    }
+    .conversation-panel__body ul{
+        display: block;
+    }
+    .ca-call-history .col-sm-12{
+        padding-right: 0;
+    }
+    .ca-call-history__right
+    {
+        position: relative;
+    text-align: center;
+    padding: 10px 0 0 0;
+    }
+    .datepicker-days{
+        overflow: auto;
+    }
   .conversation-panel__body {
-    height: calc(125vh - 9.6875rem);
+    height: calc(123vh - 9.6875rem);
 }
 .ca-main-conatiner.flipsmall .modal-content{
     width: 89%;
@@ -209,8 +327,11 @@ transition-duration: .3s;
     visibility: visible;
     transition-timing-function: ease-in-out;
     transition-duration: .3s;
+    overflow: auto;
+    height: calc(130vh - 9.6875rem);
     /* transition-property: left,visibility; */
 }
+
 .ca-main-wrapper .ca-sidebar-wrapper.fliph, .ca-main-wrapper .ca-sidebar-wrapper.fliph .iconbox-group{
     max-width: 60% !important; 
     width: 60% !important;

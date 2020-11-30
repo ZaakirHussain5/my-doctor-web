@@ -2,177 +2,162 @@
 {%load static%}
 {% block content%}
 <style>
-    .register .nav-tabs{
-    margin-bottom: 3%;
-    border: none;
-    background: #0b818b;
-    border-radius: 1.5rem;
-}
-.register .nav-tabs .nav-link{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    height: 34px;
-    font-weight: 600;
-    color: #fff;
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-}
-.register .nav-tabs .nav-item a:hover{
-    border: none;
-    color:#0b818b
-}
-.register .nav-tabs .nav-item.active a{
-    width: 100px;
-    color: #0b818b;
-    border: 2px solid #0b818b;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-    background-color: #fff;
-}.breadcrumb-outer span{
-    float: right;
-    position: relative;
-    top: -34px}
+    .register .nav-tabs {
+        margin-bottom: 3%;
+        border: none;
+        background: #0b818b;
+        border-radius: 1.5rem;
+    }
+
+    .register .nav-tabs .nav-link {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        height: 34px;
+        font-weight: 600;
+        color: #fff;
+        border-top-right-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+
+    .register .nav-tabs .nav-item a:hover {
+        border: none;
+        color: #0b818b
+    }
+
+    .register .nav-tabs .nav-item.active a {
+        width: 100px;
+        color: #0b818b;
+        border: 2px solid #0b818b;
+        border-top-left-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+        background-color: #fff;
+    }
+
+    .breadcrumb-outer span {
+        float: right;
+        position: relative;
+        top: -34px
+    }
 </style>
 <section class="breadcrumb">
     <div class="container">
-    <div class="breadcrumb-outer">
-    <nav aria-label="breadcrumb">
-    <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Register</li>
-    </ul>
-    </nav>
-    <h2>Register</h2>
-    <span class="register">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <div class="breadcrumb-outer">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Register</li>
+                </ul>
+            </nav>
+            <h2>Register</h2>
+            <span class="register">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li id="Patient" class="nav-item active">
-                        <a class="nav-link" id="home-tab" href="#" role="tab" aria-controls="home" aria-selected="true">Patient</a>
+                        <a class="nav-link" id="home-tab" href="#" role="tab" aria-controls="home"
+                            aria-selected="true">Patient</a>
                     </li>
                     <li id="Doctor" class="nav-item">
-                        <a class="nav-link" id="profile-tab" href="/doctor_reg" role="tab" aria-controls="profile" aria-selected="false">Doctor</a>
+                        <a class="nav-link" id="profile-tab" href="/doctor_reg" role="tab" aria-controls="profile"
+                            aria-selected="false">Doctor</a>
                     </li>
                 </ul>
-     
-    </span>
+
+            </span>
+        </div>
     </div>
-    </div>
-    </section>
-    <section class="login">
-        
-            
-<div class="container">
-<div class="row">
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="login-form">
-<form id="patientRegistration">
-    <div class="col-xs-12">
-<div class="form-title">
-<h2>Self Registration</h2>
-</div>
-</div>
-<div class="row" style="height:222px;overflow-y:auto;overflow-x:hidden">
-<div class="form-group col-xs-5">
-<input type="text" class="form-control" id="Name1" placeholder="Enter your name" required>
-</div>
-<div class="form-group col-xs-4">
-
-<input type="tel" class="form-control" id="mob1" placeholder="Phone No" required>
-</div>
-<div class="form-group col-xs-3 otp">
-    <p><button type="button" class="btn form-control" style="font-size:14px" id="btnOTP">Verify</button></p>
-</div>
-
-<div class="form-group col-xs-9" id="div-otp" style="display: none;">
-
-<input type="text" class="form-control"  id="OTP" placeholder="Enter the OTP" required>
-</div>
-
-<div class="form-group col-xs-12">
-
-<input type="email" class="form-control" id="email" placeholder="Email ID">
-</div>
-<div class="form-group col-xs-6">
-
-    <input type="password" class="form-control" id="password" placeholder="Set Password" required>
-    </div>
-    <div class="form-group col-xs-6">
-    
-    <input type="password" class="form-control" id="confpassword" placeholder="Re enter Password" required>
-    </div>
-<div class="row">
-<div class="col-xs-12">
-<div class="form-group col-xs-6">
-
-<input type="number" class="form-control" id="age" placeholder="Age" min="1" max="100">
-</div>
-<div class="form-group col-xs-6">
-
-<select id="gender">
-<option>Male</option>
-<option>Female</option>
-</select>
-</div>
-<div class="form-group col-xs-6">
-
-<input type="number" class="form-control" id="height" placeholder="Height">
-</div>
-<div class="form-group col-xs-6">
-
-<input type="number" class="form-control" id="weight" placeholder="Weight" min="1">
-</div>
-<div class="form-group col-xs-6">
-
-<input type="text" class="form-control" id="city" placeholder="City">
-</div>
-<div class="form-group col-xs-6">
-
-<input type="text" class="form-control" id="state" placeholder="State">
-</div>
-</div>
-</div>
-
-
-
-
-
-</div>
-<div class="col-xs-12 text-center">
-<div class="comment-btn">
-<button type="submit" class="btn btn-block" id="submit">Register</button>
-</div>
-</div>
-</form>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="login-form">
-<form>
-<div class="row">
-<div class="col-xs-12">
-<div class="form-title">
-<h2>Let's do it for you</h2>
-<p>Our experienced team is ready to
-assist <br>you in your registration
-process.</p>
-</div>
-</div>
-<div class="row text-center" style="padding: 11.7% 0;">
-<h3>JUST CALL US</h3>
-<h3 style="color: rgb(197 90 20);"><b>080 – 4554 - 9495</b></h3>
-</div>
-<div class="col-xs-12 text-center">
-<div class="comment-btn">
-<a href="tel:08045549494" class="btn btn-block">Call !!</a>
-</div>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
 </section>
-    
+<section class="login">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="login-form">
+                    <form id="patientRegistration">
+                        <div class="col-xs-12">
+                            <div class="form-title">
+                                <h2>Self Registration</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-5 col-xs-12">
+                                <input type="text" class="form-control" id="Name1" placeholder="Enter your name"
+                                    required>
+                            </div>
+                            <div class="form-group col-md-7 col-xs-12">
+                                <div class="input-group">
+                                    <input type="tel" class="form-control" id="mob1" placeholder="Phone No" required>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn"
+                                                id="btnOTP">Verify</button>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3 col-xs-4 otp">
+                            </div>
+
+                            <div class="form-group col-xs-12" id="div-otp" style="display: none;">
+
+                                <input type="text" class="form-control" id="OTP" placeholder="Enter the OTP" required>
+                            </div>
+
+                            <div class="form-group col-md-12 col-xs-12">
+
+                                <input type="email" class="form-control" id="email" placeholder="Email ID">
+                            </div>
+                            <div class="form-group col-md-6 col-xs-12">
+
+                                <input type="password" class="form-control" id="password" placeholder="Set Password"
+                                    required>
+                            </div>
+                            <div class="form-group col-md-6 col-xs-12">
+
+                                <input type="password" class="form-control" id="confpassword"
+                                    placeholder="Re enter Password" required>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <div class="comment-btn">
+                                <button type="submit" class="btn btn-block" id="submit">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="login-form">
+                    <form>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-title">
+                                    <h2>Let's do it for you</h2>
+                                    <p>Our experienced team is ready to
+                                        assist <br>you in your registration
+                                        process.</p>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="padding: 4.9% 0;">
+                                <h3>JUST CALL US</h3>
+                                <h3 style="color: rgb(197 90 20);"><b>080 – 4554 - 9495</b></h3>
+                            </div>
+                            <div class="col-xs-12 text-center">
+                                <div class="comment-btn">
+                                    <a href="tel:08045549495" class="btn btn-block">Call !!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 {%endblock%}
 {% block scripts %}
@@ -181,18 +166,18 @@ process.</p>
         $('#btnOTP').click(function () {
             if ($('#Name1').val() == '' || $('#mob1').val() == '')
                 alert('Enter Name and Mobile Number')
-            else{
+            else {
                 $.ajax({
-                    url:`https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Welcome ${$('#Name1').val()}, OTP for Mobile Number Verification is <OTP>. Do not Share or forward&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`,
-                    method:'GET',
-                    success:function(response){
+                    url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Welcome ${$('#Name1').val()}, OTP for Mobile Number Verification is <OTP>. Do not Share or forward&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`,
+                    method: 'GET',
+                    success: function (response) {
                         console.log(response)
                         $('#div-otp').show()
                     }
                 })
-               
+
             }
-                
+
         })
 
         var password = document.getElementById("password")
