@@ -614,15 +614,10 @@
       {
         data: 'Description'
       },
-      {
-        data: "id",
-        render: function (data, type, app) {
-          return `<button type="button" class="btn btn-primary btn-sm call" data-const="${app.id}" data-patient="${app.pat_id}">
-                                    <i class="fa fa-video-camera"></i> Call
-                                    </button><br>
-                    `
-        }
-      }
+      // {
+      //   data: "id",
+        
+      // }
 
     ],
     language: {
@@ -660,7 +655,13 @@
         data: 'Description'
       },
       {
-        data: "id"
+        data: "id",
+        render: function (data, type, app) {
+          return `<button type="button" class="btn btn-primary btn-sm call" data-const="${app.id}" data-patient="${app.pat_id}">
+                                    <i class="fa fa-video-camera"></i> Call
+                                    </button><br>
+                    `
+        }
       }
 
     ],
@@ -698,9 +699,9 @@
       {
         data: 'Description'
       },
-      {
-        data: "id"
-      }
+      // {
+      //   data: "id"
+      // }
 
     ],
     language: {
@@ -713,7 +714,7 @@
     }
   })
 
-  jQuery('#UpComingAppointments').on('click', '.call', function () {
+  jQuery('#TodayAppointments').on('click', '.call', function () {
     var button = jQuery(this)
     jQuery.ajax({
       url: `/api/CallPatient?patient=${button.attr('data-patient')}&const=${button.attr('data-const')}`,

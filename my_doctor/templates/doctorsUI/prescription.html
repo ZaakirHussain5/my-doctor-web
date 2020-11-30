@@ -13,10 +13,10 @@
 <div class="content">
     <form id="subscriptionForm">
         <div class="card">
-
+        
             <div class="card-body card-block">
                 <div class="row">
-                    <input type="hidden" name="id" id="spl_id">
+                    <input type="hidden" name="id" id="pres_id">
                     <div class="offset-md-2 col-md-4 pr-5 pl-5">
                         <div class="row form-group">
                             <label for="patient" class=" form-control-label">Patient</label>
@@ -77,7 +77,7 @@
                         <tr>
                             <th>Slno</th>
                             <th>Patient Name</th>
-                            <th>Record Type</th>
+                            <th>Prescription Title</th>
                             <th>Description</th>
                             <th>created_by</th>
                             <th>Actions</th>
@@ -126,9 +126,6 @@
                         render: function (data, type, row) {
                             return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
                                     <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
-                                    <i class="fa fa-trash"></i>
                                 </button>`
                         }
                     },
@@ -142,25 +139,51 @@
 
             let data = new FormData(document.getElementById('subscriptionForm'))
             console.log(data);
-            $.ajax({
-                url: "/api/DoctorPrescription/",
-                method: 'POST',
-                data: data,
-                contentType: false,
-                processData: false,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
-                }
-            }).done((response)=>{
-                console.log(response)
-                table.ajax.reload();
-            }).fail((error)=>{
-                console.log(error)
-            })
+            let url = '/api/DoctorPrescription/';
+            let action = 'POST';
+            let message = "Prescription added successfully."
 
+            if(jQuery('#submitBtn').html() == 'Update Prescription' ){
+                action = 'PUT'
+                url = url + jQuery('#pres_id').val() + '/'
+                message = "Prescription updated successfully."
+            }
 
+                $.ajax({
+                    url: url,
+                    method: action,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (request) {
+                        request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                    }
+                }).done((response)=>{
+                    console.log(response)
+                    table.ajax.reload();
+                    jQuery('#subscriptionForm').trigger('reset')
+                    jQuery('#submitBtn').html('Add Prescription')
+                    toastr.success(message,"Success",{positionClass:'toast-top-center'})
+                }).fail((error)=>{
+                    console.log(error)
+                    toastr.error("Operation Failed","Success",{positionClass:'toast-top-center'})
+                })
+
+            
 
         })
+
+        crudOperations({
+            url: '/api/DoctorPrescription/',
+            put_url: '/api/DoctorPrescription/',
+            table_id:'#subs_plans',
+            id_selector:'#pres_id',
+            form_id:'#subscriptionForm',
+            table:table,
+            entity:'Prescription',
+            tabs:true
+        })
+
         jQuery('#subs_plans').on('click', '.delete', function () {
         var id = jQuery(this).attr('data-id')  
         bootbox.confirm({
@@ -233,6 +256,8 @@
     
         }
     }
+
+ 
 
 
     // jQuery('#subs_plans').on('click', '.edit', function () {

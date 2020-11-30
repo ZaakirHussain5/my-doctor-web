@@ -1,4 +1,4 @@
-from .api import vedioChatOparetion,CallDoctorAPI,CallPatientAPI,AnswerCallAPI
+from .api import vedioChatOparetion,CallDoctorAPI,CallPatientAPI,AnswerCallAPI, check_for_answer
 from rest_framework import routers
 from django.urls import path, include
 from . import views
@@ -6,6 +6,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register('vedioChatOparetion', vedioChatOparetion, 'vedioChatOparetion')
+router.register('check_for_answer', check_for_answer, 'check_for_answer')
 
 urlpatterns = [
     path('',include(router.urls)),

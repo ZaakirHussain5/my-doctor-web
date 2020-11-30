@@ -26,7 +26,7 @@
         }
 
         @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-        
+
 
         @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
@@ -315,11 +315,11 @@
                             <h5>Patient Details</h5>
                             <div class="text-center">
                                 {% if patient.profile_pic%}
-                        <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
-                        {% else %}
-                        <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
-                        {% endif %}
-                                 <h4>{{patient.full_name}}</h4>
+                                <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
+                                {% else %}
+                                <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
+                                {% endif %}
+                                <h4>{{patient.full_name}}</h4>
                             </div>
                             <table class="table table-hover ">
                                 <tr>
@@ -378,7 +378,8 @@
                                     <ul class="timeline">
                                         {% for consultation_list in consultation_lists %}
                                         <li>
-                                            <a target="_blank" href="#">{{consultation_list.doctor_id.full_name}} ({{ consultation_list.doctor_id.specialist_type}})</a>
+                                            <a target="_blank" href="#">{{consultation_list.doctor_id.full_name}}
+                                                ({{ consultation_list.doctor_id.specialist_type}})</a>
                                             <a href="#" class="float-right">{{ consultation_list.format_date }}</a>
                                             <p>{{ consultation_list.message }}</p>
                                         </li>
@@ -389,39 +390,42 @@
                                     <h5 class="mt-2">{{patient.full_name}}'s Previous Prescriptions</h5>
                                     <ul class="list-group">
                                         {% for records in  medical_records %}
-                                            {% if records.is_prescription %}
-                                            <li class="list-group-item">
-                                                <div class="float-right">
-                                                    <a href="{{ records.record_files.url }}" target= _blank class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-file"></i> View
-                                                    </a>
-                                                </div>
-                                                {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on {{records.format_last_modified}}
+                                        {% if records.is_prescription %}
+                                        <li class="list-group-item">
+                                            <div class="float-right">
+                                                <a href="{{ records.record_files.url }}" target=_blank
+                                                    class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-file"></i> View
+                                                </a>
+                                            </div>
+                                            {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on
+                                            {{records.format_last_modified}}
 
-                                            </li>
-                                            {% endif %}
+                                        </li>
+                                        {% endif %}
                                         {% endfor %}
-                                        
+
                                     </ul>
                                 </div>
                                 <div class="tab-pane fade" id="Reps" role="tabpanel">
                                     <h5 class="mt-2">{{ patient.full_name }}'s Medical Reports</h5>
                                     <ul class="list-group">
                                         {% for records in medical_records %}
-                                            {% if records.is_prescription == False %}
-                                            <li class="list-group-item">
-                                                {% if records.record_files %}
-                                                <div class="float-right">
-                                                        <a href="{{records.record_files.url }}" target="_blank" class="btn btn-sm btn-primary">
-                                                            <i class="fa fa-file"></i> View
-                                                        </a>
-                                                    </div>
-                                                    {% endif %}
-                                                    {{ records.description }} 
-                                                </li>
+                                        {% if records.is_prescription == False %}
+                                        <li class="list-group-item">
+                                            {% if records.record_files %}
+                                            <div class="float-right">
+                                                <a href="{{records.record_files.url }}" target="_blank"
+                                                    class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-file"></i> View
+                                                </a>
+                                            </div>
                                             {% endif %}
+                                            {{ records.description }}
+                                        </li>
+                                        {% endif %}
                                         {% endfor %}
-                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -479,7 +483,7 @@
 
                 </div>
                 <ul id="messagess" class="messages">
-                    
+
                 </ul>
                 <div class="footer">
                     <div class="text-box" contenteditable="true" disabled="true"></div>
@@ -506,25 +510,43 @@
     <script>
         $(document).ready(function () {
             let consultation_id = '';
-            if(user == 'pat'){
-                data={
-                    appoinment_id: appoinment,
-                    doctor_id: doctor_id
-                };
+            if (user == 'pat'){
+                function create_consultation() {
+                    data = {
+                        appoinment_id: appoinment,
+                        doctor_id: doctor_id
+                    };
+                    $.ajax({
+                        url: '/api/consultations/',
+                        method: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        }
+                    }).done((response) => {
+                        consultation_id = response.id
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                }
 
-                $.ajax({
-                    url: '/api/consultations/',
-                    method: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    beforeSend: function(xhr){
-                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-                    }
-                }).done((response)=>{
-                    consultation_id = response.id
-                }).fail((err)=>{
-                    console.log(err)
-                })
+                let checkAnswer = setInterval(check_for_answer, 2000)
+                function check_for_answer(){
+                    jQuery.ajax({
+                        url: `/api/check_for_answer?sessions=${session}`,
+                        method: 'GET',
+                        contentType: 'application/json'
+                    }).done((res) => {
+                        console.log('Calling ...', res[0])
+                        if (res[0].is_answered == true) {
+                            create_consultation()
+                            clearInterval(checkAnswer)
+                        }
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                }
             }
             $('#end').click(function () {
                 const urlParams = new URLSearchParams(window.location.search);
@@ -559,7 +581,8 @@
                     }).fail((response) => {
                         console.log(response)
                     })
-                    window.location.href = '/api/ratings?consultation='+ consultation_id;
+                    window.location.href = '/api/ratings?consultation=' + consultation_id;
+                    
                 }
             })
 

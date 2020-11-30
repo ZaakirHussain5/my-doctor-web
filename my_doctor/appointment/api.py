@@ -31,7 +31,7 @@ def getDateFormat():
     year = '{:02d}'.format(d.year)
     month = '{:02d}'.format(d.month)
     day = '{:02d}'.format(d.day)
-    formated_date = '{0}-{1}-{2}'.format(year, month, day)
+    formated_date = '{0}/{1}/{2}'.format(day, month, year)
 
     return formated_date
 
@@ -90,7 +90,7 @@ class upComingAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         dates = getDateFormat()
-        return appointment.objects.filter(consultation_status = 'Pending', doctor=self.request.user.Doctors).exclude(appointment_date=dates)
+        return appointment.objects.filter(consultation_status = 'Pending', doctor=self.request.user.Doctors).exclude(appointment_date__contains=dates)
 
 
 class previousAppoinment(viewsets.ModelViewSet):
@@ -100,7 +100,7 @@ class previousAppoinment(viewsets.ModelViewSet):
     )
 
     def get_queryset(self):
-        return appointment.objects.filter(consultation_status = 'success', doctor=self.request.user.Doctors)
+        return appointment.objects.filter(consultation_status = 'Completed', doctor=self.request.user.Doctors)
 
 
 class todaysAppoinment(viewsets.ModelViewSet):
@@ -111,7 +111,8 @@ class todaysAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         formated_date = getDateFormat()
-        return appointment.objects.filter(consultation_status = 'Pending', appointment_date=formated_date,  doctor=self.request.user.Doctors)
+        print(formated_date)
+        return appointment.objects.filter(consultation_status = 'Pending', appointment_date__contains=formated_date,  doctor=self.request.user.Doctors)
 
 
 
@@ -136,8 +137,12 @@ class getAllAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
         status = self.request.query_params.get('status',None)
         now = self.request.query_params.get('now',None)
         formated_date = getDateFormat()
+        print(status)
         if status is not None:
-            queryset =  appointment.objects.filter(consultation_status=status).exclude(appointment_date=formated_date)
+            if status == 'Completed':
+                queryset =  appointment.objects.filter(consultation_status__icontains=status)
+            else:
+                queryset =  appointment.objects.filter(consultation_status__icontains=status).exclude(appointment_date=formated_date)
         if now is not None:
             queryset =  appointment.objects.filter(consultation_status=status,appointment_date=formated_date)
         return queryset

@@ -48,7 +48,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
-        
+        print("Yes you are right place ")
         doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
         appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
         appointment.consultation_status="Completed"
