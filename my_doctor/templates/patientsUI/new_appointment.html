@@ -4,33 +4,33 @@
 <div class="ca-content__chatstab">
 
     <div class="ca-content__callstab" style="padding-top: 0;">
-        <div class="conversation-panel__body ps" style="height: calc(100vh - 0.6875rem);">
+        <div class="conversation-panel__body ps" style="height: calc(120vh - 0rem);">
             <div class="container">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Book a Consultation in 5 easy Steps</h4>
+                        <h4>Consultation in 5 easy Steps</h4>
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-pills  nav-justified" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#spl-select"
+                                <a class="nav-link app-steps active" id="pills-home-tab" data-toggle="pill" href="#spl-select"
                                     role="tab" aria-controls="pills-home" aria-selected="true">1. Select Speciality</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#date-selection"
+                                <a class="nav-link app-steps" id="pills-profile-tab" data-toggle="pill" href="#date-selection"
                                     role="tab" aria-controls="pills-profile" aria-selected="false">2. Select Date</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" id="pills-contact-tab" data-toggle="pill" href="#select-doctor"
+                                <a class="nav-link app-steps disabled" id="pills-contact-tab" data-toggle="pill" href="#select-doctor"
                                     role="tab" aria-controls="pills-contact" aria-selected="false">3. Select Doctor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" id="pills-payment-tab" data-toggle="pill" href="#payment" role="tab"
+                                <a class="nav-link app-steps disabled" id="pills-payment-tab" data-toggle="pill" href="#payment" role="tab"
                                     aria-controls="pills-contact" aria-selected="false">4. Payment</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" id="pills-contact-tab" data-toggle="pill" href="#Confirmation"
-                                    role="tab" aria-controls="pills-contact" aria-selected="false">5. Confirmation</a>
+                                <a class="nav-link app-steps disabled" id="pills-confirm-tab" data-toggle="pill" href="#Confirmation"
+                                    role="tab" aria-controls="pills-confirm-tab" aria-selected="false">5. Confirmation</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
@@ -88,7 +88,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <input type="text" class="form-control text-center"
+                                                            <input type="text" class="form-control text-center mt-2"
                                                                 placeholder="Selected Date" id="dateSelected"
                                                                 style=" border-radius:30px">
                                                             <button type="button"
@@ -249,6 +249,7 @@
                                                             </div>
                                                         </li>
                                                         <li>
+                                                            <input type="hidden" id="doctor-number">
                                                             <div class="card">
                                                                 <div class="card-header">
                                                                     Total Payable Amount
@@ -287,7 +288,7 @@
 
                                                     <div class="ca-profile-info">
                                                         <div class="ca-profile-pic"><img class="img-fluid"
-                                                                id="summaryProfile" src="assets/images/layer-14@2x.png"
+                                                                id="summaryProfile" style="height:160px" src="assets/images/layer-14@2x.png"
                                                                 alt=""></div>
                                                     </div>
 
@@ -329,48 +330,46 @@
         </div>
     </div>
 </div>
-<div class="modal new-message-dialog" id="ConsultationDetails" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="ca-profile-thumb" style="height: auto;">
-                    <div class="ca-profile-info">
-                        <div class="ca-profile-pic">
-                            <img class="img-fluid" src="assets/images/user/500/01.jpg" alt="" id="docImage"></div>
-                        <div class="ca-profile-title">
-                            <h2 class="ca-profile-name"></h2>
+<div class="modal new-message-dialog" id="ConsultationDetails" tabindex="-1" role="dialog" aria-labelledby="ConsultationDetails"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ca-profile-thumb" style="height: auto;">
+                            <div class="ca-profile-info">
+                                <div class="ca-profile-pic"><img height="20" class="img-fluid" src="assets/images/user/500/01.jpg" alt="" id="docImage" style="height:160px"></div>
+                                <div class="ca-profile-title">
+                                    <h2 class="ca-profile-name"></h2>
+                                </div>
+                            </div>
+                            <div class="ca-overlay"></div>
+                        </div>
+                        <div class="form-group mt-5">
+                            <input type="hidden" id="docName">
+                            <input type="hidden" id="docId">
+                            <input type="hidden" id="docNum">
+                            <input type="hidden" id="appDate">
+                            <input type="hidden" id="time">
+                            <input type="hidden" id="fee">
+                            <h4><label for="ConsultingAbout">Consulting About</label></h4>
+                            <textarea class="form-control" id="ConsultingAbout" rows="10" placeholder="Describe your Problem" style="font-size: medium;"></textarea>
                         </div>
                     </div>
-                    <div class="ca-overlay"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn mfb-component__button--main"
+                        style="width:50%; border-radius:30px" id="ConfirmClick">Confirm</button>
+                        <button type="button" class="btn mfb-component__button--main"
+                        style="width:50%; border-radius:30px" id="Skip">Skip</button>
+                    </div>
                 </div>
-                <div class="form-group mt-5">
-                    <input type="hidden" id="docName">
-                    <input type="hidden" id="docId">
-                    <input type="hidden" id="appDate">
-                    <input type="hidden" id="time">
-                    <input type="hidden" id="fee">
-                    <input type="hidden" id="gst">
-                    <h4><label for="ConsultingAbout">Consulting About</label></h4>
-                    <textarea class="form-control" id="ConsultingAbout" rows="10" placeholder="Describe your Problem"
-                        style="font-size: medium;"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn mfb-component__button--main" style="width:50%; border-radius:30px"
-                    id="ConfirmClick">Continue</button>
-                <button type="button" class="btn mfb-component__button--main" style="width:50%; border-radius:30px"
-                    id="Skip">Skip</button>
             </div>
         </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block scripts %}
@@ -378,10 +377,29 @@
 <script>
     console.log('Hello world')
     $(document).ready(function () {
+        window.matchMedia("(max-width:425px)").addListener(mob)
+
+        function mob(){
+            if (window.matchMedia("(max-width:425px)").matches) {
+                document.querySelectorAll('.app-steps').forEach(function (listItem) {
+                    if (listItem.classList.contains('active')) {
+                        listItem.style.display = 'block';
+                    }else{
+                        listItem.style.display = 'none';
+                    }
+                })
+            }else{
+                document.querySelectorAll('.app-steps').forEach(function (listItem) {
+                    listItem.style.display = 'block';
+                })
+            }
+        }
+        mob()
         $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
         // VARIABLES...
         let speciality_type = 0;
         $(".select").click(function () {
+            
             console.log('clicked')
             speciality_type = $(this).attr('id');
             $('#pills-home-tab').removeClass('active');
@@ -389,9 +407,11 @@
             $('#pills-profile-tab').addClass('active');
             $('#date-selection').addClass('active show');
             console.log(speciality_type)
+            mob()
         })
 
         $('#Skip').click(function () {
+            
             $('#ConsultationDetails').modal('hide')
             $('#pills-contact-tab').removeClass('active');
             $('#select-doctor').removeClass('active show');
@@ -407,6 +427,7 @@
             $('#cons-fee').html($('#fee').val())
             $('#GST').html($('#gst').val())
             $('#total-amt').html($('#fee').val())
+            mob()
         })
 
         // $('#selectToday').click(function () {
@@ -442,9 +463,11 @@
             $('#ConsultationDetails').modal('show')
             $('#fee').val(button.attr('data-fee'))
             $('#gst').val(button.attr('data-gst'))
+            $('#docNum').val(button.attr('data-doc-num'))
         });
 
         $('#ConfirmClick').click(() => {
+            
             if ($('#ConsultingAbout').val() == '') {
                 toastr.error("", "Describe your Problem", { positionClass: "toast-top-center" })
                 return;
@@ -463,6 +486,7 @@
             $('#cons-fee').html($('#fee').val())
             $('#GST').html($('#gst').val())
             $('#total-amt').html($('#fee').val())
+            mob()
         })
         function tConvert(time) {
             // Check correct time format and split into components
@@ -477,6 +501,7 @@
         }
 
         $('#btnProceed').click(() => {
+            
             let date = $('#dateSelected').val()
             $.ajax({
                 url: "/api/patientAppointment/DoctorAvailable?date=" + date + "&&id=" + speciality_type,
@@ -519,7 +544,7 @@
                                         data-image="${data.doctor.profile_pic}"
                                         data-app-date="${$('#date-val').html()}"
                                         data-time="${data.from_time}" data-fee="${consultation_fee.toFixed(2)}" data-gst="${gst.toFixed(2)}"
-                                        
+                                        data-doc-num="${data.doctor.phone_number}"
                                         class="btn selectDorctorsd iconbox btn-solid-info text-white bookAppointment">
                                         Select
                                     </button>
@@ -535,6 +560,7 @@
                                     Couldn't Find your Doctor ?? we can help you with that, Call us at <a href="tel:080-45549495">080-45549495</a>
                                 </p>
                 `)
+                mob()
             }).fail((err) => {
                 console.log(err)
             })
@@ -572,9 +598,10 @@
 
         ///////////// payment ///////////////
         document.getElementById('rzp-button1').onclick = function (e) {
+            var amount = $('#total-amt').html() * 100
             var options = {
                 "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
-                "amount": parseFloat($('#total-amt').html()) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "amount": Math.round(amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 "currency": "INR",
                 "name": "Doctor Plus",
                 "description": "Online Doctor Appointment",
@@ -585,7 +612,7 @@
                     var payment_id = response.razorpay_payment_id;
                     var data = {
                         appointment_date: $('#app-date').html(),
-                        appointment_time: $('#app-time').html(),
+                        appointment_time: tConvert($('#app-time').html()),
                         doctor: $('#doctor-id').val(),
                         Description: $('#consultingAbout').html(),
                         consultation_status: "Pending",
@@ -612,12 +639,20 @@
                         $('#con-app-time').html(response.appointment_time)
                         $('#con-app-date').html(response.appointment_date)
                         $('#con-app-fee').html(response.paid_amount)
-                       /*  $('#pills-contact-tab').removeClass('active');
-                        $('#select-doctor').removeClass('active show');
-                        $('#pills-payment-tab').addClass('active');
-                        $('#payment').addClass('active show'); */
+                        $('#pills-payment-tab').removeClass('active');
+                        $('#payment').removeClass('active show');
+                        $('#pills-confirm-tab').addClass('active');
+                        $('#Confirmation').addClass('active show'); 
+                        mob()
                         $.ajax({
                             url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#ph_no').val()}`,
+                            method: 'GET',
+                            success: function (response) {
+                                console.log(response)
+                            }
+                        })
+                        $.ajax({
+                            url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ${$('#conversation_doc').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to=${$('#docNum').val()}`,
                             method: 'GET',
                             success: function (response) {
                                 console.log(response)

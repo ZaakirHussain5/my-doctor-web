@@ -7,44 +7,58 @@
             <div class="container">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Upcoming Appointments</h4>
+                        <h4>Appointments</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="upcoming" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Doctor</th>
-                                    <th>Problem</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                        </div>
-                        
+                    <div class="mob-list">
+                        <div class="sidebar-userlist ps ps--active-y">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <div class="calllist">
+                                        <div class="user-avatar user-avatar-rounded online">
+                                            <img class="img-fluid" src="http://127.0.0.1:8000/media/author-thumb-5.jpg" alt="">
+                                        </div>
+                                        <div class="calllist__details">
+                                            <div class="calllist__details--name">Dr. Andrew</div>
+                                            <div class="calllist__details--info mt-1">
+                                                <span>Head Ache<br>12/11/2020 10:20AM</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="calllist__actions">
+                                            <div class="iconbox btn-hovered-light" >
+                                                <i class="iconbox__icon mdi mdi-video text-danger"></i>
+                                            </div>
+                                            <div class="iconbox btn-hovered-light" data-toggle="modal" data-target="#editApp">
+                                                <i class="iconbox__icon mdi mdi-pencil-outline text-primary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="calllist">
+                                        <div class="user-avatar user-avatar-rounded online">
+                                            <img class="img-fluid" src="http://127.0.0.1:8000/media/author-thumb-5.jpg" alt="">
+                                        </div>
+                                        <div class="calllist__details">
+                                            <div class="calllist__details--name">Dr. Andrew</div>
+                                            <div class="calllist__details--info mt-1">
+                                                <span>Stomach Ache<br>12/11/2020 10:20AM</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="calllist__actions">
+                                            <div class="iconbox btn-hovered-light">
+                                                <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                    </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Previous Appointments</h4>
-                    </div>
-                    <div class="card-body">
-                        <table id="previousAppoinment" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Doctor</th>
-                                    <th>Problem</th>
-                                </tr>
-                            </thead><tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-               
             </div>
         </div>
 </div>
@@ -147,8 +161,8 @@
 {% block scripts %}
 <script>
     $(document).ready(function(){
-        $('#caMainTab a[href="{% url "patients:appointments"%}"]').addClass('active');
-
+        $('#caMainTab a[href="{% url "patients:appointments"%} .conversation"]').addClass('active');
+        
         
         let previousAppoinment = $('#previousAppoinment').DataTable({
             ajax: {
@@ -385,7 +399,6 @@
         //     let id = $(this).attr('id');
         //     return appoinmentList(id)
         // })
-
     })
 </script>
 {% endblock %}

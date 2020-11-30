@@ -15,14 +15,18 @@
     <link rel="stylesheet" href="{% static 'patients/assets/vendors/bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'patients/css/app.css' %}">
     <link rel="stylesheet" href="{% static 'patients/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'patients/css/slider.css' %}">
     <link rel="stylesheet" href="{% static 'patients/css/theme/default.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.datapicker.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
-    
+
 </head>
 
 <body class="light-default-theme">
@@ -32,10 +36,12 @@
             <div class="ca-sidebar-wrapper">
                 <div class="ca-sidebar">
                     <div class="ca-sidebar__header">
-                            <a href="/">
-                                <img src="{% static 'website/img/logo.png' %}" class="d-xs-none" alt="" id="logoImage">
-                                <img src="{% static 'patients/assets/images/favicon.png' %}" alt="" class="d-none d-xs-block" id="logoSmallImage">
-                            </a>
+                        <a href="/">
+                            <img src="{% static 'website/img/logo.png' %}" class="d-none d-lg-block d-md-block" alt=""
+                                id="logoImage">
+                            <img src="{% static 'patients/assets/images/favicon.png' %}" alt=""
+                                class="d-block d-sm-none" id="logoSmallImage">
+                        </a>
 
                     </div>
 
@@ -46,30 +52,29 @@
             <div class="ca-content-wrapper">
                 <div class="ca-content">
                     <div class="conversation-panel__head">
-                        <div class="conversation-panel__back-button ">
-                            <i class="mdi mdi-arrow-left"></i>
-                        </div>
-
                         <div class="conversation-panel__avatar personalinfo-panel-opener">
-                           
+
                         </div>
                         <div class="conversation__actions">
-                            <div class="action-icon pr-4"  data-toggle="modal" data-target="#outGoingCall">
-                                <i  class="mdi mdi-bell-ring-outline mdi-24px"></i>
+                            <div class="action-icon pr-4" data-toggle="modal" data-target="#outGoingCall">
+                                <i class="mdi mdi-bell-ring-outline mdi-24px"></i>
                             </div>
                             <div class="iconbox-dropdown dropdown">
-                                <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
                                     <div class="user-avatar user-avatar-rounded">
-                                        <img src="assets/images/user/500/02.jpg" style="height: 1.5rem;width: 1.5rem;min-width: 1.5rem;" alt="" id="Profile-pic">
+                                        <img src="assets/images/user/500/02.jpg"
+                                            style="height: 1.5rem;width: 1.5rem;min-width: 1.5rem;" alt=""
+                                            id="Profile-pic">
                                     </div>
                                     <div class="conversation__name">
-                                        <h5 id='conversation_doc' class="conversation__name--title d-lg-block d-none mt-1"></h5>
+                                        <h5 id='conversation_doc' class="conversation__name--title mt-1"></h5>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="action-icon pr-4" id="btnLogout">
                                 <i class="mdi mdi-logout mdi-24px"></i>
-                            </div>                                      
+                            </div>
                         </div>
                     </div>
                     {% block content %}
@@ -78,15 +83,16 @@
             </div>
 
 
-{% include 'patientsUI/_settings.html'%}
+            {% include 'patientsUI/_settings.html'%}
             <!-- THEME CUSTOMIZER -->
-            
+
 
             <div class="backdrop-overlay hidden"></div>
         </div>
     </div>
 
-    <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingVideoCall" tabindex="-1" role="dialog" aria-labelledby="incomingVideoCall" aria-hidden="true">
+    <div class="modal calling-modal CallDialogFullscreen-sm" id="incomingVideoCall" tabindex="-1" role="dialog"
+        aria-labelledby="incomingVideoCall" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -100,8 +106,10 @@
                         </div>
 
                         <div class="call-actions">
-                            <button type="button" class="call-hangup" id="hangupBtn"><i class="mdi mdi-phone-hangup"></i></button>
-                            <button type="button" class="call-pickup" id="answerCall"><i class="mdi mdi-video-outline"></i></button>
+                            <button type="button" class="call-hangup" id="hangupBtn"><i
+                                    class="mdi mdi-phone-hangup"></i></button>
+                            <button type="button" class="call-pickup" id="answerCall"><i
+                                    class="mdi mdi-video-outline"></i></button>
                         </div>
                     </div>
                 </div>
@@ -112,15 +120,21 @@
     <audio id="myAudio">
         <source src="{% static 'video/skype_ringtone.mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
-      </audio>
+    </audio>
     <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/material-floating-button/dist/mfb.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/OwlCarousel2/owl.carousel.min.js' %}"></script>
     <script src="{% static 'patients/js/app.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+    <script src="{% static 'patients/js/slick.js' %}"></script>
+    <script src="{% static 'patients/js/slider.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+        integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+        crossorigin="anonymous"></script>
     <script src="{% static 'assets/js/toastr.min.js' %}"></script>
     <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
@@ -131,10 +145,10 @@
                 $('.ca-main-wrapper .ca-sidebar-wrapper').toggleClass('fliph');
                 $('.ca-main-conatiner').toggleClass('flipsmall');
                 console.log($('.ca-main-wrapper .ca-sidebar-wrapper').hasClass('fliph'))
-                if($('.ca-main-wrapper .ca-sidebar-wrapper').hasClass('fliph')==true){
-                    $('#logoImage').attr('src',"{% static 'patients/assets/images/favicon.png' %}")
-                }else{
-                    $('#logoImage').attr('src',"{% static 'website/img/logo.png' %}")
+                if ($('.ca-main-wrapper .ca-sidebar-wrapper').hasClass('fliph') == true) {
+                    $('#logoImage').attr('src', "{% static 'patients/assets/images/favicon.png' %}")
+                } else {
+                    $('#logoImage').attr('src', "{% static 'website/img/logo.png' %}")
                 }
             });
         });
@@ -330,36 +344,35 @@
 
         })
     </script>
-   
 
-<script>
-    function checkForCall() {
-        
-        jQuery.ajax({
-            'url': '/api/vedioChatOparetion/?user=pat',
-            'contentType': 'application/json',
-            'async': false,
-            'method': 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
-            },
-        }).done((response) => {
-            var list = response;
-            var x = document.getElementById("myAudio");
-            if (list && list.length > 0) {
-                x.loop = true;
-                x.play()
-                jQuery('#hangupBtn').attr('data-id', list[0].id)
-                jQuery('#DoctorName').html(list[0].caller_name)
-                jQuery('#answerCall').attr('data-session',list[0].id)
-                jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`)
-                jQuery('#incomingVideoCall').modal('show')
-            }
-            else
-            {
-                jQuery('#incomingVideoCall').modal('hide')
-            }
-        });
+
+    <script>
+        function checkForCall() {
+
+            jQuery.ajax({
+                'url': '/api/vedioChatOparetion/?user=pat',
+                'contentType': 'application/json',
+                'async': false,
+                'method': 'GET',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                },
+            }).done((response) => {
+                var list = response;
+                var x = document.getElementById("myAudio");
+                if (list && list.length > 0) {
+                    x.loop = true;
+                    x.play()
+                    jQuery('#hangupBtn').attr('data-id', list[0].id)
+                    jQuery('#DoctorName').html(list[0].caller_name)
+                    jQuery('#answerCall').attr('data-session', list[0].id)
+                    jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=pat&doctor=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`)
+                    jQuery('#incomingVideoCall').modal('show')
+                }
+                else {
+                    jQuery('#incomingVideoCall').modal('hide')
+                }
+            });
 
         }
 
@@ -410,20 +423,20 @@
     </script>
     <script>
         //Family Details Scripts
-        $(document).ready(function(){
+        $(document).ready(function () {
             loadFamilyMembers();
-            function loadFamilyMembers(){
+            function loadFamilyMembers() {
                 $.ajax({
-                    url:'/api/patient_family',
-                    method:'GET',
+                    url: '/api/patient_family',
+                    method: 'GET',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
                     },
-                }).done(function(data){
+                }).done(function (data) {
                     var listItems = ''
                     $('#FamilyMembers').collapse('show')
-                    $.each(data,function(i,item){
-                        listItems+=`
+                    $.each(data, function (i, item) {
+                        listItems += `
                         <li>
                             <div class="contactlist">
                                 <div class="user-avatar user-avatar-rounded online">
@@ -448,45 +461,45 @@
                 })
             }
 
-            $('#FamilyDetails').on('click','.delete-family-member',function(){
+            $('#FamilyDetails').on('click', '.delete-family-member', function () {
                 var button = $(this)
                 $.ajax({
-                    url:`/api/patient_family/${button.attr('data-id')}`,
-                    method:'DELETE',
+                    url: `/api/patient_family/${button.attr('data-id')}`,
+                    method: 'DELETE',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
                     },
-                    contentType:'application/json'
-                }).done(function(response){
+                    contentType: 'application/json'
+                }).done(function (response) {
                     loadFamilyMembers();
-                    toastr.success("Family Member Removed Successfully","Success",{positionClass:"toast-top-center"})
-                }).fail(function(response){
+                    toastr.success("Family Member Removed Successfully", "Success", { positionClass: "toast-top-center" })
+                }).fail(function (response) {
                     console.log(response)
                 })
             })
 
-            $('#add_patient_family_btn').click(function(){
+            $('#add_patient_family_btn').click(function () {
                 var data = {
-                    member_name:$('#mem_name').val(),
-                    member_age:$('#mem_age').val(),
-                    member_relation:$('#mem_rel').val()
+                    member_name: $('#mem_name').val(),
+                    member_age: $('#mem_age').val(),
+                    member_relation: $('#mem_rel').val()
                 }
                 $.ajax({
-                    url:'/api/patient_family/',
-                    data:JSON.stringify(data),
-                    method:'POST',
+                    url: '/api/patient_family/',
+                    data: JSON.stringify(data),
+                    method: 'POST',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
                     },
-                    contentType:'application/json'
-                }).done(function(response){
+                    contentType: 'application/json'
+                }).done(function (response) {
                     loadFamilyMembers();
                     $('#mem_name').val('')
                     $('#mem_age').val('')
                     $('#mem_rel').val('')
-                    
-                    toastr.success("Family Member Added Successfully","Success",{positionClass:"toast-top-center"})
-                }).fail(function(response){
+
+                    toastr.success("Family Member Added Successfully", "Success", { positionClass: "toast-top-center" })
+                }).fail(function (response) {
                     console.log(response)
                 })
             })

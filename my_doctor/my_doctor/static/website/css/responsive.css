@@ -75,6 +75,9 @@ a.btn, button.btn{font-size: 16px;}
     position: relative !important;
     right:40px;
   }
+  .webLogin{
+    display:none;
+  }
   footer h3{
     padding-bottom: 5px !important;
     margin-bottom: 5px !important;
@@ -291,6 +294,7 @@ footer{
     border-radius: 1.5rem;
     width: 100%;
 }
+
 .header-links {
     float: left;
     padding: 12px 0;
