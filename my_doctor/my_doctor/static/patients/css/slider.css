@@ -138,7 +138,7 @@
 }
 @media(max-width:768px){
     .card-body{
-        padding: 1.25rem 0;
+        padding: 1.25rem;
     }
     .slick-slide {
         margin: 0px 10px;
