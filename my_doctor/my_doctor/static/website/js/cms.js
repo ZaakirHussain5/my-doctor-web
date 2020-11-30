@@ -225,7 +225,7 @@ $("#appointments-main-form").submit(function(e){
 $("#doctorRegistration").submit((e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
-    const message = 'Thank you doctor !! Registration request received, Kindly review and sign the MOU. We shall get back to you shortly';
+    const message = 'Success, Request received, Thank you';
     const url = `https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register_doctor/`
     
     if ($('#OTP').val() == '') {
@@ -259,7 +259,7 @@ $("#doctorRegistration").submit((e) => {
             formdata.append('username', response.doctorId);
             formdata.append('web_registration', true);
             formdata.append('gender', 'Male')
-            formdata.append('about', "Nothing sppecial")
+            formdata.append('about', "")
             const cms_data={
                 Phone_number : $('mob1').val(),
                 City : $('#city').val(),
@@ -280,7 +280,10 @@ $("#doctorRegistration").submit((e) => {
                 newsLetterSubscription(url, cms_data, message)
                 $('#doctorRegistration').trigger('reset');
                 setTimeout(function () {
-                    window.location.href = '/media/DoctorsAgreement.pdf'
+                    let url = '/media/DoctorsAgreement.pdf';
+                    send_message()
+                    window.open(url, 'moufile', 'left=20,top=20,width=1200,height=1000,toolbar=1,resizable=0'); 
+                    
                 }, 2000)
             }).fail((error) => {
                 console.log(error);
@@ -288,3 +291,19 @@ $("#doctorRegistration").submit((e) => {
         })
     })
 })
+
+function send_message(){
+    let url = `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Registration under review, We shall intimate you once approved.&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`;
+    if ($('#Name1').val() == '' || $('#mob1').val() == '')
+        alert('Enter Name and Mobile Number')
+    else {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function (response) {
+                return
+            }
+        })
+
+    }
+}

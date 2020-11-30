@@ -4,6 +4,7 @@ from .models import VedioChat
 from .serializers import VedioChatSerializer
 from doctors.models import doctors_info
 from patients.models import patient_info
+from rest_framework import status
 
 class vedioChatOparetion(viewsets.ModelViewSet):
     permission_classes = [
@@ -42,12 +43,15 @@ class AnswerCallAPI(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     session_id = request.query_params.get('session_id',None)
     video = VedioChat.objects.get(id=session_id)
-    video.is_answered = True
-    video.save()
-    return Response({
-      "Message":"Call Answered",
-      "id":video.id
-    })
+    if video.Call_for == request.user:
+      video.is_answered = True
+      video.save()
+      return Response({
+        "Message":"Call Answered",
+        "id":video.id
+      })
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class CallPatientAPI(generics.GenericAPIView):
   serializer_class = VedioChatSerializer
@@ -64,5 +68,15 @@ class CallPatientAPI(generics.GenericAPIView):
     })
 
 
+class check_for_answer(viewsets.ModelViewSet):
+  serializer_class = VedioChatSerializer
+  permissions = [
+    permissions.IsAuthenticated
+  ]
 
+  def get_queryset(self):
+    data = self.request.query_params.get('sessions', None)
+    if data:
+      return VedioChat.objects.filter(id=data)
+    return False
 

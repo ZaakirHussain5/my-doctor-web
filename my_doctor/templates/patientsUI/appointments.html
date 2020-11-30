@@ -11,7 +11,7 @@
                     </div>
                     <div class="mob-list">
                         <div class="sidebar-userlist ps ps--active-y">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled appointmentList">
                                 <li>
                                     <div class="calllist">
                                         <div class="user-avatar user-avatar-rounded online">
@@ -227,80 +227,123 @@
             }
             return time.join(''); // return adjusted time or original string
         }
+        
 
-        let upcoming = $('#upcoming').DataTable({
-            ajax: {
-                url: '/api/getUpcomingAppoinment',
-                dataSrc: '',
-                'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
-                },
+        $.ajax({
+            url: '/api/getUpcomingAppoinment',
+            method: 'GET',
+            contentType: 'application/json',
+            'beforeSend': function (request) {
+                request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
             },
-            columns:[
-                {
-                    data:'appointment_date',
-                },
-                {
-                    data:'appointment_time',
-                    render:function(data){
-                        return tConvert(data)
-                    }
-                },
-                {
-                  data: "doctor",
-                  render: function (doctor){
-                      return `
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="user-avatar user-avatar-rounded">
-                                        <img class="img-fluid" src="${doctor.profile_pic}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="ml-2 ca-call-history__left--title">
-                                        <div>${doctor.full_name}</div>
-                                        <span class="text-secondary">${doctor.specialist_type}</span>
-                                    </div>
-                                </div>
+        }).done((response)=>{
+            let li = ''
+            response.map(function(index){
+                li += `
+                <li>
+                    <div class="calllist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png':index.doctor.profile_pic}" alt="">
+                        </div>
+                        <div class="calllist__details">
+                            <div class="calllist__details--name">${index.doctor.full_name}</div>
+                            <div class="calllist__details--info mt-1">
+                                <span>${index.Description}<br>${index.appointment_date}</span>
+                                <span></span>
                             </div>
                         </div>
-                      `;
-                  }
-                },
-                {
-                    data : 'Description'
-                },
-                {
-                    data:'id',
-                    render:function(data,type,app){
-                        return `
-                        <div class="row">
-                            <div class="col-md-6 text-center">
-                                <button type="button" class="btn btn-danger btn-sm call" data-const="${app.id}" data-doctor="${app.doctor.id}" style="border-radius:50%">
-                                    <i class="mdi mdi-video text-light"></i>
-                                    </button><br>
-                                    <small class="">Call</small>
+
+                        <div class="calllist__actions">
+                            <div class="iconbox btn-hovered-light" >
+                                <i class="iconbox__icon mdi mdi-video text-danger"></i>
                             </div>
-                            <div class="col-md-6 text-center">
-                                <button type='button' class='btn btn-primary btn-sm' style="border-radius:50%" data-toggle="modal" data-target="#editApp">
-                                        <i class="mdi mdi-square-edit-outline text-light"></i>
-                                </button><br>
-                                <small class="">Edit</small>
+                            <div class="iconbox btn-hovered-light" data-toggle="modal" data-target="#editApp">
+                                <i class="iconbox__icon mdi mdi-pencil-outline text-primary"></i>
                             </div>
                         </div>
+                    </div>
+                </li>
+                `;
+            })
+
+            $('.appointmentList').html(li)
+        })
+        .fail((err)=>{
+            console.log(err);
+        })
+        // let upcoming = $('#upcoming').DataTable({
+        //     ajax: {
+        //         url: '/api/getUpcomingAppoinment',
+        //         dataSrc: '',
+        //         'beforeSend': function (request) {
+        //             request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+        //         },
+        //     },
+        //     columns:[
+        //         {
+        //             data:'appointment_date',
+        //         },
+        //         {
+        //             data:'appointment_time',
+        //             render:function(data){
+        //                 return tConvert(data)
+        //             }
+        //         },
+        //         {
+        //           data: "doctor",
+        //           render: function (doctor){
+        //               return `
+        //                 <div class="card-body p-0">
+        //                     <div class="row">
+        //                         <div class="col-md-2">
+        //                             <div class="user-avatar user-avatar-rounded">
+        //                                 <img class="img-fluid" src="${doctor.profile_pic}" alt="">
+        //                             </div>
+        //                         </div>
+        //                         <div class="col-md-10">
+        //                             <div class="ml-2 ca-call-history__left--title">
+        //                                 <div>${doctor.full_name}</div>
+        //                                 <span class="text-secondary">${doctor.specialist_type}</span>
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //               `;
+        //           }
+        //         },
+        //         {
+        //             data : 'Description'
+        //         },
+        //         {
+        //             data:'id',
+        //             render:function(data,type,app){
+        //                 return `
+        //                 <div class="row">
+        //                     <div class="col-md-6 text-center">
+        //                         <button type="button" class="btn btn-danger btn-sm call" data-const="${app.id}" data-doctor="${app.doctor.id}" style="border-radius:50%">
+        //                             <i class="mdi mdi-video text-light"></i>
+        //                             </button><br>
+        //                             <small class="">Call</small>
+        //                     </div>
+        //                     <div class="col-md-6 text-center">
+        //                         <button type='button' class='btn btn-primary btn-sm' style="border-radius:50%" data-toggle="modal" data-target="#editApp">
+        //                                 <i class="mdi mdi-square-edit-outline text-light"></i>
+        //                         </button><br>
+        //                         <small class="">Edit</small>
+        //                     </div>
+        //                 </div>
                         
                                    
-                        `
-                    }
-                }
+        //                 `
+        //             }
+        //         }
                 
-            ],
-              language: {
-                  lengthMenu: "_MENU_",
-                  search: "",
-              }
-        })
+        //     ],
+        //       language: {
+        //           lengthMenu: "_MENU_",
+        //           search: "",
+        //       }
+        // })
 
         $('#upcoming').on('click','.call',function(){
             var button = $(this)

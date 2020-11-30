@@ -25,4 +25,3 @@ class VedioChat(models.Model):
         except ObjectDoesNotExist:
             return doctors_info.objects.get(user__id=self.Call_from.id).id
     
-    

@@ -27,7 +27,10 @@ def dashboard(request):
     appointments_count_and_fees = today_total_appointment()
     print(appointments_count_and_fees['total_fees']['paid_amount__sum'])
     context['total_appointment'] = appointments_count_and_fees['total_count']
-    context['fees'] = appointments_count_and_fees['total_fees']['paid_amount__sum']
+    context['fees'] = 0.00
+    if appointments_count_and_fees['total_fees']['paid_amount__sum']:
+        context['fees'] = appointments_count_and_fees['total_fees']['paid_amount__sum']
+        
     todays_commision = today_collected_commision()
     if todays_commision['comp_share__sum'] is None:
         context['commision'] = 0.00

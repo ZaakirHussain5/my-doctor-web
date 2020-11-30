@@ -77,6 +77,7 @@ function crudOperations(options){
               url = `${options.put_url}${jQuery(options.id_selector).val()}/`
               successMessage = options.entity + ' Updated Successfully'
           }
+          console.log(url, action)
           if(jQuery(options.form_id).valid()){
               jQuery.ajax({
                   url:url,

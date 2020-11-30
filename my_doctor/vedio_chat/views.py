@@ -6,6 +6,8 @@ from consultations.models import consultations
 from patient_medical_records.models import patient_medical_records
 from .models import VedioChat
 from opentok import OpenTok,MediaModes
+from django.db.models import Q 
+
 opentok = OpenTok("46964534", "76ca83ec02f7c0ef904f536a2d0bc251df25d8a4")
 
 def createVideoSession(request):
@@ -30,6 +32,7 @@ def patientVideoChat(request):
     consulation_list = None
     if doctor_id is not None:
         doctor = doctors_info.objects.get(pk=doctor_id)
+    
     if patient_id is not None:
         patient = patient_info.objects.get(pk=patient_id)
         print(patient)
@@ -40,7 +43,6 @@ def patientVideoChat(request):
     # else:
     #     context['medical_records'] = []
     #     context['consultation_lists'] = []
-
     context['user'] =  user
     context['doctor']=doctor
     context['patient'] = patient

@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <div class="clearfix">
                                 <i class="fa fa-laptop bg-info p-3 font-2xl mr-3 float-left text-light"></i>
-                                <div class="h5 text-secondary mb-0 mt-1">267</div>
+                                <div id="todaysAppoinmentCount" class="h5 text-secondary  mb-0 mt-1">267</div>
                                 <div class="text-muted text-uppercase font-weight-bold font-xs small">Todays's
                                     Appointments
                                 </div>
@@ -123,7 +123,7 @@
                                             class=" form-control-label float-right">About me</label></div>
                                     <div class="col-12 col-md-8"><textarea name="about" readonly="readonly"
                                             id="specialist-type" rows="8" class="form-control"
-                                            placeholder="Enter About Details"></textarea></div>
+                                            placeholder="Enter details about your profession"></textarea></div>
                                 </div>
                             </div>
 
@@ -308,16 +308,28 @@
                 url: '/api/doctor_dataView',
                 method: 'GET',
                 contentType: 'application/json',
-                async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },
             }).done((response) => {
-                console.log('response', response);
-                jQuery('#amount').html('₹'+ response[0]['balance'])
+                let balance= response.length ==0 ? 0 : response[0]['balance']
+                jQuery('#amount').html('₹ '+ balance)
             }).fail((error) => {
                 console.log(error);
             });
+            
+            jQuery.ajax({
+                url: '/api/todaysAppoinment',
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                },
+            }).done((res)=>{
+                jQuery('#todaysAppoinmentCount').html(res.length)
+            })
+
+
         }).fail((error) => {
             console.log(error);
         });
@@ -364,7 +376,12 @@
 
                             break;
                         default:
-                            input.value = val;
+                            // if(val != null && val != 'None' && val != undefined)
+                            if(val != 'null' && val != 'None')
+                            {
+                                input.value = val;
+                            }
+                            
                             break;
 
                     }
@@ -381,30 +398,30 @@
 
 
     //////// UPDATING PROFILE //////////
-    jQuery("#profile_form").submit((e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const data = new FormData(document.getElementById('profile_form'))
-        console.log(data);
-        jQuery.ajax({
-            url: '/api/DoctorUpdateProfile',
-            data: data,
-            method: 'POST',
-            contentType: false,
-            processData: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-            },
-        })
-            .done((response) => {
-                console.log("postrequest response -", response);
-                jQuery.removeCookie('DoctorToken');
-                jQuery.cookie('DoctorToken', response.token, { expires: 1 })
-            })
-            .fail((error) => {
-                console.log(error);
-            })
-    })
+    // jQuery("#profile_form").submit((e) => {
+    //     e.preventDefault();
+    //     e.stopImmediatePropagation();
+    //     const data = new FormData(document.getElementById('profile_form'))
+    //     console.log(data);
+    //     jQuery.ajax({
+    //         url: '/api/DoctorUpdateProfile',
+    //         data: data,
+    //         method: 'POST',
+    //         contentType: false,
+    //         processData: false,
+    //         beforeSend: function (xhr) {
+    //             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+    //         },
+    //     })
+    //         .done((response) => {
+    //             console.log("postrequest response -", response);
+    //             jQuery.removeCookie('DoctorToken');
+    //             jQuery.cookie('DoctorToken', response.token, { expires: 1 })
+    //         })
+    //         .fail((error) => {
+    //             console.log(error);
+    //         })
+    // })
 
 
     jQuery('#pills-profile-tab').click(() => {

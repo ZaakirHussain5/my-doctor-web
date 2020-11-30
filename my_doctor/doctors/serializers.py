@@ -98,7 +98,24 @@ class UpdateProfile(serializers.Serializer):
             return user
         except IntegrityError:
             raise serializers.ValidationError("User Already Exists")
+    
+class doctorUpdateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = doctors_info
+        fields = '__all__'
+        depth = 1
 
+    def update(self, instance, validated_data):
+        print (validated_data)
+        email = validated_data.get('email', None)
+        print (email)
+        doctors_info.objects.filter(pk=instance.id).update(**validated_data)
+        doctor = doctors_info.objects.get(pk=instance.id)
+        if email is not None:
+            user = doctor.user
+            user.email = email
+            user.save()
+        return doctor
 
 class WebNewDoctorRegistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -107,7 +124,7 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
     full_name = serializers.CharField()
     phone_number = serializers.CharField(max_length=15)
     specialist_type = serializers.CharField(max_length=25)
-    about = serializers.CharField(max_length=500)
+    about = serializers.CharField(max_length=500, required=False)
     web_registration = serializers.BooleanField()
     gender=serializers.CharField(max_length=6)
 
@@ -117,7 +134,7 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
           details = doctors_info.objects.create(
               user=user,
               phone_number=validated_data['phone_number'],
-              about=validated_data['about'],
+              about=validated_data.get('about', ''),
               specialist_type=validated_data['specialist_type'],
               full_name=validated_data['full_name'],
               web_registration=validated_data['web_registration'],

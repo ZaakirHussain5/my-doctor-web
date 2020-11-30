@@ -9,6 +9,7 @@ from datetime import date
 from specialist_type.models import specialist_type
 import datetime 
 from rest_framework.views import APIView
+from rest_framework.mixins import UpdateModelMixin
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
@@ -75,25 +76,33 @@ class DoctorTimingsAPI(viewsets.ModelViewSet):
     
 
 
-class DoctorUpdateProfileAPI(generics.GenericAPIView):
-    serializer_class = UpdateProfile
-
+class DoctorUpdateProfileAPI(generics.GenericAPIView, UpdateModelMixin):
+    serializer_class = doctorUpdateProfileSerializer
+    queryset = doctors_info.objects.all()
+    lookup_field = 'id'
     permission_classes = [
         permissions.IsAuthenticated
     ]
+    # lookup_field = 'id'
+    # def post(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     user = serializer.save(loggedInuser=self.request.user.id)
+    #     print(user)
+    #     return Response({
+    #         "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+    #         "token": AuthToken.objects.create(user)[1]
+    #     })
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save(loggedInuser=self.request.user.id)
-        print(user)
-        return Response({
-            "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        })
+    def put(self, request, *args, **kwargs):
+        email = request.data.get('email', None)
+        if email:
+            user = request.user
+            user.email = email
+            user.save()
+        return self.partial_update(request, *args, **kwargs)
 
-
-class DoctorUpdateProfileAdminAPI(generics.GenericAPIView):
+class DoctorUpdateProfileAdminAPI(generics.GenericAPIView, ):
     serializer_class = UpdateProfile
 
     permission_classes = [

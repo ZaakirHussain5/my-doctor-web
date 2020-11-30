@@ -144,11 +144,13 @@ outreach program a success.</p><br>
 {% block scripts %}
 <script type="text/javascript">
     $('#btnOTP').click(function () {
+        let url = `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Welcome Dr.${$('#Name1').val()}, OTP for mobile number verification is <OTP>. Do not share or forward&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`;
+        // let url = `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Registration under review, We shall intimate you once approved. OTP for mobile number verification is <OTP>&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`;
         if ($('#Name1').val() == '' || $('#mob1').val() == '')
             alert('Enter Name and Mobile Number')
         else {
             $.ajax({
-                url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Welcome Dr.${$('#Name1').val()}, OTP for mobile number verification is <OTP>. Do not share or forward&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`,
+                url: url,
                 method: 'GET',
                 success: function (response) {
                     console.log(response)

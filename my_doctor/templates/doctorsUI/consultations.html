@@ -250,7 +250,59 @@
 
 {% block scripts%}
 <script>
-  jQuery('#BillingHistory').DataTable()
+  const billingHistory = jQuery('#BillingHistory').DataTable({
+    ajax: {
+      url: '/api/doctor_dataView',
+      dataSrc: "",
+      'beforeSend': function (request) {
+        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+      },
+
+    },
+    columns: [
+      {
+        data: 'id'
+      },
+      {
+        data: "created_at",
+        render: function(data){
+                        return tConvert(data)
+                    }
+      },
+      {
+        data: 'appointment_date'
+      },
+      {
+        data: 'appointment_time'
+      },
+      {
+        data: 'Description'
+      },
+      // {
+      //   data: "id"
+      // }
+
+    ],
+    language: {
+      lengthMenu: "_MENU_",
+      search: "",
+    },
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      jQuery("td:first", nRow).html(iDisplayIndex + 1);
+      return nRow;
+    }
+  })
+  function tConvert(time) {
+            // Check correct time format and split into components
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+            if (time.length > 1) { // If time format correct
+                time = time.slice(1);  // Remove full string match value
+                time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(''); // return adjusted time or original string
+        }
 </script>
 <!-- <script>
 // let dataList = [];

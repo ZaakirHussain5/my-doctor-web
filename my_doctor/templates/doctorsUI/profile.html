@@ -33,8 +33,6 @@
                                             class="form-control" readonly="readonly">
                                     </div>
                                 </div>
-                                <input type="hidden" name="specialist_type">
-                                <input type="hidden" name="Registration_Number">
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="full-name"
                                             class=" form-control-label float-right">Full Name</label></div>
@@ -63,7 +61,7 @@
                                             class=" form-control-label float-right">About me</label></div>
                                     <div class="col-12 col-md-8"><textarea name="about" 
                                             id="specialist-type" rows="8" class="form-control"
-                                            placeholder="Enter About Details"></textarea></div>
+                                            placeholder="Enter details about your profession"></textarea></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-12 col-md-8 offset-md-4">
@@ -219,6 +217,7 @@
 {% block scripts%}
 <script>
     let dataList = [];
+    let doctor_id = 0;
     function getDataa() {
         console.log('here')
         const form = document.getElementById('profile_form');
@@ -232,6 +231,7 @@
             },
         }).done((response) => {
             console.log('response response', response);
+            doctor_id = response.id;
             formDeserialize(form, response.user);
             formDeserialize(form,response)
 
@@ -279,7 +279,11 @@
 
                             break;
                         default:
-                            input.value = val;
+                        if(val != 'null' && val != 'None')
+                            {
+                                input.value = val;
+                            }
+                            
                             break;
 
                     }
@@ -302,9 +306,9 @@
         const data = new FormData(document.getElementById('profile_form'))
         console.log(data);
         jQuery.ajax({
-            url: '/api/DoctorUpdateProfile',
+            url: '/api/DoctorUpdateProfile/'+ doctor_id + '/',
             data: data,
-            method: 'POST',
+            method: 'PUT',
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
