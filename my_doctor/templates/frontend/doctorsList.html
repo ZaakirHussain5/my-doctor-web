@@ -56,7 +56,7 @@
                                 <div class="row form-group">
                                  <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label></div>
                                  <div class="col-12 col-md-8">
-                                     <input type="text" id="id" name="Registration_Number" placeholder="Doctor ID" class="form-control"
+                                     <input type="text" id="id" name="username" placeholder="Doctor ID" class="form-control"
                                          readonly="readonly">
                                  </div>
                              </div>
@@ -68,6 +68,13 @@
                                     <input type="text" id="full-name" name="full_name" placeholder="Full Name"
                                         class="form-control">
                                 </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="email"
+                                        class=" form-control-label float-right">Medical ID</label>
+                                </div>
+                                <div class="col-12 col-md-8"><input type="text" id="Registration_Number" name="Registration_Number"
+                                        placeholder="Medical ID" class="form-control"></div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-4"><label for="email"
@@ -126,7 +133,7 @@
                             <div class="row form-group">
                                 <div class="col-12 col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-dot-circle-o"></i> register doctor
+                                        <i class="fa fa-dot-circle-o"></i> Register doctor
                                     </button>
                                     <button type="button" data-dismiss="modal" class="btn btn-danger btn-sm">
                                         <i class="fa fa-ban"></i> Cancel
@@ -203,7 +210,7 @@
 
             $(this).find('img').attr('src', myVal.profile_pic);
 
-            let valList = ['', myVal.user.username, myVal.full_name, myVal.user.email, myVal.phone_number, myVal.consultation_fee, myVal.specialist_type]
+            let valList = ['', myVal.user.username, myVal.full_name,myVal.Registration_Number,myVal.user.email, myVal.phone_number, myVal.consultation_fee, myVal.specialist_type]
             console.log(valList)
             let inputList = $(this).find('input');
             for (var i = 0; i < inputList.length; i++) {
@@ -232,6 +239,13 @@
                 console.log(response)
                 table.ajax.reload();
                 $('#patientDetails').modal('hide')
+                $.ajax({
+                    url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Dr.${$('#full-name').val()} your registration has been approved with Doctor ID : ${$('#id').val()} Login here https://www.doctor-plus.in/login&route=0&from=BANDSS&to=${$('#ph_no').val()}`,
+                    method: 'GET',
+                    success: function (response) {
+                        console.log(response)
+                    }
+                })
                 toastr.success("Doctor Registered Successfully","Success",{positionClass:"toast-top-center"})
             }).fail((error)=>{
                 console.log(error)

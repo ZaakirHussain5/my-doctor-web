@@ -133,6 +133,7 @@ function newsLetterSubscription(url, data, message) {
             positionClass: "toast-top-center"
         })
         
+        
         $("#newsletter-form").find("input[type=email]").val("")
     })
         .fail((error) => {
@@ -222,6 +223,7 @@ $("#appointments-main-form").submit(function(e){
 
 
 ////////// DOCTOR REGISTRATION SUBMIT FORM ///////////////
+// $("#doctorRegistration").submit((e) => {
 $("#doctorRegistration").submit((e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -232,6 +234,10 @@ $("#doctorRegistration").submit((e) => {
         alert('Enter The OTP')
         return
     }
+    $('#submit').html(`
+    <i class="fa fa-spinner fa-spin"></i> Processing...
+    `)
+    $('#submit').attr('disabled', 'disabled')
     $.ajax({
         url: 'https://teleduce.corefactors.in/validate-otp/a224db72-cafb-4cce-93ab-3d7f950c92e2/',
         data: {
@@ -246,7 +252,6 @@ $("#doctorRegistration").submit((e) => {
             $('#submit').removeAttr('disabled')
             return
         }
-
         $.ajax({
             url: '/api/GenerateDoctorID',
             method: 'GET',
@@ -258,10 +263,10 @@ $("#doctorRegistration").submit((e) => {
             let formdata = new FormData(form);
             formdata.append('username', response.doctorId);
             formdata.append('web_registration', true);
-            formdata.append('gender', 'Male')
             formdata.append('about', "")
+            formdata.append('Registration_Number', $('#medical_id').val())
             const cms_data={
-                Phone_number : $('mob1').val(),
+                Phone_number : $('#mob1').val(),
                 City : $('#city').val(),
                 Name : $('#Name1').val(),
                 Medical_ID : $('#medical_id').val(),
@@ -276,34 +281,25 @@ $("#doctorRegistration").submit((e) => {
                 contentType: false,
                 processData: false,
             }).done((response) => {
-                // alert();
                 newsLetterSubscription(url, cms_data, message)
+                $.ajax({
+                    url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Registration under review, we shall inform you once approved&route=0&from=BANDSS&to=${$('#mob1').val()}`,
+                    method: 'GET',
+                    success: function (response) {
+                        console.log(response) 
+                        let url = '/media/doctor plus.pdf';
+                        window.location.href = url; 
+                    }
+                })
                 $('#doctorRegistration').trigger('reset');
-                setTimeout(function () {
-                    let url = '/media/DoctorsAgreement.pdf';
-                    send_message()
-                    window.open(url, 'moufile', 'left=20,top=20,width=1200,height=1000,toolbar=1,resizable=0'); 
-                    
-                }, 2000)
+                $('#submit').html('Register me!')
+            $('#submit').removeAttr('disabled')
+            
             }).fail((error) => {
+                $('#submit').html('Register me!')
+            $('#submit').removeAttr('disabled')
                 console.log(error);
             })
         })
     })
 })
-
-function send_message(){
-    let url = `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Registration under review, We shall intimate you once approved.&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`;
-    if ($('#Name1').val() == '' || $('#mob1').val() == '')
-        alert('Enter Name and Mobile Number')
-    else {
-        $.ajax({
-            url: url,
-            method: 'GET',
-            success: function (response) {
-                return
-            }
-        })
-
-    }
-}

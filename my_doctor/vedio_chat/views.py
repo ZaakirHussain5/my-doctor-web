@@ -49,7 +49,7 @@ def patientVideoChat(request):
     context['session'] = session
     context['appointment'] = request.GET.get('appointment', None)
     
-    return render(request,'video_chat/video_chat.html', context)
+    return render(request,'video_chat/new_video_chat.html', context)
 
 def ratings(request):
 

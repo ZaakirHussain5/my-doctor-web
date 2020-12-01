@@ -94,13 +94,6 @@ class PatientResgistrationApp(serializers.Serializer):
     email = serializers.CharField(required=False,allow_blank=True,allow_null=True)
     pat_id = serializers.CharField()
     full_name = serializers.CharField()
-    gender = serializers.CharField(required=False,allow_blank=True,allow_null=True)
-    dob = serializers.CharField(required=False,allow_blank=True,allow_null=True)
-    age = serializers.CharField(required=False,allow_blank=True,allow_null=True)
-    height=serializers.CharField(required=False,allow_blank=True,allow_null=True)
-    weight=serializers.CharField(required=False,allow_blank=True,allow_null=True)
-    marital_status=serializers.CharField(required=False,allow_blank=True,allow_null=True)
-    blood_group = serializers.CharField(required=False,allow_blank=True,allow_null=True)
 
     def create(self, validated_data):
         try:
@@ -108,13 +101,7 @@ class PatientResgistrationApp(serializers.Serializer):
             patient_details = patient_info.objects.create(user=user,
             pat_id=validated_data['pat_id'],
             full_name=validated_data['full_name'],
-            gender=validated_data['gender'],
-            age=validated_data['age'],
-            blood_group=validated_data['blood_group'],
-            ph_no=validated_data['username'],
-            height=validated_data['height'],
-            weight=validated_data['weight'],
-            marital_status=validated_data['marital_status'])
+            ph_no=validated_data['username'])
             patient_details.save()
             return user
         except IntegrityError:

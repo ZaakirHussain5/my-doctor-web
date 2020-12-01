@@ -44,9 +44,11 @@
                         </a>
 
                     </div>
-
-                    {% include 'partials/_patient_nav.html'%}
-                </div>
+                    <div class=".d-none .d-sm-block">
+                        {% include 'partials/_patient_nav.html'%}
+                    </div>
+                    
+                    </div>
             </div>
 
             <div class="ca-content-wrapper">
@@ -80,8 +82,54 @@
                             </div>
                         </div>
                     </div>
-                    {% block content %}
-                    {% endblock %}
+                    <div class="ca-content__chatstab"> 
+                        <div class="ca-content__callstab" style="padding-top: 0;">
+                            <div class="conversation-panel__body ps">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div id="otEmbedContainer" style="width:100%; height:580px;padding-left:8%">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                             <div class="card">
+                                        <div class="card-body">
+                                            <h5>Doctor Details</h5>
+                                            <div class="text-center">
+                                                {% if doctor.profile_pic%}
+                                                <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive">
+                                                {% else %}
+                                                <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive">
+                                                {% endif %}
+                                                <h4>{{doctor.full_name}}</h4>
+                                                <small>{{doctor.specialist_type}}</small>
+                                                <br>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <table class="table table-hover ">
+                                                <tr>
+                                                    <td>Consultations</td>
+                                                    <td>21</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"><strong>About</strong>
+                                                        <p>{{doctor.about}}</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>
+                                   
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
                 </div>
             </div>
 
@@ -124,6 +172,8 @@
         <source src="{% static 'video/skype_ringtone.mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <script
+        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
     <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/material-floating-button/dist/mfb.min.js' %}"></script>
@@ -156,13 +206,10 @@
             });
         });
     </script>
-    
-<script src="https://apis.google.com/js/platform.js" async defer></script>
     {% block scripts %}
 
     {% endblock %}
     <script>
-        
         $('#btnLogout').click(function () {
             $.ajax({
                 url: '/api/PatientLogout',
