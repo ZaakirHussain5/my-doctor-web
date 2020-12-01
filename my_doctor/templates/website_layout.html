@@ -278,12 +278,12 @@ section.breadcrumb{
                 xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
             },
         }).done((response)=>{
-           $('#loginItem').html(`
+           $('#loginItem,#loginItem1').html(`
             <div class="dropdown"> 
             <a href="#" class="dropbtn"><i class="fa fa-user"></i> ${response.full_name} <span class="caret"></span></a>
             <div class="dropdown-content">
-                <button id="btnGotoDashboard" data-user="patients" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
-                <button id="btnLogout" data-token="Token" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
+                <button id="btnGotoDashboard" data-user="patients" class="btn btn-dash" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
+                <button id="btnLogout" data-token="Token" class="btn-default btn-logout" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
             </div>
             </div>
             `)
@@ -304,12 +304,12 @@ section.breadcrumb{
                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
             },
         }).done((response) => {
-          $('#loginItem').html(`
+          $('#loginItem,#loginItem1').html(`
             <div class="dropdown"> 
             <a href="#" class="dropbtn"><i class="fa fa-user-md"></i> Dr. ${response.full_name} <span class="caret"></span></a>
             <div class="dropdown-content">
-                <button id="btnGotoDashboard" data-user="doctors" class="btn" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
-                <button id="btnLogout" data-token="DoctorToken" class="btn-default" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
+                <button id="btnGotoDashboard" data-user="doctors" class="btn btn-dash" style="margin: 25px 10px 5px 20px;">Go to Dashboard</button>
+                <button id="btnLogout" data-token="DoctorToken" class="btn-default btn-logout" style="margin: 15px 10px 15px 20px;"><i class="fa fa-sign-out"></i> Logout</button>
             </div>
             </div>
             `)
@@ -320,11 +320,11 @@ section.breadcrumb{
             
         }
 
-        $('#btnGotoDashboard').click(function(){
+        $('.btn-dash').click(function(){
             window.location.href=`/${$(this).attr('data-user')}/dashboard`
         })
 
-        $('#btnLogout').click(function(){
+        $('.btn-logout').click(function(){
             var button = $(this)
             var post_url = button.attr('data-token') == 'Token' ? '/api/PatientLogout' : '/api/DoctorLogout';
             $.ajax({
