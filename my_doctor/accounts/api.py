@@ -1,9 +1,9 @@
-from .serializers import userSerializer,RegistrationSerializer,UserAuthSerializer,LoginSerializer
+from .serializers import userSerializer,RegistrationSerializer,UserAuthSerializer,LoginSerializer, socialSerializer
 from .models import user_details
 from rest_framework.response import Response
 from knox.models import AuthToken
 from rest_framework import viewsets, permissions,generics
-
+from rest_framework import mixins
 
 class userViewSet(viewsets.ModelViewSet):
     queryset = user_details.objects.all()
@@ -45,5 +45,18 @@ class UserAPI(generics.RetrieveAPIView):
 
   def get_object(self):
     return self.request.user
+
+
+class g_loginView(generics.GenericAPIView):
+  serializer_class = socialSerializer
+
+  def post(self, request, *args, **kwargs):
+    serializer = self.get_serializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = serializer.save()
+    return Response({
+      "user": UserAuthSerializer(user, context=self.get_serializer_context()).data,
+      "token": AuthToken.objects.create(user)[1]
+    })
 
 

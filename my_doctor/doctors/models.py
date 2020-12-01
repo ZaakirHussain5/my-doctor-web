@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class doctors_info(models.Model):
     user = models.OneToOneField(User,related_name='Doctors',on_delete=models.CASCADE)
     full_name=models.CharField(max_length=32,null=True)
-    phone_number = models.CharField(max_length=15,null=True)
+    phone_number = models.CharField(max_length=15, unique=True, null=True)
     commission_val=models.DecimalField(max_digits=10,decimal_places=2,default=2)
     commission_type=models.CharField(max_length=15,default='Percent', null=True)
     gender=models.CharField(max_length=6, default='male', null = True)

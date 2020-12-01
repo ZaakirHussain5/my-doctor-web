@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import patient_info,medical_history,groups, PatientBillingHistory,patient_family_members
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-
+from accounts.models import user_details
 
 class patient_infoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -66,6 +66,27 @@ class PatientResgistrationSerializer(serializers.Serializer):
             return user
         except IntegrityError:
             raise serializers.ValidationError("User Already Exists")
+
+
+class socailRegistrationSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    pat_id = serializers.CharField()
+    full_name = serializers.CharField()
+
+    def create(self, validated_data):
+        try:
+            user = User.objects.get(username = validated_data['email'])
+        except User.DoesNotExist:
+            user = User(username=validated_data['email'], email=validated_data['email'])
+            user.save()
+            # details = user_details.objects.create(user=user,full_name=validated_data['full_name'], user_type=validated_data['user_type'])
+            # details.save()
+            patient_details = patient_info.objects.create(user=user,
+                pat_id=validated_data['pat_id'],
+                full_name=validated_data['full_name']
+            )
+        return user
+
 
 class PatientResgistrationApp(serializers.Serializer):
     username = serializers.CharField()

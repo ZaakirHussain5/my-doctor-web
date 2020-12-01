@@ -7,6 +7,7 @@ from doctors.models import doctors_info
 from patients.models import patient_info
 from executive_details.models import executive_details
 from django.core.exceptions import ObjectDoesNotExist
+from doctors.models import doctors_info
 
 class UserAuthSerializer(serializers.ModelSerializer):
   class Meta:
@@ -42,6 +43,14 @@ class LoginSerializer(serializers.Serializer):
   user_type = serializers.CharField()
 
   def validate(self, data):
+    print(data['username'])
+    try:
+      if data['user_type'] == 'D':
+        ph_no = int(data['username'])
+        doctor = doctors_info.objects.get(phone_number=ph_no)
+        data['username'] = doctor.user.username
+    except:
+      pass 
     user = authenticate(**data)
     if user and user.is_active:
       try:
@@ -69,5 +78,22 @@ class LoginSerializer(serializers.Serializer):
         pass
 
     raise serializers.ValidationError("Incorrect Credentials")
+
+
+class socialSerializer(serializers.Serializer):
+  # username = serializers.CharField()
+  email = serializers.CharField()
+  full_name = serializers.CharField()
+  
+  def create(self, validated_data):
+    print(validated_data)
+    try:
+      return  User.objects.get(username = validated_data['email'])
+    except User.DoesNotExist:
+      user = User(username=validated_data['email'], email=validated_data['email'])
+      user.save()
+      details = user_details.objects.create(user=user,full_name=validated_data['full_name'],user_type=validated_data['user_type'])
+      details.save()
+      return user
 
     

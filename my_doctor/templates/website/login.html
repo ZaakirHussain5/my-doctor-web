@@ -2,198 +2,268 @@
 {%load static%}
 {% block content%}
 <style>
-    .register .nav-tabs{
-    margin-bottom: 3%;
-    border: none;
-    background: #0b818b;
-    border-radius: 1.5rem;
-    width: 37%;
-}
-.register .nav-tabs .nav-link{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    height: 34px;
-    font-weight: 600;
-    color: #fff;
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-}
-.register .nav-tabs .nav-item a:hover{
-    border: none;
-    color:#0b818b
-}
-.register .nav-tabs .nav-item.active a{
-    width: 100px;
-    color: #0b818b;
-    border: 2px solid #0b818b;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-    background-color: #fff;
-}
+    .register .nav-tabs {
+        margin-bottom: 3%;
+        border: none;
+        background: #0b818b;
+        border-radius: 1.5rem;
+        width: 37%;
+    }
+
+    .register .nav-tabs .nav-link {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        height: 34px;
+        font-weight: 600;
+        color: #fff;
+        border-top-right-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+
+    .register .nav-tabs .nav-item a:hover {
+        border: none;
+        color: #0b818b
+    }
+
+    .register .nav-tabs .nav-item.active a {
+        width: 100px;
+        color: #0b818b;
+        border: 2px solid #0b818b;
+        border-top-left-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+        background-color: #fff;
+    }
+    .abcRioButton{
+        width: 100%!important;
+    }
 </style>
 <section class="breadcrumb">
     <div class="container">
-    <div class="breadcrumb-outer">
-    <nav aria-label="breadcrumb">
-    <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Login</li>
-    </ul>
-    </nav>
-    <h2>Login</h2>
-    </div>
-    </div>
-    </section>
-   <section class="login icon-left">
-<div class="container">
-<div class="row" >
-<div class="col-md-12 col-sm-12 col-xs-12">
-<div class="login-form" style="padding: 0 10%;">
-    <form id="loging_in" style="padding: 30px 20%;">
-        <div class="row">
-            <div class="col-12 col-sm-12">
-                <div class="form-title visible-lg visible-md">
-                    <h2>Login</h2>
-                    <p>Login with your registered details</p>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 register">
-                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                    <li id="Patient" class="nav-item active">
-                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Patient</a>
-                    </li>
-                    <li id="Doctor" class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Doctor</a>
-                    </li>
+        <div class="breadcrumb-outer">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Login</li>
                 </ul>
-            </div>
-            <div class="form-group col-12 col-sm-12">
-                <input id="user_type" type="hidden" value="P">
-                <input type="text" class="form-control" id="Name1" placeholder="Phone Number or Patient ID">
-            </div>
-            <div class=" form-group col-12 col-sm-12">
-            <div class="col-xs-6">
-                </div>
-               <div class="col-xs-6" style="text-align: end;color: #3a85f5;padding: 2px;"><span id="changeType">Show</span></div>
-                <input type="password" class="form-control" id="passwordVal" placeholder="Enter password">
-            </div>
-            <div class="col-12 col-sm-12">
-<div class="checkbox-outer">
-<input type="checkbox" name="vehicle2" value="Car"> Keep me signed in
-</div>
-</div>
-            <div class="col-12 col-sm-12">
-                <div class="comment-btn" style="text-align: center;">
-                    <button type="submit" class="btn btn-block">Login</button>
-                </div>
-            </div><br>
-            <div class="col-12 col-sm-12">
-            <p style="text-align: center;padding: 20px 0;">Or sign in with</p>
-            </div>
-            <a  href="/PatientRegistration">
-             <div class="col-lg-5 col-sm-12 text-primary" style="padding: 10px 30px;text-align: center; border: 1px solid;margin: 18px;">
-                    <i class="fa fa-facebook"></i> Facebook
-                </div>
-                 </a>
-                  <a  href="/PatientRegistration">
-             <div class="col-lg-5 col-sm-12" style="padding: 10px 30px;text-align: center;border: 1px solid;margin: 18px;">
-                    <i class="fa fa-google"></i> Google
-                </div>
-                 </a>
-                 <div class="col-12 col-sm-12">
-<div class="checkbox-outer"><a href="/forgot_pass" style="color: #3a85f5;"> Forgot Password? </a>&nbsp;  Not a registered user &nbsp;<a href="/PatientRegistration" id ="redirectTo" style="color: #3a85f5;"> Register here </a>
-</div>
-</div>
-            
+            </nav>
+            <h2>Login</h2>
         </div>
-    </form>
-</div>
-</div>
-</div>
-</div>
+    </div>
 </section>
-    
-  
+<section class="login icon-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="login-form" style="padding: 0 10%;">
+                    <form id="loging_in" style="padding: 30px 20%;">
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                <div class="form-title visible-lg visible-md">
+                                    <h2>Login</h2>
+                                    <p>Login with your registered details</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 register">
+                                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                                    <li id="Patient" class="nav-item active">
+                                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                            aria-controls="home" aria-selected="true">Patient</a>
+                                    </li>
+                                    <li id="Doctor" class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                                            role="tab" aria-controls="profile" aria-selected="false">Doctor</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group col-12 col-sm-12">
+                                <input id="user_type" type="hidden" value="P">
+                                <input type="text" class="form-control" id="Name1"
+                                    placeholder="Phone Number or Patient ID">
+                            </div>
+                            <div class=" form-group col-12 col-sm-12">
+                                <div class="col-xs-6">
+                                </div>
+                                <div class="col-xs-6" style="text-align: end;color: #3a85f5;padding: 2px;"><span
+                                        id="changeType">Show</span></div>
+                                <input type="password" class="form-control" id="passwordVal"
+                                    placeholder="Enter password">
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="checkbox-outer">
+                                    <input type="checkbox" name="vehicle2" value="Car"> Keep me signed in
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="comment-btn" style="text-align: center;">
+                                    <button type="submit" class="btn btn-block">Login</button>
+                                </div>
+                            </div><br>
+                            <div class="col-12 col-sm-12">
+                                <p style="text-align: center;padding: 20px 0;">Or sign in with</p>
+                            </div>
+                            
+                            <div data-onsuccess="onSignIn" onclick="ClickGoogleLogin()" class="btn btn-block g-signin2 col-lg-5 col-sm-12"
+                                style="padding: 10px 30px;text-align: center;margin: 18px;">
+                                <!-- <i class="fa fa-google"></i> Google -->
+
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="checkbox-outer"><a href="/forgot_pass" style="color: #3a85f5;"> Forgot
+                                        Password? </a>&nbsp; Not a registered user &nbsp;<a href="/PatientRegistration"
+                                        id="redirectTo" style="color: #3a85f5;"> Register here </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 {%endblock%}
 {% block scripts %}
-    <script>
-        // post url= '/api/auth/login/'
-        //
-        // data= 'username', 'password', 'user_type=P',
-        // if  status=200 redirect to '/patients/dashoard/'
-            // patient tocken store to localstorage
-        // else aleart message
-        jQuery(document).ready(function($){
-            $('#myTab li:first-child').click(()=>{
-                console.log('clicked');
-                $('#user_type').val('P')
-                $('#redirectTo').attr('href', "/PatientRegistration")
-                $('label[for="Name1"]').html('Phone Number or Patient ID')
-                $('#Name1').attr('placeholder','Phone Number or Patient ID')
-                $('#myTab #Doctor').removeClass('active')
-                $('#myTab #Patient').addClass('active')
-                return false
-            })
+<!-- <script src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+<script>
+    // post url= '/api/auth/login/'
+    //
+    // data= 'username', 'password', 'user_type=P',
+    // if  status=200 redirect to '/patients/dashoard/'
+    // patient tocken store to localstorage
+    // else aleart message
+    var clicked = false;
+    $('.abcRioButton').css('width', 'auto')
+    function ClickGoogleLogin()
+    {
+        clicked=true;
+    }
 
-            $('#myTab #Doctor').click(()=>{
-                console.log('clicked');
-                $('#user_type').val('D');
-                $('#redirectTo').attr('href', "/doctor_reg")
-                $('label[for="Name1"]').html('Phone Number or Doctor ID')
-                $('#Name1').attr('placeholder','Phone Number or Doctor ID')
-                $('#myTab #Patient').removeClass('active')
-                $('#myTab #Doctor').addClass('active')
-                return false
-            })
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        // console.log(profile)
+        // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        // console.log('Name: ' + profile.getName());
+        // console.log('Image URL: ' + profile.getImageUrl());
+        // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-            function submit_doctor_loginForm(){
-                console.log('doctorsUpload');
+        let data = {
+            'email': profile.getEmail(),
+            'full_name': profile.getName(),
+            'user_type': 'P'
+        }
+        registerOrLogin(data)
+    }
+
+    
+
+
+    function registerOrLogin(data) {
+        $.ajax({
+            url: '/api/GeneratePatientID',
+            method: 'GET',
+            contentType: 'application/json',
+        }).done((response) => {
+            console.log(response)
+            data.pat_id = response.pat_id
+            $.ajax({
+                url: '/api/socialPatientRegistrationView/',
+                data: JSON.stringify(data),
+                method: 'POST',
+                contentType: 'application/json'
+            }).done((response) => {
+                $.cookie('Token', response.token, { expires: 1 })
+                signOut()
+                window.location.href = 'patients/dashboard'
+            }).fail((err) => {
+                console.log(err)
+            })
+        })
+            .fail((err) => {
+                console.log(err)
+            })
+    }
+
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+
+    jQuery(document).ready(function ($) {
+        $('#myTab li:first-child').click(() => {
+            console.log('clicked');
+            $('#user_type').val('P')
+            $('#redirectTo').attr('href', "/PatientRegistration")
+            $('label[for="Name1"]').html('Phone Number or Patient ID')
+            $('#Name1').attr('placeholder', 'Phone Number or Patient ID')
+            $('#myTab #Doctor').removeClass('active')
+            $('#myTab #Patient').addClass('active')
+            return false
+        })
+
+        $('#myTab #Doctor').click(() => {
+            console.log('clicked');
+            $('#user_type').val('D');
+            $('#redirectTo').attr('href', "/doctor_reg")
+            $('label[for="Name1"]').html('Phone Number or Doctor ID')
+            $('#Name1').attr('placeholder', 'Phone Number or Doctor ID')
+            $('#myTab #Patient').removeClass('active')
+            $('#myTab #Doctor').addClass('active')
+            return false
+        })
+
+        function submit_doctor_loginForm() {
+            console.log('doctorsUpload');
             var data = {
-                    username: 'DPDOC2020001',
-                    password: '12345',
-                    user_type: 'D'
-                }
+                username: 'DPDOC2020001',
+                password: '12345',
+                user_type: 'D'
+            }
 
-                $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                    $.cookie('DoctorToken', response.token, {
-                        expires: 1
-                    })
-                    window.location.href = '/doctors/dashboard'
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
+            $.ajax({
+                url: '/api/auth/login',
+                data: JSON.stringify(data),
+                method: 'POST',
+                contentType: 'application/json'
+            }).done((response) => {
+                $.cookie('DoctorToken', response.token, {
+                    expires: 1
                 })
+                window.location.href = '/doctors/dashboard'
+            }).fail((err, error, wrong) => {
+                console.log(err)
+                alert(err.responseJSON.non_field_errors[0])
+            })
         }
 
-        function submit_loginForm(){
-           
+        function submit_loginForm() {
+
             var data = {
-                    username: '9945981381',
-                    password: '1234',
-                    user_type: 'P'
-                }
-                $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                    $.cookie('Token', response.token, {
-                        expires: 1
-                    })
-                    window.location.href = 'patients/dashboard'
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
+                username: '9945981381',
+                password: '1234',
+                user_type: 'P'
+            }
+            $.ajax({
+                url: '/api/auth/login',
+                data: JSON.stringify(data),
+                method: 'POST',
+                contentType: 'application/json'
+            }).done((response) => {
+                $.cookie('Token', response.token, {
+                    expires: 1
                 })
+                window.location.href = 'patients/dashboard'
+            }).fail((err, error, wrong) => {
+                console.log(err)
+                alert(err.responseJSON.non_field_errors[0])
+            })
         }
 
-        $("#loging_in").submit((e)=>{
+        $("#loging_in").submit((e) => {
             e.preventDefault();
             e.stopImmediatePropagation();
             const data = {
@@ -203,40 +273,65 @@
             };
             console.log(data);
             $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                    if (data.user_type == "P") {
-                        $.cookie('Token', response.token, {
+                url: '/api/auth/login',
+                data: JSON.stringify(data),
+                method: 'POST',
+                contentType: 'application/json'
+            }).done((response) => {
+                if (data.user_type == "P") {
+                    $.cookie('Token', response.token, {
                         expires: 1
-                        })
-                        window.location.href = 'patients/dashboard'    
-                    }
-                    else{
-                        $.cookie('DoctorToken', response.token, {
+                    })
+                    window.location.href = 'patients/dashboard'
+                }
+                else {
+                    $.cookie('DoctorToken', response.token, {
                         expires: 1
-                        })
-                        window.location.href = '/doctors/dashboard'
-                    }
-                    
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
-                })
+                    })
+                    window.location.href = '/doctors/dashboard'
+                }
+
+            }).fail((err, error, wrong) => {
+                console.log(err)
+                alert(err.responseJSON.non_field_errors[0])
+            })
 
         })
 
-        $('#changeType').click(function(){
+        $('#changeType').click(function () {
             let val = $('#passwordVal').val()
             console.log(val)
             $('#passwordVal').prop("type", "text");
             $('#passwordVal').val(val)
         })
 
+
+
+
+
+
+
+        /////////////////////////////////////////////////////////
+        //                FACEBOOK LOGIN METHOD                //
+        /////////////////////////////////////////////////////////
+        // $.ajaxSetup({ cache: true });
+        // $.getScript('https://connect.facebook.net/en_US/sdk.js', function () {
+        //     FB.init({
+        //         appId: '{your-app-id}',
+        //         version: 'v2.7' 
+        //     });
+        //     $('#loginbutton,#feedbutton').removeAttr('disabled');
+        //     FB.getLoginStatus(updateStatusCallback);
+        // });
+
+        // FB.login(function(response) {
+        //     // handle the response
+        //     console.log(response)
+        // }, {scope: 'public_profile,email'});
+
+
     })
 
 
-    </script>
+</script>
 {% endblock %}

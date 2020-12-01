@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-signin-client_id" content="145610180262-veivhascoh7qgh80ioos666avevhnq5h.apps.googleusercontent.com">
 <title>Doctor Plus Medical Consultancy Services</title>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 <script src="cdn-cgi/apps/head/aXeeT3C8FEVE2uMUPMMUDxVnKrs.js"></script>
@@ -257,12 +258,16 @@ section.breadcrumb{
 <script src="{% static 'website/js/cms.js' %}"></script>
 <script src="{% static 'website/cloudflare-static/rocket-loader.min.js' %}" data-cf-settings="f2c2a34d55bd8643fa482c8c-|49" defer=""></script></body>
 <script src="{% static 'assets/js/toastr.min.js' %}"></script>
+
+<!-- GOOGLE LOGIN SCRIPT -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 {% block scripts %}
 
 
 {% endblock %}
 <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+    
     $(document).ready(function(){
         var cookie = $.cookie('Token')
         var d_cookie = $.cookie('DoctorToken')
