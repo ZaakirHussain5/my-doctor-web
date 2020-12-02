@@ -162,7 +162,17 @@
 
     {% endblock %}
     <script>
-        
+
+        ////////////////////////////////////////////////////////////////
+        //         IF NOT LOGIN THEN REDIRECT TO LOGIN PAGE           // 
+        ////////////////////////////////////////////////////////////////
+        let cookie  = jQuery.cookie('Token')
+        if ((cookie == undefined) || (cookie == null) || (cookie == ''))
+        {
+            window.location.href = '/login?next=' + window.location.href;
+        }   
+
+        ////////////////////  ...... ///////////////////////////
         $('#btnLogout').click(function () {
             $.ajax({
                 url: '/api/PatientLogout',
@@ -511,6 +521,81 @@
                 })
             })
         })
+    
+    
+        ///////////////////////// PATIENT WALLET DETAILS ///////////
+        function getWalletDetails(){
+
+            $.ajax({
+                url: "/api/wallet_details",
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                },
+            })
+            .done((res)=>{
+                console.log('wallet details =====', res)
+                $('#currentBalance').html(res[0].wallet.balance)
+                let transactions = res[0].transaction;
+                let allTransList = '', creditTransList='', debitTransList='';
+                // allTransactions
+                // creditTransaction
+                // debitTransaction
+                transactions.map(transaction =>{
+                    let time = timeFormat(transaction.trans_date);
+                    console.log(time)
+                    let li = `
+                    <li>
+                        <div class="calllist">
+                            <div class="user-avatar user-avatar-rounded online">
+                                
+                                <p>${transaction['trans_type']}</p>
+                            </div>
+
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">
+                                <span> ${time}</span>
+                                </div>
+                            </div>
+
+                            <div class="calllist__actions">
+                                <div
+                                    class="iconbox btn-hovered-light text-danger">
+                                    <i class="iconbox__icon mdi mdi mdi-currency-inr"></i>
+                                    ${transaction.credit > 0 ? transaction.credit : transaction.debit}
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                    
+                    `;
+                    allTransList += li
+                    if( transaction.credit != 0){
+                        creditTransList += li;
+                    }
+                    else if(transaction.debit !=0){
+                        debitTransList += li;
+                    }
+                })
+                $('#allTransactions').html(allTransList != '' ? allTransList : '<p class="text-center mt-5">There has no transaction happen.</p>')
+                $('#creditTransaction').html(creditTransList != '' ? creditTransList : '<p class="text-center mt-5">There has no credit happen.</p>')
+                $('#debitTransaction').html(debitTransList != '' ? debitTransList : '<p class="text-center mt-5">There has no debit transactions.</p>')
+
+
+
+            })
+            .fail((err)=>{
+                console.log(err)
+            })
+        }
+
+
+        function timeFormat(dateTime){
+            let dates = new Date(dateTime)
+            return dates.toLocaleString();   
+        }
     </script>
 </body>
 

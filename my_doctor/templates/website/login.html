@@ -158,7 +158,7 @@
 
     
 
-
+    const urlParams = new URLSearchParams(window.location.search);
     function registerOrLogin(data) {
         $.ajax({
             url: '/api/GeneratePatientID',
@@ -175,7 +175,14 @@
             }).done((response) => {
                 $.cookie('Token', response.token, { expires: 1 })
                 signOut()
-                window.location.href = 'patients/dashboard'
+                let next_link = urlParams.get('next') 
+                console.log(next_link)
+                if (next_link && next_link != ''){
+                    window.location.href = next_link
+                }
+                else{
+                    window.location.href = '/patients/dashboard'
+                }
             }).fail((err) => {
                 console.log(err)
             })
@@ -233,7 +240,13 @@
                 $.cookie('DoctorToken', response.token, {
                     expires: 1
                 })
-                window.location.href = '/doctors/dashboard'
+                let next_link = urlParams.get('next') 
+                if (next_link && next_link != ''){
+                    window.location.href = next_link
+                }
+                else{
+                    window.location.href = '/doctors/dashboard'
+                }
             }).fail((err, error, wrong) => {
                 console.log(err)
                 alert(err.responseJSON.non_field_errors[0])
@@ -256,7 +269,13 @@
                 $.cookie('Token', response.token, {
                     expires: 1
                 })
-                window.location.href = 'patients/dashboard'
+                let next_link = urlParams.get('next') 
+                if (next_link && next_link != ''){
+                    window.location.href = next_link
+                }
+                else{
+                    window.location.href = '/patients/dashboard'
+                }
             }).fail((err, error, wrong) => {
                 console.log(err)
                 alert(err.responseJSON.non_field_errors[0])
@@ -282,13 +301,25 @@
                     $.cookie('Token', response.token, {
                         expires: 1
                     })
-                    window.location.href = 'patients/dashboard'
+                    let next_link = urlParams.get('next') 
+                    if (next_link && next_link != ''){
+                        window.location.href = next_link
+                    }
+                    else{
+                        window.location.href = '/patients/dashboard'
+                    }
                 }
                 else {
                     $.cookie('DoctorToken', response.token, {
                         expires: 1
                     })
+                    let next_link = urlParams.get('next') 
+                if (next_link && next_link != ''){
+                    window.location.href = next_link
+                }
+                else{
                     window.location.href = '/doctors/dashboard'
+                }
                 }
 
             }).fail((err, error, wrong) => {

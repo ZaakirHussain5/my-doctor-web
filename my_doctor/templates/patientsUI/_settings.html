@@ -1,11 +1,12 @@
 {% load static %}
-<div class="modal settings-modal-dialog" id="settingsModalCenter" tabindex="-1" role="dialog" aria-labelledby="settingsModalCenterTitle" aria-hidden="true">
+<div class="modal settings-modal-dialog" id="settingsModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="settingsModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="settingsModalCenterTitle">Settings</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body p-0">
@@ -13,28 +14,37 @@
                     <div class="container-fluid p-0">
                         <div class="row">
                             <div class="col-4 settings-nav-menu">
-                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active" id="v-pills-privacy-tab" data-toggle="pill" href="#v-pills-privacy" role="tab" aria-controls="v-pills-privacy" aria-selected="true">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                    aria-orientation="vertical">
+                                    <a class="nav-link active" id="v-pills-privacy-tab" data-toggle="pill"
+                                        href="#v-pills-privacy" role="tab" aria-controls="v-pills-privacy"
+                                        aria-selected="true">
                                         <div class="settingmenu">
                                             <div class="settingmenu__icon"><i class="mdi mdi-account"></i></div>
                                             <div class="settingmenu__name">Profile</div>
                                         </div>
                                     </a>
-                                    <a class="nav-link" id="v-pills-notifications-tab" data-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="false">
+                                    <a class="nav-link" id="v-pills-notifications-tab" data-toggle="pill"
+                                        href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications"
+                                        aria-selected="false">
                                         <div class="settingmenu">
-                                            <div class="settingmenu__icon"><i class="mdi mdi-shield-lock-outline"></i></div>
+                                            <div class="settingmenu__icon"><i class="mdi mdi-shield-lock-outline"></i>
+                                            </div>
                                             <div class="settingmenu__name">Password</div>
                                         </div>
                                     </a>
-                                    <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Wallet-Details" role="tab" aria-controls="v-pills-theme" aria-selected="false">
+                                    <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Wallet-Details"
+                                        role="tab" aria-controls="v-pills-theme" aria-selected="false">
                                         <div class="settingmenu">
                                             <div class="settingmenu__icon"><i class="mdi mdi-wallet"></i></div>
-                                            <div class="settingmenu__name">Wallet</div>
+                                            <div onclick="getWalletDetails()" class="settingmenu__name">Wallet</div>
                                         </div>
                                     </a>
-                                    <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Family-Details" role="tab" aria-controls="v-pills-theme" aria-selected="false">
+                                    <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Family-Details"
+                                        role="tab" aria-controls="v-pills-theme" aria-selected="false">
                                         <div class="settingmenu">
-                                            <div class="settingmenu__icon"><i class="mdi mdi-account-multiple"></i></div>
+                                            <div class="settingmenu__icon"><i class="mdi mdi-account-multiple"></i>
+                                            </div>
                                             <div class="settingmenu__name">Family</div>
                                         </div>
                                     </a>
@@ -42,21 +52,28 @@
                             </div>
                             <div class="col-8 settings-nav-content">
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="tab-pane fade show active" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
+                                    <div class="tab-pane fade show active" id="v-pills-privacy" role="tabpanel"
+                                        aria-labelledby="v-pills-privacy-tab">
                                         <form id="profile-form">
-                                            <div class="ca-profile-thumb"  style="background-image: url(assets/images/media/07.jpg);height: auto;">
+                                            <div class="ca-profile-thumb"
+                                                style="background-image: url(assets/images/media/07.jpg);height: auto;">
                                                 <div class="ca-profile-info">
                                                     <div class="ca-profile-pic">
-                                                       <input type="file" class="sr-only" id="profile_pic" name="profile_pic">
-                                                        <img id="previewImg" class="img-fluid" src="{% static 'patients/assets/images/user/500/01.jpg' %}" alt="" style="height: inherit; width: inherit; object-fit: cover;">
+                                                        <input type="file" class="sr-only" id="profile_pic"
+                                                            name="profile_pic">
+                                                        <img id="previewImg" class="img-fluid"
+                                                            src="{% static 'patients/assets/images/user/500/01.jpg' %}"
+                                                            alt=""
+                                                            style="height: inherit; width: inherit; object-fit: cover;">
                                                     </div>
                                                     <div class="ca-profile-title">
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <div class="ca-profile-actions">
                                                     <div class="iconbox-group">
-                                                        <label for="profile_pic" class="iconbox mfb-component__button--main ion-plus-round">
+                                                        <label for="profile_pic"
+                                                            class="iconbox mfb-component__button--main ion-plus-round">
                                                             <i class="iconbox__icon mdi mdi-camera" style="
                                                             padding-top: 10px;
                                                             padding-left: 9px;
@@ -71,40 +88,54 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="full_name" class="form-control-label">Name</label>
-                                                                <input type="text" class="form-control" name="full_name" placeholder="Your Name">
+                                                                <label for="full_name"
+                                                                    class="form-control-label">Name</label>
+                                                                <input type="text" class="form-control" name="full_name"
+                                                                    placeholder="Your Name">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="username" class="form-control-label">Phone Number</label>
-                                                                <input type="text" class="form-control" name="ph_no" placeholder="Your Phone Number" id="ph_no">
+                                                                <label for="username" class="form-control-label">Phone
+                                                                    Number</label>
+                                                                <input type="text" class="form-control" name="ph_no"
+                                                                    placeholder="Your Phone Number" id="ph_no">
                                                                 <input type="hidden" name="username" id="username">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="email" class="form-control-label">Email</label>
-                                                                <input type="email" class="form-control" name="email" placeholder="Your Email Address">
+                                                                <label for="email"
+                                                                    class="form-control-label">Email</label>
+                                                                <input type="email" class="form-control" name="email"
+                                                                    placeholder="Your Email Address">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="email" class="form-control-label">Blood Group</label>
-                                                                <input type="text" class="form-control" name="blood_group" placeholder="Your Blood Group">
+                                                                <label for="email" class="form-control-label">Blood
+                                                                    Group</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="blood_group" placeholder="Your Blood Group">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="email" class="form-control-label">Age</label>
-                                                                <input type="text" class="form-control" name="age" placeholder="Your Age">
+                                                                <label for="email"
+                                                                    class="form-control-label">Age</label>
+                                                                <input type="text" class="form-control" name="age"
+                                                                    placeholder="Your Age">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="email" class="form-control-label">Weight</label>
-                                                                <input type="text" class="form-control" name="weight" placeholder="Your Weight">
+                                                                <label for="email"
+                                                                    class="form-control-label">Weight</label>
+                                                                <input type="text" class="form-control" name="weight"
+                                                                    placeholder="Your Weight">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                <input type="hidden" name="gender">
-                                                <input type="hidden" name="height">
-                                                    
-                                                    
+                                                    <input type="hidden" name="gender">
+                                                    <input type="hidden" name="height">
+
+
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn mfb-component__button--main btn-block" style="width:100%; border-radius:20px">
+                                                        <button type="submit"
+                                                            class="btn mfb-component__button--main btn-block"
+                                                            style="width:100%; border-radius:20px">
                                                             Update Profile
                                                         </button>
                                                     </div>
@@ -112,80 +143,60 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
+                                    <div class="tab-pane fade" id="v-pills-notifications" role="tabpanel"
+                                        aria-labelledby="v-pills-notifications-tab">
                                         <div class="settings-inside-wrapper">
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="setting-sunheading">Update Password</div>
                                                     <form id="password_form">
-                                                    
-                                                    <div class="row" style="background: #d4ebf2">
-                                                    <div style="padding: 0; background: #d4ebf2">
-                                                      <i
-                                                        class="fal fa-info-circle"
-                                                        style="font-size: 3rem; color: #182672"
-                                                      ></i>
-                                                    </div>
-                                                    <div
-                                                      class="col"
-                                                      style="
+
+                                                        <div class="row" style="background: #d4ebf2">
+                                                            <div style="padding: 0; background: #d4ebf2">
+                                                                <i class="fal fa-info-circle"
+                                                                    style="font-size: 3rem; color: #182672"></i>
+                                                            </div>
+                                                            <div class="col" style="
                                                         padding: 0;
                                                         margin-top: 2pt;
                                                         margin-left: 1rem;
                                                         background: #d4ebf2;
-                                                      "
-                                                    >
-                                                    </div>
-                                                    </div>
-                                                    <br />
-                                                        <label for="id_old_password" class="pasword__font">Old password</label>
-                                                        <input
-                                                        name="old_password"
-                                                        class="form-control"
-                                                        type="password"
-                                                        id="id_old_password"
-                                                        required="true"
-                                                        />
+                                                      ">
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <label for="id_old_password" class="pasword__font">Old
+                                                            password</label>
+                                                        <input name="old_password" class="form-control" type="password"
+                                                            id="id_old_password" required="true" />
 
-                                                        <label for="id_new_password1" class="pasword__font">New password </label>
-                                                        <input
-                                                        name="new_password"
-                                                        class="form-control "
-                                                        type="password"
-                                                        id="id_new_password1"
-                                                        required="true"
-                                                        />
-                                                        <label for="id_new_password2" class="pasword__font"
-                                                        >Re-enter new password</label
-                                                        >
-                                                            <input
-                                                            name="confirm_new_password"
-                                                            class="form-control "
-                                                            type="password"
-                                                            id="id_new_password2"
-                                                            required="true"
-                                                            />
+                                                        <label for="id_new_password1" class="pasword__font">New password
+                                                        </label>
+                                                        <input name="new_password" class="form-control " type="password"
+                                                            id="id_new_password1" required="true" />
+                                                        <label for="id_new_password2" class="pasword__font">Re-enter new
+                                                            password</label>
+                                                        <input name="confirm_new_password" class="form-control "
+                                                            type="password" id="id_new_password2" required="true" />
 
                                                         {% for field in form %} {% for error in field.errors %}
-                                                            <p style="color: red">{{ error }}</p>
+                                                        <p style="color: red">{{ error }}</p>
                                                         {% endfor %} {% endfor %}
 
 
-                                                            <button
-                                                              class="btn btn-primary btn-block pull-right "
-                                                              type="submit"
-                                                              style="
+                                                        <button class="btn btn-primary btn-block pull-right "
+                                                            type="submit" style="
                                                                 border-radius: 20px;
-                                                              "
-                                                            >
-                                                              Update Password
-                                                            </button>
+                                                              ">
+                                                            Update Password
+                                                        </button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="Wallet-Details" role="tabpanel" aria-labelledby="v-pills-theme-tab">
+                                    <div class="tab-pane fade" id="Wallet-Details" role="tabpanel"
+                                        aria-labelledby="v-pills-theme-tab">
                                         <div class="card">
                                             <div class="card-header">
                                                 Wallet Details
@@ -194,46 +205,149 @@
                                                 <div class="row">
                                                     <div class="col-md-12 text-center">
                                                         <h6>Current Balance</h6>
-                                                        <h4><i class="mdi mdi-currency-inr"></i> 540.00</h4>
+                                                        <h4><i class="mdi mdi-currency-inr"></i><span id="currentBalance"></span> </h4>
                                                     </div>
                                                 </div>
                                             </div>
-                                    
+
                                         </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Transactions
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Transactions
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="nav nav-pills  nav-justified" id="pills-tab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" id="pills-home-tab"
+                                                            data-toggle="pill" href="#all" role="tab"
+                                                            aria-controls="pills-home" aria-selected="true">All</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill"
+                                                            href="#credits" role="tab" aria-controls="pills-profile"
+                                                            aria-selected="false">Credits</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill"
+                                                            href="#debits" role="tab" aria-controls="pills-contact"
+                                                            aria-selected="false">Debits</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+
+                                                    <div class="tab-pane fade show active" id="all">
+                                                        <ul id="allTransactions" class="list-unstyled">
+                                                            <li>
+                                                                <div class="calllist">
+                                                                    <div class="user-avatar user-avatar-rounded online">
+                                                                        <img class="img-fluid" src="" alt="">
+                                                                    </div>
+                                                                    <div class="calllist__details">
+                                                                        <div class="calllist__details--name">Jack P.
+                                                                            Angulo</div>
+                                                                        <div class="calllist__details--info">
+                                                                            <span>General Physician</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="calllist__actions">
+                                                                        <div
+                                                                            class="iconbox btn-hovered-light text-danger">
+                                                                            <i
+                                                                                class="iconbox__icon mdi mdi mdi-currency-inr"></i>
+                                                                            500.00
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <ul class="nav nav-pills  nav-justified" id="pills-tab" role="tablist">
-                                                    <li class="nav-item">
-                                                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#spl-select" role="tab" aria-controls="pills-home" aria-selected="true">All</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#date-selection" role="tab" aria-controls="pills-profile" aria-selected="false">Credits</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#select-doctor" role="tab" aria-controls="pills-contact" aria-selected="false">Debits</a>
-                                                    </li>
-                                                  </ul>
+
+
+                                                    <div class="tab-pane fade" id="credits">
+                                                        <ul id="creditTransaction" class="list-unstyled">
+                                                            <li>
+                                                                <div class="calllist">
+                                                                    <div class="user-avatar user-avatar-rounded online">
+                                                                        <img class="img-fluid" src="" alt="">
+                                                                    </div>
+                                                                    <div class="calllist__details">
+                                                                        <div class="calllist__details--name">Jack P.
+                                                                            Angulo</div>
+                                                                        <div class="calllist__details--info">
+                                                                            <span>General Physician</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="calllist__actions">
+                                                                        <div
+                                                                            class="iconbox btn-hovered-light text-danger">
+                                                                            <i
+                                                                                class="iconbox__icon mdi mdi mdi-currency-inr"></i>
+                                                                            500.00
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
+
+
+                                                    <div class="tab-pane fade" id="debits">
+                                                        <ul id="debitTransaction" class="list-unstyled">
+                                                            <li>
+                                                                <div class="calllist">
+                                                                    <div class="user-avatar user-avatar-rounded online">
+                                                                        <img class="img-fluid" src="" alt="">
+                                                                    </div>
+                                                                    <div class="calllist__details">
+                                                                        <div class="calllist__details--name">Jack P.
+                                                                            Angulo</div>
+                                                                        <div class="calllist__details--info">
+                                                                            <span>General Physician</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="calllist__actions">
+                                                                        <div
+                                                                            class="iconbox btn-hovered-light text-danger">
+                                                                            <i
+                                                                                class="iconbox__icon mdi mdi mdi-currency-inr"></i>
+                                                                            500.00
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
                                                 </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="Family-Details" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
-                                        <div class="accordion settings-accordion accordion-arrow-toggler accordion-ungrouped" id="privacySecurity">
-                                             <div class="card">
+                                    <div class="tab-pane fade" id="Family-Details" role="tabpanel"
+                                        aria-labelledby="v-pills-notifications-tab">
+                                        <div class="accordion settings-accordion accordion-arrow-toggler accordion-ungrouped"
+                                            id="privacySecurity">
+                                            <div class="card">
                                                 <div class="card-header" id="newFamilyNumberHead">
-                                                    <div class="card-title collapsed" role="button" data-toggle="collapse" data-target="#newFamilyNumber"
+                                                    <div class="card-title collapsed" role="button"
+                                                        data-toggle="collapse" data-target="#newFamilyNumber"
                                                         aria-expanded="false" aria-controls="newFamilyNumber">
                                                         Add a Family Member
                                                     </div>
                                                 </div>
-                                                <div id="newFamilyNumber" class="collapse" aria-labelledby="privacySecurity3" data-parent="#privacySecurity">
+                                                <div id="newFamilyNumber" class="collapse"
+                                                    aria-labelledby="privacySecurity3" data-parent="#privacySecurity">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="form-group col-md-12">
                                                                 <label for="mem_name">Name</label>
-                                                                <input type="text" class="form-control" placeholder="Enter the Member Name" id="mem_name">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Enter the Member Name" id="mem_name">
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label for="mem_rel">Relation</label>
@@ -246,10 +360,12 @@
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label for="Name">Age</label>
-                                                                <input type="number" id="mem_age" class="form-control" placeholder="Enter the Member Age">
+                                                                <input type="number" id="mem_age" class="form-control"
+                                                                    placeholder="Enter the Member Age">
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <button id="add_patient_family_btn" type="button" class="btn btn-primary btn-block">
+                                                                <button id="add_patient_family_btn" type="button"
+                                                                    class="btn btn-primary btn-block">
                                                                     Add Member
                                                                 </button>
                                                             </div>
@@ -259,23 +375,24 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header" id="FamilyMembershead">
-                                                    <div class="card-title collapsed" role="button" data-toggle="collapse" data-target="#FamilyMembers"
+                                                    <div class="card-title collapsed" role="button"
+                                                        data-toggle="collapse" data-target="#FamilyMembers"
                                                         aria-expanded="false" aria-controls="FamilyMembers">
                                                         Family Members
                                                     </div>
                                                 </div>
-                                                <div id="FamilyMembers" class="collapse show" aria-labelledby="privacySecurity3" data-parent="#privacySecurity">
+                                                <div id="FamilyMembers" class="collapse show"
+                                                    aria-labelledby="privacySecurity3" data-parent="#privacySecurity">
                                                     <div class="card-body">
                                                         <ul class="list-unstyled" id="FamilyDetails">
-                                                            
+
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                           
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -285,4 +402,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
