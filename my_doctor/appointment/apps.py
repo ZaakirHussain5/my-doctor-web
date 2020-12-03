@@ -7,3 +7,4 @@ class AppointmentConfig(AppConfig):
     def ready(self):
         from schedules import scheduler
         scheduler.start()
+        scheduler.every_15mins_call()

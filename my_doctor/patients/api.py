@@ -220,3 +220,32 @@ class PatientLogout(generics.GenericAPIView):
             patient.is_logged_in=False
             patient.save()
             return Response({})
+
+
+
+class check_phone_no(generics.GenericAPIView):
+    def post(self, request):
+        phone_no = request.data['ph_no']
+        all_patients = patient_info.objects.filter(ph_no=phone_no)
+        if len(all_patients) == 1:
+            return Response({
+                'patient_available': True,
+                'patient': patient_infoSerializer(all_patients[0]).data
+            })
+
+        else:
+            return Response({
+                'patient_available': False
+            })
+
+
+class cheange_password(generics.GenericAPIView):
+    def post(self, request):
+        pat_id = request.data['id']
+        patient = patient_info.objects.get(id=pat_id)
+        user = patient.user
+        user.set_password(request.data['password'])
+        user.save()
+        return Response({
+            'password_change': True
+        })
