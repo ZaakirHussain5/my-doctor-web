@@ -11,50 +11,7 @@
                     </div>
                     <div class="mob-list">
                         <div class="sidebar-userlist ps ps--active-y">
-                            <ul class="list-unstyled appointmentList">
-                                <li>
-                                    <div class="calllist">
-                                        <div class="user-avatar user-avatar-rounded online">
-                                            <img class="img-fluid" src="http://127.0.0.1:8000/media/author-thumb-5.jpg" alt="">
-                                        </div>
-                                        <div class="calllist__details">
-                                            <div class="calllist__details--name">Dr. Andrew</div>
-                                            <div class="calllist__details--info mt-1">
-                                                <span>Head Ache<br>12/11/2020 10:20AM</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="calllist__actions">
-                                            <div class="iconbox btn-hovered-light" >
-                                                <i class="iconbox__icon mdi mdi-video text-danger"></i>
-                                            </div>
-                                            <div class="iconbox btn-hovered-light" data-toggle="modal" data-target="#editApp">
-                                                <i class="iconbox__icon mdi mdi-pencil-outline text-primary"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="calllist">
-                                        <div class="user-avatar user-avatar-rounded online">
-                                            <img class="img-fluid" src="http://127.0.0.1:8000/media/author-thumb-5.jpg" alt="">
-                                        </div>
-                                        <div class="calllist__details">
-                                            <div class="calllist__details--name">Dr. Andrew</div>
-                                            <div class="calllist__details--info mt-1">
-                                                <span>Stomach Ache<br>12/11/2020 10:20AM</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="calllist__actions">
-                                            <div class="iconbox btn-hovered-light">
-                                                <i class="iconbox__icon mdi mdi-file text-primary"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                            <ul class="list-unstyled appointmentList" id="upcoming">
                             </ul>
                     </div>
                     </div>
@@ -254,7 +211,7 @@
                         </div>
 
                         <div class="calllist__actions">
-                            <div class="iconbox btn-hovered-light" >
+                            <div class="iconbox btn-hovered-light call" data-const="${index.id}" data-doctor="${index.doctor.id}">
                                 <i class="iconbox__icon mdi mdi-video text-danger"></i>
                             </div>
                             <div class="iconbox btn-hovered-light" data-toggle="modal" data-target="#editApp">
@@ -354,7 +311,10 @@
                     request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
                 },
                 success:function(response){
-                    window.location.href=`/api/VideoCall?user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                    if(window.matchMedia("(max-width:425px)").matches)
+                        window.location.href=`/api/VideoCall?device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                    else
+                        window.location.href=`/api/VideoCall?device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
                 error:function(response){
                     console.log(response)

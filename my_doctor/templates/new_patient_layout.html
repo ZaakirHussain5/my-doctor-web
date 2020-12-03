@@ -156,10 +156,13 @@
             });
         });
     </script>
+    
+<script src="https://apis.google.com/js/platform.js" async defer></script>
     {% block scripts %}
 
     {% endblock %}
     <script>
+        
         $('#btnLogout').click(function () {
             $.ajax({
                 url: '/api/PatientLogout',

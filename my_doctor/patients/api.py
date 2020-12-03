@@ -5,7 +5,8 @@ from .serializers import (
     UpdatePasswordSerializer, UpdateProfile,patient_infoSerializer,
     PatientResgistrationSerializer,medical_historySerializer,
     groupsSerializer,PatientResgistrationApp, UserEmail,
-    PatientBillingHistorySerializer,patient_family_membersSerializer
+    PatientBillingHistorySerializer,patient_family_membersSerializer,
+    socailRegistrationSerializer
 )
 from .models import (patient_info,medical_history,groups, PatientBillingHistory,patient_family_members)
 from rest_framework import viewsets, permissions,generics
@@ -72,6 +73,11 @@ class PatientResgistrationAPI(generics.GenericAPIView):
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data
         })
 
+
+
+
+
+
 class PatientResgistrationAppAPI(generics.GenericAPIView):
     serializer_class = PatientResgistrationApp
     
@@ -83,6 +89,21 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
         })
+
+
+class socialPatientRegistrationView(generics.GenericAPIView):
+    serializer_class = socailRegistrationSerializer
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            'Patient': UserAuthSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        })
+
+
 
 class PatientUpdateProfileAPI(generics.GenericAPIView):
     serializer_class = UpdateProfile

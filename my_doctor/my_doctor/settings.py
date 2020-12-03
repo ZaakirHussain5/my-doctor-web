@@ -75,7 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'my_doctor.urls'
@@ -92,8 +92,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                # 'social_django.context_processors.backends',
-                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -182,7 +180,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '145610180262-e30cgv3sdtul1eu6kplk1q3i3r79h574.apps.googleusercontent.com'
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jzx9qTt54W8JvTNoNt3jSCqK'
 
