@@ -15,11 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'rd*14e!dam(_=6n!^=)2*ee73%lkbnnhop2u5w-7!9kuh(unv6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -181,9 +176,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '145610180262-e30cgv3sdtul1eu6kplk1q3i3r79h574.apps.googleusercontent.com'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jzx9qTt54W8JvTNoNt3jSCqK'
-
-# LOGIN_URL = 'http://localhost:8000/login'
-# LOGIN_REDIRECT_URL = 'http://localhost:8000/patients/dashboard'
 
