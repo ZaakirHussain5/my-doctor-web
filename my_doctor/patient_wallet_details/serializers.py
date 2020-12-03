@@ -35,7 +35,7 @@ class WalletSerializer(serializers.ModelSerializer):
         return data
 
     def get_transaction(self, obj):
-        transactions_list = obj.patient.transaction.filter(user_id__username=obj.patient)
+        transactions_list = obj.patient.transaction.filter(user_id__username=obj.patient).order_by('-trans_date')
         return transactionsSerializer(transactions_list, many=True).data
         
     class Meta:

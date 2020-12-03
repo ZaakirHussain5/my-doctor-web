@@ -195,17 +195,18 @@
             },
         }).done((response)=>{
             let li = ''
-            response.map(function(index){
-                li += `
+            if (response.length > 0) {
+                response.map(function (index) {
+                    li += `
                 <li>
                     <div class="calllist">
                         <div class="user-avatar user-avatar-rounded online">
-                            <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png':index.doctor.profile_pic}" alt="">
+                            <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : index.doctor.profile_pic}" alt="">
                         </div>
                         <div class="calllist__details">
                             <div class="calllist__details--name">${index.doctor.full_name}</div>
                             <div class="calllist__details--info mt-1">
-                                <span>${index.doctor.specialist_type}<br>${index.appointment_date}</span>
+                                <span>${index.doctor.specialist_type}<br>${index.appointment_date} ${index.appointment_time}</span>
                                 <span></span>
                             </div>
                         </div>
@@ -221,8 +222,14 @@
                     </div>
                 </li>
                 `;
-            })
+                })
 
+            } else {
+                li = `<p class="text-center">
+                                    You have no appointments at the moment.
+                                </p>`
+            }
+          
             $('.appointmentList').html(li)
         })
         .fail((err)=>{

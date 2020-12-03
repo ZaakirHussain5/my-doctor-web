@@ -1,15 +1,19 @@
-from .serializers import *
-from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
+import datetime 
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.mixins import UpdateModelMixin
 from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
-from accounts.serializers import UserAuthSerializer
-from django.core.exceptions import ObjectDoesNotExist
-from knox.models import AuthToken
-from datetime import date
-from specialist_type.models import specialist_type
-import datetime 
 from rest_framework.views import APIView
-from rest_framework.mixins import UpdateModelMixin
+from datetime import date
+
+
+from knox.models import AuthToken
+from accounts.serializers import UserAuthSerializer
+from specialist_type.models import specialist_type
+from appointment.models import appointment
+
+from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
+from .serializers import *
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
@@ -180,11 +184,20 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
         date = self.request.query_params.get('date')
         specialist_id = self.request.query_params.get('id')
         day, month, year = date.split('/')
-        print(month, day, year)
         day_name = datetime.date(int(year), int(month), int(day))
         day_name = day_name.strftime("%A").lower()
-        print(day_name)
         queryset = DoctorTimings.objects.filter(day = day_name, doctor__specialist_type = specialist_type.objects.get(id=specialist_id))
+        for doctor in queryset:
+            total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date).count()
+            if total_appiontments > 0:
+                str_time = doctor.from_time
+                date_format = datetime.datetime.strptime(str_time, '%H:%M')
+                to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
+                from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
+                if (from_times < to_time):
+                    doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
+                else:
+                    queryset = queryset.exclude(id= doctor.id)
         return queryset
 
 
