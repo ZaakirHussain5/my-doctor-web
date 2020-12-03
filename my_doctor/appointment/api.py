@@ -1,8 +1,9 @@
-from .serializers import appointmentSerializer,appointmentsListSerializer
+from .serializers import appointmentSerializer,appointmentsListSerializer, cancleAppointmentSerializer
 from .models import appointment
 from rest_framework import viewsets, permissions,mixins
 from datetime import date, datetime
 from django.db.models import Sum
+from transactions.models import transactions
 
 
 def today_total_appointment():
@@ -40,12 +41,20 @@ class appointmentViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = appointmentSerializer
+
     
     def get_queryset(self):
         return self.request.user.appointments.all()
 
     def perform_create(self, serializer):
         serializer.save(patient=self.request.user)
+
+    def perform_update(delf, serializer):
+        if serializer.is_valid(raise_exception=False):
+            serializer.save()
+        return 
+
+
 
 class NewAppointmentAPI(viewsets.ModelViewSet):
     queryset = appointment.objects.all()
@@ -126,6 +135,8 @@ class getDoctorAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         return appointment.objects.filter(doctor__user=self.request.user)
 
+
+
 class getAllAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
     permissions = [
         permissions.AllowAny
@@ -148,3 +159,18 @@ class getAllAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
         return queryset
 
 
+
+class cancleAppointment(viewsets.ModelViewSet):
+    serializer_class = cancleAppointmentSerializer
+    queryset = appointment.objects.all()
+    permissions = {
+        permissions.IsAuthenticated
+    }
+    def perform_update(self, serializer):
+        appointments = serializer.save()
+        if appointment.consultation_status == 'Cancle':
+            now = datetime.now()
+            desc = "appointment camcled on {0}".format(now.strftime("%m/%d/%Y"))
+            transactions.objects.create(trans_type="appointment cancle", trans_desc=desc,user_id = self.request.user, credit=appointments.paid_amount )
+
+        return 

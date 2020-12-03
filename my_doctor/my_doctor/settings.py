@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'knox',
     'specialist_type',
     'consultations',
-    'appointment',
+    'appointment.apps.AppointmentConfig',
     'consultant_chat',
     'subscription_plans',
     'frontend',

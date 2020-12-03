@@ -9,6 +9,15 @@ class appointmentSerializer(serializers.ModelSerializer):
         model = appointment
         fields = '__all__'
 
+
+class cancleAppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = appointment
+        fields = '__all__'
+        read_only_fields = ('appointment_date', 'appointment_time', 'doctor', 'paid_amount')
+
+
+
 class appointmentsListSerializer(serializers.ModelSerializer):
     doctor = doctors_infoSerializer()
     patient = UserAuthSerializer()
@@ -22,4 +31,4 @@ class appointmentsListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = appointment
-        fields = ('id','doctor','patient','patient_name','patient_age','patient_gender','appointment_date','appointment_time','Description','pat_id','patient_login_status')
+        fields = ('id','doctor','patient','paid_amount', 'patient_name','patient_age','patient_gender','appointment_date','appointment_time','Description','pat_id','patient_login_status')

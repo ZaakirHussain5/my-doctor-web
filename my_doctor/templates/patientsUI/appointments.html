@@ -1,7 +1,7 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
-{% block content %} 
-<div class="ca-content__chatstab"> 
+{% block content %}
+<div class="ca-content__chatstab">
     <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
             <div class="container">
@@ -11,140 +11,140 @@
                     </div>
                     <div class="mob-list">
                         <div class="sidebar-userlist ps ps--active-y">
-                            <ul class="list-unstyled appointmentList">
-                                
-                                
+                            <ul class="list-unstyled appointmentList" id="upcoming">
+
+
                             </ul>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 <div class="modal new-message-dialog" id="editApp" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                            <h5>Edit Appointment</h5>
-                       
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex flex-wrap align-content-center" style="justify-content: center;">
-                            <ul class="nav nav-pills my-3" id="caCallsTabInside" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="all-calls-tab" data-toggle="pill" href="#cancel-app"
-                                        role="tab" aria-controls="all-calls" aria-selected="false">Cancel</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " id="missed-calls-tab" data-toggle="pill" href="#resc-app"
-                                        role="tab" aria-controls="missed-calls" aria-selected="true">Reschedule</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane  fade show active" id="cancel-app" role="tabpanel"
-                                aria-labelledby="pills-contact-tab">
-                                 <form id="mediaclForms">
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edit Appointment</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-wrap align-content-center" style="justify-content: center;">
+                    <ul class="nav nav-pills my-3" id="caCallsTabInside" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="all-calls-tab" data-toggle="pill" href="#cancel-app"
+                                role="tab" aria-controls="all-calls" aria-selected="false">Cancel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " id="missed-calls-tab" data-toggle="pill" href="#resc-app" role="tab"
+                                aria-controls="missed-calls" aria-selected="true">Reschedule</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane  fade show active" id="cancel-app" role="tabpanel"
+                        aria-labelledby="pills-contact-tab">
+                        <form id="mediaclForms">
                             <div class="form-group">
-                                <label for="ConsultingAbout">Reason</label>
-                                <textarea name="description" class="form-control" id="ConsultingAbout" rows="7" placeholder="Describe your Reason" style="font-size: medium;"></textarea>
+                                <label for="cancleReason">Reason</label>
+                                <textarea name="description" class="form-control" id="cancleReason" rows="7"
+                                    placeholder="Describe your Reason" style="font-size: medium;"></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn mfb-component__button--main"
-                                style="width:100%; border-radius:30px" id="ConfirmClick">Cancel Appointment</button>
+                                    style="width:100%; border-radius:30px" id="ConfirmClick">Cancel Appointment</button>
                             </div>
                         </form>
-                            </div>
-                            <div class="tab-pane  fade" id="resc-app" role="tabpanel"
-                            aria-labelledby="pills-contact-tab">
-                          
-                                <div class="row">
-                                    <div class="col-md-7 text-center">
-                                        <div class="ca-profile-thumb" style="height: auto;">
-                                        <div class="ca-profile-info">
-                                    <div class="ca-profile-pic"><img class="img-fluid"
-                                            id="summaryProfile" src="http://127.0.0.1:8000/media/group-12x_CENyikq.png"
-                                            alt=""></div>
-                                     </div>
-                                     <div class="ca-overlay"></div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-5 text-center mt-5">
-                                        <h5>Dr. Das</h5>
-                                        <p>Dietitian</p>
-                                    </div>
-                                </div>
-                                
+                    </div>
 
-                               
-                            <div class="form-group mt-5">
-                                <label>Select Date</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary">
-                                            Check Availablity
-                                        </button>
-                                    </span>
+                    <div class="tab-pane  fade" id="resc-app" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+                        <div class="row">
+                            <div class="col-md-7 text-center">
+                                <div class="ca-profile-thumb" style="height: auto;">
+                                    <div class="ca-profile-info">
+                                        <div class="ca-profile-pic"><img class="img-fluid" id="model-summaryProfile"
+                                                src="http://127.0.0.1:8000/media/group-12x_CENyikq.png" alt=""></div>
+                                    </div>
+                                    <div class="ca-overlay"></div>
                                 </div>
-                                
+
                             </div>
-                            <div class="form-group text-center">
-                                <strong class="text-primary">
-                                    <i class="mdi mdi-check-circle-outline"></i> Doctor Available at 12:00 PM on 12/08/2020
-                                </strong>
-                            </div>
-                            <div class="form-group">
-                                <button type="button" style="width:100%; border-radius:30px" class="btn btn-primary btn-block">
-                                    Book Appointment
-                                </button>
+                            <div class="col-md-5 text-center mt-5">
+                                <h5 id="modal-doctorname">Dr. Das</h5>
+                                <p id="modal-doctor-type">Dietitian</p>
                             </div>
                         </div>
+
+
+
+                        <div class="form-group mt-5">
+                            <label>Select Date</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control modal-date">
+                                <input type="hidden" class="modal-hidden-time">
+                                <span class="input-group-btn">
+                                    <button type="button" id="checkAvalability" class="btn btn-primary">
+                                        Check Availablity
+                                    </button>
+                                </span>
                             </div>
-                       
+
+                        </div>
+                        <div id="modal-docr-available-status" class="form-group text-center">
+                            
+                        </div>
+                        <div class="form-group">
+                            <button type="button" id="modal_change_doctorAppointment" style="width:100%; border-radius:30px"
+                                class="btn btn-primary book-appointment disabled btn-block">
+                                Book Appointment
+                            </button>
+                        </div>
                     </div>
-                    
                 </div>
+
             </div>
+
         </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block scripts %}
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#caMainTab a[href="{% url "patients:appointments"%} .conversation"]').addClass('active');
-        
-        
+
+
         let previousAppoinment = $('#previousAppoinment').DataTable({
             ajax: {
                 url: '/api/getAppoinmentHistory',
                 dataSrc: '',
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
             },
-            columns:[
+            columns: [
                 {
-                    data:'appointment_date',
+                    data: 'appointment_date',
                 },
                 {
-                    data:'appointment_time',
-                    render:function(data){
+                    data: 'appointment_time',
+                    render: function (data) {
                         return tConvert(data)
                     }
                 },
                 {
-                  data: "doctor",
-                  render: function (doctor){
-                      return `
+                    data: "doctor",
+                    render: function (doctor) {
+                        return `
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-2">
@@ -161,18 +161,18 @@
                             </div>
                         </div>
                       `;
-                  }
+                    }
                 },
-                
+
                 {
-                    data : 'Description'
+                    data: 'Description'
                 },
-                
+
             ],
-              language: {
-                  lengthMenu: "_MENU_",
-                  search: "",
-              }
+            language: {
+                lengthMenu: "_MENU_",
+                search: "",
+            }
         })
 
         function tConvert(time) {
@@ -186,50 +186,55 @@
             }
             return time.join(''); // return adjusted time or original string
         }
-        
 
-        $.ajax({
-            url: '/api/getUpcomingAppoinment',
-            method: 'GET',
-            contentType: 'application/json',
-            'beforeSend': function (request) {
-                request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
-            },
-        }).done((response)=>{
-            let li = ''
-            response.map(function(index){
-                li += `
-                <li>
-                    <div class="calllist">
-                        <div class="user-avatar user-avatar-rounded online">
-                            <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png':index.doctor.profile_pic}" alt="">
-                        </div>
-                        <div class="calllist__details">
-                            <div class="calllist__details--name">${index.doctor.full_name}</div>
-                            <div class="calllist__details--info mt-1">
-                                <span>${index.doctor.specialist_type}<br>${index.appointment_date} ${index.appointment_time}</span>
-                                <span></span>
-                            </div>
-                        </div>
+        function getMyAppointments() {
 
-                        <div class="calllist__actions">
-                            <div class="iconbox btn-hovered-light" >
-                                <i class="iconbox__icon mdi mdi-video text-danger"></i>
+            $.ajax({
+                url: '/api/getUpcomingAppoinment',
+                method: 'GET',
+                contentType: 'application/json',
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                },
+            }).done((response) => {
+                let li = ''
+                response.map(function (index) {
+                    console.log('index', index)
+                    li += `
+                    <li>
+                        <div class="calllist">
+                            <div class="user-avatar user-avatar-rounded online">
+                                <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : index.doctor.profile_pic}" alt="">
                             </div>
-                            <div class="iconbox btn-hovered-light" data-toggle="modal" data-target="#editApp">
-                                <i class="iconbox__icon mdi mdi-pencil-outline text-primary"></i>
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">${index.doctor.full_name}</div>
+                                <div class="calllist__details--info mt-1">
+                                    <span>${index.doctor.specialist_type}<br>${index.appointment_date} ${index.appointment_time}</span>
+                                    <span></span>
+                                </div>
+                            </div>
+    
+                            <div class="calllist__actions">
+                                <div class="iconbox btn-hovered-light" >
+                                    <i class="iconbox__icon mdi mdi-video text-danger"></i>
+                                </div>
+                                <div class="iconbox btn-hovered-light edit-app" data-doct='${JSON.stringify(index)}' data-id='${index.id}'>
+                                    <i  class="iconbox__icon mdi mdi-pencil-outline text-primary"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                `;
+                    </li>
+                    `;
+                })
+
+                $('.appointmentList').html(li)
             })
+                .fail((err) => {
+                    console.log(err);
+                })
+        }
 
-            $('.appointmentList').html(li)
-        })
-        .fail((err)=>{
-            console.log(err);
-        })
+        getMyAppointments()
         // let upcoming = $('#upcoming').DataTable({
         //     ajax: {
         //         url: '/api/getUpcomingAppoinment',
@@ -291,12 +296,12 @@
         //                         <small class="">Edit</small>
         //                     </div>
         //                 </div>
-                        
-                                   
+
+
         //                 `
         //             }
         //         }
-                
+
         //     ],
         //       language: {
         //           lengthMenu: "_MENU_",
@@ -304,22 +309,152 @@
         //       }
         // })
 
-        $('#upcoming').on('click','.call',function(){
+        $('#upcoming').on('click', '.call', function () {
             var button = $(this)
             $.ajax({
-                url:`/api/CallDoctor?doctor_id=${button.attr('data-doctor')}&const=${button.attr('data-const')}`,
-                method:'POST',
+                url: `/api/CallDoctor?doctor_id=${button.attr('data-doctor')}&const=${button.attr('data-const')}`,
+                method: 'POST',
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
-                success:function(response){
-                    window.location.href=`/api/VideoCall?user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                success: function (response) {
+                    window.location.href = `/api/VideoCall?user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
-                error:function(response){
+                error: function (response) {
                     console.log(response)
                 }
             })
         })
+
+
+
+
+        //                     APPOINTMENT CANCLE FORM SUBMIT //
+        let appp_id = 0;
+        let app_data = '';
+        $('#upcoming').on('click', '.edit-app', function () {
+            appp_id = $(this).attr('data-id')
+            let doctor = JSON.parse($(this).attr('data-doct'))
+            console.log(doctor.doctor.full_name)
+            app_data = doctor;
+            // $('#edit-app-id').val(appp_id)
+            $('#editApp').modal('show')
+            $('#modal-doctorname').html(doctor.doctor.full_name)
+            $('#modal-doctor-type').html(doctor.doctor.specialist_type)
+            $('#model-summaryProfile').attr('src', doctor.doctor.profile_pic != '' ? doctor.doctor.profile_pic : 'http://127.0.0.1:8000/media/group-12x_CENyikq.png')
+        })
+
+
+
+        $('#ConfirmClick').on('click', function (e) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            var button = $(this)
+            const data = {
+                'cancle_note': $('#cancleReason').val(),
+                consultation_status: "Cancle"
+            }
+            $.ajax({
+                url: `/api/cancleAppointment/${appp_id}/`,
+                method: 'PUT',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                },
+            }).done((res) => {
+                $('#editApp').modal('hide')
+                getMyAppointments()
+            }).fail((err) => {
+                console.log(err);
+            })
+        })
+
+        
+        $('#checkAvalability').click(function(){
+
+            let date = $('.modal-date').val()
+            date = moment(new Date(date)).format("DD/MM/YYYY")
+            console.log(date)
+            $.ajax({
+                url: `/api/specific_doctor_available?date=${date}&id=${appp_id}`,
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function(xhr){
+                    return xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                }
+            }).done((res)=>{
+                if(res.length > 0){
+                    console.log(res)
+                    $('#modal-docr-available-status').html(`
+                        <strong class="text-primary">
+                            <i class="mdi text-success mdi-check-circle-outline"></i> Doctor Available at ${tConvert(res[0].from_time)} on ${date}.
+                        </strong>
+                        `)
+                    $('.modal-hidden-time').val(res[0].from_time)
+                    $('.book-appointment').removeClass('disabled')
+                    return
+                }
+                $('#modal-docr-available-status').html('Doctor is not available.')
+                $('.book-appointment').addClass('disabled')
+
+
+            }).fail((err)=>{
+                console.log(err)
+            })
+        })
+        
+
+        function tConvert(time) {
+            // Check correct time format and split into components
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+            if (time.length > 1) { // If time format correct
+                time = time.slice(1);  // Remove full string match value
+                time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(''); // return adjusted time or original string
+        }
+
+
+
+        $('#modal_change_doctorAppointment').click(function(e){
+            e.preventDefault()
+            e.stopImmediatePropagation()
+
+            console.log(app_data)
+            let data = {
+                appointment_date: moment(new Date($('.modal-date').val())).format("DD/MM/YYYY"),
+                appointment_time: tConvert($('.modal-hidden-time').val()),
+                paid_amount: app_data.paid_amount,
+                doctor: app_data.doctor.id
+            }
+            console.log(data)
+            $.ajax({
+                url:`/api/appointments/${appp_id}/`,
+                method: 'PUT',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                beforeSend: function(xhr){
+                    return xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                }
+            }).done((res)=>{
+                $('#editApp').modal('hide')
+                getMyAppointments()
+            }).fail((err)=>{
+                console.log(err)
+            })
+        })
+
+
+
+
+
+
+
+
+
         // VARIABLES...
         // let dataList = [];
         // let old_active_id = null;

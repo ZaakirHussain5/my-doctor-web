@@ -428,3 +428,31 @@ class doctor_notesView(viewsets.ModelViewSet):
             pass
 
         serializer.save(doctor = doctor_info)
+
+
+
+class specific_doctor_available(viewsets.ModelViewSet):
+    serializer_class = AvlDoctorsListSerializer 
+
+    def get_queryset(self):
+        date = self.request.query_params.get('date')
+        doctor_id = self.request.query_params.get('id')
+        doctors = appointment.objects.get(id=doctor_id)
+        print(date)
+        day, month, year = date.split('/')
+        print(int(year), int(month), int(day))
+        day_name = datetime.date(int(year), int(month), int(day))
+        day_name = day_name.strftime("%A").lower()
+        queryset = DoctorTimings.objects.filter(day = day_name, doctor=doctors.doctor)
+        for doctor in queryset:
+            total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date).count()
+            if total_appiontments > 0:
+                str_time = doctor.from_time
+                date_format = datetime.datetime.strptime(str_time, '%H:%M')
+                to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
+                from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
+                if (from_times < to_time):
+                    doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
+                else:
+                    queryset = queryset.exclude(id= doctor.id)
+        return queryset       

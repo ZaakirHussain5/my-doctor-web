@@ -18,6 +18,7 @@ class appointment(models.Model):
     created_by = models.CharField(max_length=25, null=True)
     Last_modied = models.DateTimeField(auto_now_add=True)
     Modified_by = models.CharField(max_length=25, null=True)
+    cancle_note = models.CharField(max_length=500, default='')
 
     @property
     def pat_id(self):
