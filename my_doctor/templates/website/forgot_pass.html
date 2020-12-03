@@ -28,17 +28,9 @@
     <div class=" form-group col-xs-12">
     <div class="input-group">
     <input type="email" class="form-control" id="Name" placeholder="Enter phone or email id">
-
       <span class="input-group-btn">
-        <a href="#" class="btn">Reset Password</a></div>
+        <button href="#" class="btn" id="reset-pass">Reset Password</button></div>
       </span>
-    </div>
-    
-    
-    <div class="col-xs-12">
-    <div class="comment-btn">
-    
-    </div>
     </div>
     </div>
     </form>
@@ -49,3 +41,22 @@
     </section>
     
 {%endblock%}
+{% block scripts %}
+<script>
+  $(document).ready(function(){
+    $('#reset-pass').click(function(){
+      var phone_or_email = $('#phn-email').val()
+      if(phone_or_email == ''){
+        toastr.error('Enter Phone number or email','Error',{positionClass:'toast-top-center'})
+        return;
+      }
+
+      if(phone_or_email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+        //send mail
+      }else if(phone_or_email.match(/^\d{10}$/)){
+
+      }
+    })
+  })
+</script>
+{% endblock %}
