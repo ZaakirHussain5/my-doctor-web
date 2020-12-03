@@ -3,49 +3,125 @@
 {% block content%}
 
 <section class="breadcrumb">
-    <div class="container">
+  <div class="container">
     <div class="breadcrumb-outer">
-    <nav aria-label="breadcrumb">
-    <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{%static 'website/index.html'%}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Forget Password</li>
-    </ul>
-    </nav>
-    <h2>Forget Password</h2>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{%static 'website/index.html'%}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Forget Password</li>
+        </ul>
+      </nav>
+      <h2>Forget Password</h2>
     </div>
-    </div>
-    </section>
-    
-    
-    <section class="forgot-password">
-    <div class="container">
-    <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-    <div class="fp-content">
-    <p>Please provide your email address. Click in the provided link to retrieve you account.</p><br>
-    <form>
-    <div class="row">
-    <div class=" form-group col-xs-12">
-    <div class="input-group">
-    <input type="email" class="form-control" id="Name" placeholder="Enter phone or email id">
+  </div>
+</section>
 
-      <span class="input-group-btn">
-        <a href="#" class="btn">Reset Password</a></div>
-      </span>
+
+<section class="forgot-password mar-bottom-15">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="fp-content">
+          <ul class="nav nav-tabs sr-only" id="myTab">
+            <li class="active" role="tab"><a href="#details">Details</a></li>
+            <li><a href="#verification" role="tab">Verification</a></li>
+            <li><a href="#ResetPassword" role="tab">Password</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="details">
+              <p>Please provide your email address or Phone Number to retrieve you account.</p><br>
+
+              <div class="row">
+                <div class=" form-group col-xs-12">
+                  <div class="input-group">
+                    <input type="text" id="phn-email" class="form-control" placeholder="Enter phone or email id">
+                    <span class="input-group-btn">
+                      <button href="#" class="btn" id="reset-pass" type="button">Reset Password</button></div>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="verification">
+              <p>Enter the 4 digit verification code to your Email/Phonenumber. If you didn't recieve one click <span
+                  class="text-info">here.</span></p><br>
+
+              <div class="row">
+                <div class=" form-group col-xs-12">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="OTP"
+                      placeholder="Enter the Verification code sent to your Email or Phone.">
+                    <span class="input-group-btn">
+                      <button href="#" class="btn" id="check-verif" type="button">Verify Code</button></div>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="ResetPassword">
+              <p>Set a new Password</p>
+
+              <div class="row">
+                <div class=" form-group col-xs-12">
+                  <input type="password" class="form-control" placeholder="Enter Your New Password">
+                </div>
+                <div class=" form-group col-xs-12">
+                  <input type="password" class="form-control" placeholder="Confirm Your New Password">
+                </div>
+                <div class=" form-group col-xs-12">
+                  <button href="#" class="btn btn-block" id="change-pass" type="button">Reset Password</button></div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-    
-    
-    <div class="col-xs-12">
-    <div class="comment-btn">
-    
-    </div>
-    </div>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
-    </section>
-    
+  </div>
+</section>
+
 {%endblock%}
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    var phone_or_email = '';
+    $('#reset-pass').click(function () {
+      phone_or_email = $('#phn-email').val()
+      if (phone_or_email == '') {
+        toastr.error('Enter Phone number or email', 'Error', { positionClass: 'toast-top-center' })
+        return;
+      }
+      if (phone_or_email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+        //send mail
+      } else if (phone_or_email.match(/^\d{10}$/)) {
+        $.ajax({
+          url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Verification to reset your Password is <OTP>.Don't Share or forward.&route=0&from=BANDSS&to=${phone_or_email}&otp=1&otp_length=4`,
+          method: 'GET',
+          success: function (response) {
+            console.log(response)
+            $('#myTab a[href="#verification"]').tab('show')
+          }
+        })
+      }
+    })
+
+    $('#check-verif').click(function () {
+      $.ajax({
+        url: 'https://teleduce.corefactors.in/validate-otp/a224db72-cafb-4cce-93ab-3d7f950c92e2/',
+        data: {
+          mobile: phone_or_email,
+          otp: $('#OTP').val()
+        }
+      }).done(function (response) {
+        console.log(response)
+        if (response.response_code != "8000") {
+          toastr.error('Invalid OTP Please Check the OTP and Try Again', "Error", { positionClass: "toast-top-center" })
+          return
+        }
+        $('#myTab a[href="#ResetPassword"]').tab('show')
+      })
+    })
+  })
+
+</script>
+{% endblock %}

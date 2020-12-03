@@ -74,10 +74,10 @@ function submitRegistrationForm() {
                     toastr.success("Your registration successfull. You can get our service.", 'Success', {
                         positionClass: "toast-top-center"
                     })
-                    setTimeout(function(){
+                    setTimeout(function () {
                         window.location.href = 'patients/dashboard'
                     }, 2000)
-                    
+
                 }).fail((error) => {
                     $('#submit').html('Register')
                     $('#submit').removeAttr('disabled')
@@ -132,8 +132,8 @@ function newsLetterSubscription(url, data, message) {
         toastr.success(message, 'Success', {
             positionClass: "toast-top-center"
         })
-        
-        
+
+
         $("#newsletter-form").find("input[type=email]").val("")
     })
         .fail((error) => {
@@ -180,7 +180,7 @@ $('#patientRegistration').submit(submitRegistrationForm)
 
 
 ////// CONTACT US FORM /////////////
-$("#appointments-main-form").submit(function(e){
+$("#appointments-main-form").submit(function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     console.log('called')
@@ -207,17 +207,17 @@ $("#appointments-main-form").submit(function(e){
         method: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-    }).done((response)=>{
+    }).done((response) => {
         console.log(response);
         // alert("");
-       
+
         newsLetterSubscription(url, cms_data, message)
         $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
     })
-    .fail((error)=>{
-        console.log(error)
-    })
-    
+        .fail((error) => {
+            console.log(error)
+        })
+
 })
 
 
@@ -229,7 +229,7 @@ $("#doctorRegistration").submit((e) => {
     e.stopImmediatePropagation();
     const message = 'Success, Request received, Thank you';
     const url = `https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register_doctor/`
-    
+
     if ($('#OTP').val() == '') {
         alert('Enter The OTP')
         return
@@ -265,13 +265,13 @@ $("#doctorRegistration").submit((e) => {
             formdata.append('web_registration', true);
             formdata.append('about', "")
             formdata.append('Registration_Number', $('#medical_id').val())
-            const cms_data={
-                Phone_number : $('#mob1').val(),
-                City : $('#city').val(),
-                Name : $('#Name1').val(),
-                Medical_ID : $('#medical_id').val(),
-                Email : $('#email').val(),
-                speciality : $('#select-specialist').val()
+            const cms_data = {
+                Phone_number: $('#mob1').val(),
+                City: $('#city').val(),
+                Name: $('#Name1').val(),
+                Medical_ID: $('#medical_id').val(),
+                Email: $('#email').val(),
+                speciality: $('#select-specialist').val()
             }
 
             $.ajax({
@@ -286,18 +286,18 @@ $("#doctorRegistration").submit((e) => {
                     url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Registration under review, we shall inform you once approved&route=0&from=BANDSS&to=${$('#mob1').val()}`,
                     method: 'GET',
                     success: function (response) {
-                        console.log(response) 
+                        console.log(response)
                         let url = '/media/doctor plus.pdf';
-                        window.location.href = url; 
+                        window.location.href = url;
                     }
                 })
                 $('#doctorRegistration').trigger('reset');
                 $('#submit').html('Register me!')
-            $('#submit').removeAttr('disabled')
-            
+                $('#submit').removeAttr('disabled')
+
             }).fail((error) => {
                 $('#submit').html('Register me!')
-            $('#submit').removeAttr('disabled')
+                $('#submit').removeAttr('disabled')
                 console.log(error);
             })
         })

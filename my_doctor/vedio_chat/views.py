@@ -24,6 +24,7 @@ def getDoctorToken(request):
 
 def patientVideoChat(request):
     context = {}
+    device = request.GET.get('device')
     user = request.GET.get('user')
     doctor_id = request.GET.get('doctor')
     patient_id = request.GET.get('patient')
@@ -48,11 +49,12 @@ def patientVideoChat(request):
     context['patient'] = patient
     context['session'] = session
     context['appointment'] = request.GET.get('appointment', None)
-    
-    return render(request,'video_chat/new_video_chat.html', context)
+    if device == "small":
+        return render(request,'video_chat/mob_video_chat.html', context)
+    else:
+        return render(request,'video_chat/video_chat.html',context)
 
 def ratings(request):
-
     return render(request,'video_chat/ratings.html', {'consultation': request.GET.get('consultation')})
 
 

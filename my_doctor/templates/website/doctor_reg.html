@@ -86,13 +86,10 @@ outreach program a success.</p><br>
     </div>
     <div class="form-group col-xs-12">
         <select id="select-specialist" name="specialist_type" required>
-            <option value="">Speciality</option>
-            <option value="General Physician">General Physician</option>
-            <option value="Dermatologist">Dermatologist</option>
-            <option value="Pediatrician">Pediatrician</option>
-            <option value="Dietitian">Dietitian</option>
-            <option value="Psychologist">Psychologist</option>
-            <option value="Gynaecologist">Gynaecologist</option>
+            <option value="">Select Speciality</option>
+            {% for spl_type in specialist_types%}
+            <option value="{{spl_type.special_type}}">{{spl_type.special_type}}</option>
+            {% endfor %}
         </select>
     </div>
     <div class="form-group col-xs-12">
@@ -109,7 +106,7 @@ outreach program a success.</p><br>
     <div class="form-group col-xs-12" id="div-otp" style="display: none;">
 
         
-        </div>
+    </div>
     <div class="form-group col-xs-12">
     <input type="email" placeholder="Email ID" name="email" required>
     </div>
@@ -155,7 +152,7 @@ outreach program a success.</p><br>
                 success: function (response) {
                     console.log(response)
                     $('#div-otp').show()
-                    $('#div-otp').html('<input type="text" class="form-control" name="otp"  id="OTP" placeholder="Enter the OTP" required>')
+                    $('#div-otp').html('<input type="text" class="form-control" name="otp"  id="OTP" placeholder="Enter the OTP" required><small>Didn\'t Recieve an OTP click <span id="btnResendOTP" style="color:blue">here.</span></small>')
                 }
             })
 

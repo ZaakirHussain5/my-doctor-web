@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from specialist_type.models import specialist_type
 
 def index(request):
     return render(request,'website/index.html')
@@ -31,7 +32,8 @@ def faq(request):
     return render(request,'website/faq.html')
 
 def doctor_reg(request):
-    return render(request,'website/doctor_reg.html')
+    context = { "specialist_types" : specialist_type.objects.all() }
+    return render(request,'website/doctor_reg.html',context)
 
 def forgot_pass(request):
     return render(request,'website/forgot_pass.html')

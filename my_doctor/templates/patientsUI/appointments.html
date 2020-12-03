@@ -12,8 +12,7 @@
                     <div class="mob-list">
                         <div class="sidebar-userlist ps ps--active-y">
                             <ul class="list-unstyled appointmentList" id="upcoming">
-
-
+                                
                             </ul>
                         </div>
                     </div>
@@ -98,10 +97,11 @@
 
                         </div>
                         <div id="modal-docr-available-status" class="form-group text-center">
-                            
+
                         </div>
                         <div class="form-group">
-                            <button type="button" id="modal_change_doctorAppointment" style="width:100%; border-radius:30px"
+                            <button type="button" id="modal_change_doctorAppointment"
+                                style="width:100%; border-radius:30px"
                                 class="btn btn-primary book-appointment disabled btn-block">
                                 Book Appointment
                             </button>
@@ -187,35 +187,34 @@
             return time.join(''); // return adjusted time or original string
         }
 
-        function getMyAppointments() {
-
-            $.ajax({
-                url: '/api/getUpcomingAppoinment',
-                method: 'GET',
-                contentType: 'application/json',
-                'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
-                },
-            }).done((response) => {
-                let li = ''
+        $.ajax({
+            url: '/api/getUpcomingAppoinment',
+            method: 'GET',
+            contentType: 'application/json',
+            'beforeSend': function (request) {
+                request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+            },
+        }).done((response) => {
+            let li = ''
+            if (response.length > 0) {
                 response.map(function (index) {
-                    console.log('index', index)
                     li += `
-                    <li>
-                        <div class="calllist">
-                            <div class="user-avatar user-avatar-rounded online">
-                                <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : index.doctor.profile_pic}" alt="">
+                <li>
+                    <div class="calllist">
+                        <div class="user-avatar user-avatar-rounded online">
+                            <img class="img-fluid" src="${!index.doctor.profile_pic || index.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : index.doctor.profile_pic}" alt="">
+                        </div>
+                        <div class="calllist__details">
+                            <div class="calllist__details--name">${index.doctor.full_name}</div>
+                            <div class="calllist__details--info mt-1">
+                                <span>${index.doctor.specialist_type}<br>${index.appointment_date} ${index.appointment_time}</span>
+                                <span></span>
                             </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">${index.doctor.full_name}</div>
-                                <div class="calllist__details--info mt-1">
-                                    <span>${index.doctor.specialist_type}<br>${index.appointment_date} ${index.appointment_time}</span>
-                                    <span></span>
-                                </div>
-                            </div>
-    
+                        </div>
+
+                        <div class="calllist__actions">
                             <div class="calllist__actions">
-                                <div class="iconbox btn-hovered-light" >
+                                <div class="iconbox btn-hovered-light call" data-const="${index.id}" data-doctor="${index.doctor.id}">
                                     <i class="iconbox__icon mdi mdi-video text-danger"></i>
                                 </div>
                                 <div class="iconbox btn-hovered-light edit-app" data-doct='${JSON.stringify(index)}' data-id='${index.id}'>
@@ -223,18 +222,22 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                    `;
+                    </div>
+                </li>
+                `;
                 })
 
-                $('.appointmentList').html(li)
+            } else {
+                li = `<p class="text-center pt-4">
+                                    You have no appointments at the moment.
+                                </p>`
+            }
+
+            $('.appointmentList').html(li)
+        })
+            .fail((err) => {
+                console.log(err);
             })
-                .fail((err) => {
-                    console.log(err);
-                })
-        }
-
-        getMyAppointments()
         // let upcoming = $('#upcoming').DataTable({
         //     ajax: {
         //         url: '/api/getUpcomingAppoinment',
@@ -318,7 +321,10 @@
                     request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
                 success: function (response) {
-                    window.location.href = `/api/VideoCall?user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                    if (window.matchMedia("(max-width:425px)").matches)
+                        window.location.href = `/api/VideoCall?device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                    else
+                        window.location.href = `/api/VideoCall?device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
                 error: function (response) {
                     console.log(response)
@@ -370,8 +376,8 @@
             })
         })
 
-        
-        $('#checkAvalability').click(function(){
+
+        $('#checkAvalability').click(function () {
 
             let date = $('.modal-date').val()
             date = moment(new Date(date)).format("DD/MM/YYYY")
@@ -380,11 +386,11 @@
                 url: `/api/specific_doctor_available?date=${date}&id=${appp_id}`,
                 method: 'GET',
                 contentType: 'application/json',
-                beforeSend: function(xhr){
+                beforeSend: function (xhr) {
                     return xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 }
-            }).done((res)=>{
-                if(res.length > 0){
+            }).done((res) => {
+                if (res.length > 0) {
                     console.log(res)
                     $('#modal-docr-available-status').html(`
                         <strong class="text-primary">
@@ -399,11 +405,11 @@
                 $('.book-appointment').addClass('disabled')
 
 
-            }).fail((err)=>{
+            }).fail((err) => {
                 console.log(err)
             })
         })
-        
+
 
         function tConvert(time) {
             // Check correct time format and split into components
@@ -419,7 +425,7 @@
 
 
 
-        $('#modal_change_doctorAppointment').click(function(e){
+        $('#modal_change_doctorAppointment').click(function (e) {
             e.preventDefault()
             e.stopImmediatePropagation()
 
@@ -432,17 +438,17 @@
             }
             console.log(data)
             $.ajax({
-                url:`/api/appointments/${appp_id}/`,
+                url: `/api/appointments/${appp_id}/`,
                 method: 'PUT',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                beforeSend: function(xhr){
+                beforeSend: function (xhr) {
                     return xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 }
-            }).done((res)=>{
+            }).done((res) => {
                 $('#editApp').modal('hide')
                 getMyAppointments()
-            }).fail((err)=>{
+            }).fail((err) => {
                 console.log(err)
             })
         })

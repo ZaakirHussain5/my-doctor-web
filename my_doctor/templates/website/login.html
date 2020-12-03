@@ -36,6 +36,30 @@
     .abcRioButton{
         width: 100%!important;
     }
+    #customBtn {
+      display: inline-block;
+      background: #4285f4;
+      color: white;
+      width: 190px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+    #customBtn:hover {
+      cursor: pointer;
+    }
+    span.label {
+      font-weight: bold;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 42px;
+      padding-right: 42px;
+      font-size: 14px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+    }
 </style>
 <section class="breadcrumb">
     <div class="container">
@@ -99,15 +123,13 @@
                                 </div>
                             </div><br>
                             <div class="col-12 col-sm-12">
-                                <p style="text-align: center;padding: 20px 0;">Or sign in with</p>
+                                <p style="text-align: center;padding: 20px 0;">Or</p>
                             </div>
                             
                             <div data-onsuccess="onSignIn" onclick="ClickGoogleLogin()" class="btn btn-block g-signin2 col-lg-5 col-sm-12"
-                                style="padding: 10px 30px;text-align: center;margin: 18px;">
-                                <!-- <i class="fa fa-google"></i> Google -->
-
+                                style="text-align: center;" data-longtitle="true" data-theme="dark">
                             </div>
-                            <div class="col-12 col-sm-12">
+                            <div class="col-12 col-sm-12 pad-top-15 text-center" >
                                 <div class="checkbox-outer"><a href="/forgot_pass" style="color: #3a85f5;"> Forgot
                                         Password? </a>&nbsp; Not a registered user &nbsp;<a href="/PatientRegistration"
                                         id="redirectTo" style="color: #3a85f5;"> Register here </a>

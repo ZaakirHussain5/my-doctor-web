@@ -1,6 +1,5 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-
 from transactions.models import transactions
 from patient_wallet_details.models import patient_wallet_details
 
