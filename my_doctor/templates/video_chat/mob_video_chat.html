@@ -88,7 +88,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div id="otEmbedContainer" style="width:100%; height:440px;">
+                                            <div id="otEmbedContainer" style="width:100%; height:415px;">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -138,12 +138,12 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="Details" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
-                                <h5>Patient Details</h5>
+                                <h5 class="text-center">Patient Details</h5>
                                 <div class="text-center">
                                     {% if patient.profile_pic%}
-                                    <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
+                                    <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive" style="border-radius: :50%;">
                                     {% else %}
-                                    <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
+                                    <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive" style="border-radius: :50%;">
                                     {% endif %}
                                     <h4>{{patient.full_name}}</h4>
                                 </div>
@@ -263,12 +263,12 @@
                 {% else %}
                 <div class="card">
                     <div class="card-body">
-                        <h5>Doctor Details</h5>
+                        <h5 class="text-center">Doctor Details</h5>
                         <div class="text-center">
                             {% if doctor.profile_pic%}
-                            <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive">
+                            <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive" style="border-radius: :50%;">
                             {% else %}
-                            <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive">
+                            <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive" style="border-radius: :50%;">
                             {% endif %}
                             <h4>{{doctor.full_name}}</h4>
                             <small>{{doctor.specialist_type}}</small>
@@ -293,10 +293,6 @@
                     </div>
                 </div>
                 {% endif %}
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>

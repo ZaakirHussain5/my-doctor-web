@@ -52,7 +52,7 @@ def patientVideoChat(request):
     if device == "small":
         return render(request,'video_chat/mob_video_chat.html', context)
     else:
-        return render(request,'video_chat/video_chat.html')
+        return render(request,'video_chat/video_chat.html',context)
 
 def ratings(request):
     return render(request,'video_chat/ratings.html', {'consultation': request.GET.get('consultation')})
