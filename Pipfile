@@ -13,6 +13,7 @@ django-rest-knox = "*"
 djongo = "*"
 social-auth-app-django = "*"
 mysqlclient = "*"
+apscheduler = "*"
 
 [requires]
 python_version = "3.8"
