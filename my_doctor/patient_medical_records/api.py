@@ -13,7 +13,7 @@ class PatientMedicalRecordView(viewsets.ModelViewSet):
     serializer_class = MedicalRecordSerializer
 
     def get_queryset(self):
-        return self.request.user.records.all()
+        return self.request.user.records.filter(is_prescription=False)
 
     def perform_create(self,serializer):
         return serializer.save(patient=self.request.user)

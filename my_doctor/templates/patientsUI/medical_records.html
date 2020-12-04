@@ -69,7 +69,7 @@
                                 aria-labelledby="pills-contact-tab">
                                 <div class="mob-list">
                                     <div class="sidebar-userlist ps ps--active-y">
-                                        <ul class="list-unstyled medical_records_list">
+                                        <ul id="medocal-record" class="list-unstyled medical_records_list">
                                             <li>
                                                 <div class="calllist">
                                                     <div class="calllist__details">
@@ -302,69 +302,71 @@
         })
 
 
+        function get_pat_medi_record(){
 
-        $.ajax({
-            url: '/api/patient-medical-records',
-            method: 'GET',
-            contentType: 'application/json',
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
-            }
-        }).done((response)=>{
-            console.log(response)
-            let lis = `
-                <li>
-                    <div class="calllist">
-                        <div class="calllist__details">
-                            <div class="calllist__details--name">Title</div>
-                        </div>
-                        <div class="calllist__details">
-                            <div class="calllist__details--name">Description</div>
-                        </div>
-                        <div class="calllist__actions">
-                            <div class="iconbox btn-hovered-light">
-                                <span>Actions</span>
+            $.ajax({
+                url: '/api/patient-medical-records',
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                }
+            }).done((response)=>{
+                console.log(response)
+                let lis = `
+                    <li>
+                        <div class="calllist">
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">Title</div>
+                            </div>
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">Description</div>
+                            </div>
+                            <div class="calllist__actions">
+                                <div class="iconbox btn-hovered-light">
+                                    <span>Actions</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>`;
-            
-            response.map(index=>{
-                lis += `
-                <li>
-                    <div class="calllist">
-                        <div class="calllist__details"
-                            style="padding: 0 20px 0 0 !important;">
-                            <div class="calllist__details--name">${index.record_type}</div>
-                        </div>
-                        <div class="calllist__details">
-                            <div class="calllist__details--name">${index.description}</div>
-
-                        </div>
-
-                        <div class="calllist__actions"
-                            style="display: contents !important;">
-                            <div class="iconbox btn-hovered-light">
-                                <a href="${index.record_files}" target="_blank">
-                                    <i class="iconbox__icon mdi mdi-file text-primary"></i>
-                                </a>
+                    </li>`;
+                
+                response.map(index=>{
+                    lis += `
+                    <li>
+                        <div class="calllist">
+                            <div class="calllist__details"
+                                style="padding: 0 20px 0 0 !important;">
+                                <div class="calllist__details--name">${index.record_type}</div>
                             </div>
-                            <div class="iconbox btn-hovered-light">
-                                <i class="iconbox__icon mdi mdi-delete text-danger"></i>
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">${index.description}</div>
+
+                            </div>
+
+                            <div class="calllist__actions"
+                                style="display: contents !important;">
+                                <div class="iconbox btn-hovered-light">
+                                    <a href="${index.record_files}" target="_blank">
+                                        <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                    </a>
+                                </div>
+                                <div  class="iconbox mdi-delete-div btn-hovered-light">
+                                    <i data-id='${index.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                `
+                    </li>
+                    `
+                })
+                $('.medical_records_list').html(lis)
+
             })
-            $('.medical_records_list').html(lis)
+            .fail(err=>{
+                console.log(err)
+            })
+        }
 
-        })
-        .fail(err=>{
-            console.log(err)
-        })
-
-
+        get_pat_medi_record()
 
 
         ////////////////// MEDICAL REPORT SUBMITING //////////////////
@@ -404,7 +406,7 @@
                                 </a>
                             </div>
                             <div class="iconbox btn-hovered-light">
-                                <i class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                <i data-id='${index.id}'  class="iconbox__icon mdi mdi-delete text-danger"></i>
                             </div>
                         </div>
                     </div>
@@ -419,6 +421,32 @@
                 console.log(error);
             })
         })
+    
+    
+    
+        /////////////// DELETE MEDICAL RECORD //////////////////
+        $('#medocal-record').on('click', '.mdi-delete', function(){
+            let id = $(this).attr('data-id');
+            if (confirm('Are you sure you want to delete?')) {
+                $.ajax({
+                    url: '/api/patient-medical-records/'+ id + '/',
+                    method: 'DELETE',
+                    contentType: 'application/json',
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    }
+                }).done(res=>{
+                    get_pat_medi_record()
+                })
+                .fail(err=>{
+                    console.log(err)
+                })
+            }
+        })
+        
+        
     })
+
+    
 </script>
 {% endblock %}

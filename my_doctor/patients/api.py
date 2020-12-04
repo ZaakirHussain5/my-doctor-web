@@ -17,6 +17,9 @@ from knox.models import AuthToken
 from django.contrib.auth.models import User
 from appointment.models import appointment
 from appointment.serializers import appointmentSerializer
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from my_doctor.settings import EMAIL_HOST_USER
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.filter(is_active=True)
@@ -69,9 +72,30 @@ class PatientResgistrationAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        pat_info = patient_info.objects.get(user=user)
+        self.send_mails(pat_info, request.data['password'])
         return Response({
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data
         })
+
+    
+    def send_mails(self, obj, password):
+        mail_subject = 'Activate your account.'
+        message = render_to_string('email.html', {
+            'username': obj.full_name,
+            'patient_id': obj.pat_id,
+            'password': password
+        })
+
+        msg = EmailMessage(
+            'Subject',
+            message,
+            EMAIL_HOST_USER,
+            ['ssamiran472@gmail.com', 'dragndrop111@gmail.com'],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+        return True
 
 
 
@@ -85,10 +109,31 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        pat = patient_info.objects.get(user=user)
+        self.send_mails(pat, request.data['password'])
         return Response({
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
         })
+
+    
+    def send_mails(self, obj, password):
+        mail_subject = 'Activate your account.'
+        message = render_to_string('email.html', {
+            'username': obj.full_name,
+            'patient_id': obj.pat_id,
+            'password': password
+        })
+
+        msg = EmailMessage(
+            'Registration Confirmed – Doctor Plus',
+            message,
+            EMAIL_HOST_USER,
+            ['ssamiran472@gmail.com', 'dragndrop111@gmail.com', 'bstejas@live.com'],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+        return True
 
 
 class socialPatientRegistrationView(generics.GenericAPIView):

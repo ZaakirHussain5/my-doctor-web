@@ -9,5 +9,5 @@ def start():
 
 def every_15mins_call():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(apsjob.send_message_before_15mins, 'interval', seconds=1)
+    scheduler.add_job(apsjob.send_message_before_15mins, 'interval', minutes=1)
     scheduler.start()

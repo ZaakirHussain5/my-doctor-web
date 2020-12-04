@@ -305,8 +305,31 @@
             $("#profile-form").submit((e) => {
                 e.preventDefault();
                 e.stopImmediatePropagation();
+                let val_lists = []
+                let full_name = $("input[name='full_name']").val()
+                var matches = full_name.match(/\d+/g);
+                let number = /^[0-9]+$/;
+                let blood= /(A|B|AB|O)[+-]/;
+                if(matches != null){
+                    $("input[name='full_name']").css('border', '1px solid red')
+                    val_lists.push('Name')
+                }
+                if( !number.test($('input[name="ph_no"]').val())){
+                    $("input[name='ph_no']").css('border', '1px solid red')
+                    val_lists.push('phone number.')
+                    return 
+                }
+                if( !blood.test($('input[name="blood_group"]').val())){
+                    $("input[name='blood_group']").css('border', '1px solid red')
+                    val_lists.push('blood group.')
+                }
+                if(val_lists.length >0){
+                    let text = 'invalid ' + val_lists.join(', ');
+                    alert(text)
+                    return 
+                }
                 const data = new FormData(document.getElementById('profile-form'))
-                console.log(data);
+                console.log(data['full_name']);
                 $.ajax({
                     url: '/api/PatientUpdateProfile',
                     data: data,
@@ -341,7 +364,9 @@
                         xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
                     },
                 }).done((response) => {
-                    console.log(response);
+                    toastr.success('password updated successfully.', 'Success', {
+                        positionClass: "toast-top-center"
+                    })
                 }).fail((error) => {
                     console.log('errors are ', error)
                 })

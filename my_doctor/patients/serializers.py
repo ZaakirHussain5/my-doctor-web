@@ -114,7 +114,7 @@ class UpdateProfile(serializers.Serializer):
     full_name = serializers.CharField()
     age = serializers.IntegerField(required=False)
     weight=serializers.DecimalField(max_digits=10,decimal_places=2,required=False)
-    blood_group = serializers.CharField()
+    blood_group = serializers.CharField(required=False)
     ph_no=serializers.CharField()
     loggedInuser=serializers.IntegerField(required=False)
     profile_pic=serializers.FileField(required=False)

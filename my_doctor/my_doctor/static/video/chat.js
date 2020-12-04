@@ -111,9 +111,9 @@ function getMyMessage(){
     })
 }
 getMyMessage()
-// setInterval(function(){
-//     getMyMessage();
-// }, 1000)
+setInterval(function(){
+    getMyMessage();
+}, 1000)
 
 let totalMessage = 0
 function serializedMessage(arrOfMessage){

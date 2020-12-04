@@ -29,5 +29,6 @@ urlpatterns = [
     path('detailsOfPatient', patientData, name="FullDetails"),
     path('PatientLogout',PatientLogout.as_view(),name='LogoutPatient'),
     path('patient_check_phone/', check_phone_no.as_view(), name="check_phone_no"),
-    path('reset_forget_password/', cheange_password.as_view(), name="reset_password")
+    path('reset_forget_password/', cheange_password.as_view(), name="reset_password"),
+    path('send_mail/', views.send_mails, name="sendMail")
 ]

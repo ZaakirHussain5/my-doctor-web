@@ -1,4 +1,4 @@
-{% autoescape off %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +11,7 @@
 </head>
 <style>
   .circle{
-    font-size: 15px;
-    border: 1px solid;
-    border-radius: 50%;
-    padding: 0 5px;
+    font-size: 15px; border: 1px solid; border-radius: 50%; padding: 0 5px;
   }
   .bg-primary{
     background-color: #2a426c !important;
@@ -26,12 +23,12 @@
 <body>
   <div class="container mt-5 pl-5 pr-5">
     <!-- Top Header-->
-    <div class="doc-plus text-center bg-primary p-3 rounded-lg text-white">
-      <h3>Doctor Plus <sup><span class="circle">R</span></sup></h3>
+    <div style="color: white; text-align: center; padding: .5rem; background: #2a426c;">
+      <h3 style="font-size: 20px;">Doctor Plus <sup><span style=" border: 1px solid; border-radius: 50%; padding: .25rem;">R</span></sup></h3>
     </div>
     <!-- Greeting Text -->
-    <div class="greet-text mt-5 mb-5">
-      <h2><b>Dear {{ username }}</b></h2>
+    <div style="margin: 0 2rem;">
+      <h2><b>Dear {{username}},</b></h2>
       <br>
       <h4>Thank you for Signing Up with Doctor Plus,
         South India’s new Online Health Service. We are
@@ -41,9 +38,9 @@
       <h4>Please use the below PID (Patient Identiffication)
         number for future logins.</h4>
         <br>
-      <h4>Patient ID : {{patient_id}}
+      <h4>Patient ID : {{ patient_id }}
         <br>
-        Password : {{password}}</h4>
+        Password : {{ password }}</h4>
     </div>
     <hr>
     <!-- Info -->
@@ -52,12 +49,10 @@
       </p>
     </div>
     <!-- Bottom Header-->
-    <div class="doc-plus text-center bg-success p-3 rounded-lg text-white">
+    <div style="color: white; text-align: center; padding: .5rem; background: #8dc73f ;">
       <h3>A simple and easy way to consult Doctors Online.</h3>
     </div>
   </div>
 </body>
 
 </html>
-
-{% endautoescape %}

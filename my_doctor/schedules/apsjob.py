@@ -1,5 +1,7 @@
-from appointment.models import appointment
 import datetime
+import requests
+from appointment.models import appointment
+from patients.models import patient_info
 
 
 def send_todays_message():
@@ -11,8 +13,10 @@ def send_todays_message():
         date_format_app_date = datetime.datetime.strptime(str_appointment_date, "%d/%m/%Y")
         diff = today - date_format_app_date
         if diff.days >= 0:
-            pass
-            #https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. DoctorName has been fixed for today at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#ph_no').val()}
+            # doctor name, appointment_time, phone_number
+            patient = patient_info.objects.get(user=appointments.patient)
+            url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been fixed for today at {1} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={2}".format(appointments.doctor.full_name, appointments.appointment_time, patient.ph_no)
+            requests.get(url)
 
 
 def send_message_before_15mins():
@@ -30,5 +34,6 @@ def send_message_before_15mins():
             diff = (app_time_instance - after_15mins)
             in_secoends = diff.total_seconds()
             if int(in_secoends/60) == 0:
-                pass
-                #https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. DoctorName has been fixed for today at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#ph_no').val()}
+                patient = patient_info.objects.get(user=appointments.patient)
+                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
+                requests.get(url)
