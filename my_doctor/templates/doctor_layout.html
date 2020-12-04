@@ -83,7 +83,7 @@
                     </div>
                     <div class="language-select dropdown" id="language-select">
                         <button class="btn btn-default btn-sm" id="btnLogout">
-                            <i class="fa fa-sign-out"></i><span>log out</span>
+                            <i class="fa fa-sign-out"></i><span>Logout</span>
                         </button>
                     </div>
 
@@ -257,8 +257,7 @@
         }, 2000); 
         
         setTimeout(function () {
-            jQuery.removeCookie('DoctorToken', { path: '/' })
-            window.location.href = '/'
+            jQuery('#btnLogout').trigger('click')
         }, 3600000)
 
         jQuery.ajax({

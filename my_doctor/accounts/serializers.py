@@ -49,6 +49,12 @@ class LoginSerializer(serializers.Serializer):
         ph_no = int(data['username'])
         doctor = doctors_info.objects.get(phone_number=ph_no)
         data['username'] = doctor.user.username
+
+      elif data['user_type'] == 'P':
+        val = data['username']
+        if val[0:5] == 'DPPAT':
+          patient = patient_info.objects.get(pat_id=val)
+          data['username'] = patient.user.username
     except:
       pass 
     user = authenticate(**data)
