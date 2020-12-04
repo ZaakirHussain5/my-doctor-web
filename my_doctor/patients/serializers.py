@@ -79,8 +79,6 @@ class socailRegistrationSerializer(serializers.Serializer):
         except User.DoesNotExist:
             user = User(username=validated_data['email'], email=validated_data['email'])
             user.save()
-            # details = user_details.objects.create(user=user,full_name=validated_data['full_name'], user_type=validated_data['user_type'])
-            # details.save()
             patient_details = patient_info.objects.create(user=user,
                 pat_id=validated_data['pat_id'],
                 full_name=validated_data['full_name']
