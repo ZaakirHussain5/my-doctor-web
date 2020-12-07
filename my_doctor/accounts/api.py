@@ -4,6 +4,11 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from rest_framework import viewsets, permissions,generics
 from rest_framework import mixins
+from doctors.models import doctors_info
+from doctors.serializers import doctors_infoSerializer
+from patients.models import patient_info
+from patients.serializers import patient_infoSerializer
+from django.contrib.auth.models import User
 
 class userViewSet(viewsets.ModelViewSet):
     queryset = user_details.objects.all()
@@ -60,3 +65,23 @@ class g_loginView(generics.GenericAPIView):
     })
 
 
+class checkEmail(viewsets.ModelViewSet):
+  serializer_class= UserAuthSerializer
+  permission_classes = [
+    permissions.AllowAny,
+  ]
+  def get_queryset(self):
+    data_email = self.request.query_params.get('email', None)
+    print('email is ', data_email)
+    data_phone = self.request.query_params.get('phone', None)
+    if data_email is not None:
+      user =  User.objects.filter(email__icontains = data_email)
+      return user
+    if data_phone is not None:
+      doctors = doctors_info.objects.filter(phone_number__icontains=data_phone)
+      if doctors.count() > 0:
+        self.serializer_class = doctors_infoSerializer
+        return doctors
+      self.serializer_class = patient_infoSerializer
+      patients = patient_info.objects.filter(ph_no__icontains = data_phone)
+      return patients 

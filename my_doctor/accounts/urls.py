@@ -1,10 +1,11 @@
 from rest_framework import routers
 from knox.views import LogoutView
-from .api import userViewSet,RegisterAPI,LoginAPI,UserAPI, g_loginView
+from .api import userViewSet,RegisterAPI,LoginAPI,UserAPI, g_loginView, checkEmail
 from django.urls import path
 
 router = routers.DefaultRouter()
 router.register('user', userViewSet, 'user')
+router.register('has_email', checkEmail, 'has_email')
 
 urlpatterns = router.urls
 

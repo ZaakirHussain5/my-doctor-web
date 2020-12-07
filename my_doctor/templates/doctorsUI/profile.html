@@ -388,7 +388,7 @@
                 console.log(error)
             })
     }
-    getDoctorTimings();
+    // getDoctorTimings();
     jQuery('#timingsForm').submit((e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -412,5 +412,86 @@
 
     })
 
+
+    /////////////////////// PROFILE EMAIL AND PHONE NUMBER CHANGE CHECKING AVAILABELITY ////////////////
+
+
+        function checkEmail(){
+            const email = jQuery('#email').val();
+            const email_warn = jQuery('#email-warning')
+            console.log(email_warn.length)
+            if (email.length >=3){
+                jQuery.ajax({
+                    url: '/api/has_email/?email='+ email,
+                    method: 'GET',
+                    contentType: 'application/json',
+
+                }).done(res=>{
+                    
+                    if(res.length > 0){
+                        if(email_warn.length == 0){
+                            jQuery('#email').after(jQuery('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                            jQuery('.registerButton').prop('disabled', true)
+                        }
+                    }
+                    else{
+                        if(email_warn.length > 0){
+                            jQuery('#email-warning').remove()
+                            jQuery('.registerButton').prop('disabled', false)
+                        }
+                    }
+                }).fail(err=>{
+                    console.log(err)
+                })
+            }else{
+                if(email_warn.length > 0){
+                    jQuery('#email-warning').remove()
+                    jQuery('.registerButton').prop('disabled', true)
+                }
+            }
+        }
+
+        function checkPhone(){
+            const mob1 = jQuery('#ph_no').val();
+            console.log(mob1)
+            const mob1_warn = jQuery('#ph_no-warning')
+            console.log(mob1_warn.length)
+            if (mob1.length >=3){
+                jQuery.ajax({
+                    url: '/api/has_email/?phone='+ mob1,
+                    method: 'GET',
+                    contentType: 'application/json',
+
+                }).done(res=>{
+                    
+                    if(res.length > 0){
+                        if(mob1_warn.length == 0){
+                            jQuery('#ph_no').after(jQuery('<p id="ph_no-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                            jQuery('.registerButton').prop('disabled', true)
+                        }
+                    }
+                    else{
+                        if(mob1_warn.length > 0){
+                            jQuery('#ph_no-warning').remove()
+                            jQuery('.registerButton').prop('disabled', false)
+                        }
+                    }
+                }).fail(err=>{
+                    console.log(err)
+                })
+            }else{
+                if(mob1_warn.length > 0){
+                    jQuery('#ph_no-warning').remove()
+                    jQuery('.registerButton').prop('disabled', true)
+                }
+            }
+        }
+
+
+        const email = document.getElementById('email')
+        email.onkeyup = checkEmail;
+        
+        const mob1 = document.getElementById('ph_no')
+        mob1.onkeyup = checkPhone;
 </script>
 {% endblock %}

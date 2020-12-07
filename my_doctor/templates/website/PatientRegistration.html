@@ -116,14 +116,10 @@
                                     placeholder="Re enter Password" required>
                             </div>
 
-
-
-
-
                         </div>
                         <div class="col-xs-12 text-center">
                             <div class="comment-btn">
-                                <button type="submit" class="btn btn-block" style="padding:12px" id="submit">Register</button>
+                                <button type="submit" class="btn registerButton btn-block" style="padding:12px" id="submit">Register</button>
                             </div>
                         </div>
                     </form>
@@ -192,8 +188,86 @@
             }
         }
 
+        function checkEmail(){
+            const email = $('#email').val();
+            const email_warn = $('#email-warning')
+            console.log(email_warn.length)
+            if (email.length >=3){
+                $.ajax({
+                    url: '/api/has_email/?email='+ email,
+                    method: 'GET',
+                    contentType: 'application/json',
+
+                }).done(res=>{
+                    
+                    if(res.length > 0){
+                        if(email_warn.length == 0){
+                            $('#email').after($('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                            $('.registerButton').prop('disabled', true)
+                        }
+                    }
+                    else{
+                        if(email_warn.length > 0){
+                            $('#email-warning').remove()
+                            $('.registerButton').prop('disabled', false)
+                        }
+                    }
+                }).fail(err=>{
+                    console.log(err)
+                })
+            }else{
+                if(email_warn.length > 0){
+                    $('#email-warning').remove()
+                    $('.registerButton').prop('disabled', true)
+                }
+            }
+        }
+
+        function checkPhone(){
+            const mob1 = $('#mob1').val();
+            const mob1_warn = $('#mob1-warning')
+            console.log(mob1_warn.length)
+            if (mob1.length >=3){
+                $.ajax({
+                    url: '/api/has_email/?phone='+ mob1,
+                    method: 'GET',
+                    contentType: 'application/json',
+
+                }).done(res=>{
+                    
+                    if(res.length > 0){
+                        if(mob1_warn.length == 0){
+                            $('#mob1').after($('<p id="mob1-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                            $('.registerButton').prop('disabled', true)
+                        }
+                    }
+                    else{
+                        if(mob1_warn.length > 0){
+                            $('#mob1-warning').remove()
+                            $('.registerButton').prop('disabled', false)
+                        }
+                    }
+                }).fail(err=>{
+                    console.log(err)
+                })
+            }else{
+                if(mob1_warn.length > 0){
+                    $('#mob1-warning').remove()
+                    $('.registerButton').prop('disabled', true)
+                }
+            }
+        }
+
+
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
+
+        const email = document.getElementById('email')
+        email.onkeyup = checkEmail;
+        
+        const mob1 = document.getElementById('mob1')
+        mob1.onkeyup = checkPhone;
+        
     })
 </script>
 {% endblock %}
