@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="page-header text-center">
             <div class="page-title">
-                <h2>Subscription Plans</h2>
+                <h2>Promo Codes</h2>
             </div>
         </div>
     </div>
@@ -16,31 +16,32 @@
             <div class="card-body card-block">
                 <div class="row">
                     <input type="hidden" name="id" id="spl_id">
-                    <div class="offset-md-2 col-md-4 pr-5 pl-5">
+                    <div class="col-md-4">
                         <div class="row form-group">
                             <label for="hf-email" class=" form-control-label">Code Name</label>
                             <input type="text" required="" id="plan_name" name="code" placeholder="Enter Code"
                                 class="form-control">
                         </div>
+                    </div>
+                    <div class="col-md-4 ml-4">
                         <div class="row form-group">
                             <label for="hf-email" class=" form-control-label">Discount Percent</label>
-                            <input type="number" required="" id="plan_price" name="discount_percent"
+                            <div class="input-group">
+                                <input type="number" required="" id="plan_price" name="discount_percent"
                                 placeholder="Enter Discount Price" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Code</span>
+                                    </button>
+                                </span>
+                            </div>
+                            
                         </div>
-
                     </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Code</span>
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Reset
-                    </button>
-                </div>
+                        
 
+                    
+                </div>
             </div>
         </div>
     </form>
@@ -110,7 +111,7 @@
             id_selector:'#spl_id',
             form_id:'#subscriptionForm',
             table:table,
-            entity:'Subscription plan'
+            entity:'Promo Code'
         })
 
          DoHeighLight('Administration', 'subscription_plans')

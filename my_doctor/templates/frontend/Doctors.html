@@ -210,8 +210,14 @@
                     $label.removeClass('file-ok');
                     $labelText.text(labelDefault);
                     $label.css('background','#fff')
-                    
-                    toastr.success("New Doctor Added successfully","Success",{positionClass:'toast-top-center'})
+                    $.ajax({
+                    url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Dr.${$('#full-name').val()} your registration has been approved. Login using your ID : ${$('#id').val()} and Password : ${$('#password').val()} Login here https://www.doctor-plus.in/login&route=0&from=BANDSS&to=${$('#phone_number').val()}`,
+                    method: 'GET',
+                    success: function (response) {
+                        console.log(response)
+                        toastr.success("New Doctor Added successfully","Success",{positionClass:'toast-top-center'})
+                    }
+                })
                 })
                 .fail((error) => {
                     console.log(error)
