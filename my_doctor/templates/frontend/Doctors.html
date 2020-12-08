@@ -206,9 +206,10 @@
                     var $file = jQuery('#image1'),
                             $label = $file.next('label'),
                             $labelText = $label.find('span'),
-                            labelDefault = $labelText.text();
+                            labelDefault = 'Select a Photo';
                     $label.removeClass('file-ok');
                     $labelText.text(labelDefault);
+                    $label.css('background','#fff')
                     toastr.success("New Doctor Added successfully","Success",{positionClass:'toast-top-center'})
                 })
                 .fail((error) => {

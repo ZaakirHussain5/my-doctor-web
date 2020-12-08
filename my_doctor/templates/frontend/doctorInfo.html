@@ -148,9 +148,19 @@
                         </div>
                     </div>
                 </div>
-                <div id="agreement" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
+                <div id="agreement" class="tab-pane fade mt-3">
+                    <div class="col-md-5 offset-md-3">
+                        <div class="form-group">
+                            <a id='moufiles' class="btn btn-link" href="#" target="_blank"> <i class="fa fa-tasks"></i> View File</a>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="newMouFile" id="newMouFile" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button id='editmoufiles' class="btn btn-primary btn-block"> <i class="fa fa-edit"></i> Update File </button>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div id="timings" class="tab-pane fade">
                     <div class="row">
@@ -411,6 +421,7 @@
             console.log('response response', response);
             formDeserialize(form, response[0].user);
             formDeserialize(form,response[0])
+            jQuery('#moufiles').attr('href',response[0].mou_file)
             jQuery('#consultation_fee').val(response[0]['consultation_fee'])
         }).fail((error) => {
             console.log(error);
