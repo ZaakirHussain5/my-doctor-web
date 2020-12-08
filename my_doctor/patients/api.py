@@ -91,7 +91,7 @@ class PatientResgistrationAPI(generics.GenericAPIView):
             'Subject',
             message,
             EMAIL_HOST_USER,
-            ['ssamiran472@gmail.com', 'dragndrop111@gmail.com'],
+            [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
@@ -129,7 +129,7 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
             'Registration Confirmed – Doctor Plus',
             message,
             EMAIL_HOST_USER,
-            ['ssamiran472@gmail.com', 'dragndrop111@gmail.com', 'bstejas@live.com'],
+            [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()

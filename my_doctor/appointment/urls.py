@@ -1,7 +1,7 @@
 from rest_framework import routers
 from .api import (NewAppointmentAPI, getDoctorAppointments,appointmentViewSet,
     getPatientAppointments,getAllAppointments, getAppoinmentHistory, getUpcomingAppoinment, upComingAppoinment,
-    todaysAppoinment, previousAppoinment, cancleAppointment
+    todaysAppoinment, previousAppoinment, cancleAppointment, getAllAppointmentsSpecificUser
 )
 
 router = routers.DefaultRouter()
@@ -16,5 +16,6 @@ router.register('upComingAppoinment', upComingAppoinment,'upComingAppoinment')
 router.register('todaysAppoinment', todaysAppoinment,'todaysAppoinment')
 router.register('previousAppoinment', previousAppoinment,'previousAppoinment')
 router.register('cancleAppointment', cancleAppointment,'cancleAppointment')
+router.register('getAllAppointmentsSpecificUser', getAllAppointmentsSpecificUser,'getAllAppointmentsSpecificUser')
 
 urlpatterns = router.urls

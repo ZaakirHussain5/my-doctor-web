@@ -5,6 +5,10 @@ from django.http import JsonResponse
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
+from rest_framework import generics
+from .serializers import patient_infoSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
 def generateId(request):
@@ -34,3 +38,11 @@ def send_mails(request):
     msg.content_subtype = "html"  # Main content is now text/html
     msg.send()
     return redirect('dashboard')
+
+@api_view(['POST'])
+def update_medicalReport(request):
+    pat = patient_info.objects.get(user=request.user)
+    pat.medical_history = request.data['medical_history']
+    pat.save()
+    serializer = patient_infoSerializer(pat)
+    return Response(serializer.data)
