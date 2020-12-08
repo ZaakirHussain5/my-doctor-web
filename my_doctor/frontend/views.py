@@ -136,3 +136,5 @@ def appointments(request):
 def patients_details(request, id=None):
     return render(request, 'frontend/patientsInfo.html', {'id': id})
 
+def promo_code(request):
+    return render(request, 'frontend/promo_code.html')

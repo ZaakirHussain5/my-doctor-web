@@ -24,4 +24,12 @@ class VedioChat(models.Model):
             return patient_info.objects.get(user__id=self.Call_from.id).id
         except ObjectDoesNotExist:
             return doctors_info.objects.get(user__id=self.Call_from.id).id
+
+
+class video_chat_session(models.Model):
+    user = models.CharField(max_length=15)
+    session_id = models.CharField(max_length=200)
+    token = models.CharField(max_length=200)
+
+
     

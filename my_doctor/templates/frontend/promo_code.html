@@ -1,0 +1,120 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+<div class="breadcrumbs">
+    <div class="col-12">
+        <div class="page-header text-center">
+            <div class="page-title">
+                <h2>Subscription Plans</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <form id="subscriptionForm">
+        <div class="card">
+
+            <div class="card-body card-block">
+                <div class="row">
+                    <input type="hidden" name="id" id="spl_id">
+                    <div class="offset-md-2 col-md-4 pr-5 pl-5">
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Code Name</label>
+                            <input type="text" required="" id="plan_name" name="code" placeholder="Enter Code"
+                                class="form-control">
+                        </div>
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Discount Percent</label>
+                            <input type="number" required="" id="plan_price" name="discount_percent"
+                                placeholder="Enter Discount Price" class="form-control">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Code</span>
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-body card-block">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="subs_plans">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Discount Percent</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+    jQuery(document).ready(function ($) {
+        
+            var table = jQuery('#subs_plans').DataTable({
+                ajax: {
+                    url: "/api/promocode_work",
+                    dataSrc: ""
+                },
+                responsive: true,
+                columns: [
+                    {
+                        data: "code"
+                    },
+                    {
+                        data: "discount_percent"
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>`
+                        }
+                    },
+                ],
+                language: {
+                    lengthMenu: "_MENU_",
+                    search: "",
+                    searchPlaceholder: "Search..."
+                },
+            })
+        
+
+        crudOperations({
+            url:'/api/promocode_work/',
+            put_url:'/api/promocode_work/',
+            table_id:'#subs_plans',
+            id_selector:'#spl_id',
+            form_id:'#subscriptionForm',
+            table:table,
+            entity:'Subscription plan'
+        })
+
+         DoHeighLight('Administration', 'subscription_plans')
+        
+    })
+</script>
+{% endblock %}

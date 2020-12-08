@@ -35,6 +35,7 @@ urlpatterns=[
     path('mis_reports',views.mis_reports,name="mis_reports"),
     path('appointments',views.appointments,name="appointments"),
     path('patientDetails/<id>', views.patients_details, name="patient_details"),
-    path('getSnapshots', snap_shots, name="getSnapshots")
+    path('getSnapshots', snap_shots, name="getSnapshots"),
+    path('promo_code', views.promo_code, name="promoCode")
     
 ]
