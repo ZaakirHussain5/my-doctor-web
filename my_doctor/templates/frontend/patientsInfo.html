@@ -68,31 +68,76 @@
         </form>
 
         <div class="row">
-            <div class="col-md-3">
-                <h2>Medical History</h2>
-                <ul id="MedicalRecord" class="ml-5">
-                </ul>
 
-            </div>
-            <div class="col-md-8">
-                <h2>Consultations</h2>
-                <table class="table" id="consultation" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Sl No.</th>
-                            <th>Date</th>
-                            <th>Inv. No</th>
-                            <th>Doctor</th>
-                            <th>Patient</th>
-                            <th>Cons. Rating</th>
-                            <th>Paid Amt.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="content">
+                <div class="card pl-3 pr-3">
+                    <div class="card-body card-block">
+                        <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#home" role="tab"
+                                    aria-controls="pills-home" aria-selected="false">Medical Record</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#agreement" role="tab"
+                                    aria-controls="pills-profile" aria-selected="true">Consultations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#timings" role="tab"
+                                    aria-controls="pills-profile" aria-selected="true">Appointments</a>
+                            </li>
+                        </ul>
+                    </div>
+                        <div class="tab-content" style="padding-top: 3%;">
+                            <div id="home" class="tab-pane fade in active show">
+                                    <h2>Medical History</h2>
+                                    <ul id="MedicalRecord" class="ml-5">
+                                    </ul>
+
+                            </div>
                         
-                    </tbody>
-                </table>
+                            <div id="agreement" class="tab-pane fade">
+                                    <h2 class="text-center p-3">Consultations</h2>
+                                    <table class="table" id="consultation" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Sl No.</th>
+                                                <th>Date</th>
+                                                <th>Inv. No</th>
+                                                <th>Doctor</th>
+                                                <th>Patient</th>
+                                                <th>Cons. Rating</th>
+                                                <th>Paid Amt.</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                            </div>
+                        
+                            <div id="timings" class="tab-pane fade">
+                                <h1 class="text-center p-3">Appointments</h1>
+                                <table class="table" id="UpComingAppointments" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <th>Doctor</th>
+                                            <!-- <th>Patient</th> -->
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+            
         </div>
     </div>
 </div>
@@ -101,7 +146,7 @@
 {% endblock %}
 {% block scripts %}
 <script>
-    const patient_id = {{ id }};
+    const patient_id = '{{ id }}';
 
     function formDeserialize(form, data) {
         const entries = (new URLSearchParams(data)).entries();
@@ -226,5 +271,48 @@
                   return nRow;
               }
         })
+
+
+        const upComingtable = jQuery('#UpComingAppointments').DataTable({
+    ajax: {
+      url: '/api/getAllAppointmentsSpecificUser?pat_id='+ patient_id,
+      dataSrc: "",
+
+    },
+    columns: [
+      {
+        data: 'appointment_date'
+      },
+      {
+        data: 'appointment_time'
+      },
+      {
+          data: "doctor.full_name",
+          render: function (data, type, app) {
+            if (app.doctor.is_loggedin == true) {
+              return '<i class="fa fa-circle text-success"></i> ' + data
+            } else {
+              return '<i class="fa fa-circle text-danger"></i> ' + data
+            }
+
+          }
+        },
+        // {
+        //   data: "patient_login_status",
+        //   render: function (data, type, app) {
+        //     if (data == true) {
+        //       return '<i class="fa fa-circle text-success"></i> ' + app.patient_name
+        //     } else {
+        //       return '<i class="fa fa-circle text-danger"></i> ' + app.patient_name
+        //     }
+        //   }
+        // },
+      {
+        data: 'Description'
+      }
+    ]
+  })
+
+
 </script>
 {% endblock %}

@@ -4,7 +4,7 @@ from rest_framework import viewsets, permissions,mixins
 from datetime import date, datetime
 from django.db.models import Sum
 from transactions.models import transactions
-
+from patients.models import patient_info
 
 def today_total_appointment():
     date = getDateFormat()
@@ -174,3 +174,16 @@ class cancleAppointment(viewsets.ModelViewSet):
             transactions.objects.create(trans_type="appointment cancle", trans_desc=desc,user_id = self.request.user, credit=appointments.paid_amount )
 
         return 
+
+
+class getAllAppointmentsSpecificUser(viewsets.ModelViewSet):
+    serializer_class = appointmentsListSerializer
+
+    permissions = [
+        permissions.AllowAny
+    ]
+
+    def get_queryset(self):
+        pat_id = self.request.query_params.get('pat_id')
+        return appointment.objects.filter(patient=patient_info.objects.get(id=pat_id).user)
+        

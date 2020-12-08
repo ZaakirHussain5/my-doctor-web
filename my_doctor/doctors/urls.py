@@ -41,5 +41,6 @@ urlpatterns = [
     path("NewDoctorRegistration", NewDoctorRegistration.as_view(), name="newDoctorRegistration"),
     path('changeFee/', changeFee.as_view(), name = 'changeFee'),
     path('changeFeeByAdmin/', changeFeeByAdmin.as_view(), name = 'changeFeeByAdmin'),
-    path('DoctorLogout',DoctorLogout.as_view(),name="logoutDoctor")
+    path('DoctorLogout', DoctorLogout.as_view(),name="logoutDoctor"),
+    path('update_mou_file/', views.change_mouFile, name="change_mouFile")
 ]

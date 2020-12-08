@@ -26,7 +26,12 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" href="{% static 'assets/css/toastr.min.css' %}">
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
+    <style>
+        .color{
+            color: #063c7a;
+        }
 
+    </style>
 </head>
 
 <body class="light-default-theme">
@@ -59,25 +64,37 @@
                            
                         </div>
                         <div class="conversation__actions">
-                            <div class="action-icon pr-4" data-toggle="modal" data-target="#outGoingCall">
+                            <!-- <div class="action-icon pr-4" data-toggle="modal" data-target="#outGoingCall">
                                 <i class="mdi mdi-bell-ring-outline mdi-24px"></i>
-                            </div>
+                            </div> -->
                             <div class="iconbox-dropdown dropdown">
+                                <!-- <h3 class="color"> Good Afternoon</h3> -->
                                 <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <div class="user-avatar user-avatar-rounded">
+                                    <!-- <div class="user-avatar user-avatar-rounded">
                                         <img src="assets/images/user/500/02.jpg"
                                             style="height: 1.5rem;width: 1.5rem;min-width: 1.5rem;" alt=""
                                             id="Profile-pic">
-                                    </div>
-                                    <div class="conversation__name">
-                                        <h5 id='conversation_doc' class="conversation__name--title mt-1"></h5>
+                                    </div> -->
+                                    <div class="">
+                                        <h5 id='conversation_doc' class="conversation__name--title mt-1 color"></h5>
                                     </div>
                                 </div>
+                                <div class="row ml-3 pr-3 text-right" style="justify-content: flex-end; padding: 15px 20px 0 0;">
+                                    <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;">
+                                         Reminder <span class="badge badge-light">9</span></p>
+                                    <p class=" btn btn-sm btn-primary ml-1" style="cursor: pointer;">
+                                        Profile</p>
+                                    <p class=" btn btn-sm btn-primary ml-1" id="btnLogout" style="cursor: pointer;">
+                                       Logout
+                                        <!-- <i class="mdi mdi-logout"></i> -->
+                                    </p>
+                                </div>
+                                
                             </div>
-                            <div class="action-icon pr-4" id="btnLogout">
+                            <!-- <div class="action-icon pr-4" id="btnLogout">
                                 <i class="mdi mdi-logout mdi-24px"></i>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     {% block content %}
@@ -171,7 +188,7 @@
         {
             window.location.href = '/login?next=' + window.location.href;
         }   
-
+        let medical_history = [];
         ////////////////////  ...... ///////////////////////////
         $('#btnLogout').click(function () {
             $.ajax({
@@ -193,6 +210,7 @@
         })
 
         $(document).ready(function () {
+            
             function formDeserialize(form, data) {
                 const entries = (new URLSearchParams(data)).entries();
                 for (const [key, val] of entries) {
@@ -260,7 +278,7 @@
             $('#profile_pic').change(function () {
                 previewFile(this);
             })
-
+            
             function getPatientData() {
                 const profileForm = document.getElementById('profile-form');
                 $.ajax({
@@ -272,6 +290,17 @@
                         xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
                     },
                 }).done((response) => {
+                    console.log(response)
+                    if(response.medical_history !== null && response.medical_history !== ''){
+                        let list = response.medical_history.split(',')
+                        medical_history = [...list ]
+                        // $('#medical__history_list')
+                        let total_li_items = '';
+                        list.map((report, index)=>{
+                            total_li_items += `<li class="list-group-item" data-index='${index}'>${report} <i class="mdi mdi-trash-can text-danger" style="cursor: pointer;"></i></li>`;
+                        })
+                        $('#medical__history_list').html(total_li_items)
+                    }
                     $.ajax({
                         url: "/api/getEmail",
                         method: 'GET',
@@ -287,14 +316,106 @@
                     })
                     localStorage.setItem('login_name', response.full_name)
                     formDeserialize(profileForm, response);
-                    $('#conversation_doc').html(response.full_name)
-                    $('#Profile-pic').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
+
+                    var thehours = new Date().getHours();
+                    var themessage;
+                    var morning = ('Good morning!');
+                    var afternoon = ('Good afternoon!');
+                    var evening = ('Good evening!');
+
+                    if (thehours >= 0 && thehours < 12) {
+                        themessage = morning;
+
+                    } else if (thehours >= 12 && thehours < 17) {
+                        themessage = afternoon;
+
+                    } else if (thehours >= 17 && thehours < 24) {
+                        themessage = evening;
+                    }
+
+                    $('#conversation_doc').html(themessage + ' ' + response.full_name)
+                    // $('#Profile-pic').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
                     $('#username').val($('#ph_no').val())
                 }).fail(function (res) {
                     console.log(res)
                 })
             }
             getPatientData()
+
+
+
+            ////////////////////////  remove NEW MEDICAL RECORD /////////////////////
+            
+            $('#add_newMedical').click(function(){
+                let val = $('#medicalRecordText').val()
+                if(val.length > 2){
+                    medical_history.push(val)
+                    data = {
+                        'medical_history' : medical_history.join(',')
+                    }
+                    $.ajax({
+                        url: '/api/update_medicalReport/',
+                        method: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        }
+                    }).done(res=>{
+                            $('#medicalRecordText').val('')
+                            let list = res.medical_history.split(',')
+                            // medical_history = [...list ]
+                            // $('#medical__history_list')
+                            let total_li_items = '';
+                            list.map((report, index)=>{
+                                total_li_items += `<li class="list-group-item" data-index='${index}'>${report} <i class="mdi mdi-trash-can text-danger" style="cursor: pointer;"></i></li>`;
+                            })
+                            $('#medical__history_list').html(total_li_items)
+                        
+                        
+                    })
+                    .fail(err=>{
+                        console.log(err)
+                    })
+                }
+            })
+
+            //////////// DELETE MEDICAL RECORD /////////////
+            $('#medical__history_list li').on('click', 'i', function(){
+                const index = $(this).attr('data-index')
+                medical_history.splice(index, 1)
+                data = {
+                    'medical_history' : medical_history.join(',')
+                }
+                $.ajax({
+                    url: '/api/update_medicalReport/',
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    }
+                }).done(res=>{
+                    console.log(res)
+                    if(res.medical_history !== ''){
+                        let list = res.medical_history.split(',')
+                            // medical_history = [...list ]
+                            // $('#medical__history_list')
+                            let total_li_items = '';
+                            list.map((report, index)=>{
+                                total_li_items += `<li class="list-group-item" data-index='${index}'>${report} <i class="mdi mdi-trash-can text-danger" style="cursor: pointer;"></i></li>`;
+                            })
+                            $('#medical__history_list').html(total_li_items)
+                        }
+                        else{
+                            $('#medical__history_list').html('')
+                        }
+                })
+                .fail(err=>{
+                    console.log(err)
+                })
+
+            })
 
             $('#ph_no').change(function () {
                 if(!$('#username').val().includes('@')){
@@ -310,7 +431,7 @@
                 let full_name = $("input[name='full_name']").val()
                 var matches = full_name.match(/\d+/g);
                 let number = /^[0-9]+$/;
-                let blood= /(A|B|AB|O)[+-]/;
+                
                 if(matches != null){
                     $("input[name='full_name']").css('border', '1px solid red')
                     val_lists.push('Name')
@@ -320,10 +441,7 @@
                     val_lists.push('phone number.')
                     return 
                 }
-                if( !blood.test($('input[name="blood_group"]').val())){
-                    $("input[name='blood_group']").css('border', '1px solid red')
-                    val_lists.push('blood group.')
-                }
+
                 if(val_lists.length >0){
                     let text = 'invalid ' + val_lists.join(', ');
                     alert(text)
@@ -572,28 +690,26 @@
                     console.log(time)
                     let li = `
                     <li>
-                        <div class="calllist">
-                            <div class="user-avatar user-avatar-rounded online">
-                                
-                                <p>${transaction['trans_type']}</p>
-                            </div>
-
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">
-                                <span> ${time}</span>
+                            <div class="contactlist">
+                                <div class="user-avatar user-avatar-rounded online">
+                                    <img src="/media/logos/anonymous-user.png" alt="">
                                 </div>
-                            </div>
-
-                            <div class="calllist__actions">
-                                <div
+                                <div class="contactlist__details">
+                                    <div class="contactlist__details--name">${transaction['trans_type']}</div>
+                                        <div class="calllist__details--info pt-2">
+                                            <span>${time} </span>
+                                        </div>
+                                    </div>
+                                <div class="contactlist__actions">
+                                    <div
                                     class="iconbox btn-hovered-light text-danger">
                                     <i class="iconbox__icon mdi mdi mdi-currency-inr"></i>
                                     ${transaction.credit > 0 ? transaction.credit : transaction.debit}
                                 </div>
+                                </div>
                             </div>
-
-                        </div>
-                    </li>
+                        </li>
+                   
                     
                     `;
                     allTransList += li

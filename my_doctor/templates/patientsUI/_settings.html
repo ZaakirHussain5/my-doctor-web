@@ -24,6 +24,14 @@
                                             <div class="settingmenu__name">Profile</div>
                                         </div>
                                     </a>
+                                    <a class="nav-link" id="medical__history-tab" data-toggle="pill"
+                                        href="#medical__history" role="tab" aria-controls="v-pills-privacy"
+                                        aria-selected="false">
+                                        <div class="settingmenu">
+                                            <div class="settingmenu__icon"><i class="mdi mdi-account"></i></div>
+                                            <div class="settingmenu__name">Medical History</div>
+                                        </div>
+                                    </a>
                                     <a class="nav-link" id="v-pills-notifications-tab" data-toggle="pill"
                                         href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications"
                                         aria-selected="false">
@@ -35,9 +43,9 @@
                                     </a>
                                     <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Wallet-Details"
                                         role="tab" aria-controls="v-pills-theme" aria-selected="false">
-                                        <div class="settingmenu">
+                                        <div onclick="getWalletDetails()" class="settingmenu">
                                             <div class="settingmenu__icon"><i class="mdi mdi-wallet"></i></div>
-                                            <div onclick="getWalletDetails()" class="settingmenu__name">Wallet</div>
+                                            <div  class="settingmenu__name">Wallet</div>
                                         </div>
                                     </a>
                                     <a class="nav-link" id="v-pills-theme-tab" data-toggle="pill" href="#Family-Details"
@@ -112,8 +120,18 @@
                                                             <div class="form-group">
                                                                 <label for="email" class="form-control-label">Blood
                                                                     Group</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="blood_group" placeholder="Your Blood Group">
+                                                                <!-- <input type="text" class="form-control"
+                                                                    name="blood_group" placeholder="Your Blood Group"> -->
+                                                                <select name="blood_group" class="form-control">
+                                                                    <option value="A+">A+</option>
+                                                                    <option value="A-">A-</option>
+                                                                    <option value="B+">B+</option>
+                                                                    <option value="B-">B-</option>
+                                                                    <option value="AB+">AB+</option>
+                                                                    <option value="AB-">AB-</option>
+                                                                    <option value="O+">O+</option>
+                                                                    <option value="O-">O-</option>
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="email"
@@ -145,6 +163,26 @@
                                         </form>
 
                                     </div>
+
+                                    <div class="tab-pane fade" id="medical__history" role="tabpanel"
+                                        aria-labelledby="v-pills-notifications-tab">
+                                        <div class="settings-inside-wrapper">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="setting-sunheading">Medical History</div>
+                                                    <div class="row">
+                                                        <input type="text" class="form-control col-9" id="medicalRecordText" placeholder="Enter medical history">
+                                                        <button class="btn btn-block col-3 btn-info border-0" id="add_newMedical" type="button">Add New</button>
+                                                    </div>
+
+                                                    <ul id="medical__history_list" class="list-group">
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <div class="tab-pane fade" id="v-pills-notifications" role="tabpanel"
                                         aria-labelledby="v-pills-notifications-tab">
@@ -198,6 +236,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="tab-pane fade" id="Wallet-Details" role="tabpanel"
                                         aria-labelledby="v-pills-theme-tab">
                                         <div class="card">

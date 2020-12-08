@@ -107,7 +107,7 @@ class PatientResgistrationApp(serializers.Serializer):
 
 
 class UpdateProfile(serializers.Serializer):
-    username = serializers.CharField()
+    username = serializers.CharField(required=False)
     email = serializers.CharField(allow_null=True,allow_blank=True)
     full_name = serializers.CharField()
     age = serializers.IntegerField(required=False)
@@ -122,7 +122,7 @@ class UpdateProfile(serializers.Serializer):
             user = User.objects.get(id=validated_data["loggedInuser"])
             patient = patient_info.objects.get(user__id=user.id)
             print(validated_data)
-            user.username=validated_data['username']
+            user.username=validated_data.get('username', user.username)
             user.email=validated_data['email']
             user.save()
             patient.user = user
