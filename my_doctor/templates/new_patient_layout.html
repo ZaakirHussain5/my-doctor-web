@@ -316,7 +316,24 @@
                     })
                     localStorage.setItem('login_name', response.full_name)
                     formDeserialize(profileForm, response);
-                    $('#conversation_doc').html('Good Afternoon! ' + response.full_name)
+
+                    var thehours = new Date().getHours();
+                    var themessage;
+                    var morning = ('Good morning!');
+                    var afternoon = ('Good afternoon!');
+                    var evening = ('Good evening!');
+
+                    if (thehours >= 0 && thehours < 12) {
+                        themessage = morning;
+
+                    } else if (thehours >= 12 && thehours < 17) {
+                        themessage = afternoon;
+
+                    } else if (thehours >= 17 && thehours < 24) {
+                        themessage = evening;
+                    }
+
+                    $('#conversation_doc').html(themessage + ' ' + response.full_name)
                     // $('#Profile-pic').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
                     $('#username').val($('#ph_no').val())
                 }).fail(function (res) {
