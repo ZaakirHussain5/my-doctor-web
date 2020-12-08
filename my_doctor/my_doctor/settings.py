@@ -140,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtpout.secureserver.net'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'support@doctor-plus.in'
 EMAIL_HOST_PASSWORD = 'supportDoctor+'
 EMAIL_USE_TLS = True
