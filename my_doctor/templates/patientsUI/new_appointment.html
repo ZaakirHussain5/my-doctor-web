@@ -610,6 +610,8 @@
 
         ///////////// payment ///////////////
         document.getElementById('rzp-button1').onclick = function (e) {
+            
+
             var amount = $('#total-amt').html() * 100
             var options = {
                 "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
@@ -639,6 +641,9 @@
 
 
                     // '/Authorization Token {value}/appoinments/'
+                    $('#rzp-button1').html('Processing...')
+                    $('#rzp-button1').attr('disabled', true)
+                   
                     $.ajax({
                         'url': '/api/appointments/',
                         'method': 'POST',

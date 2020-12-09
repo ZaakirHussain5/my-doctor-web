@@ -28,8 +28,8 @@ class VedioChat(models.Model):
 
 class video_chat_session(models.Model):
     session_id = models.CharField(max_length=200)
-    patient_token = models.CharField(max_length=200,allow_blank=True,allow_null=True)
-    doctor_token = models.CharField(max_length=200,allow_blank=True,allow_null=True)
+    patient_token = models.CharField(max_length=200, null=True,  blank=True)
+    doctor_token = models.CharField(max_length=200, null=True, blank=True)
     Call_from = models.ForeignKey(User, related_name="call_from_user", on_delete=models.CASCADE,null=True,blank=True)
     Call_for = models.ForeignKey(User, related_name="call_for_user", on_delete=models.CASCADE,null=True,blank=True)
     appoinment_id = models.IntegerField(default=0)

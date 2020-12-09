@@ -36,7 +36,7 @@ def send_mails(obj):
     msg = EmailMessage(
         mail_subject,
         message,
-        EMAIL_HOST_USER,
+        'Doctor Plus <'+ EMAIL_HOST_USER + '>',
         [patient.user.email],
     )
     msg.content_subtype = "html"  # Main content is now text/html
@@ -56,7 +56,7 @@ def reminder_min(obj):
     msg = EmailMessage(
         mail_subject,
         message,
-        EMAIL_HOST_USER,
+        'Doctor Plus <'+ EMAIL_HOST_USER + '>',
         [patient.user.email],
     )
     msg.content_subtype = "html"  # Main content is now text/html

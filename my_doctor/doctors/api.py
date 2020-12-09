@@ -59,7 +59,7 @@ class DoctorRegisterAPI(generics.GenericAPIView):
         msg = EmailMessage(
             'Subject',
             message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
@@ -248,7 +248,7 @@ class NewDoctorRegistration(generics.GenericAPIView):
         msg = EmailMessage(
             'Subject',
             message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
@@ -335,7 +335,7 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
         msg = EmailMessage(
             'Subject',
             message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html

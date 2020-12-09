@@ -61,7 +61,7 @@ class appointmentViewSet(viewsets.ModelViewSet):
         msg = EmailMessage(
             mail_subject,
             message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [patient.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
@@ -75,7 +75,7 @@ class appointmentViewSet(viewsets.ModelViewSet):
         doct_msg = EmailMessage(
             mail_subject,
             Doctor_message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [obj.doctor.user.email],
         )
         doct_msg.content_subtype = 'html'
