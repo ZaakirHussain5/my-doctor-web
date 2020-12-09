@@ -206,7 +206,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="spl-list">
-                                                    <ul class="list-unstyled">
+                                                    <ul id="promocodelist" class="list-unstyled">
                                                         <li>
                                                             <div class="ps-list">
                                                                 <div class="ps-list__left">
@@ -236,16 +236,26 @@
                                                                 </div>
                                                                 <div class="ps-list__right" id="consultingAbout">
                                                                     <div class="input-group">
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" id="promocode" class="form-control"
                                                                             placeholder="Enter Promo Code">
                                                                         <span class="input-group-btn">
-                                                                            <button type="button"
+                                                                            <button id="promoApply" type="button"
                                                                                 class="btn btn-primary">
                                                                                 Apply
                                                                             </button>
                                                                         </span>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-none" id="message">
+                                                            <div class="ps-list">
+                                                                <div class="ps-list__left">
+                                                                    <div class="ps-list__left--icon"></div>
+                                                                    <div class="ps-list__left--name text-danger">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ps-list__right" id="promocode_percent">  </div>
                                                             </div>
                                                         </li>
                                                         <li>
@@ -454,6 +464,7 @@
         // });
         let appointment_time = '';
         let doc_id = '';
+        const doctor_fee = 0;
         $('#doctors-list').on('click', '.selectDorctorsd', function () {
             var button = $(this)
             $('#docImage').attr('src', button.attr('data-image'))
@@ -463,6 +474,7 @@
             $('#ConsultationDetails').modal('show')
             $('#fee').val(button.attr('data-fee'))
             $('#gst').val(button.attr('data-gst'))
+            doctor_fee = button.attr('data-consFee')
             $('#docNum').val(button.attr('data-doc-num'))
         });
 
@@ -483,7 +495,7 @@
             $('#app-time').html(appointment_time);
             console.log($('#docFName' + doc_id).html())
             $('#Doctor').html($('#docFName' + doc_id).html());
-            $('#cons-fee').html($('#fee').val())
+            $('#cons-fee').html(doctor_fee) // $('#fee').val()
             $('#GST').html($('#gst').val())
             $('#total-amt').html($('#fee').val())
             mob()
@@ -543,7 +555,7 @@
                                         data-doctor-id="${data.doctor.id}"
                                         data-image="${data.doctor.profile_pic}"
                                         data-app-date="${$('#date-val').html()}"
-                                        data-time="${data.from_time}" data-fee="${consultation_fee.toFixed(2)}" data-gst="${gst.toFixed(2)}"
+                                        data-time="${data.from_time}" data-consFee=${data.doctor.consultation_fee} data-fee="${consultation_fee.toFixed(2)}" data-gst="${gst.toFixed(2)}"
                                         data-doc-num="${data.doctor.phone_number}"
                                         class="btn selectDorctorsd iconbox btn-solid-info text-white bookAppointment">
                                         Select
@@ -620,7 +632,11 @@
                         payment_id: payment_id,
                         paid_amount: $('#total-amt').html()
                     };
-                    
+                    let promoCode = $('#promocode').val()
+                    if (promoCode.length > 0){
+                        data['promocode'] = promoCode
+                    }
+
 
                     // '/Authorization Token {value}/appoinments/'
                     $.ajax({
@@ -674,6 +690,64 @@
             rzp1.open();
             e.preventDefault();
         }
+    
+        ///////////// promo code ///////////////
+        function apply_promo_code(){
+            let promoCode = $('#promocode').val()
+            $.ajax({
+                url: '/api/apply_promoCode?code='+ promoCode,
+                method: 'GET',
+                contentType: 'application/json',
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                }
+            })
+            .done(response=>{
+                console.log(response)
+                let li = '';
+                $('#message').removeClass('d-none')
+                if(response.can_applied){
+                    let payable_money = parseFloat($('#total-amt').html())
+                    console.log(payable_money)
+                    let discount = (payable_money * response.code[0].discount_percent) / 100;
+                    console.log(discount)
+
+                    $('#total-amt').html(payable_money - discount);
+
+
+                    $('#message').html(`
+                    <div class="ps-list">
+                        <div class="ps-list__left">
+                            <div class="ps-list__left--icon"></div>
+                            <div class="ps-list__left--name text-danger">Promo Code Applied
+                            </div>
+                        </div>
+                        <div class="ps-list__right" id="promocode_percent"> ${response.code[0].discount_percent}%(${discount}) </div>
+                    </div>
+                    `)
+                }
+                else{
+                    let consultFee = $('#cons-fee').html();
+                    $('#total-amt').html(consultFee)
+
+                    $('#message').html(`
+                    <div class="ps-list">
+                        <div class="ps-list__left">
+                            <div class="ps-list__left--icon"></div>
+                            <div class="ps-list__left--name text-danger">${response.message}
+                            </div>
+                        </div>
+                    </div>
+                    `)
+                }
+                
+            })
+            .fail(err=>{
+                console.log(err)
+            })
+        }
+
+        $('#promoApply').click(apply_promo_code)
     })
 
 </script>

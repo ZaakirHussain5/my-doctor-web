@@ -5,6 +5,11 @@ from datetime import date, datetime
 from django.db.models import Sum
 from transactions.models import transactions
 from patients.models import patient_info
+from promo_codes.models import promo_code, AppliedPromoCode
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from my_doctor.settings import EMAIL_HOST_USER
+
 
 def today_total_appointment():
     date = getDateFormat()
@@ -42,12 +47,58 @@ class appointmentViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = appointmentSerializer
 
-    
+    def send_mails(self, obj):
+        patient = patient_info.objects.get(user= obj.patient)
+        mail_subject = 'New Appointment.'
+        message = render_to_string('emails/newAppointmentspatient.html', {
+            'full_name': patient.full_name,
+            'doctor': obj.doctor.full_name,
+            "date": obj.appointment_date,
+            "time": obj.appointment_time,
+            'patient': patient.full_name
+        })
+
+        msg = EmailMessage(
+            mail_subject,
+            message,
+            EMAIL_HOST_USER,
+            [patient.user.email],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+        Doctor_message = render_to_string('emails/newAppointmentDoctor.html', {
+            'full_name': obj.doctor.full_name,
+            "date": obj.appointment_date,
+            "time": obj.appointment_time,
+            'patient': patient.full_name
+        })
+        doct_msg = EmailMessage(
+            mail_subject,
+            Doctor_message,
+            EMAIL_HOST_USER,
+            [obj.doctor.user.email],
+        )
+        doct_msg.content_subtype = 'html'
+        doct_msg.send()
+        return True
+
     def get_queryset(self):
         return self.request.user.appointments.all()
 
     def perform_create(self, serializer):
-        serializer.save(patient=self.request.user)
+        promocodes = self.request.data.get('promocode', None)
+        print('dvsv =====>>s', promocodes)
+        if promocodes is not None:
+            
+            promoCode = promo_code.objects.get(code=promocodes)
+            print('promo code ', promoCode)
+            used_promo = AppliedPromoCode(code=promocodes, patient=self.request.user)
+            used_promo.save()
+            # except promo_code.DoesNotExist:
+            #     pass
+        new_appointmets = serializer.save(patient=self.request.user)
+        self.send_mails(new_appointmets)
+
 
     def perform_update(delf, serializer):
         if serializer.is_valid(raise_exception=False):
@@ -168,7 +219,7 @@ class cancleAppointment(viewsets.ModelViewSet):
     }
     def perform_update(self, serializer):
         appointments = serializer.save()
-        if appointment.consultation_status == 'Cancle':
+        if appointments.consultation_status == 'Cancle':
             now = datetime.now()
             desc = "appointment camcled on {0}".format(now.strftime("%m/%d/%Y"))
             transactions.objects.create(trans_type="appointment cancle", trans_desc=desc,user_id = self.request.user, credit=appointments.paid_amount )
