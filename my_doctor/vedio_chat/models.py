@@ -27,9 +27,27 @@ class VedioChat(models.Model):
 
 
 class video_chat_session(models.Model):
-    user = models.CharField(max_length=15)
     session_id = models.CharField(max_length=200)
-    token = models.CharField(max_length=200)
+    patient_token = models.CharField(max_length=200,allow_blank=True,allow_null=True)
+    doctor_token = models.CharField(max_length=200,allow_blank=True,allow_null=True)
+    Call_from = models.ForeignKey(User, related_name="call_from_user", on_delete=models.CASCADE,null=True,blank=True)
+    Call_for = models.ForeignKey(User, related_name="call_for_user", on_delete=models.CASCADE,null=True,blank=True)
+    appoinment_id = models.IntegerField(default=0)
+    is_answered = models.BooleanField(default=False)
+
+    @property
+    def caller_name(self):
+        try:
+            return patient_info.objects.get(user__id=self.Call_from.id).full_name
+        except ObjectDoesNotExist:
+            return doctors_info.objects.get(user__id=self.Call_from.id).full_name
+    
+    @property
+    def caller_ID(self):
+        try:
+            return patient_info.objects.get(user__id=self.Call_from.id).id
+        except ObjectDoesNotExist:
+            return doctors_info.objects.get(user__id=self.Call_from.id).id
 
 
     

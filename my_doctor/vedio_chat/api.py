@@ -1,10 +1,12 @@
 from rest_framework import permissions,viewsets, mixins,generics
 from rest_framework.response import Response
-from .models import VedioChat
-from .serializers import VedioChatSerializer
+from .models import VedioChat,video_chat_session
+from .serializers import VedioChatSerializer,video_mobile_serializer
 from doctors.models import doctors_info
 from patients.models import patient_info
 from rest_framework import status
+from opentok import OpenTok
+opentok = OpenTok("47034434", "21f8951c03ab3c4f33eba0962905212594f477e5")
 
 class vedioChatOparetion(viewsets.ModelViewSet):
     permission_classes = [
@@ -80,3 +82,36 @@ class check_for_answer(viewsets.ModelViewSet):
       return VedioChat.objects.filter(id=data)
     return False
 
+class call_patient_mobile(generics.GenericAPIView):
+  serializer_class = video_mobile_serializer
+
+  def post(self, request, *args, **kwargs):
+    patient_id = request.query_params.get('patient',None)
+    appoinment = request.query_params.get('app_id',None)
+    session = opentok.create_session()
+    doctor_token = session.generate_token()
+    patient = patient_info.objects.get(id=patient_id)
+    video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,doctor_token=doctor_token,patient_token='')
+    video.save()
+    return Response({
+      "Message":"Call initiated",
+      "session_id":session.session_id,
+      "token":doctor_token
+    })
+
+class call_doctor_mobile(generics.GenericAPIView):
+  serializer_class = video_mobile_serializer
+
+  def post(self, request, *args, **kwargs):
+    doctor_id = request.query_params.get('patient',None)
+    appoinment = request.query_params.get('app_id',None)
+    session = opentok.create_session()
+    patient_token = session.generate_token()
+    patient = patient_info.objects.get(id=patient_id)
+    video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,doctor_token='',patient_token=patient_token)
+    video.save()
+    return Response({
+      "Message":"Call initiated",
+      "session_id":session.session_id,
+      "token":doctor_token
+    })
