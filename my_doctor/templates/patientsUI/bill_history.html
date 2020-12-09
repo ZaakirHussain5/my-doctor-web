@@ -12,27 +12,8 @@
                     </div>
                     <div class="mob-list d-block">
                         <div class="sidebar-userlist ps ps--active-y">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <div class="calllist">
-                                        <div class="user-avatar user-avatar-rounded online">
-                                            <img class="img-fluid" src="http://127.0.0.1:8000/media/author-thumb-5.jpg" alt="">
-                                        </div>
-                                        <div class="calllist__details">
-                                            <div class="calllist__details--name">Jack P. Angulo</div>
-                                            <div class="calllist__details--info">
-                                                <span>General Physician</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="calllist__actions">
-                                            <div class="iconbox btn-hovered-light text-danger">
-                                                <i class="iconbox__icon mdi mdi mdi-currency-inr"></i> 500.00
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </li>
+                            <ul class="list-unstyled" id="BillingHistory">
+                                
                             </ul>
                     </div>
                     </div>
@@ -47,7 +28,47 @@
 {% block scripts %}
 <script>
     $(document).ready(function(){
-        $('#billingHistory').DataTable()
+
+        $.ajax({
+            url: '/api/PatientBillingHistory/',
+            'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+            },
+            method:'GET',
+            success:function(response){
+                var listData = ''
+                $.each(response,function(i,item){
+                    listData+=`
+                    <li>
+                        <div class="calllist">
+                            <div class="user-avatar user-avatar-rounded pt-3">
+                                 <img class="img-fluid" src="${item.doc_image}" alt="">
+                            </div>
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">${item.doc_name}</div>
+                                    <div class="calllist__details--info">
+                                        <span>
+                                            ${item.doc_spl}
+                                            <br>
+                                            <text class="${item.status == "P" ? "text-danger" : "text-success"}">${item.description}</text>
+                                            <br>
+                                            ${new Date(item.date).toDateString()}
+                                        </span>
+                                    </div>
+                            </div>
+                            <div class="calllist__actions">
+                                <div class="iconbox btn-hovered-light ${item.status == "P" ? "text-danger" : "text-success"}">
+                                        <i class="iconbox__icon mdi mdi mdi-currency-inr mdi-24px"></i> ${item.amount}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    `
+                })
+                $('#BillingHistory').html(listData)
+            },
+            error:function(err){ console.log(err) }
+        })
        /*  let table = $('#billingHistory').DataTable({
             ajax: {
                 url: '/api/PatientBillingHistory/',

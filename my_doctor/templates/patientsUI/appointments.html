@@ -187,7 +187,8 @@
             return time.join(''); // return adjusted time or original string
         }
 
-        $.ajax({
+        function getMyAppointments(){
+            $.ajax({
             url: '/api/getUpcomingAppoinment',
             method: 'GET',
             contentType: 'application/json',
@@ -234,83 +235,12 @@
             }
 
             $('.appointmentList').html(li)
-        })
-            .fail((err) => {
+        }).fail((err) => {
                 console.log(err);
-            })
-        // let upcoming = $('#upcoming').DataTable({
-        //     ajax: {
-        //         url: '/api/getUpcomingAppoinment',
-        //         dataSrc: '',
-        //         'beforeSend': function (request) {
-        //             request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
-        //         },
-        //     },
-        //     columns:[
-        //         {
-        //             data:'appointment_date',
-        //         },
-        //         {
-        //             data:'appointment_time',
-        //             render:function(data){
-        //                 return tConvert(data)
-        //             }
-        //         },
-        //         {
-        //           data: "doctor",
-        //           render: function (doctor){
-        //               return `
-        //                 <div class="card-body p-0">
-        //                     <div class="row">
-        //                         <div class="col-md-2">
-        //                             <div class="user-avatar user-avatar-rounded">
-        //                                 <img class="img-fluid" src="${doctor.profile_pic}" alt="">
-        //                             </div>
-        //                         </div>
-        //                         <div class="col-md-10">
-        //                             <div class="ml-2 ca-call-history__left--title">
-        //                                 <div>${doctor.full_name}</div>
-        //                                 <span class="text-secondary">${doctor.specialist_type}</span>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //               `;
-        //           }
-        //         },
-        //         {
-        //             data : 'Description'
-        //         },
-        //         {
-        //             data:'id',
-        //             render:function(data,type,app){
-        //                 return `
-        //                 <div class="row">
-        //                     <div class="col-md-6 text-center">
-        //                         <button type="button" class="btn btn-danger btn-sm call" data-const="${app.id}" data-doctor="${app.doctor.id}" style="border-radius:50%">
-        //                             <i class="mdi mdi-video text-light"></i>
-        //                             </button><br>
-        //                             <small class="">Call</small>
-        //                     </div>
-        //                     <div class="col-md-6 text-center">
-        //                         <button type='button' class='btn btn-primary btn-sm' style="border-radius:50%" data-toggle="modal" data-target="#editApp">
-        //                                 <i class="mdi mdi-square-edit-outline text-light"></i>
-        //                         </button><br>
-        //                         <small class="">Edit</small>
-        //                     </div>
-        //                 </div>
-
-
-        //                 `
-        //             }
-        //         }
-
-        //     ],
-        //       language: {
-        //           lengthMenu: "_MENU_",
-        //           search: "",
-        //       }
-        // })
+        })
+        }
+        
+        getMyAppointments();
 
         $('#upcoming').on('click', '.call', function () {
             var button = $(this)
@@ -358,7 +288,7 @@
             var button = $(this)
             const data = {
                 'cancle_note': $('#cancleReason').val(),
-                consultation_status: "Cancle"
+                consultation_status: "Cancelled"
             }
             $.ajax({
                 url: `/api/cancleAppointment/${appp_id}/`,
@@ -368,8 +298,9 @@
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
-            }).done((res) => {
+            }).done(function(res){
                 $('#editApp').modal('hide')
+                console.log(res)
                 getMyAppointments()
             }).fail((err) => {
                 console.log(err);

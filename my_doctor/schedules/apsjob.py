@@ -35,5 +35,5 @@ def send_message_before_15mins():
             in_secoends = diff.total_seconds()
             if int(in_secoends/60) == 0:
                 patient = patient_info.objects.get(user=appointments.patient)
-                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
+                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} is in next 15 minutes.To keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
                 requests.get(url)

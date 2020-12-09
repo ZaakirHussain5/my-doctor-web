@@ -168,10 +168,13 @@ class cancleAppointment(viewsets.ModelViewSet):
     }
     def perform_update(self, serializer):
         appointments = serializer.save()
-        if appointment.consultation_status == 'Cancle':
+        if appointments.consultation_status == 'Cancelled':
             now = datetime.now()
-            desc = "appointment camcled on {0}".format(now.strftime("%m/%d/%Y"))
-            transactions.objects.create(trans_type="appointment cancle", trans_desc=desc,user_id = self.request.user, credit=appointments.paid_amount )
+            desc = "Appointment Cancelled on {0}".format(now.strftime("%m/%d/%Y"))
+            print(desc)
+            trans = transactions(trans_type="Appointment Cancelled", trans_desc=desc,user_id = self.request.user, credit=appointments.paid_amount)
+            trans.save()
+            print(trans)
 
         return 
 

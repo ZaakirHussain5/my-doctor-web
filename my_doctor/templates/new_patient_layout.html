@@ -57,7 +57,7 @@
             <div class="ca-content-wrapper">
                 <div class="ca-content">
                     <div class="conversation-panel__head">
-                        <a href="#" class="click-me d-none d-md-block d-lg-block pr-3 pt-0 " style="position: relative;">
+                        <a href="#" class="click-me d-none d-md-block d-lg-block pr-3 pl-3 pt-0 " style="position: relative;">
                             <i class="mdi mdi-menu"></i>
                         </a> 
                         <div class="conversation__actions">
@@ -67,25 +67,19 @@
                             <div class="iconbox-dropdown dropdown">
                                 <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <!-- <div class="user-avatar user-avatar-rounded">
-                                        <img src="assets/images/user/500/02.jpg"
-                                            style="height: 1.5rem;width: 1.5rem;min-width: 1.5rem;" alt=""
-                                            id="Profile-pic">
-                                    </div> -->
                                     <div class="pb-1 pt-3">
-                                     <h5 id='conversation_doc' class="conversation__name--title mt-1 color"></h5> 
+                                     <h5 id='conversation_doc' class="conversation__name--title mt-1 text-right text-primary"></h5> 
+                                     <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;">
+                                        Reminder <!-- <span class="badge badge-light">9</span> --></p>
+                                   <p class=" btn btn-sm btn-primary ml-1" style="cursor: pointer;">
+                                       Profile</p>
+                                   <p class=" btn btn-sm btn-primary ml-1" id="btnLogout" style="cursor: pointer;">
+                                      Logout
+                                       <!-- <i class="mdi mdi-logout"></i> -->
+                                   </p>
                                     </div>
-                                </div>
-                                <div class="row ml-3 text-right" style="justify-content: flex-end; padding: 0 35px 0 0;">
-                                    <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;">
-                                         Reminder <span class="badge badge-light">9</span></p>
-                                    <p class=" btn btn-sm btn-primary ml-1" style="cursor: pointer;">
-                                        Profile</p>
-                                    <p class=" btn btn-sm btn-primary ml-1" id="btnLogout" style="cursor: pointer;">
-                                       Logout
-                                        <!-- <i class="mdi mdi-logout"></i> -->
-                                    </p>
-                                </div>
+                                </div> 
+                                
                                 
                             </div>
                             <!-- <div class="action-icon pr-4" id="btnLogout">
@@ -675,15 +669,35 @@
             })
             .done((res)=>{
                 console.log('wallet details =====', res)
-                $('#currentBalance').html(res[0].wallet.balance)
-                let transactions = res[0].transaction;
-                let allTransList = '', creditTransList='', debitTransList='';
+                let transactions = []
+                let allTransList = ''
+                if(res[0] ){
+                    transactions = res[0].transaction;
+                    allTransList = '', creditTransList='', debitTransList='';
+                    $('#currentBalance').html(res[0].wallet.balance)
+                } 
+                else{
+                    $('#currentBalance').html('0')
+                    $('#allTransactions').html('<p class="pt-2 text-center">No transactions at the moment</p>');
+                    $('#creditTransaction').html('<p class="pt-2 text-center">No transactions at the moment</p>');
+                    $('#debitTransaction').html('<p class="pt-2 text-center">No transactions at the moment</p>');
+                    return
+                }
+                    
+                
                 // allTransactions
                 // creditTransaction
                 // debitTransaction
+                // if(res[0].transaction.length <=0){
+                //     $('#allTransactions').html('No transactions at the mon=ment');
+                //     $('#creditTransaction').html('No transactions at the mon=ment');
+                //     $('#debitTransaction').html('No transactions at the mon=ment');
+                //     return
+                // }
                 transactions.map(transaction =>{
                     let time = timeFormat(transaction.trans_date);
                     console.log(time)
+                    
                     let li = `
                     <li>
                             <div class="contactlist">

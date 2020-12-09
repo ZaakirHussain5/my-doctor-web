@@ -47,7 +47,10 @@ class groups(models.Model):
 
 class PatientBillingHistory(models.Model):
     patient = models.ForeignKey(patient_info, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0)
+    doc_name = models.CharField(max_length=100,null=True)
+    doc_spl = models.CharField(max_length=100,null=True)
+    doc_image = models.FileField(null=True)
+    amount = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
     date = models.DateTimeField(auto_now_add = True)
     status=models.CharField(max_length=50)
     description = models.CharField(max_length=100)
