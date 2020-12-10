@@ -5,6 +5,10 @@ from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from datetime import date
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from my_doctor.settings import EMAIL_HOST_USER
+
 
 
 from knox.models import AuthToken
@@ -44,10 +48,29 @@ class DoctorRegisterAPI(generics.GenericAPIView):
     def get_queryset(self):
         return doctors_info.objects.all()
 
+    def send_mails(self, obj, password):
+        mail_subject = 'Activate your account.'
+        message = render_to_string('emails/doctorRegistrationEmail.html', {
+            'full_name': obj.full_name,
+            'username': obj.user.username,
+            "password": password
+        })
+
+        msg = EmailMessage(
+            'Subject',
+            message,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
+            [obj.user.email],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+        return True
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        self.send_mails(doctors_info.objects.get(user=user), request.data['password'])
         return Response({
             "Doctor": UserAuthSerializer(user, context=self.get_serializer_context()).data
         })
@@ -215,10 +238,29 @@ class DoctorLogout(generics.GenericAPIView):
 class NewDoctorRegistration(generics.GenericAPIView):
     serializer_class = WebNewDoctorRegistrationSerializer
 
+    def send_mails(self, obj):
+        mail_subject = 'Activate your account.'
+        message = render_to_string('emails/doctorRegistrationEmail.html', {
+            'username': obj.full_name,
+            
+        })
+
+        msg = EmailMessage(
+            'Subject',
+            message,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
+            [obj.user.email],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+        return True
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        
+        self.send_mails(doctors_info.objects.get(user=user))
         return Response({
             "Doctor": UserAuthSerializer(user, context=self.get_serializer_context()).data
         })
@@ -283,6 +325,24 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
         permissions.AllowAny
     ]
 
+    def send_mails(self, obj):
+        mail_subject = 'Activate your account.'
+        message = render_to_string('emails/pendingDoctorAcception.html', {
+            'full_name': obj.full_name,
+            'username': obj.user.username
+        })
+
+        msg = EmailMessage(
+            'Subject',
+            message,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
+            [obj.user.email],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+        return True
+
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -290,6 +350,7 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
         user = User.objects.get(username=input_username)
         user = serializer.save(loggedInuser=user.id)
         print(user)
+        self.send_mails(doctors_info.objects.get(user=user))
         return Response({
             "Doctor": UserAuthSerializer(user, context=self.get_serializer_context()).data,
         })

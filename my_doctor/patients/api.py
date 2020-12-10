@@ -90,7 +90,7 @@ class PatientResgistrationAPI(generics.GenericAPIView):
         msg = EmailMessage(
             'Subject',
             message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
@@ -128,7 +128,7 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         msg = EmailMessage(
             'Registration Confirmed – Doctor Plus',
             message,
-            EMAIL_HOST_USER,
+            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html

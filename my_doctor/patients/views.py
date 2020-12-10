@@ -32,7 +32,7 @@ def send_mails(request):
     msg = EmailMessage(
         'Subject',
         message,
-        EMAIL_HOST_USER,
+        'Doctor Plus <'+ EMAIL_HOST_USER + '>',
         ['ssamiran472@gmail.com', 'dragndrop111@gmail.com'],
     )
     msg.content_subtype = "html"  # Main content is now text/html

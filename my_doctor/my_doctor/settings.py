@@ -146,9 +146,9 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-       'knox.auth.TokenAuthentication',
-   ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'knox.auth.TokenAuthentication',
+    ),
 }
 
 # AUTHENTICATION_BACKENDS = (
