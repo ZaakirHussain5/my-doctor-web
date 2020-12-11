@@ -1,6 +1,6 @@
 from .serializers import patient_wallet_detailsSerializer, WalletSerializer
 from .models import patient_wallet_details
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
 from django.core.exceptions import ObjectDoesNotExist
 from transactions.models import transactions
 

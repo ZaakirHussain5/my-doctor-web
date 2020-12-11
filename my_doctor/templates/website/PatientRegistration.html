@@ -99,6 +99,7 @@
                             <div class="form-group col-xs-12" id="div-otp" style="display: none;">
 
                                 <input type="text" class="form-control" id="OTP" placeholder="Enter the OTP" required>
+                                <small>Didn't Recieve an OTP click <span id="btnResendOTP" style="color:blue; cursor: pointer;">here.</span></small>
                             </div>
 
                             <div class="form-group col-md-12 col-xs-12">
@@ -159,7 +160,7 @@
 {% block scripts %}
 <script>
     jQuery(document).ready(function ($) {
-        $('#btnOTP').click(function () {
+        function send_otp(){
             if ($('#Name1').val() == '' || $('#mob1').val() == '')
                 alert('Enter Name and Mobile Number')
             else {
@@ -173,7 +174,14 @@
                 })
 
             }
+        }
 
+
+        $('#btnOTP').click(function () {
+            send_otp()
+        })
+        $('#btnResendOTP').click(function () {
+            send_otp()
         })
 
         var password = document.getElementById("password")

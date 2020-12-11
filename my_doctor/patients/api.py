@@ -29,8 +29,9 @@ class patient_infoViewSet(viewsets.ModelViewSet):
     serializer_class = patient_infoSerializer
 
     def perform_destroy(self, serializer):
-        serializer.is_active = False
-        serializer.save()
+        user_id = serializer.user.id
+        u = User.objects.get(id=user_id)
+        u.delete()
         return
 
 class patient_family_membersViewset(viewsets.ModelViewSet):
@@ -94,7 +95,10 @@ class PatientResgistrationAPI(generics.GenericAPIView):
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
-        msg.send()
+        try:
+            msg.send()
+        except:
+            pass
         return True
 
 
@@ -132,7 +136,10 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
-        msg.send()
+        try:
+            msg.send()
+        except:
+            pass
         return True
 
 
