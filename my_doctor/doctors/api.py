@@ -8,16 +8,13 @@ from datetime import date
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
-
-
-
 from knox.models import AuthToken
 from accounts.serializers import UserAuthSerializer
 from specialist_type.models import specialist_type
 from appointment.models import appointment
-
 from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from .serializers import *
+from django.contrib.auth.models import User
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
@@ -27,8 +24,9 @@ class doctors_infoViewSet(viewsets.ModelViewSet):
     serializer_class = doctors_infoSerializer
 
     def perform_destroy(self, serializer):
-        serializer.is_active = False
-        serializer.save()
+        user_id = serializer.user.id
+        u = User.objects.get(id=user_id)
+        u.delete()
         return
 
 class doctor_info_adminViewSet(viewsets.ModelViewSet):
@@ -63,7 +61,10 @@ class DoctorRegisterAPI(generics.GenericAPIView):
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
-        msg.send()
+        try:
+            msg.send()
+        except:
+            pass
         return True
 
     def post(self, request, *args, **kwargs):
@@ -252,7 +253,10 @@ class NewDoctorRegistration(generics.GenericAPIView):
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
-        msg.send()
+        try:
+            msg.send()
+        except:
+            pass
         return True
 
     def post(self, request, *args, **kwargs):
@@ -339,7 +343,10 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
             [obj.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
-        msg.send()
+        try:
+            msg.send()
+        except:
+            pass
         return True
 
 

@@ -65,7 +65,10 @@ class appointmentViewSet(viewsets.ModelViewSet):
             [patient.user.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
-        msg.send()
+        try:
+            msg.send()
+        except:
+            pass
         Doctor_message = render_to_string('emails/newAppointmentDoctor.html', {
             'full_name': obj.doctor.full_name,
             "date": obj.appointment_date,
@@ -79,7 +82,11 @@ class appointmentViewSet(viewsets.ModelViewSet):
             [obj.doctor.user.email],
         )
         doct_msg.content_subtype = 'html'
-        doct_msg.send()
+        try:
+
+            doct_msg.send()
+        except:
+            pass
         return True
 
     def get_queryset(self):
@@ -150,7 +157,7 @@ class upComingAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         dates = getDateFormat()
-        return appointment.objects.filter(consultation_status = 'Pending', doctor=self.request.user.Doctors).exclude(appointment_date__contains=dates)
+        return appointment.objects.filter(consultation_status = 'Pending', doctor__user=self.request.user).exclude(appointment_date__contains=dates)
 
 
 class previousAppoinment(viewsets.ModelViewSet):
@@ -160,7 +167,7 @@ class previousAppoinment(viewsets.ModelViewSet):
     )
 
     def get_queryset(self):
-        return appointment.objects.filter(consultation_status = 'Completed', doctor=self.request.user.Doctors)
+        return appointment.objects.filter(consultation_status = 'Completed', doctor__user=self.request.user)
 
 
 class todaysAppoinment(viewsets.ModelViewSet):
@@ -172,7 +179,7 @@ class todaysAppoinment(viewsets.ModelViewSet):
     def get_queryset(self):
         formated_date = getDateFormat()
         print(formated_date)
-        return appointment.objects.filter(consultation_status = 'Pending', appointment_date__contains=formated_date,  doctor=self.request.user.Doctors)
+        return appointment.objects.filter(consultation_status = 'Pending', appointment_date__contains=formated_date,  doctor__user=self.request.user)
 
 
 
