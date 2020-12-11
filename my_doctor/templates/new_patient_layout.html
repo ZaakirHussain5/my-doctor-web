@@ -71,7 +71,7 @@
                                      <h5 id='conversation_doc' class="conversation__name--title mt-1 text-right text-primary"></h5> 
                                      <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;">
                                         Reminder <!-- <span class="badge badge-light">9</span> --></p>
-                                   <p class=" btn btn-sm btn-primary ml-1" style="cursor: pointer;">
+                                   <p data-toggle="modal" data-target="#settingsModalCenter" class=" btn btn-sm btn-primary ml-1" style="cursor: pointer;">
                                        Profile</p>
                                    <p class=" btn btn-sm btn-primary ml-1" id="btnLogout" style="cursor: pointer;">
                                       Logout
@@ -325,7 +325,6 @@
 
                     $('#conversation_doc').html( themessage + ' ' + response.full_name)
                     // $('#Profile-pic').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
-                    $('#username').val($('#ph_no').val())
                 }).fail(function (res) {
                     console.log(res)
                 })

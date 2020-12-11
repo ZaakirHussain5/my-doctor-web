@@ -241,8 +241,8 @@ class PatientBillingHistorys(viewsets.ModelViewSet):
     serializer_class = PatientBillingHistorySerializer
 
     def get_queryset(self):
-        # queryset = PatientBillingHistory.objects.filter(patient = patient_info.objects.get(user = self.request.user))
-        queryset = PatientBillingHistory.objects.all()
+        queryset = PatientBillingHistory.objects.filter(patient__user = self.request.user)
+        #queryset = PatientBillingHistory.objects.all()
         return queryset
 
     def perform_create(self, serializer):

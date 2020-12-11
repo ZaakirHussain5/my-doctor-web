@@ -205,12 +205,14 @@
                         if(email_warn.length == 0){
                             $('#email').after($('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
                             $('.registerButton').prop('disabled', true)
+                            $('#btnOTP').prop('disabled', true)
                         }
                     }
                     else{
                         if(email_warn.length > 0){
                             $('#email-warning').remove()
                             $('.registerButton').prop('disabled', false)
+                            $('#btnOTP').prop('disabled', false)
                         }
                     }
                 }).fail(err=>{
@@ -220,6 +222,7 @@
                 if(email_warn.length > 0){
                     $('#email-warning').remove()
                     $('.registerButton').prop('disabled', true)
+                    $('#btnOTP').prop('disabled', false)
                 }
             }
         }
@@ -240,12 +243,14 @@
                         if(mob1_warn.length == 0){
                             $('#mob1').after($('<p id="mob1-warning" class="text-danger">').text('Already exists. Please try another one.'))
                             $('.registerButton').prop('disabled', true)
+                            $('#btnOTP').prop('disabled', true)
                         }
                     }
                     else{
                         if(mob1_warn.length > 0){
                             $('#mob1-warning').remove()
                             $('.registerButton').prop('disabled', false)
+                            $('#btnOTP').prop('disabled', false)
                         }
                     }
                 }).fail(err=>{
@@ -255,6 +260,7 @@
                 if(mob1_warn.length > 0){
                     $('#mob1-warning').remove()
                     $('.registerButton').prop('disabled', true)
+                    $('#btnOTP').prop('disabled', false)
                 }
             }
         }

@@ -17,7 +17,7 @@
                                     role="tab" aria-controls="pills-home" aria-selected="true">1. Select Speciality</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link app-steps" id="pills-profile-tab" data-toggle="pill" href="#date-selection"
+                                <a class="nav-link app-steps disabled" id="pills-profile-tab" data-toggle="pill" href="#date-selection"
                                     role="tab" aria-controls="pills-profile" aria-selected="false">2. Select Date</a>
                             </li>
                             <li class="nav-item">
@@ -367,6 +367,7 @@
                             <input type="hidden" id="appDate">
                             <input type="hidden" id="time">
                             <input type="hidden" id="fee">
+                            <input type="hidden" id="gst">
                             <h4><label for="ConsultingAbout">Consulting About</label></h4>
                             <textarea class="form-control" id="ConsultingAbout" rows="10" placeholder="Describe your Problem" style="font-size: medium;"></textarea>
                         </div>
@@ -385,7 +386,6 @@
 {% block scripts %}
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    console.log('Hello world')
     $(document).ready(function () {
         window.matchMedia("(max-width:425px)").addListener(mob)
 
@@ -415,6 +415,7 @@
             $('#pills-home-tab').removeClass('active');
             $('#spl-select').removeClass('active show');
             $('#pills-profile-tab').addClass('active');
+            $('#pills-profile-tab').removeClass('disabled');
             $('#date-selection').addClass('active show');
             console.log(speciality_type)
             mob()
@@ -463,7 +464,7 @@
         // });
         let appointment_time = '';
         let doc_id = '';
-        const doctor_fee = 0;
+        let doctor_fee = 0;
         $('#doctors-list').on('click', '.selectDorctorsd', function () {
             var button = $(this)
             $('#docImage').attr('src', button.attr('data-image'))
@@ -530,7 +531,7 @@
                     let data = response[i];
                     console.log(data)
                     var consultation_fee = data.doctor.commission_type == "Percent" ? parseFloat(data.doctor.consultation_fee) + (parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) : parseFloat(data.doctor.consultation_fee) + parseFloat(data.doctor.commission_val);
-                    var gst = data.doctor.commission_type == "Percent" ? ((data.doctor.consultation_fee * (data.doctor.commission_val / 100)) * (5 / 100)) : data.doctor.commission_val * (5 / 100)
+                    var gst = data.doctor.commission_type == "Percent" ? ((parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) * (5 / 100)) : parseFloat(data.doctor.commission_val) * (5 / 100)
                     let strings = `
                     <div class="card">
                         <div class="card-body">
@@ -665,7 +666,7 @@
                         $('#Confirmation').addClass('active show'); 
                         mob()
                         $.ajax({
-                            url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#ph_no').val()}`,
+                            url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#mob1').val()}`,
                             method: 'GET',
                             success: function (response) {
                                 console.log(response)

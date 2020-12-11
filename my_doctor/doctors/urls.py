@@ -6,7 +6,7 @@ from .api import (DoctorUpdateProfileAPI, GetLoggedDoctor,DoctorTimingsAPI,
                   DoctorTimingsAdminAPI, specificDoctorSettlement, doctor_info_adminViewSet, 
                   getAvailableDoctorsForApponment, changeFee, doctor_bankDetails, changeFeeByAdmin,
                   DoctorLogout, DoctorUpdateProfileAdminAPI, DoctorTimingsApiView, doctor_bankDetailsAdminView, doctor_notesView,
-                  specific_doctor_available
+                  specific_doctor_available,check_phone_no,change_password
                   )
 from django.urls import path,include
 from . import views
@@ -42,5 +42,7 @@ urlpatterns = [
     path('changeFee/', changeFee.as_view(), name = 'changeFee'),
     path('changeFeeByAdmin/', changeFeeByAdmin.as_view(), name = 'changeFeeByAdmin'),
     path('DoctorLogout', DoctorLogout.as_view(),name="logoutDoctor"),
-    path('update_mou_file/', views.change_mouFile, name="change_mouFile")
+    path('update_mou_file/', views.change_mouFile, name="change_mouFile"),
+    path("check_doctor_phone/",check_phone_no.as_view(),name="check_doctor_phone"),
+    path("change_doctor_password",change_password.as_view(),name="change_doctor_password"),
 ]

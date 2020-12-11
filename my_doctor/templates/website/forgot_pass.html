@@ -65,7 +65,8 @@
                   <input type="password" id="new_password" class="form-control" placeholder="Enter Your New Password">
                 </div>
                 <div class=" form-group col-xs-12">
-                  <input type="password" id="confirm_new_password" class="form-control" placeholder="Confirm Your New Password">
+                  <input type="password" id="confirm_new_password" class="form-control"
+                    placeholder="Confirm Your New Password">
                 </div>
                 <div class=" form-group col-xs-12">
                   <button href="#" class="btn btn-block" id="change-pass" type="button">Reset Password</button></div>
@@ -86,6 +87,7 @@
   $(document).ready(function () {
     var phone_or_email = '';
     let patient_id = '';
+    let change_password_url = ''
     $('#reset-pass').click(function () {
       phone_or_email = $('#phn-email').val()
       if (phone_or_email == '') {
@@ -106,9 +108,9 @@
           method: 'POST',
           data: JSON.stringify(data),
           contentType: 'application/json'
-        }).done((res)=>{
+        }).done((res) => {
           console.log(res)
-          if (res.patient_available == true){
+          if (res.patient_available == true) {
             patient_id = res.patient.id;
             console.log(patient_id)
             $.ajax({
@@ -116,12 +118,39 @@
               method: 'GET',
               success: function (response) {
                 console.log(response)
+                change_password_url = '/api/reset_forget_password/'
                 $('#myTab a[href="#verification"]').tab('show')
+
               }
             })
-
           }
-        }).fail((err)=>{
+          else {
+            $.ajax({
+              url: '/api/check_doctor_phone/',
+              method: 'POST',
+              data: JSON.stringify(data),
+              contentType: 'application/json'
+            }).done(function (res) {
+              console.log(res)
+              if (res.doctor_available == true) {
+                patient_id = res.doctor.id;
+                $.ajax({
+                  url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Verification to reset your Password is <OTP>.Don't Share or forward.&route=0&from=BANDSS&to=${phone_or_email}&otp=1&otp_length=4`,
+                  method: 'GET',
+                  success: function (response) {
+                    console.log(response)
+                    change_password_url = '/api/change_doctor_password'
+                    $('#myTab a[href="#verification"]').tab('show')
+                  }
+                })
+              } else {
+                toastr.error('Details not Available Check your Phone Number and try again.', 'Error', { positionClass: "toast-top-center" })
+              }
+            }).fail(function (err) {
+              console.error(err)
+            })
+          }
+        }).fail((err) => {
           console.log(err)
         })
       }
@@ -148,28 +177,31 @@
 
 
 
-    $('#change-pass').click(function(){
+    $('#change-pass').click(function () {
       const new_password = $('#new_password').val()
       const confirm_new_password = $('#confirm_new_password').val()
       const data = {
         'password': new_password,
         'id': patient_id
       }
-
-      if(new_password == confirm_new_password){
+      if (new_password == confirm_new_password) {
         $.ajax({
-          url: '/api/reset_forget_password/',
+          url: change_password_url,
           method: 'POST',
           data: JSON.stringify(data),
           contentType: 'application/json'
-        }).done((response)=>{
+        }).done((response) => {
           console.log(response)
-          if(response.password_change == true){
+          if (response.password_change == true) {
             window.location.href = '/login'
           }
-        }).fail((err)=>{
+        }).fail((err) => {
           console.log(err)
         })
+      }
+      else{
+        toastr.error("Passwords Don't match", "Error", { positionClass: "toast-top-center" })
+          return
       }
 
 
