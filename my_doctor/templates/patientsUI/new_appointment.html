@@ -448,12 +448,13 @@
                 },
             }).done(res=>{
                 console.log(res)
-                if(res.length ==0){
+                if(res.length ==0 || res[0].wallet.balance == ''){
                     $('#walletBalance').html(0)
                     $('#useWalletBalance').attr('disabled', true)
                     return
                 }
                 wallet_balance = res[0].wallet.balance;
+                
                 $('#walletBalance').html(res[0].wallet.balance)
                 $('#useWalletBalance').removeAttr('disabled')
             })
@@ -509,7 +510,12 @@
                 $('#walletBalance').html(wallet_balance)
                 const code_val=$('#promocode').val();
                 const text = $("#codeText").html()
-                var n = text.search("Promo Code Applied");
+                let n=-1;
+                console.log(text)
+                if(text != undefined){
+
+                    n = text.search("Promo Code Applied");
+                }
                 console.log(n)
                 if(code_val.length >0 && (n >= 0 )){
                     $('#promoApply').attr('disabled', true)
@@ -581,6 +587,11 @@
                     return
                 }
                 wallet_balance = res[0].wallet.balance;
+                if (wallet_balance == ''){
+                    $('#walletBalance').html(0)
+                    $('#useWalletBalance').attr('disabled', true)
+                    return
+                }
                 $('#walletBalance').html(res[0].wallet.balance)
                 $('#useWalletBalance').removeAttr('disabled')
             })
@@ -748,7 +759,32 @@
                         paid_amount: $('#total-amt').html()
                     };
                     if($('#useWalletBalance').is(":checked")){
-                        data['paid_amount'] = parseFloat($('#total-amt').html()) + parseFloat(diducted_wallet_balance)
+                        data['paid_amount'] = parseFloat($('#total-amt').html()) + parseFloat(diducted_wallet_balance);
+                        let current_date = new Date()
+
+                        let transaction_data = {
+                            ref_id: payment_id,
+                            trans_type: "New appointment",
+                            trans_desc: "New appointment on " + $('#app-date').html() +'. The appointment is booked on ' + current_date.toLocaleDateString(),
+                            debit: diducted_wallet_balance,
+                            balance: diducted_wallet_balance
+
+                        }
+                        $.ajax({
+                            url: '/api/transactions/',
+                            method: 'POST',
+                            data: JSON.stringify(transaction_data),
+                            contentType: 'application/json',
+                            beforeSend: function(xhr){
+                                return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
+                            }
+                        }).done(res=>{
+                            console.log('wallet', res)
+                        })
+                        .fail(err=>{
+                            console.log(err)
+                        })
+
                     }
                     
                     let promoCode = $('#promocode').val()
@@ -842,7 +878,7 @@
                     <div class="ps-list">
                         <div class="ps-list__left">
                             <div class="ps-list__left--icon"></div>
-                            <div class="ps-list__left--name text-danger" id="codeText">Promo Code Applied
+                            <div class="ps-list__left--name text-success" id="codeText">Promo Code Applied
                             </div>
                         </div>
                         <div class="ps-list__right" id="promocode_percent"> ${response.code[0].discount_percent}%(${discount}) </div>

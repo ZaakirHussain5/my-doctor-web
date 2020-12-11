@@ -20,8 +20,8 @@ def save_wallet(sender, instance, **kwargs):
         if len(balance) >0:
             balance = balance.first() - instance.debit
             user = patient_wallet_details.objects.filter(patient=instance.user_id).update(balance=balance)
-        else:
-            balance = instance.debit
-            user = patient_wallet_details(patient=instance.user_id, balance=balance)
-            user.save()
+        # else:
+        #     balance = instance.debit
+        #     user = patient_wallet_details(patient=instance.user_id, balance=balance)
+        #     user.save()
     transactions.objects.filter(id=instance.id).update(balance=balance)
