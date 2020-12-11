@@ -196,12 +196,14 @@
                     if (email_warn.length == 0) {
                         $('#email').after($('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
                         $('#submit').prop('disabled', true)
+                        $('#btnOTP').prop('disabled', true)
                     }
                 }
                 else {
                     if (email_warn.length > 0) {
                         $('#email-warning').remove()
                         $('#submit').removeAttr('disabled')
+                        $('#btnOTP').prop('disabled', false)
                     }
                 }
             }).fail(err => {
@@ -211,6 +213,7 @@
             if (email_warn.length > 0) {
                 $('#email-warning').remove()
                 $('#submit').prop('disabled', false)
+                $('#btnOTP').prop('disabled', false)
             }
         }
     }
@@ -231,12 +234,14 @@
                     if (mob1_warn.length == 0) {
                         $('#mob1').after($('<p id="mob1-warning" class="text-danger">').text('Already exists. Please try another one.'))
                         $('#submit').prop('disabled', true)
+                        $('#btnOTP').prop('disabled', true)
                     }
                 }
                 else {
                     if (mob1_warn.length > 0) {
                         $('#mob1-warning').remove()
                         $('#submit').prop('disabled', false)
+                        $('#btnOTP').prop('disabled', false)
                     }
                 }
             }).fail(err => {
@@ -246,6 +251,7 @@
             if (mob1_warn.length > 0) {
                 $('#mob1-warning').remove()
                 $('#submit').prop('disabled', false)
+                $('#btnOTP').prop('disabled', false)
             }
         }
     }

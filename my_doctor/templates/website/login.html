@@ -122,13 +122,16 @@
                                     <button type="submit" class="btn btn-block">Login</button>
                                 </div>
                             </div><br>
-                            <div class="col-12 col-sm-12">
+                            <div id="social-login">
+                                <div class="col-12 col-sm-12">
                                 <p style="text-align: center;padding: 20px 0;">Or</p>
                             </div>
                             
                             <div data-onsuccess="onSignIn" onclick="ClickGoogleLogin()" class="btn btn-block g-signin2 col-lg-5 col-sm-12"
                                 style="text-align: center;" data-longtitle="true" data-theme="dark">
                             </div>
+                            </div>
+                            
                             <div class="col-12 col-sm-12 pad-top-15 text-center" >
                                 <div class="checkbox-outer"><a href="/forgot_pass" style="color: #3a85f5;"> Forgot
                                         Password? </a>&nbsp; Not a registered user &nbsp;<a href="/PatientRegistration"
@@ -231,6 +234,7 @@
             $('#Name1').attr('placeholder', 'Phone Number or Patient ID')
             $('#myTab #Doctor').removeClass('active')
             $('#myTab #Patient').addClass('active')
+            $('#social-login').show()
             return false
         })
 
@@ -242,6 +246,7 @@
             $('#Name1').attr('placeholder', 'Phone Number or Doctor ID')
             $('#myTab #Patient').removeClass('active')
             $('#myTab #Doctor').addClass('active')
+            $('#social-login').hide()
             return false
         })
 

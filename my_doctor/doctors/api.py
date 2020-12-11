@@ -565,3 +565,29 @@ class specific_doctor_available(viewsets.ModelViewSet):
                 else:
                     queryset = queryset.exclude(id= doctor.id)
         return queryset       
+
+class check_phone_no(generics.GenericAPIView):
+    def post(self, request):
+        phone_no = request.data['ph_no']
+        all_doctors = doctors_info.objects.filter(phone_number=phone_no)
+        if len(all_doctors) == 1:
+            return Response({
+                'doctor_available': True,
+                'doctor': doctors_infoSerializer(all_doctors[0]).data
+            })
+
+        else:
+            return Response({
+                'doctor_available': False
+            })
+
+class change_password(generics.GenericAPIView):
+    def post(self, request):
+        pat_id = request.data['id']
+        patient = doctors_info.objects.get(id=pat_id)
+        user = patient.user
+        user.set_password(request.data['password'])
+        user.save()
+        return Response({
+            'password_change': True
+        })
