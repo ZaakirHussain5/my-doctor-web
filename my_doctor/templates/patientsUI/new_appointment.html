@@ -422,7 +422,7 @@
         let speciality_type = 0;
         let wallet_balance = 0;
         let past_total_amount = 0;
-
+        let diducted_wallet_balance = 0;
         $(".select").click(function () {
             
             console.log('clicked')
@@ -460,7 +460,6 @@
             })
 
             past_total_amount = $('#fee').val()
-            $('#promocodelist').html(serialize_payment_tab())
             $('#ConsultationDetails').modal('hide')
             $('#pills-contact-tab').removeClass('active');
             $('#select-doctor').removeClass('active show');
@@ -481,119 +480,40 @@
             mob()
         })
 
-       function serialize_payment_tab(){
-           const all_li = `
-           
-           <li>
-                <div class="ps-list">
-                    <div class="ps-list__left">
-                        <div class="ps-list__left--icon"></div>
-                        <div class="ps-list__left--name">Consultation Fee
-                        </div>
-                    </div>
-                    <div class="ps-list__right" id="cons-fee">
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="ps-list">
-                    <div class="ps-list__left">
-                        <div class="ps-list__left--icon"></div>
-                        <div class="ps-list__left--name">
-                            <input type="checkbox" id="useWalletBalance" disabled>
-                            Use wallet balance
-                        </div>
-                    </div>
-                    <div class="ps-list__right" id="walletBalance"> 0
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="ps-list">
-                    <div class="ps-list__left">
-                        <div class="ps-list__left--icon"></div>
-                        <div class="ps-list__left--name">GST Incl.</div>
-                    </div>
-                    <div class="ps-list__right" id="GST">  </div>
-                </div>
-            </li>
-            <li>
-                <div class="ps-list">
-                    <div class="ps-list__left">
-                        <div class="ps-list__left--icon"></div>
-                        <div class="ps-list__left--name">Promo Code
-                        </div>
-                    </div>
-                    <div class="ps-list__right" id="consultingAbout">
-                        <div class="input-group">
-                            <input type="text" id="promocode" class="form-control"
-                                placeholder="Enter Promo Code">
-                            <span class="input-group-btn">
-                                <button id="promoApply" type="button"
-                                    class="btn btn-primary">
-                                    Apply
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="d-none" id="message">
-                <div class="ps-list">
-                    <div class="ps-list__left">
-                        <div class="ps-list__left--icon"></div>
-                        <div class="ps-list__left--name text-danger">
-                        </div>
-                    </div>
-                    <div class="ps-list__right" id="promocode_percent">  </div>
-                </div>
-            </li>
-            <li>
-                <input type="hidden" id="doctor-number">
-                <div class="card">
-                    <div class="card-header">
-                        Total Payable Amount
-                    </div>
-                    <div class="card-body text-center">
-                        <h2>
-                            <i class="mdi mdi-currency-inr"></i>
-                            <span id="total-amt"></span>
-                        </h2>
-                    </div>
-                    <div class="card-footer">
-                        <button type="button"
-                            class="btn mfb-component__button--main"
-                            style="width:100%;  border-radius:30px" id="rzp-button1">
-                            Pay
-                        </button>
-                    </div>
-                </div>
-            </li>
-           
-           `;
-           return all_li;
-       }
+       
         
         $('.list-unstyled').on('change', '#useWalletBalance', function(){
             if( $(this).is(":checked")){
 
-                // past_total_amount = parseFloat($('#total-amt').html());
+                //  
                 // wallet_balance = parseFloat($('#walletBalance').html())
                 const amount = (wallet_balance - past_total_amount)
                 if(amount >=0){
+                    diducted_wallet_balance = past_total_amount;
                     $('#total-amt').html(0)
                     $('#walletBalance').html(amount)
                 }
                 else{
+                    diducted_wallet_balance = wallet_balance;
                     $('#total-amt').html(amount * (-1))
                     $('#walletBalance').html(0)
                 }
+                $('#promoApply').attr('disabled', true)
             }
             else{
                 // const wallet_balance = parseFloat($('#walletBalance').html());
                 // const total_amount = parseFloat($('#cons-fee').html())
                 $('#total-amt').html(past_total_amount)
                 $('#walletBalance').html(wallet_balance)
+                const code_val=$('#promocode').val();
+                const text = $("#codeText").html()
+                var n = text.search("Promo Code Applied");
+                console.log(n)
+                if(code_val.length >0 && (n >= 0 )){
+                    $('#promoApply').attr('disabled', true)
+                    return
+                }
+                $('#promoApply').removeAttr('disabled')
             }
         })
 
@@ -682,11 +602,14 @@
             $('#app-time').html(appointment_time);
             console.log($('#docFName' + doc_id).html())
             $('#Doctor').html($('#docFName' + doc_id).html());
-            $('#cons-fee').html(doctor_fee) // $('#fee').val()
+            $('#cons-fee').html($('#fee').val()) // $('#fee').val()
             $('#GST').html($('#gst').val())
             $('#total-amt').html($('#fee').val())
             mob()
         })
+
+
+
         function tConvert(time) {
             // Check correct time format and split into components
             time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
@@ -765,6 +688,7 @@
             })
         })
 
+
         $('#datepicker').datepicker({
             format: "dd/mm/yyyy",
             startDate:"+0d"
@@ -821,6 +745,10 @@
                         payment_id: payment_id,
                         paid_amount: $('#total-amt').html()
                     };
+                    if($('#useWalletBalance').is(":checked")){
+                        data['paid_amount'] = parseFloat($('#total-amt').html()) + parseFloat(diducted_wallet_balance)
+                    }
+                    
                     let promoCode = $('#promocode').val()
                     if (promoCode.length > 0){
                         data['promocode'] = promoCode
@@ -912,7 +840,7 @@
                     <div class="ps-list">
                         <div class="ps-list__left">
                             <div class="ps-list__left--icon"></div>
-                            <div class="ps-list__left--name text-danger">Promo Code Applied
+                            <div class="ps-list__left--name text-danger" id="codeText">Promo Code Applied
                             </div>
                         </div>
                         <div class="ps-list__right" id="promocode_percent"> ${response.code[0].discount_percent}%(${discount}) </div>
@@ -927,7 +855,7 @@
                     <div class="ps-list">
                         <div class="ps-list__left">
                             <div class="ps-list__left--icon"></div>
-                            <div class="ps-list__left--name text-danger">${response.message}
+                            <div class="ps-list__left--name text-danger" id="codeText">${response.message}
                             </div>
                         </div>
                     </div>
