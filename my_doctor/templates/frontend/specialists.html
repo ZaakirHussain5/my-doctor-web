@@ -20,7 +20,7 @@
                             <div class="row form-group">
                                 <label for="hf-email" class=" form-control-label">Specialist Type</label>
                                 <div class="input-group">
-                                    <input type="text" required="" id="hf-email" name="special_type" placeholder="Enter Specialist Type" class="form-control">
+                                    <input type="text" required="" id="hf-email" onkeypress="return /[a-zA-Z ]/i.test(event.key)" name="special_type" placeholder="Enter Specialist Type" class="form-control">
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Specialist Type</span>

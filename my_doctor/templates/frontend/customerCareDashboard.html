@@ -106,7 +106,7 @@
                                             class=" form-control-label">Patient
                                             Name<span class="text-danger h5">*</span></label></div>
                                     <div class="col-12 col-md-8"><input type="text" required id="full_name" name="full_name"
-                                            placeholder="Select Patient Name" class="form-control"></div>
+                                            placeholder="Select Patient Name" class="form-control" onkeypress="return /[a-zA-Z ]/i.test(event.key)"></div>
                                 </div>
 
                                 <div class="row form-group">
@@ -196,13 +196,13 @@
                                         <label for="hf-email" class=" form-control-label ml-5">Mobile1<span class="text-danger h5">*</span></label>
                                     </div>
                                     <div class="col-12 col-md-8"><input type="text" id="ph_no" required name="ph_no"
-                                            placeholder="Enter mobile1" class="form-control"></div>
+                                            placeholder="Enter mobile1" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
                                             class=" form-control-label ml-5">Mobile 2</label></div>
                                     <div class="col-12 col-md-8"><input type="text" id="s_ph_no" name="s_ph_no"
-                                            placeholder="Enter mobile2" class="form-control"></div>
+                                            placeholder="Enter mobile2" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
@@ -844,13 +844,52 @@
                 }
             }
         }
+        
+        
+        function checkPhone2(){
+            const mob1 = jQuery('#s_ph_no').val();
+            console.log(mob1)
+            const mob1_warn = jQuery('#s_ph_no-warning')
+            console.log(mob1_warn.length)
+            if (mob1.length >=3){
+                jQuery.ajax({
+                    url: '/api/has_email/?phone='+ mob1,
+                    method: 'GET',
+                    contentType: 'application/json',
+
+                }).done(res=>{
+                    console.log('s_phon')
+                    if(res.length > 0){
+                        if(mob1_warn.length == 0){
+                            jQuery('#s_ph_no').after(jQuery('<p id="s_ph_no-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                            jQuery('.registerButton').prop('disabled', true)
+                        }
+                    }
+                    else{
+                        if(mob1_warn.length > 0){
+                            jQuery('#s_ph_no-warning').remove()
+                            jQuery('.registerButton').prop('disabled', false)
+                        }
+                    }
+                }).fail(err=>{
+                    console.log(err)
+                })
+            }else{
+                if(mob1_warn.length > 0){
+                    jQuery('#s_ph_no-warning').remove()
+                    jQuery('.registerButton').prop('disabled', true)
+                }
+            }
+        }
 
 
         const email = document.getElementById('email')
         email.onkeyup = checkEmail;
         
         const mob1 = document.getElementById('ph_no')
+        const mob2 = document.getElementById('s_ph_no')
         mob1.onkeyup = checkPhone;
+        mob2.onkeyup = checkPhone2;
 
 </script>
 {% endblock %}
