@@ -208,20 +208,61 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
         date = self.request.query_params.get('date')
         specialist_id = self.request.query_params.get('id')
         day, month, year = date.split('/')
-        day_name = datetime.date(int(year), int(month), int(day))
-        day_name = day_name.strftime("%A").lower()
+        dates = datetime.date(int(year), int(month), int(day))
+        day_name = dates.strftime("%A").lower()
+        today_date = datetime.date.today()
+        # if dates == today_date:
+        #     print('matched')
+
         queryset = DoctorTimings.objects.filter(day = day_name, doctor__specialist_type = specialist_type.objects.get(id=specialist_id))
         for doctor in queryset:
             total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date).count()
-            if total_appiontments > 0:
-                str_time = doctor.from_time
-                date_format = datetime.datetime.strptime(str_time, '%H:%M')
-                to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
-                from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
-                if (from_times < to_time):
-                    doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
+            if dates == today_date:
+                current_datetime = datetime.datetime.now()
+                str_make_date = str(year) + '-' + str(month) + '-' + str(day) + ' '+ doctor.to_time
+                to_time = datetime.datetime.strptime(str_make_date, "%Y-%m-%d %H:%M")
+                if current_datetime < to_time:
+                    str_from_time = str(year) + '-' + str(month) + '-' + str(day) + ' ' + doctor.from_time
+                    from_times = datetime.datetime.strptime(str_from_time, "%Y-%m-%d %H:%M")
+                    if total_appiontments > 0:
+                        # str_time = doctor.from_time
+                        # date_format = datetime.datetime.strptime(str_time, '%H:%M')
+                        # to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
+                        # from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
+                        if (from_times < to_time):
+                            if from_times < current_datetime:
+                                # doctor.from_time = current_datetime + datetime.timedelta( minutes= 10 )
+                                appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
+                        
+                                doctor.from_time = datetime.datetime.strftime(appointment_time, '%H:%M')
+                            
+                            else:
+                                doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
+                        else:
+                            queryset = queryset.exclude(id= doctor.id)
+
+                    else:
+                        appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
+                        if appointment_time < to_time:
+                            doctor.from_time = datetime.datetime.strftime(appointment_time, '%H:%M')
+                        else:
+                            queryset = queryset.exclude(id= doctor.id)
                 else:
                     queryset = queryset.exclude(id= doctor.id)
+                
+
+            else:
+                if total_appiontments > 0:
+                    str_time = doctor.from_time
+                    date_format = datetime.datetime.strptime(str_time, '%H:%M')
+                    to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
+                    from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
+                    if (from_times < to_time):
+                        doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
+                    else:
+                        queryset = queryset.exclude(id= doctor.id)
+
+
         return queryset
 
 

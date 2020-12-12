@@ -8,5 +8,5 @@ router.register('wallet_details', WalletDetailView, 'wallet_details')
 
 urlpatterns = [
     path('',include(router.urls)),
-    # path('wallet_details/', WalletDetailView.as_view(), name='wallet_details')
+    # path('my_wallet_balance/', walletBalance.as_view(), name='wallet_balance')
 ]
