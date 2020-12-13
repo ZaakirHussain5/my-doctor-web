@@ -225,10 +225,6 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                     str_from_time = str(year) + '-' + str(month) + '-' + str(day) + ' ' + doctor.from_time
                     from_times = datetime.datetime.strptime(str_from_time, "%Y-%m-%d %H:%M")
                     if total_appiontments > 0:
-                        # str_time = doctor.from_time
-                        # date_format = datetime.datetime.strptime(str_time, '%H:%M')
-                        # to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
-                        # from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
                         if (from_times < to_time):
                             if from_times < current_datetime:
                                 # doctor.from_time = current_datetime + datetime.timedelta( minutes= 10 )
