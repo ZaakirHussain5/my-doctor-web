@@ -205,7 +205,23 @@
 
           </div>
         </div>
-
+        <div class="modal fade" id="patientDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="scrollmodalLabel">Doctor Details</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
 {% endblock %}
 {% block scripts %}
 <script>
@@ -242,7 +258,7 @@
                 {
                     data : 'id',
                     render: function (data, type, row) {
-                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}'>
+                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
                             Details
                                 </button>`
                     }
@@ -256,6 +272,43 @@
               },
               
         })
+
+        jQuery('#patientDetails').on('show.bs.modal', function (event) {
+            var myVal = jQuery(event.relatedTarget).data('doct');
+            let date_time = new Date(myVal.consultation_date_time)
+            let company_share = myVal.consultation_amt - myVal.doctor_id.consultation_fee;
+            const contents = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <p><b>Doctor Name: </b>${myVal['doctor_id']['full_name']}</p>
+                                <p><b>Doctor registration Number:</b> ${myVal.doctor_id.Registration_Number}</p>
+                                <p><b>Doctor fee:</b> ${myVal.doctor_id.consultation_fee}</p>
+                                
+                            </div>
+                            <div>
+                                <p><b>patient Name: </b>${myVal.patient_name}</p>
+                                <p>patient email: ${myVal.patient.email}</p>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Appointment Date: ${date_time.toLocaleDateString()}</p>
+                            <p>Appointment time: ${date_time.toLocaleTimeString()}</p>
+                            <p>Total paid Amount: ${myVal.consultation_amt}</p>
+                            <p>Doctor share: ${myVal.doctor_id.consultation_fee}</p>
+                            <p>Company share: ${company_share}</p>
+                            <p>GST : ${company_share * 0.05 }</p>
+                        </div>
+                    </div>
+            `;
+
+            jQuery('#patientDetails .modal-body').html(contents)
+
+        })
+
+
+
     let subscriptionsTable = jQuery('#Subscriptions').DataTable({
             ajax:{
                 url:'/api/allSubscription_plans',
@@ -301,7 +354,7 @@
               },
               
         })
-    function getDotorsettlement(){
+    // function getDotorsettlement(){
 
         doctorResult = jQuery('#doctorResult').DataTable({
             ajax:{
@@ -415,7 +468,7 @@
               }
               
         })
-    }
+    // }
 
     jQuery('#settlementDetails').on('show.bs.modal', function (event) {
         var myVal = jQuery(event.relatedTarget).data('doct');

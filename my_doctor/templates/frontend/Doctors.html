@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label for="hf-email" class=" form-control-label">Doctor Name<span class="text-danger h5">*</span></label>
                                             <input type="text" id="full_name" name="full_name" required placeholder="Select Doctor Name"
-                                                class="form-control">
+                                                class="form-control" onkeypress="return /[a-zA-Z ]/i.test(event.key)">
                                         </div>
                                         <div class="form-group">
                                             <label for="hf-email" class=" form-control-label">Registration No.<span class="text-danger h5">*</span></label>
@@ -74,7 +74,7 @@
                                         <div class="form-group">
                                             <label for="hf-email" class=" form-control-label">Phone No.<span class="text-danger h5">*</span></label>
                                             <input type="text" id="phone_number" name="phone_number" placeholder="Select Phone Number"
-                                                class="form-control">
+                                                class="form-control" onkeypress="return /[0-9]/i.test(event.key)">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -104,7 +104,7 @@
                                             <br>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox1"
-                                                    value="Percent">
+                                                    value="Percent" checked>
                                                 <label class="form-check-label" for="inlineCheckbox1">Percent</label>
                                             </div>
                                             <div class="form-check form-check-inline">
@@ -185,9 +185,31 @@
         //       tabs:true
         // })
         
+        function doctorFormValidStatus(){
+            let percent_type = $('input[name="commission_type"]:checked').val()
+
+            let commission_val = $('#commission_val').val()
+            let consultation_fee = $('#consultation_fee').val();
+            if(consultation_fee <=0) {alert('consultation fee must be in psitive number'); return false}
+            if(commission_val <=0) {alert('commission must be in psitive number'); return false}
+            
+            
+            let num = percent_type.search('Percent')
+            if(num > -1 && commission_val >= 100){
+                alert('If commision type is percent then you can not enter more than or equal to 100.')
+                return false;
+            }
+            return true
+        }
+
         jQuery('#doc_form').submit( function(e){
             e.preventDefault()
             e.stopImmediatePropagation()
+            const is_valid = doctorFormValidStatus()
+            if(!is_valid){return }
+            $('#buttonSubmit').html(`
+                <i class="fa fa-spinner fa-spin"></i> submitting...
+            `) 
             let data = new FormData(document.getElementById('doc_form'));
             // data.append('doctor_id', doctor_id)
             jQuery.ajax({
@@ -199,6 +221,9 @@
                 
             })
                 .done((response) => {
+                    $('#buttonSubmit').html(`
+                    <i class="fa fa-dot-circle-o"></i><span id="submitBtn"> Submit</span>
+                    `) 
                     console.log(response);
                     // table.ajax.reload()
                     // alert("You timing is changed")
