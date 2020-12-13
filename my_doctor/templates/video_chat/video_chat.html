@@ -688,6 +688,10 @@
             $('#btnback').click(function () {
                 $('#myTab a[href="#Details"]').tab('show')
             })
+
+            setInterval(function () {
+                check_call_answered();
+            }, 1000)
         })
     </script>
 

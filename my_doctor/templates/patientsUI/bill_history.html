@@ -37,6 +37,10 @@
             method:'GET',
             success:function(response){
                 var listData = ''
+                if(response.length == 0)
+                {
+                    listData = ''
+                }
                 $.each(response,function(i,item){
                     listData+=`
                     <li>
