@@ -218,6 +218,7 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
         for doctor in queryset:
             total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date).count()
             if dates == today_date:
+                print('come 1')
                 current_datetime = datetime.datetime.now()
                 str_make_date = str(year) + '-' + str(month) + '-' + str(day) + ' '+ doctor.to_time
                 to_time = datetime.datetime.strptime(str_make_date, "%Y-%m-%d %H:%M")
@@ -242,16 +243,20 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                             queryset = queryset.exclude(id= doctor.id)
 
                     else:
+                        print('come 2')
                         appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
                         if appointment_time < to_time:
+                            print('come 3')
                             doctor.from_time = datetime.datetime.strftime(appointment_time, '%H:%M')
                         else:
                             queryset = queryset.exclude(id= doctor.id)
                 else:
+                    print('come 4')
                     queryset = queryset.exclude(id= doctor.id)
                 
 
             else:
+                print('come 5')
                 if total_appiontments > 0:
                     str_time = doctor.from_time
                     date_format = datetime.datetime.strptime(str_time, '%H:%M')
