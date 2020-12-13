@@ -1,3 +1,4 @@
+import asyncio
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -80,7 +81,7 @@ class PatientResgistrationAPI(generics.GenericAPIView):
         })
 
     
-    def send_mails(self, obj, password):
+    async def send_mails(self, obj, password):
         mail_subject = 'Activate your account.'
         message = render_to_string('email.html', {
             'username': obj.full_name,
@@ -96,7 +97,7 @@ class PatientResgistrationAPI(generics.GenericAPIView):
         )
         msg.content_subtype = "html"  # Main content is now text/html
         try:
-            msg.send()
+            await msg.send()
         except:
             pass
         return True
@@ -121,7 +122,7 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         })
 
     
-    def send_mails(self, obj, password):
+    async def mails(self, obj, password):
         mail_subject = 'Activate your account.'
         message = render_to_string('email.html', {
             'username': obj.full_name,
@@ -137,7 +138,7 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         )
         msg.content_subtype = "html"  # Main content is now text/html
         try:
-            msg.send()
+            await msg.send()
         except:
             pass
         return True

@@ -252,9 +252,9 @@
                 },
                 success: function (response) {
                     if (window.matchMedia("(max-width:425px)").matches)
-                        window.open(`/api/VideoCall?device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`)
+                        window.location.href = `/api/VideoCall?device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                     else
-                        window.open(`/api/VideoCall?device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`)
+                        window.location.href = `/api/VideoCall?device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
                 error: function (response) {
                     console.log(response)

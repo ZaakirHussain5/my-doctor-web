@@ -242,7 +242,6 @@
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },
             }).done((response) => {
-                console.log(response)
                 var x = document.getElementById("myAudio");
                 x.pause();
                 x.currentTime = 0;

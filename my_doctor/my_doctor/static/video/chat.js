@@ -113,7 +113,7 @@ function getMyMessage(){
     })
 }
 getMyMessage()
-setInterval(function(){
+let messageInterval = setInterval(function(){
     getMyMessage();
 }, 1000)
 

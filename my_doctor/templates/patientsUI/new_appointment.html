@@ -654,7 +654,7 @@
                     let data = response[i];
                     console.log(data)
                     var consultation_fee = data.doctor.commission_type == "Percent" ? parseFloat(data.doctor.consultation_fee) + (parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) : parseFloat(data.doctor.consultation_fee) + parseFloat(data.doctor.commission_val);
-                    var gst = data.doctor.commission_type == "Percent" ? ((parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) * (5 / 100)) : parseFloat(data.doctor.commission_val) * (5 / 100)
+                    var gst = data.doctor.commission_type == "Percent" ? ((parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) * (18/ 100)) : parseFloat(data.doctor.commission_val) * (18/ 100)
                     let strings = `
                     <div class="card">
                         <div class="card-body">
@@ -737,116 +737,208 @@
             
 
             var amount = $('#total-amt').html() * 100
-            var options = {
-                "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
-                "amount": Math.round(amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": "INR",
-                "name": "Doctor Plus",
-                "description": "Online Doctor Appointment",
-                "image": "{% static 'website/img/logo.png' %}",
-                "handler": function (response) {
-                    console.log(response)
-                    // implement in booking appoinment
-                    var payment_id = response.razorpay_payment_id;
-                    var data = {
-                        appointment_date: $('#app-date').html(),
-                        appointment_time: tConvert($('#app-time').html()),
-                        doctor: $('#doctor-id').val(),
-                        Description: $('#consultingAbout').html(),
-                        consultation_status: "Pending",
-                        payment_type: "UPI",
-                        payment_id: payment_id,
-                        paid_amount: $('#total-amt').html()
-                    };
-                    if($('#useWalletBalance').is(":checked")){
-                        data['paid_amount'] = parseFloat($('#total-amt').html()) + parseFloat(diducted_wallet_balance);
-                        let current_date = new Date()
+            if (amount > 0){
+                var options = {
+                    "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
+                    "amount": Math.round(amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": "INR",
+                    "name": "Doctor Plus",
+                    "description": "Online Doctor Appointment",
+                    "image": "{% static 'website/img/logo.png' %}",
+                    "handler": function (response) {
+                        console.log(response)
+                        // implement in booking appoinment
+                        var payment_id = response.razorpay_payment_id;
+                        var data = {
+                            appointment_date: $('#app-date').html(),
+                            appointment_time: tConvert($('#app-time').html()),
+                            doctor: $('#doctor-id').val(),
+                            Description: $('#consultingAbout').html(),
+                            consultation_status: "Pending",
+                            payment_type: "UPI",
+                            payment_id: payment_id,
+                            paid_amount: $('#total-amt').html()
+                        };
+                        if($('#useWalletBalance').is(":checked")){
+                            data['paid_amount'] = parseFloat($('#total-amt').html()) + parseFloat(diducted_wallet_balance);
+                            let current_date = new Date()
 
-                        let transaction_data = {
-                            ref_id: payment_id,
-                            trans_type: "New appointment",
-                            trans_desc: "New appointment on " + $('#app-date').html() +'. The appointment is booked on ' + current_date.toLocaleDateString(),
-                            debit: diducted_wallet_balance,
-                            balance: diducted_wallet_balance
+                            let transaction_data = {
+                                ref_id: payment_id,
+                                trans_type: "New appointment",
+                                trans_desc: "New appointment on " + $('#app-date').html() +'. The appointment is booked on ' + current_date.toLocaleDateString(),
+                                debit: diducted_wallet_balance,
+                                balance: diducted_wallet_balance
+
+                            }
+                            $.ajax({
+                                url: '/api/transactions/',
+                                method: 'POST',
+                                data: JSON.stringify(transaction_data),
+                                contentType: 'application/json',
+                                beforeSend: function(xhr){
+                                    return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
+                                }
+                            }).done(res=>{
+                                console.log('wallet', res)
+                            })
+                            .fail(err=>{
+                                console.log(err)
+                            })
 
                         }
+                        
+                        let promoCode = $('#promocode').val()
+                        if (promoCode.length > 0){
+                            data['promocode'] = promoCode
+                        }
+
+
+                        // '/Authorization Token {value}/appoinments/'
+                        $('#rzp-button1').html('Processing...')
+                        $('#rzp-button1').attr('disabled', true)
+                    
                         $.ajax({
-                            url: '/api/transactions/',
-                            method: 'POST',
-                            data: JSON.stringify(transaction_data),
-                            contentType: 'application/json',
-                            beforeSend: function(xhr){
-                                return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
-                            }
-                        }).done(res=>{
-                            console.log('wallet', res)
-                        })
-                        .fail(err=>{
+                            'url': '/api/appointments/',
+                            'method': 'POST',
+                            'contentType': 'application/json',
+                            'data': JSON.stringify(data),
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                            },
+                        }).done((response) => {
+                            console.log(response);
+                            toastr.success("Appointment booked Successfully", "Success", { positionClass: "toast-top-center" })
+                            $('#con-doctor').html($('#Doctor').html())
+                            $('#summaryProfile').attr('src',$('#docImage').attr('src'))
+                            $('#con-app-time').html(response.appointment_time)
+                            $('#con-app-date').html(response.appointment_date)
+                            $('#con-app-fee').html(response.paid_amount)
+                            $('#pills-payment-tab').removeClass('active');
+                            $('#payment').removeClass('active show');
+                            $('#pills-confirm-tab').addClass('active');
+                            $('#Confirmation').addClass('active show'); 
+                            mob()
+                            $.ajax({
+                                url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#mob1').val()}`,
+                                method: 'GET',
+                                success: function (response) {
+                                    console.log(response)
+                                }
+                            })
+                            $.ajax({
+                                url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ${$('#conversation_doc').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to=${$('#docNum').val()}`,
+                                method: 'GET',
+                                success: function (response) {
+                                    console.log(response)
+                                }
+                            })
+                            //Send SMS to Doctor as well
+                        }).fail((err, error, wrong) => {
                             console.log(err)
                         })
+                    },
+                    "notes": {
+                        "address": "B&S Associates No:1, Subbiaha Reddy block, Metro Station, Ulsoor, Bangalore - 560038"
+                    },
+                    "theme": {
+                        "color": "#007bff"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+                e.preventDefault();
+            }
+            else{
+                var data = {
+                    appointment_date: $('#app-date').html(),
+                    appointment_time: tConvert($('#app-time').html()),
+                    doctor: $('#doctor-id').val(),
+                    Description: $('#consultingAbout').html(),
+                    consultation_status: "Pending",
+                    payment_type: "wallet Balance",
+                    payment_id: 'used wallet balance',
+                    paid_amount: parseFloat(diducted_wallet_balance)
+                };
+                if($('#useWalletBalance').is(":checked")){
+                    data['paid_amount'] = parseFloat($('#total-amt').html()) + parseFloat(diducted_wallet_balance);
+                    let current_date = new Date()
+
+                    let transaction_data = {
+                        ref_id: 'used wallet balance',
+                        trans_type: "New appointment",
+                        trans_desc: "New appointment on " + $('#app-date').html() +'. The appointment is booked on ' + current_date.toLocaleDateString(),
+                        debit: diducted_wallet_balance,
+                        balance: diducted_wallet_balance
 
                     }
-                    
-                    let promoCode = $('#promocode').val()
-                    if (promoCode.length > 0){
-                        data['promocode'] = promoCode
-                    }
-
-
-                    // '/Authorization Token {value}/appoinments/'
-                    $('#rzp-button1').html('Processing...')
-                    $('#rzp-button1').attr('disabled', true)
-                   
                     $.ajax({
-                        'url': '/api/appointments/',
-                        'method': 'POST',
-                        'contentType': 'application/json',
-                        'data': JSON.stringify(data),
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-                        },
-                    }).done((response) => {
-                        console.log(response);
-                        toastr.success("Appointment booked Successfully", "Success", { positionClass: "toast-top-center" })
-                        $('#con-doctor').html($('#Doctor').html())
-                        $('#summaryProfile').attr('src',$('#docImage').attr('src'))
-                        $('#con-app-time').html(response.appointment_time)
-                        $('#con-app-date').html(response.appointment_date)
-                        $('#con-app-fee').html(response.paid_amount)
-                        $('#pills-payment-tab').removeClass('active');
-                        $('#payment').removeClass('active show');
-                        $('#pills-confirm-tab').addClass('active');
-                        $('#Confirmation').addClass('active show'); 
-                        mob()
-                        $.ajax({
-                            url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#mob1').val()}`,
-                            method: 'GET',
-                            success: function (response) {
-                                console.log(response)
-                            }
-                        })
-                        $.ajax({
-                            url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ${$('#conversation_doc').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to=${$('#docNum').val()}`,
-                            method: 'GET',
-                            success: function (response) {
-                                console.log(response)
-                            }
-                        })
-                        //Send SMS to Doctor as well
-                    }).fail((err, error, wrong) => {
+                        url: '/api/transactions/',
+                        method: 'POST',
+                        data: JSON.stringify(transaction_data),
+                        contentType: 'application/json',
+                        beforeSend: function(xhr){
+                            return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
+                        }
+                    }).done(res=>{
+                        console.log('wallet', res)
+                    })
+                    .fail(err=>{
                         console.log(err)
                     })
-                },
-                "notes": {
-                    "address": "B&S Associates No:1, Subbiaha Reddy block, Metro Station, Ulsoor, Bangalore - 560038"
-                },
-                "theme": {
-                    "color": "#007bff"
+
                 }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.open();
-            e.preventDefault();
+                        
+                let promoCode = $('#promocode').val()
+                if (promoCode.length > 0){
+                    data['promocode'] = promoCode
+                }
+
+
+                // '/Authorization Token {value}/appoinments/'
+                $('#rzp-button1').html('Processing...')
+                $('#rzp-button1').attr('disabled', true)
+            
+                $.ajax({
+                    'url': '/api/appointments/',
+                    'method': 'POST',
+                    'contentType': 'application/json',
+                    'data': JSON.stringify(data),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    },
+                }).done((response) => {
+                    console.log(response);
+                    toastr.success("Appointment booked Successfully", "Success", { positionClass: "toast-top-center" })
+                    $('#con-doctor').html($('#Doctor').html())
+                    $('#summaryProfile').attr('src',$('#docImage').attr('src'))
+                    $('#con-app-time').html(response.appointment_time)
+                    $('#con-app-date').html(response.appointment_date)
+                    $('#con-app-fee').html(response.paid_amount)
+                    $('#pills-payment-tab').removeClass('active');
+                    $('#payment').removeClass('active show');
+                    $('#pills-confirm-tab').addClass('active');
+                    $('#Confirmation').addClass('active show'); 
+                    mob()
+                    $.ajax({
+                        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#mob1').val()}`,
+                        method: 'GET',
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    })
+                    $.ajax({
+                        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ${$('#conversation_doc').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to=${$('#docNum').val()}`,
+                        method: 'GET',
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    })
+                    //Send SMS to Doctor as well
+                }).fail((err, error, wrong) => {
+                    console.log(err)
+                })
+            }
         }
     
         ///////////// promo code ///////////////

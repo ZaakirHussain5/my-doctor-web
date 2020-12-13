@@ -560,6 +560,7 @@
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'assets/js/toastr.min.js' %}"></script>
     <script>
         const user = '{{user}}';
         const session = '{{ session }}';
@@ -598,10 +599,44 @@
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
-                        console.log('Calling ...', res[0])
+                        if(res.length == 0) {
+                            console.log('Calling ...', res)
+                            // toastr.success("Doctor is busy now.", 'Success', {
+                            //     positionClass: "toast-top-center"
+                            // })
+                            // toastr.error("Doctor is busy now.","Success",{positionClass:'toast-top-center'})
+                            clearInterval(checkAnswer)
+                            clearInterval(messageInterval)
+                            alert('Doctor is busy now.');
+                            window.location.href = '/patients/dashboard'
+                        }
                         if (res[0].is_answered == true) {
                             create_consultation()
                             clearInterval(checkAnswer)
+                        }
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                }
+            }
+            else{
+                let checkAnswer = setInterval(check_for_answer, 2000)
+                function check_for_answer(){
+                    jQuery.ajax({
+                        url: `/api/check_for_answer?sessions=${session}`,
+                        method: 'GET',
+                        contentType: 'application/json'
+                    }).done((res) => {
+                        if(res.length == 0) {
+                            console.log('Calling ...', res)
+                            // toastr.success("Doctor is busy now.", 'Success', {
+                            //     positionClass: "toast-top-center"
+                            // })
+                            // toastr.error("Doctor is busy now.","Success",{positionClass:'toast-top-center'})
+                            clearInterval(checkAnswer)
+                            clearInterval(messageInterval)
+                            alert('Doctor is busy now.');
+                            window.location.href = '/doctors/dashboard'
                         }
                     }).fail((err) => {
                         console.log(err)
