@@ -61,3 +61,15 @@ class DoctorBankDetails(models.Model):
 class Doctornotes(models.Model):
     doctor = models.ForeignKey(doctors_info, on_delete=models.CASCADE)
     notes = models.TextField()
+
+class DoctorBillingHistory(models.Model):
+    doctor = models.ForeignKey(doctors_info, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    ref_id = models.CharField(max_length=250,null=True,blank=True)
+    e_amt=models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    r_amt=models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    balance=models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    description = models.CharField(max_length=200,null=True,blank=True)
+
+    def __str__(self):
+        return self.description

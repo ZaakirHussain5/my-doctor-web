@@ -13,7 +13,7 @@ from knox.models import AuthToken
 from accounts.serializers import UserAuthSerializer
 from specialist_type.models import specialist_type
 from appointment.models import appointment
-from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
+from .models import DoctorBillingHistory,doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from .serializers import *
 from django.contrib.auth.models import User
 
@@ -609,3 +609,17 @@ class change_password(generics.GenericAPIView):
         return Response({
             'password_change': True
         })
+
+class doctor_billing_historyAPI(viewsets.ModelViewSet):
+    serializer_class = DoctorBillingHistorySerializer
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def get_queryset(self):
+        return DoctorBillingHistory.objects.filter(doctor__user=self.request.user)
+    
+    def perform_create(self,serializer):
+        doctor = DoctorBillingHistory.objects.get(self.request.user)
+        serializer.save(doctor=doctor)
+    

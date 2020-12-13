@@ -98,22 +98,10 @@
                                             <label for="hf-email" class=" form-control-label">Commision</label>
                                             <input type="text" id="commission_val" name="commission_val"
                                                 placeholder="Enter Commision Value" class="form-control" onkeypress="return /^[0-9]+$/i.test(event.key)">
+                                            <small>Enter the Amount 18% GST Included.</small>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="hf-email" class=" form-control-label">Commision Unit</label>
-                                            <br>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox1"
-                                                    value="Percent" checked>
-                                                <label class="form-check-label" for="inlineCheckbox1">Percent</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="commission_type" id="inlineCheckbox2"
-                                                    value="Amount">
-                                                <label class="form-check-label" for="inlineCheckbox2">Amount</label>
-                                            </div>
-                
-                                        </div>
+                                        <input type="hidden" name="commission_type" value="Amount">
+                                        
                                         <div class="form-group">
                                             <label for="hf-email" class=" form-control-label">MOU/Agreement File</label>
                                             <input type="file" id="mou_file" name="mou_file" class="form-control"  accept=".png, .jpg, .pdf ,.doc ,.docx">

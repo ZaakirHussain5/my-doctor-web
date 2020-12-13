@@ -3,7 +3,8 @@ from django.dispatch import receiver
 
 from consultations.models import consultations
 from doctor_payments.models import doctor_payments
-from doctors.models import settlement_details, doctors_info
+from doctors.models import settlement_details, doctors_info,DoctorBillingHistory
+from patients.models import patient_info
 
 @receiver(post_save, sender=consultations)
 def save_doctor_payment(sender, instance, **kwargs):
@@ -25,5 +26,7 @@ def save_doctor_payment(sender, instance, **kwargs):
             balance = float(balance) + float(add_new_amount)
         else:
             balance = float(payable)
+    patient = patient_info.objects.get(user=instance.patient)
+    billing_history = DoctorBillingHistory.objects.create(doctor=instance.doctor_id,ref_id=patient.pat_id,e_amt=(instance.consultation_amt-instance.comp_share),r_amt=0,balance=balance,description='Consultation Fee')
     doc_count = consultations.objects.filter(doctor_id = instance.doctor_id).count()
     payments = doctor_payments.objects.filter(doctor = instance.doctor_id).update(total_amt=total_amount, consultations_count=doc_count, comm_amt=commission_amount, amount_payable=payable, balance=balance)
