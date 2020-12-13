@@ -1,3 +1,4 @@
+import asyncio
 from django.shortcuts import render
 from .models import patient_info
 from django.db.models import Max
@@ -21,7 +22,7 @@ def generateId(request):
     return JsonResponse({"pat_id":'DPPAT'+ str(now.year) + str(uid+1)})
 
 
-def send_mails(request):
+async def send_mails(request):
     mail_subject = 'Activate your account.'
     message = render_to_string('email.html', {
         'username': "Zaakir ",
@@ -36,7 +37,7 @@ def send_mails(request):
         ['ssamiran472@gmail.com', 'dragndrop111@gmail.com'],
     )
     msg.content_subtype = "html"  # Main content is now text/html
-    msg.send()
+    await msg.send()
     return redirect('dashboard')
 
 @api_view(['POST'])

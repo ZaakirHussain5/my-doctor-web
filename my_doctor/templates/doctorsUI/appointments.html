@@ -523,7 +523,7 @@
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
       success: function (response) {
-        window.open(`/api/VideoCall?user=doc&session=${response.id}&patient=${button.attr('data-patient')}&appointment=${button.attr('data-const')}`)
+        window.location.href = `/api/VideoCall?user=doc&session=${response.id}&patient=${button.attr('data-patient')}&appointment=${button.attr('data-const')}`
       },
       error: function (response) {
         console.log(response)

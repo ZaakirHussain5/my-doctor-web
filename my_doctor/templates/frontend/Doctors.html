@@ -210,6 +210,8 @@
             $('#buttonSubmit').html(`
                 <i class="fa fa-spinner fa-spin"></i> submitting...
             `) 
+
+            $('#buttonSubmit').attr('disabled', true)
             let data = new FormData(document.getElementById('doc_form'));
             // data.append('doctor_id', doctor_id)
             jQuery.ajax({
@@ -224,6 +226,7 @@
                     $('#buttonSubmit').html(`
                     <i class="fa fa-dot-circle-o"></i><span id="submitBtn"> Submit</span>
                     `) 
+                    $('#buttonSubmit').removeAttr('disabled')
                     console.log(response);
                     // table.ajax.reload()
                     // alert("You timing is changed")

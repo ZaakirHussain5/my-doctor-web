@@ -5,7 +5,7 @@ from patients.models import patient_info
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
-
+import asyncio
 
 def send_todays_message():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
@@ -23,7 +23,7 @@ def send_todays_message():
             send_mails(appointments)
 
 
-def send_mails(obj):
+async def send_mails(obj):
     patient = patient_info.objects.get(user=obj.patient)
     mail_subject = 'New Appointment.'
     message = render_to_string('emails/reminder1.html', {
@@ -40,12 +40,12 @@ def send_mails(obj):
         [patient.user.email],
     )
     msg.content_subtype = "html"  # Main content is now text/html
-    msg.send()
+    await msg.send()
 
     return True
 
 
-def reminder_min(obj):
+async def reminder_min(obj):
     patient = patient_info.objects.get(user=obj.patient)
     mail_subject = 'New Appointment.'
     message = render_to_string('emails/reminder2.html', {
@@ -60,7 +60,7 @@ def reminder_min(obj):
         [patient.user.email],
     )
     msg.content_subtype = "html"  # Main content is now text/html
-    msg.send()
+    await msg.send()
 
     return True
 
