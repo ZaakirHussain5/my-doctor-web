@@ -1,3 +1,4 @@
+import asyncio
 from .serializers import appointmentSerializer,appointmentsListSerializer, cancleAppointmentSerializer
 from .models import appointment
 from rest_framework import viewsets, permissions,mixins
@@ -47,7 +48,7 @@ class appointmentViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = appointmentSerializer
 
-    def send_mails(self, obj):
+    async def send_mails(self, obj):
         patient = patient_info.objects.get(user= obj.patient)
         mail_subject = 'New Appointment.'
         message = render_to_string('emails/newAppointmentspatient.html', {
@@ -66,7 +67,7 @@ class appointmentViewSet(viewsets.ModelViewSet):
         )
         msg.content_subtype = "html"  # Main content is now text/html
         try:
-            msg.send()
+            await msg.send()
         except:
             pass
         Doctor_message = render_to_string('emails/newAppointmentDoctor.html', {

@@ -271,7 +271,7 @@
         <script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
         <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
         <script>
-            const consultation = {{ consultation }}
+            const consultation = '{{ consultation }}';
             $(document).ready(function () {
 
                 /* 1. Visualizing things on Hover - See next part for action on click */
