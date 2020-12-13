@@ -97,14 +97,16 @@ function sendMessageAjax(message){
         console.log(err);
     })
 }
-
+let total_messages = 0;
 function getMyMessage(){
     $.ajax({
         url: '/api/consultant_chats?session='+ session,
         method: 'GET',
         contentType: 'application/json'
     }).done((response)=>{
-        console.log(response)
+        console.log('response,', response)
+        if( total_messages < response.length)
+        {openElement(); total_messages = response.length }
         serializedMessage(response)
     }).fail((err)=>{
         console.log(err);
