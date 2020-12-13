@@ -134,7 +134,9 @@ function serializedMessage(arrOfMessage){
         }
     }
     $('#messagess').append(lis);
-
+    messagesContainer.finish().animate({
+        scrollTop: messagesContainer.prop("scrollHeight")
+    }, 250);
 }
 
 function onMetaAndEnter(event) {
