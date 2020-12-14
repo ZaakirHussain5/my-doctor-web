@@ -304,7 +304,9 @@
         e.preventDefault();
         e.stopImmediatePropagation();
         const data = new FormData(document.getElementById('profile_form'))
-        console.log(data);
+        jQuery("#profile_form button[type='submit']").html('<i class="fa fa-spinner fa-spin"></i> Updating...')
+        jQuery("#profile_form button[type='submit']").attr('disabled', true)
+
         jQuery.ajax({
             url: '/api/DoctorUpdateProfile/'+ doctor_id + '/',
             data: data,
@@ -316,12 +318,15 @@
             },
         })
             .done((response) => {
-                console.log("postrequest response -", response);
+                jQuery("#profile_form button[type='submit']").html('<i class="fa fa-dot-circle-o"></i> Update Profile')
+                jQuery("#profile_form button[type='submit']").removeAttr('disabled')
                 jQuery.removeCookie('DoctorToken');
                 jQuery.cookie('DoctorToken', response.token, { expires: 1 })
                 toastr.success("Your details have been Updated Successfully","Profile Updated",{positionClass:"toast-top-center"})
             })
             .fail((error) => {
+                jQuery("#profile_form button[type='submit']").html('<i class="fa fa-dot-circle-o"></i> Update Profile')
+                jQuery("#profile_form button[type='submit']").removeAttr('disabled')
                 console.log(error);
             })
     })

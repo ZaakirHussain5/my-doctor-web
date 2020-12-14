@@ -428,6 +428,8 @@
         e.stopImmediatePropagation();
         let data = new FormData(document.getElementById('doctorTiming'))
         data['day'] = day
+        jQuery('#doctorTiming button').html(`<i class="fa fa-spinner fa-spin"></i> Updating...`)
+        jQuery('#doctorTiming button').attr('disabled', true)
         jQuery.ajax({
             url: '/api/DoctorTimings/',
             method: 'POST',
@@ -440,10 +442,14 @@
         })
             .done((response) => {
                 console.log(response);
-                table.ajax.reload()
+                table.ajax.reload();
+                jQuery('#doctorTiming button').html(`<i class="fa fa-dot-circle-o"></i> Update Timings`)
+                jQuery('#doctorTiming button').removeAttr('disabled')
             })
             .fail((error) => {
                 console.log(error)
+                jQuery('#doctorTiming button').html(`<i class="fa fa-dot-circle-o"></i> Update Timings`)
+                jQuery('#doctorTiming button').removeAttr('disabled')
             })
 
     })
@@ -453,6 +459,8 @@
         e.preventDefault();
         e.stopImmediatePropagation();
         const data = new FormData(document.getElementById('password_form'))
+        jQuery('#password_form button').html(`<i class="fa fa-spinner fa-spin"></i> Updating...`)
+        jQuery('#password_form button').attr('disabled', true)
         jQuery.ajax({
             url: '/api/changePassword',
             method: 'POST',
@@ -463,10 +471,14 @@
                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
             },
         }).done((response) => {
+            jQuery('#password_form button').html(`<i class="fa fa-lock"></i> Update Password`)
+            jQuery('#password_form button').removeAttr('disabled')
             toastr.success('Password change successfull.', 'success', {
                         positionClass: "toast-top-center"
                     })
         }).fail((error) => {
+            jQuery('#password_form button').html(`<i class="fa fa-lock"></i> Update Password`)
+            jQuery('#password_form button').removeAttr('disabled')
             let errors = JSON.parse(error.responseText)
             alert(errors[0])
         })
@@ -476,6 +488,8 @@
             e.preventDefault()
             e.stopImmediatePropagation()
             const data = new FormData(document.getElementById('ConsultationFeeForm'))
+            jQuery('#ConsultationFeeForm button').html(`<i class="fa fa-spinner fa-spin"></i> Updating...`)
+            jQuery('#ConsultationFeeForm button').attr('disabled', true)
             jQuery.ajax({
                 url: '/api/changeFee/',
                 method: 'POST',
@@ -487,11 +501,15 @@
                 },
             })
                 .done((response) => {
+                    jQuery('#ConsultationFeeForm button').html(`<i class="fa fa-inr"></i> Update Consultation Fee`)
+                    jQuery('#ConsultationFeeForm button').removeAttr('disabled')
                     toastr.success('Consultation fees updated.', 'Success', {
                         positionClass: "toast-top-center"
                     })
                 })
                 .fail((error) => {
+                    jQuery('#ConsultationFeeForm button').html(`<i class="fa fa-inr"></i> Update Consultation Fee`)
+                    jQuery('#ConsultationFeeForm button').removeAttr('disabled')
                     console.log(error)
                 })
         })
@@ -500,6 +518,8 @@
             e.preventDefault()
             e.stopImmediatePropagation()
             const data = new FormData(document.getElementById('DoctorBankDetailsForm'))
+            jQuery('#DoctorBankDetailsForm button').html(`<i class="fa fa-spinner fa-spin"></i> Updating...`)
+            jQuery('#DoctorBankDetailsForm button').attr('disabled', true)
             jQuery.ajax({
                 url: '/api/doctor_bankDetails/',
                 method: 'POST',
@@ -510,14 +530,18 @@
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },
             })
-                .done((response) => {
-                    toastr.success("Your bankdetails updated successfully.", 'success', {
-                        positionClass: "toast-top-center"
-                    })
+            .done((response) => {
+                jQuery('#DoctorBankDetailsForm button').html(`<i class="fa fa-building"></i> Update Details`)
+                jQuery('#DoctorBankDetailsForm button').removeAttr('disabled')
+                toastr.success("Your bankdetails updated successfully.", 'success', {
+                    positionClass: "toast-top-center"
                 })
-                .fail((error) => {
-                    console.log(error)
-                })
+            })
+            .fail((error) => {
+                jQuery('#DoctorBankDetailsForm button').html(`<i class="fa fa-building"></i> Update Details`)
+                jQuery('#DoctorBankDetailsForm button').removeAttr('disabled')
+                console.log(error)
+            })
         })
 
     function getDoctorBankDetails() {

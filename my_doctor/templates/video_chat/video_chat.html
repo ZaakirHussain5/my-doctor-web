@@ -508,16 +508,19 @@
                         <h4>{{doctor.full_name}}</h4>
                         <small>{{doctor.specialist_type}}</small>
                         <br>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star"></i>
+                        <div id="rating-div">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                        </div>
+                        
                     </div>
                     <table class="table table-hover ">
                         <tr>
                             <td>Consultations</td>
-                            <td>21</td>
+                            <td>{{ doc_total_cons }}</td>
                         </tr>
                         <tr>
                             <td colspan="2"><strong>About</strong>
@@ -553,7 +556,6 @@
             </div>
         </div>
     </div>
-<button id="end">End call</button>
 
     <script
         src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
@@ -570,6 +572,21 @@
     <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
+            let doctor_ratings = Math.round("{{doctor.rating}}");
+            console.log('Doctor ratings ', doctor_ratings)
+            let stars = 1;
+            let star = ''
+            while(stars < 6){
+                if(doctor_ratings >= stars){
+                    star += `<i class="fa fa-star text-warning"></i>`
+                }else{
+                    star += '<i class="fa fa-star"></i>'
+                }
+                stars++
+            }
+            console.log(star)
+            $('#rating-div').html(star);
+
             let consultation_id = '';
             if (user == 'pat'){
                 function create_consultation() {

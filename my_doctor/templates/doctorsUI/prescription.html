@@ -142,7 +142,8 @@
             let url = '/api/DoctorPrescription/';
             let action = 'POST';
             let message = "Prescription added successfully."
-
+            jQuery('#submitBtn').html('<i class="fa fa-spinner fa-spin"></i> Submitting...')
+            $('#submitBtn').attr('disabled', true)
             if(jQuery('#submitBtn').html() == 'Update Prescription' ){
                 action = 'PUT'
                 url = url + jQuery('#pres_id').val() + '/'
@@ -163,8 +164,11 @@
                     table.ajax.reload();
                     jQuery('#subscriptionForm').trigger('reset')
                     jQuery('#submitBtn').html('Add Prescription')
+                    $('#submitBtn').removeAttr('disabled')
                     toastr.success(message,"Success",{positionClass:'toast-top-center'})
                 }).fail((error)=>{
+                    jQuery('#submitBtn').html('Add Prescription')
+                    $('#submitBtn').removeAttr('disabled')
                     console.log(error)
                     toastr.error("Operation Failed","Success",{positionClass:'toast-top-center'})
                 })
