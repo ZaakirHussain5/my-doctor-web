@@ -13,7 +13,7 @@ from knox.models import AuthToken
 from accounts.serializers import UserAuthSerializer
 from specialist_type.models import specialist_type
 from appointment.models import appointment
-from .models import doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
+from .models import DoctorBillingHistory,doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from .serializers import *
 from django.contrib.auth.models import User
 
@@ -219,7 +219,6 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
         for doctor in queryset:
             total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date).count()
             if dates == today_date:
-                print('step 1')
                 current_datetime = datetime.datetime.now()
                 str_make_date = str(year) + '-' + str(month) + '-' + str(day) + ' '+ doctor.to_time
                 to_time = datetime.datetime.strptime(str_make_date, "%Y-%m-%d %H:%M")
@@ -610,3 +609,17 @@ class change_password(generics.GenericAPIView):
         return Response({
             'password_change': True
         })
+
+class doctor_billing_historyAPI(viewsets.ModelViewSet):
+    serializer_class = DoctorBillingHistorySerializer
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def get_queryset(self):
+        return DoctorBillingHistory.objects.filter(doctor__user=self.request.user)
+    
+    def perform_create(self,serializer):
+        doctor = DoctorBillingHistory.objects.get(self.request.user)
+        serializer.save(doctor=doctor)
+    

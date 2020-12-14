@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import doctors_info,DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
+from .models import DoctorBillingHistory,doctors_info,DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.views.defaults import bad_request
@@ -168,3 +168,8 @@ class DoctornotesSerializer(serializers.ModelSerializer):
         model = Doctornotes
         fields= '__all__'
         read_only_fields = ('doctor', )
+
+class DoctorBillingHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorBillingHistory
+        fields= '__all__'

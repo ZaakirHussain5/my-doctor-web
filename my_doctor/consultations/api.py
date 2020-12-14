@@ -56,7 +56,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         appointment.save()
         share_type = doctor.commission_type
         share_val = doctor.commission_val
-        if share_type == 'Pencent':
+        if share_type == 'Percent':
             share_val = cons_fee * (share_val/100)
         
         serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
@@ -68,7 +68,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         consultation = consultations.objects.filter(doctor_id=doctor)
         total_rating = consultation.aggregate(Sum('consultation_rating'))
         doctor.rating = float(total_rating['consultation_rating__sum'] / consultation.count()) 
-        doctor.save()
+        doctor.save(send_signals=False)
         return 
 
 
