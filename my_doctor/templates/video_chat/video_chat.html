@@ -572,6 +572,8 @@
     <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
+            $('#toggleLocalAudio').data('tooltip', 'turn off microphone')
+            $('#toggleLocalVideo').data('tooltip', 'turn off camera')
             let doctor_ratings = Math.round("{{doctor.rating}}");
             console.log('Doctor ratings ', doctor_ratings)
             let stars = 1;
