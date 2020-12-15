@@ -1,110 +1,107 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-{% include 'partials/_head.html'%}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body  class="login-page sidebar-collapse">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <div class="page-header clear-filter" filter-color="blue">
-        <div class="page-header-image" style="background-image:url('{% static 'assets/img/login.jpg'%}');"></div>
-        <div class="content">
-          <div class="container">
-            <div class="col-md-4 ml-auto mr-auto">
-              <div class="card card-login card-plain">
-                <form class="form" id="Login">
-                  <div class="card-header text-center">
-                    <div class="logo-container">
-                      <img src="{% static 'assets/img/logo1.png'%}" alt="">
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="input-group no-border input-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="now-ui-icons users_circle-08"></i>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control" id="username" placeholder="Username">
-                    </div>
-                    <div class="input-group no-border input-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                        </span>
-                      </div>
-                      <input type="password" placeholder="Password" id="password" class="form-control" />
-                    </div>
-                    <input type="hidden" value="{{user_type}}" id="user_type">
-                    <button type="submit" class="btn btn-info btn-round btn-lg btn-block" >LOGIN</button>
-
-                  </div>
-                  <div class="card-footer text-center">
-                    
-                    <div class="pull-right">
-                      <h6>
-                        <a href="#pablo" class="link">Forgot Password?</a>
-                      </h6>
-                    </div>
-                </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-    {% include 'partials/_scripts.html'%}
-    
-    <script>
-        function checkLogin(){
-            $('.btn-user').attr('disabled','disabled')
-            $('.btn-user').html('<i class="fa fa-circle-o-notch fa-spin"></i> Checking Session...')
-            $.ajax({
-                url: '/api/auth/user',
-                method: 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-                },
-            }).done((response) => {
-                    window.location.href = '/adminDashboard'
-            }).fail((err, error, wrong) => {  
-                $('.btn-user').removeAttr('disabled')          
-                $('.btn-user').html('Login')
-                console.log(err)
-            })
+    <title>Stuff login</title>
+    <style>
+        body{
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #1f3864;
         }
-        $(document).ready(function () {
-          
+        img{
+            /* height: 50%;
+            width: 56%; */
+            margin: 10px auto;
+            /* padding: 2%; */
+            object-fit: cover;
+        }
+        .card{
+            border-radius: 20px !important;
+            height: 25rem;
+            padding: 0 !important;
+            border: 0 !important;
+            /* box-shadow: 5px 5px 5px 5px rgb(218, 215, 215), 10px 10px 10px 10px rgb(211, 209, 209); */
+        }
+        .card-body{
+            padding: 0 !important;
+            
+        }
 
+        .card-title{
+            height: 100px;
+            background-color: #8dc73f;
+            color: #ffffff;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            
+        }
+        h4{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        input{
+            margin: 15px auto;
+            width: 80% !important;
+            height: 2.7rem;
+            border-radius: 25px !important;
+            padding: 20px !important;
+        }
+        form > p{
+            text-align: right !important;
+            margin-right: 10% !important;
+            font-weight: 600 !important;
+        }
+        form > button{
+            background-color: #8dc73f;
+            margin: auto;
+            border-radius: 20px !important;
+            width: 80% !important;
+        }
+    </style>
+  </head>
+  <body>
+        <div class="container h-100">
+            <div class="d-flex justify-content-center">
+                <img src="{% static 'website/img/footer-logo.png' %}" alt="Card image cap">
+            </div>
+            <div class="d-flex  justify-content-center">
+                <div class="card-deck col-md-5 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center align-items-center">ADMIN LOGIN</h4>
+                            <div class="bg-light mt-5">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <input type="text" class="form-control" name="username" placeholder="username">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    <p>Forgot <a href="#">Password?</a></p>
 
-            $('#Login').submit(function (e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                var data = {
-                    username: $('#username').val(),
-                    password: $('#password').val(),
-                    user_type:$('#user_type').val()
-                }
-                $.ajax({
-                    url: '/api/auth/login',
-                    data: JSON.stringify(data),
-                    method: 'POST',
-                    contentType: 'application/json'
-                }).done((response) => {
-                  // create admin token
-                  console.log(response)
-                      $.cookie('AdminToken', response.token, {
-                        expires: 1
-                        })
-                      window.location.href = '/adminDashboard'
+                                    <button type="submit" class="btn btn-active btn-block text-light"> <b>Login</b></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     
-                    
-                }).fail((err, error, wrong) => {
-                    console.log(err)
-                    alert(err.responseJSON.non_field_errors[0])
-                })
-            })
-        })
-    </script>
-</body>
+                </div>
+            </div>
+            
+        </div>
+    
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
