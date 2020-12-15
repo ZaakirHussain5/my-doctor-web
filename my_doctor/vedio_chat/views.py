@@ -33,7 +33,8 @@ def patientVideoChat(request):
     consulation_list = None
     if doctor_id is not None:
         doctor = doctors_info.objects.get(pk=doctor_id)
-    
+        context['doc_total_cons'] = consultations.objects.filter(doctor_id=doctor).count()
+
     if patient_id is not None:
         patient = patient_info.objects.get(pk=patient_id)
         print(patient)
