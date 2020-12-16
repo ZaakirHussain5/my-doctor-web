@@ -5,7 +5,7 @@ class VedioChatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = VedioChat
-        fields = ('id','Call_from','Call_for','caller_name','caller_ID', 'appoinment_id', 'is_answered')
+        fields = ('id','Call_from','Call_for','caller_name','caller_ID', 'appoinment_id', 'is_answered', 'consult_id')
 
 class video_mobile_serializer(serializers.ModelSerializer):
     class Meta:

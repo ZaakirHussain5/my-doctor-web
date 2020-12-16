@@ -594,7 +594,8 @@
                 function create_consultation() {
                     data = {
                         appoinment_id: appoinment,
-                        doctor_id: doctor_id
+                        doctor_id: doctor_id,
+                        session: session
                     };
                     $.ajax({
                         url: '/api/consultations/',
@@ -618,8 +619,8 @@
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
+                        console.log('Calling ...', res)
                         if(res.length == 0) {
-                            console.log('Calling ...', res)
                             // toastr.success("Doctor is busy now.", 'Success', {
                             //     positionClass: "toast-top-center"
                             // })
@@ -629,7 +630,7 @@
                             alert('Doctor is busy now.');
                             window.location.href = '/patients/dashboard'
                         }
-                        if (res[0].is_answered == true) {
+                        if (res[0].is_answered == true && res[0].consult_id == 0) {
                             create_consultation()
                             clearInterval(checkAnswer)
                         }
