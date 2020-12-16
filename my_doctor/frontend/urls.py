@@ -9,7 +9,7 @@ app_name = 'frontend'
 
 urlpatterns=[
     path('adminlogin',views.loginView,name='login'), #<str:type>
-    path('adminDashboard',views.dashboard,name='adminDashboard'),
+    path('admin/',views.dashboard,name='adminDashboard'),
     path('specialists',views.specialists,name='specialists'),
     path('AddNewDoctor',views.Doctors,name='Doctors'),
     path('DoctorLists',views.DoctorsLists,name='doctor_list'),
