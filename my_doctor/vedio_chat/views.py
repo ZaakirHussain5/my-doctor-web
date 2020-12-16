@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from doctors.models import doctors_info
 from patients.models import patient_info
@@ -56,6 +56,8 @@ def patientVideoChat(request):
         return render(request,'video_chat/video_chat.html',context)
 
 def ratings(request):
+    if request.GET.get('consultation') == '':
+        return redirect('/patients/dashboard')
     return render(request,'video_chat/ratings.html', {'consultation': request.GET.get('consultation')})
 
 

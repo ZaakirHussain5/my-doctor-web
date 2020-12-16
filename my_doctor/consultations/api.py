@@ -48,7 +48,6 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
-        print("Yes you are right place ")
         doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
         appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
         appointment.consultation_status="Completed"
@@ -62,13 +61,12 @@ class consultationsViewSet(viewsets.ModelViewSet):
         serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
 
     def perform_update(self, serializer):
-        serializer.save()
-        # print(serializer.doctor_consulataions)
+        serializer.save(send_signals=False)
         doctor = consultations.objects.get(id=self.request.data['consultation']).doctor_id
         consultation = consultations.objects.filter(doctor_id=doctor)
         total_rating = consultation.aggregate(Sum('consultation_rating'))
         doctor.rating = float(total_rating['consultation_rating__sum'] / consultation.count()) 
-        doctor.save(send_signals=False)
+        doctor.save()
         return 
 
 

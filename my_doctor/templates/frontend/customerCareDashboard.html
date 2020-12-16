@@ -147,7 +147,7 @@
                                         <div class="row form-group">
                                             <div class="col col-sm-8 col-md-12">
                                                 <input type="number" targate="Your age" id="pat_age" placeholder="Age"
-                                                    class="form-control" name="age">
+                                                    class="form-control" name="age" min="0">
                                             </div>
 
                                         </div>
@@ -823,7 +823,7 @@
                 }).done(res=>{
                     
                     if(res.length > 0){
-                        if(mob1_warn.length == 0){
+                        if(mob1_warn.length == 0 ){
                             jQuery('#ph_no').after(jQuery('<p id="ph_no-warning" class="text-danger">').text('Already exists. Please try another one.'))
                             jQuery('.registerButton').prop('disabled', true)
                         }
@@ -847,11 +847,10 @@
         
         
         function checkPhone2(){
-            const mob1 = jQuery('#s_ph_no').val();
-            console.log(mob1)
-            const mob1_warn = jQuery('#s_ph_no-warning')
-            console.log(mob1_warn.length)
-            if (mob1.length >=3){
+            const mob2 = jQuery('#s_ph_no').val();
+            console.log(mob2)
+            const mob2_warn = jQuery('#s_ph_no-warning')
+            if (mob2.length >=3){
                 jQuery.ajax({
                     url: '/api/has_email/?phone='+ mob1,
                     method: 'GET',
@@ -860,13 +859,13 @@
                 }).done(res=>{
                     console.log('s_phon')
                     if(res.length > 0){
-                        if(mob1_warn.length == 0){
+                        if(mob2_warn.length == 0){
                             jQuery('#s_ph_no').after(jQuery('<p id="s_ph_no-warning" class="text-danger">').text('Already exists. Please try another one.'))
                             jQuery('.registerButton').prop('disabled', true)
                         }
                     }
                     else{
-                        if(mob1_warn.length > 0){
+                        if(mob2_warn.length > 0){
                             jQuery('#s_ph_no-warning').remove()
                             jQuery('.registerButton').prop('disabled', false)
                         }
