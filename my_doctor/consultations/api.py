@@ -6,7 +6,7 @@ from patients.models import patient_info
 from appointment.models import appointment as appointmentTable
 from django.db.models import Sum
 from datetime import date as dates
-
+from vedio_chat.models import VedioChat
 
 
 def getDateFormat(date_time):
@@ -59,7 +59,11 @@ class consultationsViewSet(viewsets.ModelViewSet):
         if share_type == 'Percent':
             share_val = cons_fee * (share_val/100)
         
-        serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+        instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+        vedioChatInstance = VedioChat.objects.get(id=self.request.data['session'])
+        vedioChatInstance.consult_id=instance.id
+        vedioChatInstance.save()
+        return instance
 
     def perform_update(self, serializer):
         serializer.save()
@@ -68,7 +72,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         consultation = consultations.objects.filter(doctor_id=doctor)
         total_rating = consultation.aggregate(Sum('consultation_rating'))
         doctor.rating = float(total_rating['consultation_rating__sum'] / consultation.count()) 
-        doctor.save(send_signals=False)
+        doctor.save()
         return 
 
 

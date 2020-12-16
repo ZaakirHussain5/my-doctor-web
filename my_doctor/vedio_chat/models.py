@@ -11,6 +11,7 @@ class VedioChat(models.Model):
     is_answered = models.BooleanField(default=False)
     appoinment_id = models.IntegerField(default=0)
     is_busy = models.BooleanField(default=False)
+    consult_id=models.IntegerField(default=0)
 
     @property
     def caller_name(self):

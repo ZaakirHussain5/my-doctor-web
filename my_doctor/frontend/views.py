@@ -163,7 +163,9 @@ def searchUI(request):
 
 @login_required(login_url='/adminlogin/')
 def mis_reports(request):
-    return render(request, 'frontend/mis_reports.html')
+    if request.user.is_superuser:
+        return render(request, 'frontend/mis_reports.html')
+    return HttpResponseRedirect(reverse('adminDashboard'))
 
 
 @login_required(login_url='/adminlogin/')
