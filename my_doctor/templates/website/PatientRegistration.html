@@ -160,6 +160,21 @@
 {% block scripts %}
 <script>
     jQuery(document).ready(function ($) {
+        // $('#btnOTP').hover(
+        //         function() {
+        //             var $this = $(this); // caching $(this)
+        //             // $this.data('defaultText', $this.text());
+        //             $this.text("mute");
+        //         },
+        //         function(){
+        //             var $this = $(this); // caching $(this)
+        //             // $this.data('defaultText', $this.text());
+        //             $this.text("");
+
+        //         }
+        //     );
+
+
         function send_otp(){
             if ($('#Name1').val() == '' || $('#mob1').val() == '')
                 alert('Enter Name and Mobile Number')

@@ -407,7 +407,7 @@
         }
     }
 
-    const doctor_id = {{id}};
+    const doctor_id = '{{id}}';
     console.log(doctor_id)
     function getDataa() {
         const form = document.getElementById('profile_form');
@@ -432,6 +432,11 @@
     jQuery("#profile_form").submit((e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
+        let consfee = jQuery('#Confees').val();
+        if(consfee <=0){
+            alert('consultation fee can not be less then or equal to zero.')
+            return;
+        }
         const data = new FormData(document.getElementById('profile_form'))
         data.append('id', doctor_id)
         console.log(data);
@@ -458,6 +463,11 @@
     jQuery('#ConsultationFeeForm').submit((e) => {
             e.preventDefault()
             e.stopImmediatePropagation()
+            let consultFee = jQuery('#new_fee').val()
+            if(consultFee <=0){
+                alert('Consultation fee can not be lass than or equal to zero');
+                return
+            }
             let data = new FormData(document.getElementById('ConsultationFeeForm'));
             data.append('doctor_id', doctor_id)
             jQuery.ajax({
