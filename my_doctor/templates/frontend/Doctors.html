@@ -178,15 +178,9 @@
 
             let commission_val = $('#commission_val').val()
             let consultation_fee = $('#consultation_fee').val();
-            if(consultation_fee <=0) {alert('consultation fee must be in psitive number'); return false}
-            if(commission_val <=0) {alert('commission must be in psitive number'); return false}
+            if(consultation_fee <=0) {alert('consultation fee must be in positive number'); return false}
+            if(commission_val <=0) {alert('commission must be in positive number'); return false}
             
-            
-            let num = percent_type.search('Percent')
-            if(num > -1 && commission_val >= 100){
-                alert('If commision type is percent then you can not enter more than or equal to 100.')
-                return false;
-            }
             return true
         }
 

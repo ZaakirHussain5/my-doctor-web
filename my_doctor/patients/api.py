@@ -121,7 +121,6 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
             "token": AuthToken.objects.create(user)[1]
         })
 
-    
     async def send_mails(self, obj, password):
         mail_subject = 'Activate your account.'
         message = render_to_string('email.html', {

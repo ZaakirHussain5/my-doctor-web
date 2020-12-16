@@ -18,13 +18,12 @@
                         <th>Date</th>
                         <th>Patient ID</th>
                         <th>Details</th>
-                        <th>Amount</th>
-                        <th>Amount</th>
+                        <th>Earned Amt.</th>
+                        <th>Recieved Amt.</th>
                         <th>Balance</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
                 </tbody>
             </table>
         </div>
@@ -39,7 +38,7 @@
     ajax: {
       url: '/api/doctor_billing_history',
       dataSrc: "",
-      'beforeSend': function (request) {
+      beforeSend: function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
 
@@ -47,9 +46,9 @@
     columns: [
       {
         data: "created_at",
-        render: function(data){
-                        return new Date(data).toLocaleDateString()
-                    }
+        render: function (data) {
+          return new Date(data).toLocaleDateString()
+        }
       },
       {
         data: 'ref_id'
@@ -59,23 +58,19 @@
       },
       {
         data: 'e_amt',
-        render:function(data){
+        render: function (data) {
           return parseFloat(data) <= 0 ? '' : data;
         }
       },
       {
         data: 'r_amt',
-        render:function(data){
-          return parseFloat(data) <= 0  ? '' : data;
+        render: function (data) {
+          return parseFloat(data) <= 0 ? '' : data;
         }
       },
       {
         data: 'balance'
       }
-      // {
-      //   data: "id"
-      // }
-
     ],
     language: {
       lengthMenu: "_MENU_",
@@ -83,407 +78,14 @@
     }
   })
   function tConvert(time) {
-            // Check correct time format and split into components
-            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-
-            if (time.length > 1) { // If time format correct
-                time = time.slice(1);  // Remove full string match value
-                time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
-                time[0] = +time[0] % 12 || 12; // Adjust hours
-            }
-            return time.join(''); // return adjusted time or original string
-        }
+    time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+    if (time.length > 1) { // If time format correct
+      time = time.slice(1);  // Remove full string match value
+      time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join(''); // return adjusted time or original string
+  }
 </script>
-<!-- <script>
-// let dataList = [];
-//     function getDataa(){
-//         console.log('here')
-//         const form = document.getElementById('profile_form');
-//         jQuery.ajax({
-//                 url: '/api/getLoggedInDoctor',
-//                 method: 'GET',
-//                 contentType: 'application/json',
-//                 async: false,
-//                 beforeSend: function (xhr) {
-//                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-//                 },
-//             }).done((response)=>{
-//                 console.log('response response', response);
-//                 jQuery.ajax({
-//                     url: "/api/getEmail",
-//                     method: 'GET',
-//                     contendType: 'application/json',
-//                     async: false,
-//                     method: 'GET',
-//                     beforeSend: function (xhr) {
-//                         xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-//                     },
-//                 }).done((response)=>{
-//                         //formDeserialize(form, response);
-//                     })
-//                 //formDeserialize(form, response);
-                
-//             }).fail((error)=>{
-//                 console.log(error);
-//             });
-//     }
-//     getDataa()
 
-    
-// function formDeserialize(form, data) {
-//         const entries = (new URLSearchParams(data)).entries();
-//         for (const [key, val] of entries) {
-//           console.log(key);
-//             const input = form.elements[key];
-//             if (input != undefined) {
-//                 if (input.type == 'file') {
-//                     if (val) {
-//                         var $file = jQuery('#' + input.id),
-//                             $label = $file.next('label'),
-//                             $labelText = $label.find('span'),
-//                             labelDefault = $labelText.text();
-//                         var filename = val.split('/').pop()
-//                         if (filename) {
-//                             $label
-//                                 .addClass('file-ok')
-//                                 .css('background-image', 'url(' + val + ')');
-//                             $labelText.text('Click here to change pic');
-//                         } else {
-//                             $label.removeClass('file-ok');
-//                             $labelText.text(labelDefault);
-//                         }
-//                     }
-                    
-//                 } else {
-    
-//                     switch (input.type) {
-//                         case 'checkbox':
-//                             input.checked = !!val;
-//                             break;
-//                         case 'select-one':
-//                             if (val)
-//                                 input.value = val;
-//                             else
-//                                 input.selectedIndex = 0;
-    
-//                             break;
-//                         default:
-//                             input.value = val;
-//                             break;
-    
-//                     }
-    
-//                 }
-//             }
-    
-//         }
-//     }
-
-
-//////////////// username change event ////////////////
-// jQuery('#ph_no').change(function(){
-//     jQuery('#username').val(jQuery(this).val())
-// })
-// jQuery('#username').val(jQuery('#ph_no').val())
-
-
-//////// UPDATING PROFILE //////////
-// jQuery("#profile_form").submit((e)=>{
-//         e.preventDefault();
-//         e.stopImmediatePropagation();
-//         const data = new FormData(document.getElementById('profile_form'))
-//         console.log(data);
-//         jQuery.ajax({
-//         url: '/api/DoctorUpdateProfile',
-//         data: data,
-//         method: 'POST',
-//         contentType: false,
-//         processData: false,
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-//         },
-//     })
-//     .done((response)=>{
-//         console.log("postrequest response -", response);
-//         jQuery.removeCookie('DoctorToken');
-//         jQuery.cookie('DoctorToken', response.token, {expires: 1})
-//     })
-//     .fail((error)=>{
-//         console.log(error);
-//     })
-//     }) 
-
-
-// jQuery('#pills-profile-tab').click(()=>{
-    
-// })
-
-////////// PASSWORD CHANGE FEATURES //////////
-// jQuery('#password_form').submit((e)=>{
-//         e.preventDefault();
-//         e.stopImmediatePropagation();
-//         const data = new FormData(document.getElementById('password_form'))
-//        jQuery.ajax({
-//             url: '/api/changePassword',
-//             method: 'POST',
-//             data: data,
-//             contentType: false,
-//             processData: false,
-//             beforeSend: function (xhr) {
-//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-//            },
-//         }).done((response)=>{
-//             console.log(response);
-//             //jQuery.removeCookie('DoctorToken');
-//             //window.location.href = '/login';
-//         }).fail((error)=>{
-//            console.log('errors are ', error)
-//       })
-
-
-//     })
-
-///////////// Doctor Timings://///////////
-// function getDoctorTimings(){
-//     const form =document.getElementById('timingsForm');
-//     jQuery.ajax({
-//         url: '/api/DoctorTimings',
-//         method: 'GET',
-//         contendType: 'application/json',
-//         async: false,
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-//         },
-//     })
-//     .done((response)=>{
-//         console.log(response);
-//         console.log(form);
-//         if(response.length!=0){
-//             //formDeserialize(form, response[0]);
-//             for(var key in response[0]){
-//                 if(response[0][key] !== true){
-//                 console.log('')
-//                 let parent = jQuery("#" + key).parent()
-//                     parent.removeClass('switch-success');
-
-//                 }
-
-//             }
-            
-//         }
-//     })
-//     .fail((error)=>{
-//         console.log(error)
-//     })
-// }
-// getDoctorTimings();
-// jQuery('#timingsForm').submit((e)=>{
-//     e.preventDefault();
-//     e.stopImmediatePropagation();
-//     const data = new FormData(document.getElementById('timingsForm'))
-//     jQuery.ajax({
-//         url: '/api/DoctorTimings/',
-//         method: 'POST',
-//         data: data,
-//         contentType: false,
-//         processData: false,
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-//         },
-//     })
-//     .done((response)=>{
-//         console.log(response);
-//     })
-//     .fail((error)=>{
-//         console.log(error)
-//     })
-
-// })
-let consultation_list = [];
-let old_active_id = null;
-let chatData_list = [];
-let shoing_conversation_id = null;
-let doctor_name = '';
-let patient_name='';
-
-function showing_consultationList(){
-  jQuery.ajax({
-    url: '/api/getDoctorConsultations',
-    method: 'GET',
-    async: false,
-    contentType: 'application/json',
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-    },    
-  }).done((response)=>{
-
-    consultation_list = response;
-    let list = ''
-    for(var i=0; i < response.length; i++){
-      let data = response[i];
-      let li_is = `
-      <li id="doctor${data.id}" class="clearfix">
-        <img class="patient__image_style" src="${data.patient_pic}" alt="avatar" />
-          <div class="about">
-            <div class="name">${data.patient_name}</div>
-            <div class="status">
-               ${data.patient_gender}/${data.patient_age}
-            </div>
-          </div>
-        </li>
-      `;
-      list += li_is;
-    }
-    document.getElementById('patient__list').innerHTML = list;
-    let data = consultation_list[0]
-    consultationList(data.id)
-  }).fail((error)=>{console.log(error)})
-}
-
-showing_consultationList()
-
-
-jQuery('#patient__list').on('click', 'li', function(){
-        let id = jQuery(this).attr('id');
-        return consultationList(id.slice(6))
-    })
-
-
-
-function consultationList(id){
-        for(var i=0; i < consultation_list.length; i++){
-            if(consultation_list[i].id == id){
-                shoing_conversation_id = consultation_list[i].id;
-                getChatData(shoing_conversation_id);
-                jQuery('#conversation_doc').html(consultation_list[i].doctor_id.full_name);
-                doctor_name = consultation_list[i].doctor_id.full_name;
-                patient_name= consultation_list[i].patient_name;
-                jQuery('.chat-with').html(consultation_list[i].patient_name);
-                jQuery('.chat-header img').attr('src', consultation_list[i].patient_pic);
-                jQuery('.chat-num-messages').html(consultation_list[i].patient_gender + " " + consultation_list[i].patient_age);
-                //jQuery('#doctor'+id).addClass('clearfixs')
-                break;
-            }
-        }
-        let activate_class = '#doctor';
-
-        if(old_active_id == null){
-            old_active_id = id;
-        }
-        else{
-            jQuery(activate_class + old_active_id).removeClass('clearfixs');
-            old_active_id = id;
-        }
-        jQuery(activate_class + id).addClass('clearfixs');
-        
-
-    }
-
-function getChatData(consult_id){
-    const get_url = '/api/consultant_chats/?cons_id='+ consult_id;
-    jQuery.ajax({
-            'url': get_url,
-            'contentType': 'application/json',
-            'async': false,
-            'method': 'GET',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-            },
-        }).done((response)=>{
-            chatData_list= response;
-        })
-    
-    return showList();
-}
-
-function showList(){
-    let liLists = '';
-    for(var i=0; i < chatData_list.length; i++){
-        const data = chatData_list[i];
-        if(data.user == 'D'){
-            const li = `
-            <li class="clearfix">
-                    <div class="message-data align-right">
-                      <span class="message-data-time" >${data.message_date_time}</span> &nbsp; &nbsp;
-                      <span class="message-data-name" >${doctor_name}</span> <i class="fa fa-circle me"></i>
-                      
-                    </div>
-                    <div class="message other-message float-right">
-                      ${data.message}
-                    </div>
-                  </li>`;
-
-            liLists += li;
-        }
-        else{
-            const li = `
-            <li>
-                <div class="message-data">
-                  <span class="message-data-name"> ${patient_name}</span>
-                  <span class="message-data-time">${data.message_date_time}</span>
-                </div>
-                <div class="message my-message">
-                  ${data.message}
-                </div>
-              </li>
-                `;
-              liLists += li;
-        }
-        
-
-    }
-    jQuery('#chats').html(liLists);
-    if(old_active_id == null){
-        if(chatData_list.length !=0){
-
-            old_active_id = chatData_list[0].consultation_id;
-        }
-    }
-    else{
-        
-    }
-}
-setInterval(function(){ 
-    
-  getChatData(shoing_conversation_id); }, 1000); 
-
-
-
-
-function sendMessage(consult_id){
-    let data = {
-        user: 'D',
-        message: jQuery('#message-to-send').val(),
-        attachment: false,
-        //attachment_file:'file'
-        seen: false,
-        delivered: false,
-        consultation_id: consult_id
-    }
-    jQuery.ajax({
-        url: '/api/consultant_chats/',
-        data: JSON.stringify(data),
-        method: 'POST',
-        contentType: 'application/json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-        },
-    }).done((response)=>{
-        let message='success';
-    }).fail((err, error, wrong) => {
-        console.log(err)
-
-    })
-
-}
-
-
-jQuery('#sendButton').click(function(){
-        let values = jQuery('#message-to-send').val();
-        if(values.length >0){
-            sendMessage(old_active_id)
-        }
-        jQuery('#message-to-send').val('')
-    })
-</script> -->
 {% endblock %}
