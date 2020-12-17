@@ -1,4 +1,6 @@
 import asyncio
+import requests
+import json
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -81,25 +83,27 @@ class PatientResgistrationAPI(generics.GenericAPIView):
         })
 
     
-    async def send_mails(self, obj, password):
+    def send_mails(self, obj, password):
         mail_subject = 'Activate your account.'
-        message = render_to_string('email.html', {
+        messages = render_to_string('email.html', {
             'username': obj.full_name,
             'patient_id': obj.pat_id,
             'password': password
         })
-
-        msg = EmailMessage(
-            'Subject',
-            message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [obj.user.email],
-        )
-        msg.content_subtype = "html"  # Main content is now text/html
-        try:
-            await msg.send()
-        except:
-            pass
+        url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
+        
+        to_list=[{"email_id":obj.user.email,"name":obj.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":mail_subject,
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "to_recipients":to_list,
+        "reply_to": "bstejas@doctor-plus.in"
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
         return True
 
 
@@ -121,25 +125,29 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
             "token": AuthToken.objects.create(user)[1]
         })
 
-    async def send_mails(self, obj, password):
+    def send_mails(self, obj, password):
         mail_subject = 'Activate your account.'
-        message = render_to_string('email.html', {
+        messages = render_to_string('email.html', {
             'username': obj.full_name,
             'patient_id': obj.pat_id,
             'password': password
         })
 
-        msg = EmailMessage(
-            'Registration Confirmed – Doctor Plus',
-            message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [obj.user.email],
-        )
-        msg.content_subtype = "html"  # Main content is now text/html
-        try:
-            await msg.send()
-        except:
-            pass
+        url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
+        
+        to_list=[{"email_id":obj.user.email,"name":obj.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":mail_subject,
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "to_recipients":to_list,
+        "reply_to": "bstejas@doctor-plus.in"
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
+
         return True
 
 

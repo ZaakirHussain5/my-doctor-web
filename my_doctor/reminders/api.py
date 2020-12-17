@@ -37,3 +37,12 @@ class remindersList(mixins.ListModelMixin):
         if selected_data is not None:
             # queryset = queryset.filter
             pass
+
+class myreminders(viewsets.ModelViewSet):
+    permissions = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = RemindersSerializer
+
+    def get_queryset(self):
+        return Reminders.objects.filter(reminder_owner=self.request.user)

@@ -78,9 +78,23 @@
                     <div class="language-select dropdown" id="language-select">
                         <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
                             aria-expanded="true">
-                            <i class="fa fa-bell"></i>
+                            <i class="fa fa-bell"></i><span class="badge badge-light">0</span>
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            
+                        </div>
+
                     </div>
+                    <!-- <div class=" show" style="display: inline;">
+                        <a class="btn btn-sm btn-primary " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reminder<span class="badge badge-light">0</span>
+                        </a>
+                        
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            
+                        </div>
+                    </div> -->
+
                     <div class="language-select dropdown" id="language-select">
                         <button class="btn btn-default btn-sm" id="btnLogout">
                             <i class="fa fa-sign-out"></i><span>Logout</span>
@@ -194,7 +208,6 @@
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },
             }).done((response) => {
-                console.log(response)
                 var list = response;
                 var x = document.getElementById("myAudio");
                 if (list && list.length > 0) {
@@ -253,6 +266,7 @@
 
         setInterval(function () {
             checkForCall();
+            myreminders();
         }, 2000); 
         
         setTimeout(function () {
@@ -268,7 +282,6 @@
                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
             },
         }).done((response) => {
-            console.log(response)
             jQuery('#doctorName').html(response.full_name)
             jQuery('#doctorSpecialist').html(response.specialist_type)
             jQuery('#profileImage').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
@@ -293,6 +306,28 @@
                 }
             })
         })
+    
+        function myreminders(){
+            jQuery.ajax({
+            url: '/api/myreminders',
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+            },
+        }).done((response) => {
+            jQuery('.badge').html(response.length);
+            let lis = '';
+            for(let i =0; i < response.length; i++){
+                lis += `<li class="p-2 m-1">${response[i]['reminder_message']}</li>`;
+            }
+            jQuery('.dropdown-menu').html(lis)
+        }).fail((error) => {
+            console.log(error);
+        });
+        }
+    
     </script>
 </body>
 <!-- Sidebar -->

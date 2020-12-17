@@ -10,6 +10,10 @@ from promo_codes.models import promo_code, AppliedPromoCode
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
+import requests
+import json
+
+url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
 
 
 def today_total_appointment():
@@ -48,46 +52,48 @@ class appointmentViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = appointmentSerializer
 
-    async def send_mails(self, obj):
+    def send_mails(self, obj):
+        url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
         patient = patient_info.objects.get(user= obj.patient)
-        mail_subject = 'New Appointment.'
-        message = render_to_string('emails/newAppointmentspatient.html', {
+        messages = render_to_string('emails/newAppointmentspatient.html', {
             'full_name': patient.full_name,
             'doctor': obj.doctor.full_name,
             "date": obj.appointment_date,
             "time": obj.appointment_time,
             'patient': patient.full_name
         })
-
-        msg = EmailMessage(
-            mail_subject,
-            message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [patient.user.email],
-        )
-        msg.content_subtype = "html"  # Main content is now text/html
-        try:
-            await msg.send()
-        except:
-            pass
+        to_list=[{"email_id":patient.user.email,"name":patient.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":"New Appointment",
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "to_recipients":to_list,
+        "reply_to": "bstejas@doctor-plus.in"
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
+        
         Doctor_message = render_to_string('emails/newAppointmentDoctor.html', {
             'full_name': obj.doctor.full_name,
             "date": obj.appointment_date,
             "time": obj.appointment_time,
             'patient': patient.full_name
         })
-        doct_msg = EmailMessage(
-            mail_subject,
-            Doctor_message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [obj.doctor.user.email],
-        )
-        doct_msg.content_subtype = 'html'
-        try:
-
-            doct_msg.send()
-        except:
-            pass
+        to_list=[{"email_id":obj.doctor.user.email,"name":obj.doctor.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":"New Appointment",
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "reply_to": "bstejas@doctor-plus.in",
+        "to_recipients":to_list
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
+        
         return True
 
     def get_queryset(self):
