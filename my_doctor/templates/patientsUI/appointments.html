@@ -257,6 +257,22 @@
         //                     APPOINTMENT CANCLE FORM SUBMIT //
         let appp_id = 0;
         let app_data = '';
+         $('#upcoming').on('click', '.showpres', function () {
+             let button = $(this)
+             let c_id = button.attr('data-const')
+             $.ajax({
+                 url:'/api/getPrescriptionByConsultation?cons_id='+c_id,
+                 method:'GET',
+                 success:function(response){
+                     if(response.pres_avl){
+                         window.location.href = response.prescription_file
+                     }else{
+                         toastr.warning('',"Prescription not Yet Updated",{positionClass:"toast-top-center"});
+                     }
+                 }
+             })
+         })
+
         $('#upcoming').on('click', '.edit-app', function () {
             appp_id = $(this).attr('data-id')
             let doctor = JSON.parse($(this).attr('data-doct'))
