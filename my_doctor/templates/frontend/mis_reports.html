@@ -258,7 +258,7 @@
                 {
                     data : 'id',
                     render: function (data, type, row) {
-                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row)}' data-toggle="modal" data-target="#patientDetails">
+                        return `<button type="button" class="btn btn-primary btn-sm" data-doct='${JSON.stringify(row).replace(/'/,"/'")}' data-toggle="modal" data-target="#patientDetails">
                             Details
                                 </button>`
                     }

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from specialist_type.models import specialist_type
+from consultations.models import consultations as consultationTable
 
 def dashboard(request):
     return render(request,'patientsUI/dashboard.html')
@@ -39,3 +40,12 @@ def medical_records(request):
 
 def plan(request):
     return render(request,'patientsUI/plan.html')
+
+def invoice(request):
+    const_id = request.GET.get('id', None)
+    consultationInstance = consultationTable.objects.get(id=const_id)
+    context = {
+        "consultation" : consultationInstance 
+    }
+    context['tax']= (consultationInstance.comp_share * 18) / 100
+    return render(request,'patientsUI/invoice.html', context)

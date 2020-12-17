@@ -53,3 +53,4 @@ class consultations(models.Model):
         if not doctor_payments.objects.filter(doctor = self.doctor_id):
             doctor_payments.objects.create(doctor = self.doctor_id)
         super().save(*args, **kwargs)
+        

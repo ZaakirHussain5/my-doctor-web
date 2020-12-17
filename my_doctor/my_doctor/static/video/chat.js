@@ -120,6 +120,7 @@ let messageInterval = setInterval(function(){
 let totalMessage = 0
 function serializedMessage(arrOfMessage){
     let lis = '';
+    var messagesContainer = $('.messages');
     console.log(totalMessage, arrOfMessage.length)
     let subarry = arrOfMessage.slice(totalMessage, arrOfMessage.length);
     console.log(subarry)

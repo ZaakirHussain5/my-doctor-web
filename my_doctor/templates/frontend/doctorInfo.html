@@ -11,7 +11,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-10">
                     <div class="col-md-6">
                         <div class="row form-group">
                             <div class="col col-md-4"><label for="id" class="form-control-label float-right">ID</label>
@@ -39,7 +39,13 @@
                                         class="form-control">
                                 </div>
                             </div>
-
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="email" class=" form-control-label float-right">EMAIL
+                                        </label>
+                                </div>
+                                <div class="col-12 col-md-8"><input type="email" id="email" name="email"
+                                        placeholder="Email Address" class="form-control"></div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="row form-group">
@@ -50,25 +56,31 @@
                                         class="form-control" readonly="readonly">
                                 </div>
                             </div>
-
                             <div class="row form-group">
-                                <div class="col col-md-4"><label for="email" class=" form-control-label float-right">EMAIL
+                                <div class="col col-md-4"><label for="email" class=" form-control-label float-right">MEDICAL ID
                                         </label>
                                 </div>
-                                <div class="col-12 col-md-8"><input type="email" id="email" name="email"
-                                        placeholder="Email Address" class="form-control"></div>
+                                <div class="col-12 col-md-8"><input type="text" id="dropdown-menu" name="Registration_Number"
+                                        placeholder="Medical ID" class="form-control"></div>
                             </div>
+                            
 
                             <div class="row form-group">
                                 <div class="col col-md-4"><label for="email" class=" form-control-label float-right">FEES
                                         </label>
                                 </div>
                                 <div class="col-12 col-md-8"><input type="text" id="Confees" name="consultation_fee"
-                                        placeholder="Email Address" class="form-control"></div>
+                                        placeholder="Consultation Fee" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="email" class=" form-control-label float-right">COMMISSION
+                                        </label>
+                                </div>
+                                <div class="col-12 col-md-8"><input type="text" id="Confees" name="commission_val"
+                                        placeholder="Consultation Fee" class="form-control"></div>
                             </div>
                         </div>
-                        
-                    <input type="hidden" name="Registration_Number">
                     
                     <div class="row form-group">
                         <div class="col-12 col-md-8 offset-md-4">
@@ -124,17 +136,15 @@
                         <div class="col-md-10 offset-md-1">
                             <form id="ConsultationFeeForm">
                                     <div class="row form-group">
-                                        <div class="col col-md-5"><label for="old_password" class="form-control-label float-right">
-                                                Current Consultation Fee</label></div>
-                                        <div class="col-12 col-md-7">
-                                            <input type="number" id="consultation_fee" name="consultation_fee" placeholder="Current Cunsultation Fee"
-                                                class="form-control" value="500.00">
+                                        <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
+                                                New Consultation Fee</label></div>
+                                        <div class="col-12 col-md-7"><input type="number"  id="new_fee" name="new_fees" placeholder="Enter New Cunsultation Fee" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-5"><label for="new_password" class=" form-control-label float-right">
-                                                New Consultation Fee</label></div>
-                                        <div class="col-12 col-md-7"><input type="number"  id="new_fee" name="new_fees" placeholder="Enter New Cunsultation Fee" class="form-control">
+                                                New Commission</label></div>
+                                        <div class="col-12 col-md-7"><input type="number"  id="new_commission" name="new_commission" placeholder="Enter New Commission Amount" class="form-control">
                                         </div>
                                     </div>
                                 <div class="row form-group">
@@ -423,6 +433,7 @@
             formDeserialize(form,response[0])
             jQuery('#moufiles').attr('href',response[0].mou_file)
             jQuery('#consultation_fee').val(response[0]['consultation_fee'])
+                 
         }).fail((error) => {
             console.log(error);
         });

@@ -13,6 +13,7 @@ class patient_medical_records(models.Model):
     Last_modied = models.DateTimeField(auto_now=True)
     is_prescription =models.BooleanField(default=False)
     doctor = models.ForeignKey(doctors_info,on_delete=models.SET_NULL,null=True)
+    consultation_id=models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.patient)

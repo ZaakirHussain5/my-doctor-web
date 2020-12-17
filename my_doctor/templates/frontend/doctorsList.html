@@ -99,7 +99,17 @@
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <input type="text" id="consultation_fee" name="consultation_fee"
-                                        placeholder="Fee" class="form-control">
+                                        placeholder="Fee" class="form-control" required="" min=1>
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label for="consultation_fee"
+                                        class=" form-control-label float-right">Commission Amount</label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="consultation_fee" name="commission_val"
+                                        placeholder="Commission Amount" class="form-control" required="" min=1>
 
                                 </div>
                             </div>
@@ -109,7 +119,7 @@
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <input type="text" id="specialist_type" name="specialist_type"
-                                        placeholder="Specialist Type" class="form-control">
+                                        placeholder="Specialist Type" class="form-control" readonly="readonly">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -210,7 +220,7 @@
 
             $(this).find('img').attr('src', myVal.profile_pic);
 
-            let valList = ['', myVal.user.username, myVal.full_name,myVal.Registration_Number,myVal.user.email, myVal.phone_number, myVal.consultation_fee, myVal.specialist_type]
+            let valList = ['', myVal.user.username, myVal.full_name,myVal.Registration_Number,myVal.user.email, myVal.phone_number, myVal.consultation_fee,myVal.commission_val, myVal.specialist_type]
             console.log(valList)
             let inputList = $(this).find('input');
             for (var i = 0; i < inputList.length; i++) {

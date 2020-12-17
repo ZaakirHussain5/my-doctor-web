@@ -503,6 +503,7 @@ class changeFeeByAdmin(APIView):
         doctor_id = request.POST.get('doctor_id')
         doctor = doctors_info.objects.get(id=doctor_id)
         doctor.consultation_fee = request.data['new_fees']
+        doctor.commission_val = request.data['new_commission']
         doctor.save()
         print(doctor)
         serializer = doctors_listSerializer(doctor)

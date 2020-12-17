@@ -12,4 +12,5 @@ urlpatterns = [
     path('billHistory',views.billHistory,name='billHistory'),
     path('medical-records',views.medical_records,name='medicalRecords'),
     path('plan',views.plan,name='plan'),
+    path('invoice',views.invoice,name='invoice'),
 ]
