@@ -5,6 +5,7 @@ from .api import ( getAllPrescriptions, PatientMedicalRecordView,PatientPrescrip
         DoctorPrescriptionAPI, DoctorPrescriptionAPIDelete, PatientRecordAPI,  
 
 )
+from . import views
 
 router = routers.DefaultRouter()
 router.register('patient-medical-records', PatientMedicalRecordView , 'patient-medical-records')
@@ -17,4 +18,5 @@ router.register('PatientRecordAPI', PatientRecordAPI , 'PatientRecordAPI')
 
 urlpatterns = [
     path('',include(router.urls)),
+    path('getPrescriptionByConsultation',views.get_pres_by_consultation,name="getPresByCons")
 ]

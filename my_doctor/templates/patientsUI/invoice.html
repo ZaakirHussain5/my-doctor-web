@@ -24,8 +24,9 @@
         </div>
             
         <div class="card">
+            <h5 class="text-center">INVOICE</h5>
       <div class="card-header">
-      Invoice :
+      
       <strong>#{{ consultation.inv_number }}</strong> 
         <span class="float-right"> <strong>{{consultation.consultation_date_time}}</strong>  </span>
       
@@ -71,7 +72,7 @@
       <tbody>
       <tr>
       <td class="center">1</td>
-      <td class="left">Appointment With {{consultation.doctor_id.full_name}} {{consultation.doctor_id.specialist_type}} on {{consultation.consultation_date_time}} </td>
+      <td class="left">Consultation With {{consultation.doctor_id.full_name}} {{consultation.doctor_id.specialist_type}} on {{consultation.consultation_date_time}} </td>
       <td class="text-right"><i class="fa fa-inr"></i>{{ consultation.consultation_amt}} </td>
       </tr>
       </tbody>
