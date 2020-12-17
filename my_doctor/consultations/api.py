@@ -40,7 +40,7 @@ def range_of_collected_comission(from_date, to_date):
 
 class consultationsViewSet(viewsets.ModelViewSet):
     permissions = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = consultationsSerializer
 

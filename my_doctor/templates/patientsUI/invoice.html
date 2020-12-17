@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Plus Invoice</title>
+    <link rel="stylesheet" href="{% static 'patients/assets/vendors/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+<style>
+    @media print{
+        .print-header{
+            visibility: hidden;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="card print-header">
+            <div class="card-body">
+                <button class="btn btn-primary float-right " onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+            </div>
+        </div>
+            
+        <div class="card">
+      <div class="card-header">
+      Invoice :
+      <strong>#DPINV20201</strong> 
+        <span class="float-right"> <strong>Date:</strong> <span>01/01/2018</span> </span>
+      
+      </div>
+      <div class="card-body">
+      <div class="row mb-4">
+      <div class="col-sm-4">
+      <h6 class="mb-3">From:</h6>
+      <div>
+      <strong>Doctor Plus</strong>
+      </div>
+      <div>No:1, Subbiaha Reddy block, Metro</div>
+      <div>Station, Ulsoor, Bangalore - 560038</div>
+      <div>Email: support@doctor-plus.in</div>
+      <div>Phone: 080-4554 9495</div>
+      </div>
+      
+      <div class="col-sm-4">
+      <h6 class="mb-3">To:</h6>
+      <div>
+      <strong>Zaakir Hussain</strong>
+      </div>
+      <div>Email: zaakir338@gmail.com</div>
+      <div>Phone: +91 9845725232</div>
+      </div>
+      <div class="col-sm-4">
+        <img src="{% static 'website/img/logo.png' %}" class="float-right" alt=""
+        id="logoImage">
+      </div>
+      
+      
+      </div>
+      
+      <div class="table-responsive-sm mt-5">
+      <table class="table table-striped">
+      <thead>
+      <tr>
+      <th class="center">#</th>
+      <th>Description</th>
+      <th class="text-right">Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td class="center">1</td>
+      <td class="left">Appointment With Dr. Kabir Psychologist </td>
+      <td class="text-right"><i class="fa fa-inr"></i>249.00</td>
+      </tr>
+      </tbody>
+      </table>
+      </div>
+      <div class="row">
+      <div class="col-lg-4 col-sm-5">
+      
+      </div>
+      
+      <div class="col-lg-4 col-sm-5 ml-auto">
+      <table class="table table-clear">
+      <tbody>
+      <tr>
+      <td class="left">
+      <strong>Subtotal</strong>
+      </td>
+      <td class="text-right"><i class="fa fa-inr"></i>249.00</td>
+      </tr>
+      <tr>
+      <td class="left">
+       <strong>GST (18%)</strong>
+      </td>
+      <td class="text-right"><i class="fa fa-inr"></i>9.00</td>
+      </tr>
+      <tr>
+      <td class="left">
+      <strong>Total</strong>
+      </td>
+      <td class="text-right">
+      <strong><i class="fa fa-inr"></i>249.00</strong>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+      </div>
+      </div>
+</body>
+</html>

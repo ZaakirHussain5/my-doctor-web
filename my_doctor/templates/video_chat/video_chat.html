@@ -681,7 +681,7 @@
                     }).fail((response) => {
                         console.log(response)
                     })
-                    window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}`;
+                    window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
                 }
                 else {
                     $.ajax({

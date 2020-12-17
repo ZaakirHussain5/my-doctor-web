@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 app_name = 'frontend'
 
 urlpatterns=[
-    path('adminlogin',views.loginView,name='login'), #<str:type>
+    path('adminlogin',views.loginView,name='loginAdmin'), #<str:type>
     path('admin/',views.dashboard,name='adminDashboard'),
     path('specialists',views.specialists,name='specialists'),
     path('AddNewDoctor',views.Doctors,name='Doctors'),
@@ -36,6 +36,7 @@ urlpatterns=[
     path('appointments',views.appointments,name="appointments"),
     path('patientDetails/<id>', views.patients_details, name="patient_details"),
     path('getSnapshots', snap_shots, name="getSnapshots"),
-    path('promo_code', views.promo_code, name="promoCode")
+    path('promo_code', views.promo_code, name="promoCode"),
+    path('logout-stuff/', views.loutoutView, name="logoutStuffs")
     
 ]

@@ -73,8 +73,8 @@ class UpdateProfile(serializers.Serializer):
     email = serializers.CharField()
     full_name = serializers.CharField()
     phone_number = serializers.CharField(max_length=15)
-    commission_val=serializers.DecimalField(max_digits=10,decimal_places=2,default=2)
-    commission_type=serializers.CharField(max_length=15,default='Percent')
+    commission_val=serializers.DecimalField(max_digits=10,decimal_places=2,default=59)
+    commission_type=serializers.CharField(max_length=15,default='Amount')
     Registration_Number = serializers.CharField(max_length=25)
     specialist_type = serializers.CharField(max_length=25)
     consultation_fee = serializers.DecimalField(max_digits=10,decimal_places=2,default=0)
@@ -136,7 +136,7 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
               specialist_type=validated_data['specialist_type'],
               full_name=validated_data['full_name'],
               web_registration=validated_data['web_registration'],
-              Registration_Number=validated_data['Registration_Number']
+              Registration_Number=validated_data['Registration_Number'],
           )
           details.save()
           return user

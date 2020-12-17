@@ -39,3 +39,6 @@ def medical_records(request):
 
 def plan(request):
     return render(request,'patientsUI/plan.html')
+
+def invoice(request):
+    return render(request,'patientsUI/invoice.html')
