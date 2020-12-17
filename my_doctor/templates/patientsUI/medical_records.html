@@ -236,18 +236,25 @@
             </li>`
             ;
             console.log(response)
-            response.map(index => lis += `<li>
+            response.map(index => lis += `
+            <li>
                 <div class="calllist">
                     <div class="calllist__details">
-                        <div class="calllist__details--name">${index.description}</div>
-                        
+                        <div class="calllist__details--name">${index.record_type}</div>
+                            <div class="calllist__details--info">
+                                <span>
+                                    Dr. ${index.doctor.full_name}
+                                    <br>
+                                    <text class="text-success">${index.doctor.specialist_type}</text>
+                                    <br>
+                                    ${new Date(index.Last_modied).toDateString()}
+                                </span>
+                            </div>
                     </div>
-
                     <div class="calllist__actions">
                         <div class="iconbox btn-hovered-light">
                             <a href="${index.record_files}" target="_blank" ><i class="iconbox__icon mdi mdi-file text-primary"></i></a>
                         </div>
-                        
                     </div>
                 </div>
             </li>`)

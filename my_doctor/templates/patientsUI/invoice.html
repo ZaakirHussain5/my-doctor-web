@@ -26,8 +26,8 @@
         <div class="card">
       <div class="card-header">
       Invoice :
-      <strong>#DPINV20201</strong> 
-        <span class="float-right"> <strong>Date:</strong> <span>01/01/2018</span> </span>
+      <strong>#{{ consultation.inv_number }}</strong> 
+        <span class="float-right"> <strong>{{consultation.consultation_date_time}}</strong>  </span>
       
       </div>
       <div class="card-body">
@@ -46,10 +46,10 @@
       <div class="col-sm-4">
       <h6 class="mb-3">To:</h6>
       <div>
-      <strong>Zaakir Hussain</strong>
+      <strong>{{ consultation.doctor_id.full_name }}</strong>
       </div>
-      <div>Email: zaakir338@gmail.com</div>
-      <div>Phone: +91 9845725232</div>
+      <div>Email: {{ consultation.doctor_id.user.email }}</div>
+      <div>Phone: +91 {{ consultation.doctor_id.phone_number }}</div>
       </div>
       <div class="col-sm-4">
         <img src="{% static 'website/img/logo.png' %}" class="float-right" alt=""
@@ -71,8 +71,8 @@
       <tbody>
       <tr>
       <td class="center">1</td>
-      <td class="left">Appointment With Dr. Kabir Psychologist </td>
-      <td class="text-right"><i class="fa fa-inr"></i>249.00</td>
+      <td class="left">Appointment With {{consultation.doctor_id.full_name}} {{consultation.doctor_id.specialist_type}} on {{consultation.consultation_date_time}} </td>
+      <td class="text-right"><i class="fa fa-inr"></i>{{ consultation.consultation_amt}} </td>
       </tr>
       </tbody>
       </table>
@@ -89,20 +89,20 @@
       <td class="left">
       <strong>Subtotal</strong>
       </td>
-      <td class="text-right"><i class="fa fa-inr"></i>249.00</td>
+      <td class="text-right"><i class="fa fa-inr"></i>{{ consultation.consultation_amt}}</td>
       </tr>
       <tr>
       <td class="left">
-       <strong>GST (18%)</strong>
+       <strong>GST Incl.(18%)</strong>
       </td>
-      <td class="text-right"><i class="fa fa-inr"></i>9.00</td>
+      <td class="text-right"><i class="fa fa-inr"></i>{{tax}}</td>
       </tr>
       <tr>
       <td class="left">
       <strong>Total</strong>
       </td>
       <td class="text-right">
-      <strong><i class="fa fa-inr"></i>249.00</strong>
+      <strong><i class="fa fa-inr"></i>{{ consultation.consultation_amt}}</strong>
       </td>
       </tr>
       </tbody>

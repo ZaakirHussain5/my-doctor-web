@@ -1,5 +1,6 @@
 import datetime
 import requests
+import json
 from appointment.models import appointment
 from patients.models import patient_info
 from django.core.mail import EmailMessage
@@ -7,6 +8,9 @@ from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
 from reminders.models import Reminders
 import asyncio
+
+
+url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
 
 def send_todays_message():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
@@ -30,44 +34,76 @@ def send_todays_message():
 # SEND MESSAGES AT 10mins, 5 mins, 15mins
 # ADD INSTANCE OF REMINDER MODEL
 
-async def send_mails(obj):
+def send_mails(obj):
     patient = patient_info.objects.get(user=obj.patient)
-    mail_subject = 'New Appointment.'
-    message = render_to_string('emails/reminder1.html', {
+    mail_subject = 'Reminder Appointment.'
+    messages = render_to_string('emails/reminder1.html', {
         'full_name': patient.full_name,
         'doctor': obj.doctor.full_name,
         "date": obj.appointment_date,
         "time": obj.appointment_time,
     })
-
-    msg = EmailMessage(
-        mail_subject,
-        message,
-        'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-        [patient.user.email],
-    )
-    msg.content_subtype = "html"  # Main content is now text/html
-    await msg.send()
+    
+    to_list=[{"email_id":patient.user.email,"name":patient.full_name}]
+    message = {
+    "html_content": messages,
+    "subject":mail_subject,
+    "from_mail":"bstejas@doctor-plus.in",
+    "from_name":"doctor Plus",
+    "reply_to":"bstejas@doctor-plus.in",
+    "to_recipients":to_list
+    }
+    payload = {"message" :message}
+    single_content = {"mail_datas":payload}
+    reqdata = requests.post(url, data=json.dumps(single_content), headers={'Content-Type': 'application/json'})
+    doct_messages = render_to_string('emails/reminder1.html', {
+        'full_name': obj.doctor.full_name,
+        'doctor':  patient.full_name,
+        "date": obj.appointment_date,
+        "time": obj.appointment_time,
+    })
+    to_list=[{"email_id":obj.doctor.user.email,"name":obj.doctor.full_name}]
+    message["html_content"] = doct_messages
+    messages["to_recipients"] = to_list
+    payload = {"message" :message}
+    single_content = {"mail_datas":payload}
+    reqdata = requests.post(url, data=json.dumps(single_content), headers={'Content-Type': 'application/json'})
 
     return True
 
 
-async def reminder_min(obj):
+async def reminder_min(obj, min):
     patient = patient_info.objects.get(user=obj.patient)
-    mail_subject = 'New Appointment.'
-    message = render_to_string('emails/reminder2.html', {
+    mail_subject = 'Appointment Reminder on Doctor Plus'
+    messages = render_to_string('emails/reminder2.html', {
         'full_name': patient.full_name,
-        "doctor": obj.doctor.full_name
+        "doctor": obj.doctor.full_name,
+        "min": min
     })
+    to_list=[{"email_id":patient.user.email,"name":patient.full_name}]
+    message = {
+    "html_content": messages,
+    "subject":mail_subject,
+    "from_mail":"bstejas@doctor-plus.in",
+    "from_name":"doctor Plus",
+    "reply_to":"bstejas@doctor-plus.in",
+    "to_recipients":to_list
+    }
+    payload = {"message" :message}
+    single_content = {"mail_datas":payload}
+    reqdata = requests.post(url, data=json.dumps(single_content), headers={'Content-Type': 'application/json'})
 
-    msg = EmailMessage(
-        mail_subject,
-        message,
-        'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-        [patient.user.email],
-    )
-    msg.content_subtype = "html"  # Main content is now text/html
-    await msg.send()
+    doct_message = render_to_string('emails/reminder2.html', {
+        'full_name': obj.doctor.full_name,
+        "doctor": patient.full_name,
+        "min": min
+    })
+    to_list=[{"email_id":obj.doctor.user.email,"name":obj.doctor.full_name}]
+    message["html_content"] = messages
+    messages["to_recipients"] = to_list
+    payload = {"message" :message}
+    single_content = {"mail_datas":payload}
+    reqdata = requests.post(url, data=json.dumps(single_content), headers={'Content-Type': 'application/json'})
 
     return True
 
@@ -99,7 +135,7 @@ def send_message_before_15mins():
                 requests.get(url)
                 doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
                 requests.get(doct_url)
-                reminder_min(appointments)
+                reminder_min(appointments, 15)
 
 def send_message_before_10mins():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
@@ -128,7 +164,7 @@ def send_message_before_10mins():
                 requests.get(url)
                 doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
                 requests.get(doct_url)
-                reminder_min(appointments)
+                reminder_min(appointments, 10)
 
 def send_message_before_5mins():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
@@ -159,7 +195,7 @@ def send_message_before_5mins():
                 requests.get(url)
                 doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
                 requests.get(doct_url)
-                reminder_min(appointments)
+                reminder_min(appointments, 5)
 
 
 

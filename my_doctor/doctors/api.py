@@ -1,4 +1,6 @@
 import datetime 
+import requests
+import json
 import asyncio
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.mixins import UpdateModelMixin
@@ -47,25 +49,28 @@ class DoctorRegisterAPI(generics.GenericAPIView):
     def get_queryset(self):
         return doctors_info.objects.all()
 
-    async def send_mails(self, obj, password):
+    def send_mails(self, obj, password):
+        url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
+
         mail_subject = 'Activate your account.'
-        message = render_to_string('emails/doctorRegistrationEmail.html', {
+        messages = render_to_string('emails/doctorRegistrationEmail.html', {
             'full_name': obj.full_name,
             'username': obj.user.username,
             "password": password
         })
+        to_list=[{"email_id":obj.user.email,"name":obj.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":mail_subject,
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "to_recipients":to_list,
+        "reply_to": "bstejas@doctor-plus.in"
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
 
-        msg = EmailMessage(
-            'Subject',
-            message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [obj.user.email],
-        )
-        msg.content_subtype = "html"  # Main content is now text/html
-        try:
-            await msg.send()
-        except:
-            pass
         return True
 
     def post(self, request, *args, **kwargs):
@@ -298,24 +303,26 @@ class DoctorLogout(generics.GenericAPIView):
 class NewDoctorRegistration(generics.GenericAPIView):
     serializer_class = WebNewDoctorRegistrationSerializer
 
-    async def send_mails(self, obj):
+    def send_mails(self, obj):
         mail_subject = 'Activate your account.'
-        message = render_to_string('emails/doctorRegistrationEmail.html', {
+        messages = render_to_string('emails/doctorRegistrationEmail.html', {
             'username': obj.full_name,
             
         })
-
-        msg = EmailMessage(
-            'Subject',
-            message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [obj.user.email],
-        )
-        msg.content_subtype = "html"  # Main content is now text/html
-        try:
-            await msg.send()
-        except:
-            pass
+        url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
+        
+        to_list=[{"email_id":obj.user.email,"name":obj.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":mail_subject,
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "to_recipients":to_list,
+        "reply_to": "bstejas@doctor-plus.in"
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
         return True
 
     def post(self, request, *args, **kwargs):
@@ -388,24 +395,27 @@ class doctorRegistrationAdmin(generics.GenericAPIView):
         permissions.AllowAny
     ]
 
-    async def send_mails(self, obj):
+    def send_mails(self, obj):
         mail_subject = 'Activate your account.'
-        message = render_to_string('emails/pendingDoctorAcception.html', {
+        messages = render_to_string('emails/pendingDoctorAcception.html', {
             'full_name': obj.full_name,
             'username': obj.user.username
         })
 
-        msg = EmailMessage(
-            'Subject',
-            message,
-            'Doctor Plus <'+ EMAIL_HOST_USER + '>',
-            [obj.user.email],
-        )
-        msg.content_subtype = "html"  # Main content is now text/html
-        try:
-            await msg.send()
-        except:
-            pass
+        url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-93ab-3d7f950c92e2/1009/"
+        
+        to_list=[{"email_id":obj.user.email,"name":obj.full_name}]
+        message = {
+        "html_content": messages,
+        "subject":mail_subject,
+        "from_mail":"bstejas@doctor-plus.in",
+        "from_name":"doctor Plus",
+        "to_recipients":to_list,
+        "reply_to": "bstejas@doctor-plus.in"
+        }
+        payload = {"message" :message}
+        single_content = {"mail_datas":payload}
+        reqdata = requests.post(url, data=json.dumps(single_content))
         return True
 
 

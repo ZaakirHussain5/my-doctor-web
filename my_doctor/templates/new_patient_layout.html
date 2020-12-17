@@ -69,14 +69,30 @@
                                     aria-haspopup="true" aria-expanded="false">
                                     <div class="pb-1 pt-3">
                                      <h5 id='conversation_doc' class="conversation__name--title mt-1 text-right text-primary"></h5> 
-                                     <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;">
-                                        Reminder <!-- <span class="badge badge-light">9</span> --></p>
-                                   <p data-toggle="modal" data-target="#settingsModalCenter" class=" btn btn-sm btn-primary ml-1" style="cursor: pointer;">
-                                       Profile</p>
-                                   <p class=" btn btn-sm btn-primary ml-1" id="btnLogout" style="cursor: pointer;">
-                                      Logout
-                                       <!-- <i class="mdi mdi-logout"></i> -->
-                                   </p>
+                                     <!-- <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  style="cursor: pointer;">
+                                        Reminder <span class="badge badge-light">0</span></p>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            </div>
+                                          </div>
+                                           -->
+                                        <div class=" show" style="display: inline;">
+                                            <a class="btn btn-sm btn-primary " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Reminder<span class="badge badge-light">0</span>
+                                            </a>
+                                            
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                
+                                            </div>
+                                        </div>
+                                        <p data-toggle="modal" data-target="#settingsModalCenter" class=" btn btn-sm btn-primary ml-1 mt-3" style="cursor: pointer;">
+                                            Profile</p>
+
+                                        <p class=" btn btn-sm btn-primary ml-1 mt-3" id="btnLogout" style="cursor: pointer;">
+                                            Logout
+                                            <!-- <i class="mdi mdi-logout"></i> -->
+                                        </p>
                                     </div>
                                 </div> 
                                 
@@ -562,8 +578,33 @@
             })
         })
 
+
+        function myreminders(){
+            jQuery.ajax({
+            url: '/api/myreminders',
+            method: 'GET',
+            contentType: 'application/json',
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+            },
+        }).done((response) => {
+            // console.log('reminder response ===', response)
+            jQuery('.badge').html(response.length);
+            let lis = '';
+            for(let i =0; i < response.length; i++){
+                lis += `<li class="p-2 m-1">${response[i]['reminder_message']}</li>`;
+            }
+            jQuery('.dropdown-menu').html(lis)
+        
+        }).fail((error) => {
+            console.log(error);
+        });
+        }
+
         setInterval(function () {
             checkForCall();
+            myreminders()
         }, 2000);
 
         setTimeout(function () {
