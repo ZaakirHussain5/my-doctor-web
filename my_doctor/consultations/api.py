@@ -7,6 +7,7 @@ from appointment.models import appointment as appointmentTable
 from django.db.models import Sum
 from datetime import date as dates
 from vedio_chat.models import VedioChat
+from reminders.models import Reminders
 
 
 def getDateFormat(date_time):
@@ -48,6 +49,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
+    
         doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
         appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
         appointment.consultation_status="Completed"
@@ -59,6 +61,11 @@ class consultationsViewSet(viewsets.ModelViewSet):
             share_val = cons_fee * (share_val/100)
         
         instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+        try:
+            Reminders.objects.filter(appointment_id=instance.id).delete()
+        except Reminders.DoesNotExist: 
+            pass
+        
         vedioChatInstance = VedioChat.objects.get(id=self.request.data['session'])
         vedioChatInstance.consult_id=instance.id
         vedioChatInstance.save()
@@ -96,7 +103,7 @@ class getPatientConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = getAllConsultationsSerializer
 
     def get_queryset(self):
-         return self.request.user.consultations.all()
+         return self.request.user.consultations.all().order_by('-id')
 
 class getDoctorConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     
@@ -118,3 +125,15 @@ class specific_patient_consultations(viewsets.ModelViewSet):
     def get_queryset(self):
         pat_id = self.request.query_params.get('pat_id')
         return consultations.objects.filter(patient= patient_info.objects.get(id=pat_id).user)
+
+
+class consult_info_for_doct(viewsets.ModelViewSet):
+    permissions = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = consultationsSerializer
+
+    def get_queryset(self):
+        session_id = self.request.query_params.get('sessions')
+        vedio_chat  = VedioChat.objects.get(id=session_id)
+        return consultations.objects.filter(id=vedio_chat.consult_id)

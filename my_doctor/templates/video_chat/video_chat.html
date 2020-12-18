@@ -556,7 +556,7 @@
             </div>
         </div>
     </div>
-
+    <button id="end">End button</button>
     <script
         src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
@@ -575,7 +575,6 @@
             $('#toggleLocalAudio').data('tooltip', 'turn off microphone')
             $('#toggleLocalVideo').data('tooltip', 'turn off camera')
             let doctor_ratings = Math.round("{{doctor.rating}}");
-            console.log('Doctor ratings ', doctor_ratings)
             let stars = 1;
             let star = ''
             while(stars < 6){
@@ -586,12 +585,10 @@
                 }
                 stars++
             }
-            console.log(star)
             $('#rating-div').html(star);
 
-            let consultation_id = '';
-            if (user == 'pat'){
-                function create_consultation() {
+            let consultation_id = 0;
+            function create_consultation() {
                     data = {
                         appoinment_id: appoinment,
                         doctor_id: doctor_id,
@@ -611,6 +608,8 @@
                         console.log(err)
                     })
                 }
+            if (user == 'pat'){
+                
 
                 let checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer(){
@@ -619,7 +618,6 @@
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
-                        console.log('Calling ...', res)
                         if(res.length == 0) {
                             // toastr.success("Doctor is busy now.", 'Success', {
                             //     positionClass: "toast-top-center"
@@ -630,7 +628,7 @@
                             alert('Doctor is busy now.');
                             window.location.href = '/patients/dashboard'
                         }
-                        if (res[0].is_answered == true && res[0].consult_id == 0) {
+                        if (res[0].is_answered == true) {
                             create_consultation()
                             clearInterval(checkAnswer)
                         }
@@ -648,15 +646,24 @@
                         contentType: 'application/json'
                     }).done((res) => {
                         if(res.length == 0) {
-                            console.log('Calling ...', res)
-                            // toastr.success("Doctor is busy now.", 'Success', {
-                            //     positionClass: "toast-top-center"
-                            // })
-                            // toastr.error("Doctor is busy now.","Success",{positionClass:'toast-top-center'})
+                            
                             clearInterval(checkAnswer)
                             clearInterval(messageInterval)
                             alert('Doctor is busy now.');
                             window.location.href = '/doctors/dashboard'
+                        }
+                        if(res[0].is_answered == true){
+                            $.ajax({
+                                url: '/api/consult_info_for_doct?sessions='+session,
+                                method: 'GET',
+                                contentType: 'application/json',
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                                }
+                            }).done(res=>{
+                                consultation_id = res[0].id
+                                clearInterval(checkAnswer)
+                            })
                         }
                     }).fail((err) => {
                         console.log(err)
@@ -676,10 +683,9 @@
                             xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
                         },
                     }).done((response) => {
-                        console.log(response)
                         $('#incomingVideoCall').modal('hide')
-                    }).fail((response) => {
-                        console.log(response)
+                    }).fail((err) => {
+                        console.log(err)
                     })
                     window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
                 }
@@ -691,10 +697,9 @@
                             xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
                         },
                     }).done((response) => {
-                        console.log(response)
                         $('#incomingVideoCall').modal('hide')
-                    }).fail((response) => {
-                        console.log(response)
+                    }).fail((err) => {
+                        console.log(err)
                     })
                     window.location.href = '/api/ratings?consultation=' + consultation_id;
                     
@@ -709,9 +714,9 @@
                 $('#myTab a[href="#Details"]').tab('show')
             })
 
-            setInterval(function () {
-                check_call_answered();
-            }, 1000)
+            // setInterval(function () {
+            //     check_call_answered();
+            // }, 1000)
         })
     </script>
 

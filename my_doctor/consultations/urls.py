@@ -1,5 +1,6 @@
 from rest_framework import routers
-from .api import consultationsViewSet,getAllConsultations,getPatientConsultations,getDoctorConsultations, specific_patient_consultations
+from .api import (consultationsViewSet,getAllConsultations,getPatientConsultations,getDoctorConsultations, 
+    specific_patient_consultations, consult_info_for_doct)
 from django.urls import path,include
 from . import views
 
@@ -9,6 +10,7 @@ router.register('specific_patient_consultations', specific_patient_consultations
 router.register('getAllConsultations', getAllConsultations, 'getAllConsultations')
 router.register('getPatientConsultations', getPatientConsultations, 'getPatientConsultations')
 router.register('getDoctorConsultations', getDoctorConsultations, 'getDoctorConsultations')
+router.register('consult_info_for_doct', consult_info_for_doct, 'consult_info_for_doct')
 
 urlpatterns = [
     path('',include(router.urls)),

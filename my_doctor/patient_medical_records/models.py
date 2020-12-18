@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from doctors.models import doctors_info
+from patients.models import patient_info
 
 # Create your models here.
 
@@ -21,3 +22,7 @@ class patient_medical_records(models.Model):
     @property
     def format_last_modified(self):
         return self.Last_modied.date()
+
+    @property
+    def patient_name(self):
+        return patient_info.objects.get(user__id=self.patient.id).full_name
