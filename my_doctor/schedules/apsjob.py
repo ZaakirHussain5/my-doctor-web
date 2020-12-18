@@ -14,6 +14,13 @@ url = "https://teleduce.corefactors.in/send-email-json-otom/a224db72-cafb-4cce-9
 
 def send_todays_message():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
+    complete_appointment = appointment.objects.filter(consultation_status='Completed')
+    for app in complete_appointment:
+        try: 
+            Reminders.objects.filter(appointment_id=app.id).delete()
+        except:
+            pass
+
     for appointments in all_pending_appointment:
         today = datetime.datetime.now()
         
@@ -136,6 +143,8 @@ def send_message_before_15mins():
                 doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
                 requests.get(doct_url)
                 reminder_min(appointments, 15)
+
+        
 
 def send_message_before_10mins():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')

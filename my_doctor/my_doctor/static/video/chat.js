@@ -92,7 +92,7 @@ function sendMessageAjax(message){
         data: JSON.stringify(data),
         contentType: 'application/json'
     }).done((response)=>{
-        console.log(response)
+        return
     }).fail((err)=>{
         console.log(err);
     })
@@ -104,7 +104,6 @@ function getMyMessage(){
         method: 'GET',
         contentType: 'application/json'
     }).done((response)=>{
-        console.log('response,', response)
         if( total_messages < response.length)
         {openElement(); total_messages = response.length }
         serializedMessage(response)
@@ -121,9 +120,7 @@ let totalMessage = 0
 function serializedMessage(arrOfMessage){
     let lis = '';
     var messagesContainer = $('.messages');
-    console.log(totalMessage, arrOfMessage.length)
     let subarry = arrOfMessage.slice(totalMessage, arrOfMessage.length);
-    console.log(subarry)
     totalMessage = arrOfMessage.length;
     for(var i =0; i < subarry.length; i++){
         let message = subarry[i];
