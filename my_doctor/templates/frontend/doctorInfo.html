@@ -163,12 +163,15 @@
                         <div class="form-group">
                             <a id='moufiles' class="btn btn-link" href="#" target="_blank"> <i class="fa fa-tasks"></i> View File</a>
                         </div>
-                        <div class="form-group">
-                            <input type="file" name="newMouFile" id="newMouFile" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button id='editmoufiles' class="btn btn-primary btn-block"> <i class="fa fa-edit"></i> Update File </button>
-                        </div>
+                        <form id="moufileForm">
+                            <div class="form-group">
+                                <input type="file" name="mou_file" id="newMouFile" class="form-control">
+                                
+                            </div>
+                            <div class="form-group">
+                                <button id='editmoufiles' class="btn btn-primary btn-block"> <i class="fa fa-edit"></i> Update File </button>
+                            </div>
+                        </form>
                     </div>
                     
                 </div>
@@ -418,7 +421,7 @@
     }
 
     const doctor_id = '{{id}}';
-    console.log(doctor_id)
+
     function getDataa() {
         const form = document.getElementById('profile_form');
         jQuery.ajax({
@@ -428,7 +431,6 @@
             async: false,
            
         }).done((response) => {
-            console.log('response response', response);
             formDeserialize(form, response[0].user);
             formDeserialize(form,response[0])
             jQuery('#moufiles').attr('href',response[0].mou_file)
@@ -449,8 +451,7 @@
             return;
         }
         const data = new FormData(document.getElementById('profile_form'))
-        data.append('id', doctor_id)
-        console.log(data);
+        data.append('id', doctor_id);
         jQuery.ajax({
             url: '/api/DoctorUpdateProfileAdminAPI',
             data: data,
@@ -460,7 +461,6 @@
            
         })
             .done((response) => {
-                console.log("postrequest response -", response);
                 jQuery.removeCookie('DoctorToken');
                 jQuery.cookie('DoctorToken', response.token, { expires: 1 })
                 toastr.success("Your details have been Updated Successfully","Profile Updated",{positionClass:"toast-top-center"})
@@ -518,10 +518,7 @@
            
         })
             .done((response) => {
-                
-                console.log(form);
                 if (response.length > 0) {
-                    console.log(response);
                     formDeserialize(form, response[0]);
                     jQuery('#day_name_here').html( 'Available ' + response[0].day)
                     jQuery('#available').prop('checked',true)
@@ -556,7 +553,6 @@
             
         })
             .done((response) => {
-                console.log(response);
                 table.ajax.reload()
                 toastr.success("Timings Updated Successfully","Success",{positionClass:'toast-top-centre'})
             })
@@ -649,7 +645,6 @@
             
         })
             .done((response) => {
-                console.log(response);
                 // table.ajax.reload()
                 // alert("You timing is changed")
                 toastr.success("Bank details updated successfully","Success",{positionClass:'toast-top-center'})
@@ -666,7 +661,6 @@
                 contentType: 'application/json',
                 
             }).done((response) => {
-                console.log(response)
                 const form = document.getElementById("DoctorBankDetailsForm");
                 formDeserialize(form, response[0])
             }).fail((err) => {
@@ -686,9 +680,6 @@
             columns:[
                 {
                     data:"paid_date",
-                    // render : function(data){
-                    //     return tConvert(data)
-                    // }
                 },
                 
                 {
@@ -698,11 +689,6 @@
                 
                 {
                     data:"bank_trans_id",
-                    // render:function(data){
-                    //     return `<button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
-                    //                 <i class="fa fa-trash"></i>
-                    //             </button>`
-                    // }
                 }
             ]
         })
@@ -715,7 +701,6 @@
                 contentType: 'application/json',
                 
             }).done((response) => {
-                console.log('Notes', response[0]['notes'])
                 jQuery('#notess').val(response[0]['notes'])
             }).fail((err) => {
                 console.log(err)
@@ -736,14 +721,34 @@
             
         })
             .done((response) => {
-                console.log(response);
-                // table.ajax.reload()
-                // alert("You timing is changed")
                 toastr.success("Notes added successfully.","Success",{positionClass:'toast-top-center'})
             })
             .fail((error) => {
                 console.log(error)
             })
+    })
+
+    jQuery('#moufileForm').submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+
+        let form = new FormData(document.getElementById('moufileForm'))
+        form.append('user', doctor_id)
+        jQuery.ajax({
+            url: '/api/change_mouFile_for_admin/',
+            method: 'POST',
+            data : form,
+            contentType: false,
+            processData: false,
+            
+        }).done(response =>{
+            getDataa();
+            toastr.success("Mou file updated successfully.","Success",{positionClass:'toast-top-center'});
+            jQuery('#newMouFile').val()
+        }).fail(err=>{
+            console.log(err)
+        })
     })
 </script>
 {% endblock %}

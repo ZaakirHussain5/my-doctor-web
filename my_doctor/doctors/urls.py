@@ -43,6 +43,7 @@ urlpatterns = [
     path('changeFeeByAdmin/', changeFeeByAdmin.as_view(), name = 'changeFeeByAdmin'),
     path('DoctorLogout', DoctorLogout.as_view(),name="logoutDoctor"),
     path('update_mou_file/', views.change_mouFile, name="change_mouFile"),
+    path('change_mouFile_for_admin/', views.change_mouFile_for_admin, name="change_mouFile_for_admin"),
     path("check_doctor_phone/",check_phone_no.as_view(),name="check_doctor_phone"),
     path("change_doctor_password",change_password.as_view(),name="change_doctor_password"),
 ]
