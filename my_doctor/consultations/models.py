@@ -35,6 +35,10 @@ class consultations(models.Model):
         return patient_info.objects.get(user__id=self.patient.id).full_name
     
     @property
+    def patient_number(self):
+        return patient_info.objects.get(user__id=self.patient.id).ph_no
+
+    @property
     def patient_age(self):
         return patient_info.objects.get(user__id=self.patient.id).age
     
