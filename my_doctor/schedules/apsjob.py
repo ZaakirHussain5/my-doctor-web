@@ -161,6 +161,7 @@ def send_message_before_10mins():
             diff = (app_time_instance - after_15mins)
             in_secoends = diff.total_seconds()
             if int(in_secoends/600) == 0:
+                patient = patient_info.objects.get(user=appointments.patient)
                 pat_message = "Your Appointment with Dr. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
                 pat_message = "Your Appointment with Mr./Mrs. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
                 pat_reminder = Reminders(message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
@@ -168,7 +169,6 @@ def send_message_before_10mins():
                 doct_reminder = Reminders(message=doct_message, reminder_owner=appointment.doctor.user, appointment_id=appointments.id )
                 doct_reminder.save()
 
-                patient = patient_info.objects.get(user=appointments.patient)
                 url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
                 requests.get(url)
                 doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
@@ -189,22 +189,23 @@ def send_message_before_5mins():
             app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
             diff = (app_time_instance - after_15mins)
             in_secoends = diff.total_seconds()
-            if int(in_secoends/(60*5)) == 0:
-                patient = patient_info.objects.get(user=appointments.patient)
+            print(in_secoends/300)
+            if in_secoends/300 > 0 and in_secoends/300 < 0.1:
+                # patient = patient_info.objects.get(user=appointments.patient)
+                print('=====>>>', in_secoends/(60*5))
+                # pat_message = "Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
+                # doct_message = "Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
+                # pat_reminder = Reminders(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
+                # pat_reminder.save()
 
-                pat_message = "Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
-                doct_message = "Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
-                pat_reminder = Reminders(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
-                pat_reminder.save()
+                # doct_reminder = Reminders(reminder_message=doct_message, reminder_owner=appointments.doctor.user, appointment_id=appointments.id )
+                # doct_reminder.save()
 
-                doct_reminder = Reminders(reminder_message=doct_message, reminder_owner=appointments.doctor.user, appointment_id=appointments.id )
-                doct_reminder.save()
-
-                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
-                requests.get(url)
-                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
-                requests.get(doct_url)
-                reminder_min(appointments, 5)
+                # url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
+                # requests.get(url)
+                # doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
+                # requests.get(doct_url)
+                # reminder_min(appointments, 5)
 
 
 

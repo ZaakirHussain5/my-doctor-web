@@ -227,6 +227,7 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                 current_datetime = datetime.datetime.now()
                 str_make_date = str(year) + '-' + str(month) + '-' + str(day) + ' '+ doctor.to_time
                 to_time = datetime.datetime.strptime(str_make_date, "%Y-%m-%d %H:%M")
+                print('==>', current_datetime, to_time)
                 if current_datetime < to_time:
                     print('step 2')
                     str_from_time = str(year) + '-' + str(month) + '-' + str(day) + ' ' + doctor.from_time

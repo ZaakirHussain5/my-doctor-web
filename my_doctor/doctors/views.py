@@ -29,3 +29,17 @@ def change_mouFile(request):
         serializer = doctors_infoSerializer(doctor)
         return Response(serializer.data)
 
+
+@api_view(['POST'])
+def change_mouFile_for_admin(request):
+    # if request.user.is_authenticated:
+    mou_files = request.data['mou_file']
+
+    doctor = doctors_info.objects.get(id=request.data['user'])
+    if doctor.mou_file:
+        doctor.mou_file.delete()
+    doctor.mou_file = mou_files
+    doctor.save()
+    serializer = doctors_infoSerializer(doctor)
+    return Response(serializer.data)
+
