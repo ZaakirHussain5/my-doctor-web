@@ -29,7 +29,7 @@ def today_total_appointment():
 
 
 def get_a_range_appointment(from_date, to_date):
-    total_appointmetns = appointment.objects.filter(appointment_date__range=(from_date, to_date))
+    total_appointmetns = appointment.objects.filter(created_at__date__range=(from_date, to_date))
     total_fees_collected = total_appointmetns.aggregate(Sum('paid_amount'))
     obj = {
         'total_count': total_appointmetns.count(),
