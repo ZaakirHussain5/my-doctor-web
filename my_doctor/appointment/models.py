@@ -20,6 +20,7 @@ class appointment(models.Model):
     Modified_by = models.CharField(max_length=25, null=True)
     cancle_note = models.CharField(max_length=500, default='')
 
+    
     @property
     def pat_id(self):
         return patient_info.objects.get(user__id=self.patient.id).id
