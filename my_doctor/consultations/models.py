@@ -37,6 +37,10 @@ class consultations(models.Model):
         except:
             return "Patient Deleted"
     @property
+    def patient_number(self):
+        return patient_info.objects.get(user__id=self.patient.id).ph_no
+
+    @property
     def patient_age(self):
         try:
             return patient_info.objects.get(user__id=self.patient.id).age

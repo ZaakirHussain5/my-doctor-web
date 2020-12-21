@@ -306,7 +306,8 @@
         const data = new FormData(document.getElementById('profile_form'))
         jQuery("#profile_form button[type='submit']").html('<i class="fa fa-spinner fa-spin"></i> Updating...')
         jQuery("#profile_form button[type='submit']").attr('disabled', true)
-
+        if (document.getElementById('image1').files.length == 0)
+                    data.delete('profile_pic')
         jQuery.ajax({
             url: '/api/DoctorUpdateProfile/'+ doctor_id + '/',
             data: data,

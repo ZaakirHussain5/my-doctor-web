@@ -8,6 +8,5 @@ class AppointmentConfig(AppConfig):
         import appointment.signals
         from schedules import scheduler
         scheduler.start()
-        scheduler.every_15mins_call()
         scheduler.every_10mins_call()
         scheduler.every_5mins_call()

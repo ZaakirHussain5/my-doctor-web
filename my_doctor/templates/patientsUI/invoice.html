@@ -47,10 +47,10 @@
       <div class="col-sm-4">
       <h6 class="mb-3">To:</h6>
       <div>
-      <strong>{{ consultation.doctor_id.full_name }}</strong>
+      <strong>{{ consultation.patient_name }}</strong>
       </div>
-      <div>Email: {{ consultation.doctor_id.user.email }}</div>
-      <div>Phone: +91 {{ consultation.doctor_id.phone_number }}</div>
+      <div>Email: {{ consultation.patient.email }}</div>
+      <div>Phone: {{ consultation.patient_number }}</div>
       </div>
       <div class="col-sm-4">
         <img src="{% static 'website/img/logo.png' %}" class="float-right" alt=""
