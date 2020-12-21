@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import doctor_payments
-from doctors.serializers import doctors_infoSerializer
+from doctors.serializers import doctors_listSerializer
 
 class doctor_paymentsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,7 +9,7 @@ class doctor_paymentsSerializer(serializers.ModelSerializer):
 
 
 class DoctorPaymentsListSerializer(serializers.ModelSerializer):
-	doctor = doctors_infoSerializer()
+	doctor = doctors_listSerializer()
 	class Meta:
 	    model = doctor_payments
 	    fields = '__all__'
