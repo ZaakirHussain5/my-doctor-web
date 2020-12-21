@@ -30,7 +30,7 @@ function crudOperations(options){
       jQuery(options.table_id).on('click', '.delete', function () {
         var id = jQuery(this).attr('data-id')  
         bootbox.confirm({
-              message: "Are you sure to delete the Specialist Type permenently?",
+              message: `Are you sure to delete ${options.message} permenently?`,
               callback: function (result) {
                   if(result){
                       jQuery.ajax({
