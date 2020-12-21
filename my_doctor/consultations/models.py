@@ -32,16 +32,22 @@ class consultations(models.Model):
 
     @property
     def patient_name(self):
-        return patient_info.objects.get(user__id=self.patient.id).full_name
-    
+        try:
+            return patient_info.objects.get(user__id=self.patient.id).full_name
+        except:
+            return "Patient Deleted"
     @property
     def patient_age(self):
-        return patient_info.objects.get(user__id=self.patient.id).age
-    
+        try:
+            return patient_info.objects.get(user__id=self.patient.id).age
+        except:
+            return 0
     @property
     def patient_gender(self):
-        return patient_info.objects.get(user__id=self.patient.id).gender
-
+        try:
+            return patient_info.objects.get(user__id=self.patient.id).gender
+        except:
+            return "No data"
     @property
     def format_date(self):
         return self.consultation_date_time.date()

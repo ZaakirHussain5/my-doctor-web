@@ -656,6 +656,16 @@
                     console.log(data)
                     var consultation_fee = data.doctor.commission_type == "Percent" ? parseFloat(data.doctor.consultation_fee) + (parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) : parseFloat(data.doctor.consultation_fee) + parseFloat(data.doctor.commission_val);
                     var gst = data.doctor.commission_type == "Percent" ? ((parseFloat(data.doctor.consultation_fee) * (parseFloat(data.doctor.commission_val) / 100)) * (18/ 100)) : parseFloat(data.doctor.commission_val) * (18/ 100)
+                    let stars = '';
+                    for(var j=0; j<5; j++ ){
+                        if(j < data.doctor.rating){
+                            stars += `<i class="mdi mdi-star text-warning" ></i>`
+                        }
+                        else{
+                            stars += `<i class="mdi mdi-star" ></i>`
+                        }
+                    }
+                    
                     let strings = `
                     <div class="card">
                         <div class="card-body">
@@ -667,6 +677,8 @@
                                     </div>
                                     <div class="ml-2 ca-call-history__left--title">
                                         <div id='docFName${data.doctor.id}'>${data.doctor.full_name}</div>
+                                        ${stars}
+                                        <br>
                                         <span class="font-weight-bold text-success">Available Time :
                                             ${tConvert(data.from_time)}</span>
                                         <br>

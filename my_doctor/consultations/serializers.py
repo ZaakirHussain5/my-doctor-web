@@ -17,10 +17,13 @@ class getAllConsultationsSerializer(serializers.ModelSerializer):
     patient_pic = serializers.SerializerMethodField('get_patient_pic')
 
     def get_patient_pic(self, obj):
-        pat_details = patient_info.objects.get(user__id=obj.patient.id)
-        if pat_details.profile_pic:
-            return self.context['request'].build_absolute_uri(pat_details.profile_pic.url)
-        return ""
+        try:
+            pat_details = patient_info.objects.get(user__id=obj.patient.id)
+            if pat_details.profile_pic:
+                return self.context['request'].build_absolute_uri(pat_details.profile_pic.url)
+            return ""
+        except:
+            return ""
 
     class Meta:
         model = consultations

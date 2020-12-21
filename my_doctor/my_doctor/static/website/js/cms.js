@@ -287,7 +287,7 @@ $("#doctorRegistration").submit((e) => {
                     method: 'GET',
                     success: function (response) {
                         console.log(response)
-                        let url = '/media/doctor plus.pdf';
+                        let url = '/media/doctor_plus.pdf';
                         window.location.href = url;
                     }
                 })
