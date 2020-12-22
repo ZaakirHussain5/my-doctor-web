@@ -290,6 +290,15 @@ footer{
 }
 }
 @media(max-width:425px){
+  .login-link{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 1.25rem;
+    max-height: 1.25rem;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
     .register .nav-tabs {
     margin-bottom: 3%;
     border: none;
@@ -512,9 +521,10 @@ section.slider .x_023_animated_layers_txt {
 }
   }
   @media(max-width:375px){
-    .header_menu .navbar.navbar-default .navbar-header .navbar-brand img {
+  
+  .header_menu .navbar.navbar-default .navbar-header .navbar-brand img {
       display: inline-block;
-      width: 50%;
+      width: 40% !important;
   }
   section.slider {
       padding: 14% 0 0 0 !important;
@@ -532,4 +542,23 @@ section.slider .x_023_animated_layers_txt {
 .nav-tabs.nav-justified>li>a {
   margin-bottom:1px;
 }
+.login-link{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 1.25rem;
+  max-height: 1.25rem;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
   }
+
+.login-link{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 1.25rem;
+  max-height: 1.25rem;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
