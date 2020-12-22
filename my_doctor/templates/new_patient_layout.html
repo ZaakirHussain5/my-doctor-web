@@ -49,13 +49,122 @@
                     {% include 'partials/_patient_nav.html'%}
                 </div>
             </div>
+            <style>
 
+                /*  BURGER
+                ========================================== */
+                
+                .burger {
+                  width: 50px;
+                  height: 50px;
+                  position: relative;
+                  top: -35px!important;
+                  border-radius: 4px;
+                  z-index: 10;
+                }
+                .clicked{
+                    top:-100px!important;
+                }
+                .burger span {
+                  position: relative;
+                  margin-top: 9px;
+                  margin-bottom: 9px;
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
+                  user-select: none;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  margin-left: -15px;
+                  margin-top: -1.5px;
+                }
+                
+                .burger span, .burger span::before, .burger span::after {
+                  display: block;
+                  width: 30px;
+                  height: 3px;
+                  background-color: #2a2a2a;
+                  outline: 1px solid transparent;
+                  -webkit-transition-property: background-color, -webkit-transform;
+                  -moz-transition-property: background-color, -moz-transform;
+                  -o-transition-property: background-color, -o-transform;
+                  transition-property: background-color, transform;
+                  -webkit-transition-duration: 0.3s;
+                  -moz-transition-duration: 0.3s;
+                  -o-transition-duration: 0.3s;
+                  transition-duration: 0.3s;
+                }
+                
+                .burger span::before, .burger span::after {
+                  position: absolute;
+                  content: "";
+                }
+                
+                .burger span::before { top: -9px; }
+                
+                .burger span::after { top: 9px; }
+                
+                .burger.clicked span { background-color: transparent; }
+                
+                .burger.clicked span::before {
+                  -webkit-transform: translateY(9px) rotate(45deg);
+                  -moz-transform: translateY(9px) rotate(45deg);
+                  -ms-transform: translateY(9px) rotate(45deg);
+                  -o-transform: translateY(9px) rotate(45deg);
+                  transform: translateY(9px) rotate(45deg);
+                }
+                
+                .burger.clicked span::after {
+                  -webkit-transform: translateY(-9px) rotate(-45deg);
+                  -moz-transform: translateY(-9px) rotate(-45deg);
+                  -ms-transform: translateY(-9px) rotate(-45deg);
+                  -o-transform: translateY(-9px) rotate(-45deg);
+                  transform: translateY(-9px) rotate(-45deg);
+                }
+                
+                .burger.clicked span:before, .burger.clicked span:after { background-color: #000; }
+                
+                .burger:hover { cursor: pointer; }
+                
+                
+                
+                /*  OVERLAY
+                ========================================== */
+                
+                .overlay {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  z-index: 1;
+                  width: 100%;
+                  height: 100%;
+                  -webkit-transition: all 0.3s ease-in-out;
+                  -moz-transition: all 0.3s ease-in-out;
+                  -o-transition: all 0.3s ease-in-out;
+                  transition: all 0.3s ease-in-out;
+                  background-color: #fff;
+                  opacity: 0;
+                  visibility: hidden;
+                }
+                
+                .overlay.show {
+                  opacity: 0.8;
+                  visibility: visible;
+                }
+                </style>
             <div class="ca-content-wrapper">
                 <div class="ca-content">
                     <div class="conversation-panel__head">
-                        <a href="#" class="click-me pr-3 pl-3 pt-0 " style="position: relative;">
+                        <div class="burger click-me"> 
+                            <span></span> 
+                         </div>
+                             
+                         <div class=""></div>
+                         
+                        <!-- <a href="#" class="click-me pr-3 pl-3 pt-0 " style="position: relative;">
                             <i class="mdi mdi-menu"></i> Menu
-                        </a> 
+                        </a>  -->
                         <div class="conversation__actions">
                             <!-- <div class="action-icon pr-4" data-toggle="modal" data-target="#outGoingCall">
                                 <i class="mdi mdi-bell-ring-outline mdi-24px"></i>
@@ -73,22 +182,27 @@
                                             </div>
                                           </div>
                                            -->
-                                        <div class=" show" style="display: inline;">
-                                            <a class="btn btn-sm btn-primary " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Reminder<span class="badge badge-light">0</span>
-                                            </a>
-                                            
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                
+                                        <div class="profile-icons">
+                                            <div class=" show" style="display: inline;">
+                                                <a class="btn btn-sm btn-primary " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    Reminder<span class="badge badge-light">0</span>
+                                                </a>
+                                        
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        
+                                                </div>
                                             </div>
+                                            <p data-toggle="modal" data-target="#settingsModalCenter" class=" btn btn-sm btn-primary mt-3"
+                                                style="cursor: pointer;">
+                                                Profile</p>
+                                        
+                                            <p class=" btn btn-sm btn-primary mt-3" id="btnLogout" style="cursor: pointer;">
+                                                Logout
+                                                <!-- <i class="mdi mdi-logout"></i> -->
+                                            </p>
                                         </div>
-                                        <p data-toggle="modal" data-target="#settingsModalCenter" class=" btn btn-sm btn-primary ml-1 mt-3" style="cursor: pointer;">
-                                            Profile</p>
-
-                                        <p class=" btn btn-sm btn-primary ml-1 mt-3" id="btnLogout" style="cursor: pointer;">
-                                            Logout
-                                            <!-- <i class="mdi mdi-logout"></i> -->
-                                        </p>
+                                        
                                     </div>
                                 </div> 
                                 
@@ -103,7 +217,7 @@
                     {% endblock %}
                 </div>
             </div>
-
+            
 
             {% include 'patientsUI/_settings.html'%}
             <!-- THEME CUSTOMIZER -->
@@ -163,7 +277,9 @@
     <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
     <script>
         $(document).ready(function () {
-            $('.click-me').click(function () {
+            $('.click-me, .burger, .overlay').click(function () {
+                $('.burger').toggleClass('clicked');
+                $('.overlay').toggleClass('show');
                 $('.ca-main-wrapper .ca-sidebar-wrapper').toggleClass('fliph');
                 $('.ca-main-conatiner').toggleClass('flipsmall');
                 console.log($('.ca-main-wrapper .ca-sidebar-wrapper').hasClass('fliph'))

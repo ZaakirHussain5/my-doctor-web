@@ -283,11 +283,14 @@ transition-duration: .3s;
     }
 }
 @media only screen and (max-width: 425px){
+    
     .conversation-panel__body,.spl-list {
         padding: 0 25px !important;
     }
     .iconbox-dropdown{
-        text-align:center!important;
+        text-align:center !important;
+        top:-25px;
+        margin-bottom:-40px !important;
     }
     .iconbox-dropdown .mr-3{
         margin-right: 4rem!important;
@@ -348,8 +351,8 @@ transition-duration: .3s;
 }
 
 .ca-main-wrapper .ca-sidebar-wrapper.fliph, .ca-main-wrapper .ca-sidebar-wrapper.fliph .iconbox-group{
-    max-width: 60% !important; 
-    width: 60% !important;
+    max-width: 90% !important; 
+    width: 90% !important;
     transition: all 0.5s  ease-in-out !important;
     transition-duration: .3s;
     display: flex !important;  

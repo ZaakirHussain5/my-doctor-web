@@ -1,3 +1,6 @@
+.row{
+  margin: 0 !important;
+}
 footer #Cert1{
   display:none;
 }
@@ -355,7 +358,7 @@ section.slider {
 }a.btn, button.btn {
   font-size: 11px;
   padding: 8px;
-  z-index: 99;
+  z-index: 9 !important;
   margin: 0 10px;
   float: left;
 }.batch img {
@@ -506,5 +509,27 @@ section.slider .x_023_animated_layers_txt {
   height: 80%;
   top: -6%;
   border-radius: 16px;
+}
+  }
+  @media(max-width:375px){
+    .header_menu .navbar.navbar-default .navbar-header .navbar-brand img {
+      display: inline-block;
+      width: 50%;
+  }
+  section.slider {
+      padding: 14% 0 0 0 !important;
+  }
+    .register .nav-tabs .nav-item a, .register .nav-tabs {
+      width: 100%!important;
+  }
+  .nav-tabs.nav-justified>li {
+    float: none;
+    width: 100% !important;
+}
+.nav-tabs.nav-justified {
+  display: flex;
+}
+.nav-tabs.nav-justified>li>a {
+  margin-bottom:1px;
 }
   }
