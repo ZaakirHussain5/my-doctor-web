@@ -9,6 +9,7 @@ from doctors.serializers import doctors_infoSerializer
 from patients.models import patient_info
 from patients.serializers import patient_infoSerializer
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 class userViewSet(viewsets.ModelViewSet):
     queryset = user_details.objects.all()
@@ -36,6 +37,7 @@ class LoginAPI(generics.GenericAPIView):
     serializer = self.get_serializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = serializer.validated_data
+    login(request,user)
     _, token = AuthToken.objects.create(user)
     return Response({
       "user": UserAuthSerializer(user, context=self.get_serializer_context()).data,
