@@ -308,6 +308,7 @@
                 url: '/api/doctor_dataView',
                 method: 'GET',
                 contentType: 'application/json',
+                async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },
@@ -322,6 +323,7 @@
                 url: '/api/todaysAppoinment',
                 method: 'GET',
                 contentType: 'application/json',
+                async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
                 },

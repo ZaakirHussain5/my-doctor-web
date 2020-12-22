@@ -390,6 +390,7 @@
     ajax: {
       url: '/api/upComingAppoinment',
       dataSrc: "",
+      async: false,
       'beforeSend': function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
@@ -431,6 +432,7 @@
     ajax: {
       url: '/api/todaysAppoinment',
       dataSrc: "",
+      async: false,
       'beforeSend': function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
@@ -477,6 +479,7 @@
     ajax: {
       url: '/api/previousAppoinment',
       dataSrc: "",
+      async: false,
       'beforeSend': function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
@@ -519,6 +522,7 @@
     jQuery.ajax({
       url: `/api/CallPatient?patient=${button.attr('data-patient')}&const=${button.attr('data-const')}`,
       method: 'POST',
+      async: false,
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
