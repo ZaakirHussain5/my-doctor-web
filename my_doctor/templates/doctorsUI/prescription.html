@@ -96,7 +96,7 @@
         
             var table = jQuery('#subs_plans').DataTable({
                 ajax: {
-                    url: "/api/DoctorPrescription",
+                    url: "/api/DoctorPrescription/",
                     dataSrc: "",
                     'beforeSend': function (request) {
                     request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));

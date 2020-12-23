@@ -388,7 +388,7 @@
     function getDoctorTimings(dayName = 'monday') {
         const form = document.getElementById('doctorTiming');
         jQuery.ajax({
-            url: '/api/DoctorTimings?name='+ dayName,
+            url: '/api/DoctorTimings/?name='+ dayName,
             method: 'GET',
             contendType: 'application/json',
             async: false,
@@ -598,7 +598,7 @@
 
         let table = jQuery('#Timings').DataTable({
             ajax:{
-                url:'/api/DoctorTimings',
+                url:'/api/DoctorTimings/',
                 dataSrc:"",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));

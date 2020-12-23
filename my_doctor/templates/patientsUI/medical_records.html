@@ -213,7 +213,7 @@
         // })
 
         $.ajax({
-            url: '/api/PatientPrescription',
+            url: '/api/PatientPrescription/',
             method: 'GET',
             contentType: 'application/json',
             beforeSend: function (request) {
@@ -268,7 +268,7 @@
         function get_pat_medi_record(){
 
             $.ajax({
-                url: '/api/patient-medical-records',
+                url: '/api/patient-medical-records/',
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (request) {

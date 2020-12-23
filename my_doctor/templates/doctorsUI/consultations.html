@@ -36,7 +36,7 @@
 <script>
   const billingHistory = jQuery('#BillingHistory').DataTable({
     ajax: {
-      url: '/api/doctor_billing_history',
+      url: '/api/doctor_billing_history/',
       dataSrc: "",
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));

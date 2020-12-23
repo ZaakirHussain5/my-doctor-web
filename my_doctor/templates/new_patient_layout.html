@@ -690,7 +690,7 @@
 
         function myreminders(){
             jQuery.ajax({
-            url: '/api/myreminders',
+            url: '/api/myreminders/',
             method: 'GET',
             contentType: 'application/json',
             async: false,
@@ -726,7 +726,7 @@
             loadFamilyMembers();
             function loadFamilyMembers() {
                 $.ajax({
-                    url: '/api/patient_family',
+                    url: '/api/patient_family/',
                     method: 'GET',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));

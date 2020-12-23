@@ -388,7 +388,7 @@
   // let token = ;
   const upComingtable = jQuery('#UpComingAppointments').DataTable({
     ajax: {
-      url: '/api/upComingAppoinment',
+      url: '/api/upComingAppoinment/',
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {
@@ -477,7 +477,7 @@
   })
   const previoustable = jQuery('#PreviousAppointments').DataTable({
     ajax: {
-      url: '/api/previousAppoinment',
+      url: '/api/previousAppoinment/',
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {

@@ -413,7 +413,7 @@
         $('#Skip').click(function () {
 
             $.ajax({
-                url: "/api/wallet_details",
+                url: "/api/wallet_details/",
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
@@ -546,7 +546,7 @@
         ////// formating payment tab /////// 
         $('#ConfirmClick').click(() => {
             $.ajax({
-                url: "/api/wallet_details",
+                url: "/api/wallet_details/",
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
@@ -612,7 +612,7 @@
             
             let date = $('#dateSelected').val()
             $.ajax({
-                url: "/api/patientAppointment/DoctorAvailable?date=" + date + "&&id=" + speciality_type,
+                url: "/api/patientAppointment/DoctorAvailable/?date=" + date + "&&id=" + speciality_type,
                 method: 'GET',
                 contentType: 'Application/json'
             }).done((response) => {
@@ -930,7 +930,7 @@
         function apply_promo_code(){
             let promoCode = $('#promocode').val()
             $.ajax({
-                url: '/api/apply_promoCode?code='+ promoCode,
+                url: '/api/apply_promoCode/?code='+ promoCode,
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function(xhr){

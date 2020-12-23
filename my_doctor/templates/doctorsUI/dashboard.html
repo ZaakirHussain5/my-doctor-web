@@ -305,7 +305,7 @@
             jQuery('#stars').html(i_s);
 
             jQuery.ajax({
-                url: '/api/doctor_dataView',
+                url: '/api/doctor_dataView/',
                 method: 'GET',
                 contentType: 'application/json',
                 async: false,
@@ -320,7 +320,7 @@
             });
             
             jQuery.ajax({
-                url: '/api/todaysAppoinment',
+                url: '/api/todaysAppoinment/',
                 method: 'GET',
                 contentType: 'application/json',
                 async: false,
