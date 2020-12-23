@@ -13,19 +13,15 @@ class MySubscriptionPlans(viewsets.ModelViewSet):
     serializer_class = PatientSubscriptionSerializers
 
     def get_queryset(self):
-        print(self.request.user)
-        return PatientSubscription.objects.filter(user=self.request.user, is_active=True)
+        user = patient_info.objects.get(user=self.request.user)
+        return PatientSubscription.objects.filter(user=user, is_active=True)
 
     def perform_create(self, serializer):
-        subs_plan = subscription_plans.objects.get(id=self.request.data.get('plan'))
-        print(subs_plan)
-        subs_plan_end_date = date.today() + timedelta(days=subs_plan.validity)
-        print(subs_plan_end_date)
-        patient = patient_info.objects.get(user = self.request.user)
-        print(patient)
-        return serializer.save(end_date = subs_plan_end_date,plan=subs_plan, user = self.request.user, patient=patient)
-
+        user = patient_info.objects.get(user=self.request.user)
+        return serializer.save(user = user)
     
+    def perform_update(self,serializer,validated_data):
+        user = patient_info.objects.get(user=self.request.user)
 
 class allSubscriptionForAdmin(viewsets.ModelViewSet):
     serializer_class = PatientSubscriptionSerializers
