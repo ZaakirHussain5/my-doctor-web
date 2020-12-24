@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{% static 'video/chat.css' %}">
     <style>
         @media(max-width:425px) {
-            .floating-chat{
+            .floating-chat {
                 z-index: 1020;
             }
         }
@@ -69,9 +69,9 @@
                                     <div class="conversation__name">
                                         <h5 id='conversation_doc' class="conversation__name--title mt-1">
                                             {% if user == 'doc'%}
-                                                {{patient.full_name}}
+                                            {{patient.full_name}}
                                             {% else %}
-                                                {{doctor.full_name}}
+                                            {{doctor.full_name}}
                                             {% endif %}
                                         </h5>
                                     </div>
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ca-content__chatstab"> 
+                    <div class="ca-content__chatstab">
                         <div class="ca-content__callstab" style="padding-top: 0;">
                             <div class="conversation-panel__body ps">
                                 <div class="container">
@@ -92,211 +92,223 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
-                                            <button class="btn btn-danger" style="border-radius: 50%;">
+                                            <button class="btn btn-danger" id="endBtn" style="border-radius: 50%;">
                                                 <i class="mdi mdi-phone-hangup text-white"></i>
                                             </button>
-                                            <button class="btn btn-outline-danger" style="border-radius: 50%;">
+                                            <button class="btn btn-outline-danger" id="videoBtn"
+                                                style="border-radius: 50%;">
                                                 <i class="mdi mdi-video-off"></i>
                                             </button>
-                                            <button class="btn btn-outline-danger" style="border-radius: 50%;">
+                                            <button class="btn btn-outline-danger" id="micBtn"
+                                                style="border-radius: 50%;">
                                                 <i class="mdi mdi-microphone-off"></i>
                                             </button>
                                         </div>
                                     </div>
-                                   
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="backdrop-overlay hidden"></div>
         </div>
     </div>
-    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                {% if user == 'doc'%}
-                <div class="card">
-                    <div class="card-body">
-                        <ul class="nav nav-pills d-none" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Details" role="tab"
-                                    aria-controls="pills-home" aria-selected="true">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#History" role="tab"
-                                    aria-controls="pills-profile" aria-selected="false">Profile</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="Details" role="tabpanel"
-                                aria-labelledby="pills-home-tab">
-                                <h5 class="text-center">Patient Details</h5>
-                                <div class="text-center">
-                                    {% if patient.profile_pic%}
-                                    <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive" style="border-radius: :50%;">
-                                    {% else %}
-                                    <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive" style="border-radius: :50%;">
-                                    {% endif %}
-                                    <h4>{{patient.full_name}}</h4>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if user == 'doc'%}
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-pills d-none" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Details"
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#History"
+                                        role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="Details" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+                                    <h5 class="text-center">Patient Details</h5>
+                                    <div class="text-center">
+                                        {% if patient.profile_pic%}
+                                        <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive"
+                                            style="border-radius: :50%;">
+                                        {% else %}
+                                        <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive"
+                                            style="border-radius: :50%;">
+                                        {% endif %}
+                                        <h4>{{patient.full_name}}</h4>
+                                    </div>
+                                    <table class="table table-hover ">
+                                        <tr>
+                                            <td>Age</td>
+                                            <td>{{patient.age}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Height</td>
+                                            <td>{{patient.height}} cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weight</td>
+                                            <td>{{patient.weight}} Kgs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blood Group</td>
+                                            <td>{{patient.blood_group}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City</td>
+                                            <td>{{patient.city}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button id="btnViewMore" class="btn btn-primary btn-block" role="tab">
+                                                    <i class="fa fa-user"></i> View More
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <table class="table table-hover ">
-                                    <tr>
-                                        <td>Age</td>
-                                        <td>{{patient.age}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Height</td>
-                                        <td>{{patient.height}} cm</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Weight</td>
-                                        <td>{{patient.weight}} Kgs</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Blood Group</td>
-                                        <td>{{patient.blood_group}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>City</td>
-                                        <td>{{patient.city}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <button id="btnViewMore" class="btn btn-primary btn-block" role="tab">
-                                                <i class="fa fa-user"></i> View More
+                                <div class="tab-pane fade " id="History" role="tabpanel">
+                                    <div class="mb-1">
+                                        <buttton class="btn btn-default" id="btnback">
+                                            <i class="fa fa-angle-left"></i> Back
                                             </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade " id="History" role="tabpanel">
-                                <div class="mb-1">
-                                    <buttton class="btn btn-default" id="btnback">
-                                        <i class="fa fa-angle-left"></i> Back
-                                        </button>
-                                </div>
-    
-                                <ul class="nav nav-pills flex-column nav-pills" id="mySecondTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Cons"
-                                            role="tab" aria-controls="pills-home" aria-selected="true">Consultations</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Pres"
-                                            role="tab" aria-controls="pills-profile" aria-selected="false">Prescriptions</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Reps"
-                                            role="tab" aria-controls="pills-profile" aria-selected="false">Reports</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="Cons" role="tabpanel">
-                                        <h5 class="mt-2">{{patient.full_name}}'s Previous Consultations</h5>
-                                        <ul class="timeline">
-                                            {% for consultation_list in consultation_lists %}
-                                            <li>
-                                                <a target="_blank" href="#">{{consultation_list.doctor_id.full_name}}
-                                                    ({{ consultation_list.doctor_id.specialist_type}})</a>
-                                                <a href="#" class="float-right">{{ consultation_list.format_date }}</a>
-                                                <p>{{ consultation_list.message }}</p>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
                                     </div>
-                                    <div class="tab-pane fade" id="Pres" role="tabpanel">
-                                        <h5 class="mt-2">{{patient.full_name}}'s Previous Prescriptions</h5>
-                                        <ul class="list-group">
-                                            {% for records in  medical_records %}
-                                            {% if records.is_prescription %}
-                                            <li class="list-group-item">
-                                                <div class="float-right">
-                                                    <a href="{{ records.record_files.url }}" target=_blank
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-file"></i> View
-                                                    </a>
-                                                </div>
-                                                {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on
-                                                {{records.format_last_modified}}
-    
-                                            </li>
-                                            {% endif %}
-                                            {% endfor %}
-    
-                                        </ul>
-                                    </div>
-                                    <div class="tab-pane fade" id="Reps" role="tabpanel">
-                                        <h5 class="mt-2">{{ patient.full_name }}'s Medical Reports</h5>
-                                        <ul class="list-group">
-                                            {% for records in medical_records %}
-                                            {% if records.is_prescription == False %}
-                                            <li class="list-group-item">
-                                                {% if records.record_files %}
-                                                <div class="float-right">
-                                                    <a href="{{records.record_files.url }}" target="_blank"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-file"></i> View
-                                                    </a>
-                                                </div>
+
+                                    <ul class="nav nav-pills flex-column nav-pills" id="mySecondTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill"
+                                                href="#Cons" role="tab" aria-controls="pills-home"
+                                                aria-selected="true">Consultations</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Pres"
+                                                role="tab" aria-controls="pills-profile"
+                                                aria-selected="false">Prescriptions</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Reps"
+                                                role="tab" aria-controls="pills-profile"
+                                                aria-selected="false">Reports</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="Cons" role="tabpanel">
+                                            <h5 class="mt-2">{{patient.full_name}}'s Previous Consultations</h5>
+                                            <ul class="timeline">
+                                                {% for consultation_list in consultation_lists %}
+                                                <li>
+                                                    <a target="_blank"
+                                                        href="#">{{consultation_list.doctor_id.full_name}}
+                                                        ({{ consultation_list.doctor_id.specialist_type}})</a>
+                                                    <a href="#"
+                                                        class="float-right">{{ consultation_list.format_date }}</a>
+                                                    <p>{{ consultation_list.message }}</p>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="Pres" role="tabpanel">
+                                            <h5 class="mt-2">{{patient.full_name}}'s Previous Prescriptions</h5>
+                                            <ul class="list-group">
+                                                {% for records in  medical_records %}
+                                                {% if records.is_prescription %}
+                                                <li class="list-group-item">
+                                                    <div class="float-right">
+                                                        <a href="{{ records.record_files.url }}" target=_blank
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-file"></i> View
+                                                        </a>
+                                                    </div>
+                                                    {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on
+                                                    {{records.format_last_modified}}
+
+                                                </li>
                                                 {% endif %}
-                                                {{ records.description }}
-                                            </li>
-                                            {% endif %}
-                                            {% endfor %}
-    
-                                        </ul>
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="Reps" role="tabpanel">
+                                            <h5 class="mt-2">{{ patient.full_name }}'s Medical Reports</h5>
+                                            <ul class="list-group">
+                                                {% for records in medical_records %}
+                                                {% if records.is_prescription == False %}
+                                                <li class="list-group-item">
+                                                    {% if records.record_files %}
+                                                    <div class="float-right">
+                                                        <a href="{{records.record_files.url }}" target="_blank"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-file"></i> View
+                                                        </a>
+                                                    </div>
+                                                    {% endif %}
+                                                    {{ records.description }}
+                                                </li>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-    
                     </div>
-                </div>
-                {% else %}
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-center">Doctor Details</h5>
-                        <div class="text-center">
-                            {% if doctor.profile_pic%}
-                            <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive" style="border-radius: :50%;">
-                            {% else %}
-                            <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive" style="border-radius: :50%;">
-                            {% endif %}
-                            <h4>{{doctor.full_name}}</h4>
-                            <small>{{doctor.specialist_type}}</small>
-                            <br>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star"></i>
+                    {% else %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">Doctor Details</h5>
+                            <div class="text-center">
+                                {% if doctor.profile_pic%}
+                                <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive"
+                                    style="border-radius: :50%;">
+                                {% else %}
+                                <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive"
+                                    style="border-radius: :50%;">
+                                {% endif %}
+                                <h4>{{doctor.full_name}}</h4>
+                                <small>{{doctor.specialist_type}}</small>
+                                <br>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <table class="table table-hover ">
+                                <tr>
+                                    <td>Consultations</td>
+                                    <td>21</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>About</strong>
+                                        <p>{{doctor.about}}</p>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <table class="table table-hover ">
-                            <tr>
-                                <td>Consultations</td>
-                                <td>21</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><strong>About</strong>
-                                    <p>{{doctor.about}}</p>
-                                </td>
-                            </tr>
-                        </table>
                     </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <div class="floating-chat">
         <div class="chat-btn">
@@ -322,25 +334,50 @@
         </div>
     </div>
     <script
-    src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
-<script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
-<script>
-    const user = '{{user}}';
-    const session = '{{ session }}';
-    const appoinment = '{{ appointment }}';
-    const doctor_id = '{{doctor.id}}';
-</script>
-<script src="{% static 'video/chat.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        let consultation_id = '';
-        if (user == 'pat'){
+        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
+    <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'patients/assets/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
+    <script>
+        const user = '{{user}}';
+        const session = '{{ session }}';
+        const appoinment = '{{ appointment }}';
+        const doctor_id = '{{doctor.id}}';
+    </script>
+    <script src="{% static 'video/chat.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#endBtn').click(function () {
+                $('#end').trigger('click')
+            })
+
+            $('#videoBtn').click(function () {
+                $('#toggleLocalVideo').trigger('click')
+            })
+
+            $('#micBtn').click(function () {
+                $('#toggleLocalAudio').trigger('click')
+            })
+
+            let doctor_ratings = Math.round("{{doctor.rating}}");
+            let stars = 1;
+            let star = ''
+            while (stars < 6) {
+                if (doctor_ratings >= stars) {
+                    star += `<i class="fa fa-star text-warning"></i>`
+                } else {
+                    star += '<i class="fa fa-star"></i>'
+                }
+                stars++
+            }
+            $('#rating-div').html(star);
+
+            let consultation_id = 0;
             function create_consultation() {
                 data = {
                     appoinment_id: appoinment,
-                    doctor_id: doctor_id
+                    doctor_id: doctor_id,
+                    session: session
                 };
                 $.ajax({
                     url: '/api/consultations/',
@@ -356,46 +393,117 @@
                     console.log(err)
                 })
             }
+            if (user == 'pat') {
 
-            let checkAnswer = setInterval(check_for_answer, 2000)
-            function check_for_answer(){
-                jQuery.ajax({
-                    url: `/api/check_for_answer?sessions=${session}`,
-                    method: 'GET',
-                    contentType: 'application/json'
-                }).done((res) => {
-                    console.log('Calling ...', res[0])
-                    if (res[0].is_answered == true) {
-                        create_consultation()
-                        clearInterval(checkAnswer)
-                    }
-                }).fail((err) => {
-                    console.log(err)
-                })
-            }
-        }
-        $('#end').click(function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            var id = urlParams.get('session')
-            var user = urlParams.get('user')
 
-            if (user == 'doc') {
-                window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}`;
+                let checkAnswer = setInterval(check_for_answer, 2000)
+                function check_for_answer() {
+                    jQuery.ajax({
+                        url: `/api/check_for_answer?sessions=${session}`,
+                        method: 'GET',
+                        contentType: 'application/json'
+                    }).done((res) => {
+                        if (res.length == 0) {
+                            // toastr.success("Doctor is busy now.", 'Success', {
+                            //     positionClass: "toast-top-center"
+                            // })
+                            // toastr.error("Doctor is busy now.","Success",{positionClass:'toast-top-center'})
+                            clearInterval(checkAnswer)
+                            clearInterval(messageInterval)
+                            alert('Doctor is busy now.');
+                            window.location.href = '/patients/dashboard'
+                        }
+                        if (res[0].is_answered == true) {
+                            create_consultation()
+                            clearInterval(checkAnswer)
+                        }
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                }
             }
             else {
-                window.location.href = '/api/ratings?consultation=' + consultation_id;
+                let checkAnswer = setInterval(check_for_answer, 2000)
+                function check_for_answer() {
+                    jQuery.ajax({
+                        url: `/api/check_for_answer?sessions=${session}`,
+                        method: 'GET',
+                        contentType: 'application/json'
+                    }).done((res) => {
+                        if (res.length == 0) {
+
+                            clearInterval(checkAnswer)
+                            clearInterval(messageInterval)
+                            alert('Doctor is busy now.');
+                            window.location.href = '/doctors/dashboard'
+                        }
+                        if (res[0].is_answered == true) {
+                            $.ajax({
+                                url: '/api/consult_info_for_doct?sessions=' + session,
+                                method: 'GET',
+                                contentType: 'application/json',
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                                }
+                            }).done(res => {
+                                consultation_id = res[0].id
+                                clearInterval(checkAnswer)
+                            })
+                        }
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                }
             }
-        })
+            $('#end').click(function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                var id = urlParams.get('session')
+                var user = urlParams.get('user')
 
-        $('#btnViewMore').click(function () {
-            $('#myTab a[href="#History"]').tab('show')
-        })
+                if (user == 'doc') {
+                    $.ajax({
+                        'url': '/api/vedioChatOparetion/' + $(this).attr('data-id') + '/',
+                        'method': 'DELETE',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                        },
+                    }).done((response) => {
+                        $('#incomingVideoCall').modal('hide')
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                    window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
+                }
+                else {
+                    $.ajax({
+                        'url': '/api/vedioChatOparetion/' + $(this).attr('data-id') + '/',
+                        'method': 'DELETE',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        },
+                    }).done((response) => {
+                        $('#incomingVideoCall').modal('hide')
+                    }).fail((err) => {
+                        console.log(err)
+                    })
+                    window.location.href = '/api/ratings?consultation=' + consultation_id;
 
-        $('#btnback').click(function () {
-            $('#myTab a[href="#Details"]').tab('show')
+                }
+            })
+
+            $('#btnViewMore').click(function () {
+                $('#myTab a[href="#History"]').tab('show')
+            })
+
+            $('#btnback').click(function () {
+                $('#myTab a[href="#Details"]').tab('show')
+            })
+
+            // setInterval(function () {
+            //     check_call_answered();
+            // }, 1000)
         })
-    })
-</script>
+    </script>
 </body>
 
 </html>

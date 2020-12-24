@@ -218,7 +218,10 @@
                     jQuery('#PatientName').html(list[0].caller_name)
                     // jQuery('#answerCall').attr('href', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`)
                     jQuery('#answerCall').attr('data-session', list[0].id)
-                    jQuery('#answerCall').attr('data-url', `/api/VideoCall?session=${list[0].id}&user=doc&patient=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`);
+                    let device = 'big'
+                    if (window.matchMedia("(max-width:425px)").matches)
+                        device ='small'
+                    jQuery('#answerCall').attr('data-url', `/api/VideoCall?device=${device}&session=${list[0].id}&user=doc&patient=${list[0].caller_ID}&appointment=${list[0].appoinment_id}`);
                     jQuery('#incomingVideoCall').modal('show')
                 }
                 else {

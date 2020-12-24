@@ -348,12 +348,23 @@
                             </span>
                         </a>
                     </li>
-                   
+
 
                 </ul>
                 {% endif %}
             </nav>
             <div id="otEmbedContainer" style="width:100%; height:580px;padding-left:8%">
+            </div>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-danger" id="endBtn" style="border-radius: 50%;">
+                    <i class="mdi mdi-phone-hangup text-white"></i>
+                </button>
+                <button class="btn btn-outline-danger" id="videoBtn" style="border-radius: 50%;">
+                    <i class="mdi mdi-video-off"></i>
+                </button>
+                <button class="btn btn-outline-danger" id="micBtn" style="border-radius: 50%;">
+                    <i class="mdi mdi-microphone-off"></i>
+                </button>
             </div>
         </div>
         <div class="col-md-3">
@@ -515,7 +526,7 @@
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
                         </div>
-                        
+
                     </div>
                     <table class="table table-hover ">
                         <tr>
@@ -556,7 +567,6 @@
             </div>
         </div>
     </div>
-    <button id="end">End button</button>
     <script
         src="https://tokbox.com/embed/embed/ot-embed.js?embedId=5c0f7c4e-673c-4d7a-82c6-ddf7e5f5a100&room=room{{session}}"></script>
     <script src="{% static 'patients/assets/vendors/jquery/jquery-3.4.1.min.js' %}"></script>
@@ -572,15 +582,25 @@
     <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
-            $('#toggleLocalAudio').data('tooltip', 'turn off microphone')
-            $('#toggleLocalVideo').data('tooltip', 'turn off camera')
+            $('#endBtn').click(function () {
+                $('#end').trigger('click')
+            })
+
+            $('#videoBtn').click(function () {
+                $('#toggleLocalVideo').trigger('click')
+            })
+
+            $('#micBtn').click(function () {
+                $('#toggleLocalAudio').trigger('click')
+            })
+
             let doctor_ratings = Math.round("{{doctor.rating}}");
             let stars = 1;
             let star = ''
-            while(stars < 6){
-                if(doctor_ratings >= stars){
+            while (stars < 6) {
+                if (doctor_ratings >= stars) {
                     star += `<i class="fa fa-star text-warning"></i>`
-                }else{
+                } else {
                     star += '<i class="fa fa-star"></i>'
                 }
                 stars++
@@ -589,36 +609,36 @@
 
             let consultation_id = 0;
             function create_consultation() {
-                    data = {
-                        appoinment_id: appoinment,
-                        doctor_id: doctor_id,
-                        session: session
-                    };
-                    $.ajax({
-                        url: '/api/consultations/',
-                        method: 'POST',
-                        data: JSON.stringify(data),
-                        contentType: 'application/json',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
-                        }
-                    }).done((response) => {
-                        consultation_id = response.id
-                    }).fail((err) => {
-                        console.log(err)
-                    })
-                }
-            if (user == 'pat'){
-                
+                data = {
+                    appoinment_id: appoinment,
+                    doctor_id: doctor_id,
+                    session: session
+                };
+                $.ajax({
+                    url: '/api/consultations/',
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    }
+                }).done((response) => {
+                    consultation_id = response.id
+                }).fail((err) => {
+                    console.log(err)
+                })
+            }
+            if (user == 'pat') {
+
 
                 let checkAnswer = setInterval(check_for_answer, 2000)
-                function check_for_answer(){
+                function check_for_answer() {
                     jQuery.ajax({
                         url: `/api/check_for_answer?sessions=${session}`,
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
-                        if(res.length == 0) {
+                        if (res.length == 0) {
                             // toastr.success("Doctor is busy now.", 'Success', {
                             //     positionClass: "toast-top-center"
                             // })
@@ -637,30 +657,30 @@
                     })
                 }
             }
-            else{
+            else {
                 let checkAnswer = setInterval(check_for_answer, 2000)
-                function check_for_answer(){
+                function check_for_answer() {
                     jQuery.ajax({
                         url: `/api/check_for_answer?sessions=${session}`,
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
-                        if(res.length == 0) {
-                            
+                        if (res.length == 0) {
+
                             clearInterval(checkAnswer)
                             clearInterval(messageInterval)
                             alert('Doctor is busy now.');
                             window.location.href = '/doctors/dashboard'
                         }
-                        if(res[0].is_answered == true){
+                        if (res[0].is_answered == true) {
                             $.ajax({
-                                url: '/api/consult_info_for_doct?sessions='+session,
+                                url: '/api/consult_info_for_doct?sessions=' + session,
                                 method: 'GET',
                                 contentType: 'application/json',
                                 beforeSend: function (xhr) {
                                     xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
                                 }
-                            }).done(res=>{
+                            }).done(res => {
                                 consultation_id = res[0].id
                                 clearInterval(checkAnswer)
                             })
@@ -702,7 +722,7 @@
                         console.log(err)
                     })
                     window.location.href = '/api/ratings?consultation=' + consultation_id;
-                    
+
                 }
             })
 

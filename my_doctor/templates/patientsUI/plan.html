@@ -2,331 +2,495 @@
 {% load static%}
 {% block content %}
 <div class="ca-content__chatstab">
-
     <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
-            <div class="container">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Select a Plan</h4>
-                    </div>
-                    <div class="card-body">
-                        <section class="customer-logos slider">
-                            <!-- Individual -->
-                            <div class="slide">
-                                <div class="card" style="    border-radius:1.25rem;">
-                                    <div class="card-header" style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
-                                        <h4 class="text-center">Individual</h4>
-                                    </div>
-                            
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Coverage</td>
-                                                <td>One</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Validity</td>
-                                                <td>10 Consults</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Video / Audio Consult</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unlimited Consult / Month</td>
-                                                <td>NO</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lab Discounts</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Follow up</td>
-                                                <td>2 Free</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Report Storage</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Speciality Choice</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Choice of Doctor</td>
-                                                <td>YES</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            
-                                    <div class="card-footer">
-                                        <div class="text-center">
-                                            <div class="card-body text-center">
-                                                <h2>
-                                                    <i class="mdi mdi-currency-inr"></i>  2,490.00
-                                                </h2>
+            <ul class="nav nav-pills sr-only" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#SelectPlan" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Payment" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active show" id="SelectPlan">
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Select a Plan</h4>
+                            </div>
+                            <div class="card-body">
+                                <section class="customer-logos slider">
+                                    <!-- Individual -->
+                                    <div class="slide">
+                                        <div class="card" style="    border-radius:1.25rem;">
+                                            <div class="card-header"
+                                                style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
+                                                <h4 class="text-center">Individual</h4>
+                                            </div>
+                
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Coverage</td>
+                                                        <td>One</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Validity</td>
+                                                        <td>10 Consults</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Video / Audio Consult</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Unlimited Consult / Month</td>
+                                                        <td>NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lab Discounts</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Follow up</td>
+                                                        <td>2 Free</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Report Storage</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Speciality Choice</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Choice of Doctor</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <div class="card-body text-center">
+                                                        <h2>
+                                                            <i class="mdi mdi-currency-inr"></i> 2,490.00
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn mfb-component__button--main selectPlan"
+                                                    style="width:100%;  border-radius:30px">
+                                                    Select Plan
+                                                </button>
                                             </div>
                                         </div>
-                                        <button data-toggle="modal" data-target="#CommingSoon" type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
-                                            Select Plan
-                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- You + 1 -->
-                            <div class="slide">
-                                <div class="card" style="    border-radius:1.25rem;">
-                                    <div class="card-header" style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
-                                        <h4 class="text-center">You + 1</h4>
-                                    </div>
-                            
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Coverage</td>
-                                                <td>You + 1 Child</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Validity</td>
-                                                <td>15 Consults</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Video / Audio Consult</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unlimited Consult / Month</td>
-                                                <td>NO</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lab Discounts</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Follow up</td>
-                                                <td>2 Free</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Report Storage</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Speciality Choice</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Choice of Doctor</td>
-                                                <td>YES</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            
-                                    <div class="card-footer">
-                                        <div class="text-center">
-                                            <div class="card-body text-center">
-                                                <h2>
-                                                    <i class="mdi mdi-currency-inr"></i> 3,990.00
-                                                </h2>
+                                    <!-- You + 1 -->
+                                    <div class="slide">
+                                        <div class="card" style="    border-radius:1.25rem;">
+                                            <div class="card-header"
+                                                style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
+                                                <h4 class="text-center">You + 1</h4>
+                                            </div>
+                
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Coverage</td>
+                                                        <td>You + 1 Child</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Validity</td>
+                                                        <td>15 Consults</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Video / Audio Consult</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Unlimited Consult / Month</td>
+                                                        <td>NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lab Discounts</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Follow up</td>
+                                                        <td>2 Free</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Report Storage</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Speciality Choice</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Choice of Doctor</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <div class="card-body text-center">
+                                                        <h2>
+                                                            <i class="mdi mdi-currency-inr"></i> 3,990.00
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn mfb-component__button--main selectPlan"
+                                                    style="width:100%;  border-radius:30px">
+                                                    Select Plan
+                                                </button>
                                             </div>
                                         </div>
-                                        <button data-toggle="modal" data-target="#CommingSoon" type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
-                                            Select Plan
-                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- You + 2 -->
-                            <div class="slide">
-                                <div class="card" style="    border-radius:1.25rem;">
-                                    <div class="card-header" style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
-                                        <h4 class="text-center">You + 2</h4>
-                                    </div>
-                            
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Coverage</td>
-                                                <td>You + 1 Adult + 1 Child</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Validity</td>
-                                                <td>15 Consults</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Video / Audio Consult</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unlimited Consult / Month</td>
-                                                <td>NO</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lab Discounts</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Follow up</td>
-                                                <td>2 Free</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Report Storage</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Speciality Choice</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Choice of Doctor</td>
-                                                <td>YES</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            
-                                    <div class="card-footer">
-                                        <div class="text-center">
-                                            <div class="card-body text-center">
-                                                <h2>
-                                                    <i class="mdi mdi-currency-inr"></i> 4,990.00
-                                                </h2>
+                                    <!-- You + 2 -->
+                                    <div class="slide">
+                                        <div class="card" style="    border-radius:1.25rem;">
+                                            <div class="card-header"
+                                                style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
+                                                <h4 class="text-center">You + 2</h4>
+                                            </div>
+                
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Coverage</td>
+                                                        <td>You + 1 Adult + 1 Child</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Validity</td>
+                                                        <td>15 Consults</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Video / Audio Consult</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Unlimited Consult / Month</td>
+                                                        <td>NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lab Discounts</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Follow up</td>
+                                                        <td>2 Free</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Report Storage</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Speciality Choice</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Choice of Doctor</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <div class="card-body text-center">
+                                                        <h2>
+                                                            <i class="mdi mdi-currency-inr"></i> 4,990.00
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <button type="button"  class="btn mfb-component__button--main selectPlan"
+                                                    style="width:100%;  border-radius:30px">
+                                                    Select Plan
+                                                </button>
                                             </div>
                                         </div>
-                                        <button data-toggle="modal" data-target="#CommingSoon" type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
-                                            Select Plan
-                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- You + 3 -->
-                            <div class="slide">
-                                <div class="card" style="    border-radius:1.25rem;">
-                                    <div class="card-header" style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
-                                        <h4 class="text-center">You + 3</h4>
-                                    </div>
-                            
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Coverage</td>
-                                                <td>You + 1 Adult + 2 Child</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Validity</td>
-                                                <td>15 Consults</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Video / Audio Consult</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unlimited Consult / Month</td>
-                                                <td>NO</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lab Discounts</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Follow up</td>
-                                                <td>2 Free</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Report Storage</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Speciality Choice</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Choice of Doctor</td>
-                                                <td>YES</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            
-                                    <div class="card-footer">
-                                        <div class="text-center">
-                                            <div class="card-body text-center">
-                                                <h2>
-                                                    <i class="mdi mdi-currency-inr"></i> 5,990.00
-                                                </h2>
+                                    <!-- You + 3 -->
+                                    <div class="slide">
+                                        <div class="card" style="    border-radius:1.25rem;">
+                                            <div class="card-header"
+                                                style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
+                                                <h4 class="text-center">You + 3</h4>
+                                            </div>
+                
+                                            <table class="table" id="youPlusThree">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Coverage</td>
+                                                        <td>You + 1 Adult + 2 Child</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Validity</td>
+                                                        <td>15 Consults</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Video / Audio Consult</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Unlimited Consult / Month</td>
+                                                        <td>NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lab Discounts</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Follow up</td>
+                                                        <td>2 Free</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Report Storage</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Speciality Choice</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Choice of Doctor</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <div class="card-body text-center">
+                                                        <h2>
+                                                            <i class="mdi mdi-currency-inr"></i> 5,990.00
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <button type="button" data-table="#youPlusThree" class="btn mfb-component__button--main selectPlan"
+                                                    style="width:100%;  border-radius:30px">
+                                                    Select Plan
+                                                </button>
                                             </div>
                                         </div>
-                                        <button data-toggle="modal" data-target="#CommingSoon" type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
-                                            Select Plan
-                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- Senior Citizens -->
-                            <div class="slide">
-                                <div class="card" style="    border-radius:1.25rem;">
-                                    <div class="card-header" style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
-                                        <h4 class="text-center">Senior Citizens</h4>
-                                    </div>
-                            
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Coverage</td>
-                                                <td>One</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Validity</td>
-                                                <td>One Month</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Video / Audio Consult</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unlimited Consult / Month</td>
-                                                <td>UNLIMITED</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lab Discounts</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Free Follow up</td>
-                                                <td>4 Free</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Report Storage</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Speciality Choice</td>
-                                                <td>YES</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Choice of Doctor</td>
-                                                <td>YES</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            
-                                    <div class="card-footer">
-                                        <div class="text-center">
-                                            <div class="card-body text-center">
-                                                <h2>
-                                                    <i class="mdi mdi-currency-inr"></i> 4,990.00
-                                                </h2>
+                                    <!-- Senior Citizens -->
+                                    <div class="slide">
+                                        <div class="card" style="    border-radius:1.25rem;">
+                                            <div class="card-header"
+                                                style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
+                                                <h4 class="text-center">Senior Citizens</h4>
+                                            </div>
+                
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Coverage</td>
+                                                        <td>One</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Validity</td>
+                                                        <td>One Month</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Video / Audio Consult</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Unlimited Consult / Month</td>
+                                                        <td>UNLIMITED</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lab Discounts</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Free Follow up</td>
+                                                        <td>4 Free</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Report Storage</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Speciality Choice</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Choice of Doctor</td>
+                                                        <td>YES</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <div class="card-body text-center">
+                                                        <h2>
+                                                            <i class="mdi mdi-currency-inr"></i> 4,990.00
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn mfb-component__button--main selectPlan"
+                                                    style="width:100%;  border-radius:30px">
+                                                    Select Plan
+                                                </button>
                                             </div>
                                         </div>
-                                        <button data-toggle="modal" data-target="#CommingSoon" type="button" class="btn mfb-component__button--main" style="width:100%;  border-radius:30px">
-                                            Select Plan
-                                        </button>
                                     </div>
-                                </div>
+                                </section>
                             </div>
-                         </section>
+                        </div>
+                
                     </div>
                 </div>
-               
-            </div>
+                  <div class="tab-pane" id="Payment">
+                    <div class="spl-list">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card" style="    border-radius:1.25rem;">
+                                        <div class="card-header"
+                                            style=" border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0;">
+                                            <h5 class="text-center">Senior Citizens</h5>
+                                        </div>
+            
+                                        <table class="table" id="planDetails">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Coverage</td>
+                                                    <td>One</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Validity</td>
+                                                    <td>One Month</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Free Video / Audio Consult</td>
+                                                    <td>YES</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Unlimited Consult / Month</td>
+                                                    <td>UNLIMITED</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lab Discounts</td>
+                                                    <td>YES</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Free Follow up</td>
+                                                    <td>4 Free</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Report Storage</td>
+                                                    <td>YES</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Speciality Choice</td>
+                                                    <td>YES</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Choice of Doctor</td>
+                                                    <td>YES</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+            
+                                        <div class="card-footer">
+                                            <button type="button" class="btn mfb-component__button--main ChangePlan"
+                                                style="width:100%;  border-radius:30px">
+                                                Change Plan
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header text-center">
+                                            <h5>Payment Summary</h5>
+                                        </div>
+                                        <div class="card-body">
+<ul id="promocodelist" class="list-unstyled">
+                                            <li>
+                                                <div class="ps-list">
+                                                    <div class="ps-list__left">
+                                                        <div class="ps-list__left--icon"></div>
+                                                        <div class="ps-list__left--name">Subscription Fee
+                                                        </div>
+                                                    </div>
+                                                    <div class="ps-list__right" id="cons-fee">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="ps-list">
+                                                    <div class="ps-list__left">
+                                                        <div class="ps-list__left--icon"></div>
+                                                        <div class="ps-list__left--name">
+                                                            <input type="checkbox" id="useWalletBalance" disabled>
+                                                            Use wallet balance
+                                                        </div>
+                                                    </div>
+                                                    <div class="ps-list__right" id="walletBalance"> 0
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="ps-list">
+                                                    <div class="ps-list__left">
+                                                        <div class="ps-list__left--icon"></div>
+                                                        <div class="ps-list__left--name">GST Incl.</div>
+                                                    </div>
+                                                    <div class="ps-list__right" id="GST">  </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-none" id="message">
+                                                <div class="ps-list">
+                                                    <div class="ps-list__left">
+                                                        <div class="ps-list__left--icon"></div>
+                                                        <div class="ps-list__left--name text-danger">
+                                                        </div>
+                                                    </div>
+                                                    <div class="ps-list__right" id="promocode_percent">  </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <input type="hidden" id="doctor-number">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Total Payable Amount
+                                                    </div>
+                                                    <div class="card-body text-center">
+                                                        <h2>
+                                                            <i class="mdi mdi-currency-inr"></i>
+                                                            <span id="total-amt"></span>
+                                                        </h2>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <button type="button"
+                                                            class="btn mfb-component__button--main"
+                                                            style="width:100%;  border-radius:30px" id="rzp-button1">
+                                                            Pay
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </div>
+                                        
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+           
+        </div>
     </div>
 </div>
 <div id="select-subplan" class="modal fade" role="dialog">
@@ -430,23 +594,23 @@
     </div>
 </div>
 <div class="modal new-message-dialog" id="CommingSoon" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                       <h5>Comming Soon..</h5>
-                          
-                    </div>
-                    <div class="modal-body text-center">
-                      <p class="">This Feature is Unavailable at moment it will be at your service at the earliest.</p>
-                    </div>
-                    <div class="modal-footer d-flex flex-wrap align-content-center">
-                        <button type="button" class="btn mfb-component__button--main"
-                        style="width:100%;border-radius:0px" data-dismiss="modal" >ok</button>
-                    </div>
-                </div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Comming Soon..</h5>
+
+            </div>
+            <div class="modal-body text-center">
+                <p class="">This Feature is Unavailable at moment it will be at your service at the earliest.</p>
+            </div>
+            <div class="modal-footer d-flex flex-wrap align-content-center">
+                <button type="button" class="btn mfb-component__button--main" style="width:100%;border-radius:0px"
+                    data-dismiss="modal">ok</button>
             </div>
         </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
@@ -457,7 +621,19 @@
         // VARIABLES...
         let dataList = [];
         let old_active_id = null;
-        
+
+        $('.selectPlan').click(function(){
+            let button = $(this)
+            let tableid = button.attr('data-table')
+
+            $('#planDetails').html($(tableid).html())
+            $('#myTab a[href="#Payment"]').tab('show')
+        })
+
+        $('.ChangePlan').click(function(){
+            $('#myTab a[href="#SelectPlan"]').tab('show')
+        })
+
         document.getElementById('rzp-button1').onclick = function (e) {
             var options = {
                 "key": "rzp_test_Sh4geUmypYkfzX", // Enter the Key ID generated from the Dashboard
