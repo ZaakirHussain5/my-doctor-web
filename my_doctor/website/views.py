@@ -4,7 +4,7 @@ from specialist_type.models import specialist_type
 def index(request):
 
     return render(request,'website/index.html',{
-        "page_title":"Title From Code",
+        "page_title":"Welcome to Doctor Plus | India's Most Popular Telemedicine Online Doctor Consultancy.",
         "meta_description":"Doctor Plus | India's most trusted Online Doctor Consultant for General Physician, Dermatology, Psychology, Dietitian, Pediatrician and Gynechology"})
 
 def features(request):
