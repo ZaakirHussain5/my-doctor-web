@@ -1,19 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from specialist_type.models import specialist_type
 from consultations.models import consultations as consultationTable
+from patient_subscription.models import PatientSubscription
+from patients.models import patient_info
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url='/login')
 def dashboard(request):
     return render(request,'patientsUI/dashboard.html')
 
+@login_required(login_url='/login')
 def old_dashboard(request):
     return render(request,'patientsUI/old_dashboard.html')
 
+@login_required(login_url='/login')
 def appointments(request):
     return render(request,'patientsUI/appointments.html')
 
+@login_required(login_url='/login')
 def consultations(request):
     return render(request,'patientsUI/consultations.html')
 
+@login_required(login_url='/login')
 def selectDoctors(request):
     spl_type = specialist_type.objects.get(special_type=request.GET.get('spl'))
     print(spl_type)
@@ -27,20 +36,46 @@ def selectDoctors(request):
         "week":weekDays[week]
     })
 
+@login_required(login_url='/login')
 def newAppointment(request):
+    try:
+        patient = patient_info.objects.get(user=request.user)
+    except:
+        return redirect('/login')
     context ={}
     context['specialist']=specialist_type.objects.all()
+    context["subscription_active"] = 'no'
+    try:
+        pat_sub = PatientSubscription.objects.get(user=patient)
+        context["subscription_active"] = 'yes'
+    except PatientSubscription.DoesNotExist:
+        context["subscription_active"] = 'no'
     return render(request,'patientsUI/new_appointment.html', context)
 
+@login_required(login_url='/login')
 def billHistory(request):
     return render(request,'patientsUI/bill_history.html')
 
+@login_required(login_url='/login')
 def medical_records(request):
     return render(request,'patientsUI/medical_records.html')
 
+@login_required(login_url='/login')
 def plan(request):
-    return render(request,'patientsUI/plan.html')
+    try:
+        patient = patient_info.objects.get(user=request.user)
+    except:
+        return redirect('/login')
+    context = {}
+    try:
+        pat_sub = PatientSubscription.objects.get(user=patient)
+        context['active_plan'] = pat_sub
+        context["planExists"] = True
+    except PatientSubscription.DoesNotExist:
+        context["planExists"] = False
+    return render(request,'patientsUI/plan.html',context)
 
+@login_required(login_url='/login')
 def invoice(request):
     const_id = request.GET.get('id', None)
     consultationInstance = consultationTable.objects.get(id=const_id)

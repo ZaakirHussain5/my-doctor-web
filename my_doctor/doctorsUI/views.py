@@ -1,17 +1,22 @@
 from django.shortcuts import render,redirect
 from patients.models import patient_info
 from consultations.models import consultations
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='/login')
 def dashboard(request):
     return render(request,'doctorsUI/dashboard.html')
 
+@login_required(login_url='/login')
 def consultationsView(request):
     return render(request,'doctorsUI/consultations.html')
 
+@login_required(login_url='/login')
 def appointmentsView(request):
     return render(request,'doctorsUI/appointments.html')
 
+@login_required(login_url='/login')
 def Prescription(request):
 	context ={}
 	pat_id = request.GET.get('pat_id')
@@ -30,8 +35,10 @@ def Prescription(request):
 	context['patients'] = patients
 	return render(request, 'doctorsUI/prescription.html', context)
 
+@login_required(login_url='/login')
 def profile(request):
 	return render(request,'doctorsUI/profile.html')
 
+@login_required(login_url='/login')
 def settings(request):
 	return render(request,'doctorsUI/settings.html')

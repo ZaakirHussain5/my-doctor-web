@@ -18,6 +18,7 @@ from appointment.models import appointment
 from .models import DoctorBillingHistory,doctors_info, DoctorTimings, settlement_details, DoctorBankDetails, Doctornotes
 from .serializers import *
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
@@ -298,6 +299,7 @@ class DoctorLogout(generics.GenericAPIView):
                 user=request.user)
             doctor.is_loggedin=False
             doctor.save()
+            logout(request)
             return Response({})
 
 

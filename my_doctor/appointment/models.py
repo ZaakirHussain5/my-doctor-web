@@ -27,11 +27,17 @@ class appointment(models.Model):
 
     @property
     def patient_name(self):
-        return patient_info.objects.get(user__id=self.patient.id).full_name
+        try:
+            return patient_info.objects.get(user__id=self.patient.id).full_name
+        except:
+            return "Patient Deleted"
     
     @property
     def patient_login_status(self):
-        return patient_info.objects.get(user__id=self.patient.id).is_logged_in
+        try:
+            return patient_info.objects.get(user__id=self.patient.id).is_logged_in
+        except:
+            return False
     
     @property
     def patient_age(self):

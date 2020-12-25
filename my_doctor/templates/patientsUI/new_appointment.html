@@ -373,6 +373,7 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     $(document).ready(function () {
+        const isSubscriptionActive = '{{ subscription_active }}' ;
         window.matchMedia("(max-width:425px)").addListener(mob)
 
         function mob(){
@@ -421,6 +422,13 @@
                 },
             }).done(res=>{
                 console.log(res)
+                if(isSubscriptionActive == 'yes'){
+                    $('#promoApply').attr('disabled', true)
+                    $('#walletBalance').html(0)
+                    $('#useWalletBalance').attr('disabled', true)
+                    $('#total-amt').html(0)
+                    return
+                }
                 if(res.length ==0 || res[0].wallet.balance == ''){
                     $('#walletBalance').html(0)
                     $('#useWalletBalance').attr('disabled', true)
@@ -554,13 +562,21 @@
                 },
             }).done(res=>{
                 console.log('wallet', res);
-                if(res.length ==0){
+                if(isSubscriptionActive == 'yes'){
+                    $('#promoApply').attr('disabled', true)
+                    $('#walletBalance').html(0)
+                    $('#useWalletBalance').attr('disabled', true)
+                    $('#total-amt').html(0)
+                    return
+                }
+                
+                if(res.length ==0 ){
                     $('#walletBalance').html(0)
                     $('#useWalletBalance').attr('disabled', true)
                     return
                 }
                 wallet_balance = res[0].wallet.balance;
-                if (wallet_balance == ''){
+                if (wallet_balance == '' && isSubscriptionActive == 'yes'){
                     $('#walletBalance').html(0)
                     $('#useWalletBalance').attr('disabled', true)
                     return
@@ -827,7 +843,7 @@
                         "address": "B&S Associates No:1, Subbiaha Reddy block, Metro Station, Ulsoor, Bangalore - 560038"
                     },
                     "theme": {
-                        "color": "#007bff"
+                        "color": "#1f3864"
                     }
                 };
                 var rzp1 = new Razorpay(options);
@@ -855,7 +871,6 @@
                         trans_desc: "New appointment on " + $('#app-date').html() +'. The appointment is booked on ' + current_date.toLocaleDateString(),
                         debit: diducted_wallet_balance,
                         balance: diducted_wallet_balance
-
                     }
                     $.ajax({
                         url: '/api/transactions/',

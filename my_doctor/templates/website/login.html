@@ -241,7 +241,7 @@
         $('#myTab #Doctor').click(() => {
             console.log('clicked');
             $('#user_type').val('D');
-            $('#redirectTo').attr('href', "/doctor_reg")
+            $('#redirectTo').attr('href', "{% url 'website:doctor_reg'%}")
             $('label[for="Name1"]').html('Phone Number or Doctor ID')
             $('#Name1').attr('placeholder', 'Phone Number or Doctor ID')
             $('#myTab #Patient').removeClass('active')

@@ -6,7 +6,7 @@ from patients.serializers import patient_infoSerializer
 
 
 class PatientSubscriptionSerializers(serializers.ModelSerializer):
-    user = patient_infoSerializer()
+    user = patient_infoSerializer(required=False)
     class Meta:
         model = PatientSubscription
         fields = "__all__"

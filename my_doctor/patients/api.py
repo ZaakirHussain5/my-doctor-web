@@ -18,11 +18,13 @@ from accounts.serializers import UserAuthSerializer
 from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 from appointment.models import appointment
 from appointment.serializers import appointmentSerializer
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
+from django.contrib.auth import logout
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.filter(is_active=True)
@@ -158,6 +160,7 @@ class socialPatientRegistrationView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        login(request,user)
         return Response({
             'Patient': UserAuthSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
@@ -279,6 +282,7 @@ class PatientLogout(generics.GenericAPIView):
                 user=request.user)
             patient.is_logged_in=False
             patient.save()
+            logout(request)
             return Response({})
 
 
