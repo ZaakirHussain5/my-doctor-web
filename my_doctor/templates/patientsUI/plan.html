@@ -338,7 +338,7 @@
                                                         </h2>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn mfb-component__button--main selectSeniorPlan"
+                                                <button type="button" data-table="#seniorPlan" data-price="4990" data-plan="Senior Citizens" data-cons-count="0" class="btn mfb-component__button--main selectSeniorPlan"
                                                     style="width:100%;  border-radius:30px">
                                                     Select Plan
                                                 </button>
@@ -548,7 +548,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <a href="#" class="btn btn-primary btn-block">
+                                            <a href="/patients/patientInvoice/?id={{ active_plan.id }}" class="btn btn-primary btn-block">
                                                 View Invoice
                                             </a>
                                         </td>
@@ -578,6 +578,8 @@
         let price = ""
         let gst = 0
         let con_count=0
+        let gst_decimal = 0.00;
+        let senior_status = false;
         
         $('.selectPlan').click(function () {
             let button = $(this)
@@ -585,7 +587,9 @@
             plan = button.attr('data-plan')
             price = button.attr('data-price')
             con_count=button.attr('data-cons-count')
-            gst = parseFloat(price)*(18/100)
+            gst = (parseFloat(price)*(18/100));
+            gst_decimal = gst.toFixed(2);
+            senior_status = false;
             $('#GST').html(gst.toFixed(2))
             $('#total-amount').html((parseFloat(price)+gst).toFixed(2))
             $('#selectedPlanName').html(plan + ' Plan')
@@ -593,6 +597,35 @@
             $('#planDetails').html($(tableid).html())
             $('#myTab a[href="#Payment"]').tab('show')
         })
+        {% if is_senior == 'eligable' %}
+
+            $('.selectSeniorPlan').click(function(){
+                let button = $(this)
+                let tableid = button.attr('data-table')
+                plan = button.attr('data-plan')
+                price = button.attr('data-price')
+                con_count=button.attr('data-cons-count')
+                gst = (parseFloat(price)*(18/100));
+                gst_decimal = gst.toFixed(2);
+                senior_status=true;
+                $('#GST').html(gst.toFixed(2))
+                $('#total-amount').html((parseFloat(price)+gst).toFixed(2))
+                $('#selectedPlanName').html(plan + ' Plan')
+                $('#subs-fee').html(price)
+                $('#planDetails').html($(tableid).html())
+                $('#myTab a[href="#Payment"]').tab('show')
+            })
+
+        {% elif is_senior == 'nodata' %}
+            $('.selectSeniorPlan').click(function(){
+                $('#settingsModalCenter').modal('show')
+            })
+        
+        {% else %}
+            $('.selectSeniorPlan').click(function(){
+                alert('You are not eligable for this plan. For more information please contact with us.')
+            })
+        {% endif %}
 
         $('.ChangePlan').click(function () {
             $('#myTab a[href="#SelectPlan"]').tab('show')
@@ -613,9 +646,10 @@
                     var data = {
                         plan: plan,
                         is_active: true,
+                        is_senior: senior_status,
                         payment_id:payment_id,
                         cons_count:con_count,
-                        gst:gst,
+                        gst:gst_decimal,
                         paid_amount:$('#total-amount').html(),
                         plan_price:price,
                         plan_description:$('#planDetails').html()
@@ -632,6 +666,9 @@
                     }).done((response) => {
                         console.log(response);
                         toastr.success("Your Subscription is now active.","Success",{positionClass:"toast-top-center"})
+                        setTimeout(function(){
+                            window.location.href = '/patients/patientInvoice/?id='+response.id
+                        }, 1000)
                     }).fail((err, error, wrong) => {
                         console.log(err)
                     })

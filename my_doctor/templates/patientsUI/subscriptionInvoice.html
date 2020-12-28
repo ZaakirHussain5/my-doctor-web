@@ -50,10 +50,10 @@
                     <div class="col-sm-4">
                         <h6 class="mb-3">To:</h6>
                         <div>
-                            <strong>{{ consultation.patient_name }}</strong>
+                            <strong>{{ plan.user.full_name }}</strong>
                         </div>
-                        <div>Email: {{ consultation.patient.email }}</div>
-                        <div>Phone: {{ consultation.patient_number }}</div>
+                        <div>Email: {{ plan.user.user.email }}</div>
+                        <div>Phone: {{ plan.user.ph_no }}</div>
                     </div>
                     <div class="col-sm-4">
                         <img src="{% static 'website/img/logo.png' %}" class="float-right" alt="" id="logoImage">
@@ -74,10 +74,8 @@
                         <tbody>
                             <tr>
                                 <td class="center">1</td>
-                                <td class="left">Consultation With {{consultation.doctor_id.full_name}}
-                                    {{consultation.doctor_id.specialist_type}} on
-                                    {{consultation.consultation_date_time}} </td>
-                                <td class="text-right"><i class="fa fa-inr"></i>{{ consultation.consultation_amt}} </td>
+                                <td class="left">{{plan.plan}} plan</td>
+                                <td class="text-right"><i class="fa fa-inr"></i>{{ plan.plan_price }} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -94,21 +92,21 @@
                                     <td class="left">
                                         <strong>Subtotal</strong>
                                     </td>
-                                    <td class="text-right"><i class="fa fa-inr"></i>{{ consultation.consultation_amt}}
+                                    <td class="text-right"><i class="fa fa-inr"></i>{{ plan.plan_price}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="left">
-                                        <strong>GST Incl.(18%)</strong>
+                                        <strong>GST(18%)</strong>
                                     </td>
-                                    <td class="text-right"><i class="fa fa-inr"></i>{{tax}}</td>
+                                    <td class="text-right"><i class="fa fa-inr"></i>{{ plan.gst }}</td>
                                 </tr>
                                 <tr>
                                     <td class="left">
                                         <strong>Total</strong>
                                     </td>
                                     <td class="text-right">
-                                        <strong><i class="fa fa-inr"></i>{{ consultation.consultation_amt}}</strong>
+                                        <strong><i class="fa fa-inr"></i>{{ plan.paid_amount }}</strong>
                                     </td>
                                 </tr>
                             </tbody>
