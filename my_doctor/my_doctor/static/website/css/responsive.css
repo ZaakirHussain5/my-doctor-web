@@ -365,7 +365,7 @@ section.slider {
 }.slider h4 {
   font-size: 15px !important;margin-bottom: 10px;
 }a.btn, button.btn {
-  font-size: 11px;
+  font-size: 10px;
   padding: 8px;
   z-index: 9 !important;
   margin: 0 10px;

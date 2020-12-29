@@ -7,29 +7,26 @@ from patient_subscription.models import PatientSubscription
 
 @receiver(post_save, sender=appointment)
 def save_doctor_payment(sender, instance, **kwargs):
-    patient = patient_info.objects.get(user=instance.patient)
-    if instance.is_senior:
-        pass
-    else:
-
+        patient = patient_info.objects.get(user=instance.patient)
         try:
             pat_subs = PatientSubscription.objects.get(user=patient)
-            if pat_subs.is_active:
-                if instance.consultation_status == "Cancelled":
-                    if pat_subs.cons_count == pat_subs.total_count:
-                        return
-                    if pat_subs.cons_count == 0:
-                        pat_subs.is_active = True
+            if pat_subs.is_senior == False:
+                if pat_subs.is_active:
+                    if instance.consultation_status == "Cancelled":
+                        if pat_subs.cons_count == pat_subs.total_count:
+                            return
+                        if pat_subs.cons_count == 0:
+                            pat_subs.is_active = True
 
-                    pat_subs.cons_count = pat_subs.cons_count + 1
-                    pat_subs.save()
-                else:
-                    if pat_subs.cons_count == 1:
-                        pat_subs.is_active = False
-                    pat_subs.cons_count = pat_subs.cons_count - 1
-                    
-                    pat_subs.save()
-                return
+                        pat_subs.cons_count = pat_subs.cons_count + 1
+                        pat_subs.save()
+                    else:
+                        if pat_subs.cons_count == 1:
+                            pat_subs.is_active = False
+                        pat_subs.cons_count = pat_subs.cons_count - 1
+                        
+                        pat_subs.save()
+                    return
         except PatientSubscription.DoesNotExist:
             pass
         if instance.consultation_status != "Cancelled":

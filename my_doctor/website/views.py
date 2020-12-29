@@ -29,7 +29,7 @@ def aboutus(request):
 
 def login(request):
     return render(request,'website/login.html',{
-        "page_title":"Title From Code",
+        "page_title":"Doctor Plus | Login",
         "meta_description":""})
 
 def contact(request):
