@@ -535,7 +535,12 @@
                                             Consultations Remaining
                                         </td>
                                         <td class="tetx-right">
+                                            {% if active_plan.is_senior == True %}
+                                            Unlimited till {{ active_plan.end_date }}
+                                            {% else %}
                                             {{ active_plan.cons_count }}
+                                            {% endif %}
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -597,7 +602,7 @@
             $('#planDetails').html($(tableid).html())
             $('#myTab a[href="#Payment"]').tab('show')
         })
-        
+
         {% if is_senior == 'eligable' %}
             $('.selectSeniorPlan').click(function(){
                 let button = $(this)
@@ -618,12 +623,12 @@
 
         {% elif is_senior == 'nodata' %}
             $('.selectSeniorPlan').click(function(){
-                toastr.error("","Update Your age in the Profile",{positionClass:'toast-top-center'})
+                toastr.error("","Update Your age in your Profile",{positionClass:'toast-top-center'})
                 $('#settingsModalCenter').modal('show')
             })
         {% else %}
             $('.selectSeniorPlan').click(function(){
-                toast.warning('You are not eligable for this plan. For more information please contact with us.',"Not Eligible",{positionClass:'toast-top-center'})
+                toastr.warning('You are not eligable for this plan. For more information please contact with us.',"Not Eligible",{positionClass:'toast-top-center'})
             })
         {% endif %}
 
