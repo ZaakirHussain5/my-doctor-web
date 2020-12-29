@@ -33,6 +33,13 @@ class patient_info(models.Model):
     def __str__(self):
         return self.full_name
 
+    @property
+    def get_age(self):
+        if (self.age != None) and (self.age != ''):
+            return self.age
+        else:
+            return 1
+
 class medical_history(models.Model):
     medical_history=models.CharField(max_length=25)
     def __str__(self):
