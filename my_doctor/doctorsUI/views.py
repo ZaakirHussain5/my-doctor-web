@@ -19,8 +19,9 @@ def appointmentsView(request):
 @login_required(login_url='/login')
 def Prescription(request):
 	context ={}
-	pat_id = request.GET.get('pat_id')
+	pat_id = request.GET.get('pat_id', None)
 	patients = patient_info.objects.all()
+	print(patients)
 	for patient in patients:
 		if consultations.objects.filter(patient = patient.user).count() <= 0:
 			patients = patients.exclude(id__in = [patient.id])
@@ -32,6 +33,7 @@ def Prescription(request):
 		context['consulataion_id'] = request.GET.get('cons_id')
 		if context['consulataion_id'] == '':
 			return redirect('/doctors/dashboard')
+	print(patients)
 	context['patients'] = patients
 	return render(request, 'doctorsUI/prescription.html', context)
 
