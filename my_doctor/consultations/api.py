@@ -6,7 +6,7 @@ from patients.models import patient_info
 from appointment.models import appointment as appointmentTable
 from django.db.models import Sum
 from datetime import date as dates
-from vedio_chat.models import VedioChat
+from vedio_chat.models import VedioChat,video_chat_session
 from reminders.models import Reminders
 
 
@@ -49,7 +49,6 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
-    
         doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
         appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
         appointment.consultation_status="Completed"
@@ -60,15 +59,19 @@ class consultationsViewSet(viewsets.ModelViewSet):
         if share_type == 'Percent':
             share_val = cons_fee * (share_val/100)
         
-        instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
         try:
-            Reminders.objects.filter(appointment_id=instance.id).delete()
+            Reminders.objects.filter(appointment_id=appointment.id).delete()
         except Reminders.DoesNotExist: 
             pass
         
-        vedioChatInstance = VedioChat.objects.get(id=self.request.data['session'])
-        vedioChatInstance.consult_id=instance.id
-        vedioChatInstance.save()
+        vedioChatInstance = video_chat_session.objects.get(id=self.request.data['session'])
+        if vedioChatInstance.consult_id == 0:
+            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+            vedioChatInstance.consult_id=instance.id
+            vedioChatInstance.save()
+        else :
+            instance = consultations.objects.get(id=vedioChatInstance.consult_id)
+        print(instance)
         return instance
 
     def perform_update(self, serializer):
@@ -135,5 +138,5 @@ class consult_info_for_doct(viewsets.ModelViewSet):
 
     def get_queryset(self):
         session_id = self.request.query_params.get('sessions')
-        vedio_chat  = VedioChat.objects.get(id=session_id)
+        vedio_chat  = video_chat_session.objects.get(id=session_id)
         return consultations.objects.filter(id=vedio_chat.consult_id)

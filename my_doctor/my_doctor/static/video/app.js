@@ -3,28 +3,29 @@
 var apiKey = "46964534";
 var sessionId;
 var token;
+var publisher = null
 
 function handleError(error) {
   if (error) {
     console.error(error);
   }
 }
-var session;
+var video_session;
 
 function initializeSession() {
-   session = OT.initSession(apiKey, sessionId);
+  video_session = OT.initSession(apiKey, sessionId);
 
   // Subscribe to a newly created stream
-  session.on('streamCreated', function streamCreated(event) {
+  video_session.on('streamCreated', function streamCreated(event) {
     var subscriberOptions = {
       insertMode: 'append',
       width: '100%',
       height: '100%'
     };
-    session.subscribe(event.stream, 'subscriber', subscriberOptions, handleError);
+    video_session.subscribe(event.stream, 'subscriber', subscriberOptions, handleError);
   });
 
-  session.on('sessionDisconnected', function sessionDisconnected(event) {
+  video_session.on('sessionDisconnected', function sessionDisconnected(event) {
     console.log('You were disconnected from the session.', event.reason);
     if(window.location.href.search('PatientVideoUI') !=-1)
     {
@@ -42,18 +43,50 @@ function initializeSession() {
     width: '100%',
     height: '100%'
   };
-  var publisher = OT.initPublisher('publisher', publisherOptions, handleError);
+  publisher = OT.initPublisher('publisher', publisherOptions, handleError);
 
   // Connect to the session
-  session.connect(token, function callback(error) {
+  video_session.connect(token, function callback(error) {
     if (error) {
       handleError(error);
     } else {
       // If the connection is successful, publish the publisher to the session
-      session.publish(publisher, handleError);
+      video_session.publish(publisher, handleError);
     }
   });
 }
+
+$('#micBtn').click(function(){
+  var isConnected = $(this).attr('data-connected')
+  if(isConnected == 'true'){
+    $(this).attr('data-connected','false')
+    $(this).removeClass('btn-outline-danger')
+    $(this).addClass('btn-danger')
+    publisher.publishAudio(false)
+  }
+  else{
+    $(this).attr('data-connected','true')
+    $(this).removeClass('btn-danger')
+    $(this).addClass('btn-outline-danger')
+    publisher.publishAudio(true)
+  }
+})
+
+$('#videoBtn').click(function(){
+  var isConnected = $(this).attr('data-connected')
+  if(isConnected == 'true'){
+    $(this).attr('data-connected','false')
+    $(this).removeClass('btn-outline-danger')
+    $(this).addClass('btn-danger')
+    publisher.publishVideo(false)
+  }
+  else{
+    $(this).attr('data-connected','true')
+    $(this).removeClass('btn-danger')
+    $(this).addClass('btn-outline-danger')
+    publisher.publishVideo(true)
+  }
+})
 
 $('#endCall').click(function(){
   if(window.location.href.search('DoctorVideoUI') !=-1) {
@@ -69,7 +102,7 @@ $('#endCall').click(function(){
       console.log(response)
   })
   }
-  session.disconnect()
+  video_session.disconnect()
 
 })
 

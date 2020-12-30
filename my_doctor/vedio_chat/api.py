@@ -95,8 +95,8 @@ class check_for_answer(viewsets.ModelViewSet):
   def get_queryset(self):
     data = self.request.query_params.get('sessions', None)
     if data:
-      return VedioChat.objects.filter(id=data)
-    return False
+      return video_chat_session.objects.filter(id=data)
+    return []
 
 class call_patient_mobile(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
@@ -142,12 +142,13 @@ class MobAnswerCallAPI(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     session_id = request.query_params.get('id',None)
     video = video_chat_session.objects.get(id=session_id)
-    if video.Call_for == request.user:
-      video.is_answered = True
-      video.save()
-      token = opentok.generate_token(video.session_id)
-      return Response({
+    #if video.Call_for == request.user:
+    video.is_answered = True
+    video.save()
+    token = opentok.generate_token(video.session_id)
+    return Response({
         "Message":"Call Answered",
+        "session_id" : video.session_id,
         "token":token
-      })
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+    })
+    #return Response(status=status.HTTP_400_BAD_REQUEST)

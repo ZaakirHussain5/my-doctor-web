@@ -235,16 +235,16 @@
         $('#upcoming').on('click', '.call', function () {
             var button = $(this)
             $.ajax({
-                url: `/api/CallDoctor?doctor_id=${button.attr('data-doctor')}&const=${button.attr('data-const')}`,
+                url: `/api/MobCallDoctor?doctor=${button.attr('data-doctor')}&app_id=${button.attr('data-const')}`,
                 method: 'POST',
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
                 success: function (response) {
                     if (window.matchMedia("(max-width:425px)").matches)
-                        window.location.href = `/api/VideoCall?device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                        window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                     else
-                        window.location.href = `/api/VideoCall?device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
+                        window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
                 error: function (response) {
                     console.log(response)
