@@ -1,14 +1,11 @@
 home page:
-
-	2. dinamic doctors list
+    2. dinamic doctors list
 speciality page;
 	1. book appoinment form
 plans page:
 
-
 login page :
 	1. login form (login patient) (templates/website/login )
-
 
 patient dashboard:
 	1. profile editing ( form = templates/patientsui/_settings.html) script = templates/patientsui/dashboard.html

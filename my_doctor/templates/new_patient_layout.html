@@ -624,7 +624,7 @@
         function checkForCall() {
 
             jQuery.ajax({
-                'url': '/api/vedioChatOparetion/?user=pat',
+                'url': '/api/MobVedioChatOparetion/?user=pat',
                 'contentType': 'application/json',
                 'async': false,
                 'method': 'GET',
@@ -656,14 +656,13 @@
         $('#answerCall').click(function () {
             var button = $(this)
             $.ajax({
-                url: '/api/answer_call?session_id=' + button.attr('data-session'),
+                url: '/api/MobAnswerCall?id=' + button.attr('data-session'),
                 method: 'POST',
                 'beforeSend': function (request) {
                     request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
                 },
                 success: function (response) {
-                    window.location.href = button.attr('data-url')
-                    
+                    window.location.href = button.attr('data-url') + `&session_id=${response.session_id}&session_token=${response.token}`;                    
                 },
                 error: function (error) {
                     console.log(error)
@@ -674,7 +673,7 @@
 
         jQuery('#hangupBtn').click(function () {
             jQuery.ajax({
-                'url': '/api/vedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
+                'url': '/api/MobVedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
                 'method': 'DELETE',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));

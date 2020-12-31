@@ -55,7 +55,10 @@ class consultationsViewSet(viewsets.ModelViewSet):
         cons_fee = appointment.paid_amount
         appointment.save()
         share_type = doctor.commission_type
-        share_val = doctor.commission_val
+        if cons_fee:
+            share_val = doctor.commission_val
+        else:
+            share_val = 0.00
         if share_type == 'Percent':
             share_val = cons_fee * (share_val/100)
         
@@ -70,8 +73,10 @@ class consultationsViewSet(viewsets.ModelViewSet):
             vedioChatInstance.consult_id=instance.id
             vedioChatInstance.save()
         else :
-            instance = consultations.objects.get(id=vedioChatInstance.consult_id)
-        print(instance)
+            consultations.objects.get(id=vedioChatInstance.consult_id).delete()
+            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+            vedioChatInstance.consult_id=instance.id
+            vedioChatInstance.save()
         return instance
 
     def perform_update(self, serializer):

@@ -13,9 +13,9 @@ def save_doctor_payment(sender, instance, created, **kwargs):
         balance = doctor_payments.objects.filter(doctor = instance.doctor_id).values_list('balance',flat=True).first()
         commission_amount = doctor_payments.objects.filter(doctor = instance.doctor_id).values_list('comm_amt',flat=True).first()
         print(instance)
-        if instance.consultation_amt >= 0.0 and instance.comp_share:
+        if instance.comp_share >= 0.0:
             if total_amount:
-                total_amount = total_amount + instance.consultation_amt
+                total_amount = total_amount + instance.doctor_id.consultation_fee
             else:
                 total_amount = instance.consultation_amt
             if commission_amount:

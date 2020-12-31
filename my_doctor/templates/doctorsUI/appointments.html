@@ -520,15 +520,18 @@
   jQuery('#TodayAppointments').on('click', '.call', function () {
     var button = jQuery(this)
     jQuery.ajax({
-      url: `/api/CallPatient?patient=${button.attr('data-patient')}&const=${button.attr('data-const')}`,
+      url: `/api/MobCallPatient?patient=${button.attr('data-patient')}&app_id=${button.attr('data-const')}`,
       method: 'POST',
       async: false,
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
       success: function (response) {
-        window.location.href = `/api/VideoCall?user=doc&session=${response.id}&patient=${button.attr('data-patient')}&appointment=${button.attr('data-const')}`
-      },
+        if (window.matchMedia("(max-width:425px)").matches)
+          window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=small&user=doc&session=${response.id}&patient=${button.attr('data-patient')}&app_id=${button.attr('data-const')}`
+        else
+          window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=big&user=doc&session=${response.id}&patient=${button.attr('data-patient')}&app_id=${button.attr('data-const')}`
+        },
       error: function (response) {
         console.log(response)
       }

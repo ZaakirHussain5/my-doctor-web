@@ -27,14 +27,6 @@ function initializeSession() {
 
   video_session.on('sessionDisconnected', function sessionDisconnected(event) {
     console.log('You were disconnected from the session.', event.reason);
-    if(window.location.href.search('PatientVideoUI') !=-1)
-    {
-          window.location.href = '/api/ratings'
-    }
-    else
-    {
-          window.location.href = '/doctors/Prescription?pat_id=1'
-    }
   });
 
   // initialize the publisher
