@@ -81,10 +81,22 @@
                                         placeholder="Consultation Fee" class="form-control"></div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col col-md-2"><label for="email" class=" form-control-label float-right">ABOUT
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-10">
+                                    <textarea rows="5" class="form-control" placeholder="About Doctor" name="about"
+                                        id="about"></textarea>
+                                </div>
+                            </div>
+                            
+                        </div>
                     
                     <div class="row form-group">
-                        <div class="col-12 col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary btn-sm">
+                        <div class="col-10 offset-md-2">
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">
                                 <i class="fa fa-dot-circle-o"></i> Update Profile
                             </button>
                             <!-- <button type="reset" class="btn btn-danger btn-sm">
@@ -169,7 +181,7 @@
                                 
                             </div>
                             <div class="form-group">
-                                <button id='editmoufiles' class="btn btn-primary btn-block"> <i class="fa fa-edit"></i> Update File </button>
+                                <button type="submit" id='editmoufiles' class="btn btn-primary btn-block"> <i class="fa fa-edit"></i> Update File </button>
                             </div>
                         </form>
                     </div>
@@ -409,7 +421,10 @@
 
                             break;
                         default:
-                            input.value = val;
+                        if(val != 'null' && val != 'None')
+                            {
+                                input.value = val;
+                            }
                             break;
 
                     }
@@ -462,7 +477,6 @@
         })
             .done((response) => {
                 jQuery.removeCookie('DoctorToken');
-                jQuery.cookie('DoctorToken', response.token, { expires: 1 })
                 toastr.success("Your details have been Updated Successfully","Profile Updated",{positionClass:"toast-top-center"})
             })
             .fail((error) => {
