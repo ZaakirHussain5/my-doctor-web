@@ -5,14 +5,11 @@ from accounts.serializers import UserAuthSerializer
 from patients.models import patient_info
 
 class consultationsSerializer(serializers.ModelSerializer):
-    patient = UserAuthSerializer(required=False)
-    comp_share = serializers.DecimalField(max_digits=10,decimal_places=2,required=False)
-    consultation_amt =serializers.DecimalField(max_digits=10,decimal_places=2,required=False)
     class Meta:
         model = consultations
         fields = '__all__'
+        read_only_fields = ('patient', 'doctor_id', 'comp_share', 'consultation_amt', 'duration')
         optional_fields = ['message', ]
-        depth=1
 
 class getAllConsultationsSerializer(serializers.ModelSerializer):
     doctor_id = doctors_infoSerializer()
