@@ -1,6 +1,5 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-
 from consultations.models import consultations
 from doctor_payments.models import doctor_payments
 from doctors.models import settlement_details, doctors_info, DoctorBillingHistory
@@ -17,7 +16,7 @@ def save_doctor_payment(sender, instance, created, **kwargs):
             if total_amount:
                 total_amount = total_amount + instance.doctor_id.consultation_fee
             else:
-                total_amount = instance.consultation_amt
+                total_amount = instance.doctor_id.consultation_fee
             if commission_amount:
                 commission_amount = commission_amount + instance.comp_share
             else:

@@ -376,6 +376,8 @@
     <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
+           
+
             let doctor_ratings = Math.round("{{doctor.rating}}");
             let stars = 1;
             let star = ''
@@ -405,18 +407,17 @@
                         xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
                     }
                 }).done((response) => {
+                    console.log(response);
                     consultation_id = response.id
                 }).fail((err) => {
                     console.log(err)
                 })
             }
             if (user == 'pat') {
-
-
                 let checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer() {
                     jQuery.ajax({
-                        url: `/api/check_for_answer/?sessions=${session}`,
+                        url: `/api/check_for_answer?sessions=${session}`,
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
@@ -443,7 +444,7 @@
                 let checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer() {
                     jQuery.ajax({
-                        url: `/api/check_for_answer/?sessions=${session}`,
+                        url: `/api/check_for_answer?sessions=${session}`,
                         method: 'GET',
                         contentType: 'application/json'
                     }).done((res) => {
@@ -451,21 +452,11 @@
 
                             clearInterval(checkAnswer)
                             clearInterval(messageInterval)
-                            alert('Doctor is busy now.');
+                            alert('Patient is busy now.');
                             window.location.href = '/doctors/dashboard'
                         }
                         if (res[0].is_answered == true) {
-                            $.ajax({
-                                url: '/api/consult_info_for_doct?sessions=' + session,
-                                method: 'GET',
-                                contentType: 'application/json',
-                                beforeSend: function (xhr) {
-                                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
-                                }
-                            }).done(res => {
-                                consultation_id = res[0].id
-                                clearInterval(checkAnswer)
-                            })
+                            clearInterval(checkAnswer)
                         }
                     }).fail((err) => {
                         console.log(err)
@@ -478,11 +469,22 @@
                 var user = urlParams.get('user')
 
                 if (user == 'doc') {
-                    window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
+                    video_session.disconnect()
+                    $.ajax({
+                        url: '/api/consult_info_for_doct?sessions=' + session,
+                        method: 'GET',
+                        contentType: 'application/json',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                        }
+                    }).done(res => {
+                        consultation_id = res[0].id
+                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
+                    })
                 }
                 else {
+                    video_session.disconnect()
                     window.location.href = '/api/ratings?consultation=' + consultation_id;
-
                 }
             })
 
