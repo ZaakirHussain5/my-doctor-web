@@ -29,7 +29,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
  -->
 
- 
+<script>
+  // register the service worker if available
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("{% static 'website/manifest.json' %}", { scope: '/' }).then(function (reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function (err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  }
+</script>
+
  <style>
     /* Style The Dropdown Button */
    
@@ -108,6 +118,9 @@ section.breadcrumb{
 }
 .slider-author img,.quote-icon img{
   height:auto;
+}
+@media(max-width: 300px;){
+
 }
 
  </style>
