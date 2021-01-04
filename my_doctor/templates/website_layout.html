@@ -8,7 +8,7 @@
 <meta name="description" content="{{meta_description}}"/>
 <title>{{ page_title }}</title>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-<link rel="shortcut icon" type="image/x-icon" href="{% static 'patients/assets/images/favicon.png' %}">
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'website/website/img/favicon.png'%}">
 
 <link href="{% static 'website/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
 
@@ -27,7 +27,15 @@
 <!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
  -->
-
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("{% static 'website/sw.js' %}", {scope: '/'}).then(function(reg) {
+        console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+        console.warn('Error whilst registering service worker', err);
+    });
+}
+</script>
 <style>
   .modal {
     text-align: center;
