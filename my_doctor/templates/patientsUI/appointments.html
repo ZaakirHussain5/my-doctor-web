@@ -373,7 +373,6 @@
                 paid_amount: app_data.paid_amount,
                 doctor: app_data.doctor.id
             }
-            console.log(data)
             $.ajax({
                 url: `/api/appointments/${appp_id}/`,
                 method: 'PUT',
