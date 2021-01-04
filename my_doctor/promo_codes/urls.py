@@ -7,4 +7,4 @@ router.register('promocode_work', promocode_work, 'promocode_work')
 
 
 urlpatterns = router.urls
-urlpatterns.append(path('apply_promoCode', apply_promoCode.as_view(), name="applyPromoCode"))
+urlpatterns.append(path('apply_promoCode/', apply_promoCode.as_view(), name="applyPromoCode"))

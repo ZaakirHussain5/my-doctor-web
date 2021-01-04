@@ -51,9 +51,15 @@ def patientVideoChat(request):
     context['session'] = session
     context['appointment'] = request.GET.get('appointment', None)
     if device == "small":
-        return render(request,'video_chat/mob_video_chat.html', context)
+        return render(request,'video_chat/new_mob_video_chat.html', context)
     else:
-        return render(request,'video_chat/video_chat.html',context)
+        return render(request,'video_chat/new_video_chat.html',context)
+
+def newVideoUI(request):
+    return render(request,'video_chat/new_video_chat.html')
+
+def newMobileVideoUI(request):
+    return render(request,'video_chat/new_mob_video_chat.html')
 
 def ratings(request):
     if request.GET.get('consultation') == '':

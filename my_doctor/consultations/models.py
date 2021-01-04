@@ -26,7 +26,6 @@ class consultations(models.Model):
     overall_rating = models.IntegerField(default=0)
     problem=models.CharField(max_length=250,default='Not Specified')
     message = models.CharField(max_length=500, null=True, blank=True)
-    duration = models.CharField(max_length=100, blank='')
     consultation_amt = models.DecimalField(max_digits=10,decimal_places=2)
     comp_share = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
