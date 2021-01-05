@@ -1,6 +1,12 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
 {% block content %}
+<style>
+    .about{
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
 <div class="ca-content__chatstab">
 
     <div class="ca-content__callstab" style="padding-top: 0;">
@@ -667,8 +673,8 @@
                                         <div id='docFName${data.doctor.id}'>${data.doctor.full_name}</div>
                                         ${stars}
                                         <br>
-                                        <span class="font-weight-bold text-success">About :
-                                            ${tConvert(data.from_time)}</span>
+                                        <span class="font-weight-bold text-success about">About :
+                                            ${tConvert(data.doctor.about)}</span>
                                         <br>
                                         <span class="font-weight-bold text-success">Available Time :
                                             ${tConvert(data.from_time)}</span>
