@@ -53,7 +53,9 @@ def faq(request):
         "meta_description":"Frequently Asked Questions"})
 
 def doctor_reg(request):
-    context = { "specialist_types" : specialist_type.objects.all() }
+    context = { "specialist_types" : specialist_type.objects.all(),
+        "page_title":"Doctor Plus | Doctor Registration",
+        "meta_description":"" }
     return render(request,'website/doctor_reg.html',context)
 
 def forgot_pass(request):
@@ -63,5 +65,5 @@ def forgot_pass(request):
 
 def PatientRegistration(request):
     return render(request,'website/PatientRegistration.html',{
-        "page_title":"Registration",
+        "page_title":"Doctor Plus | Patient Registration",
         "meta_description":"Registration"})
