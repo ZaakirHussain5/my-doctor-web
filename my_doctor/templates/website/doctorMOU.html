@@ -1,0 +1,208 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+<style>
+    @media (max-width: 1024px) {
+      .final-setup .form{
+        padding: 10px 0px !important;
+    }
+    .final-setup .table{
+      font-size: 13px;
+    }
+    }
+    @media (max-width: 768px) {
+      .final-setup .form{
+        margin: 20px !important;
+        padding: 20px !important;
+    }
+  }
+  @media (max-width: 425px) {
+      .final-setup .form{
+        overflow: hidden;
+    }
+    .final-setup .detail-table{
+      overflow: scroll;
+    }
+    }
+    .final-setup .form{
+      border: 1px solid #f1f1f1;
+      box-shadow: 1px 1px 20px #cccccc57;
+      margin: 0 10px;
+      padding: 20px;
+    }
+    table{
+      border: 2px solid #ddd; 
+    }
+    .table>thead>tr>th, .table>tbody>tr>td {
+      border-right: 2px solid #ddd;
+  }
+  .table{
+      margin-bottom: 0;
+  }
+  </style>
+<section class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-outer">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Register</li>
+                </ul>
+            </nav>
+            <h2>Register</h2>
+        </div>
+    </div>
+</section>
+
+  <section class="final-setup">
+  <div class="container">
+  <div class="row">
+  <form>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+  <div class="row form">
+  <div class="col-xs-12">
+    <h3>Final Step</h3>
+    <p>Set Availability and Bank Details</p>
+  </div>
+  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <img src="" alt="" style="border: 1px solid #f1f1f1;">
+  </div>
+  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <input type="file" class="form-control">
+  </div>
+  <!--  -->
+  <div class="detail-table col-xs-12">
+    <p>Availability Details</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Day</th>
+          <th scope="col">From Time</th>
+          <th scope="col">To Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">Monday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+        <tr>
+          <td scope="row">Tuesday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+        <tr>
+          <td scope="row">Wednesday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+        <tr>
+          <td scope="row">Thursday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+        <tr>
+          <td scope="row">Friday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+        <tr>
+          <td scope="row">Saturday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+        <tr>
+          <td scope="row">Sunday</td>
+          <td><input type="time" class="form-control"></td>
+          <td><input type="time" class="form-control"></td>
+        </tr>
+      </tbody>
+    </table>
+    <small>Consultations will be forwarded only during these times.</small>
+
+  </div>
+  
+  </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="row form">
+      <div class="col-xs-12">
+        <h3>Bank Details</h3>
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>Consultation Fee</p>
+      </div>
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <input type="number" class="form-control" min="200" max="500">
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>Bank ACC No.</p>
+      </div>
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <input type="number" class="form-control">
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>IFSC </p>
+      </div>
+      <div class="form-group col-xs-6">
+        <input type="number" class="form-control">
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>Bank ,Branch</p>
+      </div>
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <input type="text" class="form-control">
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>UPI ID</p>
+      </div>
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <input type="text" class="form-control">
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>Cancelled Cheque Photo</p>
+      </div>
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <input type="file" class="form-control">
+      </div>
+      <!--  -->
+      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p><b>About you</b></p><br>
+      <textarea name="" id="" cols="30" rows="10">
+  
+      </textarea>
+      </div>
+     
+     
+  </div>
+  </div>
+  <div class="mar-bottom-15">
+    <div class="col-xs-10">
+        <div class="checkbox-outer">
+           
+        <input type="checkbox" name="chkAgree" value="Agreed"> I have read and understood the <a href="#">MOU</a> <a href="#">Terms and Conditions</a> and agree to be bound by me.</div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-right">
+            <a href="#" class="btn btn-block">Submit</a>
+            <br>
+        </div>
+  </div>
+ 
+  </form>
+  
+  </div>
+  </div>
+  </section>
+
+
+{%endblock%}
+
+{% block scripts %}
+{% endblock %}

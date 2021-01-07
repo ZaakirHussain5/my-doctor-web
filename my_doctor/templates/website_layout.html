@@ -8,8 +8,7 @@
 <meta name="description" content="{{meta_description}}"/>
 <title>{{ page_title }}</title>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-<script src="cdn-cgi/apps/head/aXeeT3C8FEVE2uMUPMMUDxVnKrs.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="{% static 'website/website/img/favicon.png'%}">
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'patients/assets/images/favicon.png' %}">
 
 <link href="{% static 'website/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
 
@@ -28,16 +27,33 @@
 <!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
  -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("{% static 'website/sw.js' %}").then(function(reg) {
+        console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+        console.warn('Error whilst registering service worker', err);
+    });
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-450800963"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
- 
- <style>
-    /* Style The Dropdown Button */
-   
-    .modal {
+  gtag('config', 'AW-450800963');
+</script>
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-450800963/np-fCJWTt-8BEMPa-tYB'});
+</script>
+
+<style>
+  .modal {
     text-align: center;
   }
-  
-  @media screen and (min-width: 768px) { 
+
+  @media screen and (min-width: 768px) {
     .modal:before {
       display: inline-block;
       vertical-align: middle;
@@ -45,72 +61,66 @@
       height: 100%;
     }
   }
-  
   .modal-dialog {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
   }
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    
-    /* Links inside the dropdown */
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    
-    /* Change color of dropdown links on hover */
-    .dropdown-content a:hover {background-color: #f1f1f1}
-    
-    /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    
-    /* Change the background color of the dropdown button when the dropdown content is shown */
-    
-    </style>
- <style>
-     .header_menu .navbar.navbar-default .nav.navbar-nav li a{
-         padding-top:18px;
-     }
-     section{
-         padding:15px 0 0 0;
-     }
-     .services p{
-         text-align:left;
-     }
-section.breadcrumb{
-    padding:2% 0 0 0;
-}
-.fa-google {
-  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-.slider-author img,.quote-icon img{
-  height:auto;
-}
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content a:hover {
+    background-color: #f1f1f1
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+<style>
+  .header_menu .navbar.navbar-default .nav.navbar-nav li a {
+    padding-top: 18px;
+  }
 
- </style>
+  section {
+    padding: 15px 0 0 0;
+  }
+
+  .services p {
+    text-align: left;
+  }
+
+  section.breadcrumb {
+    padding: 2% 0 0 0;
+  }
+
+  .fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .slider-author img,
+  .quote-icon img {
+    height: auto;
+  }
+</style>
 </head>
 <body>
 
@@ -169,9 +179,9 @@ section.breadcrumb{
 </div>
 </div>
 
-<div class="col-lg-3 col-md-3 col-sm-12">
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
   <div class="footer-contact">
-    <div class="footer-logo text-center mar-bottom-15" style="margin-left:85px">
+    <div class="footer-logo text-center mar-bottom-15" >
       <img src="{%static 'website/img/footer-logo.png'%} " alt="Image" id="Footer logo">
       <img src="{%static 'website/img/ISO.png'%} " style="height:100px" alt="ISO Certification" id="Cert">
       </div>
@@ -257,7 +267,6 @@ section.breadcrumb{
 <script src="{% static 'website/js/bootstrap.min.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/plugin.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/main.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
-<script src="{% static 'website/js/custom-lightbox.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/custom-nav.js' %}" type="f2c2a34d55bd8643fa482c8c-text/javascript"></script>
 <script src="{% static 'website/js/cms.js' %}"></script>
 <script src="{% static 'website/cloudflare-static/rocket-loader.min.js' %}" data-cf-settings="f2c2a34d55bd8643fa482c8c-|49" defer=""></script></body>
