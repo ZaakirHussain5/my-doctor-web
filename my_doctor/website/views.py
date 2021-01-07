@@ -67,3 +67,9 @@ def PatientRegistration(request):
     return render(request,'website/PatientRegistration.html',{
         "page_title":"Doctor Plus | Patient Registration",
         "meta_description":"Registration"})
+
+def doctorsMOU(request):
+    return render(request,'website/doctorMOU.html',{
+        "page_title":"Doctor Plus | Doctor Registration",
+        "meta_description":"Registration"
+    })
