@@ -6,7 +6,8 @@ from .api import (DoctorUpdateProfileAPI, GetLoggedDoctor,DoctorTimingsAPI,
                   DoctorTimingsAdminAPI, specificDoctorSettlement, doctor_info_adminViewSet, 
                   getAvailableDoctorsForApponment, changeFee, doctor_bankDetails, changeFeeByAdmin,
                   DoctorLogout, DoctorUpdateProfileAdminAPI, DoctorTimingsApiView, doctor_bankDetailsAdminView, doctor_notesView,
-                  specific_doctor_available,check_phone_no,change_password,doctor_billing_historyAPI
+                  specific_doctor_available,check_phone_no,change_password,doctor_billing_historyAPI,
+                  updateDoctor_profile
                   )
 from django.urls import path,include
 from . import views
@@ -29,6 +30,9 @@ router.register('doctor_bankDetailsAdminView', doctor_bankDetailsAdminView,'doct
 router.register('doctor_notesView', doctor_notesView,'doctor_notesView')
 router.register('specific_doctor_available', specific_doctor_available,'specific_doctor_available')
 router.register('doctor_billing_history',doctor_billing_historyAPI,'doctor_billing_history')
+router.register('updateDoctor_profile',updateDoctor_profile,'updateDoctor_profile')
+
+
 
 urlpatterns = [
     path('',include(router.urls)),

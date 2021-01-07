@@ -282,12 +282,14 @@ $("#doctorRegistration").submit((e) => {
                 processData: false,
             }).done((response) => {
                 newsLetterSubscription(url, cms_data, message)
+                console.log('the response is', response)
+                let doctorId = response.Doctor.id;
                 $.ajax({
                     url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Registration under review, we shall inform you once approved&route=0&from=BANDSS&to=${$('#mob1').val()}`,
                     method: 'GET',
                     success: function (response) {
                         console.log(response)
-                        let url = '/media/doctor plus.pdf';
+                        let url = '/DoctorsMOU/'+ doctorId + '/';
                         window.location.href = url;
                     }
                 })
