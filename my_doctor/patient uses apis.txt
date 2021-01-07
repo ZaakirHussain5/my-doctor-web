@@ -53,7 +53,7 @@ PATIENT:
         method: 'POST',
     
     9. hangup Call:
-        url: '/api/vedioChatOparetion/' + data-id + '/',
+        url: '/api/MobVedioChatOparetion/' + ** call id ** + '/',
         method: 'DELETE'
     
     10. reminders:
@@ -206,9 +206,12 @@ PATIENT:
 
 
 
+    35. vedio call redirection: 
+        url = /api/VideoCall?device=** device ** &session=** session id ** &user=pat&doctor=$** doctor id ** &appointment= **appoinment_id **
 
-
-
+    36. vedio call check; 
+        url: '/api/MobVedioChatOparetion/?user=pat'
+        method: 'get'
 
 
 
