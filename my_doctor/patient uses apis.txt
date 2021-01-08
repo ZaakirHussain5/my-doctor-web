@@ -1,0 +1,226 @@
+PATIENT:
+    1. patient logout: 
+        url: '/api/PatientLogout'
+        method: 'GET'
+    2. getPatientData:
+        url: '/api/getLoggedInPatient'
+        method: 'GET'
+    3. Add new Medical:
+        url: '/api/update_medicalReport/'
+        method: 'POST'
+        data: {
+                'medical_history' : ''
+            }
+    4. Delete Medical Record:
+        url : '/api/update_medicalReport/'
+        method: 'POST'
+        data: {
+                'medical_history' : ''
+            }
+    
+    5. profile-form update: 
+        url: '/api/PatientUpdateProfile',
+        method: 'POST',
+        data= {
+            profile_pic: '',
+            full_name: '',
+            ph_no: '',
+            username: ph_no,
+            email: '',
+            blood_group: '',
+            age: '',
+            weight: '',
+            gender: '',
+            height: ''
+        }
+
+    6. password form:
+        url: '/api/changePassword',
+        method: 'POST',
+        data={
+            old_password: '',
+            new_password: '',
+            confirm_new_password: ''
+        }
+
+
+    7. check For Call:
+        url: '/api/vedioChatOparetion/?user=pat',
+        method: 'GET',
+
+    8. answer Call: 
+        url: '/api/answer_call?session_id=' ** need session_id
+        method: 'POST',
+    
+    9. hangup Call:
+        url: '/api/MobVedioChatOparetion/' + ** call id ** + '/',
+        method: 'DELETE'
+    
+    10. reminders:
+        url: '/api/myreminders/',
+        method: 'GET'
+
+    11. get Family Members:
+        url: '/api/patient_family/',
+        method: 'GET'
+
+    12. delete family member:
+        url: `/api/patient_family/${button.attr('data-id')}`,
+        method: 'DELETE',
+
+    13. add_patient_family:
+        url: '/api/patient_family/',
+        method: 'POST',
+        var data = {
+                member_name: '',
+                member_age: '',
+                member_relation: ''
+            }
+
+    14. get Wallet Details:
+        url: "/api/wallet_details/",
+        method: 'GET',
+    
+    15. get My Appointments:
+        url: '/api/getUpcomingAppoinment/',
+        method: 'GET',
+
+    16. Call to Doctor:
+        url: '/api/CallDoctor?doctor_id= **doctor_id**&const=**const**',
+        method: 'POST'
+
+    17. get prescription:
+        url:'/api/getPrescriptionByConsultation?cons_id=** consultant_id**',
+        method:'GET'
+
+    18. mediaclForms:
+        url: `/api/cancleAppointment/${appp_id}/`,
+        method: 'PUT'
+        data = {
+                'cancle_note': '',
+                consultation_status: "Cancelled"
+            }
+
+    19. check Doctor Avalability:
+        url: `/api/specific_doctor_available/?date=**date**&id=**appointment_id**`,
+        method: 'GET'
+    
+    20. change doctor Appointment: 
+        url: `/api/appointments/${appp_id}/`,
+        method: 'PUT',
+        let data = {
+                appointment_date: **date**,
+                appointment_time: **time**,
+                paid_amount: **appointment_paid_amount**,
+                doctor: **doctor_id**
+            }
+
+    21. bill history:
+        url: '/api/PatientBillingHistory/',
+        method:'GET',
+    
+    22. Consultant list: 
+        'url': '/api/getPatientConsultations/',
+        'method': 'GET',
+    
+    23. get prescription list:
+        url: '/api/PatientPrescription/',
+        method: 'GET'
+    
+    24. get medical record;
+        url: '/api/patient-medical-records/',
+        method: 'GET',
+    
+    25. mediaclForms:
+        url: '/api/patient-medical-records/',
+        method: 'POST',
+        data = {
+            record_type: ''
+            record_files: ** file **,
+            description: ''
+        }
+
+    26. DELETE MEDICAL RECORD:
+        url: '/api/patient-medical-records/'+ ** mediacal id **  + '/',
+        method: 'DELETE',
+
+    27. Doctor Avalability check with date and speciality_type:
+        url: "/api/patientAppointment/DoctorAvailable/?date=" + ** date ** + "&&id=" + ** speciality_type **,
+        method: 'GET'
+
+    28. use Wallet Balance:
+        url: '/api/transactions/',
+        method: 'POST'
+        data = {
+                ref_id: payment_id,
+                trans_type: "New appointment",
+                trans_desc: "New appointment on " + $('#app-date').html() +'. The appointment is booked on ' + current_date.toLocaleDateString(),
+                debit:  ** diducted_wallet_balance **,
+                balance: ** diducted_wallet_balance ** 
+            }
+    
+    29. new Appointment:
+        data = {
+                appointment_date: ,
+                appointment_time: ,
+                doctor: ,
+                Description: ,
+                consultation_status: "Pending",
+                payment_type: "UPI",
+                payment_id: ** payment_id **
+                paid_amount: 
+            };
+        'url': '/api/appointments/',
+        'method': 'POST'
+
+    30. message on new appointment: 
+        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. *** doctor name **  has been fixed on ** date ** at ** time **  to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=** patient mob number **`,
+        method: 'GET'
+
+    31. message on new appointment to doctor: 
+        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ** patinet name ** has been fixed on ** date **  at ** time** to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to= ** selected doctor mob **`,
+        method: 'GET',
+    
+    32. apply promocode: 
+        url: '/api/apply_promoCode/?code='+ promoCode,
+        method: 'GET'
+
+    33. Subscription plan:
+        url: `/api/subscription_plans`,
+        method: 'GET',
+
+    34. get new Plan:
+        'url': '/api/MySubscriptionPlan/',
+        'method': 'POST'
+        data = {
+                plan: plan,
+                is_active: true,
+                is_senior: senior_status,
+                payment_id:payment_id,
+                cons_count:con_count,
+                gst:gst_decimal,
+                paid_amount:$('#total-amount').html(),
+                plan_price:price,
+                plan_description:$('#planDetails').html()
+            };
+
+
+
+    35. vedio call redirection: 
+        url = /api/VideoCall?device=** device ** &session=** session id ** &user=pat&doctor=$** doctor id ** &appointment= **appoinment_id **
+
+    36. vedio call check; 
+        url: '/api/MobVedioChatOparetion/?user=pat'
+        method: 'get'
+
+
+
+
+
+
+
+
+
+
+
+

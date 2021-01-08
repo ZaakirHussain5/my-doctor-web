@@ -22,6 +22,7 @@ class doctors_info(models.Model):
     Modified_by = models.CharField(max_length=25, null=True)
     is_loggedin = models.BooleanField(default=False)
     web_registration = models.BooleanField(default=False)
+    settlement_cycle = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return str(self.full_name) +','+ str(self.specialist_type)

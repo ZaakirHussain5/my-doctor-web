@@ -636,4 +636,43 @@ class doctor_billing_historyAPI(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         doctor = DoctorBillingHistory.objects.get(self.request.user)
         serializer.save(doctor=doctor)
+
+
+
+class updateDoctor_profile(viewsets.ModelViewSet):
+    queryset = doctors_info.objects.all()
+    permissions = [
+        permissions.AllowAny
+    ]
+    serializer_class = doctors_infoSerializer
+    def perform_update(self, serializer):
+        if serializer.is_valid(raise_exception=False):
+            serializer.save()
+        return 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     

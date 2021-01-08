@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from specialist_type.models import specialist_type
+from doctors.models import doctors_info
+from django.contrib.auth.models import User
 
 def index(request):
 
@@ -68,8 +70,11 @@ def PatientRegistration(request):
         "page_title":"Doctor Plus | Patient Registration",
         "meta_description":"Registration"})
 
-def doctorsMOU(request):
+def doctorsMOU(request, id):
+    doctor = doctors_info.objects.get(user = User.objects.get(id=id)).id
     return render(request,'website/doctorMOU.html',{
         "page_title":"Doctor Plus | Doctor Registration",
-        "meta_description":"Registration"
+        "meta_description":"Registration",
+        "doctor": doctor,
+        "user": id
     })

@@ -1,0 +1,138 @@
+Doctor Apid:
+    1. check For Call: 
+        'url': '/api/vedioChatOparetion/?user=doc',
+        'method': 'GET',
+
+    2. answer Call:
+        url: '/api/answer_call?session_id=' ** session id** ,
+        method: 'POST',
+
+    3. hangup Call:
+        'url': '/api/vedioChatOparetion/' + ** session id ** + '/',
+        'method': 'DELETE',
+
+    4. Doctor info:
+        url: '/api/getLoggedInDoctor',
+        method: 'GET'
+
+    5. doctor reminder:
+        url: '/api/myreminders/',
+        method: 'GET'
+
+    6. doctor logout: 
+        url:'/api/DoctorLogout',
+        method:'POST'
+
+    7. upcoming appointment:
+        url: '/api/upComingAppoinment/',
+        method: 'GET'
+    
+    8. today appointment: 
+        url: '/api/todaysAppoinment/'
+        method: 'GET'
+    
+    9. previus appointment: 
+        url: '/api/previousAppoinment/'
+        method: 'GET'
+
+    10. TodayAppointments Call: 
+        url: `/api/MobCallPatient?patient= ** patient id ** &app_id= ** appointment_id **}`,
+        method: 'POST'
+    11. bill history: 
+        url: '/api/doctor_billing_history/',
+        method: 'GET'
+    12. doctor payments:
+        url: '/api/doctor_dataView/',
+        method: 'GET'
+    13. change password:
+        url: '/api/changePassword',
+        method: 'POST'
+    
+    14. Doctor Prescription create:
+        url = '/api/DoctorPrescription/';
+        method = 'POST'
+        data= {
+            patient: ** patient id **,
+            record_type: '',
+            created_by: 'created by doctor',
+            consultation_id: **consultant_id**,
+            record_files: file
+            description: ''
+        }
+
+    15. Doctor Prescription Update: 
+        url = '/api/DoctorPrescription/**id **/';
+        method = 'PUT'
+        data= {
+            patient: ** patient id **,
+            record_type: '',
+            created_by: 'created by doctor',
+            consultation_id: **consultant_id**,
+            record_files: file
+            description: ''
+        }
+    16. delete prescription:
+        url:`/api/DoctorPrescriptionDelete/** id ** /`,
+        method: 'DELETE',
+
+    17. doctor update profile: 
+        url: '/api/DoctorUpdateProfile/'+ doctor_id + '/',
+        method: 'PUT',
+        data = {
+            profile_pic: ** file ** ,
+            username: *** not changable **,
+            full_name: '',
+            email: '',
+            phone_number: '',
+            about: ''
+        }
+    18. doctor password change: 
+        url: '/api/changePassword',
+        method: 'POST',
+        data = {
+            old_password: '',
+            new_password: ''
+            confirm_new_password: ''
+        }
+
+    19. get doctor timings:
+        url: '/api/DoctorTimings/?name='+ ** dayName**,
+        method: 'GET'
+    20. new doctor timings: 
+        url: '/api/DoctorTimings/',
+        method: 'POST'
+        data = {
+            day: '',
+            from_time: '',
+            to_time: ''
+        }
+
+    21. Change Fee:
+        url: '/api/changeFee/',
+        method: 'POST'
+        data= {
+            consultation_fee: '',
+            new_fees: ''
+        }
+    22. post DOctor Bank details: 
+        url: '/api/doctor_bankDetails/',
+        method: 'POST'
+        data = {
+            account_no: '',
+            account_holder_name: '',
+            bank_name: '',
+            branch_name: '',
+            ifsc_no: '',
+            upi_id: ''
+            phone_no: ''
+            blank_cheque: ** file **(optional)
+        }
+
+    23. get doctor bank details:
+        url: '/api/doctor_bankDetails/',
+        method: 'GET'
+
+
+
+
+
