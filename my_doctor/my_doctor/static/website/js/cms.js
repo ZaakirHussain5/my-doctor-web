@@ -263,11 +263,11 @@ $("#doctorRegistration").submit((e) => {
             let formdata = new FormData(form);
             formdata.append('username', response.doctorId);
             formdata.append('web_registration', true);
-            formdata.append('about', "")
+            formdata.append('about', $('#about').val())
             formdata.append('Registration_Number', $('#medical_id').val())
             const cms_data = {
                 Phone_number: $('#mob1').val(),
-                City: $('#city').val(),
+                City: 'Not specified',
                 Name: $('#Name1').val(),
                 Medical_ID: $('#medical_id').val(),
                 Email: $('#email').val(),
@@ -289,6 +289,33 @@ $("#doctorRegistration").submit((e) => {
                     method: 'GET',
                     success: function (response) {
                         console.log(response)
+                        let days = [{day: 'sunday'}, {day: 'monday'}, {day: 'tuesday'}, {day: 'wednesday'}, {day: 'thursday'}, {day: 'friday'}, {day: 'saturday'}]
+                        for(var i=0; i < days.length; i++){
+                            let my_obj = days[i];
+                            formdata.append('day', my_obj.day)
+                            formdata.append('id', doctorId)
+                            $.ajax({
+                                url: '/api/NewDoctorTimingAPI/',
+                                method: 'POST',
+                                data: formdata,
+                                contentType: false,
+                                processData: false
+                            }).done(res=>{
+                                console.log(res)
+                            }).fail(err=>{console.log(err)})
+                        }
+                        $.ajax({
+                            url: '/api/NewDoctornotes/',
+                            method: 'POST',
+                            data: formdata,
+                            contentType: false,
+                            processData: false
+                        }).done(res=>{
+                            console.log(res)
+                        }).fail(err=>{
+                            console.log(err)
+                        })
+                        
                         let url = '/DoctorsMOU/'+ doctorId + '/';
                         window.location.href = url;
                     }

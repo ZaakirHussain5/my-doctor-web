@@ -15,6 +15,7 @@ djongo = "*"
 social-auth-app-django = "*"
 mysqlclient = "*"
 apscheduler = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

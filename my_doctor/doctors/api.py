@@ -651,12 +651,36 @@ class updateDoctor_profile(viewsets.ModelViewSet):
         return 
 
 
+class NewDoctorTimingAPI(viewsets.ModelViewSet):
+    serializer_class = NewDoctorTimingsSerializer
+
+    queryset = DoctorTimings.objects.all()
+
+    def perform_create(self, serializer):
+        user = User.objects.get(id=self.request.data.get('id'))
+        doctor = doctors_info.objects.get(user=user)
+        if serializer.is_valid(raise_exception=False):
+            serializer.save(doctor=doctor)
+
+        return
+        
 
 
 
+class NewDoctornotes(viewsets.ModelViewSet):
+    serializer_class = NewDoctornotesSerializer
+    permissions = [
+        permissions.AllowAny
+    ]
+    queryset = Doctornotes.objects.all()
 
+    def perform_create(self, serializer):
+        user = User.objects.get(id=self.request.data.get('id'))
+        doctor = doctors_info.objects.get(user=user)
+        if serializer.is_valid(raise_exception=False):
+            serializer.save(doctor=doctor)
 
-
+        return
 
 
 

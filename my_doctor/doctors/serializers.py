@@ -25,6 +25,12 @@ class DoctorTimingsSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('doctor', )
 
+
+class NewDoctorTimingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorTimings
+        fields = ['from_time', 'to_time', 'day']
+
 class AvlDoctorsListSerializer(serializers.ModelSerializer):
     doctor=doctors_infoSerializer()
     class Meta:
@@ -126,6 +132,10 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
     specialist_type = serializers.CharField(max_length=25)
     web_registration = serializers.BooleanField()
     Registration_Number = serializers.CharField(max_length=54)
+    about=serializers.CharField(required=False)
+    consultation_fee = serializers.CharField(required=False)
+    settlement_cycle = serializers.CharField(required=False)
+    profile_pic=serializers.FileField(required=False)
 
     def create(self, validated_data):
         try:
@@ -133,10 +143,14 @@ class WebNewDoctorRegistrationSerializer(serializers.Serializer):
           details = doctors_info.objects.create(
               user=user,
               phone_number=validated_data['phone_number'],
+              profile_pic = validated_data.get('profile_pic', None),
               specialist_type=validated_data['specialist_type'],
               full_name=validated_data['full_name'],
               web_registration=validated_data['web_registration'],
               Registration_Number=validated_data['Registration_Number'],
+              about = validated_data.get('about', ''),
+              consultation_fee=validated_data.get('consultation_fee', 0),
+              settlement_cycle = validated_data.get('settlement_cycle', None)
           )
           details.save()
           return user
@@ -168,6 +182,11 @@ class DoctornotesSerializer(serializers.ModelSerializer):
         model = Doctornotes
         fields= '__all__'
         read_only_fields = ('doctor', )
+
+class NewDoctornotesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctornotes
+        fields= ['notes']
 
 class DoctorBillingHistorySerializer(serializers.ModelSerializer):
     class Meta:

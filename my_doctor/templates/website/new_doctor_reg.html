@@ -2,17 +2,351 @@
 {%load static%}
 {% block content%}
 <style>
+  @media (max-width: 1024px) {
+    .final-setup .form {
+      padding: 10px 0px !important;
+    }
+
+    .final-setup .table {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 768px) {
     
+  }
+
+  @media (max-width: 425px) {
+    .final-setup .form {
+      overflow: hidden;
+    }
+
+    .final-setup .detail-table {
+      overflow: scroll;
+    }
+  }
+
+  .final-setup .form {
+    border: 1px solid #f1f1f1;
+    box-shadow: 1px 1px 20px #cccccc57;
+    margin: 0 10px;
+    padding: 20px;
+  }
+
+  table {
+    border: 2px solid #ddd;
+  }
+
+  .table>thead>tr>th,
+  .table>tbody>tr>td {
+    border-right: 2px solid #ddd;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+  .img-container{
+    position: relative;
+  }
+  .img-overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:1;
+  color: white;
+  font-size: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  border-radius: 50% !important;
+}
+
+
+.input-group-addon{
+    color: #ffffff !important;
+    background-color: #337ab7 !important;
+}
+
 </style>
 <section class="breadcrumb">
-    
+  <div class="container">
+    <div class="breadcrumb-outer">
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Register</li>
+        </ul>
+      </nav>
+      <h2>Register</h2>
+    </div>
+  </div>
+</section>
+
+<section class="final-setup">
+  <div class="container">
+    <div class="container">
+      <form id="doctorRegistration">
+        <div class="col-lg-5 mx-auto col-md-5 col-sm-12 col-xs-12">
+          <div class="row">
+            <!-- <div class="col-xs-12">
+              <h3>Final Step</h3>
+              <p>Set Availability and Bank Details</p>
+            </div> -->
+            
+            <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12 img-container">
+                <input type="file" id="profile_photo" name="profile_pic" class="form-control sr-only" accept=".gif, .jpg, .png">
+                <label for="profile_photo">
+                    <div id="imag_overlay" class="img-container" style="z-index: 100;">
+                        <img src="/media/logos/anonymous-doctor.png" alt="" id="profile_pics" style="border: 1px solid #f1f1f1;"
+                            class="img">
+                        <div class="img-overlay">Set a Profile Picture</div>
+                    </div>
+                </label>
+            </div>
+            <!--  -->
+            <div class="col-md-8">
+                <div class="form-group" style="margin-top: 25px;">
+                    <input type="text" id="Name1" name="full_name" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="medical_id" class="form-control" placeholder="Med Registration No">
+                </div>
+                <div class="input-group form-group">
+                    <input type="text" class="form-control" name="phone_number" id="mob1" placeholder="Mobile">
+                    <div class="input-group-addon bg-primary" id="btnOTP" style="cursor: pointer;">OTP</div>
+                </div>
+                <div class="form-group col-xs-12" id="div-otp" style="display: none;">
+                    <input type="text" class="form-control" name="otp"  id="OTP" placeholder="Enter the OTP" required>
+                    <small>Didn't Recieve an OTP click <span id="btnResendOTP" style="color:blue; cursor: pointer;">here.</span></small>
+
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                </div>
+            </div>
+
+            
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <select name="specialist_type" id="select-specialist">
+                    <option >Specialty</option>
+                    <option value="general physician">General Physician</option>
+                    <option value="gynaecologist">Gynaecologist</option>
+                    <option value="psychologist">Psychologist</option>
+                    <option value="dietitian">Dietitian</option>
+                    <option value="pediatrician">Pediatrician</option>
+                    <option value="dermatologist">Dermatologist</option>
+                </select>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        Available: 
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="from_time">From: </label>
+                        <input type="time" required name="from_time" id="from_time" placeholder="from :">
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="to_time">To: </label>
+                        <input type="time" required id="to_time" name="to_time" placeholder="To: ">
+                    </div>
+                  </div>
+                <div class="form-group row">
+                    <input type="text" class="form-control col-md-4" name="consultation_fee" placeholder="Consultation Fee">
+                </div>
+                <div class="form-group row">
+                    <textarea name="notes" placeholder="Bank A/C Details"></textarea>
+                </div>
+                <div class="form-group row">
+                    <input type="text" class="form-control col-md-4" name="" placeholder="Phone Pay / Google Pay / UPID">
+                </div>
+                <div class="form-group row">
+                    <input type="text" class="form-control col-md-4" name="settlement_cycle" placeholder="Fee Settlement. (Daily / Weekly / Monthly)">
+                </div>
+                <div class="form-group row">
+                    <textarea id="about" placeholder="About: Write a few lines about your achievements and exprience as a doctor."></textarea>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Set Password">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="rePassword">Password</label>
+                        <input type="password" class="form-control" id="rePassword" placeholder="Re Enter Password">
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+        </div>
+        
+        <div class="mar-bottom-15">
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="checkbox-outer">
+
+                <input type="checkbox" id="agreed" name="chkAgree" value="Agreed"> I have read and understood the <a
+                  href="#">MOU</a>
+                <a href="#">Terms and Conditions</a> and agree to be bound by me.
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-12 col-xs-12 text-center mar-top-15">
+              <button type="submit" class="btn btn-block" id="submitButton">Submit</button>
+              <br>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
 </section>
 
 
 {%endblock%}
 
 {% block scripts %}
-<script type="text/javascript">
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile_pics').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#profile_photo").change(function () {
+        readURL(this);
+    });
+
+    // $("#imag_overlay").click(function(){
+    //     $("#profile_photo").trigger('click'); 
+    // })
+
+    function send_otp(){
+        let url = `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Welcome Dr.${$('#Name1').val()}, OTP for mobile number verification is <OTP>. Do not share or forward&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`;
+        // let url = `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Registration under review, We shall intimate you once approved. OTP for mobile number verification is <OTP>&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`;
+        if ($('#Name1').val() == '' || $('#mob1').val() == '')
+            alert('Enter Name and Mobile Number')
+        else {
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    console.log(response)
+                    $('#div-otp').show()
+                    // $('#div-otp').html('')
+                    
+                }
+            })
+
+        }
+    }
+
+    $('#btnOTP').click(function () {
+        send_otp()
+    })
+
+    $('#btnResendOTP').click(function(){
+        send_otp()
+    })
+    function checkEmail() {
+        const email = $('#email').val();
+        const email_warn = $('#email-warning')
+        console.log(email_warn.length)
+        if (email.length >= 3) {
+            $.ajax({
+                url: '/api/has_email/?email=' + email,
+                method: 'GET',
+                contentType: 'application/json',
+
+            }).done(res => {
+
+                if (res.length > 0) {
+                    if (email_warn.length == 0) {
+                        $('#email').after($('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                        $('#submit').prop('disabled', true)
+                        $('#btnOTP').prop('disabled', true)
+                    }
+                }
+                else {
+                    if (email_warn.length > 0) {
+                        $('#email-warning').remove()
+                        $('#submit').removeAttr('disabled')
+                        $('#btnOTP').prop('disabled', false)
+                    }
+                }
+            }).fail(err => {
+                console.log(err)
+            })
+        } else {
+            if (email_warn.length > 0) {
+                $('#email-warning').remove()
+                $('#submit').prop('disabled', false)
+                $('#btnOTP').prop('disabled', false)
+            }
+        }
+    }
+
+    function checkPhone() {
+        const mob1 = $('#mob1').val();
+        const mob1_warn = $('#mob1-warning')
+        console.log(mob1_warn.length)
+        if (mob1.length >= 3) {
+            $.ajax({
+                url: '/api/has_email/?phone=' + mob1,
+                method: 'GET',
+                contentType: 'application/json',
+
+            }).done(res => {
+
+                if (res.length > 0) {
+                    if (mob1_warn.length == 0) {
+                        $('#mob1').after($('<p id="mob1-warning" class="text-danger">').text('Already exists. Please try another one.'))
+                        $('#submit').prop('disabled', true)
+                        $('#btnOTP').prop('disabled', true)
+                    }
+                }
+                else {
+                    if (mob1_warn.length > 0) {
+                        $('#mob1-warning').remove()
+                        $('#submit').prop('disabled', false)
+                        $('#btnOTP').prop('disabled', false)
+                    }
+                }
+            }).fail(err => {
+                console.log(err)
+            })
+        } else {
+            if (mob1_warn.length > 0) {
+                $('#mob1-warning').remove()
+                $('#submit').prop('disabled', false)
+                $('#btnOTP').prop('disabled', false)
+            }
+        }
+    }
+
+
+    const email = document.getElementById('email')
+    email.onkeyup = checkEmail;
+
+    const mob1 = document.getElementById('mob1')
+    mob1.onkeyup = checkPhone;
 
 </script>
 {% endblock %}
