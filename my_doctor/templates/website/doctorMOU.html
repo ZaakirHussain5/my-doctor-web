@@ -13,10 +13,7 @@
   }
 
   @media (max-width: 768px) {
-    .final-setup .form {
-      margin: 20px !important;
-      padding: 20px !important;
-    }
+    
   }
 
   @media (max-width: 425px) {
@@ -48,6 +45,28 @@
   .table {
     margin-bottom: 0;
   }
+  .img-container{
+    position: relative;
+  }
+  .img-overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:1;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.img {
+  display: block;
+  width: 232px;
+  height: 232px;
+}
 </style>
 <section class="breadcrumb">
   <div class="container">
@@ -73,13 +92,27 @@
               <h3>Final Step</h3>
               <p>Set Availability and Bank Details</p>
             </div>
-            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <img src="" alt="" id="profile_pics" style="border: 1px solid #f1f1f1;">
+            <input type="file" id="profile_photo" class="form-control sr-only" accept=".gif, .jpg, .png">
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 img-container">
+                <label for="profile_photo">
+                    <div class="img-container">
+                        <img src="/media/logos/anonymous-doctor.png" alt="" id="profile_pics" style="border: 1px solid #f1f1f1;"
+                            class="img">
+                        <div class="img-overlay">Set a Profile Picture</div>
+                    </div>
+                </label>
             </div>
-            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <label for="profile_photo">Profile Photo</label>
-              <input type="file" id="profile_photo" class="form-control">
-            </div>
+            </div> -->
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label for="about">
+                    <b>About you</b>
+                </label>
+                <textarea  id="about" rows="10" class="form-control" placeholder="Write about your achievements and experience as a doctor."></textarea>
+              </div>
+         
             <!--  -->
             <div class="detail-table col-xs-12">
               <p>Availability Details</p>
@@ -142,91 +175,84 @@
               <h3>Bank Details</h3>
             </div>
             <!--  -->
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="account_no" class="form-control-label float-right">
-                  Consultation Fees:</label></div>
-              <div class="col-12 col-md-7 m-2">
-                <input type="number" id="consultation_fee" name="consultation_fee" placeholder="Enter your Fees"
-                  class="form-control m-1" value='0'>
-              </div>
-              <div class="col col-md-5"><label for="account_no" class="form-control-label float-right">
-                  Settlement Cycle:</label></div>
-              <div class="col-12 col-md-7 m-2">
-                <select id="settlementCycle">
-                  <option value="one week">One Week</option>
-                  <option value="two week">Two Week</option>
-                  <option value="one month">One Month</option>
-                </select>
-              </div>
-
-              <div class="col col-md-5"><label for="account_no" class="form-control-label float-right">
-                  A/c No.</label></div>
-              <div class="col-12 col-md-7">
-                <input type="number" id="account_no" name="account_no" placeholder="Enter yout Account Number"
-                  class="form-control">
-                <input type="hidden" name="doctor_id" value="{{ doctor }}">
-              </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="account_no" class="form-control-label float-right">
+                      Consultation Fees</label>
+                    <input type="number" id="consultation_fee" name="consultation_fee" placeholder="Enter your Fees"
+                      class="form-control m-1" value='0'>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="account_no" class="form-control-label float-right">
+                        Settlement Cycle:</label>
+                    <select id="settlementCycle">
+                        <option value="Daily">Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                    </select>
+                </div>
             </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="account_holder_name" class=" form-control-label float-right">
-                  A/c Holder Name</label></div>
-              <div class="col-12 col-md-7"><input type="text" id="account_holder_name" name="account_holder_name"
-                  placeholder="Enter the Name Linked with the Account" class="form-control">
-              </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="account_no" class="form-control-label float-right">
+                        A/c No.</label>
+                    <input type="number" id="account_no" name="account_no" placeholder="Enter yout Account Number"
+                        class="form-control">
+                    <input type="hidden" name="doctor_id" value="{{ doctor }}">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="account_holder_name" class=" form-control-label float-right">
+                        A/c Holder Name</label>
+                    <input type="text" id="account_holder_name" name="account_holder_name"
+                        placeholder="Enter the Name Linked with the Account" class="form-control">
+            
+                </div>
+                <div class=" form-group col-md-12">
+                    <label for="bank_name" class=" form-control-label float-right">
+                        Bank Name</label><input type="text" id="bank_name" name="bank_name" placeholder="Enter the Bank Name"
+                        class="form-control">
+            
+                </div>
+                <div class=" form-group col-md-12">
+                    <label for="branch_name" class=" form-control-label float-right">
+                        Branch Name</label>
+                    <input type="text" id="branch_name" name="branch_name" placeholder="Enter the Branch Name" class="form-control">
+            
+                </div>
+                <div class=" form-group col-md-12">
+                    <label for="ifsc_no" class=" form-control-label float-right">
+                        IFSC</label><input type="text" id="ifsc_no" name="ifsc_no" placeholder="Enter the IFSC"
+                        class="form-control">
+                </div>
+                <div class=" form-group col-md-12"><label for="upi_id" class=" form-control-label float-right">
+                        UPI ID</label>
+                    <input type="text" id="upi_id" name="upi_id" placeholder="Enter UPI ID" class="form-control">
+                </div>
+                <div class="form-group col-md-12"><label for="phone_no" class=" form-control-label float-right">
+                        Phone Number</label>
+                    <input type="number" id="phone_no" name="phone_no" placeholder="Enter the Phone Number" class="form-control">
+                    <small>Phone Number which is linked with Google Pay,Phone pe or other
+                        UPI apps.</small>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="blank_cheque" class=" form-control-label float-right">
+                        Cancelled Cheque Photo</label>
+                    <input type="file" id="blank_cheque" name="blank_cheque" placeholder="Enter the Phone Number"
+                        class="form-control">
+                    <small>You can provide us a cancelled cheque for bankdetails confirmation.</small>
+                </div>
             </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="bank_name" class=" form-control-label float-right">
-                  Bank Name</label></div>
-              <div class="col-12 col-md-7"><input type="text" id="bank_name" name="bank_name"
-                  placeholder="Enter the Bank Name" class="form-control">
-              </div>
+            
             </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="branch_name" class=" form-control-label float-right">
-                  Branch Name</label></div>
-              <div class="col-12 col-md-7"><input type="text" id="branch_name" name="branch_name"
-                  placeholder="Enter the Branch Name" class="form-control">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="ifsc_no" class=" form-control-label float-right">
-                  IFSC</label></div>
-              <div class="col-12 col-md-7"><input type="text" id="ifsc_no" name="ifsc_no" placeholder="Enter the IFSC"
-                  class="form-control">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="upi_id" class=" form-control-label float-right">
-                  UPI ID</label></div>
-              <div class="col-12 col-md-7"><input type="text" id="upi_id" name="upi_id" placeholder="Enter UPI ID"
-                  class="form-control">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="phone_no" class=" form-control-label float-right">
-                  Phone Number</label></div>
-              <div class="col-12 col-md-7"><input type="number" id="phone_no" name="phone_no"
-                  placeholder="Enter the Phone Number" class="form-control">
-                <small>Phone Number which is linked with Google Pay,Phone pe or other
-                  UPI apps.</small>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col col-md-5"><label for="blank_cheque" class=" form-control-label float-right">
-                  Cancelled Cheque Photo</label></div>
-              <div class="col-12 col-md-7"><input type="file" id="blank_cheque" name="blank_cheque"
-                  placeholder="Enter the Phone Number" class="form-control">
-                <small>You can provide us a cancelled cheque for bankdetails confirmation.</small>
-              </div>
-
-            </div>
+            
+            
+            
+            
+            
+            
+           
             <!--  -->
-            <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <p><b>About you</b></p><br>
-              <textarea name="" id="about" cols="30" rows="10">
-
-      </textarea>
-            </div>
+            
 
 
           </div>
@@ -234,7 +260,7 @@
         <div class="mar-bottom-15">
           <div class="row">
 
-            <div class="col-xs-10">
+            <div class="col-xs-12">
               <div class="checkbox-outer">
 
                 <input type="checkbox" id="agreed" name="chkAgree" value="Agreed"> I have read and understood the <a
@@ -242,7 +268,7 @@
                 <a href="#">Terms and Conditions</a> and agree to be bound by me.
               </div>
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+            <div class="col-md-offset-5 col-lg-offset-5 col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center mar-top-15">
               <a href="#" class="btn btn-block" id="submitButton">Submit</a>
               <br>
             </div>
@@ -260,160 +286,161 @@
 
 {% block scripts %}
 <script>
-  let availableDay = []
-  const doctorId = "{{doctor}}";  
-  const userId = "{{user}}"
+    let availableDay = []
+    const doctorId = "{{doctor}}";
+    const userId = "{{user}}"
 
-  
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#profile_pics').attr('src', e.target.result);
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile_pics').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
         }
-
-        reader.readAsDataURL(input.files[0]);
     }
-}
 
-  $("#profile_photo").change(function(){
-      readURL(this);
-  });
+    $("#profile_photo").change(function () {
+        readURL(this);
+    });
 
 
-  $('.form-control').change(function () {
-    let inputType = $(this).attr('type');
-    if (inputType == 'time') {
-      let has_obj = false;
-      let dayName = $(this).data('day')
-      for (let i = 0; i < availableDay.length; i++) {
-        let obj = availableDay[i]
-        let name_of_attr = $(this).attr('name')
-        if (obj.day == dayName) {
+    $('.form-control').change(function () {
+        let inputType = $(this).attr('type');
+        if (inputType == 'time') {
+            let has_obj = false;
+            let dayName = $(this).data('day')
+            for (let i = 0; i < availableDay.length; i++) {
+                let obj = availableDay[i]
+                let name_of_attr = $(this).attr('name')
+                if (obj.day == dayName) {
 
-          has_obj = true;
-          obj[name_of_attr] = $(this).val()
+                    has_obj = true;
+                    obj[name_of_attr] = $(this).val()
 
+                }
+            }
+            if (!has_obj) {
+                let name_of_attr = $(this).attr('name')
+                console.log(name_of_attr)
+                let objs = {
+                    doctor_id: doctorId,
+                    day: dayName,
+                }
+                objs[name_of_attr] = $(this).val()
+                availableDay.push(objs)
+            }
+            console.log(availableDay)
         }
-      }
-      if (!has_obj) {
-        let name_of_attr = $(this).attr('name')
-        console.log(name_of_attr)
-        let objs = {
-          doctor_id: doctorId,
-          day: dayName,
-        }
-        objs[name_of_attr] = $(this).val()
-        availableDay.push(objs)
-      }
-      console.log(availableDay)
-    }
-  })
-
-  $('#submitButton').click(function (e) {
-    e.preventDefault();
-    const a = $('#about').val().trim().length > 0 ? $('#about').val() : 'not specified';
-
-    if (!$('#agreed').prop('checked')) {
-      alert('you need to agree our terms and condition')
-      return
-    }
-
-    if (availableDay.length == 0) {
-      alert('Please select atleast one day.')
-      return
-    }
-    if ($('#consultation_fee').val() == 0) {
-      alert('Please enter your consultation fees.')
-      return
-    }
-    
-    let doctor_data = new FormData()
-    doctor_data.append('doctor_id', doctorId)
-    doctor_data.append('user', userId)
-    doctor_data.append('consultation_fee', $('#consultation_fee').val())
-    doctor_data.append('settlement_cycle', $('#settlementCycle').val())
-    doctor_data.append('about', a)
-    doctor_data.append('doctor_id', doctorId)
-    let fiels = $('#profile_photo')[0].files
-    if(fiels.length > 0)
-    {
-      doctor_data.append('profile_pic', fiels[0])
-    }
-    else{
-      alert('please select a photo')
-      return
-    }
-    let bankdetails = new FormData()
-    bankdetails.append('doctor_id', doctorId)
-    bankdetails.append('account_no', $('#account_no').val().trim().length > 0 ? $('#account_no').val() : 'not specified')
-    bankdetails.append('account_holder_name', $('#account_holder_name').val().trim().length > 0 ? $('#account_holder_name').val() : 'not specified')
-    bankdetails.append('bank_name', $('#bank_name').val().length > 0 ? $('#bank_name').val() : 'not specified')
-    bankdetails.append('branch_name', $('#branch_name').val().length > 0 ? $('#branch_name').val() : 'not specified')
-    bankdetails.append('ifsc_no', $('#ifsc_no').val().length > 0 ? $('#ifsc_no').val() : 'not specified')
-    bankdetails.append('upi_id', $('#upi_id').val().length > 0 ? $('#upi_id').val() : 'not specified')
-    bankdetails.append('phone_no', $('#phone_no').val().length > 0 ? $('#phone_no').val() : 00)
-
-    let cheque_fiels = $('#blank_cheque')[0].files
-    if(cheque_fiels.length > 0){
-      bankdetails.append('blank_cheque', cheque_fiels[0])
-    }
-
-    $.ajax({
-      url: '/api/updateDoctor_profile/'+ doctorId + '/',
-      method: 'PUT',
-      async:false,
-      data: doctor_data,
-      contentType: false,
-      processData: false
-      
-    }).done(res=>{
-      console.log('doctor profile', res)
-    }).fail(err=>{
-      console.log(err)
     })
-    for(var i =0; i < availableDay.length; i++){
-      let d  = availableDay[i]; 
-      let timeData = new FormData()
-      timeData.append('doctor_id', d.doctor_id)
-      timeData.append('day', d.day)
-      timeData.append('from_time', d.from_time)
-      timeData.append('to_time', d.to_time)
+
+    $('#submitButton').click(function (e) {
+        e.preventDefault();
+        const a = $('#about').val().trim().length > 0 ? $('#about').val() : 'not specified';
+
+        if (!$('#agreed').prop('checked')) {
+            alert('you need to agree our terms and condition')
+            return
+        }
+
+        if (availableDay.length == 0) {
+            alert('Please select atleast one day.')
+            return
+        }
+        if ($('#consultation_fee').val() == 0) {
+            alert('Please enter your consultation fees.')
+            return
+        }
+
+        let doctor_data = new FormData()
+        doctor_data.append('doctor_id', doctorId)
+        doctor_data.append('user', userId)
+        doctor_data.append('consultation_fee', $('#consultation_fee').val())
+        doctor_data.append('settlement_cycle', $('#settlementCycle').val())
+        doctor_data.append('about', a)
+        doctor_data.append('doctor_id', doctorId)
+        let fiels = $('#profile_photo')[0].files
+        if (fiels.length > 0) {
+            doctor_data.append('profile_pic', fiels[0])
+        }
+        else {
+            alert('please select a photo')
+            return
+        }
+        let bankdetails = new FormData()
+        bankdetails.append('doctor_id', doctorId)
+        bankdetails.append('account_no', $('#account_no').val().trim().length > 0 ? $('#account_no').val() : 'not specified')
+        bankdetails.append('account_holder_name', $('#account_holder_name').val().trim().length > 0 ? $('#account_holder_name').val() : 'not specified')
+        bankdetails.append('bank_name', $('#bank_name').val().length > 0 ? $('#bank_name').val() : 'not specified')
+        bankdetails.append('branch_name', $('#branch_name').val().length > 0 ? $('#branch_name').val() : 'not specified')
+        bankdetails.append('ifsc_no', $('#ifsc_no').val().length > 0 ? $('#ifsc_no').val() : 'not specified')
+        bankdetails.append('upi_id', $('#upi_id').val().length > 0 ? $('#upi_id').val() : 'not specified')
+        bankdetails.append('phone_no', $('#phone_no').val().length > 0 ? $('#phone_no').val() : 00)
+
+        let cheque_fiels = $('#blank_cheque')[0].files
+        if (cheque_fiels.length > 0) {
+            bankdetails.append('blank_cheque', cheque_fiels[0])
+        }
+
         $.ajax({
-        url: '/api/DoctorTimingsApiView/',
-        method: 'POST',
-        async:false,
-        data: timeData,
-        contentType: false,
-        processData: false
-      }).done(response => {
-        console.log(response)
-      }).fail(err=>{
-        console.log(err)
-      })
-    }
-    
+            url: '/api/updateDoctor_profile/' + doctorId + '/',
+            method: 'PUT',
+            async: false,
+            data: doctor_data,
+            contentType: false,
+            processData: false
 
-    $.ajax({
-      url: '/api/doctor_bankDetailsAdminView/',
-      method: 'POST',
-      data: bankdetails,
-      contentType: false,
-      async:false,
-      processData: false
-    }).done(res=>{
-      console.log(res)
+        }).done(res => {
+            console.log('doctor profile', res)
+        }).fail(err => {
+            console.log(err)
+        })
+        for (var i = 0; i < availableDay.length; i++) {
+            let d = availableDay[i];
+            let timeData = new FormData()
+            timeData.append('doctor_id', d.doctor_id)
+            timeData.append('day', d.day)
+            timeData.append('from_time', d.from_time)
+            timeData.append('to_time', d.to_time)
+            $.ajax({
+                url: '/api/DoctorTimingsApiView/',
+                method: 'POST',
+                async: false,
+                data: timeData,
+                contentType: false,
+                processData: false
+            }).done(response => {
+                console.log(response)
+            }).fail(err => {
+                console.log(err)
+            })
+        }
+
+
+        $.ajax({
+            url: '/api/doctor_bankDetailsAdminView/',
+            method: 'POST',
+            data: bankdetails,
+            contentType: false,
+            async: false,
+            processData: false
+        }).done(res => {
+            console.log(res)
+        })
+            .fail(err => {
+                console.log(err)
+            })
+        setTimeout(function () {
+            window.location.href = '/';
+        }, 2000)
+        toastr.success('Registration Completed Successfully. Our Representatives will get back to you soon.', 'Registration Completed', {
+            positionClass: "toast-top-center"
+        })
+
     })
-    .fail(err=>{
-      console.log(err)
-    })
-
-    toastr.success('Availability and Bank Details added successfully.', 'Success', {
-                        positionClass: "toast-top-center"
-                    })
-
-  })
 
 </script>
 {% endblock %}
