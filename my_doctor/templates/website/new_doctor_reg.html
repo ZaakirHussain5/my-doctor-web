@@ -58,7 +58,7 @@
   transition: .5s ease;
   opacity:1;
   color: white;
-  font-size: 10px;
+  font-size: 20px;
   padding: 20px;
   text-align: center;
 }
@@ -90,126 +90,127 @@
   </div>
 </section>
 
-<section class="final-setup">
+<section class="login">
   <div class="container">
-    <div class="container">
-      <form id="doctorRegistration">
-        <div class="col-lg-5 mx-auto col-md-5 col-sm-12 col-xs-12">
-          <div class="row">
-            <!-- <div class="col-xs-12">
-              <h3>Final Step</h3>
-              <p>Set Availability and Bank Details</p>
-            </div> -->
-            
-            <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12 img-container">
-                <input type="file" id="profile_photo" name="profile_pic" class="form-control sr-only" accept=".gif, .jpg, .png">
-                <label for="profile_photo">
-                    <div id="imag_overlay" class="img-container" style="z-index: 100;">
-                        <img src="/media/logos/anonymous-doctor.png" alt="" id="profile_pics" style="border: 1px solid #f1f1f1;"
-                            class="img">
-                        <div class="img-overlay">Set a Profile Picture</div>
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xs-12">
+        <div class="login-form" style="padding: 0 10%;">
+          <form id="doctorRegistration">
+            <div class="col-lg-12 mx-auto col-md-12 col-sm-12 col-xs-12">
+              <div class="row">
+                 <div class="col-xs-12 text-center">
+                  <h2>Doctor Registration</h2>
+                </div>
+                
+                <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12 img-container">
+                    <input type="file" id="profile_photo" name="profile_pic" class="form-control sr-only" accept=".gif, .jpg, .png">
+                    <label for="profile_photo">
+                        <div id="imag_overlay" class="img-container" style="z-index: 100;">
+                            <img src="/media/logos/anonymous-doctor.png" alt="" id="profile_pics" style="border: 1px solid #f1f1f1;"
+                                class="img">
+                            <div class="img-overlay">Set a Profile Picture</div>
+                        </div>
+                    </label>
+                </div>
+                <!--  -->
+                <div class="col-md-8">
+                    <div class="form-group" style="margin-top: 25px;">
+                        <input type="text" id="Name1" name="full_name" class="form-control" placeholder="Name">
                     </div>
-                </label>
-            </div>
-            <!--  -->
-            <div class="col-md-8">
-                <div class="form-group" style="margin-top: 25px;">
-                    <input type="text" id="Name1" name="full_name" class="form-control" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="medical_id" class="form-control" placeholder="Med Registration No">
-                </div>
-                <div class="input-group form-group">
-                    <input type="text" class="form-control" name="phone_number" id="mob1" placeholder="Mobile">
-                    <div class="input-group-addon bg-primary" id="btnOTP" style="cursor: pointer;">OTP</div>
-                </div>
-                <div class="form-group col-xs-12" id="div-otp" style="display: none;">
-                    <input type="text" class="form-control" name="otp"  id="OTP" placeholder="Enter the OTP" required>
-                    <small>Didn't Recieve an OTP click <span id="btnResendOTP" style="color:blue; cursor: pointer;">here.</span></small>
-
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                </div>
-            </div>
-
-            
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <select name="specialist_type" id="select-specialist">
-                    <option >Specialty</option>
-                    <option value="general physician">General Physician</option>
-                    <option value="gynaecologist">Gynaecologist</option>
-                    <option value="psychologist">Psychologist</option>
-                    <option value="dietitian">Dietitian</option>
-                    <option value="pediatrician">Pediatrician</option>
-                    <option value="dermatologist">Dermatologist</option>
-                </select>
-                <div class="row">
-
-                    <div class="col-md-3">
-                        Available: 
+                    <div class="form-group">
+                        <input type="text" id="medical_id" class="form-control" placeholder="Med Registration No">
                     </div>
-                    <div class="col-md-3 form-group">
-                        <label for="from_time">From: </label>
-                        <input type="time" required name="from_time" id="from_time" placeholder="from :">
+                    <div class="input-group form-group">
+                        <input type="text" class="form-control" name="phone_number" id="mob1" placeholder="Mobile">
+                        <div class="input-group-addon bg-primary" id="btnOTP" style="cursor: pointer;">OTP</div>
                     </div>
-                    <div class="col-md-3 form-group">
-                        <label for="to_time">To: </label>
-                        <input type="time" required id="to_time" name="to_time" placeholder="To: ">
+                    <div class="form-group col-xs-12" id="div-otp" style="display: none;">
+                        <input type="text" class="form-control" name="otp"  id="OTP" placeholder="Enter the OTP" required>
+                        <small>Didn't Recieve an OTP click <span id="btnResendOTP" style="color:blue; cursor: pointer;">here.</span></small>
+    
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                    </div>
+                </div>
+    
+                
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="from-group">
+                     <select name="specialist_type" id="select-specialist">
+                        <option >Specialty</option>
+                        <option value="general physician">General Physician</option>
+                        <option value="gynaecologist">Gynaecologist</option>
+                        <option value="psychologist">Psychologist</option>
+                        <option value="dietitian">Dietitian</option>
+                        <option value="pediatrician">Pediatrician</option>
+                        <option value="dermatologist">Dermatologist</option>
+                    </select>
                   </div>
-                <div class="form-group row">
-                    <input type="text" class="form-control col-md-4" name="consultation_fee" placeholder="Consultation Fee">
-                </div>
-                <div class="form-group row">
-                    <textarea name="notes" placeholder="Bank A/C Details"></textarea>
-                </div>
-                <div class="form-group row">
-                    <input type="text" class="form-control col-md-4" name="" placeholder="Phone Pay / Google Pay / UPID">
-                </div>
-                <div class="form-group row">
-                    <input type="text" class="form-control col-md-4" name="settlement_cycle" placeholder="Fee Settlement. (Daily / Weekly / Monthly)">
-                </div>
-                <div class="form-group row">
-                    <textarea id="about" placeholder="About: Write a few lines about your achievements and exprience as a doctor."></textarea>
-                </div>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <label class="sr-only" for="password">Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Set Password">
+                   
+                    <div class="row mar-top-15" style="margin-top: 15px!important;">
+    
+                        <div class="col-md-3">
+                            Available: 
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label for="from_time">From: </label>
+                            <input type="time" required name="from_time" id="from_time" placeholder="from :">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label for="to_time">To: </label>
+                            <input type="time" required id="to_time" name="to_time" placeholder="To: ">
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                        <input type="text" class="form-control col-md-4" name="consultation_fee" placeholder="Consultation Fee">
                     </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="rePassword">Password</label>
-                        <input type="password" class="form-control" id="rePassword" placeholder="Re Enter Password">
+                    <div class="form-group row">
+                        <textarea name="notes" placeholder="Bank A/C Details"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <input type="text" class="form-control col-md-4" name="settlement_cycle" placeholder="Fee Settlement. (Daily / Weekly / Monthly)">
+                    </div>
+                    <div class="form-group row">
+                        <textarea id="about" placeholder="About: Write a few lines about your achievements and exprience as a doctor."></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Set Password">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" id="rePassword" placeholder="Re Enter Password">
+                        </div>
                     </div>
                 </div>
+    
+              </div>
+    
             </div>
-
-          </div>
-
-        </div>
-        
-        <div class="mar-bottom-15">
-          <div class="row">
-
-            <div class="col-xs-12">
-              <div class="checkbox-outer">
-
-                <input type="checkbox" id="agreed" name="chkAgree" value="Agreed"> I have read and understood the <a
-                  href="#">MOU</a>
-                <a href="#">Terms and Conditions</a> and agree to be bound by me.
+            
+            <div class="mar-bottom-15">
+              <div class="row">
+    
+                <div class="col-xs-12">
+                  <div class="checkbox-outer">
+    
+                    <input type="checkbox" id="agreed" name="chkAgree" value="Agreed"> I have read and understood the <a
+                      href="#">MOU</a>
+                    <a href="#">Terms and Conditions</a> and agree to be bound by me.
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center mar-top-15">
+                  <button type="submit" class="btn btn-block" id="submitButton">Submit</button>
+                  <br>
+                </div>
               </div>
             </div>
-            <div class="col-md-5 col-sm-12 col-xs-12 text-center mar-top-15">
-              <button type="submit" class="btn btn-block" id="submitButton">Submit</button>
-              <br>
-            </div>
-          </div>
+    
+          </form>
         </div>
-
-      </form>
-
+      </div>
     </div>
+      
   </div>
 </section>
 
