@@ -44,7 +44,6 @@ function submitRegistrationForm() {
             otp: $('#OTP').val()
         }
     }).done(function (response) {
-        console.log(response)
         if (response.response_code != "8000") {
             alert('Invalid OTP Please Check the OTP and Try Again')
             $('#submit').html('Register')
@@ -94,25 +93,16 @@ function submitRegistrationForm() {
             console.log(error)
         })
     })
-
-
-
-    console.log("data is", data);
-
-
-
 }
 
 
 function submitSubscriptionForm(data) {
-    console.log("Data coming so function is called.", data);
     $.ajax({
         url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/BookAnAppoinment/',
         method: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
     }).done((response) => {
-        console.log(response);
         alert("Thank you!! We have your details, Our representatives will get back to you.");
         $("#appointments-main-form").find("input[type=text], textarea, input[type=tel], input[type=number]").val("")
     })
@@ -128,7 +118,6 @@ function newsLetterSubscription(url, data, message) {
         data: JSON.stringify(data),
         contentType: 'application/json',
     }).done((response) => {
-        console.log(response);
         toastr.success(message, 'Success', {
             positionClass: "toast-top-center"
         })
@@ -146,9 +135,6 @@ $("#newsletter-form").submit(function (e) {
     e.stopImmediatePropagation();
     const url = 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Newsletter/';
     const message = 'You are now registered for important updates and newsletters.';
-    console.log(
-        "Form submitted successfully."
-    )
     let data = {
         Subsricbe_To_Newsletter: $('#SubsricbeToNewsletter').val()
     }
@@ -183,7 +169,6 @@ $('#patientRegistration').submit(submitRegistrationForm)
 $("#appointments-main-form").submit(function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    console.log('called')
     // alert("Thank you!! We have your details, Our representatives will get back to you.");
     const url = 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Contact_us/';
     const message = `Thank you!! We have your details, Our representatives will get back to you.`;
@@ -201,14 +186,12 @@ $("#appointments-main-form").submit(function (e) {
         Email: data.email,
         Name: data.name
     }
-    console.log(cms_data)
     $.ajax({
         url: '/api/onlineEnquiry/',
         method: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
     }).done((response) => {
-        console.log(response);
         // alert("");
 
         newsLetterSubscription(url, cms_data, message)
@@ -245,7 +228,6 @@ $("#doctorRegistration").submit((e) => {
             otp: $('#OTP').val()
         }
     }).done(function (response) {
-        console.log(response)
         if (response.response_code != "8000") {
             alert('Invalid OTP Please Check the OTP and Try Again')
             $('#submit').html('Register')
@@ -257,8 +239,8 @@ $("#doctorRegistration").submit((e) => {
             method: 'GET',
             contentType: 'application/json'
         }).done((response) => {
-            console.log("response ", response);
-
+            const is_agree = $('input[name=chkAgree]:checked').length;
+            if(!is_agree) {alert('You need to agree with our terms and condition.'); return }
             let form = document.getElementById("doctorRegistration");
             let formdata = new FormData(form);
             formdata.append('username', response.doctorId);
@@ -282,13 +264,11 @@ $("#doctorRegistration").submit((e) => {
                 processData: false,
             }).done((response) => {
                 newsLetterSubscription(url, cms_data, message)
-                console.log('the response is', response)
                 let doctorId = response.Doctor.id;
                 $.ajax({
                     url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus: Registration under review, we shall inform you once approved&route=0&from=BANDSS&to=${$('#mob1').val()}`,
                     method: 'GET',
                     success: function (response) {
-                        console.log(response)
                         let days = [{day: 'sunday'}, {day: 'monday'}, {day: 'tuesday'}, {day: 'wednesday'}, {day: 'thursday'}, {day: 'friday'}, {day: 'saturday'}]
                         for(var i=0; i < days.length; i++){
                             let my_obj = days[i];
@@ -300,8 +280,7 @@ $("#doctorRegistration").submit((e) => {
                                 data: formdata,
                                 contentType: false,
                                 processData: false
-                            }).done(res=>{
-                                console.log(res)
+                            }).done(res=>{return
                             }).fail(err=>{console.log(err)})
                         }
                         $.ajax({
@@ -310,14 +289,12 @@ $("#doctorRegistration").submit((e) => {
                             data: formdata,
                             contentType: false,
                             processData: false
-                        }).done(res=>{
-                            console.log(res)
-                        }).fail(err=>{
+                        }).done(res=>{return}).fail(err=>{
                             console.log(err)
                         })
                         
-                        let url = '/DoctorsMOU/'+ doctorId + '/';
-                        window.location.href = url;
+                        // let url = '/DoctorsMOU/'+ doctorId + '/';
+                        // window.location.href = url;
                     }
                 })
                 $('#doctorRegistration').trigger('reset');
