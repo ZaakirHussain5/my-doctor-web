@@ -660,83 +660,40 @@
                     }
                     
                     let strings = `
+                    <div class="col-md-4">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="ca-call-history">
-                                <div class="ca-call-history__left">
-                                    <div class="user-avatar user-avatar-rounded">
-                                        <img class="img-fluid" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-user.png' : data.doctor.profile_pic}"
-                                            alt="">
-                                    </div>
-                                    <div class="ml-2 ca-call-history__left--title">
-                                        <div id='docFName${data.doctor.id}'>${data.doctor.full_name}</div>
-                                        ${stars}
-                                        <br>
-                                        <div class="font-weight-bold text-success about">About :
-                                            ${data.doctor.about}</div><span data-toggle="modal" data-target="about${data.doctor.id}" class="text-info"> more</span>
-                                        <br>
-                                        <span class="font-weight-bold text-success">Available Time :
-                                            ${tConvert(data.from_time)}</span>
-                                        <br>
-                                        <span class="font-weight-bold text-success">Consultation Fee :
-                                            ${consultation_fee}</span>
-                                    </div>
-                                </div>
-                                <div class="ca-call-history__right">
-                                    <button type="button" data-doctor="${data.doctor.full_name}"
+  <img class="card-img-top" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
+    <p class="card-text">${data.doctor.about}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Consultation Fee : ${consultation_fee}</li>
+    <li class="list-group-item">Available Time : ${tConvert(data.from_time)}</li>
+    <li class="list-group-item">${stars}</li>
+  </ul>
+  <div class="card-footer">
+    <button type="button" data-doctor="${data.doctor.full_name}"
                                         data-doctor-id="${data.doctor.id}"
-                                        data-image="${data.doctor.profile_pic}"
+                                        data-image="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}"
                                         data-app-date="${$('#date-val').html()}"
                                         data-time="${data.from_time}" data-consFee=${data.doctor.consultation_fee} data-fee="${consultation_fee.toFixed(2)}" data-gst="${gst.toFixed(2)}"
                                         data-doc-num="${data.doctor.phone_number}"
-                                        class="btn selectDorctorsd iconbox btn-solid-info text-white bookAppointment">
+                                        class="btn btn-block btn-primary selectDorctorsd bookAppointment">
                                         Select
                                     </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal new-message-dialog" id="about${data.doctor.id}" tabindex="-1" role="dialog" aria-labelledby="ConsultationDetails"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                       
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="ca-profile-thumb" style="height: auto;">
-                            <div class="ca-profile-info">
-                                <div class="ca-profile-pic"><img height="20" class="img-fluid" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-user.png' : data.doctor.profile_pic}" alt="" id="docImage" style="height:160px"></div>
-                                <div class="ca-profile-title">
-                                    <h2 class="ca-profile-name">${data.doctor.full_name}</h2>
-                                </div>
-                            </div>
-                            <div class="ca-overlay"></div>
-                        </div>
-                        <div class="form-group mt-5">
-                            <h4><label for="AboutDoctor">About</label></h4>
-                            <textarea class="form-control" id="AboutDoctor" rows="7"  value="${data.doctor.about}" style="font-size: medium;"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn mfb-component__button--main"
-                        style="width:100%; border-radius:30px" data-dismiss="modal">Close</button>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+  </div>
+</div>
+                   </div> 
                     `;
-                    doctor_list += strings;
+                    doctor_list += strings
                 }
-                $('#doctors-list').html(doctor_list + `
+                $('#doctors-list').html(`<div class="row">
+                    ${doctor_list}
+                    </div>
                 <p class="text-center">
                                     Couldn't Find your Doctor ?? we can help you with that, Call us at <a href="tel:080-45549495">080-45549495</a>
-                                </p>
-                `)
+                                </p>;`)
                 mob()
             }).fail((err) => {
                 console.log(err)
