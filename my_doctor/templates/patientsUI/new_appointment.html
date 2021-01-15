@@ -8,6 +8,14 @@
         font-size: 13px;
         width:30%;
     }
+    .card-img-top {
+    width: 100px;
+    height: 100px;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+    border-radius: 50%;
+    object-fit: cover;
+}
 </style>
 <div class="ca-content__chatstab">
     <div class="ca-content__callstab" style="padding-top: 0;">
@@ -661,7 +669,7 @@
                     
                     let strings = `
                     <div class="col-md-4">
-                    <div class="card">
+                    <div class="card text-center" style="align-content:center;">
   <img class="card-img-top" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
