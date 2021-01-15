@@ -672,16 +672,14 @@
   <img class="card-img-top" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
-    <p class="card-text about">${data.doctor.about}</p>
+    <p class="card-text about">${data.doctor.about?data.doctor.about.substring(0,150)+'...':"" }</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">${stars}</li>
     <li class="list-group-item">Consultation Fee : ${consultation_fee}</li>
     <li class="list-group-item">Available Time : ${tConvert(data.from_time)}</li>
-    
-  </ul>
-  <div class="card-footer">
-    <button type="button" data-doctor="${data.doctor.full_name}"
+    <li>
+        <button type="button" data-doctor="${data.doctor.full_name}"
                                         data-doctor-id="${data.doctor.id}"
                                         data-image="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}"
                                         data-app-date="${$('#date-val').html()}"
@@ -690,7 +688,8 @@
                                         class="btn btn-block btn-primary selectDorctorsd bookAppointment">
                                         Select
                                     </button>
-  </div>
+    </li>
+  </ul>
 </div>
                    </div> 
                     `;
