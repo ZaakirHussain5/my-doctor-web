@@ -676,9 +676,10 @@
     <p class="card-text">${data.doctor.about}</p>
   </div>
   <ul class="list-group list-group-flush">
+    <li class="list-group-item">${stars}</li>
     <li class="list-group-item">Consultation Fee : ${consultation_fee}</li>
     <li class="list-group-item">Available Time : ${tConvert(data.from_time)}</li>
-    <li class="list-group-item">${stars}</li>
+    
   </ul>
   <div class="card-footer">
     <button type="button" data-doctor="${data.doctor.full_name}"
