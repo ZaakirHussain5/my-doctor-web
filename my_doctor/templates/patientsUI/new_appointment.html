@@ -16,9 +16,9 @@
     object-fit: cover;
 }
 </style>
-<div class="ca-content__chatstab">
-    <div class="ca-content__callstab" style="padding-top: 0;">
-        <div class="conversation-panel__body ps" style="height: calc(120vh - 0rem);">
+<div class="">
+    <div class="" style="padding-top: 0;">
+        <div class="conversation-panel__body" style="height: calc(120vh - 0rem);">
             <div class="container">
                 <div class="card">
                     <div class="card-header">
@@ -672,7 +672,7 @@
   <img class="card-img-top" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
-    <p class="card-text">${data.doctor.about?data.doctor.about.substring(0,70)+'...':"" }</p>
+    <p class="card-text">${data.doctor.about ? data.doctor.about.substring(0, 70) + '...' : ""}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">${stars}</li>
