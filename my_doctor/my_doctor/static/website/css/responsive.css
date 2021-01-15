@@ -290,6 +290,12 @@ footer{
 }
 }
 @media(max-width:425px){
+  .special-content h4{
+    font-size: small;
+  }
+  .special-content p{
+    font-size: x-small;
+  }
   .login-link{
     overflow: hidden;
     text-overflow: ellipsis;
