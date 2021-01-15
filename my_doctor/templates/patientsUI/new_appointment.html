@@ -6,7 +6,6 @@
         white-space: nowrap;
         overflow: hidden;
         font-size: 13px;
-        width:30%;
     }
     .card-img-top {
     width: 100px;
@@ -673,7 +672,7 @@
   <img class="card-img-top" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
-    <p class="card-text">${data.doctor.about}</p>
+    <p class="card-text about">${data.doctor.about}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">${stars}</li>
