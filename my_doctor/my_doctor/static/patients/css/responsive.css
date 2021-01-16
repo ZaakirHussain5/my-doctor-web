@@ -151,6 +151,11 @@ display: none;
     }
 }
 @media only screen and (max-width: 768px){
+    .med-ul{
+        display: flex !important;
+        padding-top:0 !important;
+        padding-bottom: 0 !important;
+    }
     .ca-call-history__right
     {
         position: relative;
