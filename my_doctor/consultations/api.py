@@ -81,7 +81,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return instance
 
     def perform_update(self, serializer):
-        serializer.save(send_signals=False)
+        serializer.save()
         doctor = consultations.objects.get(id=self.request.data['consultation']).doctor_id
         consultation = consultations.objects.filter(doctor_id=doctor)
         total_rating = consultation.aggregate(Sum('consultation_rating'))
