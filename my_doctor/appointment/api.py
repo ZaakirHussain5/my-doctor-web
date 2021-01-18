@@ -153,7 +153,7 @@ class getUpcomingAppoinment(viewsets.ModelViewSet):
     )
 
     def get_queryset(self):
-        return appointment.objects.filter(consultation_status = 'Pending', patient=self.request.user)
+        return appointment.objects.filter(consultation_status = 'Pending', patient=self.request.user).order_by('appointment_date')
 
 
 class upComingAppoinment(viewsets.ModelViewSet):
@@ -164,7 +164,7 @@ class upComingAppoinment(viewsets.ModelViewSet):
 
     def get_queryset(self):
         dates = getDateFormat()
-        return appointment.objects.filter(consultation_status = 'Pending', doctor__user=self.request.user).exclude(appointment_date__contains=dates)
+        return appointment.objects.filter(consultation_status = 'Pending', doctor__user=self.request.user).exclude(appointment_date__contains=dates).order_by('appointment_date')
 
 
 class previousAppoinment(viewsets.ModelViewSet):
@@ -186,7 +186,7 @@ class todaysAppoinment(viewsets.ModelViewSet):
     def get_queryset(self):
         formated_date = getDateFormat()
         print(formated_date)
-        return appointment.objects.filter(consultation_status = 'Pending', appointment_date__contains=formated_date,  doctor__user=self.request.user)
+        return appointment.objects.filter(consultation_status = 'Pending', appointment_date__contains=formated_date,  doctor__user=self.request.user).order_by('appointment_date')
 
 
 
