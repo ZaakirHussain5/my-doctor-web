@@ -2,6 +2,9 @@
 {% load static%}
 {% block content %}
 <style>
+    .about{
+        font-size: 13px;
+    }
     .card-img-top {
     width: 100px;
     height: 100px;
@@ -672,8 +675,9 @@
   <div class="card-body">
     <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
     
-    <p class="card-text about">${data.doctor.about ? data.doctor.about.substring(0, 60) + '...' : ""}
-    ${data.doctor.about.length>=60 ? `<button type="button" class="btn btn-link btn-sm readmore" data-about="${data.doctor.about}">Read More</button></p>`:""}
+    <p class="card-text about">${data.doctor.about ? data.doctor.about.substring(0, 60) : ""}
+    ${data.doctor.about.length>=60 ? `...<button type="button" class="btn btn-link btn-sm readmore" data-about="${data.doctor.about}">Read More</button>`:""}
+</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">${stars}</li>
