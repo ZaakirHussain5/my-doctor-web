@@ -252,7 +252,7 @@ class PatientBillingHistorys(viewsets.ModelViewSet):
     serializer_class = PatientBillingHistorySerializer
 
     def get_queryset(self):
-        queryset = PatientBillingHistory.objects.filter(patient__user = self.request.user)
+        queryset = PatientBillingHistory.objects.filter(patient__user = self.request.user).order_by('-date')
         #queryset = PatientBillingHistory.objects.all()
         return queryset
 

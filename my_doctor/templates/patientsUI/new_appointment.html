@@ -562,6 +562,11 @@
             $('#docNum').val(button.attr('data-doc-num'))
         });
 
+        $('#doctors-list').on('click', '.readmore', function () {
+            var aboutText = $(this).attr('data-about')
+            $(this).closest('.about').html(aboutText)
+        })
+
         ////// formating payment tab /////// 
         $('#ConfirmClick').click(() => {
             $.ajax({
@@ -671,7 +676,9 @@
   <img class="card-img-top" src="${!data.doctor.profile_pic || data.doctor.profile_pic == '' ? '/media/logos/anonymous-doctor.png' : data.doctor.profile_pic}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title" id='docFName${data.doctor.id}'>${data.doctor.full_name}</h5>
-    <p class="card-text">${data.doctor.about ? data.doctor.about.substring(0, 70) + '...' : ""}</p>
+    
+    <p class="card-text about">${data.doctor.about ? data.doctor.about.substring(0, 70) + '...' : ""}
+    <button type="button" class="btn btn-link readmore" data-about="${data.doctor.about}">Read More</button></p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">${stars}</li>
