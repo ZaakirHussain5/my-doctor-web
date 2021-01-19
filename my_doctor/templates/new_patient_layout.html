@@ -274,6 +274,14 @@
     <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
     <script>
         $(document).ready(function () {
+            $('#settingsModalCenter').on('show.bs.modal',function(){
+                if ($('.ca-main-wrapper .ca-sidebar-wrapper').hasClass('fliph') == true) {
+                    $('.burger').toggleClass('clicked');
+                    $('.overlay').toggleClass('show');
+                    $('.ca-main-wrapper .ca-sidebar-wrapper').toggleClass('fliph');
+                    $('.ca-main-conatiner').toggleClass('flipsmall');
+                }
+            })
             $('.click-me, .burger, .overlay').click(function () {
                 $('.burger').toggleClass('clicked');
                 $('.overlay').toggleClass('show');

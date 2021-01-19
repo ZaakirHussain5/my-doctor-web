@@ -70,11 +70,3 @@ def PatientRegistration(request):
         "page_title":"Doctor Plus | Patient Registration",
         "meta_description":"Registration"})
 
-def doctorsMOU(request, id):
-    doctor = doctors_info.objects.get(user = User.objects.get(id=id)).id
-    return render(request,'website/doctorMOU.html',{
-        "page_title":"Doctor Plus | Doctor Registration",
-        "meta_description":"Registration",
-        "doctor": doctor,
-        "user": id
-    })

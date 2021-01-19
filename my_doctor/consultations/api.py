@@ -69,18 +69,19 @@ class consultationsViewSet(viewsets.ModelViewSet):
         
         vedioChatInstance = video_chat_session.objects.get(id=self.request.data['session'])
         if vedioChatInstance.consult_id == 0:
-            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount,duration="10:00")
+            print(instance.id)
             vedioChatInstance.consult_id=instance.id
             vedioChatInstance.save()
         else :
             consultations.objects.get(id=vedioChatInstance.consult_id).delete()
-            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
+            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount,duration="10:00")
             vedioChatInstance.consult_id=instance.id
             vedioChatInstance.save()
         return instance
 
     def perform_update(self, serializer):
-        serializer.save(send_signals=False)
+        serializer.save()
         doctor = consultations.objects.get(id=self.request.data['consultation']).doctor_id
         consultation = consultations.objects.filter(doctor_id=doctor)
         total_rating = consultation.aggregate(Sum('consultation_rating'))

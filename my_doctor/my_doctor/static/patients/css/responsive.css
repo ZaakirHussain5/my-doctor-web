@@ -151,6 +151,11 @@ display: none;
     }
 }
 @media only screen and (max-width: 768px){
+    .med-ul{
+        display: flex !important;
+        padding-top:0 !important;
+        padding-bottom: 0 !important;
+    }
     .ca-call-history__right
     {
         position: relative;
@@ -296,7 +301,7 @@ transition-duration: .3s;
         margin-right: 4rem!important;
     }
     .ca-content{
-        padding:1rem;
+        padding:0.5rem!important;
     }
     .ca-call-history{
         padding: 0 30px!important;

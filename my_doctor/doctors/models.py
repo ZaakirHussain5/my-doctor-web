@@ -55,7 +55,7 @@ class DoctorBankDetails(models.Model):
     branch_name = models.CharField(max_length=50)
     account_holder_name = models.CharField(max_length=50)
     upi_id = models.CharField(max_length = 50, null=True, blank=True)
-    phone_no = models.IntegerField(default=00)
+    phone_no = models.CharField(max_length = 50,null=True, blank=True)
     blank_cheque = models.FileField(null=True, blank=True)
 
 
