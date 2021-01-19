@@ -17,7 +17,7 @@ def generateId():
 
 class consultations(models.Model):
     doctor_id = models.ForeignKey(doctors_info,related_name='doctor_consulataions',on_delete=models.CASCADE)
-    patient = models.ForeignKey(User,related_name='consultations',on_delete=models.SET_NULL,null=True)
+    patient = models.ForeignKey(User,related_name='consultations',on_delete=models.SET_NULL,null=True, blank=True)
     consultation_date_time = models.DateTimeField(auto_now_add=True)
     subscription_based = models.BooleanField(default=False)
     inv_number  = models.CharField(max_length=25,default=generateId)
@@ -26,7 +26,7 @@ class consultations(models.Model):
     overall_rating = models.IntegerField(default=0)
     problem=models.CharField(max_length=250,default='Not Specified')
     message = models.CharField(max_length=500, null=True, blank=True)
-    consultation_amt = models.DecimalField(max_digits=10,decimal_places=2)
+    consultation_amt = models.DecimalField(max_digits=10,decimal_places=2, default=0.00)
     comp_share = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
     @property
