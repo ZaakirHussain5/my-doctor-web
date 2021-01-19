@@ -369,7 +369,7 @@
                                 </a>
                             </div>
                             <div class="iconbox btn-hovered-light">
-                                <i data-id='${index.id}'  class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                <i data-id='${response.id}'  class="iconbox__icon mdi mdi-delete text-danger"></i>
                             </div>
                         </div>
                     </div>
@@ -377,8 +377,7 @@
                 `;
                 let previous = $('.medical_records_list').html()
                 $('.medical_records_list').html(previous + lis)
-
-                $('#newReport').removeClass('active')
+                toastr.success("Report Added Successfully","Success",{positionClass:"toast-top-center"})
                 $('#newReport').modal('hide')
             }).fail((error) => {
                 console.log(error);
