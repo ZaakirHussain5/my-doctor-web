@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from patient_medical_records.models import patient_medical_records
 from doctors.serializers import doctors_infoSerializer
 

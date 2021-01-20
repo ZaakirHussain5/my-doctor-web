@@ -236,7 +236,12 @@
                     </div>
                     <div class="calllist__actions">
                         <div class="iconbox btn-hovered-light">
-                            <a href="${index.record_files}" target="_blank" ><i class="iconbox__icon mdi mdi-file text-primary"></i></a>
+                            <a href="${index.record_files}" target="_blank" >
+                                <ul>
+                                    <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                    <li><span>View File</span></li>
+                                </ul> 
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -286,11 +291,19 @@
                                 style="display: contents !important;">
                                 <div class="iconbox btn-hovered-light">
                                     <a href="${index.record_files}" target="_blank">
-                                        <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                        <ul>
+                                            <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                            <li><span>View File</span></li>
+                                        </ul>
                                     </a>
                                 </div>
                                 <div  class="iconbox mdi-delete-div btn-hovered-light">
-                                    <i data-id='${index.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                    <ul>
+                                        <li>
+                                            <i data-id='${index.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                        </li>
+                                        <li><span>Delete</span></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +371,7 @@
     
     
         /////////////// DELETE MEDICAL RECORD //////////////////
-        $('#medocal-record').on('click', '.mdi-delete', function(){
+        $('#medocal-record').on('click', '.mdi-delete-div', function(){
             let id = $(this).attr('data-id');
             if (confirm('Are you sure you want to delete?')) {
                 $.ajax({
