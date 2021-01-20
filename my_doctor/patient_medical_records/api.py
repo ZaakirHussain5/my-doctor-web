@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions,generics,mixins
 from rest_framework.response import Response
 
-from .serializers import MedicalRecordSerializer
+from .serializers import MedicalRecordSerializer,MedicalRecordListSerializer
 from .models import patient_medical_records
 from doctors.models import doctors_info
 
@@ -58,6 +58,14 @@ class PatientPrescriptionAPI(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         return serializer.save(is_prescription=True,patient=self.request.user)
 
+class GetPatientPrescriptionAPI(viewsets.ModelViewSet):
+    permissions = [
+        permissions.IsAuthenticated
+
+    ]
+    serializer_class = MedicalRecordListSerializer
+    def get_queryset(self):
+        return self.request.user.records.filter(is_prescription=True)
 
 class PatientRecordAPI(viewsets.ModelViewSet):
     permission = [
@@ -74,7 +82,7 @@ class getAllPrescriptions(mixins.ListModelMixin,viewsets.GenericViewSet):
     permissions = [
         permissions.AllowAny
     ]
-    serializer_class = MedicalRecordSerializer
+    serializer_class = MedicalRecordListSerializer
     
     def get_queryset(self):
         return patient_medical_records.objects.filter(is_prescription=True)

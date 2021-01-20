@@ -209,26 +209,14 @@
         // })
 
         $.ajax({
-            url: '/api/PatientPrescription/',
+            url: '/api/GetPatientPrescription/',
             method: 'GET',
             contentType: 'application/json',
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
             }
         }).done((response) => {
-            let lis = `
-            <li>
-             <div class="calllist">
-                <div class="calllist__details">
-                    <div class="calllist__details--name">Report Tile</div>
-                </div>
-                <div class="calllist__actions">
-                    <div class="iconbox btn-hovered-light">
-                        <span>Actions</span>
-                    </div>
-                </div>
-              </div>
-            </li>`
+            let lis = ``
             ;
             console.log(response)
             response.map(index => lis += `
