@@ -111,7 +111,7 @@
                         <label for="RecordType">Report Files</label>
                         <input type="file" name="record_files" class="form-control">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group sr-only">
                         <label for="ConsultingAbout">Description</label>
                         <textarea name="description" class="form-control" id="ConsultingAbout" rows="7"
                             placeholder="Describe your Problem" style="font-size: medium;"></textarea>
@@ -280,10 +280,7 @@
                     <li>
                         <div class="calllist">
                             <div class="calllist__details">
-                                <div class="calllist__details--name">Title</div>
-                            </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">Description</div>
+                                <div class="calllist__details--name">Report Title</div>
                             </div>
                             <div class="calllist__actions">
                                 <div class="iconbox btn-hovered-light">
@@ -300,10 +297,6 @@
                             <div class="calllist__details"
                                 style="padding: 0 20px 0 0 !important;">
                                 <div class="calllist__details--name">${index.record_type}</div>
-                            </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">${index.description}</div>
-
                             </div>
 
                             <div class="calllist__actions"
@@ -356,11 +349,6 @@
                             style="padding: 0 20px 0 0 !important;">
                             <div class="calllist__details--name">${response.record_type}</div>
                         </div>
-                        <div class="calllist__details">
-                            <div class="calllist__details--name">${response.description}</div>
-
-                        </div>
-
                         <div class="calllist__actions"
                             style="display: contents !important;">
                             <div class="iconbox btn-hovered-light">
