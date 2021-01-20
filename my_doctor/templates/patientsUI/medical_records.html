@@ -239,7 +239,7 @@
                             <a href="${index.record_files}" target="_blank" >
                                 <ul>
                                     <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
-                                    <li><span>View File</span></li>
+                                    <li><span>View</span></li>
                                 </ul> 
                             </a>
                         </div>
@@ -293,7 +293,7 @@
                                     <a href="${index.record_files}" target="_blank">
                                         <ul>
                                             <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
-                                            <li><span>View File</span></li>
+                                            <li><span>View</span></li>
                                         </ul>
                                     </a>
                                 </div>
@@ -346,16 +346,24 @@
                             <div class="calllist__details--name">${response.record_type}</div>
                         </div>
                         <div class="calllist__actions"
-                            style="display: contents !important;">
-                            <div class="iconbox btn-hovered-light">
-                                <a href="${response.record_files}" target="_blank">
-                                    <i class="iconbox__icon mdi mdi-file text-primary"></i>
-                                </a>
+                                style="display: contents !important;">
+                                <div class="iconbox btn-hovered-light">
+                                    <a href="${response.record_files}" target="_blank">
+                                        <ul>
+                                            <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                            <li><span>View</span></li>
+                                        </ul>
+                                    </a>
+                                </div>
+                                <div  class="iconbox mdi-delete-div btn-hovered-light">
+                                    <ul>
+                                        <li>
+                                            <i data-id='${response.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                        </li>
+                                        <li><span>Delete</span></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="iconbox btn-hovered-light">
-                                <i data-id='${response.id}'  class="iconbox__icon mdi mdi-delete text-danger"></i>
-                            </div>
-                        </div>
                     </div>
                 </li>
                 `;
