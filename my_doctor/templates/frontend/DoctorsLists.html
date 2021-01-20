@@ -27,11 +27,10 @@
                         <i class="fa fa-plus"></i> Add a new Doctor
                     </a>
                 </div>
-                <table class="table" id="Doctors" style="width: 100%;">
+                <table class="table table-sm" id="Doctors" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>slno</th>
-                            
+                            <th>Photo</th>
                             <th>Specialist Type</th>
                             <th>Name</th>
                             <th>Phone No.</th>
@@ -210,14 +209,11 @@
             responsive: true,
             columns:[
                 {
-                    data:'id'
+                    data:'profile_pic',
+                    render:function(data){
+                        return `<img src="${data}" style="height: 50px;width: 80px;" alt="Doctor Image">`
+                    }
                 },
-                // {
-                //     data:'profile_pic',
-                //     render:function(data){
-                //         return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                //     }
-                // },
                 {
                     data:'specialist_type'
                 },
@@ -248,10 +244,6 @@
                   lengthMenu: "_MENU_",
                   search: "",
                   searchPlaceholder: "Search..."
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
               }
         })
 
