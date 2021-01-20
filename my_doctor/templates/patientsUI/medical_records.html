@@ -55,12 +55,8 @@
                                             <li>
                                                 <div class="calllist">
                                                     <div class="calllist__details">
-                                                        <div class="calllist__details--name">Title</div>
+                                                        <div class="calllist__details--name">Report Tile</div>
                                                     </div>
-                                                    <div class="calllist__details">
-                                                        <div class="calllist__details--name">Description</div>
-                                                    </div>
-
                                                     <div class="calllist__actions">
                                                         <div class="iconbox btn-hovered-light">
                                                             <span>Actions</span>
@@ -222,17 +218,16 @@
         }).done((response) => {
             let lis = `
             <li>
-                <div class="calllist">
-                    <div class="calllist__details">
-                        <div class="calllist__details--name">Description</div>
-                    </div>
-
-                    <div class="calllist__actions">
-                        <div class="iconbox btn-hovered-light">
-                            <span>Actions</span>
-                        </div>
+             <div class="calllist">
+                <div class="calllist__details">
+                    <div class="calllist__details--name">Report Tile</div>
+                </div>
+                <div class="calllist__actions">
+                    <div class="iconbox btn-hovered-light">
+                        <span>Actions</span>
                     </div>
                 </div>
+              </div>
             </li>`
             ;
             console.log(response)
