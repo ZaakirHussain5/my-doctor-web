@@ -72,7 +72,9 @@
                 {% if prescription_data.record_files %}
                 <img src="{{prescription_data.record_files.url}}">
                 {% else %}
-                <p id="medication">{{ prescription_data.description }}</p>
+                <p id="medication">
+                    {% autoescape off %}{{ prescription_data.description }}
+                    {% endautoescape %}</p>
                 {% endif %}
             </div>
         </div>
