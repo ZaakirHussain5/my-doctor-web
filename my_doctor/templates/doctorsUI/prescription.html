@@ -33,12 +33,12 @@
                         <div class="row form-group">
                             <label for="description" class=" form-control-label">Prognosis</label>
                             <textarea name="record_type" id="record_type" rows="3" class="form-control"
-                                placeholder="Prognosis : About patients Symptoms and Severities"></textarea>
+                                placeholder="About patients Symptoms and Severities"></textarea>
                         </div>
                         <div class="row form-group">
                             <label for="description" class=" form-control-label">Medication</label>
                             <textarea name="description" id="description" rows="3" class="form-control"
-                                placeholder="Medication : Suggested medication or Lab tests."></textarea>
+                                placeholder="Suggested medication or Lab tests."></textarea>
                         </div>
                         <input type="hidden" name="consultation_id" value="{{ consulataion_id }}">
                         
@@ -148,7 +148,7 @@
                 url = url + jQuery('#pres_id').val() + '/'
                 message = "Prescription updated successfully."
             }
-
+            data.set('description',$('#description').html().replace(/\r?\n/g, '<br />'))
                 $.ajax({
                     url: url,
                     method: action,
