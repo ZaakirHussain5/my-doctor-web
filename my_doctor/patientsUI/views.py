@@ -108,3 +108,6 @@ def patientInvoice(request):
         pass
     print(context)
     return render(request,'patientsUI/subscriptionInvoice.html', context)
+
+def prescrption(request):
+    return render(request,'doctorsUI/single_prescrption.html')

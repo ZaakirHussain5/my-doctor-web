@@ -44,3 +44,4 @@ def profile(request):
 @login_required(login_url='/login')
 def settings(request):
 	return render(request,'doctorsUI/settings.html')
+
