@@ -31,24 +31,28 @@
                             </select>
                         </div>
                         <div class="row form-group">
-                            <label for="record_type" class=" form-control-label">Prescription Title</label>
-                            <input type="text" required="" id="record_type" name="record_type" placeholder="Enter Record Type"
-                                class="form-control">
-                            <input type="hidden"  id="created_by" name="created_by" placeholder="Enter Prescription Title"
-                                class="form-control" value="created by doctor">
+                            <label for="description" class=" form-control-label">Medication</label>
+                            <textarea name="description" id="description" rows="5" class="form-control"
+                                placeholder="Describe about the Prescription"></textarea>
+                        </div>
+                        <div class="row form-group">
+                            <label for="description" class=" form-control-label">Medication</label>
+                            <textarea name="description" id="description" rows="5" class="form-control"
+                                placeholder="Describe about the Prescription"></textarea>
                         </div>
                         <input type="hidden" name="consultation_id" value="{{ consulataion_id }}">
-                        <div class="row form-group">
-                            <label for="record_files" class=" form-control-label">Prescription File</label>
-                            <input type="file" required="" id="record_files" name="record_files"
-                                placeholder="Enter Plan Price" class="form-control">
-                        </div>
+                        
                     </div>
                     <div class="col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="description" class=" form-control-label">Description</label>
-                            <textarea name="description" id="description" rows="5" class="form-control"
-                                placeholder="Describe about the Prescription"></textarea>
+                            <label for="record_files" class=" form-control-label">Prescription Slip</label>
+                            <input type="file" required="" id="record_files" name="record_files"
+                                class="form-control">
+                        </div>
+                        <div class="row form-group">
+                            <label for="record_files" class=" form-control-label">Select Followup Date</label>
+                            <input type="file" required="" id="record_files" name="record_files"
+                                placeholder="Enter Plan Price" class="form-control">
                         </div>
                     </div>
                 </div>
