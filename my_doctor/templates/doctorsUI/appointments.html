@@ -502,9 +502,15 @@
       {
         data: 'Description'
       },
-      // {
-      //   data: "id"
-      // }
+      {
+         data: "id",
+         render: function (data, type, app) {
+          return `<button type="button" class="btn btn-primary btn-sm call" data-const="${app.id}" data-patient="${app.pat_id}">
+                                    <i class="fa fa-eye"></i> View
+                                    </button><br>
+                    `
+        }
+      }
 
     ],
     language: {

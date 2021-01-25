@@ -286,9 +286,9 @@
                  method:'GET',
                  success:function(response){
                      if(response.pres_avl){
-                         window.location.href = response.prescription_file
+                         window.location.href = '/patients/single_prescrption/?id'+response.id
                      }else{
-                         toastr.warning('',"Prescription not Yet Updated",{positionClass:"toast-top-center"});
+                         toastr.warning('',"Prescription not Yet Added",{positionClass:"toast-top-center"});
                      }
                  }
              })

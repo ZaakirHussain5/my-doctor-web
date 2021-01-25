@@ -38,18 +38,20 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
-                            <strong>Dr. Sam Curry</strong>
+                            <strong>{{prescription_data.doctor.full_name}}</strong>
                         </div>
-                        <div>Speciality : Dietitian</div>
-                        <div>License No. : 4874758JIKUH</div>
+                        <div>Speciality : {{prescription_data.doctor.specialist_type}}</div>
+                        <div>License No. : {{prescription_data.doctor.Registration_Number}}</div>
+                        <div>Email : support@doctor-plus.in</div>
+                        <div>Ph No. : 080-4554 9495</div>
                     </div>
 
                     <div class="col-sm-6">
                         <div>
-                            <strong>Shantamma</strong>
+                            <strong>{{patient_data.full_name}}</strong>
                         </div>
-                        <div>Email: </div>
-                        <div>Phone: +91900920022</div>
+                        <div>Email: {{patient_data.user.email}}</div>
+                        <div>Phone: {{patient_data.ph_no}}</div>
                     </div>
                    
 
@@ -61,14 +63,15 @@
                 <h5 class="text-primary mt-3">
                     Symptoms & Diagnosis
                 </h5>
-                <p>Developed headaches due to travelling and other weather change conditions.</p>
+                <p>{{ prescription_data.record_type }}</p>
                 <h5 class="text-primary">
                     Medication
                 </h5>
-                <p>TAXIM 50mg Morning and Night 1/2 before meal for 20 Days, 
-                    Andum Morning and Night before meal 1 20 Days,
-                    Pantocid Morning and Night before meal 1 20 Days,
-                    Benydryl Morning and Night before meal 1 20 Days,</p>
+                {% if prescription_data.record_files %}
+                <img src="{{prescription_data.record_files.url}}">
+                {% else %}
+                <p>{{ prescription_data.description }}</p>
+                {% endif %}
             </div>
         </div>
     </div>
