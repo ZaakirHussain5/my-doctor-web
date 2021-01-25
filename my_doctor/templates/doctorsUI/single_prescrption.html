@@ -73,14 +73,15 @@
                 <img src="{{prescription_data.record_files.url}}">
                 {% else %}
                 <p id="medication">
-                    {% autoescape off %}{{ prescription_data.description }}
-                    {% endautoescape %}</p>
+                    {% autoescape off %}
+                    {{ prescription_data.description }}
+                    {% endautoescape %}
+                </p>
                 {% endif %} 
             </div>
         </div>
     </div>
 </body>
 <script>
-    document.getElementById('medication').innerText = document.getElementById('medication').innerText.replace(/(?:\r\n|\r|\n)/g, '<br>');
 </script>
 </html>
