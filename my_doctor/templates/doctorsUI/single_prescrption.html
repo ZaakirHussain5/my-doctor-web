@@ -52,6 +52,8 @@
                         </div>
                         <div>Email: {{patient_data.user.email}}</div>
                         <div>Phone: {{patient_data.ph_no}}</div>
+                        <div>Consult date : {{prescription_data.format_last_modified}}</div>
+                        <div>Followup Date : {{prescription_data.follow_up_date}}</div>
                     </div>
                    
 
@@ -70,11 +72,13 @@
                 {% if prescription_data.record_files %}
                 <img src="{{prescription_data.record_files.url}}">
                 {% else %}
-                <p>{{ prescription_data.description }}</p>
+                <p id="medication">{{ prescription_data.description }}</p>
                 {% endif %}
             </div>
         </div>
     </div>
 </body>
-
+<script>
+    document.getElementById('medication').innerText = document.getElementById('medication').innerText.replace(/(?:\r\n|\r|\n)/g, '<br>');
+</script>
 </html>
