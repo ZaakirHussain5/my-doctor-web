@@ -148,7 +148,7 @@
                 url = url + jQuery('#pres_id').val() + '/'
                 message = "Prescription updated successfully."
             }
-            data.set('description',$('#description').html().replace(/\r?\n/g, '<br />'))
+            data.set('description',$('#description').val().replace(/\r?\n/g, '<br />'))
                 $.ajax({
                     url: url,
                     method: action,
