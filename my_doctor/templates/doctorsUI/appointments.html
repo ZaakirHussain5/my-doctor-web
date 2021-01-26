@@ -61,8 +61,7 @@
                       <th>Slno</th>
                       
                       <th>Patient</th>
-                      <th>Appointment Date</th>
-                      <th>Appointment Time</th>
+                      <th>Consultation Date & Time</th>
                       <th>Description</th><th>Actions</th>
                   </tr>
               </thead>
@@ -239,7 +238,7 @@
   })
   const previoustable = jQuery('#PreviousAppointments').DataTable({
     ajax: {
-      url: '/api/previousAppoinment/',
+      url: '/api/getDoctorConsultations/',
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {
@@ -256,18 +255,15 @@
         data: "patient_name"
       },
       {
-        data: 'appointment_date'
+        data: 'consultation_date_time'
       },
       {
-        data: 'appointment_time'
-      },
-      {
-        data: 'Description'
+        data: 'problem'
       },
       {
          data: "id",
          render: function (data, type, app) {
-          return `<button type="button" class="btn btn-primary btn-sm call" data-const="${app.id}" data-patient="${app.pat_id}" data-toggle="modal" data-target="#patientProfile">
+          return `<button type="button" class="btn btn-primary btn-sm ViewPatientProfile" data-const="${app.id}" data-patient="${app.patient}">
                                     <i class="fa fa-eye"></i> View
                                     </button><br>
                     `
@@ -283,6 +279,11 @@
       jQuery("td:first", nRow).html(iDisplayIndex + 1);
       return nRow;
     }
+  })
+
+  jQuery('#PreviousAppointments').on('click','.ViewPatientProfile',function(){
+    var button = $(this)
+    $('#patientProfile').modal('show')
   })
 
   jQuery('#TodayAppointments').on('click', '.call', function () {
