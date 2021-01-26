@@ -157,7 +157,7 @@ class GetConsultationDetails(generics.GenericAPIView):
         consultation = consultations.objects.get(id=consult_id)
         response['consultation'] = djangoSerializers.serialize('json',[consultation])
         response['patient'] = djangoSerializers.serialize('json',patient_info.objects.filter(user = consultation.patient))
-        response['user'] = djangoSerializers.serialize('json'consultation.patient)
+        response['user'] = djangoSerializers.serialize('json',consultation.patient)
         try: 
             response['prescription'] = djangoSerializers.serialize('json',patient_medical_records.objects.filter(consultation_id = consult_id))
         except patient_medical_records.DoesNotExist:
