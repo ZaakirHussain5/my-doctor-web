@@ -305,19 +305,19 @@
         let prescriptionObj = JSON.parse(response.prescription)
         let userObj = JSON.parse(response.user)
         if(patientObj[0].fields.profile_pic)
-          $('#pat_image').attr('src','/media/'+patientObj[0].fields.profile_pic)
-        $('#pat_name').val(patientObj[0].fields.full_name)
-        $('#pat_email').val(userObj[0].fields.email)
-        $('#pat_number').val(patientObj[0].fields.ph_no)
-        $('#pat_blood_group').val(patientObj[0].fields.blood_group)
-        $('#pat_age').val(patientObj[0].fields.age)
-        $('#pat_weight').val(patientObj[0].fields.weight)
-        $('#pat_MedicalHistory').val(patientObj[0].fields.medical_history)
+          jQuery('#pat_image').attr('src','/media/'+patientObj[0].fields.profile_pic)
+        jQuery('#pat_name').val(patientObj[0].fields.full_name)
+        jQuery('#pat_email').val(userObj[0].fields.email)
+        jQuery('#pat_number').val(patientObj[0].fields.ph_no)
+        jQuery('#pat_blood_group').val(patientObj[0].fields.blood_group)
+        jQuery('#pat_age').val(patientObj[0].fields.age)
+        jQuery('#pat_weight').val(patientObj[0].fields.weight)
+        jQuery('#pat_MedicalHistory').val(patientObj[0].fields.medical_history)
         if(prescriptionObj[0]){
-          $('#Prognosis').val(prescriptionObj[0].fields.record_type)
-          $('#Medication').val(prescriptionObj[0].fields.description)
-          $('#follow_up_date').html(prescriptionObj[0].fields.follow_up_date)
-          $('#prescriptionSlip').html(prescriptionObj[0].fields.record_files ? `
+          jQuery('#Prognosis').val(prescriptionObj[0].fields.record_type)
+          jQuery('#Medication').val(prescriptionObj[0].fields.description)
+          jQuery('#follow_up_date').html(prescriptionObj[0].fields.follow_up_date)
+          jQuery('#prescriptionSlip').html(prescriptionObj[0].fields.record_files ? `
           <a target="_blank" href='/media/${prescriptionObj[0].fields.record_files}'></a>
           `:"Not Added")
         }
