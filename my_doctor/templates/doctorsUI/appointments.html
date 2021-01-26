@@ -84,6 +84,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-md-4">
+                <img src="/media/logos/anonymous-user.png" alt="" id="pat_image" style="width: 255px;height:255px;border-radius: 50%;">
               </div>
               <div class="col-md-8">
                 <div class="row">
@@ -305,6 +306,8 @@
         let userObj = JSON.parse(response.user)
         if(patientObj[0].fields.profile_pic)
           jQuery('#pat_image').attr('src','/media/'+patientObj[0].fields.profile_pic)
+        else
+          jQuery('#pat_image').attr('src','/media/logos/anonymous-user.png')
         jQuery('#pat_name').val(patientObj[0].fields.full_name)
         jQuery('#pat_email').val(userObj[0].fields.email)
         jQuery('#pat_number').val(patientObj[0].fields.ph_no)
