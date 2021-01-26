@@ -255,7 +255,10 @@
         data: "patient_name"
       },
       {
-        data: 'consultation_date_time'
+        data: 'consultation_date_time',
+        render:function(data){
+          return new Date(data)
+        }
       },
       {
         data: 'problem'
@@ -283,7 +286,22 @@
 
   jQuery('#PreviousAppointments').on('click','.ViewPatientProfile',function(){
     var button = $(this)
-    $('#patientProfile').modal('show')
+    jQuery.ajax({
+      url: `/api/getConsDetails?cons_id=${button.attr('data-const')}`,
+      method: 'POST',
+      async: false,
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+      },
+      success: function (response) {
+        console.log(response)
+        $('#patientProfile').modal('show')
+      error: function (response) {
+        console.log(response)
+      }
+    })
+    
+
   })
 
   jQuery('#TodayAppointments').on('click', '.call', function () {

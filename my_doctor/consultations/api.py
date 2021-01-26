@@ -1,6 +1,7 @@
 from .serializers import consultationsSerializer,getAllConsultationsSerializer
 from .models import consultations
-from rest_framework import viewsets, permissions , mixins
+from rest_framework import viewsets, permissions , mixins , generics
+from rest_framework.response import Response
 from doctors.models import doctors_info
 from patients.models import patient_info
 from appointment.models import appointment as appointmentTable
@@ -8,6 +9,7 @@ from django.db.models import Sum
 from datetime import date as dates
 from vedio_chat.models import VedioChat,video_chat_session
 from reminders.models import Reminders
+from patient_medical_records.models import patient_medical_records
 
 
 def getDateFormat(date_time):
@@ -146,3 +148,17 @@ class consult_info_for_doct(viewsets.ModelViewSet):
         session_id = self.request.query_params.get('sessions')
         vedio_chat  = video_chat_session.objects.get(id=session_id)
         return consultations.objects.filter(id=vedio_chat.consult_id)
+
+class GetConsultationDetails(generics.GenericAPIView):
+    def post(self, request, *args, **kwargs):
+        response = {}
+        consult_id = request.query_params.get('cons_id',None)
+        consultation = consultations.objects.get(id=consult_id)
+        response['consultation'] = consultation
+        response['patient'] = patient_info.objects.get(user = consultation.patient)
+        try: 
+            response['prescription'] = patient_medical_records.objects.get(consultation_id = consult_id)
+        except patient_medical_records.DoesNotExist:
+            pass
+        return Response(response)
+
