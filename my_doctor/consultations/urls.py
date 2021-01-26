@@ -14,6 +14,6 @@ router.register('consult_info_for_doct', consult_info_for_doct, 'consult_info_fo
 
 urlpatterns = [
     path('',include(router.urls)),
-    path('getInvoiceNumber',views.generateId,name='getInvoiceNumber')
+    path('getInvoiceNumber',views.generateId,name='getInvoiceNumber'),
     path('getConsDetails',GetConsultationDetails.as_view(),name='getConsDetails')
 ]
