@@ -523,6 +523,8 @@ class doctor_bankDetails(viewsets.ModelViewSet):
         return DoctorBankDetails.objects.filter(doctor_id=doctors_info.objects.get(user=self.request.user))
 
     def perform_create(self, serializer):
+        DoctorBankDetails.objects.filter(doctor_id=doctors_info.objects.get(
+            user=self.request.user)).delete()
         serializer.save(doctor_id=doctors_info.objects.get(
             user=self.request.user))
 
