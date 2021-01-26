@@ -294,7 +294,11 @@
         request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
       },
       success: function (response) {
-        console.log(response)
+        let consultationObj = JSON.parse(response.consultation)
+        let patientObj = JSON.parse(response.patient)
+        let prescriptionObj = JSON.parse(response.prescription)
+        console.log(consultationObj,patientObj,prescriptionObj)
+
         jQuery('#patientProfile').modal('show')
       },
       error: function (response) {
