@@ -151,13 +151,14 @@ class consult_info_for_doct(viewsets.ModelViewSet):
 
 class GetConsultationDetails(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
+        from django.forms.models import model_to_dict
         response = {}
         consult_id = request.query_params.get('cons_id',None)
         consultation = consultations.objects.get(id=consult_id)
-        response['consultation'] = consultation
-        response['patient'] = patient_info.objects.get(user = consultation.patient)
+        response['consultation'] = model_to_dict(consultation)
+        response['patient'] = model_to_dict(patient_info.objects.get(user = consultation.patient))
         try: 
-            response['prescription'] = patient_medical_records.objects.get(consultation_id = consult_id)
+            response['prescription'] = model_to_dict(patient_medical_records.objects.get(consultation_id = consult_id))
         except patient_medical_records.DoesNotExist:
             pass
         return Response(response)
