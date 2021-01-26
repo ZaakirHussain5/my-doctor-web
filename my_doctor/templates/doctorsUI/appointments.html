@@ -84,36 +84,36 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-md-4">
-                <img src="/media/logogs/anonymous-user.png" alt="">
+                <img src="/media/logos/anonymous-user.png" alt="" id="pat_image">
               </div>
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Name">Name</label>
-                      <input type="text" readonly="readonly" class="form-control">
+                      <input type="text" readonly="readonly" class="form-control" id="pat_name">
                     </div>
                     <div class="form-group">
                       <label for="Phone">Phone Number</label>
-                      <input type="text" readonly="readonly" class="form-control">
+                      <input type="text" readonly="readonly" class="form-control" id="pat_number">
                     </div>
                     <div class="form-group">
                       <label for="Email">Email</label>
-                      <input type="email" readonly="readonly" class="form-control">
+                      <input type="email" readonly="readonly" class="form-control" id="pat_email">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="BloodGroup">Blood Group</label>
-                      <input type="text" readonly="readonly" class="form-control">
+                      <input type="text" readonly="readonly" class="form-control" id="pat_blood_group">
                     </div>
                     <div class="form-group">
                       <label for="Age">Age</label>
-                      <input type="text" readonly="readonly" class="form-control">
+                      <input type="text" readonly="readonly" class="form-control" id="pat_age">
                     </div>
                     <div class="form-group">
                       <label for="Weight">Weight</label>
-                      <input type="text" readonly="readonly" class="form-control">
+                      <input type="text" readonly="readonly" class="form-control" id="pat_weight">
                     </div>
                   </div>
                 </div>
@@ -123,7 +123,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="MedicalHistory">Medical History</label>
-                  <textarea class="form-control" name="MedicalHistory" id="MedicalHistory" rows="3"></textarea>
+                  <textarea class="form-control" name="MedicalHistory" id="pat_MedicalHistory" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="Prognosis">Prognosis</label>
@@ -132,6 +132,12 @@
                 <div class="form-group">
                   <label for="Medication">Medication</label>
                   <textarea class="form-control" name="Medication" id="Medication" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Prescrption Slip : <strong id="prescriptionSlip">Not Added</strong></label>
+                </div>
+                <div class="form-group">
+                  <label>Next Consultation : <strong id="follow_up_date"></strong></label>
                 </div>
               </div>
             </div>
@@ -297,8 +303,25 @@
         let consultationObj = JSON.parse(response.consultation)
         let patientObj = JSON.parse(response.patient)
         let prescriptionObj = JSON.parse(response.prescription)
-        console.log(consultationObj,patientObj,prescriptionObj)
-
+        let userObj = JSON.parse(response.user)
+        if(patientObj[0].fields.profile_pic)
+          $('#pat_image').attr('src','/media/'+patientObj[0].fields.profile_pic)
+        $('#pat_name').val(patientObj[0].fields.full_name)
+        $('#pat_email').val(userObj[0].fields.email)
+        $('#pat_number').val(patientObj[0].fields.ph_no)
+        $('#pat_blood_group').val(patientObj[0].fields.blood_group)
+        $('#pat_age').val(patientObj[0].fields.age)
+        $('#pat_weight').val(patientObj[0].fields.weight)
+        $('#pat_MedicalHistory').val(patientObj[0].fields.medical_history)
+        if(prescriptionObj[0]){
+          $('#Prognosis').val(prescriptionObj[0].fields.record_type)
+          $('#Medication').val(prescriptionObj[0].fields.description)
+          $('#follow_up_date').html(prescriptionObj[0].fields.follow_up_date)
+          $('#prescriptionSlip').html(prescriptionObj[0].fields.record_files ? `
+          <a target="_blank" href='/media/${prescriptionObj[0].fields.record_files}'></a>
+          `:"Not Added")
+        }
+        
         jQuery('#patientProfile').modal('show')
       },
       error: function (response) {
