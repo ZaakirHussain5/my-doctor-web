@@ -123,15 +123,15 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="MedicalHistory">Medical History</label>
-                  <textarea class="form-control" name="MedicalHistory" id="pat_MedicalHistory" rows="3"></textarea>
+                  <textarea class="form-control" name="MedicalHistory" id="pat_MedicalHistory" rows="3" readonly="readonly"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="Prognosis">Prognosis</label>
-                  <textarea class="form-control" name="Prognosis" id="Prognosis" rows="3"></textarea>
+                  <textarea class="form-control" name="Prognosis" id="Prognosis" rows="3" readonly="readonly"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="Medication">Medication</label>
-                  <textarea class="form-control" name="Medication" id="Medication" rows="3"></textarea>
+                  <textarea class="form-control" name="Medication" id="Medication" rows="3" readonly="readonly"></textarea>
                 </div>
                 <div class="form-group">
                   <label>Prescrption Slip : <strong id="prescriptionSlip">Not Added</strong></label>
@@ -307,7 +307,7 @@
         if(patientObj[0].fields.profile_pic)
           jQuery('#pat_image').attr('src','/media/'+patientObj[0].fields.profile_pic)
         else
-          jQuery('#pat_image').attr('src','/media/logos/anonymous-user.png')
+          jQuery('#pat-_image').attr('src','/media/logos/anonymous-user.png')
         jQuery('#pat_name').val(patientObj[0].fields.full_name)
         jQuery('#pat_email').val(userObj[0].fields.email)
         jQuery('#pat_number').val(patientObj[0].fields.ph_no)
