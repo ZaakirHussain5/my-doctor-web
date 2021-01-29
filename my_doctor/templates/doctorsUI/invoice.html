@@ -30,12 +30,34 @@
             <h5 class="text-center">INVOICE</h5>
             <div class="card-header">
 
-                <strong>#{{ bill_details.id }}</strong>
-                <span class="float-right"> <strong>{{ bill_details.created_at }}</strong> </span>
+                <strong>#{{ bill.id }}</strong>
+                <span class="float-right"> <strong>{{ bill.created_at }}</strong> </span>
 
             </div>
             <div class="card-body">
                 <div class="row mb-4">
+                    {% if bill.e_amt %}
+                    <div class="col-sm-4">
+                        <h6 class="mb-3">From:</h6>
+                        <div>
+                            <strong>{{ bill.doctor.full_name }}</strong>
+                        </div>
+                        <div>Email: {{ bill.doctor.user.email }}</div>
+                        <div>Phone: {{ bill.doctor.phone_number }}</div>
+                        
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h6 class="mb-3">To:</h6>
+                        <div>
+                            <strong>Doctor Plus</strong>
+                        </div>
+                        <div>No:1, Subbiaha Reddy block, Metro</div>
+                        <div>Station, Ulsoor, Bangalore - 560038</div>
+                        <div>Email: support@doctor-plus.in</div>
+                        <div>Phone: 080-4554 9495</div>
+                    </div>
+                    {% else %}
                     <div class="col-sm-4">
                         <h6 class="mb-3">From:</h6>
                         <div>
@@ -50,11 +72,12 @@
                     <div class="col-sm-4">
                         <h6 class="mb-3">To:</h6>
                         <div>
-                            <strong>{{ bill_details.doctor.full_name }}</strong>
+                            <strong>{{ bill.doctor.full_name }}</strong>
                         </div>
-                        <div>Email: {{ bill_details.doctor.user.email }}</div>
-                        <div>Phone: {{ bill_details.doctor.phone_number }}</div>
+                        <div>Email: {{ bill.doctor.user.email }}</div>
+                        <div>Phone: {{ bill.doctor.phone_number }}</div>
                     </div>
+                    {% endif %}
                     <div class="col-sm-4">
                         <img src="{% static 'website/img/logo.png' %}" class="float-right" alt="" id="logoImage">
                     </div>
@@ -74,17 +97,17 @@
                         <tbody>
                             <tr>
                                 <td class="center">1</td>
-                                {% if bill_details.e_amt %}
-                                <td class="left">Consultation with the Patient ({{bill_details.ref_id}}) </td>
+                                {% if bill.e_amt %}
+                                <td class="left">Consultation with the Patient ({{bill.ref_id}}) </td>
                                 <td class="text-right">
                                     <i class="fa fa-inr"></i>
-                                    {{ bill_details.e_amt }} 
+                                    {{ bill.e_amt }} 
                                 </td>
                                 {% else %}
-                                <td class="left">Recieved From Doctor Plus on Transaction ({{bill_details.ref_id}})</td>
+                                <td class="left">Recieved From Doctor Plus on Transaction ({{bill.ref_id}})</td>
                                 <td class="text-right">
                                     <i class="fa fa-inr"></i>
-                                    {{ bill_details.r_amt }} 
+                                    {{ bill.r_amt }} 
                                 </td>
                                 {% endif %}
                             </tr>
@@ -106,10 +129,10 @@
                                     <td class="text-right">
                                         <strong>
                                             <i class="fa fa-inr"></i>
-                                            {% if bill_details.e_amt %}
-                                            {{bill_details.e_amt}}
+                                            {% if bill.e_amt %}
+                                            {{bill.e_amt}}
                                             {% else %}
-                                            {{bill_details.r_amt}}
+                                            {{bill.r_amt}}
                                             {% endif %}
                                         </strong>
                                     </td>
