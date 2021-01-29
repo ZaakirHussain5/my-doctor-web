@@ -29,14 +29,14 @@ def save_doctor_payment(sender, instance, **kwargs):
                     return
         except PatientSubscription.DoesNotExist:
             pass
-        if instance.consultation_status != "Cancelled":
+        if instance.consultation_status == "Completed":
             billing_history = PatientBillingHistory.objects.create(patient=patient,status="P",
-            description="Amount Deducted for New Appointment",
+            description="Amount Paid for New Appointment",
             amount=instance.paid_amount,doc_name=instance.doctor.full_name,
             doc_image=instance.doctor.profile_pic,doc_spl=instance.doctor.specialist_type)
-        else:
+        elif instance.consultation_status == "Cancelled":
             billing_history = PatientBillingHistory.objects.create(patient=patient,status="R",
-            description="Amount added to wallet for Appointment Appointment Cancellation",
+            description="Amount added to wallet for Appointment Cancellation",
             amount=instance.paid_amount,doc_name=instance.doctor.full_name,
             doc_image=instance.doctor.profile_pic,doc_spl=instance.doctor.specialist_type)
 

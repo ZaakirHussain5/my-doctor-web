@@ -61,8 +61,7 @@
                       <th>Slno</th>
                       
                       <th>Patient</th>
-                      <th>Appointment Date</th>
-                      <th>Appointment Time</th>
+                      <th>Consultation Date & Time</th>
                       <th>Description</th><th>Actions</th>
                   </tr>
               </thead>
@@ -73,319 +72,87 @@
       </div>
   </div>
 </div>
-<div class="modal fade" id="ConsultancDetails" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="patientProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="scrollmodalLabel">Patient Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-              <div class="row p-3">
-                  <div class="col-md-6">
-                      <div class="form-group">
-                        <img src="{% static 'images/avatar/1.jpg' %}" class="justify-content-center" style="height:120px;width:120px;margin-left: 7rem;" alt="">
-                      </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Patient ID</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">DP2020001</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Patient Name</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">Praveen</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Blood Group</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">AB-</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Gender/Age</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">Male/42</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Family</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">Father/Naveen</p>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Primary Mobile No.</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">+91 9899887787</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Secondary Mobile No.</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">+91 9899887715</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Email ID</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">praveen@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Preffered Language</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">English (Practice Default)</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Street Address</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">#1234 Unknown Street</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">Locality</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">Unknown Locality</p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-6"><label class=" form-control-label float-right">City</label></div>
-                        <div class="col-12 col-md-6">
-                            <p class="form-control-static">Unknown City</p>
-                        </div>
-                    </div>
-                    
-                  </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Patient Profile</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="/media/logos/anonymous-user.png" alt="" id="pat_image" style="width: 255px;height:255px;border-radius: 50%;">
               </div>
-      
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Name">Name</label>
+                      <input type="text" readonly="readonly" class="form-control" id="pat_name">
+                    </div>
+                    <div class="form-group">
+                      <label for="Phone">Phone Number</label>
+                      <input type="text" readonly="readonly" class="form-control" id="pat_number">
+                    </div>
+                    <div class="form-group">
+                      <label for="Email">Email</label>
+                      <input type="email" readonly="readonly" class="form-control" id="pat_email">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="BloodGroup">Blood Group</label>
+                      <input type="text" readonly="readonly" class="form-control" id="pat_blood_group">
+                    </div>
+                    <div class="form-group">
+                      <label for="Age">Age</label>
+                      <input type="text" readonly="readonly" class="form-control" id="pat_age">
+                    </div>
+                    <div class="form-group">
+                      <label for="Weight">Weight</label>
+                      <input type="text" readonly="readonly" class="form-control" id="pat_weight">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="modal-footer">
-               
-                <button type="button" data-dismiss="modal" class="btn btn-danger">
-                  Cancel
-              </button>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="MedicalHistory">Medical History</label>
+                  <textarea class="form-control" name="MedicalHistory" id="pat_MedicalHistory" rows="3" readonly="readonly"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="Prognosis">Prognosis</label>
+                  <textarea class="form-control" name="Prognosis" id="Prognosis" rows="3" readonly="readonly"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="Medication">Medication</label>
+                  <textarea class="form-control" name="Medication" id="Medication" rows="3" readonly="readonly"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Prescrption Slip : <strong id="prescriptionSlip">Not Added</strong></label>
+                </div>
+                <div class="form-group">
+                  <label>Next Consultation : <strong id="follow_up_date"></strong></label>
+                </div>
+              </div>
             </div>
           </div>
-          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
-
 {% endblock %}
 
 {% block scripts%}
 <script>
   let dataList = [];
-  // function getDataa(){
-  //     console.log('here')
-  //     const form = document.getElementById('profile_form');
-  //     jQuery.ajax({
-  //             url: '/api/getLoggedInDoctor',
-  //             method: 'GET',
-  //             contentType: 'application/json',
-  //             async: false,
-  //             beforeSend: function (xhr) {
-  //                 xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-  //             },
-  //         }).done((response)=>{
-  //             console.log('response response', response);
-  //             jQuery.ajax({
-  //                 url: "/api/getEmail",
-  //                 method: 'GET',
-  //                 contendType: 'application/json',
-  //                 async: false,
-  //                 method: 'GET',
-  //                 beforeSend: function (xhr) {
-  //                     xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-  //                 },
-  //             }).done((response)=>{
-  //                     formDeserialize(form, response);
-  //                 })
-  //             formDeserialize(form, response);
-
-  //         }).fail((error)=>{
-  //             console.log(error);
-  //         });
-  // }
-  // getDataa()
-
-
-  // function formDeserialize(form, data) {
-  //         const entries = (new URLSearchParams(data)).entries();
-  //         for (const [key, val] of entries) {
-  //             const input = form.elements[key];
-  //             if (input != undefined) {
-  //                 if (input.type == 'file') {
-  //                     if (val) {
-  //                         var $file = jQuery('#' + input.id),
-  //                             $label = $file.next('label'),
-  //                             $labelText = $label.find('span'),
-  //                             labelDefault = $labelText.text();
-  //                         var filename = val.split('/').pop()
-  //                         if (filename) {
-  //                             $label
-  //                                 .addClass('file-ok')
-  //                                 .css('background-image', 'url(' + val + ')');
-  //                             $labelText.text('Click here to change pic');
-  //                         } else {
-  //                             $label.removeClass('file-ok');
-  //                             $labelText.text(labelDefault);
-  //                         }
-  //                     }
-
-  //                 } else {
-
-  //                     switch (input.type) {
-  //                         case 'checkbox':
-  //                             input.checked = !!val;
-  //                             break;
-  //                         case 'select-one':
-  //                             if (val)
-  //                                 input.value = val;
-  //                             else
-  //                                 input.selectedIndex = 0;
-
-  //                             break;
-  //                         default:
-  //                             input.value = val;
-  //                             break;
-
-  //                     }
-
-  //                 }
-  //             }
-
-  //         }
-  //     }
-
-
-  //////////////// username change event ////////////////
-  // jQuery('#ph_no').change(function(){
-  //     jQuery('#username').val(jQuery(this).val())
-  // })
-  // jQuery('#username').val(jQuery('#ph_no').val())
-
-
-  //////// UPDATING PROFILE //////////
-  // jQuery("#profile_form").submit((e)=>{
-  //         e.preventDefault();
-  //         e.stopImmediatePropagation();
-  //         const data = new FormData(document.getElementById('profile_form'))
-  //         console.log(data);
-  //         jQuery.ajax({
-  //         url: '/api/DoctorUpdateProfile',
-  //         data: data,
-  //         method: 'POST',
-  //         contentType: false,
-  //         processData: false,
-  //         beforeSend: function (xhr) {
-  //             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-  //         },
-  //     })
-  //     .done((response)=>{
-  //         console.log("postrequest response -", response);
-  //         jQuery.removeCookie('DoctorToken');
-  //         jQuery.cookie('DoctorToken', response.token, {expires: 1})
-  //     })
-  //     .fail((error)=>{
-  //         console.log(error);
-  //     })
-  //     }) 
-
-
-  // jQuery('#pills-profile-tab').click(()=>{
-
-  // })
-
-  ////////// PASSWORD CHANGE FEATURES //////////
-  // jQuery('#password_form').submit((e)=>{
-  //         e.preventDefault();
-  //         e.stopImmediatePropagation();
-  //         const data = new FormData(document.getElementById('password_form'))
-  //        jQuery.ajax({
-  //             url: '/api/changePassword',
-  //             method: 'POST',
-  //             data: data,
-  //             contentType: false,
-  //             processData: false,
-  //             beforeSend: function (xhr) {
-  //             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-  //            },
-  //         }).done((response)=>{
-  //             console.log(response);
-  //             //jQuery.removeCookie('DoctorToken');
-  //             //window.location.href = '/login';
-  //         }).fail((error)=>{
-  //            console.log('errors are ', error)
-  //       })
-
-
-  //     })
-
-  ///////////// Doctor Timings://///////////
-  // function getDoctorTimings(){
-  //     const form =document.getElementById('timingsForm');
-  //     jQuery.ajax({
-  //         url: '/api/DoctorTimings',
-  //         method: 'GET',
-  //         contendType: 'application/json',
-  //         async: false,
-  //         beforeSend: function (xhr) {
-  //             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-  //         },
-  //     })
-  //     .done((response)=>{
-  //         console.log(response);
-  //         console.log(form);
-  //         if(response.length!=0){
-  //             formDeserialize(form, response[0]);
-  //             for(var key in response[0]){
-  //                 if(response[0][key] !== true){
-  //                 console.log('')
-  //                 let parent = jQuery("#" + key).parent()
-  //                     parent.removeClass('switch-success');
-
-  //                 }
-
-  //             }
-
-  //         }
-  //     })
-  //     .fail((error)=>{
-  //         console.log(error)
-  //     })
-  // }
-  // getDoctorTimings();
-  // jQuery('#timingsForm').submit((e)=>{
-  //     e.preventDefault();
-  //     e.stopImmediatePropagation();
-  //     const data = new FormData(document.getElementById('timingsForm'))
-  //     jQuery.ajax({
-  //         url: '/api/DoctorTimings/',
-  //         method: 'POST',
-  //         data: data,
-  //         contentType: false,
-  //         processData: false,
-  //         beforeSend: function (xhr) {
-  //             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
-  //         },
-  //     })
-  //     .done((response)=>{
-  //         console.log(response);
-  //     })
-  //     .fail((error)=>{
-  //         console.log(error)
-  //     })
-
-  // // })
-  // let token = ;
   const upComingtable = jQuery('#UpComingAppointments').DataTable({
     ajax: {
       url: '/api/upComingAppoinment/',
@@ -477,7 +244,7 @@
   })
   const previoustable = jQuery('#PreviousAppointments').DataTable({
     ajax: {
-      url: '/api/previousAppoinment/',
+      url: '/api/getDoctorConsultations/',
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {
@@ -494,17 +261,23 @@
         data: "patient_name"
       },
       {
-        data: 'appointment_date'
+        data: 'consultation_date_time',
+        render:function(data){
+          return new Date(data)
+        }
       },
       {
-        data: 'appointment_time'
+        data: 'problem'
       },
       {
-        data: 'Description'
-      },
-      // {
-      //   data: "id"
-      // }
+         data: "id",
+         render: function (data, type, app) {
+          return `<button type="button" class="btn btn-primary btn-sm ViewPatientProfile" data-const="${app.id}" data-patient="${app.patient}">
+                                    <i class="fa fa-eye"></i> View
+                                    </button><br>
+                    `
+        }
+      }
 
     ],
     language: {
@@ -515,6 +288,50 @@
       jQuery("td:first", nRow).html(iDisplayIndex + 1);
       return nRow;
     }
+  })
+
+  jQuery('#PreviousAppointments').on('click','.ViewPatientProfile',function(){
+    var button = jQuery(this)
+    jQuery.ajax({
+      url: `/api/getConsDetails?cons_id=${button.attr('data-const')}`,
+      method: 'POST',
+      async: false,
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+      },
+      success: function (response) {
+        let consultationObj = JSON.parse(response.consultation)
+        let patientObj = JSON.parse(response.patient)
+        let prescriptionObj = JSON.parse(response.prescription)
+        let userObj = JSON.parse(response.user)
+        if(patientObj[0].fields.profile_pic)
+          jQuery('#pat_image').attr('src','/media/'+patientObj[0].fields.profile_pic)
+        else
+          jQuery('#pat-_image').attr('src','/media/logos/anonymous-user.png')
+        jQuery('#pat_name').val(patientObj[0].fields.full_name)
+        jQuery('#pat_email').val(userObj[0].fields.email)
+        jQuery('#pat_number').val(patientObj[0].fields.ph_no)
+        jQuery('#pat_blood_group').val(patientObj[0].fields.blood_group)
+        jQuery('#pat_age').val(patientObj[0].fields.age)
+        jQuery('#pat_weight').val(patientObj[0].fields.weight)
+        jQuery('#pat_MedicalHistory').val(patientObj[0].fields.medical_history)
+        if(prescriptionObj[0]){
+          jQuery('#Prognosis').val(prescriptionObj[0].fields.record_type)
+          jQuery('#Medication').val(prescriptionObj[0].fields.description)
+          jQuery('#follow_up_date').html(prescriptionObj[0].fields.follow_up_date)
+          jQuery('#prescriptionSlip').html(prescriptionObj[0].fields.record_files ? `
+          <a target="_blank" href='/media/${prescriptionObj[0].fields.record_files}'></a>
+          `:"Not Added")
+        }
+        
+        jQuery('#patientProfile').modal('show')
+      },
+      error: function (response) {
+        console.log(response)
+      }
+    })
+    
+
   })
 
   jQuery('#TodayAppointments').on('click', '.call', function () {

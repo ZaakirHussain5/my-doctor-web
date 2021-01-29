@@ -409,10 +409,6 @@
                                     <td>{{patient.age}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Height</td>
-                                    <td>{{patient.height}} cm</td>
-                                </tr>
-                                <tr>
                                     <td>Weight</td>
                                     <td>{{patient.weight}} Kgs</td>
                                 </tr>
@@ -421,8 +417,8 @@
                                     <td>{{patient.blood_group}}</td>
                                 </tr>
                                 <tr>
-                                    <td>City</td>
-                                    <td>{{patient.city}}</td>
+                                    <td>Medical History</td>
+                                    <td>{{patient.medical_history}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
@@ -503,7 +499,7 @@
                                                 </a>
                                             </div>
                                             {% endif %}
-                                            {{ records.description }}
+                                            {{ records.record_type }}
                                         </li>
                                         {% endif %}
                                         {% endfor %}
@@ -694,13 +690,13 @@
                             xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
                         }
                     }).done(res => {
-                        consultation_id = res[0].id
-                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
+                        consultation_id = res[0]? res[0].id : 0 
+                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id!=0 ? `&cons_id=${consultation_id}` : ""}`;
                     })
                 }
                 else {
                     video_session.disconnect()
-                    window.location.href = '/api/ratings?consultation=' + consultation_id;
+                    window.location.href = `/api/ratings?${consultation_id && consultation_id!=0 ? `&consultation=${consultation_id}` : ""}`;
                 }
             })
 

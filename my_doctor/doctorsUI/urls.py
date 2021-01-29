@@ -10,5 +10,6 @@ urlpatterns=[
     path('Prescription', views.Prescription, name="Prescription"),
     path('profile', views.profile, name="profile"),
     path('settings', views.settings, name="settings"),
+    path('invoice', views.invoice, name="invoice"),
 
 ]

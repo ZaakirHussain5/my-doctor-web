@@ -121,6 +121,7 @@ class PatientResgistrationAppAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         pat = patient_info.objects.get(user=user)
+        login(request,user)
         self.send_mails(pat, request.data['password'])
         return Response({
             "Patient": UserAuthSerializer(user, context=self.get_serializer_context()).data,
@@ -252,7 +253,7 @@ class PatientBillingHistorys(viewsets.ModelViewSet):
     serializer_class = PatientBillingHistorySerializer
 
     def get_queryset(self):
-        queryset = PatientBillingHistory.objects.filter(patient__user = self.request.user)
+        queryset = PatientBillingHistory.objects.filter(patient__user = self.request.user).order_by('-date')
         #queryset = PatientBillingHistory.objects.all()
         return queryset
 

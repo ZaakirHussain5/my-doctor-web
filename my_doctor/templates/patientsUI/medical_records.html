@@ -1,6 +1,11 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
 {% block content %}
+<style>
+    .conversation-panel__body ul{
+        padding-bottom: 0 !important;
+    }
+</style>
 <div class="ca-content__chatstab">
 
     <div class="ca-content__callstab" style="padding-top: 0;">
@@ -55,12 +60,8 @@
                                             <li>
                                                 <div class="calllist">
                                                     <div class="calllist__details">
-                                                        <div class="calllist__details--name">Title</div>
+                                                        <div class="calllist__details--name">Report Tile</div>
                                                     </div>
-                                                    <div class="calllist__details">
-                                                        <div class="calllist__details--name">Description</div>
-                                                    </div>
-
                                                     <div class="calllist__actions">
                                                         <div class="iconbox btn-hovered-light">
                                                             <span>Actions</span>
@@ -111,7 +112,7 @@
                         <label for="RecordType">Report Files</label>
                         <input type="file" name="record_files" class="form-control">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group sr-only">
                         <label for="ConsultingAbout">Description</label>
                         <textarea name="description" class="form-control" id="ConsultingAbout" rows="7"
                             placeholder="Describe your Problem" style="font-size: medium;"></textarea>
@@ -213,27 +214,14 @@
         // })
 
         $.ajax({
-            url: '/api/PatientPrescription/',
+            url: '/api/GetPatientPrescription/',
             method: 'GET',
             contentType: 'application/json',
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
             }
         }).done((response) => {
-            let lis = `
-            <li>
-                <div class="calllist">
-                    <div class="calllist__details">
-                        <div class="calllist__details--name">Description</div>
-                    </div>
-
-                    <div class="calllist__actions">
-                        <div class="iconbox btn-hovered-light">
-                            <span>Actions</span>
-                        </div>
-                    </div>
-                </div>
-            </li>`
+            let lis = ``
             ;
             console.log(response)
             response.map(index => lis += `
@@ -253,7 +241,12 @@
                     </div>
                     <div class="calllist__actions">
                         <div class="iconbox btn-hovered-light">
-                            <a href="${index.record_files}" target="_blank" ><i class="iconbox__icon mdi mdi-file text-primary"></i></a>
+                            <a href="/patients/single_prescrption/?id=${index.id}" target="_blank" >
+                                <ul>
+                                    <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                    <li><span>View</span></li>
+                                </ul> 
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -280,10 +273,7 @@
                     <li>
                         <div class="calllist">
                             <div class="calllist__details">
-                                <div class="calllist__details--name">Title</div>
-                            </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">Description</div>
+                                <div class="calllist__details--name">Report Title</div>
                             </div>
                             <div class="calllist__actions">
                                 <div class="iconbox btn-hovered-light">
@@ -301,20 +291,24 @@
                                 style="padding: 0 20px 0 0 !important;">
                                 <div class="calllist__details--name">${index.record_type}</div>
                             </div>
-                            <div class="calllist__details">
-                                <div class="calllist__details--name">${index.description}</div>
-
-                            </div>
 
                             <div class="calllist__actions"
                                 style="display: contents !important;">
                                 <div class="iconbox btn-hovered-light">
                                     <a href="${index.record_files}" target="_blank">
-                                        <i class="iconbox__icon mdi mdi-file text-primary"></i>
+                                        <ul>
+                                            <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                            <li><span>View</span></li>
+                                        </ul>
                                     </a>
                                 </div>
                                 <div  class="iconbox mdi-delete-div btn-hovered-light">
-                                    <i data-id='${index.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                    <ul>
+                                        <li>
+                                            <i data-id='${index.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                        </li>
+                                        <li><span>Delete</span></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -356,29 +350,31 @@
                             style="padding: 0 20px 0 0 !important;">
                             <div class="calllist__details--name">${response.record_type}</div>
                         </div>
-                        <div class="calllist__details">
-                            <div class="calllist__details--name">${response.description}</div>
-
-                        </div>
-
                         <div class="calllist__actions"
-                            style="display: contents !important;">
-                            <div class="iconbox btn-hovered-light">
-                                <a href="${response.record_files}" target="_blank">
-                                    <i class="iconbox__icon mdi mdi-file text-primary"></i>
-                                </a>
+                                style="display: contents !important;">
+                                <div class="iconbox btn-hovered-light">
+                                    <a href="${response.record_files}" target="_blank">
+                                        <ul>
+                                            <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                            <li><span>View</span></li>
+                                        </ul>
+                                    </a>
+                                </div>
+                                <div  class="iconbox mdi-delete-div btn-hovered-light">
+                                    <ul>
+                                        <li>
+                                            <i data-id='${response.id}' class="iconbox__icon mdi mdi-delete text-danger"></i>
+                                        </li>
+                                        <li><span>Delete</span></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="iconbox btn-hovered-light">
-                                <i data-id='${index.id}'  class="iconbox__icon mdi mdi-delete text-danger"></i>
-                            </div>
-                        </div>
                     </div>
                 </li>
                 `;
                 let previous = $('.medical_records_list').html()
                 $('.medical_records_list').html(previous + lis)
-
-                $('#newReport').removeClass('active')
+                toastr.success("Report Added Successfully","Success",{positionClass:"toast-top-center"})
                 $('#newReport').modal('hide')
             }).fail((error) => {
                 console.log(error);
@@ -388,7 +384,7 @@
     
     
         /////////////// DELETE MEDICAL RECORD //////////////////
-        $('#medocal-record').on('click', '.mdi-delete', function(){
+        $('#medocal-record').on('click', '.mdi-delete-div', function(){
             let id = $(this).attr('data-id');
             if (confirm('Are you sure you want to delete?')) {
                 $.ajax({

@@ -28,7 +28,7 @@ def save_doctor_payment(sender, instance, created, **kwargs):
             else:
                 balance = float(payable)
         patient = patient_info.objects.get(user=instance.patient)
-        billing_history = DoctorBillingHistory.objects.create(doctor=instance.doctor_id,ref_id=patient.pat_id,e_amt=(float(instance.consultation_amt)- float(instance.comp_share)),r_amt=0,balance=balance,description='Consultation Fee')
+        billing_history = DoctorBillingHistory.objects.create(doctor=instance.doctor_id,ref_id=patient.pat_id,e_amt=instance.doctor_id.consultation_fee,r_amt=0,balance=balance,description='Consultation Fee')
         doc_count = consultations.objects.filter(doctor_id = instance.doctor_id).count()
         payments = doctor_payments.objects.filter(doctor = instance.doctor_id).update(total_amt=total_amount, consultations_count=doc_count, comm_amt=commission_amount, amount_payable=payable, balance=balance)
         

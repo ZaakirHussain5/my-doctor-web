@@ -30,8 +30,7 @@
                 <table class="table" id="Doctors" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>slno</th>
-                            
+                            <th>Photo</th>
                             <th>Specialist Type</th>
                             <th>Name</th>
                             <th>Phone No.</th>
@@ -210,27 +209,29 @@
             responsive: true,
             columns:[
                 {
-                    data:'id'
+                    data:'profile_pic',
+                    render:function(data){
+                        return `<img src="${data}" style="height: 50px;width: 80px;" alt="Doctor Image">`
+                    }
                 },
-                // {
-                //     data:'profile_pic',
-                //     render:function(data){
-                //         return `<img src="${data}" style="height:90px;width:120px" alt="">`
-                //     }
-                // },
                 {
+                    className:"align-middle",
                     data:'specialist_type'
                 },
                 {
+                    className:"align-middle",
                     data:'full_name'
                 },
                 {
+                    className:"align-middle",
                     data : 'phone_number'
                 },
                 {
+                    className:"align-middle",
                     data : 'consultation_fee'
                 },
                 {
+                    className:"align-middle",
                     data:'id',
                     render: function (data,type,row) {
                           return `
@@ -248,10 +249,6 @@
                   lengthMenu: "_MENU_",
                   search: "",
                   searchPlaceholder: "Search..."
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
               }
         })
 

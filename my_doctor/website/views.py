@@ -70,3 +70,13 @@ def PatientRegistration(request):
         "page_title":"Doctor Plus | Patient Registration",
         "meta_description":"Registration"})
 
+def doctor_mou_tc(request):
+    return render(request,'website/doctors_mou_tc.html',{
+        "page_title":"Doctor Plus | MOU Terms and Conditions",
+        "meta_description":"MOU Terms and Conditions"})
+
+def lab_tests(request):
+    return render(request,'website/lab_tests.html',{
+        "page_title":"Doctor Plus | Lab tests",
+        "meta_description":"Lab Tests Packages"})
+

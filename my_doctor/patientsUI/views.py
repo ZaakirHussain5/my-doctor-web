@@ -5,6 +5,7 @@ from patient_subscription.models import PatientSubscription
 from patients.models import patient_info
 from django.contrib.auth.decorators import login_required
 from patient_subscription.models import PatientSubscription
+from patient_medical_records.models import patient_medical_records
 
 
 @login_required(login_url='/login')
@@ -108,3 +109,12 @@ def patientInvoice(request):
         pass
     print(context)
     return render(request,'patientsUI/subscriptionInvoice.html', context)
+
+def prescrption(request):
+    pres_id = request.GET.get('id')
+    prescription_data = patient_medical_records.objects.get(id=pres_id)
+    patient_data = patient_info.objects.get(user__id = prescription_data.patient.id)
+    return render(request,'doctorsUI/single_prescrption.html',{
+        "prescription_data":prescription_data,
+        "patient_data":patient_data
+    })

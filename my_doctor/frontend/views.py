@@ -183,6 +183,10 @@ def patients_details(request, id=None):
 def promo_code(request):
     return render(request, 'frontend/promo_code.html')
 
+@login_required(login_url='/adminlogin')
+def lab_Tests_packages(request):
+    return render(request, 'frontend/manage_lab_test.html')
+
 
 @login_required(login_url='/adminlogin')
 def loutoutView(request):

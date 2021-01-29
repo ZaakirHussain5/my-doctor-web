@@ -31,24 +31,28 @@
                             </select>
                         </div>
                         <div class="row form-group">
-                            <label for="record_type" class=" form-control-label">Prescription Title</label>
-                            <input type="text" required="" id="record_type" name="record_type" placeholder="Enter Record Type"
-                                class="form-control">
-                            <input type="hidden"  id="created_by" name="created_by" placeholder="Enter Prescription Title"
-                                class="form-control" value="created by doctor">
+                            <label for="description" class=" form-control-label">Prognosis</label>
+                            <textarea name="record_type" id="record_type" rows="3" class="form-control"
+                                placeholder="About patients Symptoms and Severities"></textarea>
+                        </div>
+                        <div class="row form-group">
+                            <label for="description" class=" form-control-label">Medication</label>
+                            <textarea name="description" id="description" rows="3" class="form-control"
+                                placeholder="Suggested medication or Lab tests."></textarea>
                         </div>
                         <input type="hidden" name="consultation_id" value="{{ consulataion_id }}">
-                        <div class="row form-group">
-                            <label for="record_files" class=" form-control-label">Prescription File</label>
-                            <input type="file" required="" id="record_files" name="record_files"
-                                placeholder="Enter Plan Price" class="form-control">
-                        </div>
+                        
                     </div>
                     <div class="col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="description" class=" form-control-label">Description</label>
-                            <textarea name="description" id="description" rows="5" class="form-control"
-                                placeholder="Describe about the Prescription"></textarea>
+                            <label for="record_files" class=" form-control-label">Prescription Slip</label>
+                            <input type="file" id="record_files" name="record_files"
+                                class="form-control" accept="image/*">
+                        </div>
+                        <div class="row form-group">
+                            <label for="record_files" class=" form-control-label">Select Followup Date</label>
+                            <input type="date" required="" id="follow_up_date" name="follow_up_date"
+                                 class="form-control" >
                         </div>
                     </div>
                 </div>
@@ -74,10 +78,10 @@
                 <table class="table table-bordered table-hover" id="subs_plans">
                     <thead>
                         <tr>
-                            <th>Slno</th>
+                            <th>Date</th>
                             <th>Patient Name</th>
-                            <th>Prescription Title</th>
-                            <th>Description</th>
+                            <th>Prognosis</th>
+                            <th>Medication</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -105,7 +109,7 @@
                 responsive: true,
                 columns: [
                     {
-                        data: "id"
+                        data: "format_last_modified"
                     },
                     {
                         data: "patient_name"
@@ -144,7 +148,7 @@
                 url = url + jQuery('#pres_id').val() + '/'
                 message = "Prescription updated successfully."
             }
-
+            data.set('description',$('#description').val().replace(/\r?\n/g, '<br />'))
                 $.ajax({
                     url: url,
                     method: action,

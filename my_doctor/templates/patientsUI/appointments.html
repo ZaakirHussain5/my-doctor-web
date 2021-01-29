@@ -1,6 +1,11 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
 {% block content %}
+<style>
+    .conversation-panel__body ul{
+        padding-bottom: 0 !important;
+    }
+</style>
 <div class="ca-content__chatstab">
     <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
@@ -165,18 +170,26 @@
                             <div class="calllist__details--name">${index.doctor_id.full_name}</div>
                             <div class="calllist__details--info mt-1">
                                 <span>${index.doctor_id.specialist_type}<br>${new Date(index.consultation_date_time).toDateString()}</span>
-                                <span></span>
+                                
                             </div>
                         </div>
 
                         <div class="calllist__actions">
                             <div class="calllist__actions">
                                 <div class="iconbox btn-hovered-light showpres" data-target="tooltip" title="precription" data-const="${index.id}" data-doctor="${index.doctor_id.id}">
-                                    <i class="iconbox__icon mdi mdi-medical-bag text-danger" ></i>
+                                    <ul>
+                                        <li><i class="iconbox__icon mdi mdi-medical-bag text-danger" ></i></li>
+                                        <li class="text-center"><span>Prescrption</span></li>
+                                    </ul>
+                                    
                                 </div>
                                 <a href="/patients/invoice?id=${index.id}" target="_blank">
                                     <div class="iconbox btn-hovered-light show-in" data-toggle="tooltip"  title="Invoice">
-                                    <i  class="iconbox__icon mdi mdi-file-chart text-primary"></i>
+                                    <ul>
+                                        <li><i  class="iconbox__icon mdi mdi-file-chart text-primary"></i></li>
+                                        <li class="text-center"><span>Invoice</span></li>
+                                    </ul>
+                                    
                                     </div>
                                 </a>
                             </div>
@@ -199,16 +212,23 @@
                             <div class="calllist__details--name">${index.doctor.full_name}</div>
                             <div class="calllist__details--info mt-1">
                                 <span>${index.doctor.specialist_type}<br>${index.appointment_date} ${index.appointment_time}</span>
-                                <span></span>
+                                
                             </div>
                         </div>
                         <div class="calllist__actions">
                             <div class="calllist__actions">
                                 <div class="iconbox btn-hovered-light call" data-const="${index.id}" data-doctor="${index.doctor.id}">
-                                    <i class="iconbox__icon mdi mdi-video text-danger"></i>
+                                    <ul>
+                                        <li><i class="iconbox__icon mdi mdi-video text-danger"></i></li>
+                                        <li class="text-center"><span>Call</span></li>
+                                    </ul>
                                 </div>
                                 <div class="iconbox btn-hovered-light edit-app" data-doct='${JSON.stringify(index)}' data-id='${index.id}'>
-                                    <i  class="iconbox__icon mdi mdi-pencil-outline text-primary"></i>
+                                    <ul>
+                                        <li><i  class="iconbox__icon mdi mdi-pencil-outline text-primary"></i></li>
+                                        <li class="text-center"><span>Edit</span></li>
+                                    </ul>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -266,9 +286,9 @@
                  method:'GET',
                  success:function(response){
                      if(response.pres_avl){
-                         window.location.href = response.prescription_file
+                         window.location.href = '/patients/single_prescrption/?id'+response.id
                      }else{
-                         toastr.warning('',"Prescription not Yet Updated",{positionClass:"toast-top-center"});
+                         toastr.warning('',"Prescription not Yet Added",{positionClass:"toast-top-center"});
                      }
                  }
              })

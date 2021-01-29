@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Plus Invoice</title>
+    <link rel="stylesheet" href="{% static 'patients/assets/vendors/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <style>
+        @media print {
+            .print-header {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card print-header">
+            <div class="card-body">
+                <button class="btn btn-primary float-right " onclick="window.print()"><i class="fa fa-print"></i>
+                    Print</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-4">
+                     <h5 class="text-primary">Powered By</h5>
+            <img src="{% static 'website/img/logo.png' %}" alt="" id="logoImage">
+                </div>
+            </div>
+           </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div>
+                            <strong>{{prescription_data.doctor.full_name}}</strong>
+                        </div>
+                        <div>Speciality : {{prescription_data.doctor.specialist_type}}</div>
+                        <div>License No. : {{prescription_data.doctor.Registration_Number}}</div>
+                        <div>Email : support@doctor-plus.in</div>
+                        <div>Ph No. : 080-4554 9495</div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div>
+                            <strong>{{patient_data.full_name}}</strong>
+                        </div>
+                        <div>Email: {{patient_data.user.email}}</div>
+                        <div>Phone: {{patient_data.ph_no}}</div>
+                        <div>Consult date : {{prescription_data.format_last_modified}}</div>
+                        <div>Followup Date : {{prescription_data.follow_up_date}}</div>
+                    </div>
+                   
+
+
+                </div>
+            </div>
+            <div class="card-body">
+                <img src="{% static 'patients/assets/images/rx.jpeg' %}" alt="">
+                <h5 class="text-primary mt-3">
+                    Symptoms & Diagnosis
+                </h5>
+                <p>{{ prescription_data.record_type }}</p>
+                <h5 class="text-primary">
+                    Medication
+                </h5>
+                {% if prescription_data.record_files %}
+                <img src="{{prescription_data.record_files.url}}">
+                {% else %}
+                <p id="medication">
+                    {% autoescape off %}
+                    {{ prescription_data.description }}
+                    {% endautoescape %}
+                </p>
+                {% endif %} 
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+</script>
+</html>

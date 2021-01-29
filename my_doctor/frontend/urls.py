@@ -37,6 +37,7 @@ urlpatterns=[
     path('patientDetails/<id>', views.patients_details, name="patient_details"),
     path('getSnapshots', snap_shots, name="getSnapshots"),
     path('promo_code', views.promo_code, name="promoCode"),
-    path('logout-stuff/', views.loutoutView, name="logoutStuffs")
+    path('logout-stuff/', views.loutoutView, name="logoutStuffs"),
+    path('Manage_lab_test_packages', views.lab_Tests_packages, name="Manage_lab_test_packages"),
     
 ]
