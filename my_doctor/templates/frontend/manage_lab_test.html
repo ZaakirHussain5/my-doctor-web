@@ -1,0 +1,172 @@
+{% extends 'admin_layout.html' %} {% block content %}
+
+<div class="breadcrumbs">
+    <div class="col-sm-12">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h2>New Lab Test Package</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card pl-3 pr-3">
+        <div class="card-body card-block">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header">
+                            Package Details
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Title">Title</label>
+                                <input type="text" placeholder="Enter Package Title" class="form-control" name="Tile" id="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="g_desc">Grid Description</label>
+                                <textarea type="text" placeholder="Enter Grid Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="g_desc">Short Description</label>
+                                <textarea type="text" placeholder="Enter Short Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="g_desc">Detailed Description</label>
+                                <textarea type="text" placeholder="Enter Short Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="Title">Package Price</label>
+                                <input type="number" placeholder="Enter Package Title" class="form-control" name="Tile" id="Title">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btnbtn-block btn-primary">
+                                Add Package
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header">
+                            Package Parameter Types
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Enter Parameter Type">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Lipid Quality
+                                    <span class="badge badge-danger badge-pill">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                  </li>
+                              </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            Package Parameters
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <select name="parameterType" id="parameterType" class="form-control">
+                                                    <option value="" >Select Parameter Type</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Enter Parameter Value">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary">
+                                                            <i class="fa fa-plus-circle"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Lipid Quality,Fat
+                                    <span class="badge badge-danger badge-pill">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                  </li>
+                              </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Package FAQs
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="g_desc">Question</label>
+                                <textarea type="text" placeholder="Enter Grid Description" class="form-control" name="Tile" id="Title" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="g_desc">Answer</label>
+                                <textarea type="text" placeholder="Enter Short Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btnbtn-block btn-primary">
+                                Add FAQ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            FAQs List
+                        </div>
+                        <div class="card-body">
+                            <div id="accordion">
+                                <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="float-right btn btn-danger"><i class="fa fa-trash"></i></button>
+                                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Question #1
+                                      </button>
+                                    </h5>
+                                  </div>
+                              
+                                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Answer #1                                    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block scripts %}{% endblock %}

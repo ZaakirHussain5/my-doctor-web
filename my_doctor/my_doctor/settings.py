@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'reminders',
     'bill_payments',
     'vedio_chat',
-    'promo_codes'
+    'promo_codes',
+    'lab_tests'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,79 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+<style>
+    .exclusive-item{
+      background: #fff;
+      border-radius: 6px;
+      padding: 20px 20px 5px 20px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+    }
+    .exclusive-item h3{
+      font-size: 20px;
+      text-transform: capitalize;
+    }
+  .healthiansprice {
+      display: inline-block;
+      font-family: Ubuntu,sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #1a9ca6;
+      margin-top: 0;
+      margin-bottom: 0;
+  }
+  .exclusive-item .btn-danger:hover  {
+      color: #fff !important;
+      background: #f37d26 !important;
+      border-color: #f37d26 !important;
+      transition: .3s ease-in-out !important;
+  }
+  .exclusive-item .btn-danger{
+      color: #fff !important;
+      background: #1a9ca6 !important;
+      border-color: #1a9ca6 !important;
+      transition: .3s ease-in-out !important;
+  }
+  </style>
+<section class="breadcrumb">
+    <div class="container">
+    <div class="breadcrumb-outer">
+    <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Lab Tests</li>
+    </ul>
+    </nav>
+    <h2>Lab Tests</h2>
+    </div>
+    </div>
+    </section>
+
+    <section class="services icon-left">
+        <div class="container">
+        <div class="row">
+        <div class="col-xs-12">
+        <div class="section-title ">
+        <h2>Exclusive <span>Offers</span></h2>
+        </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="exclusive-item">
+          <div class="exclusive-content">
+          <h3><a href="#">Master Health Checkup</a></h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div class="healthiansprice"> <span class="rupeesign">₹</span>999 </div>
+          <div class="buy-book-btn dealtopspace">
+            <a class="btn btn-danger" href="#">Know More <img src="{%static 'website/img/left-icon-sml.png' %}"></a>
+        </div>
+          </div>
+          
+          </div>
+        </div>
+        </div>
+        </section>
+  
+   
+{%endblock%}

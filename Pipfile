@@ -16,6 +16,7 @@ social-auth-app-django = "*"
 mysqlclient = "*"
 apscheduler = "*"
 pillow = "*"
+opentok = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.6"

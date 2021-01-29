@@ -49,11 +49,11 @@ class settlement_details (models.Model):
 
 class DoctorBankDetails(models.Model):
     doctor_id = models.ForeignKey(doctors_info, on_delete=models.CASCADE, related_name='DoctorBankDetails')
-    account_no = models.CharField(max_length=20)
-    ifsc_no = models.CharField(max_length=100)
-    bank_name = models.CharField(max_length=50)
-    branch_name = models.CharField(max_length=50)
-    account_holder_name = models.CharField(max_length=50)
+    account_no = models.CharField(max_length=20, null=True, blank=True)
+    ifsc_no = models.CharField(max_length=100, null=True, blank=True)
+    bank_name = models.CharField(max_length=50, null=True, blank=True)
+    branch_name = models.CharField(max_length=50, null=True, blank=True)
+    account_holder_name = models.CharField(max_length=50, null=True, blank=True)
     upi_id = models.CharField(max_length = 50, null=True, blank=True)
     phone_no = models.CharField(max_length = 50,null=True, blank=True)
     blank_cheque = models.FileField(null=True, blank=True)

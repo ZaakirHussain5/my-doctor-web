@@ -17,4 +17,5 @@ urlpatterns = [
     path('ForgotPassword',views.forgot_pass,name='forgot_pass'),
     path('PatientRegistration',views.PatientRegistration,name='PatientRegistration'),
     path('doctors_mou_tc',views.doctor_mou_tc,name='doctors_mou_tc'),
+    path('lab_tests',views.lab_tests,name='lab_tests'),
 ]
