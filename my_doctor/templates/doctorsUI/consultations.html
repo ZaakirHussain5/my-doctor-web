@@ -21,6 +21,7 @@
                         <th>Earned Amt.</th>
                         <th>Recieved Amt.</th>
                         <th>Balance</th>
+                        <th>Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,14 @@
       },
       {
         data: 'balance'
+      },
+      {
+        data: 'id',
+        render:function(data){
+          return `
+               <a class="btn btn-link" href="/doctors/invoice?id=${data}">View Invoice</a>
+          `
+        }
       }
     ],
     language: {

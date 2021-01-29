@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from patients.models import patient_info
 from consultations.models import consultations
 from django.contrib.auth.decorators import login_required
+from doctors.models import DoctorBillingHistory
 
 
 @login_required(login_url='/login')
@@ -44,4 +45,11 @@ def profile(request):
 @login_required(login_url='/login')
 def settings(request):
 	return render(request,'doctorsUI/settings.html')
+
+@login_required(login_url='/login')
+def invoice(request):
+	bill_details = DoctorBillingHistory.objects.get(request.GET.get('id'))
+	return render(request,'doctorsUI/invoice.html',{
+		"bill":bill_details
+	})
 
