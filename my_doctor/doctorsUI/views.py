@@ -48,7 +48,7 @@ def settings(request):
 
 @login_required(login_url='/login')
 def invoice(request):
-	bill_details = DoctorBillingHistory.objects.get(request.GET.get('id'))
+	bill_details = DoctorBillingHistory.objects.get(pk=request.GET.get('id'))
 	return render(request,'doctorsUI/invoice.html',{
 		"bill":bill_details
 	})
