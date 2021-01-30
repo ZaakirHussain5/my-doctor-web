@@ -9,17 +9,22 @@ class lab_tests(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class lab_tests_parameters_type(models.Model):
     lab_test = models.ForeignKey(lab_tests,on_delete=models.CASCADE)
     parameter_type = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+
 class lab_tests_parameter(models.Model):
-    parameter_type = models.ForeignKey(lab_tests_parameters_type,on_delete=models.CASCADE)
+    parameter_type = models.ForeignKey(lab_tests_parameters_type,on_delete=models.CASCADE, related_name='type_children')
     parameter = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
 
 class lab_tests_faqs(models.Model):
     lab_test = models.ForeignKey(lab_tests,on_delete=models.CASCADE)
@@ -27,3 +32,5 @@ class lab_tests_faqs(models.Model):
     answer =models.TextField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+

@@ -1,0 +1,868 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+<style>/*  */
+    .cart-div {
+        background-color: #fff;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        border-radius: 6px 6px 6px 6px;
+        box-shadow: 0 6px 10px rgba(148,148,148,.5);
+        overflow: hidden;
+    }
+    .cart-sec {
+        display: inline-block;
+    }
+    .package_rating span.filled-rating {
+        background-image: url(star_1.png);
+    }
+    
+    .step-div {
+        background-color: #1a9ca6;
+        position: relative;
+        padding: 30px 35px;
+    }
+    .step-div h1 {
+        font-size: 25px;
+        text-transform: capitalize;
+        font-weight: 500;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    .also_known_as {
+        font-size: 15px !important;
+        padding-top: 8px !important;
+        color: #efe7e7 !important;
+        font-weight: 400 !important;
+    }
+    .parameterinc {
+        color: #fff;
+        font-size: 17px!important;
+        padding-top: 10px!important;
+    }
+    .price {
+        color: #dcf9fb;
+        font-size: 19px;
+    }
+    .rupeesign {
+        font-family: Hind,sans-serif;
+    }
+    .step-div h2 {
+        font-family: Ubuntu,sans-serif;
+        font-size: 25px;
+        text-transform: capitalize;
+        font-weight: 500;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    .package_rating {
+        margin-top: 10px;
+        background: #fff;
+        border-radius: 40px;
+        font-weight: bold;
+        display: inline-block;
+        padding: 6px 35px 2px 14px;
+        color: #484b4b;
+    }
+    .package_rating span {
+        display: inline-block;
+        height: 17px;
+        width: 17px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .pro-content-area {
+        padding: 20px 10px;
+        margin-bottom: 5px;
+        float: left;
+    }
+    .pro-content-area .metaFooterToggleLink {
+        font-size: 15px;
+        margin-bottom: 5px;
+        padding-right: 0px;
+        text-align: justify;
+    }
+    .pro-content-area .metaFooterToggleLink {
+        font-size: 15px;
+        margin-bottom: 5px;
+        padding-right: 0px;
+        text-align: justify;
+    }
+    .covidsafetyassured {
+        border-radius: 3px;
+        background-color: #e4f5ff;
+        display: block;
+        border: 1px solid #c2e2f4;
+        padding: 0px 9px;
+        float: none;
+        width: 190px;
+        margin: 0px auto 20px auto;
+    }
+    .covidsafetyassured a {
+        margin-left: 0px;
+        text-decoration: none;
+    }
+    .covidsafetyassured img {
+        border-right: 1px solid #c2e2f4;
+        display: inline-block;
+        margin-top: 0px;
+        padding-right: 6px;
+        padding-top: 5px;
+    }
+    .covidsafetyassured p {
+        font-size: 14px;
+        display: inline-block;
+        margin-bottom: 0px;
+        color: #00a0a8;
+        line-height: 16px;
+        padding: 7px 20px 5px 10px;
+        vertical-align: top;
+    }
+    .covidsafetyassured span {
+        clear: both;
+        display: block;
+        color: #000;
+    }
+    .samplesmartreport {
+        border-radius: 3px;
+        background-color: #fffadc;
+        display: block;
+        border: 1px solid #eee4ab;
+        padding: 0px 9px;
+        float: none;
+        width: 190px;
+        margin: 0px auto 20px auto;
+    }
+    .samplesmartreport img {
+        border-right: 1px solid #eee4ab;
+        display: inline-block;
+        margin-top: 0px;
+        padding-right: 6px;
+        padding-top: 5px;
+    }
+    .samplesmartreport p {
+        font-size: 14px;
+        display: inline-block;
+        margin-bottom: 0px;
+        color: #00a0a8;
+        line-height: 16px;
+        padding: 7px 20px 5px 10px;
+        vertical-align: top;
+    }
+    .samplesmartreport span {
+        clear: both;
+        display: block;
+        color: #000;
+    }
+    .gray-band {
+        float: left;
+        font-size: 15px;
+        width: 100%;
+        padding: 20px 24px;
+        margin: 0 0 0;
+        max-height: 130px;
+        padding: 0px 25px 25px 25px;
+        background: linear-gradient(0deg, rgba(232,232,232,1) 0%, rgba(255,255,255,1) 100%);
+    }
+    .usplevel_one {
+        display: block;
+        padding: 10px 20px 10px 20px;
+    }
+    .usplevel_one ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+    .usplevel_one ul li {
+        display: inline-block;
+        width: 24%;
+        vertical-align: top;
+    }
+    .usplevel_one ul li span {
+        display: inline-block;
+        margin-right: 15px;
+        padding: 10px;
+        background: #fff;
+        border: 1px solid #e7e7e7;
+        border-radius: 4px;
+        width: 55px;
+        height: 55px;
+        text-align: center;
+        vertical-align: top;
+    }
+    .usplevel_one ul li p {
+        display: inline-block;
+        color: #000;
+        margin-bottom: 0px;
+        font-size: 14px;
+        line-height: 18px;
+        margin-top: 10px;
+        vertical-align: top;
+    }
+    .usplevel_two {
+        padding: 0px 25px 0px 25px;
+        background: #f3feff;
+        clear: both;
+        box-shadow: 0px 2px 6px #d9d9d9;
+        margin: 20px 20px 10px 20px;
+        border-radius: 3px;
+    }
+    .usplevel_two ul {
+        margin: 0px;
+        padding: 15px 0px;
+        list-style: none;
+    }
+    .usplevel_two ul li {
+        display: inline-block;
+        vertical-align: top;
+        background: url(/arrow_dtl.png);
+        background-position: left 0px;
+        background-repeat: no-repeat;
+        padding-right: 5px;
+        padding-left: 4px;
+        border-right: 1px solid #ccc;
+        margin: 0;
+    }
+    .usplevel_two ul li p {
+        display: inline-block;
+        margin-bottom: 0px;
+        color: #000;
+        font-size: 14px;
+        line-height: 18px;
+        padding-right: 35px;
+    }
+    .usplevel_two ul li:nth-child(4) {
+        margin-right: 0px;
+        border-right: none;
+        padding-right: 0px;
+    }
+    .detailbtm_book ul {
+        display: block;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 17px;
+    }
+    .detailbtm_book ul li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    .detail-div {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 6px 10px rgba(148,148,148,.5);
+        overflow: hidden;
+        margin-top: 30px;
+        padding: 5px 20px 12px 15px!important;
+    }
+    .detail-div h3 {
+        padding-left: 0;
+        font-weight: 800;
+        color: #212121;
+        font-family: raleway,sans-serif;
+        margin-top: 0;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        text-transform: capitalize;
+    }
+    .green-band {
+        background: #199ca6;
+        padding: 10px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 10px 30px;
+        display: block;
+        height: 44px;
+        color: #fff;
+        font-weight: 600;
+    }
+    .accordion-option {
+        width: 100%;
+        float: left;
+        clear: both;
+        margin: 15px 0;
+    }
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #e4e5e7;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+    .panel-default>.panel-heading {
+        color: #333;
+        background-color: #fff;
+        border-color: #e4e5e7;
+        padding: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: inherit;
+    }
+    .panel-default>.panel-heading a {
+        display: block;
+        padding: 15px 15px 30px 0;
+    }
+    .accordionpanel .col-width {
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: capitalize;
+        padding: 0 20px;
+        width: 49%;
+        display: inline-block;
+        float: left;
+    }
+    .accordionFAQ .col-width {
+        width: 96%;
+    }
+    .panel-default>.panel-heading+.panel-collapse>.panel-body {
+        border-top-color: #ddd;
+    }
+    .parameterlist a {
+        margin: 0;
+        font-size: 14px;
+        color: #000;
+    }
+    .panel-title {
+        background: #ebebeb;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: inherit;
+    }
+    .panel-default>.panel-heading a:after {
+        content: "\002b";
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        float: right;
+        transition: transform .25s linear;
+        -webkit-transition: -webkit-transform .25s linear;
+    }
+    .panel-default>.panel-heading a[aria-expanded=true]:after {
+        content: "\2212";
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    /* Responsive */
+    @media only screen and (max-width: 1199px){
+      .gray-band {
+        padding: 0;
+    }
+    .usplevel_one {
+        display: block;
+        padding: 10px 9px;
+    }
+    .usplevel_two {
+        padding: 0px 15px;
+    }
+    .usplevel_two ul li p{
+      padding-right: 2px;
+    }
+    }
+    @media only screen and (max-width: 991px){
+     .cart-sec .text-right {
+        text-align: left;
+    }
+    }
+    @media only screen and (max-width: 966px){
+      .usplevel_two {
+        padding: 0px 50px;
+    }
+    .usplevel_two ul li{
+      padding: 0 35px;
+    }
+      .usplevel_two ul li p {
+        display: grid;
+    }
+    }
+    @media only screen and (max-width: 949px){
+      .usplevel_one ul li span{
+        margin-right: 14px;
+      }
+      .usplevel_two {
+        padding: 0px 40px;
+    }
+    }
+    @media only screen and (max-width: 944px){
+      .gray-band {
+        padding: 0 20px;
+    }
+    .usplevel_one ul li span {
+        margin-right: 60px;
+    }
+    .usplevel_two {
+        padding: 0px;
+    }
+    .usplevel_two ul li{
+      padding: 0 35px;
+    }
+      .usplevel_two ul li p {
+        display: grid;
+    }
+    .detailbtm_book ul{
+      margin-top: 110px;
+    }
+    }
+    @media only screen and (max-width: 888px){
+      
+    .usplevel_two ul li{
+      padding: 0 20px;
+    }
+      .usplevel_two ul li p {
+        display: grid;
+    }
+    .detailbtm_book ul{
+      margin-top: 110px;
+    }
+    }
+    @media only screen and (max-width: 783px){
+      
+      .usplevel_two ul li{
+        padding: 0 16px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 110px;
+      }
+      }
+    @media only screen and (max-width: 767px){
+     .cart-sec .text-right {
+        text-align: left;
+    }
+    .cart-sec .col-md-5 {
+        text-align: left;
+        margin: 10px 0px 0px 0px;
+    }
+    }
+    @media only screen and (max-width: 755px){
+      
+      .usplevel_two ul li{
+        padding: 0 10px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 110px;
+      }
+      }
+      @media only screen and (max-width: 713px){
+      
+      .usplevel_two ul li{
+        padding: 0px 8px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 110px;
+      }
+      }
+      @media only screen and (max-width: 699px){
+      
+      .usplevel_two ul li{
+        padding: 5px 65px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 160px;
+      }
+      }
+      @media only screen and (max-width: 679px){
+        .gray-band{
+          max-height: 150px;
+        }
+      .usplevel_two ul li{
+        padding: 5px 88px 5px 20px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 180px;
+      }
+      }
+      @media only screen and (max-width: 579px){
+      
+      .usplevel_two ul li{
+        padding: 5px 10px 5px 20px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 180px;
+      }
+      }
+      @media only screen and (max-width: 532px){
+      .accordionpanel .col-width.num{
+    width:2%;
+      }
+      .green-band{
+        padding: 10px;
+      }
+      }
+      @media only screen and (max-width: 511px){
+      
+      .usplevel_two ul li{
+        padding: 5px 5px 5px 20px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 180px;
+      }
+      }
+      
+    @media only screen and (max-width: 500px){
+      .gray-band {
+        max-height: 250px;
+      }
+      .usplevel_one ul li {
+        display: inline-block;
+        width: 49%;
+        vertical-align: top;
+    }
+    .detailbtm_book ul {
+        display: block;
+        text-align: center;
+        margin-top: 160px;
+        margin-bottom: 0;
+    }
+    }
+    @media only screen and (max-width: 496px){
+        .usplevel_two{
+          margin: 10px 0;
+        }
+      .usplevel_two ul li{
+        padding: 5px 11px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 180px;
+      }
+      }
+    @media only screen and (max-width: 480px){
+    .cart-sec .col-md-7 {
+        width: 100%;
+        text-align: left;
+    }
+    }
+    @media only screen and (max-width: 425px){
+        .usplevel_two{
+          margin: 10px 0;
+        }
+      .usplevel_two ul li{
+        padding: 5px 11px;
+      }
+        .usplevel_two ul li p {
+          display: grid;
+      }
+      .detailbtm_book ul{
+        margin-top: 180px;
+      }
+      }
+    @media only screen and (max-width: 377px){
+      .gray-band {
+        max-height: 265px;
+      }
+      .usplevel_one ul li {
+        display: inline-block;
+        width: 49%;
+        vertical-align: top;
+    }
+    .detailbtm_book ul {
+        display: block;
+        text-align: center;
+        margin-top: 200px;
+        margin-bottom: 0;
+    }
+    }
+      @media only screen and (max-width: 371px){
+        .green-band{
+          height: 60px;
+        }
+      }
+      @media only screen and (max-width: 368px){
+        .accordionFAQ  .panel-default>.panel-heading a {
+        display: block;
+        padding: 15px 15px 50px 0;
+    }
+      }
+      @media only screen and (max-width: 307px){
+        .panel-default>.panel-heading a, .accordionFAQ  .panel-default>.panel-heading a {
+        display: block;
+        padding: 15px 14px 50px 0;
+    }
+      }
+    </style>
+<!--Service Details-->
+<section class="services" style="margin-top: 10rem;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="cart-div deal_detail">
+            <div class="step-div cart-sec">
+              <div class="col-md-7 col-sm-12 col-xs-12">
+                <h1 id="product_name">{{lab_test.title}}</h1>
+                <h2 class="also_known_as">
+                  {{ lab_test.short_desc }}
+                </h2>
+      
+                <p class="parameterinc">Parameter Included: <b>{{total_parameters}}</b></p>
+              </div>
+      
+              <div class="col-md-5 col-sm-12 col-xs-12 text-right hpriceright">
+                <div class="price">
+                  Healthians Price: <span class="rupeesign">₹</span>
+                  <strike>5133/-</strike>
+                </div>
+                <h2 class="ltoffer">
+                  Limited Time Offer: <span class="rupeesign">₹</span>
+                    {{lab_test.price}}/-
+                </h2>
+      
+                <!-- package rating -->
+                <div class="package_rating">
+      
+                  <span class="filled-rating"></span>
+      
+                  <span class="filled-rating"></span>
+      
+                  <span class="filled-rating"></span>
+      
+                  <span class="filled-rating"></span>
+      
+                  <span class="one-fourth-rating"></span>
+      
+      
+      
+      
+                  <span class="numeric_rating">4.4/5</span>
+                </div>
+                <!-- package rating -->
+      
+      
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="pro-content-area prodcontentarea w-100">
+              <div class="col-md-9 col-sm-12 col-xs-12">
+                <p class="metaFooterToggleLink">
+                    {{lab_test.grid_description}}
+      
+                  
+      
+                  <br><br>
+      
+      
+                  <span class="metaFooterLink"> {{ lab_test.detailed_description }}  </span>
+                </p>
+              </div>
+      
+      
+              <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="covidsafetyassured">
+                  <a href="#">
+                    <img src="safety-assured.jpg">
+                    <p>Covid Safety <span>Assured</span></p>
+                  </a>
+                </div>
+      
+                <div class="samplesmartreport">
+                  <a href="#"><img src="smart-report-icon.jpg">
+                    <p>View Smart <span>Lab Report</span></p>
+                  </a>
+                </div>
+              </div>
+            </div>
+      
+            <!-- level one usp -->
+            <div class="gray-band">
+      
+              <!-- level one usp -->
+      
+              <div class="usplevel_one">
+                <ul>
+                  <li> <span><img src="lv_icon1.png" alt=""></span>
+                    <p>Parameter Included:<br>
+                      <strong>{{total_parameters}}</strong>
+                    </p>
+                  </li>
+                  <li> <span><img src="lv_icon2.png" alt=""></span>
+                    <p><strong>FREE </strong>Sample <br>Collection<br>
+                    </p>
+                  </li>
+                  <li> <span><img src="lv_icon3.png" alt=""></span>
+                    <p><strong>FREE </strong>Doctor <br>Consultation<br>
+                    </p>
+                  </li>
+                  <li> <span><img src="lv_icon4.png" alt=""></span>
+                    <p>Test booked so far:<br>
+                      <strong>90097+ </strong>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <!-- level one usp -->
+      
+              <div class="clear"></div>
+      
+      
+              <!-- level two usp -->
+              <div class="usplevel_two">
+                <ul>
+                  <li>
+                    <p>
+                      Report Time:
+                      <strong>
+                        24 Hours
+                      </strong>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Fasting Time:
+                      <strong>
+                        10 Hours
+                      </strong>
+                    </p>
+                  </li>
+                  <li>
+                    <p>Test Recommended for:
+                      <strong>
+                        Male, Female
+                      </strong>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Recommended for age:
+                      <strong>
+                        <span>
+                          5-99 Years
+                        </span>
+                      </strong>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <!-- level two usp -->
+      
+            <span class="clearfix"></span>
+            <div class="col-md-12 detailbtm_book mobextraspc">
+              <ul style="padding-left: 0;">
+                <li>
+                  <a class="btn btn-danger booknow-package ga_booknow_healthians-full-body-checkup-with-thyroid-and-cbc">Book
+                    Now <img src="left-icon-sml.png" class="images"></a>
+                </li>
+      
+                <!--Start Temporary hide a get call back for specific package-->
+                <li>
+                  <a href="#" class="btn btn-default getcallbackprdtl ga_product_detail_get_a_call_back_button">Get
+                    a Call Back</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      
+          <!-- Test Details -->
+          <div class="detail-div" id="included_parameter_div">
+            <h3 class="title">Test Details (Parameters included : {{total_parameters}})</h3>
+            <div class="green-band">
+              <div class="col-md-5 col-xs-6" style="padding:0px;">Profile/Parameter </div>
+              <div class="col-md-7 col-xs-6">No. of Parameters</div>
+            </div>
+            <div class="accordion-option">
+      
+            </div>
+            <div class="clearfix"></div>
+            <div class="panel-group accordionpanel" id="accordion" role="tablist" aria-multiselectable="true">
+      <!--  -->
+            {% for types in lab_test_types %}
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" onclick="pushGaEvent('package', 'Clicked on accordian', 'Lipid Profile')"
+                      data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne{{types.id}}" aria-expanded="false"
+                      aria-controls="collapseOne" href="javascript:void(0);">
+                      <div class="col-width">{{types.parameter_type}}</div>
+                      <div class="col-width num">{{types.total}}</div>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne{{types.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    {% for parameter in parameters %}
+                        {% if parameter.parameter_type.id == types.id %}
+                        <div class="panel-body parameterlist">
+                            <a href="#"
+                            title="Cholesterol-Total, Serum in gurgaon">
+                            <p>{{parameter.parameter}}</p>
+                            </a>
+                        </div>
+                        {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+              </div>
+              <!--  -->
+          </div>
+      
+          <div class="detail-div accordionFAQ" id="faq_div">
+            <h3 class="title">Frequently Asked Questions</h3>
+      
+            <div class="clearfix"></div>
+            <div class="panel-group accordionpanel" id="accordionFAQ" role="tablist" aria-multiselectable="true">
+              <!--  -->
+              {% for faq in faqs %}
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQTwo"
+                      aria-expanded="false" aria-controls="collapseTwo" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">{{ faq.question }}</div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    {{faq.answer}}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <!--  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+<!--  -->
+{%endblock%}

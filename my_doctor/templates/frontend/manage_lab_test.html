@@ -19,31 +19,38 @@
                             Package Details
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="Title">Title</label>
-                                <input type="text" placeholder="Enter Package Title" class="form-control" name="Tile" id="Title">
-                            </div>
-                            <div class="form-group">
-                                <label for="g_desc">Grid Description</label>
-                                <textarea type="text" placeholder="Enter Grid Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="g_desc">Short Description</label>
-                                <textarea type="text" placeholder="Enter Short Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="g_desc">Detailed Description</label>
-                                <textarea type="text" placeholder="Enter Short Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="Title">Package Price</label>
-                                <input type="number" placeholder="Enter Package Title" class="form-control" name="Tile" id="Title">
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btnbtn-block btn-primary">
-                                Add Package
-                            </button>
+                            <form id="lab_testsForm">
+                                <div class="form-group">
+                                    <label for="Title">Title</label>
+                                    <input type="text" placeholder="Enter Package Title" class="form-control"
+                                        name="title" id="Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_desc">Grid Description</label>
+                                    <textarea type="text" placeholder="Enter Grid Description" class="form-control"
+                                        name="grid_description" id="Title" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_desc">Short Description</label>
+                                    <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                        name="short_desc" id="Title" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_desc">Detailed Description</label>
+                                    <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                        name="detailed_description" id="Title" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Title">Package Price</label>
+                                    <input type="number" placeholder="Enter Package Title" class="form-control"
+                                        name="price" id="Title">
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btnbtn-block btn-primary">
+                                        Add Package
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -53,24 +60,40 @@
                             Package Parameter Types
                         </div>
                         <div class="card-body">
-                            <ul class="list-group">
+
+                            <ul class="list-group" id="parameter_types">
                                 <li class="list-group-item">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Enter Parameter Type">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary">
-                                                <i class="fa fa-plus-circle"></i>
-                                            </button>
-                                        </span>
-                                    </div>
+                                    <form id="lab_tests_parameters_type_form">
+                                        <div class="form-group">
+                                            <select name="lab_test" id="lab_test" class="form-control lab_tests"
+                                                required>
+                                                <option value="">Select Lab Test </option>
+                                                {% for test in labtests %}
+                                                <option value="{{test.id}}"> {{test.title}} </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="parameter_type"
+                                                placeholder="Enter Parameter Type">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary">
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
                                 </li>
+                                {% for parameter in lab_test_parameter_type %}
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Lipid Quality
-                                    <span class="badge badge-danger badge-pill">
+                                    {{ parameter.parameter_type }}
+                                    <span data-id="{{parameter.id}}"
+                                        class="badge deleteParameterType badge-danger badge-pill">
                                         <i class="fa fa-trash"></i>
                                     </span>
-                                  </li>
-                              </ul>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                     <div class="card">
@@ -78,38 +101,55 @@
                             Package Parameters
                         </div>
                         <div class="card-body">
-                            <ul class="list-group">
+                            <ul class="list-group" id="lab_tests_parameterUL">
                                 <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <select name="parameterType" id="parameterType" class="form-control">
-                                                    <option value="" >Select Parameter Type</option>
-                                                </select>
+                                    <form id="lab_tests_parameterForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <select name="parameter_type" id="parameter_type_s"
+                                                        class="form-control">
+                                                        <option value="">Select Parameter Type</option>
+                                                        {% for parameter in lab_test_parameter_type %}
+                                                        <option value="{{parameter.id}}">{{parameter.parameter_type}}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Enter Parameter Value">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-primary">
-                                                            <i class="fa fa-plus-circle"></i>
-                                                        </button>
-                                                    </span>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" name="parameter" class="form-control"
+                                                            placeholder="Enter Parameter Value">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-primary">
+                                                                <i class="fa fa-plus-circle"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
+                                    </form>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                                <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Lipid Quality,Fat
                                     <span class="badge badge-danger badge-pill">
                                         <i class="fa fa-trash"></i>
                                     </span>
-                                  </li>
-                              </ul>
+                                  </li> -->
+                                {% for parameter in parametes %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{parameter.parameter}}
+                                    <span data-id="{{parameter.id}}"
+                                        class="badge parameterDelete badge-danger badge-pill">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -121,20 +161,33 @@
                             Package FAQs
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="g_desc">Question</label>
-                                <textarea type="text" placeholder="Enter Grid Description" class="form-control" name="Tile" id="Title" rows="2"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="g_desc">Answer</label>
-                                <textarea type="text" placeholder="Enter Short Description" class="form-control" name="Tile" id="Title" rows="3"></textarea>
-                            </div>
+                            <form id="lab_tests_faqs">
+                                <div class="form-group">
+                                    <select name="lab_test" class="form-control lab_tests" required>
+                                        <option value="">Select lab test</option>
+                                        {% for test in labtests %}
+                                        <option value="{{test.id}}"> {{test.title}} </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_desc">Question</label>
+                                    <textarea type="text" placeholder="Enter Grid Description" class="form-control"
+                                        name="question" id="question" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_desc">Answer</label>
+                                    <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                        name="answer" id="answer" rows="3"></textarea>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btnbtn-block btn-primary">
+                                        Add FAQ
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="card-footer">
-                            <button class="btnbtn-block btn-primary">
-                                Add FAQ
-                            </button>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -144,23 +197,29 @@
                         </div>
                         <div class="card-body">
                             <div id="accordion">
+                                {% for faq in faqs %}
                                 <div class="card">
-                                  <div class="card-header" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <button class="float-right btn btn-danger"><i class="fa fa-trash"></i></button>
-                                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Question #1
-                                      </button>
-                                    </h5>
-                                  </div>
-                              
-                                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Answer #1                                    
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button data-id="{{faq.id}}" class="float-right deletefaq btn btn-danger"><i
+                                                    class="fa fa-trash"></i></button>
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                {{faq.question}}
+                                            </button>
+                                        </h5>
                                     </div>
-                                  </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            {{faq.answer}}
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,4 +228,175 @@
     </div>
 </div>
 
-{% endblock %} {% block scripts %}{% endblock %}
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    console.log('Ima')
+    jQuery('#lab_testsForm').submit(function (e) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        let data = new FormData(document.getElementById('lab_testsForm'));
+        jQuery.ajax({
+            url: '/api/labtestCRUD/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+
+        }).done(function (response) {
+            jQuery('.lab_tests').append(new Option(response.title, response.id))
+        })
+            .fail(err => console.log(err))
+
+
+    })
+
+    jQuery('#lab_tests_parameters_type_form').submit(function (e) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+
+        let data = new FormData(document.getElementById('lab_tests_parameters_type_form'));
+
+        jQuery.ajax({
+            url: '/api/labtestparameterTypeCRUD/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+                jQuery('#parameter_types').append(`
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${response.parameter_type}
+                    <span data-id="${response.id}" class="badge deleteParameterType badge-danger badge-pill">
+                        <i class="fa fa-trash"></i>
+                    </span>
+                </li>
+            `)
+                jQuery('#parameter_type_s').append(new Option(response.parameter_type, response.id))
+            })
+            .fail(err => console.log(err))
+    })
+
+    jQuery('#parameter_types').on('click', '.deleteParameterType', function(){
+        let button = jQuery(this)
+        let id =  jQuery(button).data('id')
+        jQuery.ajax({
+            url: '/api/labtestparameterTypeCRUD/'+ id +'/',
+            method: 'DELETE'
+        })
+        .done(()=>{
+            jQuery(button).closest('li').remove()
+        })
+    })
+
+    jQuery('#lab_tests_parameterForm').submit(function (e) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+
+        let data = new FormData(document.getElementById('lab_tests_parameterForm'));
+        jQuery.ajax({
+            url: '/api/labtestparameterCRUD/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+                console.log(response)
+                jQuery('#lab_tests_parameterUL').append(
+                    `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ${response.parameter}
+                        <span data-id="${response.id}" class="badge parameterDelete badge-danger badge-pill">
+                            <i class="fa fa-trash"></i>
+                        </span>
+                    </li>
+                `
+                )
+
+
+            })
+            .fail(err => {
+                console.log(err);
+            })
+    })
+
+    jQuery('#lab_tests_parameterUL').on('click', '.parameterDelete', function(){
+        let id = jQuery(this).data('id');
+        let buttons = jQuery(this);
+        jQuery.ajax({
+            url: '/api/labtestparameterCRUD/'+ id +'/',
+            method: 'DELETE'
+        })
+        .done(response=>{
+            jQuery(buttons).closest('li').remove()
+        })
+    })
+
+    jQuery('#lab_tests_faqs').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation()
+        let data = new FormData(document.getElementById('lab_tests_faqs'));
+
+        jQuery.ajax({
+            url: '/api/labtestFaqsCRUD/',
+            method: 'POST',
+            data: data,
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+                console.log(response)
+                let html_of_faq = jQuery('#accordion').html()
+                let new_faq =    `
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button data-id="${response.id}" class="float-right deletefaq btn btn-danger"><i
+                                            class="fa fa-trash"></i></button>
+                                    <button class="btn btn-link" data-toggle="collapse"
+                                        data-target="#collapseOne" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                        ${response.question}
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                data-parent="#accordion">
+                                <div class="card-body">
+                                    ${response.answer}
+                                </div>
+                            </div>
+                        </div>
+                `
+                let newest_faqs = new_faq + html_of_faq
+                jQuery('#accordion').html(newest_faqs)
+
+            })
+            .fail(err => {
+                console.log(err);
+            })
+    })
+
+
+    
+
+    jQuery('#accordion').on('click', '.deletefaq', function(){
+        let id = jQuery(this).data('id')
+        let button = jQuery(this)
+        jQuery.ajax({
+            url: '/api/labtestFaqsCRUD/' + id + '/',
+            method:'DELETE'
+        })
+        .done(response=>{
+            jQuery(button).closest('.card').remove()
+        })
+        .fail(err=>console.log(err))
+    })
+
+</script>
+{% endblock %}

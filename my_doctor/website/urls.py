@@ -18,4 +18,5 @@ urlpatterns = [
     path('PatientRegistration',views.PatientRegistration,name='PatientRegistration'),
     path('doctors_mou_tc',views.doctor_mou_tc,name='doctors_mou_tc'),
     path('lab_tests',views.lab_tests,name='lab_tests'),
+    path('lab_test/<id>/', views.detail_lab_test, name="detail_lab_test"),
 ]

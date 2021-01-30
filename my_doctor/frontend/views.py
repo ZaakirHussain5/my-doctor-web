@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 
+from lab_tests.models import lab_tests, lab_tests_parameters_type, lab_tests_parameter, lab_tests_faqs
+
 
 def loginView(request):
     if request.method == 'POST':
@@ -185,7 +187,12 @@ def promo_code(request):
 
 @login_required(login_url='/adminlogin')
 def lab_Tests_packages(request):
-    return render(request, 'frontend/manage_lab_test.html')
+    context = {}
+    context['labtests'] = lab_tests.objects.all()
+    context['lab_test_parameter_type'] = lab_tests_parameters_type.objects.all()
+    context['parametes'] = lab_tests_parameter.objects.all()
+    context['faqs'] = lab_tests_faqs.objects.all().order_by('-id')
+    return render(request, 'frontend/manage_lab_test.html', context)
 
 
 @login_required(login_url='/adminlogin')

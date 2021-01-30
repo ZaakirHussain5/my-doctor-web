@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.http import Http404
+from django.db.models import Count
 from specialist_type.models import specialist_type
 from doctors.models import doctors_info
 from django.contrib.auth.models import User
+from lab_tests.models import lab_tests as lab_test_model, lab_tests_faqs, lab_tests_parameter, lab_tests_parameters_type
 
 def index(request):
 
@@ -76,7 +79,30 @@ def doctor_mou_tc(request):
         "meta_description":"MOU Terms and Conditions"})
 
 def lab_tests(request):
-    return render(request,'website/lab_tests.html',{
-        "page_title":"Doctor Plus | Lab tests",
-        "meta_description":"Lab Tests Packages"})
+    context={}
+    context['page_title'] = "Doctor Plus | Lab tests"
+    context['meta_description'] = "Lab Tests Packages"
+    context['lab_tests'] = lab_test_model.objects.all()
+    return render(request,'website/lab_tests.html',context)
+
+
+def detail_lab_test(request, id):
+    context = {}
+    try:
+        lab_test = lab_test_model.objects.get(pk=id)
+        context['lab_test'] = lab_test
+        lab_test_type = lab_tests_parameters_type.objects.filter(lab_test=lab_test)
+        lab_test_types = lab_test_type.annotate(total = Count('type_children'))
+        context['lab_test_types'] = lab_test_types
+        totalParameter = 0
+        for types in lab_test_types:
+            totalParameter += types.total
+        context['total_parameters'] = totalParameter
+        context['parameters'] = lab_tests_parameter.objects.filter(parameter_type__in=lab_test_type)
+        faqs = lab_tests_faqs.objects.filter(lab_test=lab_test)
+        context['faqs'] = faqs
+    except lab_test_model.DoesNotExist as e:
+        raise Http404()
+    
+    return render(request, 'website/lab_tests_single.html', context) 
 
