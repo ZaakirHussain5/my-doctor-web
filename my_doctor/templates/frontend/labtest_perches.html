@@ -1,0 +1,107 @@
+
+{% extends 'admin_layout.html' %}{% load static%} {% block content %}
+<style>
+    .btn-circle{
+        border-radius: 50%;
+    }
+</style>
+
+    
+
+  <div class="breadcrumbs">
+      <div class="col-12">
+          <div class="page-header text-center">
+              <div class="page-title">
+                  <h2>Consultations List</h2>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="content">
+        <div class="card pl-3 pr-3">
+            <div class="card-body card-block">
+                <table class="table" id="Specialists" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>order Id</th>
+                            <th>Name</th>
+                            <th>Lab Title</th>
+                            <th>Purchase Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+  
+{% endblock %}
+
+
+
+
+{% block scripts %}
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        var table = $('#Specialists').DataTable({
+            ajax:{
+                url:'/api/PurchaseLabTests',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data: 'order_id',
+                },
+                {
+                    data:'user_id.full_name'
+                },
+                {
+                    data:'lab_test_id.title'
+                },
+                {
+                    data : 'purchase_date'
+                },
+                {
+                    data : 'id',
+                    render: function(data){
+                        console.log(data)
+                        return `
+                            <a href="/labtest_perches/${data}/" class="btn btn-active btn-primary">
+                                <i class="fa fa-edit"></i>    
+                            </a>
+                        `
+                    }
+                },
+                
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+
+        // $('#ConsultancDetails')
+        
+         DoHeighLight('PatientsDropDown', 'consultations_list')
+        
+    })
+
+
+</script>
+
+{% endblock %}

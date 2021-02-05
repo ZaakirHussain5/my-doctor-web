@@ -45,4 +45,14 @@ class lab_tests_puchase_viewset(viewsets.ModelViewSet):
             queryset = lab_tests_purchase.objects.filter(user_id=patient_info.objects.get(user=self.request.user))
         return queryset
 
+
+class lab_test_files(viewsets.ModelViewSet):
+    serializer_class = FilesSerializer
+    permissions = [permissions.AllowAny]
+
+    def get_queryset(self):
+        get_id = self.request.query_params.get('id')
+        purches = lab_tests_purchase.objects.get(id=get_id)
+        print(purches)
+        return lab_test_perches_files.objects.filter(purchase=purches)
     

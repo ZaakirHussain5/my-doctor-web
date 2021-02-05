@@ -1,0 +1,125 @@
+
+{% extends 'admin_layout.html' %}{% load static%} {% block content %}
+<style>
+    .btn-circle{
+        border-radius: 50%;
+    }
+</style>
+  <div class="breadcrumbs">
+      <div class="col-12">
+          <div class="page-header text-center">
+              <div class="page-title">
+                  <h2>Consultations List</h2>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <p>{{lab_file.order_id}}</p>
+                    <p>{{lab_file.is_delivered}}</p>
+                    <p>{{lab_file.lab_test_id.title}}</p>
+                </div>
+                <div class="col">
+                    <p> {{lab_file.user_id.full_name}}</p>
+                    <p> {{lab_file.user_id.gender}}</p>
+                    <p> {{lab_file.user_id.blood_group}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <form id="file">
+                <input type="hidden" name="purchase" value="{{lab_file.id}}">
+                <input type="file" name="files" class="form-control">
+                <button class="btn btn-active btn-primary">Add File</button>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+        <div class="card pl-3 pr-3">
+            <div class="card-body card-block">
+                <table class="table" id="Specialists" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>file</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+  
+{% endblock %}
+
+
+
+
+{% block scripts %}
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        var table = $('#Specialists').DataTable({
+            ajax:{
+                url:'/api/lab_test_files/?id={{lab_file.id}}',
+                dataSrc:""
+            },
+            columns:[
+                {
+                    data:'id'
+                },
+                {
+                    data: 'files'
+                }
+            ],
+            language: {
+                  lengthMenu: "_MENU_",
+                  search: "",
+                  searchPlaceholder: "Search..."
+              },
+              fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                  $("td:first", nRow).html(iDisplayIndex + 1);
+                  return nRow;
+              }
+        })
+
+        // $('#ConsultancDetails')
+        
+    //      DoHeighLight('PatientsDropDown', 'consultations_list')
+    jQuery('#file').submit(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        let form = new FormData(document.getElementById('file'));
+        jQuery.ajax({
+            url: '/api/lab_test_files/',
+            method : 'POST',
+            data: form,
+            contentType: false,
+            processData: false  
+
+        }).done((response)=>{
+            console.log("Settlement", response)
+            // document.getElementById('closePopUP').click();
+            // doctorResult.ajax.reload()
+        }).error((err)=>{
+            console.log(err)
+        })
+
+
+    })
+    })
+
+
+</script>
+
+{% endblock %}

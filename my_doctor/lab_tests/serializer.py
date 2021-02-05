@@ -38,7 +38,10 @@ class lab_tests_purchase_list_serializer(serializers.ModelSerializer):
         model = lab_tests_purchase
         fields = '__all__'
 
-
+class FilesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = lab_test_perches_files
+        fields = '__all__'
 
 
         
