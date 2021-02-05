@@ -1,0 +1,135 @@
+{% extends 'new_patient_layout.html'%}
+{% load static%}
+{% block content %}
+<div class="ca-content__chatstab">
+    <div class="ca-content__callstab" style="padding-top: 0;">
+        <div class="conversation-panel__body ps">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{test.title}}</h4>
+                </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p>
+                                    {{test.short_desc}}
+                                </p>
+                                <p>
+                                    {{test.detailed_description}}
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-3 text-center">
+                                        <span><img src="{% static 'website/img/lv_icon1.png' %}" alt=""></span>
+                                        <p class="mt-2">Parameter Included:<br>
+                                          <strong>{{total_parameters}}</strong>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <span><img src="{% static 'website/img/lv_icon2.png' %}" alt=""></span>
+                                        <p class="mt-2"><strong>FREE </strong>Sample <br>Collection<br>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <span><img src="{% static 'website/img/lv_icon3.png' %}" alt=""></span>
+                                        <p class="mt-2"><strong>FREE </strong>Doctor <br>Consultation<br></p>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <span><img src="{% static 'website/img/lv_icon4.png' %}" alt=""></span>
+                                        <p class="mt-2">Test booked so far:<br>
+                                          <strong>90097+ </strong>
+                                        </p>
+                                    </div>
+                                    </ul>
+                                  </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="{% static 'website/img/safety-assured.jpg' %}">
+                                    </div>
+                                    <div class="col-md-8 mt-2">
+                                        <p>Covid Safety <span>Assured</span></p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="{% static 'website/img/smart-report-icon.jpg' %}">
+                                    </div>
+                                    <div class="col-md-8 mt-2">
+                                        <p>View Smart <span>Lab Report</span></p>
+                                    </div>
+                                  </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Total Payable Amount
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h2>
+                                            <i class="mdi mdi-currency-inr"></i>
+                                            <span id="total-amt">{{test.price}}</span>
+                                        </h2>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button"
+                                            class="btn mfb-component__button--main"
+                                            style="width:100%;  border-radius:30px" id="rzp-button1">
+                                            Pay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    $(document).ready(function () {
+        document.getElementById('rzp-button1').onclick = function (e) {
+            var options = {
+                "key": "rzp_test_jHXw1hxbiDYti1", // Enter the Key ID generated from the Dashboard
+                "amount": parseFloat($('#total-amt').html()) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Doctor Plus",
+                "description": "Purchasing a lab test Package.",
+                "image": "{% static 'website/img/logo.png' %}",
+                "handler": function (response) {
+                    $.ajax({
+                        url:'/api/PurchaseLabTests/',
+                        data:JSON.stringify({
+                           lab_test_id:"{{test.id}}",
+                           payment_id:response.razorpay_payment_id
+                        }),
+                        method:'POST',
+                        contentType:'application/json',
+                        beforeSend:function(xhr){
+                            xhr.setRequestHeader("Authorization",`Token ${$.cookie('Token')}`)
+                        }
+                    }).done(function(res){
+                        console.log(res)
+                    }).fail(function(res){
+                        console.log(res)
+                    })
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#1f3864"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+
+    })
+</script>
+{% endblock %}

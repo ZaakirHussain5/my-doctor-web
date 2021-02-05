@@ -14,5 +14,8 @@ urlpatterns = [
     path('plan',views.plan,name='plan'),
     path('invoice',views.invoice,name='invoice'),
     path('patientInvoice/', views.patientInvoice, name='patientInvoice'),
-    path('single_prescrption/', views.prescrption, name='single_prescrption')
+    path('single_prescrption/', views.prescrption, name='single_prescrption'),
+    path('lab_tests/', views.labtest, name='lab_tests'),
+    path('lab_tests_details/', views.labtest_single, name='lab_tests_details'),
+    path('lab_tests_orders/', views.labTestsOrders, name='lab_tests_orders'),
 ]

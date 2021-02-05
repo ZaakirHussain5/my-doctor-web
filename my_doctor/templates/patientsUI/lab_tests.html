@@ -1,0 +1,80 @@
+{% extends 'new_patient_layout.html'%}
+{% load static%}
+
+
+{% block content%}
+<div class="ca-content__chatstab">
+    <div class="ca-content__callstab" style="padding-top: 0;">
+        <div class="card-header ">
+            <a href="{% url 'patients:lab_tests_orders'%}" class="btn btn-primary float-right btn-sm">
+                My Orders
+            </a>
+            <h5>Choose A Package</h5>
+        </div>
+        <div class="conversation-panel__body ps">
+            <div class="container">
+                <div class="row">
+                    {% for test in tests%}
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class=" card-body p-0">
+                                <div class="ca-call-details-card" style="border-bottom: none;">
+                                    <div class="ca-call-details__left pl-2">
+                                        <div class="ca-call-details__pname">
+                                            <h5>{{test.title}}</h5>
+                                            <div class="calllist__details--info">
+            
+                                                <span>
+                                                    <p style="height: 150px; overflow: auto;">{{test.grid_description}}
+                                                    </p>
+                                                    <h4>
+                                                        <strong>₹{{test.price}}</strong>
+                                                    </h4>
+                                                </span>
+            
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                <a href="/patients/lab_tests_details/?id={{test.id}}" class="btn btn-block btn-primary">Book Now <i
+                                        class="mdi mdi-arrow-right-circle"></i></a>
+            
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+            
+            
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+<div class="modal new-message-dialog" id="CommingSoon" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <h5>Comming Soon..</h5>
+                          
+                    </div>
+                    <div class="modal-body text-center">
+                      <p class="">This Feature is Unavailable at moment it will be at your service at the earliest.</p>
+                    </div>
+                    <div class="modal-footer d-flex flex-wrap align-content-center">
+                        <button type="button" class="btn mfb-component__button--main"
+                        style="width:100%;border-radius:0px" data-dismiss="modal" >ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+
+
+<script>
+
+</script>
+{% endblock %}

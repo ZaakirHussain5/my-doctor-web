@@ -4,69 +4,132 @@
     <div class="col-sm-12">
         <div class="page-header float-left">
             <div class="page-title">
-                <h2>New Lab Test Package</h2>
+                <h2>Manage Lab Test Package</h2>
             </div>
         </div>
     </div>
 </div>
 <div class="content">
     <div class="card pl-3 pr-3">
+        <div class="card-header">
+            <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#PacageDetail" role="tab"
+                        aria-controls="pills-home" aria-selected="false">Package Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#parameterTypes" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Parameter Types</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#parameters" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">Parameters</a>
+                </li>
+                <li class="nav-item" onclick="getDoctorBankDetails()">
+                    <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#FAQs" role="tab"
+                        aria-controls="pills-profile" aria-selected="true">FAQs</a>
+                </li>
+            </ul>
+        </div>
         <div class="card-body card-block">
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            Package Details
+            <div class="tab-content">
+                <div class="tab-pane show active" id="PacageDetail">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    Add New Package
+                                </div>
+                                <div class="card-body">
+                                    <form id="lab_testsForm">
+                                        <div class="form-group">
+                                            <label for="Title">Title</label>
+                                            <input type="text" placeholder="Enter Package Title" class="form-control"
+                                                name="title" id="Title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="g_desc">Grid Description</label>
+                                            <textarea type="text" placeholder="Enter Grid Description" class="form-control"
+                                                name="grid_description" id="Title" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="g_desc">Short Description</label>
+                                            <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                                name="short_desc" id="Title" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="g_desc">Detailed Description</label>
+                                            <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                                name="detailed_description" id="Title" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Title">Package Price</label>
+                                            <input type="number" placeholder="Enter Package Title" class="form-control"
+                                                name="price" id="Title">
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="submit" class="btnbtn-block btn-primary">
+                                                Add Package
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+        
                         </div>
-                        <div class="card-body">
-                            <form id="lab_testsForm">
-                                <div class="form-group">
-                                    <label for="Title">Title</label>
-                                    <input type="text" placeholder="Enter Package Title" class="form-control"
-                                        name="title" id="Title">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    Packages List
                                 </div>
-                                <div class="form-group">
-                                    <label for="g_desc">Grid Description</label>
-                                    <textarea type="text" placeholder="Enter Grid Description" class="form-control"
-                                        name="grid_description" id="Title" rows="3"></textarea>
+                                <div class="card-body">
+                                    <div id="package-accordion">
+                                        {% for labtest in labtests %}
+                                        <div class="card">
+                                            <div class="card-header" id="heading{{labtest.id}}">
+                                                <h5 class="mb-0">
+                                                    <button data-id="{{labtest.id}}" class="float-right btn btn-danger delete-package" ><i class="fa fa-trash"></i></button>
+                                                    <button class="btn btn-link" data-toggle="collapse"
+                                                        data-target="#collapse{{labtest.id}}" aria-expanded="true"
+                                                        aria-controls="collapse{{labtest.id}}">
+                                                        {{labtest.title}}
+                                                    </button>
+                                                </h5>
+                                            </div>
+        
+                                            <div id="collapse{{labtest.id}}" class="collapse "
+                                                aria-labelledby="heading{{labtest.id}}" data-parent="#heading{{labtest.id}}">
+                                                <div class="card-body">
+                                                    <h4>Grid Descrption</h4>
+                                                    <p>{{labtest.grid_description}}</p>
+                                                    <h4>Short Descrption</h4>
+                                                    <p>{{labtest.short_desc}}</p>
+                                                    <h4>Detailed Descrption</h4>
+                                                    <p>{{labtest.detailed_description}}</p>
+                                                    <h4>Price</h4>
+                                                    <p><i class="fa fa-inr"></i>{{labtest.price}}/-</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="g_desc">Short Description</label>
-                                    <textarea type="text" placeholder="Enter Short Description" class="form-control"
-                                        name="short_desc" id="Title" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="g_desc">Detailed Description</label>
-                                    <textarea type="text" placeholder="Enter Short Description" class="form-control"
-                                        name="detailed_description" id="Title" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Title">Package Price</label>
-                                    <input type="number" placeholder="Enter Package Title" class="form-control"
-                                        name="price" id="Title">
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btnbtn-block btn-primary">
-                                        Add Package
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
+        
                 </div>
-                <div class="col-md-5">
+                <div class="tab-pane" id="parameterTypes">
                     <div class="card">
                         <div class="card-header">
                             Package Parameter Types
                         </div>
                         <div class="card-body">
-
-                            <ul class="list-group" id="parameter_types">
-                                <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <form id="lab_tests_parameters_type_form">
                                         <div class="form-group">
-                                            <select name="lab_test" id="lab_test" class="form-control lab_tests"
-                                                required>
+                                            <select name="lab_test" id="lab_test" class="form-control lab_tests" required>
                                                 <option value="">Select Lab Test </option>
                                                 {% for test in labtests %}
                                                 <option value="{{test.id}}"> {{test.title}} </option>
@@ -83,35 +146,42 @@
                                             </span>
                                         </div>
                                     </form>
-                                </li>
-                                {% for parameter in lab_test_parameter_type %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ parameter.parameter_type }}
-                                    <span data-id="{{parameter.id}}"
-                                        class="badge deleteParameterType badge-danger badge-pill">
-                                        <i class="fa fa-trash"></i>
-                                    </span>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                                </div>
+                                <div class="col-md-7">
+                                    <ul class="list-group" id="parameter_types">
+                                        {% for parameter in lab_test_parameter_type %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{parameter.lab_test.title}} | {{ parameter.parameter_type }}
+                                            <span data-id="{{parameter.id}}"
+                                                class="badge deleteParameterType badge-danger badge-pill">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+        
                         </div>
                     </div>
+                </div>
+                <div class="tab-pane" id="parameters">
                     <div class="card">
                         <div class="card-header">
                             Package Parameters
                         </div>
                         <div class="card-body">
-                            <ul class="list-group" id="lab_tests_parameterUL">
-                                <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <form id="lab_tests_parameterForm">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <select name="parameter_type" id="parameter_type_s"
-                                                        class="form-control">
+                                                    <select name="parameter_type" id="parameter_type_s" class="form-control">
                                                         <option value="">Select Parameter Type</option>
                                                         {% for parameter in lab_test_parameter_type %}
-                                                        <option value="{{parameter.id}}">{{parameter.parameter_type}}
+                                                        <option value="{{parameter.id}}">{{parameter.lab_test.title}} |
+                                                            {{parameter.parameter_type}}
                                                         </option>
                                                         {% endfor %}
                                                     </select>
@@ -132,98 +202,108 @@
                                             </div>
                                         </div>
                                     </form>
-                                </li>
-
-                                <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Lipid Quality,Fat
-                                    <span class="badge badge-danger badge-pill">
-                                        <i class="fa fa-trash"></i>
-                                    </span>
-                                  </li> -->
-                                {% for parameter in parametes %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{parameter.parameter}}
-                                    <span data-id="{{parameter.id}}"
-                                        class="badge parameterDelete badge-danger badge-pill">
-                                        <i class="fa fa-trash"></i>
-                                    </span>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            Package FAQs
-                        </div>
-                        <div class="card-body">
-                            <form id="lab_tests_faqs">
-                                <div class="form-group">
-                                    <select name="lab_test" class="form-control lab_tests" required>
-                                        <option value="">Select lab test</option>
-                                        {% for test in labtests %}
-                                        <option value="{{test.id}}"> {{test.title}} </option>
+                                </div>
+                                <div class="col-md-7">
+                                    <ul class="list-group" id="lab_tests_parameterUL">
+        
+        
+                                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Lipid Quality,Fat
+                                            <span class="badge badge-danger badge-pill">
+                                                <i class="fa fa-trash"></i>
+                                            </span>
+                                          </li> -->
+                                        {% for parameter in parametes %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{parameter.parameter_type.lab_test.title}} |
+                                            {{parameter.parameter_type.parameter_type}} | {{parameter.parameter}}
+                                            <span data-id="{{parameter.id}}"
+                                                class="badge parameterDelete badge-danger badge-pill">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        </li>
                                         {% endfor %}
-                                    </select>
+                                    </ul>
                                 </div>
-                                <div class="form-group">
-                                    <label for="g_desc">Question</label>
-                                    <textarea type="text" placeholder="Enter Grid Description" class="form-control"
-                                        name="question" id="question" rows="2"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="g_desc">Answer</label>
-                                    <textarea type="text" placeholder="Enter Short Description" class="form-control"
-                                        name="answer" id="answer" rows="3"></textarea>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btnbtn-block btn-primary">
-                                        Add FAQ
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
+        
                         </div>
-
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            FAQs List
-                        </div>
-                        <div class="card-body">
-                            <div id="accordion">
-                                {% for faq in faqs %}
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <button data-id="{{faq.id}}" class="float-right deletefaq btn btn-danger"><i
-                                                    class="fa fa-trash"></i></button>
-                                            <button class="btn btn-link" data-toggle="collapse"
-                                                data-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                {{faq.question}}
-                                            </button>
-                                        </h5>
-                                    </div>
-
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                        data-parent="#accordion">
-                                        <div class="card-body">
-                                            {{faq.answer}}
+                <div class="tab-pane" id="FAQs">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    Package FAQs
+                                </div>
+                                <div class="card-body">
+                                    <form id="lab_tests_faqs">
+                                        <div class="form-group">
+                                            <select name="lab_test" class="form-control lab_tests" required>
+                                                <option value="">Select lab test</option>
+                                                {% for test in labtests %}
+                                                <option value="{{test.id}}"> {{test.title}} </option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="g_desc">Question</label>
+                                            <textarea type="text" placeholder="Enter Grid Description" class="form-control"
+                                                name="question" id="question" rows="2"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="g_desc">Answer</label>
+                                            <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                                name="answer" id="answer" rows="3"></textarea>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button class="btnbtn-block btn-primary">
+                                                Add FAQ
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    FAQs List
+                                </div>
+                                <div class="card-body">
+                                    <div id="accordion">
+                                        {% for faq in faqs %}
+                                        <div class="card">
+                                            <div class="card-header" id="heading{{faq.id}}">
+                                                <h5 class="mb-0">
+                                                    <button data-id="{{faq.id}}" class="float-right deletefaq btn btn-danger"><i
+                                                            class="fa fa-trash"></i></button>
+                                                    <button class="btn btn-link" data-toggle="collapse"
+                                                        data-target="#collapse{{faq.id}}" aria-expanded="true"
+                                                        aria-controls="collapse{{faq.id}}">
+                                                        {{faq.question}}
+                                                    </button>
+                                                </h5>
+                                            </div>
+        
+                                            <div id="collapse{{faq.id}}" class="collapse show"
+                                                aria-labelledby="heading{{faq.id}}" data-parent="#heading{{faq.id}}">
+                                                <div class="card-body">
+                                                    {{faq.answer}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
-                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        
         </div>
     </div>
 </div>
@@ -234,6 +314,7 @@
 {% block scripts %}
 <script>
     console.log('Ima')
+    DoHeighLight('LabTestDropDown', 'LabTests');
     jQuery('#lab_testsForm').submit(function (e) {
         e.preventDefault()
         e.stopImmediatePropagation()
@@ -247,6 +328,83 @@
 
         }).done(function (response) {
             jQuery('.lab_tests').append(new Option(response.title, response.id))
+            toastr.success("New Lab Test Package Added Successfully","Success",{positionClass:"toast-top-center"})
+            jQuery(`#package-accordion`).append(`<div class="card">
+                                            <div class="card-header" id="heading${response.id}">
+                                                <h5 class="mb-0">
+                                                    <button data-id="${response.id}" class="float-right btn btn-danger" ><i class="fa fa-trash"></i></button>
+                                                    <button class="float-right btn btn-primary mr-1" data-toggle="modal" data-target="#EditPackageModal${response.id}"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-link" data-toggle="collapse"
+                                                        data-target="#collapse${response.id}" aria-expanded="true"
+                                                        aria-controls="collapse${response.id}">
+                                                        ${response.title}
+                                                    </button>
+                                                </h5>
+                                            </div>
+        
+                                            <div id="collapse${response.id}" class="collapse "
+                                                aria-labelledby="heading${response.id}" data-parent="#heading${response.id}">
+                                                <div class="card-body">
+                                                    <h4>Grid Descrption</h4>
+                                                    <p>${response.grid_description}</p>
+                                                    <h4>Short Descrption</h4>
+                                                    <p>${response.short_desc}</p>
+                                                    <h4>Detailed Descrption</h4>
+                                                    <p>${response.detailed_description}</p>
+                                                    <h4>Price</h4>
+                                                    <p><i class="fa fa-inr"></i>${response.price}/-</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="EditPackageModal${response.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered " role="document">
+                                              <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit ${response.title} Package</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="edit_lab_testsForm">
+                                                            <input type="hidden" value="${response.id}" id="labtest_id">
+                                                            <div class="form-group">
+                                                                <label for="Title">Title</label>
+                                                                <input type="text" placeholder="Enter Package Title" class="form-control"
+                                                                    name="title" id="Title" value=${response.title}>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="g_desc">Grid Description</label>
+                                                                <textarea type="text" placeholder="Enter Grid Description" class="form-control"
+                                                                    name="grid_description" id="Title" rows="3" >${response.grid_description}</textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="g_desc">Short Description</label>
+                                                                <textarea type="text" placeholder="Enter Short Description" class="form-control"
+                                                                    name="short_desc" id="Title" rows="3" >${response.short_desc}</textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="g_desc">Detailed Description</label>
+                                                                <textarea type="text" placeholder="Enter Detailed Description" class="form-control"
+                                                                    name="detailed_description" id="Title" rows="3">${response.detailed_description}</textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Title">Package Price</label>
+                                                                <input type="number" placeholder="Enter Package Title" class="form-control"
+                                                                    name="price" id="Title" value="${response.price}">
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <button type="submit" class="btnbtn-block btn-primary">
+                                                                    Uodate Package
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                
+                                              </div>
+                                            </div>
+                                        </div>`)
+        
         })
             .fail(err => console.log(err))
 
@@ -280,16 +438,16 @@
             .fail(err => console.log(err))
     })
 
-    jQuery('#parameter_types').on('click', '.deleteParameterType', function(){
+    jQuery('#parameter_types').on('click', '.deleteParameterType', function () {
         let button = jQuery(this)
-        let id =  jQuery(button).data('id')
+        let id = jQuery(button).data('id')
         jQuery.ajax({
-            url: '/api/labtestparameterTypeCRUD/'+ id +'/',
+            url: '/api/labtestparameterTypeCRUD/' + id + '/',
             method: 'DELETE'
         })
-        .done(()=>{
-            jQuery(button).closest('li').remove()
-        })
+            .done(() => {
+                jQuery(button).closest('li').remove()
+            })
     })
 
     jQuery('#lab_tests_parameterForm').submit(function (e) {
@@ -324,16 +482,16 @@
             })
     })
 
-    jQuery('#lab_tests_parameterUL').on('click', '.parameterDelete', function(){
+    jQuery('#lab_tests_parameterUL').on('click', '.parameterDelete', function () {
         let id = jQuery(this).data('id');
         let buttons = jQuery(this);
         jQuery.ajax({
-            url: '/api/labtestparameterCRUD/'+ id +'/',
+            url: '/api/labtestparameterCRUD/' + id + '/',
             method: 'DELETE'
         })
-        .done(response=>{
-            jQuery(buttons).closest('li').remove()
-        })
+            .done(response => {
+                jQuery(buttons).closest('li').remove()
+            })
     })
 
     jQuery('#lab_tests_faqs').submit(function (e) {
@@ -351,7 +509,7 @@
             .done(function (response) {
                 console.log(response)
                 let html_of_faq = jQuery('#accordion').html()
-                let new_faq =    `
+                let new_faq = `
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
@@ -383,19 +541,30 @@
     })
 
 
-    
 
-    jQuery('#accordion').on('click', '.deletefaq', function(){
+
+    jQuery('#accordion').on('click', '.deletefaq', function () {
         let id = jQuery(this).data('id')
         let button = jQuery(this)
         jQuery.ajax({
             url: '/api/labtestFaqsCRUD/' + id + '/',
-            method:'DELETE'
+            method: 'DELETE'
         })
-        .done(response=>{
-            jQuery(button).closest('.card').remove()
-        })
-        .fail(err=>console.log(err))
+            .done(response => {
+                jQuery(button).closest('.card').remove()
+            })
+            .fail(err => console.log(err))
+    })
+    jQuery('#package-accordion').on('click', '.delete-package', function () {
+        let id = jQuery(this).data('id')
+        let button = jQuery(this)
+        jQuery.ajax({
+            url: '/api/labtestCRUD/' + id + '/',
+            method: 'DELETE'
+        }).done(response => {
+                jQuery(button).closest('.card').remove()
+            })
+            .fail(err => console.log(err))
     })
 
 </script>

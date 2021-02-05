@@ -118,3 +118,21 @@ def prescrption(request):
         "prescription_data":prescription_data,
         "patient_data":patient_data
     })
+
+@login_required(login_url='/login')
+def labtest(request):
+    from lab_tests.models import lab_tests
+    return render(request,'patientsUI/lab_tests.html',{
+        "tests":lab_tests.objects.all()
+    })
+
+@login_required(login_url='/login')
+def labtest_single(request):
+    test_id = request.GET.get('id')
+    from lab_tests.models import lab_tests
+    return render(request,'patientsUI/lab_tests_single.html',{
+        "test":lab_tests.objects.get(id=test_id)
+    })
+
+def labTestsOrders(request):
+    return render(request,'patientsUI/lab_test_orders.html')

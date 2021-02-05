@@ -1,0 +1,81 @@
+{% extends 'new_patient_layout.html'%}
+{% load static%}
+{% block content %} 
+<div class="ca-content__chatstab">
+                        
+    <div class="ca-content__callstab" style="padding-top: 0;">
+        <div class="conversation-panel__body ps">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Diagnostics Orders</h4>
+                    </div>
+                    <div class="mob-list d-block">
+                        <div class="sidebar-userlist ps ps--active-y">
+                            <ul class="list-unstyled" id="BillingHistory">
+                                
+                            </ul>
+                    </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+
+        $.ajax({
+            url: '/api/PurchaseLabTests/',
+            'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+            },
+            method:'GET',
+            success:function(response){
+                var listData = ''
+                if(response.length == 0)
+                {
+                    listData = '<p>You Have Not Ordered any Diagnostics</p>'
+                }
+                $.each(response,function(i,item){
+                    listData+=`
+                    <li>
+                        <div class="calllist">
+                            <div class="calllist__details">
+                                <div class="calllist__details--name">
+                                    <h5>${item.lab_test_id.title}</h5></div>
+                                    <div class="calllist__details--info mt-2">
+                                        <span>
+                                            ORDER # : ${item.order_id}
+                                            <br>
+                                            <text>STATUS : ${item.is_delivered ? "Delivered" : "Pending"}</text>
+                                            <br>
+                                            ORDERED AT : ${new Date(item.purchase_date).toDateString()}
+                                        </span>
+                                    </div>
+                            </div>
+                            <div class="calllist__actions">
+                        <div class="iconbox btn-hovered-light">
+                            <a href="${item.is_delivered ? item.report_file:"#"}" target="_blank" class="${item.is_delivered?"":"disabled"}disabled" >
+                                <ul>
+                                    <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
+                                    <li><span>View</span></li>
+                                </ul> 
+                            </a>
+                        </div>
+                    </div>
+                        </div>
+                    </li>
+                    `
+                })
+                $('#BillingHistory').html(listData)
+            },
+            error:function(err){ console.log(err) }
+        })
+    })
+</script>
+{% endblock %}

@@ -617,6 +617,13 @@
         padding: 15px 14px 50px 0;
     }
       }
+      .getcallbackprdtl {
+    color: #f37d26 !important;
+    background: #fff !important;
+    border: 1px solid !important;
+    border-color: #f37d26 !important;
+    transition: .3s ease-in-out !important;
+}
     </style>
 <!--Service Details-->
 <section class="services" style="margin-top: 10rem;">
@@ -628,50 +635,25 @@
               <div class="col-md-7 col-sm-12 col-xs-12">
                 <h1 id="product_name">{{lab_test.title}}</h1>
                 <h2 class="also_known_as">
-                  {{ lab_test.short_desc }}
+                  {{ lab_test.grid_description }}
                 </h2>
       
                 <p class="parameterinc">Parameter Included: <b>{{total_parameters}}</b></p>
               </div>
       
               <div class="col-md-5 col-sm-12 col-xs-12 text-right hpriceright">
-                <div class="price">
-                  Healthians Price: <span class="rupeesign">₹</span>
-                  <strike>5133/-</strike>
-                </div>
+            
                 <h2 class="ltoffer">
                   Limited Time Offer: <span class="rupeesign">₹</span>
                     {{lab_test.price}}/-
                 </h2>
-      
-                <!-- package rating -->
-                <div class="package_rating">
-      
-                  <span class="filled-rating"></span>
-      
-                  <span class="filled-rating"></span>
-      
-                  <span class="filled-rating"></span>
-      
-                  <span class="filled-rating"></span>
-      
-                  <span class="one-fourth-rating"></span>
-      
-      
-      
-      
-                  <span class="numeric_rating">4.4/5</span>
-                </div>
-                <!-- package rating -->
-      
-      
               </div>
               <div class="clearfix"></div>
             </div>
             <div class="pro-content-area prodcontentarea w-100">
               <div class="col-md-9 col-sm-12 col-xs-12">
                 <p class="metaFooterToggleLink">
-                    {{lab_test.grid_description}}
+                    {{lab_test.short_desc}}
       
                   
       
@@ -685,14 +667,14 @@
       
               <div class="col-md-3 col-sm-12 col-xs-12">
                 <div class="covidsafetyassured">
-                  <a href="#">
-                    <img src="safety-assured.jpg">
+                  <a>
+                    <img src="{% static 'website/img/safety-assured.jpg' %}">
                     <p>Covid Safety <span>Assured</span></p>
                   </a>
                 </div>
       
                 <div class="samplesmartreport">
-                  <a href="#"><img src="smart-report-icon.jpg">
+                  <a><img src="{% static 'website/img/smart-report-icon.jpg' %}">
                     <p>View Smart <span>Lab Report</span></p>
                   </a>
                 </div>
@@ -706,70 +688,26 @@
       
               <div class="usplevel_one">
                 <ul>
-                  <li> <span><img src="lv_icon1.png" alt=""></span>
+                  <li> <span><img src="{% static 'website/img/lv_icon1.png' %}" alt=""></span>
                     <p>Parameter Included:<br>
                       <strong>{{total_parameters}}</strong>
                     </p>
                   </li>
-                  <li> <span><img src="lv_icon2.png" alt=""></span>
+                  <li> <span><img src="{% static 'website/img/lv_icon2.png' %}" alt=""></span>
                     <p><strong>FREE </strong>Sample <br>Collection<br>
                     </p>
                   </li>
-                  <li> <span><img src="lv_icon3.png" alt=""></span>
+                  <li> <span><img src="{% static 'website/img/lv_icon3.png' %}" alt=""></span>
                     <p><strong>FREE </strong>Doctor <br>Consultation<br>
                     </p>
                   </li>
-                  <li> <span><img src="lv_icon4.png" alt=""></span>
+                  <li> <span><img src="{% static 'website/img/lv_icon4.png' %}" alt=""></span>
                     <p>Test booked so far:<br>
                       <strong>90097+ </strong>
                     </p>
                   </li>
                 </ul>
               </div>
-              <!-- level one usp -->
-      
-              <div class="clear"></div>
-      
-      
-              <!-- level two usp -->
-              <div class="usplevel_two">
-                <ul>
-                  <li>
-                    <p>
-                      Report Time:
-                      <strong>
-                        24 Hours
-                      </strong>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Fasting Time:
-                      <strong>
-                        10 Hours
-                      </strong>
-                    </p>
-                  </li>
-                  <li>
-                    <p>Test Recommended for:
-                      <strong>
-                        Male, Female
-                      </strong>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Recommended for age:
-                      <strong>
-                        <span>
-                          5-99 Years
-                        </span>
-                      </strong>
-                    </p>
-                  </li>
-                </ul>
-              </div>
-              <div class="clear"></div>
             </div>
             <!-- level two usp -->
       
@@ -777,13 +715,13 @@
             <div class="col-md-12 detailbtm_book mobextraspc">
               <ul style="padding-left: 0;">
                 <li>
-                  <a class="btn btn-danger booknow-package ga_booknow_healthians-full-body-checkup-with-thyroid-and-cbc">Book
-                    Now <img src="left-icon-sml.png" class="images"></a>
+                  <a class="btn btn-danger booknow-package ga_booknow_healthians-full-body-checkup-with-thyroid-and-cbc" href="/login?next=/patients/lab_tests_details/?id={{lab_test.id}}">Book
+                    Now <img src="{% static 'website/img/left-icon-sml.png' %}" class="images"></a>
                 </li>
       
                 <!--Start Temporary hide a get call back for specific package-->
                 <li>
-                  <a href="#" class="btn btn-default getcallbackprdtl ga_product_detail_get_a_call_back_button">Get
+                  <a href="#" class="btn btn-default getcallbackprdtl" data-toggle="modal" data-target="#callBackModal">Get
                     a Call Back</a>
                 </li>
               </ul>
@@ -805,10 +743,10 @@
       <!--  -->
             {% for types in lab_test_types %}
               <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="panel-heading" role="tab" id="headingOne{{types.id}}">
                   <h4 class="panel-title">
                     <a role="button" onclick="pushGaEvent('package', 'Clicked on accordian', 'Lipid Profile')"
-                      data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne{{types.id}}" aria-expanded="false"
+                      data-toggle="collapse" data-parent="#headingOne{{types.id}}" data-target="#collapseOne{{types.id}}" aria-expanded="false"
                       aria-controls="collapseOne" href="javascript:void(0);">
                       <div class="col-width">{{types.parameter_type}}</div>
                       <div class="col-width num">{{types.total}}</div>
@@ -841,15 +779,15 @@
               <!--  -->
               {% for faq in faqs %}
               <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="panel-heading" role="tab" id="accordionFAQ{{faq.id}}">
                   <h2 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQTwo"
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ{{faq.id}}" data-target="#collapseFAQTwo{{faq.id}}"
                       aria-expanded="false" aria-controls="collapseTwo" href="javascript:void(0);" class="collapsed">
                       <div class="col-width">{{ faq.question }}</div>
                     </a>
                   </h2>
                 </div>
-                <div id="collapseFAQTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
+                <div id="collapseFAQTwo{{faq.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
                   aria-expanded="false">
                   <div class="panel-body parameterlist">
                     {{faq.answer}}
@@ -864,5 +802,33 @@
       </div>
     </div>
     </section>
+    <div id="callBackModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Request a Call Back</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Enter Your Name">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Email">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your phone number">
+            </div>
+            <div class="from-group"><textarea name="Message" id="Message" rows="5" placeholder="Any Aditional Message"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Send Request</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
 <!--  -->
 {%endblock%}
