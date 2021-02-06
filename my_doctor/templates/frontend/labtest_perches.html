@@ -12,7 +12,7 @@
       <div class="col-12">
           <div class="page-header text-center">
               <div class="page-title">
-                  <h2>Consultations List</h2>
+                  <h2>Lab tests Purchase List</h2>
               </div>
           </div>
       </div>
@@ -23,9 +23,9 @@
                 <table class="table" id="Specialists" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>Sl No.</th>
-                            <th>order Id</th>
+                            <th>Order Id</th>
                             <th>Name</th>
+                            <th>Phone Number</th>
                             <th>Lab Title</th>
                             <th>Purchase Date</th>
                             <th>Action</th>
@@ -57,13 +57,13 @@
             },
             columns:[
                 {
-                    data:'id'
-                },
-                {
                     data: 'order_id',
                 },
                 {
                     data:'user_id.full_name'
+                },
+                {
+                    data:'user_id.ph_no'
                 },
                 {
                     data:'lab_test_id.title'
@@ -88,10 +88,6 @@
                   lengthMenu: "_MENU_",
                   search: "",
                   searchPlaceholder: "Search..."
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
               }
         })
 
