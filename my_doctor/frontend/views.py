@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 
-from lab_tests.models import lab_tests, lab_tests_parameters_type, lab_tests_parameter, lab_tests_faqs
+from lab_tests.models import lab_tests, lab_tests_parameters_type, lab_tests_parameter, lab_tests_faqs, lab_tests_purchase
 
 
 def loginView(request):
@@ -199,3 +199,28 @@ def lab_Tests_packages(request):
 def loutoutView(request):
     logout(request)
     return redirect('/adminlogin')
+
+
+@login_required(login_url='/adminlogin')
+def labTest_perches(request):
+    return render(request, 'frontend/labtest_perches.html') 
+
+
+@login_required(login_url='/adminlogin')
+def purches_files(request, id):
+    lab_test_file = lab_tests_purchase.objects.get(id=id)
+    return render(request, 'frontend/labTestFile.html', {'lab_file': lab_test_file})
+
+
+
+
+
+
+
+
+
+
+
+
+
+

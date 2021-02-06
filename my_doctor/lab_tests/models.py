@@ -51,9 +51,18 @@ class lab_tests_purchase(models.Model):
     payment_id = models.CharField(max_length=120)
     purchase_date = models.DateTimeField(auto_now_add=True)
     is_delivered = models.BooleanField(default=False)
-    report_file = models.FileField(null=True)
 
     def __str__(self):
         return self.user_id.full_name
 
+
+class lab_test_perches_files(models.Model):
+    purchase = models.ForeignKey(lab_tests_purchase, on_delete=models.CASCADE)
+    files = models.FileField(blank=True, null=True)
+
+
+
+        
+# order_id, purchase_date, user_id(name), lab_test_id(title)
+#action= upload report(b)
 
