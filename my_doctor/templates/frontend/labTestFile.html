@@ -5,59 +5,167 @@
         border-radius: 50%;
     }
 </style>
-  <div class="breadcrumbs">
-      <div class="col-12">
-          <div class="page-header text-center">
-              <div class="page-title">
-                  <h2>Consultations List</h2>
-              </div>
-          </div>
-      </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <p>{{lab_file.order_id}}</p>
-                    <p>{{lab_file.is_delivered}}</p>
-                    <p>{{lab_file.lab_test_id.title}}</p>
-                </div>
-                <div class="col">
-                    <p> {{lab_file.user_id.full_name}}</p>
-                    <p> {{lab_file.user_id.gender}}</p>
-                    <p> {{lab_file.user_id.blood_group}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <form id="file">
-                <input type="hidden" name="purchase" value="{{lab_file.id}}">
-                <input type="file" name="files" class="form-control">
-                <button class="btn btn-active btn-primary">Add File</button>
-            </form>
-        </div>
-    </div>
+   
     <div class="content">
         <div class="card pl-3 pr-3">
             <div class="card-body card-block">
-                <table class="table" id="Specialists" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Sl No.</th>
-                            <th>file</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th></th>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Upload Report File
+                                </h5>
+                                <form id="file">
+                                    <input type="hidden" name="purchase" value="{{lab_file.id}}">
+                                    <div class="input-group">
+                                        <input type="file" name="files" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-active btn-primary">Upload File</button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <table class="table" id="reportFiles" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>File</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        Order Details
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Order #
+                                    </th>
+                                    <td>
+                                        {{lab_file.order_id}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Lab Test Package
+                                    </th>
+                                    <td>
+                                        <a href="#" class="btn btn-link btn-sm" data-toggle="modal" data-target="#LabtestModal">
+                                            {{lab_file.lab_test_id.title}}
+                                        </a>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Patient Name
+                                    </th>
+                                    <td>
+                                        {{lab_file.user_id.full_name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Gender
+                                    </th>
+                                    <td>
+                                        {{lab_file.user_id.gender}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Blood Group
+                                    </th>
+                                    <td>
+                                        {{lab_file.user_id.blood_group}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
-    
+    <div class="modal fade" id="LabtestModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Lab Test Package Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row p-3">
+                      <div class="col-md-6">
+                        <h5>
+                            {{lab_file.lab_test_id.title}}
+                        </h5>
+                        <p>
+                            {{lab_file.lab_test_id.detailed_description}}
+                        </p>
+                        <h5>Price : {{lab_file.lab_test_id.price}}</h5>
+                      </div>
+                      <div class="col-md-6">
+                        {% for types in lab_test_types %}
+                        <div class="card card-default">
+                          <div class="card-header" role="tab" id="headingOne{{types.id}}">
+                            <h4 class="card-title">
+                              <a role="button" onclick="pushGaEvent('package', 'Clicked on accordian', 'Lipid Profile')"
+                                data-toggle="collapse" data-parent="#headingOne{{types.id}}" data-target="#collapseOne{{types.id}}" aria-expanded="false"
+                                aria-controls="collapseOne" href="javascript:void(0);">
+                                <div class="row">
+                                   <div class="col">{{types.parameter_type}}</div>
+                                <div class="col">{{types.total}}</div> 
+                                </div>
+                                
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapseOne{{types.id}}" class="collapse" role="tabcard" aria-labelledby="headingOne">
+                              {% for parameter in parameters %}
+                                  {% if parameter.parameter_type.id == types.id %}
+                                  <div class="card-body parameterlist">
+                                      <a href="#"
+                                      title="Cholesterol-Total, Serum in gurgaon">
+                                      <p>{{parameter.parameter}}</p>
+                                      </a>
+                                  </div>
+                                  {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endfor %}
+                      </div>
+                  </div>
+          
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">
+                      Close
+                  </button>
+                </div>
+              </div>
+              
+          </div>
+        </div>
   
 {% endblock %}
 
@@ -69,33 +177,61 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($){
-        var table = $('#Specialists').DataTable({
+        var table = $('#reportFiles').DataTable({
             ajax:{
                 url:'/api/lab_test_files/?id={{lab_file.id}}',
                 dataSrc:""
             },
             columns:[
                 {
-                    data:'id'
+                    data: 'files',
+                    render:function(data){
+                        return `
+                        <a href="${data}" class="btn btn-link" target="_blank">${data.split('/').pop()}</a>
+                        `
+                    }
                 },
                 {
-                    data: 'files'
+                    data:'id',
+                    render:function(data){
+                        return `<button class="btn btn-danger btn-sm delete" data-id="${data}">
+                            <i class="fa fa-trash"></i> 
+                            </button>`
+                    }
                 }
             ],
             language: {
                   lengthMenu: "_MENU_",
                   search: "",
                   searchPlaceholder: "Search..."
-              },
-              fnRowCallback: function (nRow, aData, iDisplayIndex) {
-                  $("td:first", nRow).html(iDisplayIndex + 1);
-                  return nRow;
               }
         })
 
         // $('#ConsultancDetails')
         
     //      DoHeighLight('PatientsDropDown', 'consultations_list')
+    jQuery("#reportFiles").on('click', '.delete', function () {
+        var id = jQuery(this).attr('data-id')  
+        bootbox.confirm({
+              message: `Are you sure to delete the report file permenently?`,
+              callback: function (result) {
+                  if(result){
+                      jQuery.ajax({
+                          url:`/api/lab_test_files/${id}/`,
+                          method: 'DELETE',
+                          success:function(){
+                              table.ajax.reload()
+                              toastr.success("Deleted Successfully","Success",{positionClass:'toast-top-center'})
+                          },
+                          error:function(err){
+                              console.log(err)
+                              toastr.error("Deletion Failed","Error",{positionClass:'toast-top-center'})
+                          }
+                      })
+                  }
+              }
+          });
+      })
     jQuery('#file').submit(function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -108,7 +244,8 @@
             processData: false  
 
         }).done((response)=>{
-            console.log("Settlement", response)
+            table.ajax.reload()
+            toastr.success("Report File Added Successfully","Success",{positionClass:"toast-top-center"})
             // document.getElementById('closePopUP').click();
             // doctorResult.ajax.reload()
         }).error((err)=>{

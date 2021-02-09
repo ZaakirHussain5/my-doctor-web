@@ -51,8 +51,9 @@ class lab_test_files(viewsets.ModelViewSet):
     permissions = [permissions.AllowAny]
 
     def get_queryset(self):
+        queryset = lab_test_perches_files.objects.all()
         get_id = self.request.query_params.get('id')
-        purches = lab_tests_purchase.objects.get(id=get_id)
-        print(purches)
-        return lab_test_perches_files.objects.filter(purchase=purches)
+        if get_id is not None:
+            queryset = lab_test_perches_files.objects.filter(purchase__id=get_id)
+        return queryset
     

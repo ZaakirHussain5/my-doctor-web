@@ -23,6 +23,26 @@
         </div>
 </div>
 </div>
+<div class="modal new-message-dialog" id="reportsFilesModal" tabindex="-1" role="dialog" aria-labelledby="newMsgModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Report Files</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="reportFiles">
+                  </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
@@ -60,22 +80,53 @@
                             </div>
                             <div class="calllist__actions">
                         <div class="iconbox btn-hovered-light">
-                            <a href="${item.is_delivered ? item.report_file:"#"}" target="_blank" class="${item.is_delivered?"":"disabled"}disabled" >
+                            <div class="view-files" data-id="${item.id}"">
                                 <ul>
                                     <li><i class="iconbox__icon mdi mdi-file text-primary"></i></li>
-                                    <li><span>View</span></li>
+                                    <li><span>Reports</span></li>
                                 </ul> 
-                            </a>
+                            </div>
                         </div>
                     </div>
                         </div>
                     </li>
                     `
                 })
+                
                 $('#BillingHistory').html(listData)
             },
             error:function(err){ console.log(err) }
         })
+        
+        $('#BillingHistory').on('click', '.view-files', function () {
+            var button = $(this)
+            $.ajax({
+                url: '/api/lab_test_files/?id=' + button.attr('data-id'),
+                method: 'GET',
+                success: function (response) {
+                    var reports = ''
+                    if (response.length == 0) {
+                        reports = '<p>There are no reports uploaded yet</p>'
+                    }
+                    $.each(response, function (i, item) {
+                        reports += `
+                    <li>
+                        <a href="${item.files}" target="_blank" class="btn btn-link">
+                            ${item.files.split('/').pop()}
+                        </a>
+                    </li>
+                    `
+                    })
+
+                    $('#reportFiles').html(reports)
+
+                    $('#reportsFilesModal').modal('show')
+                },
+                error: function (err) { console.log(err) }
+            })
+        })
+
+        
     })
 </script>
 {% endblock %}

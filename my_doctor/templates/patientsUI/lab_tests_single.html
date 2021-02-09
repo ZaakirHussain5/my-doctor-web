@@ -114,6 +114,11 @@
                         }
                     }).done(function(res){
                         console.log(res)
+                        $('#rzp-button1').attr('disabled','disabled')
+                        toastr.success("Lab Test Ordered Successfully","Success",{positionClass:"toast-top-center"})
+                        setTimeout(function(){
+                            window.location.href = '/patients/lab_tests_orders/'
+                        },2000)
                     }).fail(function(res){
                         console.log(res)
                     })

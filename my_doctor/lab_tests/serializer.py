@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import *
+from patients.serializers import patient_infoSerializer
 
 class lab_testsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,6 +33,7 @@ class lab_tests_purchase_serializer(serializers.ModelSerializer):
         extra_kwargs = {'user_id':{'required':False}}
 
 class lab_tests_purchase_list_serializer(serializers.ModelSerializer):
+    user_id = patient_infoSerializer()
     lab_test_id = lab_testsSerializer()
 
     class Meta:
