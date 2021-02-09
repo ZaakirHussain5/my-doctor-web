@@ -1,0 +1,282 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+<section class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-outer">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Pediatrician</li>
+                </ul>
+            </nav>
+            <h2>Pediatrician</h2>
+        </div>
+    </div>
+</section>
+
+<section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="cart-div deal_detail">
+            <div class="pro-content-area prodcontentarea w-100">
+              <br>
+              <div class="col-md-5 col-sm-12 col-xs-12">
+                <p class="metaFooterToggleLink">
+                  Paediatricians manage the health of your child, including physical, behavior, and mental health issues. They are trained to diagnose and treat childhood illnesses, from minor health problems to serious diseases.
+                </p>
+                <ul class="book">
+                  <li><a class="btn">Book
+                    Appoinments</a></li>
+                </ul>
+                
+              </div>
+              <div class="row col-md-7 col-sm-12 col-xs-12">
+                <h3 class="m-l-20">Our Doctors</h3>
+                <div class="col-md-6 col-sm-6">
+                  <div class="exclusive-item">
+                  <div class="exclusive-content ">
+                    <div class="text-center">
+                        <img src="/media/logos/anonymous-doctor.png" height="90" alt="">
+                        <h5><a href="#">Dr. Keshav CB</a></h5>
+                    </div>
+                  
+                  <ul>
+                    <li>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </li>
+                    <li>
+                      <div class="package_rating doctor_rating">
+      
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="one-fourth-rating"></span>
+                      </div>
+                    </li>
+                    <li><p>Consultation fees: Rs.250/-</p></li>
+                    <li><p>Available time: 02:30 PM</p></li>
+                    <li>
+                        <a href="#" class="btn">View Profile</a>
+                        
+                        <a href="#" class="btn">Book Appoinment</a>
+                    </li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="exclusive-item">
+                  <div class="exclusive-conten">
+                      <div class=" text-center">
+                          <img src="/media/logos/anonymous-doctor.png" height="90" alt="">
+                       <h5><a href="#">Dr. Sunny Sharma</a></h5>
+                        </div>
+                 
+                  <ul>
+                    <li>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </li>
+                    <li>
+                      <div class="package_rating doctor_rating">
+      
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="one-fourth-rating"></span>
+                      </div>
+                    </li>
+                    <li><p>Consultation fees: Rs.250/-</p></li>
+                    <li><p>Available time: 02:30 PM</p></li>
+                    <li>
+                        <a href="#" class="btn">View Profile</a>
+                        
+                        <a href="#" class="btn">Book Appoinment</a>
+                    </li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>   
+           <!--FAQs  -->
+          <div class="detail-div accordionFAQ" id="faq_div">
+            <h3 class="title">Frequently Asked Questions</h3>
+      
+            <div class="clearfix"></div>
+            <div class="panel-group accordionpanel" id="accordionFAQ" role="tablist" aria-multiselectable="true">
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQOne"
+                      aria-expanded="false" aria-controls="collapseOne" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        Why and when should I consult a Pediatrician?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      Paediatricians manage the health of your child, including physical, mental health and behavioural issues. They are trained to diagnose and treat childhood illnesses, from minor health problems to serious diseases. Your child needs to see a paediatrician if they are showing any of the below symptoms. 
+  
+                    </p>
+                    <br>
+                    <ul>
+                      <li>-Persistent Cough for more than a Week. </li>
+                      <li>-Chest pain </li>
+                      <li>-Abdominal pain or Colic </li>
+                      <li>-High Fever of 101F not subsiding with medication </li>
+                      <li>-Headache </li>
+                      <li>-Cold, severe sneezing, sore throat and runny nose.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQTwo"
+                      aria-expanded="false" aria-controls="collapseTwo" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        What are the conditions that our Pediatrician can treat?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      ADHD: Attention deficit hyperactivity disorder (ADHD) is a mental health disorder that can cause above-normal levels of hyperactive and impulsive behaviours. People with ADHD may also have trouble focusing their attention on a single task or sitting still for long periods of time. It is a chronic condition where even parents and care providers need to be counselled. 
+                    </p>
+                    <br>
+                    <p>
+                      Dysplasia: It is the presence of abnormal cells within a tissue or organ which  is not cancer but can turn into one. Early identification and treatment are necessary to prevent it from becoming malignant. 
+                    </p>
+                    <br>
+                    <p>
+                      Sore Throat: Can be a bacterial or viral infection presenting with throat pain, fever, and inability to swallow or drink. 
+                    </p>
+                    <br>
+                    <p>
+                      Bronchiectasis: is a disease in which there is permanent enlargement of parts of the airways of the lung. Symptoms typically include a chronic cough with mucus production. Other symptoms include shortness of breath, coughing up blood, and chest pain. 
+                    </p>
+                    <br>
+                    <p>
+                      Hernia: It is a bulge near the belly or groin and goes away by the time the child turns 5. In some cases, it persists even after the 5th Year leading to problems for the child. 
+                    </p>
+                    <br>
+                    <p>
+                      Food poisoning: Vomiting, diarrhoea, gas, bloating, abdominal pain are some of the symptoms. 
+                    </p>
+                    <br>
+                    <p>
+                      Vitamin Deficiency: Vitamin deficiency is the condition of a long-term lack of a vitamin caused by not enough vitamin intake hence needing supplements. 
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQThree"
+                      aria-expanded="false" aria-controls="collapseThree" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        What can I expect in an Online Video Consultation with a Pediatrician?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      Once you have made the wise decision of consulting with one of our top specialists, you no longer have to go searching for Pediatrician near me. Instead, you can 
+                    </p>
+                    <br>
+                    <ul>
+                      <li>-Book an appointment with the doctor of your choice from our app or website </li>
+                      <li>-Share your medical reports or records with your doctor to help them understand your case beforehand. </li>
+                      <li>-Before the day of consultation, note down all your symptoms and any questions that you may have to make the best use of the time given. </li>
+                      <li>-During the consultation, the doctor will do a thorough investigation. and recommend the best way forward.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFour">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQFour"
+                      aria-expanded="false" aria-controls="collapseFour" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        What are the benefits of doing an Online Pediatrician Consultation?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      Best Doctors : Connect with the Best Pediatrician  in the country to get accurate diagnosis and the best possible treatment options for your condition.  
+                    </p>
+                    <br>
+                    <p>
+                      No wait time: You do not have to worry about waiting in line at a doctors clinic as the consultation starts exactly at the time chosen by you. 
+                    </p>
+                    <br>
+                    <p>
+                      Digital records: All your prescriptions from the doctor and medical records are digitized which gives you the convenience of accessing it from just about anywhere and at any time. 
+                    </p>
+                    <br>
+                    <p>
+                      Free follow up session: Get a free follow-up within 8 days of your consultation. 
+                    </p>
+                    <br>
+                    <p>
+                      Convenience: Our objective at Care.Fit is to facilitate best services in a hassle free manner. You can pick the time slot as per your convenience and get the consultation from doctors at the comfort of your home. 
+                    </p>
+                    <br>
+                    <p>
+                      After successful payment, a confirmation email will be sent to the registered email id with a link for Online Dermatologist consultation.
+                    </p>
+                    <br>
+                    <p>
+                      We have Female Pediatricians too if you prefer your child be seen by a lady doctor.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}

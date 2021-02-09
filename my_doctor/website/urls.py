@@ -19,4 +19,13 @@ urlpatterns = [
     path('doctors_mou_tc',views.doctor_mou_tc,name='doctors_mou_tc'),
     path('lab_tests',views.lab_tests,name='lab_tests'),
     path('lab_test/<id>/', views.detail_lab_test, name="detail_lab_test"),
+    path('speciality/generalPhysician', views.spl_gp, name="generalPhysician"),
+    path('speciality/Dermatology', views.spl_dermat, name="Dermatology"),
+    path('speciality/Pediatrician', views.spl_pt, name="Pediatrician"),
+    path('speciality/Dietitian', views.spl_dietitian, name="Dietitian"),
+    path('speciality/Ayurveda', views.spl_ayur, name="Ayurveda"),
+    path('speciality/Gynaecology', views.spl_gyna, name="Gynaecology"),
+    path('speciality/Orthopadic', views.spl_ortho, name="Orthopadic"),
+    path('speciality/ENT', views.spl_ent, name="ENT"),
+    path('speciality/Gastroentrology', views.spl_gastro, name="Gastroentrology"),
 ]

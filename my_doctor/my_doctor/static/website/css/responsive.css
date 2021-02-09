@@ -5,6 +5,14 @@ footer #Cert1{
   display:none;
 }
 @media(max-width:1440px){section.slider{padding: 9% 0 0 0 !important;}section.slider #x_023_animated_layers {height: auto;}#web{display: none;}#x_023_animated_layers,#x_023_animated_layers>.carousel-inner,#x_023_animated_layers>.carousel-inner>.item{overflow:hidden;height:575px;}}
+@media(max-width:1199px){
+  .navbar-default .container {
+    width: 100% !important;
+  }
+  .navbar-brand img{
+    width: 85%;
+  }
+}
 @media(max-width:1024px){section.slider {
     padding: 9% 0 0 0 !important;
 }#web{display: none;}.service-icon {
@@ -42,6 +50,7 @@ font-size: 19px !important;
   .container {
     width: 100%;
 }
+
   .slicknav_nav li {
     display: flex;
     margin: 0 0 20px 20px;
@@ -55,7 +64,7 @@ font-size: 19px !important;
 a.btn, button.btn{font-size: 16px;}
 .footer .heading {
   float: left;
-}#web{display: block;}#speciality{display: none;}
+}
 .video iframe {
   position: absolute;
   margin: 0 0 0 5%;
@@ -137,7 +146,7 @@ a.btn, button.btn{font-size: 16px;}
     margin-top:0
   }
   .download-app{display: flex !important;margin:15px !important;}.slicknav_btn.slicknav_collapsed:before {color: #000;
-}#x_023_animated_layers,#x_023_animated_layers>.carousel-inner,#x_023_animated_layers>.carousel-inner>.item{overflow:hidden;height:345px;}.slider h3{font-size: 45px !important;}.slider h4 {font-size: 25px !important;}section.slider .x_023_animated_layers_txt {left: 4%;width: 50%;}a.btn, button.btn{font-size: 15px;}.batch {top: 405px !important;}.batch img {width: 150px !important;margin: 0 0 0 30% !important;}.batch h5{font-size: 15px !important;}.footer .heading {float:  none;text-align: center;}.footer .f-contact-inner {display: block !important;}#web{display: block;}#speciality{display: none;}.service-icon{width: 65px;height: 65px;}.appointment .section-title {width: 100%;right: 0;}.appointment-image {top: 15px;}.appointment-image {
+}#x_023_animated_layers,#x_023_animated_layers>.carousel-inner,#x_023_animated_layers>.carousel-inner>.item{overflow:hidden;height:345px;}.slider h3{font-size: 45px !important;}.slider h4 {font-size: 25px !important;}section.slider .x_023_animated_layers_txt {left: 4%;width: 50%;}a.btn, button.btn{font-size: 15px;}.batch {top: 405px !important;}.batch img {width: 150px !important;margin: 0 0 0 30% !important;}.batch h5{font-size: 15px !important;}.footer .heading {float:  none;text-align: center;}.footer .f-contact-inner {display: block !important;}.service-icon{width: 65px;height: 65px;}.appointment .section-title {width: 100%;right: 0;}.appointment-image {top: 15px;}.appointment-image {
   top: 15px;
   right: 0;
 }

@@ -1,0 +1,250 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+
+<section class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-outer">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">General Physician</li>
+                </ul>
+            </nav>
+            <h2>General Physician</h2>
+        </div>
+    </div>
+</section>
+<section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="cart-div deal_detail">
+            <div class="pro-content-area prodcontentarea w-100">
+              <br>
+              <div class="col-md-5 col-sm-12 col-xs-12">
+                    <p class="metaFooterToggleLink">
+                  General Physicians provide long-term, comprehensive care and can manage both common and complex diseases. They examine, diagnose, treat acute illnesses (e.g., infections, influenza) and chronic diseases (e.g., diabetes, high blood pressure)
+                </p>
+                <ul class="book">
+                    <li><a class="btn">Book
+                        Appoinments</a></li>
+                </ul>
+                
+              </div>
+              <div class="row col-md-7 col-sm-12 col-xs-12">
+                <h3 class="m-l-20">Our Doctors</h3>
+                <div class="col-md-6 col-sm-6">
+                  <div class="exclusive-item">
+                  <div class="exclusive-content ">
+                    <div class="text-center">
+                        <img src="/media/logos/anonymous-doctor.png" height="90" alt="">
+                        <h5><a href="#">Dr. Keshav CB</a></h5>
+                    </div>
+                  
+                  <ul>
+                    <li>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </li>
+                    <li>
+                      <div class="package_rating doctor_rating">
+      
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="one-fourth-rating"></span>
+                      </div>
+                    </li>
+                    <li><p>Consultation fees: Rs.250/-</p></li>
+                    <li><p>Available time: 02:30 PM</p></li>
+                    <li>
+                        <a href="#" class="btn">View Profile</a>
+                        
+                        <a href="#" class="btn">Book Appoinment</a>
+                    </li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="exclusive-item">
+                  <div class="exclusive-conten">
+                      <div class=" text-center">
+                          <img src="/media/logos/anonymous-doctor.png" height="90" alt="">
+                       <h5><a href="#">Dr. Sunny Sharma</a></h5>
+                        </div>
+                 
+                  <ul>
+                    <li>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </li>
+                    <li>
+                      <div class="package_rating doctor_rating">
+      
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="one-fourth-rating"></span>
+                      </div>
+                    </li>
+                    <li><p>Consultation fees: Rs.250/-</p></li>
+                    <li><p>Available time: 02:30 PM</p></li>
+                    <li>
+                        <a href="#" class="btn">View Profile</a>
+                        
+                        <a href="#" class="btn">Book Appoinment</a>
+                    </li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>   
+           <!--FAQs  -->
+          <div class="detail-div accordionFAQ" id="faq_div">
+            <h3 class="title">Frequently Asked Questions</h3>
+      
+            <div class="clearfix"></div>
+            <div class="panel-group accordionpanel" id="accordionFAQ" role="tablist" aria-multiselectable="true">
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQOne"
+                      aria-expanded="false" aria-controls="collapseOne" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        Why and when should I consult an Internal Medicine Specialist?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      Internal/Family Medicine specialists provide long-term, comprehensive care and can manage both common and complex diseases. They examine, diagnose, treat acute illnesses (e.g., infections, influenza) and chronic diseases (e.g., diabetes, high blood pressure). 
+                    </p>
+                    <p>
+                      If you are experiencing any of the below mentioned symptoms, you are requested to consult an internal/family medicine specialist at the earliest. 
+                    </p>
+                    <br>
+                    <ul>
+                      <li>-If you have been experiencing any kind of inexplicable body pain for a few days.</li>
+                      <li>-If you have had high blood pressure for some time now. </li>
+                      <li>-If you have been sneezing continuously or have a running nose.</li>
+                      <li>-When your body temperature has been on the higher side persistently despite following general precautions. </li>
+                      <li>-All the above-mentioned symptoms can seem very trivial at face value, however, they might just be the window to something fatal which you should get treatment at the earliest.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQTwo"
+                      aria-expanded="false" aria-controls="collapseTwo" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        What are the conditions that our Internal Medicine Specialists can treat?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      We have listed down some conditions, which if you have been persistently experiencing, must consult an internal/family medicine specialist immediately.
+                    </p>
+                    <br>
+                    <ul>
+                      <li>-If you have been down with cough and cold for a few days now and it has not gone despite any treatment, then you should get it checked immediately. </li>
+                      <li>-When your fever has just been on the higher side and has not gone down despite following all the guidelines of a general physician, then it is time to get it checked for more potential serious problems. </li>
+                      <li>-If you have been facing general allergies or any sort of allergies for a few days and are unable to understand the reason why, then we recommend you get it treated as it might be the symptom of a potentially chronic disease which you should eliminate in the earlier stages itself. </li>
+                      <li>-If you have been having any heart disease or anything else ranging from diabetes, obesity and chronic lung disease, then consulting an expert is the best way ahead for your body.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQThree"
+                      aria-expanded="false" aria-controls="collapseThree" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        What can I expect in an Online Video Consultation with an Internal Medicine Specialist?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                      Once you have made the wise decision of consulting with one of our top specialists, you no longer have to go searching for Internal Medicine Specialist near me. Instead, you can
+                    </p>
+                    <br>
+                    <ul>
+                      <li>-Book an appointment with the doctor of your choice from our app or website. </li>
+                      <li>-Share your medical reports or records with your doctor to help them understand your case beforehand. </li>
+                      <li>-Before the day of consultation, note down all your symptoms and any questions that you may have to make the best use of the time given. </li>
+                      <li>-During the consultation, the doctor will do a thorough investigation. and recommend the best way forward</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFour">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQFour"
+                      aria-expanded="false" aria-controls="collapseFour" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                        What are the benefits of doing an Online Internal Medicine Consultation?
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>Best Doctors: Connect with the Best Internal Medicine Specialist in the country to get accurate diagnosis and the best possible treatment options for your condition.</p>
+                    <p>No wait time: You do not have to worry about waiting in line at a doctors clinic as the consultation starts exactly at the time chosen by you. </p>
+                    <br>
+                    <p>Digital records: All your prescriptions from the doctor and medical records are digitized which gives you the convenience of accessing it from just about anywhere and at any time.</p>
+                    <p>Free follow up session: Get a free follow-up within 8 days of your consultation.</p>
+                    <br>
+                    <br>
+                    <p>Convenience: Our objective at carefit is to facilitate best services in a hassle-free manner.You can pick the time slot as per your convenience and get the consultation from doctors at the comfort of your home. </p>
+                    <br>
+                    <p>After successful payment, a confirmation email will be sent to the registered email id with a link for Online Internal Medicine Specialist. </p>
+                    <br>
+                    <p>We have Female Specialists too for women who prefer to be seen by a lady doctor.</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}

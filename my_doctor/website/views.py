@@ -104,5 +104,32 @@ def detail_lab_test(request, id):
     except lab_test_model.DoesNotExist as e:
         raise Http404()
     
-    return render(request, 'website/lab_tests_single.html', context) 
+    return render(request, 'website/lab_tests_single.html', context)
+
+def spl_gp(request):
+    return render(request,'website/specialities/gp.html') 
+
+def spl_gyna(request):
+    return render(request,'website/specialities/gyna.html') 
+
+def spl_pt(request):
+    return render(request,'website/specialities/pt.html') 
+
+def spl_ortho(request):
+    return render(request,'website/specialities/ortho.html') 
+
+def spl_ayur(request):
+    return render(request,'website/specialities/ayur.html') 
+
+def spl_gastro(request):
+    return render(request,'website/specialities/gastro.html') 
+
+def spl_dietitian(request):
+    return render(request,'website/specialities/dietitian.html') 
+
+def spl_ent(request):
+    return render(request,'website/specialities/ent.html') 
+
+def spl_dermat(request):
+    return render(request,'website/specialities/dermat.html') 
 

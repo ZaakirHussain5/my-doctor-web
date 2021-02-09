@@ -1,0 +1,150 @@
+{%extends 'website_layout.html'%}
+{%load static%}
+{% block content%}
+
+<section class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-outer">
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website:index'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dietitian</li>
+                </ul>
+            </nav>
+            <h2>Dietitian</h2>
+        </div>
+    </div>
+</section>
+<section class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="cart-div deal_detail">
+            <div class="pro-content-area prodcontentarea w-100">
+              <br>
+              <div class="col-md-5 col-sm-12 col-xs-12">
+                <p class="metaFooterToggleLink">
+                  Personalised plans for Weight Management, Sports & Fitness, Lifestyle issues around Stress, thyroids etc
+                </p>
+                <ul class="book">
+                  <li><a class="btn">Book
+                    Appoinments</a></li>
+                </ul>
+                
+              </div>
+              <div class="row col-md-7 col-sm-12 col-xs-12">
+                <h3 class="m-l-20">Our Doctors</h3>
+                <div class="col-md-6 col-sm-6">
+                  <div class="exclusive-item">
+                  <div class="exclusive-content ">
+                    <div class="text-center">
+                        <img src="/media/logos/anonymous-doctor.png" height="90" alt="">
+                        <h5><a href="#">Dr. Keshav CB</a></h5>
+                    </div>
+                  
+                  <ul>
+                    <li>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </li>
+                    <li>
+                      <div class="package_rating doctor_rating">
+      
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="one-fourth-rating"></span>
+                      </div>
+                    </li>
+                    <li><p>Consultation fees: Rs.250/-</p></li>
+                    <li><p>Available time: 02:30 PM</p></li>
+                    <li>
+                        <a href="#" class="btn">View Profile</a>
+                        
+                        <a href="#" class="btn">Book Appoinment</a>
+                    </li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="exclusive-item">
+                  <div class="exclusive-conten">
+                      <div class=" text-center">
+                          <img src="/media/logos/anonymous-doctor.png" height="90" alt="">
+                       <h5><a href="#">Dr. Sunny Sharma</a></h5>
+                        </div>
+                 
+                  <ul>
+                    <li>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </li>
+                    <li>
+                      <div class="package_rating doctor_rating">
+      
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="filled-rating"></span>
+            
+                        <span class="one-fourth-rating"></span>
+                      </div>
+                    </li>
+                    <li><p>Consultation fees: Rs.250/-</p></li>
+                    <li><p>Available time: 02:30 PM</p></li>
+                    <li>
+                        <a href="#" class="btn">View Profile</a>
+                        
+                        <a href="#" class="btn">Book Appoinment</a>
+                    </li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>   
+           <!--FAQs  -->
+          <div class="detail-div accordionFAQ" id="faq_div">
+            <h3 class="title">Frequently Asked Questions</h3>
+      
+            <div class="clearfix"></div>
+            <div class="panel-group accordionpanel" id="accordionFAQ" role="tablist" aria-multiselectable="true">
+              <!--  -->
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h2 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordionFAQ" data-target="#collapseFAQOne"
+                      aria-expanded="false" aria-controls="collapseOne" href="javascript:void(0);" class="collapsed">
+                      <div class="col-width">
+                      </div>
+                    </a>
+                  </h2>
+                </div>
+                <div id="collapseFAQOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
+                  aria-expanded="false">
+                  <div class="panel-body parameterlist">
+                    <p>
+                    </p>
+                    
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}

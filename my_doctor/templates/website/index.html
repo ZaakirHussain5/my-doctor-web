@@ -3,7 +3,12 @@
 {% block content%}
 
     
-    
+    <style>
+        .service-content{
+    height: 180px;
+    overflow: hidden;
+}
+    </style>
     <!-- <section class="slider">
         <div id="x_023_animated_layers" class="">
     
@@ -94,7 +99,7 @@
     
     <section class="services icon-left">
     
-    <div class="container" id="web">
+    <!-- <div class="container" id="web">
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="service-item">
@@ -155,13 +160,10 @@
                 <div class="service-item">
                     <div class="service-icon mar-bottom-20 child-3">
                         <img src="{% static 'website/img/psychology.png' %}" alt="psychology">
-                        <h3><a href="#">Psychologist</a></h3>
+                        <h3><a href="#">Ayurveda</a></h3>
                     </div>
                     <div class="service-content">
-    
-                        <p><b>We are</b> someone who studies the human mind, emotions and behavior. We help you to deal with
-                            different types of mental and emotional distress. Various techniques and medications are
-                            suggested to overcome your problems. <br><br></p>
+                        <p>Ayurveda or "The Science of Life" places great emphasis on prevention and encourages the maintenance of health through close attention to balance in one's life, right thinking, diet, lifestyle and the use of herbs. Knowledge of Ayurveda enables one to understand how to create this balance of body, mind and consciousness according to one's own individual constitution and how to make lifestyle changes to bring about and maintain this balance. <br><br></p>
                     </div>
                 </div>
             </div>
@@ -179,12 +181,54 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="/login">
+                    <div class="service-item">
+                     <div class="service-icon mar-bottom-20">
+                    <img src="{%static 'website/img/gynecology.png'%}" alt="">
+                    <h3 class="spl-text">Orthopadic</h3>
+                    </div>
+                    <div class="service-content">
+        
+                    <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
+                    </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="/login">
+                    <div class="service-item">
+                     <div class="service-icon mar-bottom-20">
+                    <img src="{%static 'website/img/gynecology.png'%}" alt="">
+                    <h3 class="spl-text">ENT</h3>
+                    </div>
+                    <div class="service-content">
+        
+                    <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
+                    </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="/login">
+                    <div class="service-item">
+                     <div class="service-icon mar-bottom-20">
+                    <img src="{%static 'website/img/gynecology.png'%}" alt="">
+                    <h3 class="spl-text">Gastroentrology</h3>
+                    </div>
+                    <div class="service-content">
+        
+                    <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
+                    </div>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+    </div> -->
     <div class="container" id="speciality">
         <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="/login">
+        <a href="{% url 'website:generalPhysician'%}">
             <div class="service-item">
                 <div class="service-icon mar-bottom-20">
                     <img src="{%static 'website/img/stethoscope.png'%}" alt="">
@@ -197,7 +241,7 @@
         </a>
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-      <a href="/login">
+      <a href="{% url 'website:Dermatology'%}">
         <div class="service-item">
             <div class="service-icon mar-bottom-20 child-2">
                 <img src="{%static 'website/img/dermatologist.png'%}" alt="">
@@ -211,7 +255,7 @@
         </a>
       </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <a href="/login">
+            <a href="{% url 'website:Pediatrician'%}">
                 <div class="service-item">
                     <div class="service-icon mar-bottom-20 child-3">
                         <img src="{%static 'website/img/pediatrician.png'%}" alt="">
@@ -224,45 +268,84 @@
                 </div>
             </a>
         </div>
-
-      </div>
-      <div class="row">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="/login">
-              <div class="service-item">
-                  <div class="service-icon mar-bottom-20 child-2">
-                      <img src="{%static 'website/img/diet.png'%}" alt="">
-                      <h3 class="spl-text">Dietitian</h3>
-                  </div>
-                  <div class="service-content">
-                        <p><b>We are</b> expert human nutrition and the regulation of diet. We alters their patient's nutrition based upon their medical condition and individual needs. We are regulated healthcare professionals licensed to assess, diagnose, and treat nutritional problems.</p>
-                  </div>
-              </div>
-          </a>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="/login" >
-            <div class="service-item">
-            <div class="service-icon mar-bottom-20 child-3">
-            <img src="{%static 'website/img/psychology.png'%}" alt="">
-            <h3 class="spl-text">Psychologist</h3>
-            </div>
-            <div class="service-content">
-
-            <p><b>We are</b> someone who studies the human mind, emotions and behavior. We help you to deal with different types of mental and emotional distress. Various techniques and medications are suggested to overcome your problems.</p>
-            </div>
-            </div>
-          </a>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="/login">
-              <div class="service-item">
-               <div class="service-icon mar-bottom-20">
-              <img src="{%static 'website/img/gynecology.png'%}" alt="">
-              <h3 class="spl-text">Gynaecologist</h3>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <a href="{% url 'website:Dietitian'%}">
+                <div class="service-item">
+                    <div class="service-icon mar-bottom-20 child-2">
+                        <img src="{%static 'website/img/diet.png'%}" alt="">
+                        <h3 class="spl-text">Dietitian</h3>
+                    </div>
+                    <div class="service-content">
+                          <p><b>We are</b> expert human nutrition and the regulation of diet. We alters their patient's nutrition based upon their medical condition and individual needs. We are regulated healthcare professionals licensed to assess, diagnose, and treat nutritional problems.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <a href="{% url 'website:Ayurveda'%}">
+                <div class="service-item">
+              <div class="service-icon mar-bottom-20 child-3">
+                  <img src="{% static 'website/img/ayurveda.png' %}" alt="psychology">
+                  <h3><a href="#">Ayurveda</a></h3>
               </div>
               <div class="service-content">
-
+                  <p>Ayurveda or "The Science of Life" places great emphasis on prevention and encourages the maintenance of health through close attention to balance in one's life, right thinking, diet, lifestyle and the use of herbs. <br><br></p>
+              </div>
+          </div>
+            </a>
+          
+      </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <a href="{% url 'website:Gynaecology'%}">
+                <div class="service-item">
+                 <div class="service-icon mar-bottom-20">
+                <img src="{%static 'website/img/gynecology.png'%}" alt="">
+                <h3 class="spl-text">Gynaecologist</h3>
+                </div>
+                <div class="service-content">
+  
+                <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
+                </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <a href="{% url 'website:Orthopadic'%}">
+              <div class="service-item">
+               <div class="service-icon mar-bottom-20">
+              <img src="{%static 'website/img/ortho.png'%}" alt="">
+              <h3 class="spl-text">Orthopadic</h3>
+              </div>
+              <div class="service-content">
+  
+              <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
+              </div>
+              </div>
+          </a>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <a href="{% url 'website:ENT'%}">
+              <div class="service-item">
+               <div class="service-icon mar-bottom-20">
+              <img src="{%static 'website/img/ENT.png'%}" alt="">
+              <h3 class="spl-text">ENT</h3>
+              </div>
+              <div class="service-content">
+  
+              <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
+              </div>
+              </div>
+          </a>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+          <a href="{% url 'website:Gastroentrology'%}">
+              <div class="service-item">
+               <div class="service-icon mar-bottom-20">
+              <img src="{%static 'website/img/gas.png'%}" alt="">
+              <h3 class="spl-text">Gastroentrology</h3>
+              </div>
+              <div class="service-content">
+  
               <p><b>We are</b> Doctors here to treat the overall health of our female patients, treating problems and diseases of the female reproductive system such as breast and hormonal problems, urinary tract and pelvic disorders, and cancer of the cervix.</p>
               </div>
               </div>
