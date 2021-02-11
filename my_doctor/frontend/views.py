@@ -134,8 +134,8 @@ def EnquiresList(request):
 
 
 @login_required(login_url='/adminlogin')
-def subscription_plans(request):
-    return render(request, 'frontend/subscription_plans.html')
+def labtests(request):
+    return render(request, 'frontend/labtests.html')
 
 
 @login_required(login_url='/adminlogin')
@@ -190,10 +190,10 @@ def promo_code(request):
 @login_required(login_url='/adminlogin')
 def lab_Tests_packages(request):
     context = {}
-    context['labtests'] = lab_tests.objects.all()
+    context['labtest'] = lab_tests.objects.get(id=request.GET.get('id'))
     context['lab_test_parameter_type'] = lab_tests_parameters_type.objects.all()
     context['parametes'] = lab_tests_parameter.objects.all()
-    context['faqs'] = lab_tests_faqs.objects.all().order_by('-id')
+    context['faqs'] = lab_tests_faqs.objects.filter(lab_test__id=request.GET.get('id')).order_by('-id')
     return render(request, 'frontend/manage_lab_test.html', context)
 
 

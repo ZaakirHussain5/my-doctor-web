@@ -4,68 +4,25 @@
 
     
     <style>
-        .service-content{
-    height: 180px;
-    overflow: hidden;
-}
+    .service-content{
+        height: 180px;
+        overflow: hidden;
+    }
     </style>
-    <!-- <section class="slider">
-        <div id="x_023_animated_layers" class="">
-    
+    <section class="slider" style="padding:5% 0 0 0;">
+        <div id="x_023_animated_layers"
+            class="carousel slide x_023_animated_layers_indicators x_023_animated_layers_control_button thumb_scroll_x swipe_x ps_easeOutInCubic"
+            data-ride="carousel" data-pause="hover" data-interval="8000" data-duration="1000">
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="{%static 'website/img/Main Image1.jpg'%}" alt="">
-                </div>
-                <div class="item">
-                    <img src="{%static 'website/img/Main Image 2.jpg'%}" alt="">
-                </div>
-                <div class="item">
-                    <img src="{%static 'website/img/Main Image 3.jpg'%}" alt="">
+                    <div class="x_023_animated_layers_content"
+                        style="background-image: url({%static 'website/img/Main image 3.jpg'%});background-size: cover;">
+                    </div>
                 </div>
             </div>
         </div>
-    </section> -->
-    <section class="slider" style="padding:5% 0 0 0;">
-
-        <div id="x_023_animated_layers" class="carousel slide x_023_animated_layers_indicators x_023_animated_layers_control_button thumb_scroll_x swipe_x ps_easeOutInCubic" data-ride="carousel" data-pause="hover" data-interval="8000" data-duration="1000">
-        
-        <ol class="carousel-indicators">
-        
-        <li data-target="#x_023_animated_layers" data-slide-to="0" class="active"></li>
-        
-        <li data-target="#x_023_animated_layers" data-slide-to="1"></li>
-        
-        <li data-target="#x_023_animated_layers" data-slide-to="2"></li>
-        </ol>
-        
-        <div class="carousel-inner" role="listbox">
-        <div class="item active">
-        
-        <div class="x_023_animated_layers_content" style="background-image: url({%static 'website/img/Main image 3.jpg'%});background-size: cover;">
-        </div> 
-        </div> 
-        <div class="item">
-        
-        <div class="x_023_animated_layers_content" style="background-image: url({%static 'website/img/Main Image1.jpg'%});background-size: cover;">
-        </div> 
-        </div> 
-        <div class="item">
-        
-        <div class="x_023_animated_layers_content" style="background-image: url({%static 'website/img/Main image 2.jpg'%});background-size: cover;">
-        </div> 
-        </div> 
-        </div> 
-        
-        <a class="left carousel-control" href="#x_023_animated_layers" role="button" data-slide="prev">
-        <span class="fa fa-angle-left"></span>
-        </a>
-        
-        <a class="right carousel-control" href="#x_023_animated_layers" role="button" data-slide="next">
-        <span class="fa fa-angle-right"></span>
-        </a>
-        </div> 
         <div class="overlay"></div>
-        </section>
+    </section>
     
     <div class="footer">
         <div class="f-contact">
@@ -121,7 +78,6 @@
                 <h3 class="spl-text">Dermatologist</h3>
             </div>
             <div class="service-content">
-      
                 <p><b>We are </b>doctors who specializes in conditions involving the skin, hair, and nails. We can identify and treat more than 3,000 conditions. These conditions include eczema, psoriasis, and skin cancer, among many others. The skin is an incredible organ.</p>
             </div>
         </div>
@@ -159,7 +115,7 @@
                 <div class="service-item">
               <div class="service-icon mar-bottom-20 child-3">
                   <img src="{% static 'website/img/ayurveda.png' %}" alt="psychology">
-                  <h3><a href="#">Ayurveda</a></h3>
+                  <h3>Ayurveda</h3>
               </div>
               <div class="service-content">
                   <p>Ayurveda or "The Science of Life" places great emphasis on prevention and encourages the maintenance of health through close attention to balance in one's life, right thinking, diet, lifestyle and the use of herbs. <br><br></p>
@@ -187,11 +143,11 @@
               <div class="service-item">
                <div class="service-icon mar-bottom-20">
               <img src="{%static 'website/img/ortho.png'%}" alt="">
-              <h3 class="spl-text">Orthopadic</h3>
+              <h3 class="spl-text">Orthopaedic</h3>
               </div>
               <div class="service-content">
   
-              <p>Orthopedist focus on the treatment & prevention of skeletal deformities such as disorders of the bones, joints, muscles, ligaments, tendons, nerves and skin.</p>
+              <p>Orthopaedist focus on the treatment & prevention of skeletal deformities such as disorders of the bones, joints, muscles, ligaments, tendons, nerves and skin.</p>
               </div>
               </div>
           </a>

@@ -4,13 +4,13 @@
     <div class="col-12">
         <div class="page-header text-center">
             <div class="page-title">
-                <h2>Subscription Plans</h2>
+                <h2>Lab Test packages</h2>
             </div>
         </div>
     </div>
 </div>
 <div class="content">
-    <form id="subscriptionForm">
+    <form id="labPackageForm">
         <div class="card">
 
             <div class="card-body card-block">
@@ -18,29 +18,32 @@
                     <input type="hidden" name="id" id="spl_id">
                     <div class="offset-md-2 col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Plan Name</label>
-                            <input type="text" required="" id="plan_name" name="plan_name" placeholder="Enter Name"
+                            <label for="hf-email" class=" form-control-label">Package Title</label>
+                            <input type="text" required="" id="title" name="title" placeholder="Enter Name"
                                 class="form-control">
                         </div>
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Plan Price</label>
-                            <input type="number" required="" id="plan_price" name="plan_price"
+                            <label for="hf-email" class=" form-control-label">Package Price</label>
+                            <input type="number" required="" id="price" name="price"
                                 placeholder="Enter Plan Price" class="form-control">
                         </div>
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Plan Validity</label>
-                            <input type="number" required="" id="validity" name="validity"
-                                placeholder="Enter Plan Validity" class="form-control">
-                            <small>Plan Validity in Days</small>
+                            <label for="hf-email" class=" form-control-label">Grid Description</label>
+                            <textarea name="grid_description" id="grid_description" rows="3" class="form-control"
+                                placeholder="Enter Benifits List"></textarea>
                         </div>
 
                     </div>
                     <div class="col-md-4 pr-5 pl-5">
                         <div class="row form-group">
-                            <label for="hf-email" class=" form-control-label">Benifits List</label>
-                            <textarea name="benifits_list" id="benifits_list" rows="5" class="form-control"
+                            <label for="hf-email" class=" form-control-label">Short Description</label>
+                            <textarea name="short_desc" id="short_desc" rows="3" class="form-control"
                                 placeholder="Enter Benifits List"></textarea>
-                            <small>Use comma(,) to seperate a benifit</small>
+                        </div>
+                        <div class="row form-group">
+                            <label for="hf-email" class=" form-control-label">Detailed Description</label>
+                            <textarea name="detailed_description" id="detailed_description" rows="3" class="form-control"
+                                placeholder="Enter Benifits List"></textarea>
                         </div>
                     </div>
                 </div>
@@ -48,7 +51,7 @@
             <div class="card-footer">
                 <div class="pull-right">
                     <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Subscription Plan</span>
+                        <i class="fa fa-dot-circle-o"></i> <span id="submitBtn">Add Package</span>
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">
                         <i class="fa fa-ban"></i> Reset
@@ -63,14 +66,12 @@
     <div class="card">
         <div class="card-body card-block">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="subs_plans">
+                <table class="table table-bordered table-hover" id="labTestPackages">
                     <thead>
                         <tr>
                             <th>Slno</th>
-                            <th>Plan Name</th>
-                            <th>Plan Price</th>
-                            <th>Validity</th>
-                            <th>Description</th>
+                            <th>Title</th>
+                            <th>Price</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -87,9 +88,9 @@
 <script>
     jQuery(document).ready(function ($) {
         
-            var table = jQuery('#subs_plans').DataTable({
+            var table = jQuery('#labTestPackages').DataTable({
                 ajax: {
-                    url: "/api/subscription_plans",
+                    url: "/api/labtestCRUD/",
                     dataSrc: ""
                 },
                 responsive: true,
@@ -98,21 +99,20 @@
                         data: "id"
                     },
                     {
-                        data: "plan_name"
+                        data: "title"
                     },
                     {
-                        data: "plan_price"
-                    },
-                    {
-                        data: "validity"
-                    },
-                    {
-                        data: "benifits_list"
+                        data: "price"
                     },
                     {
                         data: 'id',
                         render: function (data, type, row) {
-                            return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                            var obj =JSON.stringify(row).replace(/'/g,"")
+                            return `
+                            <a href="/Manage_lab_test_packages?id=${data}" class="btn rounded-circle btn-success btn-sm">
+                                <i class="fa fa-tasks"></i>
+                            </a>
+                            <button type="button" data-id='${data}' data-obj='${obj}' class="btn rounded-circle btn-primary btn-sm edit">
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button type="button" data-id='${data}' class="btn rounded-circle btn-danger btn-sm delete">
@@ -130,13 +130,13 @@
         
 
         crudOperations({
-            url:'/api/subscription_plans/',
-            put_url:'/api/subscription_plans/',
-            table_id:'#subs_plans',
+            url:'/api/labtestCRUD/',
+            put_url:'/api/labtestCRUD/',
+            table_id:'#labTestPackages',
             id_selector:'#spl_id',
-            form_id:'#subscriptionForm',
+            form_id:'#labPackageForm',
             table:table,
-            entity:'Subscription plan'
+            entity:'Package'
         })
 
          DoHeighLight('Administration', 'subscription_plans')

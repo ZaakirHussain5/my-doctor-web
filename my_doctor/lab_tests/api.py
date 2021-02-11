@@ -14,21 +14,40 @@ class lab_testsViewset(viewsets.ModelViewSet):
 
 
 class lab_tests_parameters_type_viewset(viewsets.ModelViewSet):
-    queryset = lab_tests_parameters_type.objects.all()
     serializer_class = lab_tests_parameters_type_serializer
     permission_classes = [permissions.AllowAny]
 
+    def get_queryset(self):
+        queryset = lab_tests_parameters_type.objects.all()
+        lab_test = self.request.query_params.get('labtest',None)
+        if lab_test is not None:
+            queryset = lab_tests_parameters_type.objects.filter(lab_test__id=lab_test)
+        return queryset
+
 
 class lab_tests_parameter_viewset(viewsets.ModelViewSet):
-    queryset = lab_tests_parameter.objects.all()
     serializer_class = lab_tests_parameter_serializer
     permission_classes = [permissions.AllowAny]
 
+    def get_queryset(self):
+        queryset = lab_tests_parameter.objects.all()
+        parameter_type = self.request.query_params.get('type',None)
+        if parameter_type is not None:
+            queryset = lab_tests_parameter.objects.filter(parameter_type__id=parameter_type)
+        return queryset
+        
+
 
 class lab_tests_faqs_viewset(viewsets.ModelViewSet):
-    queryset = lab_tests_faqs.objects.all()
     serializer_class = lab_tests_faqs_serializer
     permissions=[permissions.AllowAny]
+
+    def get_queryset(self):
+        queryset = lab_tests_faqs.objects.all()
+        lab_test = self.request.query_params.get('labtest',None)
+        if lab_test is not None:
+            queryset = lab_tests_faqs.objects.filter(lab_test__id=lab_test)
+        return queryset
 
 class lab_tests_puchase_viewset(viewsets.ModelViewSet):
     serializer_class = lab_tests_purchase_serializer
