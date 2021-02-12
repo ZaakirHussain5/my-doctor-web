@@ -5,6 +5,14 @@ footer #Cert1{
   display:none;
 }
 @media(max-width:1440px){section.slider{padding: 5% 0 0 0 !important;}section.slider #x_023_animated_layers {height: auto;}#web{display: none;}#x_023_animated_layers,#x_023_animated_layers>.carousel-inner,#x_023_animated_layers>.carousel-inner>.item{overflow:hidden;height:575px;}}
+@media(max-width: 1148px){
+  #responsive-menu {
+    display: none;
+}  
+.slicknav_menu {
+  display: block;
+}             
+}
 @media(max-width:1199px){
   .navbar-default .container {
     width: 100% !important;

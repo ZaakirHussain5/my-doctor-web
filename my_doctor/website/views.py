@@ -79,11 +79,15 @@ def doctor_mou_tc(request):
         "meta_description":"MOU Terms and Conditions"})
 
 def lab_tests(request):
+    search_term = request.GET.get('s')
     context={}
+    context['lab_tests'] = lab_test_model.objects.all()
+    if search_term is not None:
+        context['lab_tests'] = lab_test_model.objects.filter(title__icontains=search_term)
     context['page_title'] = "Doctor Plus | Lab tests"
     context['meta_description'] = "Lab Tests Packages"
-    context['lab_tests'] = lab_test_model.objects.all()
     return render(request,'website/lab_tests.html',context)
+
 
 
 def detail_lab_test(request, id):

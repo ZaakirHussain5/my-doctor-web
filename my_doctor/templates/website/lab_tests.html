@@ -5,7 +5,7 @@
   .exclusive-item {
     background: #fff;
     border-radius: 6px;
-    padding: 20px 20px 5px 20px;
+    padding: 20px 12px 5px 12px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
   }
 
@@ -46,6 +46,14 @@
 .exclusive-item{
     margin-bottom:40px;
 }
+.exclusive-item ul{display: inline-flex}
+.exclusive-item ul li{margin: 10px 20px 0 0}
+.form-list {display: inline-flex;
+    float: right;}
+    .form-list  li{margin: 0 20px;}
+    @media(max-width:767px){
+        .form-list ul{margin: 0 25%;}
+    }
 </style>
 <section class="breadcrumb">
   <div class="container">
@@ -64,13 +72,29 @@
 <section class="services">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <div class="section-title ">
-          <h2>Exclusive <span>Offers</span></h2>
+      <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+        <div class="section-title">
+        <h2>Exclusive <span>Offers</span></h2>
         </div>
-      </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        
+        <form action="" method="">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-conrol" id="searchTerm" placeholder="Search Here">
+              <span class="input-group-btn">
+                <button type="button" class="btn" id="searchButton">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </form>
+        </div>
     </div>
     <div class="row m-2">
+      {% if lab_tests %}
       {% for lab_test in lab_tests %}
         <div class="col-md-3 col-sm-6 col-xs-12 m-2">
           <div class="exclusive-item">
@@ -78,13 +102,24 @@
               <h3><a href="#">{{lab_test.title}}</a></h3>
               <p>{{lab_test.grid_description}}</p>
             </div>
-            <div class="healthiansprice"> <span class="rupeesign">₹</span> {{lab_test.price}} </div>
-            <div class="buy-book-btn dealtopspace">
-              <a class="btn btn-danger" href="{% url 'website:detail_lab_test' id=lab_test.id %}">Know More <img src="{%static 'website/img/left-icon-sml.png' %}"></a>
-            </div>
+            <ul>
+              <li>
+                <div class="healthiansprice" style="font-size: 16px;"> <span class="rupeesign">₹</span> {{lab_test.price}} </div>
+              </li>
+              <li>
+                <div class="buy-book-btn dealtopspace">
+                  <a class="btn btn-danger" style="font-size: 12px;padding: 3px 4px;" href="{% url 'website:detail_lab_test' id=lab_test.id %}">Know More <img
+                      src="{%static 'website/img/left-icon-sml.png' %}"></a>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       {% endfor %}
+      {% else %}
+      <h3>No Lab test Packages Found</h3>
+      {% endif %}
+      
       <!-- <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="exclusive-item">
           <div class="exclusive-content">
@@ -119,3 +154,10 @@
 
 
 {%endblock%}
+{% block scripts%}
+<script>
+  $('#searchButton').click(function(){
+    window.location.href = '/lab_tests?s='+$('#searchTerm').val()
+  })
+</script>
+{% endblock %}
