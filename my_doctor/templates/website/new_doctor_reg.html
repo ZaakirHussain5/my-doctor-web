@@ -169,7 +169,12 @@
                         <textarea name="notes" placeholder="Bank A/C Details" required></textarea>
                     </div>
                     <div class="form-group row">
-                        <input type="text" required class="form-control col-md-4" name="settlement_cycle" placeholder="Fee Settlement. (Daily / Weekly / Monthly)">
+                      <select name="settlement_cycle" id="settlement_cycle" class="form-control col-md-4" required>
+                        <option value="">Select Settlement Cycle</option>
+                        <option value="Daily">Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                      </select>
                     </div>
                     <div class="form-group row">
                         <textarea id="about" required placeholder="About: Write a few lines about your achievements and exprience as a doctor."></textarea>
