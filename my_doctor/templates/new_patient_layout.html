@@ -297,7 +297,8 @@
         });
     </script>
     
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     {% block scripts %}
 
     {% endblock %}
@@ -306,7 +307,8 @@
         ////////////////////////////////////////////////////////////////
         //         IF NOT LOGIN THEN REDIRECT TO LOGIN PAGE           // 
         ////////////////////////////////////////////////////////////////
-        let cookie  = jQuery.cookie('Token')
+        let cookie  = localStorage.getItem('Token')
+        localStorage.getItem
         if ((cookie == undefined) || (cookie == null) || (cookie == ''))
         {
             window.location.href = '/login?next=' + window.location.href;
@@ -317,14 +319,14 @@
             $.ajax({
                 url: '/api/PatientLogout',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
                 method: 'POST',
                 contendType: 'application/json',
                 async: false,
                 success: function (response) {
                     console.log(response)
-                    $.cookie('Token', '', { path: '/' })
+                    localStorage.removeItem('Token')
                     window.location.href = '/'
                 }, error: function (err) {
                     console.log(err);
@@ -410,7 +412,7 @@
                     contendType: 'application/json',
                     'async': false,
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                 }).done((response) => {
                     console.log(response)
@@ -431,7 +433,7 @@
                         async: false,
                         method: 'GET',
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                            xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                         },
                     }).done((response) => {
                         formDeserialize(profileForm, response);
@@ -481,7 +483,7 @@
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         beforeSend: function(xhr){
-                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                            xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                         }
                     }).done(res=>{
                             $('#medicalRecordText').val('')
@@ -515,7 +517,7 @@
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     beforeSend: function(xhr){
-                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     }
                 }).done(res=>{
                     console.log(res)
@@ -578,7 +580,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                 }).done((response) => {
                     console.log("postrequest response -", response);
@@ -602,7 +604,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                 }).done((response) => {
                     toastr.success('password updated successfully.', 'Success', {
@@ -823,7 +825,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
             })
             .done((res)=>{

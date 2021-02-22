@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class patient_info(models.Model):
     user = models.OneToOneField(User,related_name='patients',on_delete=models.CASCADE)
-    pat_id = models.CharField(max_length=15,unique=True)
+    pat_id = models.CharField(max_length=150,unique=True)
     full_name = models.CharField(max_length=30)
     gender = models.CharField(max_length=25, blank=True, null=True)
     dob = models.CharField(max_length=25,null=True, blank=True)

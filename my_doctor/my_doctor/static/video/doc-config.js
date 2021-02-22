@@ -25,7 +25,7 @@ $.ajax({
     contendType: 'application/json',
     'async': false,
     beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
     },
 }).done((response)=>{
     console.log(response)

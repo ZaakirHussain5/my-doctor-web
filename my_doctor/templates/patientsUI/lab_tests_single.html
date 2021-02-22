@@ -110,7 +110,7 @@
                         method:'POST',
                         contentType:'application/json',
                         beforeSend:function(xhr){
-                            xhr.setRequestHeader("Authorization",`Token ${$.cookie('Token')}`)
+                            xhr.setRequestHeader("Authorization",`Token ${localStorage.getItem('Token')}`)
                         }
                     }).done(function(res){
                         console.log(res)

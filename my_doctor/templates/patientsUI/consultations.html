@@ -547,7 +547,7 @@ function getChatData(consult_id){
             'async': false,
             'method': 'GET',
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
             },
         }).done((response)=>{
             chatData_list= response;
@@ -635,7 +635,7 @@ function sendMessage(consult_id){
         method: 'POST',
         contentType: 'application/json',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+            xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
         },
     }).done((response)=>{
         console.log("postrequest response -", response);

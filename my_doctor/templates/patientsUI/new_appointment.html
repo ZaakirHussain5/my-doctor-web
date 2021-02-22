@@ -427,7 +427,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
             }).done(res=>{
                 console.log(res)
@@ -572,7 +572,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
             }).done(res=>{
                 console.log('wallet', res);
@@ -786,7 +786,7 @@
                                 data: JSON.stringify(transaction_data),
                                 contentType: 'application/json',
                                 beforeSend: function(xhr){
-                                    return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
+                                    return xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'))
                                 }
                             }).done(res=>{
                                 console.log('wallet', res)
@@ -813,7 +813,7 @@
                             'contentType': 'application/json',
                             'data': JSON.stringify(data),
                             beforeSend: function (xhr) {
-                                xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                             },
                         }).done((response) => {
                             console.log(response);
@@ -886,7 +886,7 @@
                         data: JSON.stringify(transaction_data),
                         contentType: 'application/json',
                         beforeSend: function(xhr){
-                            return xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'))
+                            return xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'))
                         }
                     }).done(res=>{
                         console.log('wallet', res)
@@ -913,7 +913,7 @@
                     'contentType': 'application/json',
                     'data': JSON.stringify(data),
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                 }).done((response) => {
                     console.log(response);
@@ -957,7 +957,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function(xhr){
-                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 }
             })
             .done(response=>{

@@ -198,7 +198,7 @@
                 method: 'POST',
                 contentType: 'application/json'
             }).done((response) => {
-                $.cookie('Token', response.token, { expires: 1 })
+                localStorage.setItem("Token",response.token)
                 signOut()
                 let next_link = urlParams.get('next') 
                 console.log(next_link)
