@@ -145,7 +145,7 @@
             method: 'GET',
             contentType: 'application/json',
             'beforeSend': function (request) {
-                request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
             },
         }).done((response) => {
             let li = ''
@@ -156,7 +156,7 @@
                 'async': false,
                 'method': 'GET',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
             }).done(function (cons) {
                 $.each(cons, function (i, index) {
@@ -258,7 +258,7 @@
                 url: `/api/MobCallDoctor?doctor=${button.attr('data-doctor')}&app_id=${button.attr('data-const')}`,
                 method: 'POST',
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 },
                 success: function (response) {
                     if (window.matchMedia("(max-width:425px)").matches)
@@ -322,7 +322,7 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 },
             }).done(function(res){
                 $('#editApp').modal('hide')
@@ -344,7 +344,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    return xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    return xhr.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 }
             }).done((res) => {
                 if (res.length > 0) {
@@ -399,7 +399,7 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    return xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    return xhr.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 }
             }).done((res) => {
                 $('#editApp').modal('hide')

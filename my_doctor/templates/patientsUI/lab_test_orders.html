@@ -52,7 +52,7 @@
         $.ajax({
             url: '/api/PurchaseLabTests/',
             'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('Token'));
             },
             method:'GET',
             success:function(response){

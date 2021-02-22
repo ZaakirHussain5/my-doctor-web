@@ -639,7 +639,7 @@
                 'async': false,
                 'method': 'GET',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
             }).done((response) => {
                 var list = response;
@@ -669,7 +669,7 @@
                 url: '/api/MobAnswerCall?id=' + button.attr('data-session'),
                 method: 'POST',
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 },
                 success: function (response) {
                     window.location.href = button.attr('data-url') + `&session_id=${response.session_id}&session_token=${response.token}`;                    
@@ -686,7 +686,7 @@
                 'url': '/api/MobVedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
                 'method': 'DELETE',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },
             }).done((response) => {
                 console.log(response)
@@ -707,7 +707,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
             },
         }).done((response) => {
             // console.log('reminder response ===', response)
@@ -741,7 +741,7 @@
                     url: '/api/patient_family/',
                     method: 'GET',
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                 }).done(function (data) {
                     var listItems = ''
@@ -778,7 +778,7 @@
                     url: `/api/patient_family/${button.attr('data-id')}`,
                     method: 'DELETE',
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                     contentType: 'application/json'
                 }).done(function (response) {
@@ -800,7 +800,7 @@
                     data: JSON.stringify(data),
                     method: 'POST',
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                     },
                     contentType: 'application/json'
                 }).done(function (response) {

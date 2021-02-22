@@ -137,7 +137,7 @@
         //         url: '/api/PatientPrescription/',
         //         dataSrc: "",
         //         'beforeSend': function (request) {
-        //             request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+        //             request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
         //         },
         //     },
         //     columns: [
@@ -173,7 +173,7 @@
         //         url: '/api/PatientRecordAPI/',
         //         dataSrc: "",
         //         'beforeSend': function (request) {
-        //             request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+        //             request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
         //         },
         //     },
         //     columns: [
@@ -218,7 +218,7 @@
             method: 'GET',
             contentType: 'application/json',
             beforeSend: function (request) {
-                request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
             }
         }).done((response) => {
             let lis = ``
@@ -265,7 +265,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 }
             }).done((response)=>{
                 console.log(response)
@@ -338,7 +338,7 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                    xhr.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 },
 
             }).done((response) => {
@@ -392,7 +392,7 @@
                     method: 'DELETE',
                     contentType: 'application/json',
                     beforeSend: function(xhr){
-                        xhr.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('Token'));
+                        xhr.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                     }
                 }).done(res=>{
                     get_pat_medi_record()

@@ -32,7 +32,7 @@
         $.ajax({
             url: '/api/PatientBillingHistory/',
             'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('Token'));
             },
             method:'GET',
             success:function(response){
@@ -75,7 +75,7 @@
                 url: '/api/PatientBillingHistory/',
                 dataSrc: "",
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('Token'));
+                    request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('Token'));
                 },
             },
             columns: [
