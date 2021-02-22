@@ -10,16 +10,18 @@ from rest_framework import generics
 from .serializers import patient_infoSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+import random
 
 
 def generateId(request):
     import datetime
     now = datetime.datetime.now()
     uid = patient_info.objects.aggregate(Max('id'))
+    randNum = random.SystemRandom().choice([i for i in range(1000,9999)])
     uid = uid['id__max'] 
     if uid == None:
         uid = 0
-    return JsonResponse({"pat_id":'DPPAT'+ str(now.year) + str(uid+1)})
+    return JsonResponse({"pat_id":'DPPAT'+str(randNum)+ str(now.year) + str(uid+1)})
 
 
 async def send_mails(request):
