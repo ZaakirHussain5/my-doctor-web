@@ -308,7 +308,6 @@
         //         IF NOT LOGIN THEN REDIRECT TO LOGIN PAGE           // 
         ////////////////////////////////////////////////////////////////
         let cookie  = localStorage.getItem('Token')
-        localStorage.getItem
         if ((cookie == undefined) || (cookie == null) || (cookie == ''))
         {
             window.location.href = '/login?next=' + window.location.href;
