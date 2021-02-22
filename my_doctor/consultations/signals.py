@@ -23,7 +23,7 @@ def save_doctor_payment(sender, instance, created, **kwargs):
                 commission_amount = instance.comp_share
             payable = float(total_amount) - float(commission_amount)
             if balance:
-                add_new_amount = float(instance.consultation_amt) - float(instance.comp_share)
+                add_new_amount = float(instance.doctor_id.consultation_fee) 
                 balance = float(balance) + float(add_new_amount)
             else:
                 balance = float(payable)
