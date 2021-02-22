@@ -32,7 +32,7 @@ def Prescription(request):
 		patients = patient_info.objects.filter(id=pat_id)
 		context['select_required'] = True
 		context['consulataion_id'] = request.GET.get('cons_id')
-		if context['consulataion_id'] == '':
+		if context['consulataion_id'] == '' or context['consulataion_id'] == '0':
 			return redirect('/doctors/dashboard')
 	print(patients)
 	context['patients'] = patients
