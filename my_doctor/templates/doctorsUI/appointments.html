@@ -159,7 +159,7 @@
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
 
     },
@@ -201,7 +201,7 @@
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
 
     },
@@ -248,7 +248,7 @@
       dataSrc: "",
       async: false,
       'beforeSend': function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
 
     },
@@ -297,7 +297,7 @@
       method: 'POST',
       async: false,
       beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
       success: function (response) {
         let consultationObj = JSON.parse(response.consultation)
@@ -341,7 +341,7 @@
       method: 'POST',
       async: false,
       beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
       success: function (response) {
         if (window.matchMedia("(max-width:425px)").matches)

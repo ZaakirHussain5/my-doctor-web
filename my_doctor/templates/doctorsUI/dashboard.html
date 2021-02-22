@@ -279,7 +279,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             console.log('response response', response);
@@ -310,7 +310,7 @@
                 contentType: 'application/json',
                 async: false,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             }).done((response) => {
                 let balance= response.length ==0 ? 0 : response[0]['balance']
@@ -325,7 +325,7 @@
                 contentType: 'application/json',
                 async: false,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             }).done((res)=>{
                 jQuery('#todaysAppoinmentCount').html(res.length)
@@ -412,7 +412,7 @@
     //         contentType: false,
     //         processData: false,
     //         beforeSend: function (xhr) {
-    //             xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+    //             xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
     //         },
     //     })
     //         .done((response) => {
@@ -442,7 +442,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             console.log(response);

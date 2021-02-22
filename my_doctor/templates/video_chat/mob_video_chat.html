@@ -443,7 +443,7 @@
                                 method: 'GET',
                                 contentType: 'application/json',
                                 beforeSend: function (xhr) {
-                                    xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                                 }
                             }).done(res => {
                                 consultation_id = res[0].id
@@ -465,7 +465,7 @@
                         'url': '/api/vedioChatOparetion/' + $(this).attr('data-id') + '/',
                         'method': 'DELETE',
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                            xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                         },
                     }).done((response) => {
                         $('#incomingVideoCall').modal('hide')

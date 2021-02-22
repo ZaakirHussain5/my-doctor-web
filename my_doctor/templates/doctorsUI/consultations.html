@@ -40,7 +40,7 @@
       url: '/api/doctor_billing_history/',
       dataSrc: "",
       beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
 
     },

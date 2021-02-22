@@ -250,64 +250,9 @@
             return false
         })
 
-        function submit_doctor_loginForm() {
-            console.log('doctorsUpload');
-            var data = {
-                username: 'DPDOC2020001',
-                password: '12345',
-                user_type: 'D'
-            }
 
-            $.ajax({
-                url: '/api/auth/login',
-                data: JSON.stringify(data),
-                method: 'POST',
-                contentType: 'application/json'
-            }).done((response) => {
-                $.cookie('DoctorToken', response.token, {
-                    expires: 1
-                })
-                let next_link = urlParams.get('next') 
-                if (next_link && next_link != ''){
-                    window.location.href = next_link
-                }
-                else{
-                    window.location.href = '/doctors/dashboard'
-                }
-            }).fail((err, error, wrong) => {
-                console.log(err)
-                alert(err.responseJSON.non_field_errors[0])
-            })
-        }
 
-        function submit_loginForm() {
 
-            var data = {
-                username: '9945981381',
-                password: '1234',
-                user_type: 'P'
-            }
-            $.ajax({
-                url: '/api/auth/login',
-                data: JSON.stringify(data),
-                method: 'POST',
-                contentType: 'application/json'
-            }).done((response) => {
-                $.cookie('Token', response.token, {
-                    expires: 1
-                })
-                let next_link = urlParams.get('next') 
-                if (next_link && next_link != ''){
-                    window.location.href = next_link
-                }
-                else{
-                    window.location.href = '/patients/dashboard'
-                }
-            }).fail((err, error, wrong) => {
-                console.log(err)
-                alert(err.responseJSON.non_field_errors[0])
-            })
-        }
 
         $("#loging_in").submit((e) => {
             e.preventDefault();
@@ -325,9 +270,7 @@
                 contentType: 'application/json'
             }).done((response) => {
                 if (data.user_type == "P") {
-                    $.cookie('Token', response.token, {
-                        expires: 1
-                    })
+                    localStorage.setItem("Token",response.token)
                     let next_link = urlParams.get('next') 
                     if (next_link && next_link != ''){
                         window.location.href = next_link
@@ -337,9 +280,7 @@
                     }
                 }
                 else {
-                    $.cookie('DoctorToken', response.token, {
-                        expires: 1
-                    })
+                    localStorage.setItem("DoctorToken",response.token)
                     let next_link = urlParams.get('next') 
                 if (next_link && next_link != ''){
                     window.location.href = next_link

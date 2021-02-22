@@ -173,7 +173,7 @@
     //         IF NOT LOGIN THEN REDIRECT TO LOGIN PAGE           // 
     ////////////////////////////////////////////////////////////////
 
-    let cookie  = jQuery.cookie('DoctorToken')
+    let cookie  = localStorage.getItem('DoctorToken')
     if ((cookie == undefined) || (cookie == null) || (cookie == ''))
     {
         window.location.href = '/login?next=' + window.location.href;
@@ -205,7 +205,7 @@
                 'async': false,
                 'method': 'GET',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             }).done((response) => {
                 var list = response;
@@ -238,7 +238,7 @@
                 url: '/api/MobAnswerCall?id=' + button.attr('data-session'),
                 method: 'POST',
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
                 },
                 success: function (response) {
                     window.location.href = button.attr('data-url') + `&session_id=${response.session_id}&session_token=${response.token}`
@@ -255,7 +255,7 @@
                 'url': '/api/MobVedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
                 'method': 'DELETE',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             }).done((response) => {
                 var x = document.getElementById("myAudio");
@@ -282,7 +282,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             jQuery('#doctorName').html(response.full_name)
@@ -297,14 +297,14 @@
             jQuery.ajax({
                 url:'/api/DoctorLogout',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
                 method:'POST',
                 contendType: 'application/json',
                 async: false,
                 success:function(response){
                    
-                    jQuery.cookie('DoctorToken','', { path: '/' }) 
+                    localStorage.removeItem('DoctorToken') 
                     window.location.href = '/'
                 }
             })
@@ -317,7 +317,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             jQuery('.badge').html(response.length);

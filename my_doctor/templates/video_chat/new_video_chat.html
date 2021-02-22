@@ -687,7 +687,7 @@
                         method: 'GET',
                         contentType: 'application/json',
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+                            xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                         }
                     }).done(res => {
                         consultation_id = res[0]? res[0].id : 0 

@@ -308,7 +308,7 @@
       url: '/api/CallPatient?patient=' + button.attr('data-patient'),
       method: 'POST',
       beforeSend: function (request) {
-        request.setRequestHeader("Authorization", 'Token ' + jQuery.cookie('DoctorToken'));
+        request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
       success: function (response) {
         window.location.href = `/api/VideoCall?user=doc&session=+${response.id}&patient=${button.attr('data-patient')}`

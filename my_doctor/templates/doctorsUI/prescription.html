@@ -103,7 +103,7 @@
                     url: "/api/DoctorPrescription/",
                     dataSrc: "",
                     'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                    request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('DoctorToken'));
                 },
                 },
                 responsive: true,
@@ -156,7 +156,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                        request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('DoctorToken'));
                     }
                 }).done((response)=>{
                     console.log(response)

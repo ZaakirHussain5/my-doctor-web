@@ -227,7 +227,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             console.log('response response', response);
@@ -315,7 +315,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         })
             .done((response) => {
@@ -349,7 +349,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             console.log(response);
@@ -371,7 +371,7 @@
             contendType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         })
             .done((response) => {
@@ -406,7 +406,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         })
             .done((response) => {

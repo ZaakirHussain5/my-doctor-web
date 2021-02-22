@@ -86,7 +86,7 @@ $('#endCall').click(function(){
       'url': '/api/vedioChatOparetion/' + urlParams.get('conf_id')+'/',
       'method': 'DELETE',
       beforeSend: function (xhr) {
-          xhr.setRequestHeader("Authorization", "Token " + $.cookie('DoctorToken'));
+          xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
       },
   }).done((response) => {
       console.log(response)

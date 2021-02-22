@@ -289,7 +289,7 @@
     
     $(document).ready(function(){
         var cookie = localStorage.getItem('Token')
-        var d_cookie = $.cookie('DoctorToken')
+        var d_cookie = localStorage.getItem('DoctorToken')
         if(cookie && cookie!=''){
           const profileForm = document.getElementById('profile-form');
         $.ajax({
@@ -325,7 +325,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
           $('#loginItem,#loginItem1').html(`

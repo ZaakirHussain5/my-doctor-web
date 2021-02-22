@@ -316,7 +316,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             console.log('response response', response['mou_file']);
@@ -393,7 +393,7 @@
             contendType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         })
             .done((response) => {
@@ -434,7 +434,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         })
             .done((response) => {
@@ -465,7 +465,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             jQuery('#password_form button').html(`<i class="fa fa-lock"></i> Update Password`)
@@ -494,7 +494,7 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             })
                 .done((response) => {
@@ -525,7 +525,7 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             })
             .done((response) => {
@@ -548,7 +548,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             }).done((response) => {
                 console.log(response)
@@ -571,7 +571,7 @@
             contentType: false,
             processData: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done(response =>{
             openMouFile()
@@ -586,7 +586,7 @@
                 method: 'GET',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             }).done((response) => {
                 console.log(response)
@@ -602,7 +602,7 @@
                 url:'/api/DoctorTimings/',
                 dataSrc:"",
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             },
             columns:[
@@ -655,7 +655,7 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                    xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                 },
             })
                 .done((response) => {
@@ -678,7 +678,7 @@
                           url:`/api/DoctorTimings/${id}/`,
                           method: 'DELETE',
                           beforeSend: function(request){
-                            request.setRequestHeader("Authorization", 'Token '+jQuery.cookie('DoctorToken'));
+                            request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('DoctorToken'));
                           },
                           success:function(){
                               table.ajax.reload()
@@ -702,7 +702,7 @@
             contentType: 'application/json',
             async: false,
             beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Token " + jQuery.cookie('DoctorToken'));
+                xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
             },
         }).done((response) => {
             jQuery("#moufiles").attr('href', response['mou_file']);
