@@ -109,7 +109,6 @@
             day = '0' + day.toString();
 
         var maxDate = year + '-' + month + '-' + day;
-        alert(maxDate);
         $('#follow_up_date').attr('min', maxDate);
 
         var table = jQuery('#subs_plans').DataTable({
