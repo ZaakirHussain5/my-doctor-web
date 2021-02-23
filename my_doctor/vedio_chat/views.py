@@ -57,7 +57,7 @@ def patientVideoChat(request):
 
 
 def ratings(request):
-    if request.GET.get('consultation') == '' or request.GET.get('consultation') == '0':
+    if request.GET.get('consultation') == None or request.GET.get('consultation') == '' or request.GET.get('consultation') == '0':
         return redirect('/patients/dashboard')
     return render(request,'video_chat/ratings.html', {'consultation': request.GET.get('consultation')})
 

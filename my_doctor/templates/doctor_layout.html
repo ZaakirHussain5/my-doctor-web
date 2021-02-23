@@ -225,6 +225,7 @@
                     jQuery('#incomingVideoCall').modal('show')
                 }
                 else {
+                    if(x) x.stop()
                     jQuery('#incomingVideoCall').modal('hide')
                 }
             });
