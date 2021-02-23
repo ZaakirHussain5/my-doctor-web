@@ -10,7 +10,7 @@ opentok = OpenTok("47034434", "21f8951c03ab3c4f33eba0962905212594f477e5")
 
 class vedioChatOparetion(viewsets.ModelViewSet):
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.AllowAny
     ]
     serializer_class = VedioChatSerializer
 

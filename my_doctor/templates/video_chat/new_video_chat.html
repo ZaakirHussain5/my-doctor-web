@@ -685,9 +685,6 @@
                 $.ajax({
                     'url': '/api/MobVedioChatOparetion/' + id + '/',
                     'method': 'DELETE',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token'));
-                    },
                 }).done((response) => {
                     console.log(response)
                 }).fail((response) => {
