@@ -13,7 +13,7 @@
 <div class="content">
     <form id="subscriptionForm">
         <div class="card">
-        
+
             <div class="card-body card-block">
                 <div class="row">
                     <input type="hidden" name="id" id="pres_id">
@@ -41,18 +41,18 @@
                                 placeholder="Suggested medication or Lab tests."></textarea>
                         </div>
                         <input type="hidden" name="consultation_id" value="{{ consulataion_id }}">
-                        
+
                     </div>
                     <div class="col-md-4 pr-5 pl-5">
                         <div class="row form-group">
                             <label for="record_files" class=" form-control-label">Prescription Slip</label>
-                            <input type="file" id="record_files" name="record_files"
-                                class="form-control" accept="image/*">
+                            <input type="file" id="record_files" name="record_files" class="form-control"
+                                accept="image/*">
                         </div>
                         <div class="row form-group">
                             <label for="record_files" class=" form-control-label">Select Followup Date</label>
                             <input type="date" required="" id="follow_up_date" name="follow_up_date"
-                                 class="form-control" >
+                                class="form-control">
                         </div>
                     </div>
                 </div>
@@ -97,42 +97,56 @@
 {% block scripts %}
 <script>
     jQuery(document).ready(function ($) {
-        
-            var table = jQuery('#subs_plans').DataTable({
-                ajax: {
-                    url: "/api/DoctorPrescription/",
-                    dataSrc: "",
-                    'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('DoctorToken'));
+
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        alert(maxDate);
+        $('#follow_up_date').attr('min', maxDate);
+
+        var table = jQuery('#subs_plans').DataTable({
+            ajax: {
+                url: "/api/DoctorPrescription/",
+                dataSrc: "",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
                 },
+            },
+            responsive: true,
+            columns: [
+                {
+                    data: "format_last_modified"
                 },
-                responsive: true,
-                columns: [
-                    {
-                        data: "format_last_modified"
-                    },
-                    {
-                        data: "patient_name"
-                    },
-                    {
-                        data: "record_type"
-                    },
-                    {
-                        data: "description"
-                    },
-                    {
-                        data: 'id',
-                        render: function (data, type, row) {
-                            return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
+                {
+                    data: "patient_name"
+                },
+                {
+                    data: "record_type"
+                },
+                {
+                    data: "description"
+                },
+                {
+                    data: 'id',
+                    render: function (data, type, row) {
+                        return `<button type="button" data-id='${data}' data-obj='${JSON.stringify(row)}' class="btn rounded-circle btn-primary btn-sm edit">
                                     <i class="fa fa-edit"></i>
                                 </button>`
-                        }
-                    },
-                ]
-            })
-        
+                    }
+                },
+            ]
+        })
 
-        $('#subscriptionForm').submit(function(e){
+
+        $('#subscriptionForm').submit(function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -143,140 +157,140 @@
             let message = "Prescription added successfully."
             jQuery('#submitBtn').html('<i class="fa fa-spinner fa-spin"></i> Submitting...')
             $('#submitBtn').attr('disabled', true)
-            if(jQuery('#submitBtn').html() == 'Update Prescription' ){
+            if (jQuery('#submitBtn').html() == 'Update Prescription') {
                 action = 'PUT'
                 url = url + jQuery('#pres_id').val() + '/'
                 message = "Prescription updated successfully."
             }
-            data.set('description',$('#description').val().replace(/\r?\n/g, '<br />'))
-                $.ajax({
-                    url: url,
-                    method: action,
-                    data: data,
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", 'Token '+localStorage.getItem('DoctorToken'));
-                    }
-                }).done((response)=>{
-                    console.log(response)
-                    table.ajax.reload();
-                    jQuery('#subscriptionForm').trigger('reset')
-                    jQuery('#submitBtn').html('Add Prescription')
-                    $('#submitBtn').removeAttr('disabled')
-                    toastr.success(message,"Success",{positionClass:'toast-top-center'})
-                }).fail((error)=>{
-                    jQuery('#submitBtn').html('Add Prescription')
-                    $('#submitBtn').removeAttr('disabled')
-                    console.log(error)
-                    toastr.error("Operation Failed","Success",{positionClass:'toast-top-center'})
-                })
+            data.set('description', $('#description').val().replace(/\r?\n/g, '<br />'))
+            $.ajax({
+                url: url,
+                method: action,
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
+                }
+            }).done((response) => {
+                console.log(response)
+                table.ajax.reload();
+                jQuery('#subscriptionForm').trigger('reset')
+                jQuery('#submitBtn').html('Add Prescription')
+                $('#submitBtn').removeAttr('disabled')
+                toastr.success(message, "Success", { positionClass: 'toast-top-center' })
+            }).fail((error) => {
+                jQuery('#submitBtn').html('Add Prescription')
+                $('#submitBtn').removeAttr('disabled')
+                console.log(error)
+                toastr.error("Operation Failed", "Success", { positionClass: 'toast-top-center' })
+            })
 
-            
+
 
         })
 
         crudOperations({
             url: '/api/DoctorPrescription/',
             put_url: '/api/DoctorPrescription/',
-            table_id:'#subs_plans',
-            id_selector:'#pres_id',
-            form_id:'#subscriptionForm',
-            table:table,
-            entity:'Prescription',
-            tabs:true
+            table_id: '#subs_plans',
+            id_selector: '#pres_id',
+            form_id: '#subscriptionForm',
+            table: table,
+            entity: 'Prescription',
+            tabs: true
         })
 
         jQuery('#subs_plans').on('click', '.delete', function () {
-        var id = jQuery(this).attr('data-id')  
-        bootbox.confirm({
-              message: "Are you sure to delete the Specialist Type permenently?",
-              callback: function (result) {
-                  if(result){
-                      jQuery.ajax({
-                          url:`/api/DoctorPrescriptionDelete/${id}/`,
-                          method: 'DELETE',
-                          success:function(){
-                              table.ajax.reload()
-                              toastr.success("Deleted Successfully","Success",{positionClass:'toast-top-center'})
-                          },
-                          error:function(err){
-                              console.log(err)
-                              toastr.error("Deletion Failed","Error",{positionClass:'toast-top-center'})
-                          }
-                      })
-                  }
-              }
-          });
-      })
-
-
-    function formDeserialize(form, data) {
-        const entries = (new URLSearchParams(data)).entries();
-        for (const [key, val] of entries) {
-            const input = form.elements[key];
-            if (input != undefined) {
-                if (input.type == 'file') {
-                    if (val) {
-                        var $file = jQuery('#' + input.id),
-                            $label = $file.next('label'),
-                            $labelText = $label.find('span'),
-                            labelDefault = $labelText.text();
-                        var filename = val.split('/').pop()
-                        console.log(filename)
-                        if (filename) {
-                            $label
-                                .addClass('file-ok')
-                                .css('background-image', 'url(' + val + ')');
-                            $labelText.text(filename);
-                        } else {
-                            $label.removeClass('file-ok');
-                            $labelText.text(labelDefault);
-                        }
+            var id = jQuery(this).attr('data-id')
+            bootbox.confirm({
+                message: "Are you sure to delete the Specialist Type permenently?",
+                callback: function (result) {
+                    if (result) {
+                        jQuery.ajax({
+                            url: `/api/DoctorPrescriptionDelete/${id}/`,
+                            method: 'DELETE',
+                            success: function () {
+                                table.ajax.reload()
+                                toastr.success("Deleted Successfully", "Success", { positionClass: 'toast-top-center' })
+                            },
+                            error: function (err) {
+                                console.log(err)
+                                toastr.error("Deletion Failed", "Error", { positionClass: 'toast-top-center' })
+                            }
+                        })
                     }
-                    
-                } else {
-    
-                    switch (input.type) {
-                        case 'checkbox':
-                            input.checked = !!val;
-                            break;
-                        case 'select-one':
-                            if (val)
-                                input.value = val;
-                            else
-                                input.selectedIndex = 0;
-    
-                            break;
-                        default:
-                            input.value = val;
-                            break;
-    
-                    }
-    
                 }
+            });
+        })
+
+
+        function formDeserialize(form, data) {
+            const entries = (new URLSearchParams(data)).entries();
+            for (const [key, val] of entries) {
+                const input = form.elements[key];
+                if (input != undefined) {
+                    if (input.type == 'file') {
+                        if (val) {
+                            var $file = jQuery('#' + input.id),
+                                $label = $file.next('label'),
+                                $labelText = $label.find('span'),
+                                labelDefault = $labelText.text();
+                            var filename = val.split('/').pop()
+                            console.log(filename)
+                            if (filename) {
+                                $label
+                                    .addClass('file-ok')
+                                    .css('background-image', 'url(' + val + ')');
+                                $labelText.text(filename);
+                            } else {
+                                $label.removeClass('file-ok');
+                                $labelText.text(labelDefault);
+                            }
+                        }
+
+                    } else {
+
+                        switch (input.type) {
+                            case 'checkbox':
+                                input.checked = !!val;
+                                break;
+                            case 'select-one':
+                                if (val)
+                                    input.value = val;
+                                else
+                                    input.selectedIndex = 0;
+
+                                break;
+                            default:
+                                input.value = val;
+                                break;
+
+                        }
+
+                    }
+                }
+
             }
-    
         }
-    }
-
- 
 
 
-    // jQuery('#subs_plans').on('click', '.edit', function () {
-    //       var data = JSON.parse(jQuery(this).attr('data-obj'))
-    //       formDeserialize(document.getElementById('#subscriptionForm'.slice(1)), data)
-    //       jQuery('#submitBtn').html('Update ' + "prescription")
-    //       if(options.tabs){
-    //         jQuery('#myTab a[href="#form"]').tab('show')
-    //       }
-    //       else{
-    //         document.documentElement.scrollTop = 0;
-    //       }
-          
-    //   })
-        
-        
+
+
+        // jQuery('#subs_plans').on('click', '.edit', function () {
+        //       var data = JSON.parse(jQuery(this).attr('data-obj'))
+        //       formDeserialize(document.getElementById('#subscriptionForm'.slice(1)), data)
+        //       jQuery('#submitBtn').html('Update ' + "prescription")
+        //       if(options.tabs){
+        //         jQuery('#myTab a[href="#form"]').tab('show')
+        //       }
+        //       else{
+        //         document.documentElement.scrollTop = 0;
+        //       }
+
+        //   })
+
+
     })
 </script>
 {% endblock %}

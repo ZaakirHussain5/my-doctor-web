@@ -456,7 +456,7 @@
                                     <ul class="timeline">
                                         {% for consultation_list in consultation_lists %}
                                         <li>
-                                            <a target="_blank" href="#">{{consultation_list.doctor_id.full_name}}
+                                            <a href="#">{{consultation_list.doctor_id.full_name}}
                                                 ({{ consultation_list.doctor_id.specialist_type}})</a>
                                             <a href="#" class="float-right">{{ consultation_list.format_date }}</a>
                                             <p>{{ consultation_list.message }}</p>
@@ -470,12 +470,14 @@
                                         {% for records in  medical_records %}
                                         {% if records.is_prescription %}
                                         <li class="list-group-item">
+                                            {% if records.record_files %}
                                             <div class="float-right">
-                                                <a href="{% if records.record_files %}{{ records.record_files.url }}{% else %}#{% endif %}" target=_blank
+                                                <a href="{% if records.record_files %}{{ records.record_files.url }}{% else %}#{% endif %}" target="_blank"
                                                     class="btn btn-sm btn-primary">
                                                     <i class="fa fa-file"></i> View
                                                 </a>
                                             </div>
+                                            {% endif %}
                                             {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on
                                             {{records.format_last_modified}}
 
