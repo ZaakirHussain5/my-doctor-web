@@ -225,7 +225,10 @@
                     jQuery('#incomingVideoCall').modal('show')
                 }
                 else {
-                    if(x) x.stop()
+                    if(x) {
+                        x.pause();
+                        x.currentTime = 0;
+                    }
                     jQuery('#incomingVideoCall').modal('hide')
                 }
             });
