@@ -471,7 +471,7 @@
                                         {% if records.is_prescription %}
                                         <li class="list-group-item">
                                             <div class="float-right">
-                                                <a href="{{ records.record_files.url }}" target=_blank
+                                                <a href="{% if records.record_files %}{{ records.record_files.url }}{% else %}#{% endif %}" target=_blank
                                                     class="btn btn-sm btn-primary">
                                                     <i class="fa fa-file"></i> View
                                                 </a>
@@ -493,7 +493,7 @@
                                         <li class="list-group-item">
                                             {% if records.record_files %}
                                             <div class="float-right">
-                                                <a href="{{records.record_files.url }}" target="_blank"
+                                                <a href="{% if records.record_files %}{{ records.record_files.url }}{% else %}#{% endif %}" target="_blank"
                                                     class="btn btn-sm btn-primary">
                                                     <i class="fa fa-file"></i> View
                                                 </a>
