@@ -682,17 +682,14 @@
                 var id = urlParams.get('session')
                 var user = urlParams.get('user')
 
-                jQuery.ajax({
+                $.ajax({
                     'url': '/api/MobVedioChatOparetion/' + id + '/',
                     'method': 'DELETE',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token'));
                     },
                 }).done((response) => {
-                    var x = document.getElementById("myAudio");
-                    x.pause();
-                    x.currentTime = 0;
-                    jQuery('#incomingVideoCall').modal('hide')
+                    console.log(response)
                 }).fail((response) => {
                     console.log(response)
                 })
@@ -708,12 +705,12 @@
                         }
                     }).done(res => {
                         consultation_id = res[0] ? res[0].id : 0
-                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
+                        //window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
                     })
                 }
                 else {
                     video_session.disconnect()
-                    window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
+                    //window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
                 }
             })
 
