@@ -705,12 +705,12 @@
                         }
                     }).done(res => {
                         consultation_id = res[0] ? res[0].id : 0
-                        //window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
+                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
                     })
                 }
                 else {
                     video_session.disconnect()
-                    //window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
+                    window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
                 }
             })
 
