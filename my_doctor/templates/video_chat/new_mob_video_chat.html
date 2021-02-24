@@ -150,30 +150,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {% if user == 'doc'%}
+                    { {% if user == 'doc'%}
                     <div class="card">
                         <div class="card-body">
                             <ul class="nav nav-pills d-none" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Details"
-                                        role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Details" role="tab"
+                                        aria-controls="pills-home" aria-selected="true">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#History"
-                                        role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#History" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false">Profile</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="Details" role="tabpanel"
                                     aria-labelledby="pills-home-tab">
-                                    <h5 class="text-center">Patient Details</h5>
+                                    <h5>Patient Details</h5>
                                     <div class="text-center">
                                         {% if patient.profile_pic%}
-                                        <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive"
-                                            style="border-radius: :50%;">
+                                        <img src="{{patient.profile_pic.url}}" class="img-fluid img-responsive">
                                         {% else %}
-                                        <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive"
-                                            style="border-radius: :50%;">
+                                        <img src="/media/logos/anonymous-user.png" class="img-fluid img-responsive">
                                         {% endif %}
                                         <h4>{{patient.full_name}}</h4>
                                     </div>
@@ -181,10 +179,6 @@
                                         <tr>
                                             <td>Age</td>
                                             <td>{{patient.age}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Height</td>
-                                            <td>{{patient.height}} cm</td>
                                         </tr>
                                         <tr>
                                             <td>Weight</td>
@@ -195,8 +189,8 @@
                                             <td>{{patient.blood_group}}</td>
                                         </tr>
                                         <tr>
-                                            <td>City</td>
-                                            <td>{{patient.city}}</td>
+                                            <td>Medical History</td>
+                                            <td>{{patient.medical_history}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
@@ -213,22 +207,19 @@
                                             <i class="fa fa-angle-left"></i> Back
                                             </button>
                                     </div>
-
+        
                                     <ul class="nav nav-pills flex-column nav-pills" id="mySecondTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill"
-                                                href="#Cons" role="tab" aria-controls="pills-home"
-                                                aria-selected="true">Consultations</a>
+                                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#Cons"
+                                                role="tab" aria-controls="pills-home" aria-selected="true">Consultations</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Pres"
-                                                role="tab" aria-controls="pills-profile"
-                                                aria-selected="false">Prescriptions</a>
+                                                role="tab" aria-controls="pills-profile" aria-selected="false">Prescriptions</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#Reps"
-                                                role="tab" aria-controls="pills-profile"
-                                                aria-selected="false">Reports</a>
+                                                role="tab" aria-controls="pills-profile" aria-selected="false">Reports</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -237,11 +228,9 @@
                                             <ul class="timeline">
                                                 {% for consultation_list in consultation_lists %}
                                                 <li>
-                                                    <a target="_blank"
-                                                        href="#">{{consultation_list.doctor_id.full_name}}
+                                                    <a href="#">{{consultation_list.doctor_id.full_name}}
                                                         ({{ consultation_list.doctor_id.specialist_type}})</a>
-                                                    <a href="#"
-                                                        class="float-right">{{ consultation_list.format_date }}</a>
+                                                    <a href="#" class="float-right">{{ consultation_list.format_date }}</a>
                                                     <p>{{ consultation_list.message }}</p>
                                                 </li>
                                                 {% endfor %}
@@ -253,19 +242,21 @@
                                                 {% for records in  medical_records %}
                                                 {% if records.is_prescription %}
                                                 <li class="list-group-item">
+                                                    {% if records.record_files %}
                                                     <div class="float-right">
-                                                        <a href="{{ records.record_files.url }}" target=_blank
+                                                        <a href="{% if records.record_files %}{{ records.record_files.url }}{% else %}#{% endif %}" target="_blank"
                                                             class="btn btn-sm btn-primary">
                                                             <i class="fa fa-file"></i> View
                                                         </a>
                                                     </div>
+                                                    {% endif %}
                                                     {{records.doctor.full_name}} ({{records.doctor.specialist_type}}) on
                                                     {{records.format_last_modified}}
-
+        
                                                 </li>
                                                 {% endif %}
                                                 {% endfor %}
-
+        
                                             </ul>
                                         </div>
                                         <div class="tab-pane fade" id="Reps" role="tabpanel">
@@ -276,7 +267,7 @@
                                                 <li class="list-group-item">
                                                     {% if records.record_files %}
                                                     <div class="float-right">
-                                                        <a href="{{records.record_files.url }}" target="_blank"
+                                                        <a href="{% if records.record_files %}{{ records.record_files.url }}{% else %}#{% endif %}" target="_blank"
                                                             class="btn btn-sm btn-primary">
                                                             <i class="fa fa-file"></i> View
                                                         </a>
@@ -286,40 +277,41 @@
                                                 </li>
                                                 {% endif %}
                                                 {% endfor %}
-
+        
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+        
                         </div>
                     </div>
                     {% else %}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="text-center">Doctor Details</h5>
+                            <h5>Doctor Details</h5>
                             <div class="text-center">
                                 {% if doctor.profile_pic%}
-                                <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive"
-                                    style="border-radius: :50%;">
+                                <img src="{{doctor.profile_pic.url}}" class="img-fluid img-responsive">
                                 {% else %}
-                                <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive"
-                                    style="border-radius: :50%;">
+                                <img src="/media/logos/anonymous-doctor.png" class="img-fluid img-responsive">
                                 {% endif %}
                                 <h4>{{doctor.full_name}}</h4>
                                 <small>{{doctor.specialist_type}}</small>
                                 <br>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star"></i>
+                                <div id="rating-div">
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                </div>
+        
                             </div>
                             <table class="table table-hover ">
                                 <tr>
                                     <td>Consultations</td>
-                                    <td>21</td>
+                                    <td>{{ doc_total_cons }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><strong>About</strong>
@@ -466,6 +458,18 @@
                 var id = urlParams.get('session')
                 var user = urlParams.get('user')
 
+                $.ajax({
+                    'url': '/api/MobVedioChatOparetion/' + id + '/',
+                    'method': 'DELETE',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Token " + (user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token')));
+                    },
+                }).done((response) => {
+                    console.log(response)
+                }).fail((response) => {
+                    console.log(response)
+                })
+
                 if (user == 'doc') {
                     video_session.disconnect()
                     $.ajax({
@@ -476,13 +480,13 @@
                             xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
                         }
                     }).done(res => {
-                        consultation_id = res[0].id
-                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}&cons_id=${consultation_id}`;
+                        consultation_id = res[0] ? res[0].id : 0
+                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
                     })
                 }
                 else {
                     video_session.disconnect()
-                    window.location.href = '/api/ratings?consultation=' + consultation_id;
+                    window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
                 }
             })
 
