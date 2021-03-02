@@ -75,7 +75,6 @@ class checkEmail(viewsets.ModelViewSet):
   ]
   def get_queryset(self):
     data_email = self.request.query_params.get('email', None)
-    print('email is ', data_email)
     data_phone = self.request.query_params.get('phone', None)
     if data_email is not None:
       user =  User.objects.filter(email__icontains = data_email)

@@ -642,7 +642,7 @@
             
             let date = $('#dateSelected').val()
             $.ajax({
-                url: "/api/patientAppointment/DoctorAvailable/?date=" + date + "&&id=" + speciality_type,
+                url: "/api/patientAppointment/DoctorAvailable/?date=" + date + "&id=" + speciality_type,
                 method: 'GET',
                 contentType: 'Application/json'
             }).done((response) => {

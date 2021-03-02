@@ -5,7 +5,7 @@ from django.urls import path
 
 router = routers.DefaultRouter()
 router.register('user', userViewSet, 'user')
-router.register('has_email', checkEmail, 'has_email')
+router.register('duplicationCheck', checkEmail, 'duplicationCheck')
 
 urlpatterns = router.urls
 

@@ -460,7 +460,7 @@ function checkEmail(){
             console.log(email_warn.length)
             if (email.length >=3){
                 $.ajax({
-                    url: '/api/has_email/?email='+ email,
+                    url: '/api/duplicationCheck/?email='+ email,
                     method: 'GET',
                     contentType: 'application/json',
 
@@ -495,7 +495,7 @@ function checkEmail(){
             console.log(mob1_warn.length)
             if (mob1.length >=3){
                 $.ajax({
-                    url: '/api/has_email/?phone='+ mob1,
+                    url: '/api/duplicationCheck/?phone='+ mob1,
                     method: 'GET',
                     contentType: 'application/json',
 
