@@ -283,7 +283,6 @@ class PatientLogout(generics.GenericAPIView):
                 user=request.user)
             patient.is_logged_in=False
             patient.save()
-            request.user.auth_token.delete()
             logout(request)
             return Response({})
 

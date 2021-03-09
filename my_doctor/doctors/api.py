@@ -299,7 +299,6 @@ class DoctorLogout(generics.GenericAPIView):
                 user=request.user)
             doctor.is_loggedin=False
             doctor.save()
-            request.user.auth_token.delete()
             logout(request)
             return Response({})
 
