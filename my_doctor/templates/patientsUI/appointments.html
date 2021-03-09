@@ -261,6 +261,10 @@
                     request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
                 },
                 success: function (response) {
+                    if(response.error){
+                        toastr.error(response.error,"Error",{positionClass:"toast-top-center"})
+                        return
+                    }
                     if (window.matchMedia("(max-width:425px)").matches)
                         window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=small&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                     else

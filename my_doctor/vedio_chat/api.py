@@ -47,6 +47,7 @@ class CallDoctorAPI(generics.GenericAPIView):
     doctor_id = request.query_params.get('doctor_id',None)
     doctor = doctors_info.objects.get(id=doctor_id)
     appoinment = request.query_params.get('const', None)
+    
     video = VedioChat.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment)
     video.save()
     return Response({
@@ -104,18 +105,24 @@ class call_patient_mobile(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     patient_id = request.query_params.get('patient',None)
     appoinment = request.query_params.get('app_id',None)
-    session = opentok.create_session()
-    session_id = session.session_id
-    doctor_token = session.generate_token()
     patient = patient_info.objects.get(id=patient_id)
-    video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,user_token=doctor_token)
-    video.save()
-    return Response({
-      "Message":"Call initiated",
-      "session_id":session_id,
-      "token":doctor_token,
-      "id":video.id
-    })
+    if patient.is_logged_in:
+      session = opentok.create_session()
+      session_id = session.session_id
+      doctor_token = session.generate_token()
+      patient = patient_info.objects.get(id=patient_id)
+      video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,user_token=doctor_token)
+      video.save()
+      return Response({
+        "Message":"Call initiated",
+        "session_id":session_id,
+        "token":doctor_token,
+        "id":video.id
+      })
+    else:
+      return Response({
+        "error":"Patient is Offline"
+      })
 
 class call_doctor_mobile(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
@@ -123,18 +130,24 @@ class call_doctor_mobile(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     doctor_id = request.query_params.get('doctor',None)
     appoinment = request.query_params.get('app_id',None)
-    session = opentok.create_session()
-    session_id = session.session_id
-    patient_token = session.generate_token()
     doctor = doctors_info.objects.get(id=doctor_id)
-    video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment,session_id=session_id,user_token=patient_token)
-    video.save()
-    return Response({
-      "Message":"Call initiated",
-      "session_id":session_id,
-      "token":patient_token,
-      "id":video.id
-    })
+    if doctor.is_loggedin:
+      session = opentok.create_session()
+      session_id = session.session_id
+      patient_token = session.generate_token()
+      doctor = doctors_info.objects.get(id=doctor_id)
+      video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment,session_id=session_id,user_token=patient_token)
+      video.save()
+      return Response({
+        "Message":"Call initiated",
+        "session_id":session_id,
+        "token":patient_token,
+        "id":video.id
+      })
+    else:
+      return Response({
+        "error":"Doctor is Offline"
+      })
 
 class MobAnswerCallAPI(generics.GenericAPIView):
   serializer_class = video_mobile_serializer

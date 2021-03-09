@@ -344,11 +344,15 @@
         request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('DoctorToken'));
       },
       success: function (response) {
+        if (response.error) {
+          toastr.error(response.error, "Error", { positionClass: "toast-top-center" })
+          return
+        }
         if (window.matchMedia("(max-width:425px)").matches)
           window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=small&user=doc&session=${response.id}&patient=${button.attr('data-patient')}&app_id=${button.attr('data-const')}`
         else
           window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=big&user=doc&session=${response.id}&patient=${button.attr('data-patient')}&app_id=${button.attr('data-const')}`
-        },
+      },
       error: function (response) {
         console.log(response)
       }
