@@ -19,6 +19,7 @@ from .models import DoctorBillingHistory,doctors_info, DoctorTimings, settlement
 from .serializers import *
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from knox.models import AuthToken
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
@@ -297,6 +298,7 @@ class DoctorLogout(generics.GenericAPIView):
         if request.user is not None:
             doctor = doctors_info.objects.get(
                 user=request.user)
+            AuthToken.objects.filter(user=request.user).delete()
             doctor.is_loggedin=False
             doctor.save()
             logout(request)

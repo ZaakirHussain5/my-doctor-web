@@ -25,6 +25,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from my_doctor.settings import EMAIL_HOST_USER
 from django.contrib.auth import logout
+from knox.models import AuthToken
 
 class patient_infoViewSet(viewsets.ModelViewSet):
     queryset = patient_info.objects.filter(is_active=True)
@@ -282,6 +283,7 @@ class PatientLogout(generics.GenericAPIView):
             patient = patient_info.objects.get(
                 user=request.user)
             patient.is_logged_in=False
+            AuthToken.objects.filter(user=request.user).delete()
             patient.save()
             logout(request)
             return Response({})
