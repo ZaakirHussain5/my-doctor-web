@@ -184,6 +184,7 @@
                     success: function (response) {
                         console.log(response)
                         $('.disabled').removeAttr('disabled')
+                        $('.registerButton').removeClass('disabled')
                         $('#div-otp').show()
                     }
                 })
