@@ -68,6 +68,7 @@
                                             <label for="hf-email" class=" form-control-label">Email Address<span class="text-danger h5">*</span></label>
                                             <input type="email" id="email" name="email" required placeholder="Enter Email Address"
                                                 class="form-control">
+                                                <p class="text-danger sr-only" id="EmailError">Email Already Exists</p>
                                         </div>
                                         
                                         
@@ -75,6 +76,7 @@
                                             <label for="hf-email" class=" form-control-label">Phone No.<span class="text-danger h5">*</span></label>
                                             <input type="text" id="phone_number" name="phone_number" placeholder="Select Phone Number"
                                                 class="form-control" onkeypress="return /[0-9]/i.test(event.key)">
+                                                <p class="text-danger sr-only" id="PhoneError">Phone Number Already Exists</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -251,27 +253,20 @@
                     contentType: 'application/json',
 
                 }).done(res=>{
-                    
                     if(res.length > 0){
-                        if(email_warn.length == 0){
-                            jQuery('#email').after(jQuery('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
-                            jQuery('#buttonSubmit').prop('disabled', true)
-                        }
+                        jQuery('#EmailError').removeClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', true)
                     }
                     else{
-                        if(email_warn.length > 0){
-                            jQuery('#email-warning').remove()
-                            jQuery('#buttonSubmit').removeAttr('disabled')
-                        }
+                        jQuery('#EmailError').addClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', false)
                     }
                 }).fail(err=>{
                     console.log(err)
                 })
             }else{
-                if(email_warn.length > 0){
-                    jQuery('#email-warning').remove()
-                    jQuery('#buttonSubmit').prop('disabled', true)
-                }
+                jQuery('#Email').addClass('sr-only')
+                jQuery('.registerButton').prop('disabled', true)
             }
         }
 
@@ -287,27 +282,21 @@
                     contentType: 'application/json',
 
                 }).done(res=>{
-                    
+                    console.log('s_phon')
                     if(res.length > 0){
-                        if(mob1_warn.length == 0){
-                            jQuery('#phone_number').after(jQuery('<p id="phone_number-warning" class="text-danger">').text('Already exists. Please try another one.'))
-                            jQuery('#buttonSubmit').prop('disabled', true)
-                        }
+                        jQuery('#PhoneError').removeClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', true)
                     }
                     else{
-                        if(mob1_warn.length > 0){
-                            jQuery('#phone_number-warning').remove()
-                            jQuery('#buttonSubmit').removeAttr('disabled')
-                        }
+                        jQuery('#PhoneError').addClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', false)
                     }
                 }).fail(err=>{
                     console.log(err)
                 })
             }else{
-                if(mob1_warn.length > 0){
-                    jQuery('#phone_number-warning').remove()
-                    jQuery('#buttonSubmit').prop('disabled', true)
-                }
+                jQuery('#PhoneError').addClass('sr-only')
+                jQuery('.registerButton').prop('disabled', true)
             }
         }
 

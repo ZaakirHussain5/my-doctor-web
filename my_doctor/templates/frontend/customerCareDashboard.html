@@ -196,20 +196,23 @@
                                         <label for="hf-email" class=" form-control-label ml-5">Mobile1<span class="text-danger h5">*</span></label>
                                     </div>
                                     <div class="col-12 col-md-8"><input type="text" id="ph_no" required name="ph_no"
-                                            placeholder="Enter mobile1" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"></div>
+                                            placeholder="Enter mobile1" class="form-control" onkeypress="return /[0-9]/i.test(event.key)">
+                                            <p class="text-danger sr-only" id="PhoneError">Phone Number Already Exists</p></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
                                             class=" form-control-label ml-5">Mobile 2</label></div>
                                     <div class="col-12 col-md-8"><input type="text" id="s_ph_no" name="s_ph_no"
-                                            placeholder="Enter mobile2" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"></div>
+                                            placeholder="Enter mobile2" class="form-control" onkeypress="return /[0-9]/i.test(event.key)">
+                                            <p class="text-danger sr-only" id="AltPhoneError">Phone Number Already Exists</p></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
                                             class=" form-control-label ml-5">Email
                                             ID<span class="text-danger h5">*</span></label></div>
                                     <div class="col-12 col-md-8"><input type="text" id="email" required name="email"
-                                            placeholder="Enter Email ID" class="form-control"></div>
+                                            placeholder="Enter Email ID" class="form-control">
+                                        <p class="text-danger sr-only" id="EmailError">Email Already Exists</p></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-4"><label for="hf-email"
@@ -783,29 +786,22 @@
                     url: '/api/duplicationCheck/?email='+ email,
                     method: 'GET',
                     contentType: 'application/json',
-
                 }).done(res=>{
-                    
+                    console.log('s_phon')
                     if(res.length > 0){
-                        if(email_warn.length == 0){
-                            jQuery('#email').after(jQuery('<p id="email-warning" class="text-danger">').text('Already exists. Please try another one.'))
-                            jQuery('.registerButton').prop('disabled', true)
-                        }
+                        jQuery('#EmailError').removeClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', true)
                     }
                     else{
-                        if(email_warn.length > 0){
-                            jQuery('#email-warning').remove()
-                            jQuery('.registerButton').prop('disabled', false)
-                        }
+                        jQuery('#EmailError').addClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', false)
                     }
                 }).fail(err=>{
                     console.log(err)
                 })
             }else{
-                if(email_warn.length > 0){
-                    jQuery('#email-warning').remove()
-                    jQuery('.registerButton').prop('disabled', true)
-                }
+                jQuery('#EmailError').addClass('sr-only')
+                jQuery('.registerButton').prop('disabled', true)
             }
         }
 
@@ -821,27 +817,21 @@
                     contentType: 'application/json',
 
                 }).done(res=>{
-                    
+                    console.log('s_phon')
                     if(res.length > 0){
-                        if(mob1_warn.length == 0 ){
-                            jQuery('#ph_no').after(jQuery('<p id="ph_no-warning" class="text-danger">').text('Already exists. Please try another one.'))
-                            jQuery('.registerButton').prop('disabled', true)
-                        }
+                        jQuery('#PhoneError').removeClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', true)
                     }
                     else{
-                        if(mob1_warn.length > 0){
-                            jQuery('#ph_no-warning').remove()
-                            jQuery('.registerButton').prop('disabled', false)
-                        }
+                        jQuery('#PhoneError').addClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', false)
                     }
                 }).fail(err=>{
                     console.log(err)
                 })
             }else{
-                if(mob1_warn.length > 0){
-                    jQuery('#ph_no-warning').remove()
-                    jQuery('.registerButton').prop('disabled', true)
-                }
+                jQuery('#PhoneError').addClass('sr-only')
+                jQuery('.registerButton').prop('disabled', true)
             }
         }
         
@@ -852,32 +842,25 @@
             const mob2_warn = jQuery('#s_ph_no-warning')
             if (mob2.length >=3){
                 jQuery.ajax({
-                    url: '/api/duplicationCheck/?phone='+ mob1,
+                    url: '/api/duplicationCheck/?phone='+ mob2,
                     method: 'GET',
                     contentType: 'application/json',
-
                 }).done(res=>{
                     console.log('s_phon')
                     if(res.length > 0){
-                        if(mob2_warn.length == 0){
-                            jQuery('#s_ph_no').after(jQuery('<p id="s_ph_no-warning" class="text-danger">').text('Already exists. Please try another one.'))
-                            jQuery('.registerButton').prop('disabled', true)
-                        }
+                        jQuery('#AltPhoneError').removeClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', true)
                     }
                     else{
-                        if(mob2_warn.length > 0){
-                            jQuery('#s_ph_no-warning').remove()
-                            jQuery('.registerButton').prop('disabled', false)
-                        }
+                        jQuery('#AltPhoneError').addClass('sr-only')
+                        jQuery('.registerButton').prop('disabled', false)
                     }
                 }).fail(err=>{
                     console.log(err)
                 })
             }else{
-                if(mob1_warn.length > 0){
-                    jQuery('#s_ph_no-warning').remove()
-                    jQuery('.registerButton').prop('disabled', true)
-                }
+                jQuery('#AltPhoneError').addClass('sr-only')
+                jQuery('.registerButton').prop('disabled', true)
             }
         }
 

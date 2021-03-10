@@ -563,7 +563,6 @@
                     <button>
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
-
                 </div>
                 <ul id="messagess" class="messages">
 
@@ -663,7 +662,6 @@
                         contentType: 'application/json'
                     }).done((res) => {
                         if (res.length == 0) {
-
                             clearInterval(checkAnswer)
                             clearInterval(messageInterval)
                             alert('Patient is busy now.');
