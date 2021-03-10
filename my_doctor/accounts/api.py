@@ -37,6 +37,7 @@ class LoginAPI(generics.GenericAPIView):
     serializer = self.get_serializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = serializer.validated_data
+    AuthToken.objects.filter(user__id=user.id).delete()
     login(request,user)
     _, token = AuthToken.objects.create(user)
     return Response({
@@ -61,6 +62,7 @@ class g_loginView(generics.GenericAPIView):
     serializer = self.get_serializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = serializer.save()
+    AuthToken.objects.filter(user__id=user.id).delete()
     login(request,user)
     return Response({
       "user": UserAuthSerializer(user, context=self.get_serializer_context()).data,

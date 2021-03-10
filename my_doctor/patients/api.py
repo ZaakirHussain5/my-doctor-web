@@ -162,6 +162,7 @@ class socialPatientRegistrationView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        AuthToken.objects.filter(user__id=user.id).delete()
         login(request,user)
         return Response({
             'Patient': UserAuthSerializer(user, context=self.get_serializer_context()).data,
