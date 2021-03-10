@@ -644,9 +644,7 @@
                     jQuery('#incomingVideoCall').modal('hide')
                 }
             }).fail(function(xhr,status,message){
-                if(message == 'Unauthorized'){
                     window.location.href = '/'
-                }
             });
 
         }
