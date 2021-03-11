@@ -2,6 +2,7 @@ import datetime
 import requests
 import json
 from appointment.models import appointment
+from transactions.models import transactions
 from patients.models import patient_info
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -217,6 +218,8 @@ def appointmentExpired():
             if in_secoends < 300 :
                 appointments.consultation_status = 'Expired'
                 appointments.save()
+                trans = transactions(trans_type="Appointment Expired", trans_desc="Appointment Exired due inactivity.",user_id = appointments.patient, credit=appointments.paid_amount)
+
                 url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Dr. {0} has been Expired and the paid Amount has been transfered to the doctor plus wallet.&route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
                 requests.get(url)
                 doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Mr./Mrs. {0} has been Cancelled.&route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
