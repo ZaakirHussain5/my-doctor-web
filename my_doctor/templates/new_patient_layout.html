@@ -170,7 +170,7 @@
                                 <div class="iconbox mr-3" role="button" id="dropdownMenuLink2" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <div class="pb-1 pt-3">
-                                     <h5 id='conversation_doc' class="conversation__name--title mt-1 text-primary"></h5> 
+                                     <h5 id="conversation_doc" class="conversation__name--title mt-1 text-primary"></h5> 
                                      <!-- <p class=" btn btn-sm btn-primary ml-1"  style="cursor: pointer;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"  style="cursor: pointer;">
                                         Reminder <span class="badge badge-light">0</span></p>
                                         <div class="collapse" id="collapseExample">
@@ -442,7 +442,7 @@
                         themessage = evening;
                     }
 
-                    $('#conversation_doc').html( themessage + ' ' + response.full_name)
+                    $('#conversation_doc').html( themessage + ' <span id="patientNameForSMS">' + response.full_name + '</span>')
                     // $('#Profile-pic').attr('src', !response.profile_pic || response.profile_pic == '' ? '/media/logos/anonymous-user.png' : response.profile_pic)
                 }).fail(function (res) {
                     console.log(res)
