@@ -132,10 +132,10 @@ def send_message_before_15mins():
             if int(in_secoends/900) == 0:
                 pat_message = "Your Appointment with Dr. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
                 doct_message = "Your Appointment with Mr./Mrs. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
-                pat_reminder = Reminders(message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
+                pat_reminder = Reminders(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
                 pat_reminder.save()
 
-                doct_reminder = Reminders(message=doct_message, reminder_owner=appointment.doctor.user, appointment_id=appointments.id )
+                doct_reminder = Reminders(reminder_message=doct_message, reminder_owner=appointment.doctor.user, appointment_id=appointments.id )
                 doct_reminder.save()
                 patient = patient_info.objects.get(user=appointments.patient)
                 url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 15 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
@@ -163,11 +163,9 @@ def send_message_before_10mins():
             if int(in_secoends/600) == 0:
                 patient = patient_info.objects.get(user=appointments.patient)
                 pat_message = "Your Appointment with Dr. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
-                pat_message = "Your Appointment with Mr./Mrs. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
-                pat_reminder = Reminders(message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
-                pat_reminder.save()
-                doct_reminder = Reminders(message=doct_message, reminder_owner=appointment.doctor.user, appointment_id=appointments.id )
-                doct_reminder.save()
+                doct_message = "Your Appointment with Mr./Mrs. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
+                pat_reminder = Reminders.objects.create(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
+                doct_reminder = Reminders.objects.create(reminder_message=doct_message, reminder_owner=appointment.doctor.user, appointment_id=appointments.id )
 
                 url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
                 requests.get(url)
@@ -183,32 +181,46 @@ def send_message_before_5mins():
         appointment_time = appointments.appointment_time
         str_appointment_date = appointments.appointment_date
         date_format_app_date = datetime.datetime.strptime(str_appointment_date, "%d/%m/%Y")
-
         day_diff = today - date_format_app_date
         if day_diff.days == 0:
             app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
             diff = (app_time_instance - after_15mins)
             in_secoends = diff.total_seconds()
-            print(in_secoends/300)
             if in_secoends/300 > 0 and in_secoends/300 < 0.1:
-                # patient = patient_info.objects.get(user=appointments.patient)
-                print('=====>>>', in_secoends/(60*5))
-                # pat_message = "Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
-                # doct_message = "Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
-                # pat_reminder = Reminders(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
-                # pat_reminder.save()
+                patient = patient_info.objects.get(user=appointments.patient)
+                pat_message = "Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
+                doct_message = "Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
+                pat_reminder = Reminders(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
+                pat_reminder.save()
+                doct_reminder = Reminders(reminder_message=doct_message, reminder_owner=appointments.doctor.user, appointment_id=appointments.id )
+                doct_reminder.save()
+                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
+                requests.get(url)
+                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
+                requests.get(doct_url)
+                reminder_min(appointments, 5)
 
-                # doct_reminder = Reminders(reminder_message=doct_message, reminder_owner=appointments.doctor.user, appointment_id=appointments.id )
-                # doct_reminder.save()
-
-                # url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
-                # requests.get(url)
-                # doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
-                # requests.get(doct_url)
-                # reminder_min(appointments, 5)
-
-
-
+def appointmentExpired():
+    all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
+    today = datetime.datetime.now()
+    for appointments in all_pending_appointment:
+        after_15mins = today - datetime.timedelta(minutes=15)
+        appointment_time = appointments.appointment_time
+        str_appointment_date = appointments.appointment_date
+        date_format_app_date = datetime.datetime.strptime(str_appointment_date, "%d/%m/%Y")
+        day_diff = today - date_format_app_date
+        print(day_diff.days," ",appointments.id)
+        if day_diff.days <= 0:
+            app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
+            diff = (app_time_instance - after_15mins)
+            in_secoends = diff.total_seconds()
+            if in_secoends < 300 :
+                appointments.consultation_status = 'Expired'
+                appointments.save()
+                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Dr. {0} has been Expired and the paid Amount has been transfered to the doctor plus wallet.&route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
+                requests.get(url)
+                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Mr./Mrs. {0} has been Cancelled.&route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
+                requests.get(doct_url)
 # import requests
 # import json
 # url = "http://teleduce.corefactors.in/send-email-json-otom/xxxxxxxxxxxxxxxxxxx/route/"

@@ -39,4 +39,9 @@ def save_doctor_payment(sender, instance, **kwargs):
             description="Amount added to wallet for Appointment Cancellation",
             amount=instance.paid_amount,doc_name=instance.doctor.full_name,
             doc_image=instance.doctor.profile_pic,doc_spl=instance.doctor.specialist_type)
+        elif instance.consultation_status == "Expired":
+            billing_history = PatientBillingHistory.objects.create(patient=patient,status="R",
+            description="Amount added to wallet for Appointment Expired",
+            amount=instance.paid_amount,doc_name=instance.doctor.full_name,
+            doc_image=instance.doctor.profile_pic,doc_spl=instance.doctor.specialist_type)
 

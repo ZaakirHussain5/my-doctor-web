@@ -10,3 +10,4 @@ class AppointmentConfig(AppConfig):
         scheduler.start()
         scheduler.every_10mins_call()
         scheduler.every_5mins_call()
+        scheduler.appointmentExpiry_call()
