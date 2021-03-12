@@ -224,7 +224,7 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
 
         queryset = DoctorTimings.objects.filter(day = day_name, doctor__specialist_type = specialist_type.objects.get(id=specialist_id))
         for doctor in queryset:
-            total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date).count()
+            total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date,consultation_statuc="Pending").count()
             if dates == today_date:
                 current_datetime = datetime.datetime.now()
                 str_make_date = str(year) + '-' + str(month) + '-' + str(day) + ' '+ doctor.to_time
