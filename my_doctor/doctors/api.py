@@ -229,65 +229,44 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                 current_datetime = datetime.datetime.now()
                 str_make_date = str(year) + '-' + str(month) + '-' + str(day) + ' '+ doctor.to_time
                 to_time = datetime.datetime.strptime(str_make_date, "%Y-%m-%d %H:%M")
-                print('==>', current_datetime, to_time)
                 if current_datetime < to_time:
-                    print('step 2')
                     str_from_time = str(year) + '-' + str(month) + '-' + str(day) + ' ' + doctor.from_time
                     from_times = datetime.datetime.strptime(str_from_time, "%Y-%m-%d %H:%M")
                     if total_appiontments > 0:
-                        print('step 3')
                         # str_time = doctor.from_time
                         # date_format = datetime.datetime.strptime(str_time, '%H:%M')
                         # to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
-                        # from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
+                        from_times = from_times + datetime.timedelta( minutes= 10 * total_appiontments )
                         appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
-                        print(datetime.datetime.strftime(  appointment_time, "%I:%M %p") )
                         if (from_times < to_time):
-                            print('step 4')
                             if from_times < current_datetime:
-                                print('step 5')
-                                # doctor.from_time = current_datetime + datetime.timedelta( minutes= 10 )
                                 appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
-                        
                                 doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
-                            
                             else:
-                                print('step 6')
                                 doctor.from_time = datetime.datetime.strftime(from_times, '%I:%M %p')
                         else:
-                            print('step 7')
                             queryset = queryset.exclude(id= doctor.id)
 
                     else:
-                        print('step 8')
                         appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
                         if appointment_time < to_time:
-                            print('step 9')
-                            print(datetime.datetime.strftime(appointment_time, '%I:%M %p'))
                             doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
                         else:
-                            print('step 10')
                             queryset = queryset.exclude(id= doctor.id)
                 else:
-                    print('step 11')
                     queryset = queryset.exclude(id= doctor.id)
                 
 
             else:
-                print('step 12')
                 if total_appiontments > 0:
-                    print('step 13')
                     str_time = doctor.from_time
                     date_format = datetime.datetime.strptime(str_time, '%H:%M')
                     to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
                     from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
                     if (from_times < to_time):
-                        print('step 14')
                         doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M %p')
                     else:
-                        print('step 15')
                         queryset = queryset.exclude(id= doctor.id)
-            print('end loop')
 
         return queryset
 
