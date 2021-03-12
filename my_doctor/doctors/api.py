@@ -236,11 +236,10 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                         # str_time = doctor.from_time
                         # date_format = datetime.datetime.strptime(str_time, '%H:%M')
                         # to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
-                        from_times = from_times + datetime.timedelta( minutes= 10 * total_appiontments )
-                        appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
-                        if (from_times < to_time):
+                        from_times = from_times + datetime.timedelta( minutes= 10  )
+                        appointment_time = current_datetime + datetime.timedelta( minutes= 10 * total_appiontments)
+                        if (appointment_time < to_time):
                             if from_times < current_datetime:
-                                appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
                                 doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
                             else:
                                 doctor.from_time = datetime.datetime.strftime(from_times, '%I:%M %p')
@@ -250,11 +249,14 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                     else:
                         appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
                         if appointment_time < to_time:
-                            doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
+                            if from_times < current_datetime:
+                                doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
+                            else:
+                                doctor.from_time = datetime.datetime.strftime(from_times, '%I:%M %p')
                         else:
-                            queryset = queryset.exclude(id= doctor.id)
+                            queryset = queryset.exclude(id=doctor.id)
                 else:
-                    queryset = queryset.exclude(id= doctor.id)
+                    queryset = queryset.exclude(id=doctor.id)
                 
 
             else:
