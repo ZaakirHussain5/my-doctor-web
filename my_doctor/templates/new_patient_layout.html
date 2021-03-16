@@ -307,6 +307,21 @@
         ////////////////////////////////////////////////////////////////
         //         IF NOT LOGIN THEN REDIRECT TO LOGIN PAGE           // 
         ////////////////////////////////////////////////////////////////
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#previewImg').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+        $('#profile_pic').change(function (){
+            readURL(this)
+        })
+
         let cookie  = localStorage.getItem('Token')
         if ((cookie == undefined) || (cookie == null) || (cookie == ''))
         {

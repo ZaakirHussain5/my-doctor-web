@@ -103,9 +103,9 @@ class getAllConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         day = self.request.query_params.get('today', None)
         if day:
-            return consultations.objects.filter(consultation_date_time=day)
+            return consultations.objects.filter(consultation_date_time=day).order_by('-consultation_date_time')
 
-        return consultations.objects.all()
+        return consultations.objects.all().order_by('-consultation_date_time')
 
 class getPatientConsultations(mixins.ListModelMixin, viewsets.GenericViewSet):
     permissions = [
