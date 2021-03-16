@@ -790,7 +790,22 @@
                 })
             })
 
-            $('#add_patient_family_btn').click(function () {
+            $('#add_patient_family_btn').click(function () { 
+                if($('#mem_name').val() == ''){
+                    $('#NameMessage').removeClass('sr-only')
+                }else{
+                    $('#NameMessage').addClass('sr-only')
+                }
+                if($('#mem_rel').val() == ''){
+                    $('#RelationMessage').removeClass('sr-only')
+                }else{
+                    $('#RelationMessage').addClass('sr-only')
+                }
+                if($('#mem_age').val() == ''){
+                    $('#AgeMessage').removeClass('sr-only')
+                }else{
+                    $('#AgeMessage').addClass('sr-only')
+                }
                 var data = {
                     member_name: $('#mem_name').val(),
                     member_age: $('#mem_age').val(),

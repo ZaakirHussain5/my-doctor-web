@@ -388,12 +388,12 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="form-group col-md-12">
-                                                                <label for="mem_name">Name</label>
+                                                                <label for="mem_name">Name* <span class="text-danger sr-only" id="NameMessage">This Field Required</span> </label>
                                                                 <input type="text" class="form-control"
                                                                     placeholder="Enter the Member Name" id="mem_name" required>
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label for="mem_rel">Relation</label>
+                                                                <label for="mem_rel">Relation* <span class="text-danger sr-only" id="RelationMessage">This Field Required</span></label>
                                                                 <select id="mem_rel" class="form-control" required>
                                                                     <option value="">Select Member Relation</option>
                                                                     <option value="Spouse">Spouse</option>
@@ -402,9 +402,9 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label for="Name">Age</label>
+                                                                <label for="Name">Age* <span class="text-danger sr-only" id="AgeMessage">This Field Required</span></label>
                                                                 <input type="number" id="mem_age" class="form-control"
-                                                                    placeholder="Enter the Member Age" required>
+                                                                    placeholder="Enter the Member Age"  required>
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <button id="add_patient_family_btn" type="button"
