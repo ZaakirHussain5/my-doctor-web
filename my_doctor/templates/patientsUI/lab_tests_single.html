@@ -1,6 +1,11 @@
 {% extends 'new_patient_layout.html'%}
 {% load static%}
 {% block content %}
+<style>
+    .lab-img{
+        height: 3rem !important;
+    }
+</style>
 <div class="ca-content__chatstab">
     <div class="ca-content__callstab" style="padding-top: 0;">
         <div class="conversation-panel__body ps">
@@ -20,21 +25,21 @@
                                 </p>
                                 <div class="row">
                                     <div class="col-md-3 text-center">
-                                        <span><img src="{% static 'website/img/lv_icon1.png' %}" alt=""></span>
+                                        <span><img src="{% static 'website/img/lv_icon1.png' %}" alt="" class="lab-img"></span>
                                         <p class="mt-2">Parameter Included:<br>
                                           <strong>{{total_parameters}}</strong>
                                     </div>
                                     <div class="col-md-3 text-center">
-                                        <span><img src="{% static 'website/img/lv_icon2.png' %}" alt=""></span>
+                                        <span><img src="{% static 'website/img/lv_icon2.png' %}" alt="" class="lab-img"></span>
                                         <p class="mt-2"><strong>FREE </strong>Sample <br>Collection<br>
                                         </p>
                                     </div>
                                     <div class="col-md-3 text-center">
-                                        <span><img src="{% static 'website/img/lv_icon3.png' %}" alt=""></span>
+                                        <span><img src="{% static 'website/img/lv_icon3.png' %}" alt="" class="lab-img"></span>
                                         <p class="mt-2"><strong>FREE </strong>Doctor <br>Consultation<br></p>
                                     </div>
                                     <div class="col-md-3 text-center">
-                                        <span><img src="{% static 'website/img/lv_icon4.png' %}" alt=""></span>
+                                        <span><img src="{% static 'website/img/lv_icon4.png' %}" alt="" class="lab-img"></span>
                                         <p class="mt-2">Test booked so far:<br>
                                           <strong>90097+ </strong>
                                         </p>
