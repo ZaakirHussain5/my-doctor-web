@@ -97,11 +97,16 @@ class PatientResgistrationApp(serializers.Serializer):
     def create(self, validated_data):
         try:
             user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+            fcm_token = ""
+            try:
+                fcm_token = validated_data["fcm_token"]
+            except KeyError:
+                pass
             patient_details = patient_info.objects.create(user=user,
             pat_id=validated_data['pat_id'],
             full_name=validated_data['full_name'],
             ph_no=validated_data['username'],
-            fcm_token=validated_data["fcm_token"])
+            fcm_token=fcm_token)
             patient_details.save()
             return user
         except IntegrityError:
