@@ -47,6 +47,27 @@ class appointment(models.Model):
     def patient_gender(self):
         return patient_info.objects.get(user__id=self.patient.id).gender
     
+    @property
+    def video_flag(self):
+        import datetime
+        today = datetime.datetime.now()
+        after_15mins = today + datetime.timedelta(minutes=10)
+        appointment_time = self.appointment_time
+        str_appointment_date = self.appointment_date
+        date_format_app_date = datetime.datetime.strptime(str_appointment_date, "%d/%m/%Y")
+
+        day_diff = today - date_format_app_date
+        if day_diff.days == 0:
+            app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
+            diff = (app_time_instance - after_15mins)
+            in_secoends = diff.total_seconds()
+            if int(in_secoends/600) < 0:
+                return True
+            else:
+                return False
+        else:
+            return False
+    
 
     def __str__(self):
         return str(self.id)

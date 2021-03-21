@@ -41,6 +41,7 @@ class LoginSerializer(serializers.Serializer):
   username = serializers.CharField()
   password = serializers.CharField()
   user_type = serializers.CharField()
+  fcm_token = serializers.CharField(required=False,allow_null=True,allow_blank=True)
 
   def validate(self, data):
     print(data['username'])
@@ -64,14 +65,22 @@ class LoginSerializer(serializers.Serializer):
         if user_type == 'P':
           patDetails = patient_info.objects.get(user__id = user.id, is_active=True)
           patDetails.is_logged_in = True
+          try:
+              patDetails.fcm_token = data["fcm_token"]
+          except KeyError:
+              pass
           patDetails.save()
           if patDetails :
             return user
         if user_type == 'D':
           patDetails = doctors_info.objects.get(user__id = user.id, is_active=True)
-          if patDetails:
-            patDetails.is_loggedin = True
-            patDetails.save()
+          patDetails.is_loggedin = True
+          try:
+              patDetails.fcm_token = data["fcm_token"]
+          except KeyError:
+              pass
+          patDetails.save()
+          if patDetails :
             return user
         if user_type == 'E':
           patDetails = executive_details.objects.get(user__id = user.id)

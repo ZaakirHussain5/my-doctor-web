@@ -205,7 +205,7 @@ def appointmentExpired():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
     today = datetime.datetime.now()
     for appointments in all_pending_appointment:
-        after_15mins = today - datetime.timedelta(minutes=15)
+        after_15mins = today 
         appointment_time = appointments.appointment_time
         str_appointment_date = appointments.appointment_date
         date_format_app_date = datetime.datetime.strptime(str_appointment_date, "%d/%m/%Y")
@@ -213,9 +213,9 @@ def appointmentExpired():
         print(day_diff.days," ",appointments.id)
         if day_diff.days <= 0:
             app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
-            diff = (app_time_instance - after_15mins)
+            diff = (after_15mins - app_time_instance)
             in_secoends = diff.total_seconds()
-            if in_secoends < 300 :
+            if in_secoends >= 1200 :
                 appointments.consultation_status = 'Expired'
                 appointments.save()
                 trans = transactions(trans_type="Appointment Expired", trans_desc="Appointment Exired due inactivity.",user_id = appointments.patient, credit=appointments.paid_amount)

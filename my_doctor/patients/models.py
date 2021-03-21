@@ -29,6 +29,7 @@ class patient_info(models.Model):
     modified_at=models.DateTimeField(auto_now=True)
     is_logged_in=models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
+    fcm_token = models.TextField(null=True,blank=True)
 
     def __str__(self):
         return self.full_name
