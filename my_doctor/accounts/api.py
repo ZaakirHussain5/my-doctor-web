@@ -89,3 +89,26 @@ class checkEmail(viewsets.ModelViewSet):
       self.serializer_class = patient_infoSerializer
       patients = patient_info.objects.filter(ph_no__icontains = data_phone)
       return patients 
+
+class fcmTokenAPI(generics.GenericAPIView):
+  permission_classes=[
+    permissions.IsAuthenticated,
+  ]
+  def post(self, request, *args, **kwargs):
+    fcm_token = request.query_params.get('fcm',None)
+    if request.user.username.startswith('DPDOC'):
+      doctor = doctors_info.objects.get(user=request.user)
+      doctor.fcm_token = fcm_token
+      doctor.save()
+      return Response({
+        "Message" : "FCM Token Saved Successfully."
+      })
+    else:
+      doctor = patient_info.objects.get(user=request.user)
+      doctor.fcm_token = fcm_token
+      doctor.save()
+      return Response({
+        "Message" : "FCM Token Saved Successfully."
+      })
+      
+
