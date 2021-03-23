@@ -106,7 +106,6 @@ class call_patient_mobile(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     patient_id = request.query_params.get('patient',None)
     appoinment = request.query_params.get('app_id',None)
-    patient = patient_info.objects.get(id=patient_id)
     if patient.is_logged_in:
       session = opentok.create_session()
       session_id = session.session_id
@@ -114,7 +113,7 @@ class call_patient_mobile(generics.GenericAPIView):
       patient = patient_info.objects.get(id=patient_id)
       appointIns=appo.objects.get(id=appointment)
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,user_token=doctor_token)
-      pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.")
+      #pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.")
       return Response({
         "Message":"Call initiated",
         "session_id":session_id,
@@ -132,7 +131,6 @@ class call_doctor_mobile(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     doctor_id = request.query_params.get('doctor',None)
     appoinment = request.query_params.get('app_id',None)
-    doctor = doctors_info.objects.get(id=doctor_id)
     if doctor.is_loggedin:
       session = opentok.create_session()
       session_id = session.session_id
@@ -140,7 +138,7 @@ class call_doctor_mobile(generics.GenericAPIView):
       doctor = doctors_info.objects.get(id=doctor_id)
       appointIns=appo.objects.get(id=appointment)
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment,session_id=session_id,user_token=patient_token)
-      pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.")
+      #pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.")
       return Response({
         "Message":"Call initiated",
         "session_id":session_id,
@@ -167,30 +165,25 @@ class MobAnswerCallAPI(generics.GenericAPIView):
         "session_id" : video.session_id,
         "token":token
     })
-    #return Response(status=status.HTTP_400_BAD_REQUEST)
 
-def pushNotification(deviceToken,message):
-  import requests
-  import json
+def pushNotification(deviceToken,title, message):
+    import requests
+    import json
 
-  serverToken = 'AIzaSyD5FJg-faFBfW53PhRIqYKzlJHzSlUTGXE
+    serverToken = 'AIzaSyD5FJg-faFBfW53PhRIqYKzlJHzSlUTGXE'
 
-  headers = {
-          'Content-Type': 'application/json',
-          'Authorization': 'key=' + serverToken,
-        }
+    headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=' + serverToken
+    }
 
-  body = {
-            'notification': {'title': title,
-                              'body': message
-                              },
-            'to':
-                deviceToken,
-            'priority': 'high',
-          #   'data': dataPayLoad,
-          }
-  response = requests.post("https://fcm.googleapis.com/fcm/send",headers = headers, data=json.dumps(body))
-  print(response.status_code)
+    body = {
+      'notification': {'title': title,'body': message},
+      'to': deviceToken,
+      'priority': 'high'
+    }
+    response = requests.post("https://fcm.googleapis.com/fcm/send",headers = headers, data=json.dumps(body))
+    print(response.status_code)
 
-  print(response.json())
+    print(response.json())
 
