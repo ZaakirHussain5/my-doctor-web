@@ -106,11 +106,11 @@ class call_patient_mobile(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     patient_id = request.query_params.get('patient',None)
     appoinment = request.query_params.get('app_id',None)
+    patient = patient_info.objects.get(id=patient_id)
     if patient.is_logged_in:
       session = opentok.create_session()
       session_id = session.session_id
       doctor_token = session.generate_token()
-      patient = patient_info.objects.get(id=patient_id)
       appointIns=appo.objects.get(id=appointment)
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,user_token=doctor_token)
       #pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.")
@@ -131,11 +131,11 @@ class call_doctor_mobile(generics.GenericAPIView):
   def post(self, request, *args, **kwargs):
     doctor_id = request.query_params.get('doctor',None)
     appoinment = request.query_params.get('app_id',None)
+    doctor = doctors_info.objects.get(id=doctor_id)
     if doctor.is_loggedin:
       session = opentok.create_session()
       session_id = session.session_id
       patient_token = session.generate_token()
-      doctor = doctors_info.objects.get(id=doctor_id)
       appointIns=appo.objects.get(id=appointment)
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment,session_id=session_id,user_token=patient_token)
       #pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.")
