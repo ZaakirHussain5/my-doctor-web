@@ -105,7 +105,7 @@ class call_patient_mobile(generics.GenericAPIView):
 
   def post(self, request, *args, **kwargs):
     patient_id = request.query_params.get('patient',None)
-    appoinment = request.query_params.get('app_id',None)
+    appointment = request.query_params.get('app_id',None)
     patient = patient_info.objects.get(id=patient_id)
     if patient.is_logged_in:
       session = opentok.create_session()
@@ -130,7 +130,7 @@ class call_doctor_mobile(generics.GenericAPIView):
 
   def post(self, request, *args, **kwargs):
     doctor_id = request.query_params.get('doctor',None)
-    appoinment = request.query_params.get('app_id',None)
+    appointment = request.query_params.get('app_id',None)
     doctor = doctors_info.objects.get(id=doctor_id)
     if doctor.is_loggedin:
       session = opentok.create_session()
