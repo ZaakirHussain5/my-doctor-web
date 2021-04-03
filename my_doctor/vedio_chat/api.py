@@ -112,7 +112,7 @@ class call_patient_mobile(generics.GenericAPIView):
       session_id = session.session_id
       doctor_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
-      video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment,session_id=session_id,user_token=doctor_token)
+      video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appointment,session_id=session_id,user_token=doctor_token)
       #pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.")
       return Response({
         "Message":"Call initiated",
@@ -137,7 +137,7 @@ class call_doctor_mobile(generics.GenericAPIView):
       session_id = session.session_id
       patient_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
-      video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment,session_id=session_id,user_token=patient_token)
+      video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appointment,session_id=session_id,user_token=patient_token)
       #pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.")
       return Response({
         "Message":"Call initiated",
