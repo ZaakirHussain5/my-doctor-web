@@ -41,6 +41,24 @@ class MobVedioChatOparetion(viewsets.ModelViewSet):
     def perform_create(self,serializer):
         return serializer.save()
 
+    def perform_destroy(self,serializer):
+        if self.request.user.id == serializer.Call_from.id:
+          if serializer.Call_for.username.startswith('DPDOC') and serializer.is_answered == False:
+            doctor = doctors_info.objects.get(user__id=serializer.Call_for.id)
+            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient")
+          elif serializer.is_answered == False:
+            patient = patient_info.objects.get(user__id=serializer.Call_for.id)
+            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor")
+        else:
+          if serializer.Call_from.username.startswith('DPDOC') and serializer.is_answered == False:
+            doctor = doctors_info.objects.get(user__id=serializer.Call_from.id)
+            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient")
+          elif serializer.is_answered == False:
+            patient = patient_info.objects.get(user__id=serializer.Call_from.id)
+            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor")
+
+        return serializer.delete()
+
 class CallDoctorAPI(generics.GenericAPIView):
   serializer_class = VedioChatSerializer
 
