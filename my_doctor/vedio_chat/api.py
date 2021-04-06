@@ -45,17 +45,17 @@ class MobVedioChatOparetion(viewsets.ModelViewSet):
         if self.request.user.id == serializer.Call_from.id:
           if serializer.Call_for.username.startswith('DPDOC') and serializer.is_answered == False:
             doctor = doctors_info.objects.get(user__id=serializer.Call_for.id)
-            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient")
+            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
           elif serializer.is_answered == False:
             patient = patient_info.objects.get(user__id=serializer.Call_for.id)
-            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor")
+            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
         else:
           if serializer.Call_from.username.startswith('DPDOC') and serializer.is_answered == False:
             doctor = doctors_info.objects.get(user__id=serializer.Call_from.id)
-            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient")
+            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
           elif serializer.is_answered == False:
             patient = patient_info.objects.get(user__id=serializer.Call_from.id)
-            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor")
+            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
 
         return serializer.delete()
 
@@ -131,7 +131,7 @@ class call_patient_mobile(generics.GenericAPIView):
       doctor_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appointment,session_id=session_id,user_token=doctor_token)
-      #pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.")
+      pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.","P")
       return Response({
         "Message":"Call initiated",
         "session_id":session_id,
@@ -156,7 +156,7 @@ class call_doctor_mobile(generics.GenericAPIView):
       patient_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appointment,session_id=session_id,user_token=patient_token)
-      #pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.")
+      pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.","D")
       return Response({
         "Message":"Call initiated",
         "session_id":session_id,
@@ -184,11 +184,14 @@ class MobAnswerCallAPI(generics.GenericAPIView):
         "token":token
     })
 
-def pushNotification(deviceToken,title, message):
+def pushNotification(deviceToken,title, message,user):
     import requests
     import json
 
-    serverToken = 'AIzaSyD5FJg-faFBfW53PhRIqYKzlJHzSlUTGXE'
+    if user == "D" :
+      serverToken = 'AAAA08jY3gQ:APA91bE_y6faaIH3lej5TUBUuM2z4dIO4hUIWJ_HF1OVOsEdtiSQS9Dmyp8hRaHInFYImiqLp1OjxwcVngI_q0IwAexzUwfT9mobnsVDkegygwgYdF4_afgNmgDpy5jHMWMCWbl5Q-X-'
+    else:
+      serverToken = 'AAAAYWuqYoM:APA91bFkyQr5rD92Zd6IB1-5O6QnQRcFYCFvAENEdushl7f2RxSRR45qVno1UDsNGHvGIJfGBAukqnol2XSSWyBnoigdoqarb7-Hu7CshYtPyduu5IHR4FKcU_nJGPWq0NjwHIfZYWSX'
 
     headers = {
       'Content-Type': 'application/json',
