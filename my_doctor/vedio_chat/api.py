@@ -141,7 +141,7 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
     try:
       video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
     except video_chat_session.DoesNotExist:
-      video = video_chat_session.objects.get(Call_from=request.user,is_answered=False,is_rejected=False)
+      video = video_chat_session.objects.get(Call_from=request.user,is_rejected=False)
     video.is_rejected = True
     video.save()
     if request.user.id == video.Call_from.id:
