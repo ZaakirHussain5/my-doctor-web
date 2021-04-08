@@ -140,17 +140,17 @@ class getPatientAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 class getAppoinmentHistory(viewsets.ModelViewSet):
     serializer_class = appointmentsListSerializer
-    permission = (
+    permissions = [
         permissions.IsAuthenticated
-    )
+    ]
     def get_queryset(self):
         return appointment.objects.filter(patient = self.request.user).exclude(consultation_status='Pending')
 
 class getUpcomingAppoinment(viewsets.ModelViewSet):
     serializer_class = appointmentsListSerializer
-    permission = (
+    permissions = [
         permissions.IsAuthenticated
-    )
+    ]
 
     def get_queryset(self):
         return appointment.objects.filter(consultation_status = 'Pending', patient=self.request.user).order_by('-created_at')
@@ -158,9 +158,9 @@ class getUpcomingAppoinment(viewsets.ModelViewSet):
 
 class upComingAppoinment(viewsets.ModelViewSet):
     serializer_class = appointmentsListSerializer
-    permission = (
+    permissions = [
         permissions.IsAuthenticated
-    )
+    ]
 
     def get_queryset(self):
         dates = getDateFormat()
@@ -169,9 +169,9 @@ class upComingAppoinment(viewsets.ModelViewSet):
 
 class previousAppoinment(viewsets.ModelViewSet):
     serializer_class = appointmentsListSerializer
-    permission = (
+    permissions = [
         permissions.IsAuthenticated
-    )
+    ]
 
     def get_queryset(self):
         return appointment.objects.filter(consultation_status = 'Completed', doctor__user=self.request.user)
@@ -179,9 +179,9 @@ class previousAppoinment(viewsets.ModelViewSet):
 
 class todaysAppoinment(viewsets.ModelViewSet):
     serializer_class = appointmentsListSerializer
-    permission = (
+    permissions = [
         permissions.IsAuthenticated
-    )
+    ]
 
     def get_queryset(self):
         formated_date = getDateFormat()
@@ -228,9 +228,9 @@ class getAllAppointments(mixins.ListModelMixin, viewsets.GenericViewSet):
 class cancleAppointment(viewsets.ModelViewSet):
     serializer_class = cancleAppointmentSerializer
     queryset = appointment.objects.all()
-    permissions = {
+    permissions = [
         permissions.IsAuthenticated
-    }
+    ]
     def perform_update(self, serializer):
         appointments = serializer.save()
         if appointments.consultation_status == 'Cancelled':

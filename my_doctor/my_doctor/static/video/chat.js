@@ -5,7 +5,7 @@ if (!myStorage.getItem('chatID')) {
     myStorage.setItem('chatID', createUUID());
 }
 
-setTimeout(function() {
+setTimeout(function () {
     element.addClass('enter');
 }, 1000);
 
@@ -32,7 +32,7 @@ function closeElement() {
     element.find('.header button').off('click', closeElement);
     element.find('#sendMessage').off('click', sendNewMessage);
     element.find('.text-box').off('keydown', onMetaAndEnter).prop("disabled", true).blur();
-    setTimeout(function() {
+    setTimeout(function () {
         element.find('.chat').removeClass('enter').show()
         element.click(openElement);
     }, 500);
@@ -53,94 +53,14 @@ function createUUID() {
     return uuid;
 }
 
-function sendNewMessage() {
 
-    var userInput = $('.text-box');
-    var newMessage = userInput.html();
 
-    if (!newMessage) return;
 
-    var messagesContainer = $('.messages');
 
-    // messagesContainer.append([
-    //     '<li class="self">',
-    //     newMessage,
-    //     '</li>'
-    // ].join(''));
-
-    // clean out old message
-    userInput.html('');
-    // focus on input
-    userInput.focus();
-
-    messagesContainer.finish().animate({
-        scrollTop: messagesContainer.prop("scrollHeight")
-    }, 250);
-    sendMessageAjax(newMessage);
-}
-
-function sendMessageAjax(message){
-    
-    let data = {
-        'user': user,
-        'message': message,
-        'session_id': session
-    }
-    $.ajax({
-        url: '/api/consultant_chats/',
-        method: 'POST',
-        data: JSON.stringify(data),
-        contentType: 'application/json'
-    }).done((response)=>{
-        return
-    }).fail((err)=>{
-        console.log(err);
-    })
-}
 let total_messages = 0;
-function getMyMessage(){
-    $.ajax({
-        url: '/api/consultant_chats?session='+ session,
-        method: 'GET',
-        contentType: 'application/json'
-    }).done((response)=>{
-        if( total_messages < response.length)
-        {openElement(); total_messages = response.length }
-        serializedMessage(response)
-    }).fail((err)=>{
-        console.log(err);
-    })
-}
-getMyMessage()
-let messageInterval = setInterval(function(){
-    getMyMessage();
-}, 1000)
+
+
 
 let totalMessage = 0
-function serializedMessage(arrOfMessage){
-    let lis = '';
-    var messagesContainer = $('.messages');
-    let subarry = arrOfMessage.slice(totalMessage, arrOfMessage.length);
-    totalMessage = arrOfMessage.length;
-    for(var i =0; i < subarry.length; i++){
-        let message = subarry[i];
-        if(user == message.user){
-            let li = `<li class="self">${message.message}</li>`;
-            lis += li
-        }
-        else{
-            let li = `<li class="other">${message.message}</li>`;
-            lis += li
-        }
-    }
-    $('#messagess').append(lis);
-    messagesContainer.finish().animate({
-        scrollTop: messagesContainer.prop("scrollHeight")
-    }, 250);
-}
 
-function onMetaAndEnter(event) {
-    if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
-        sendNewMessage();
-    }
-}
+

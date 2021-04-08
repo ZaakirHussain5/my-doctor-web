@@ -580,13 +580,13 @@
     <script src="{% static 'assets/js/toastr.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'video/config.js' %}"></script>
     <script type="text/javascript" src="{% static 'video/app.js' %}"></script>
+    <script src="{% static 'video/chat.js' %}"></script>
     <script>
         const user = '{{user}}';
         const session = '{{ session }}';
         const appoinment = '{{ appointment }}';
         const doctor_id = '{{doctor.id}}';
     </script>
-    <script src="{% static 'video/chat.js' %}"></script>
     <script>
         $(document).ready(function () {
            
@@ -626,8 +626,12 @@
                     console.log(err)
                 })
             }
+
+            var checkAnswer = null;
+            
+
             if (user == 'pat') {
-                let checkAnswer = setInterval(check_for_answer, 2000)
+                checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer() {
                     jQuery.ajax({
                         url: `/api/check_for_answer?sessions=${session}`,
@@ -640,7 +644,6 @@
                             // })
                             // toastr.error("Doctor is busy now.","Success",{positionClass:'toast-top-center'})
                             clearInterval(checkAnswer)
-                            clearInterval(messageInterval)
                             alert('Doctor is busy now.');
                             window.location.href = '/patients/dashboard'
                         }
@@ -654,7 +657,7 @@
                 }
             }
             else {
-                let checkAnswer = setInterval(check_for_answer, 2000)
+                checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer() {
                     jQuery.ajax({
                         url: `/api/check_for_answer?sessions=${session}`,
@@ -663,7 +666,6 @@
                     }).done((res) => {
                         if (res.length == 0) {
                             clearInterval(checkAnswer)
-                            clearInterval(messageInterval)
                             alert('Patient is busy now.');
                             window.location.href = '/doctors/dashboard'
                         }
@@ -679,20 +681,17 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 var id = urlParams.get('session')
                 var user = urlParams.get('user')
-
+                if(checkAnswer) clearInterval(checkAnswer)
                 $.ajax({
-                    'url': '/api/MobVedioChatOparetion/' + id + '/',
-                    'method': 'DELETE',
+                    'url': '/api/reject_call',
+                    'method': 'POST',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + (user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token')));
                     },
                 }).done((response) => {
-                    console.log(response)
-                }).fail((response) => {
-                    console.log(response)
-                })
 
-                if (user == 'doc') {
+                    console.log(response)
+                    if (user == 'doc') {
                     video_session.disconnect()
                     $.ajax({
                         url: '/api/consult_info_for_doct?sessions=' + session,
@@ -710,6 +709,11 @@
                     video_session.disconnect()
                     window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
                 }
+                }).fail((response) => {
+                    console.log(response)
+                })
+
+                
             })
 
             $('#btnViewMore').click(function () {

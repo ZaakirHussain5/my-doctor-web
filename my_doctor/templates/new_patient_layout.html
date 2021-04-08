@@ -684,8 +684,8 @@
 
         jQuery('#hangupBtn').click(function () {
             jQuery.ajax({
-                'url': '/api/MobVedioChatOparetion/' + jQuery(this).attr('data-id') + '/',
-                'method': 'DELETE',
+                'url': '/api/reject_call',
+                'method': 'POST',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
                 },

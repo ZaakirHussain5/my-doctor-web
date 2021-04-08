@@ -32,78 +32,15 @@ class MobVedioChatOparetion(viewsets.ModelViewSet):
     serializer_class = video_mobile_serializer
 
     def get_queryset(self):
-        queryset = video_chat_session.objects.filter(is_answered=False)
+        queryset = video_chat_session.objects.filter(is_answered=False).filter(is_rejected=False)
         user = self.request.query_params.get('user', None)
         if user is not None:
-            queryset = self.request.user.call_for_user.filter(is_answered=False)
+            queryset = self.request.user.call_for_user.filter(is_answered=False).filter(is_rejected=False)
         return queryset
     
     def perform_create(self,serializer):
         return serializer.save()
 
-    def perform_destroy(self,serializer):
-        if self.request.user.id == serializer.Call_from.id:
-          if serializer.Call_for.username.startswith('DPDOC') and serializer.is_answered == False:
-            doctor = doctors_info.objects.get(user__id=serializer.Call_for.id)
-            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
-          elif serializer.is_answered == False:
-            patient = patient_info.objects.get(user__id=serializer.Call_for.id)
-            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
-        else:
-          if serializer.Call_from.username.startswith('DPDOC') and serializer.is_answered == False:
-            doctor = doctors_info.objects.get(user__id=serializer.Call_from.id)
-            pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
-          elif serializer.is_answered == False:
-            patient = patient_info.objects.get(user__id=serializer.Call_from.id)
-            pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
-
-        return serializer.delete()
-
-class CallDoctorAPI(generics.GenericAPIView):
-  serializer_class = VedioChatSerializer
-
-  def post(self, request, *args, **kwargs):
-    doctor_id = request.query_params.get('doctor_id',None)
-    doctor = doctors_info.objects.get(id=doctor_id)
-    appoinment = request.query_params.get('const', None)
-    
-    video = VedioChat.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appoinment)
-    video.save()
-    return Response({
-      "Message":"Call initiated",
-      "id":video.id
-    })
-
-
-class AnswerCallAPI(generics.GenericAPIView):
-  serializer_class = VedioChatSerializer
-  
-  def post(self, request, *args, **kwargs):
-    session_id = request.query_params.get('session_id',None)
-    video = VedioChat.objects.get(id=session_id)
-    if video.Call_for == request.user:
-      video.is_answered = True
-      video.save()
-      return Response({
-        "Message":"Call Answered",
-        "id":video.id
-      })
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
-class CallPatientAPI(generics.GenericAPIView):
-  serializer_class = VedioChatSerializer
-
-  def post(self, request, *args, **kwargs):
-    patient_id = request.query_params.get('patient',None)
-    appoinment = request.query_params.get('const',None)
-    patient = patient_info.objects.get(id=patient_id)
-    video = VedioChat.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appoinment)
-    video.save()
-    return Response({
-      "Message":"Call initiated",
-      "id":video.id
-    })
 
 
 class check_for_answer(viewsets.ModelViewSet):
@@ -115,12 +52,15 @@ class check_for_answer(viewsets.ModelViewSet):
   def get_queryset(self):
     data = self.request.query_params.get('sessions', None)
     if data:
-      return video_chat_session.objects.filter(id=data)
+      return video_chat_session.objects.filter(id=data).filter(is_rejected=False)
     return []
 
 class call_patient_mobile(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
 
+  permissions = [
+    permissions.IsAuthenticated
+  ]
   def post(self, request, *args, **kwargs):
     patient_id = request.query_params.get('patient',None)
     appointment = request.query_params.get('app_id',None)
@@ -130,8 +70,8 @@ class call_patient_mobile(generics.GenericAPIView):
       session_id = session.session_id
       doctor_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
+      pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.full_name,"You are getting a call from your doctor for the Appointment.","P")
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appointment,session_id=session_id,user_token=doctor_token)
-      pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.name,"You are getting a call from your doctor for the Appointment.","P")
       return Response({
         "Message":"Call initiated",
         "session_id":session_id,
@@ -146,6 +86,10 @@ class call_patient_mobile(generics.GenericAPIView):
 class call_doctor_mobile(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
 
+  permissions = [
+    permissions.IsAuthenticated
+  ]
+
   def post(self, request, *args, **kwargs):
     doctor_id = request.query_params.get('doctor',None)
     appointment = request.query_params.get('app_id',None)
@@ -155,8 +99,8 @@ class call_doctor_mobile(generics.GenericAPIView):
       session_id = session.session_id
       patient_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
-      video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appointment,session_id=session_id,user_token=patient_token)
       pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.","D")
+      video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appointment,session_id=session_id,user_token=patient_token)
       return Response({
         "Message":"Call initiated",
         "session_id":session_id,
@@ -170,11 +114,13 @@ class call_doctor_mobile(generics.GenericAPIView):
 
 class MobAnswerCallAPI(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
+
+  permissions = [
+    permissions.IsAuthenticated
+  ]
   
   def post(self, request, *args, **kwargs):
-    session_id = request.query_params.get('id',None)
-    video = video_chat_session.objects.get(id=session_id)
-    #if video.Call_for == request.user:
+    video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
     video.is_answered = True
     video.save()
     token = opentok.generate_token(video.session_id)
@@ -182,6 +128,70 @@ class MobAnswerCallAPI(generics.GenericAPIView):
         "Message":"Call Answered",
         "session_id" : video.session_id,
         "token":token
+    })
+
+class MobRejectEndCallAPI(generics.GenericAPIView):
+  serializer_class = video_mobile_serializer
+
+  permissions = [
+    permissions.IsAuthenticated
+  ]
+  
+  def post(self, request, *args, **kwargs):
+    try:
+      video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
+    except video_chat_session.DoesNotExist:
+      video = video_chat_session.objects.get(Call_from=request.user,is_answered=False,is_rejected=False)
+    video.is_rejected = True
+    video.save()
+    if request.user.id == video.Call_from.id:
+      if video.Call_for.username.startswith('DPDOC') and video.is_answered == False:
+        doctor = doctors_info.objects.get(user__id=video.Call_for.id)
+        pushNotification(doctor.fcm_token,"Call Ended","Call was Ended by Patient","D")
+      elif serializer.is_answered == False:
+        patient = patient_info.objects.get(user__id=video.Call_for.id)
+        pushNotification(patient.fcm_token,"Call Ended","Call was Ended by the Doctor","P")
+    else:
+      if video.Call_from.username.startswith('DPDOC') and video.is_answered == False:
+        doctor = doctors_info.objects.get(user__id=video.Call_from.id)
+        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
+      elif video.is_answered == False:
+        patient = patient_info.objects.get(user__id=video.Call_from.id)
+        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
+    return Response({
+        "Message":"Call Rejected"
+    })
+
+class MobEndCallAPI(generics.GenericAPIView):
+  serializer_class = video_mobile_serializer
+
+  permissions = [
+    permissions.IsAuthenticated
+  ]
+  
+  def post(self, request, *args, **kwargs):
+    try:
+      video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
+    except video_chat_session.DoesNotExist:
+      video = video_chat_session.objects.get(Call_from=request.user,is_answered=False,is_rejected=False)
+    video.is_ended = True
+    video.save()
+    if request.user.id == video.Call_from.id:
+      if video.Call_for.username.startswith('DPDOC') and video.is_answered == False:
+        doctor = doctors_info.objects.get(user__id=video.Call_for.id)
+        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
+      elif serializer.is_answered == False:
+        patient = patient_info.objects.get(user__id=video.Call_for.id)
+        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
+    else:
+      if video.Call_from.username.startswith('DPDOC') and video.is_answered == False:
+        doctor = doctors_info.objects.get(user__id=video.Call_from.id)
+        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
+      elif video.is_answered == False:
+        patient = patient_info.objects.get(user__id=video.Call_from.id)
+        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
+    return Response({
+        "Message":"Call Rejected"
     })
 
 def pushNotification(deviceToken,title, message,user):
@@ -206,5 +216,5 @@ def pushNotification(deviceToken,title, message,user):
     response = requests.post("https://fcm.googleapis.com/fcm/send",headers = headers, data=json.dumps(body))
     print(response.status_code)
 
-    print(response.json())
+    print(response)
 

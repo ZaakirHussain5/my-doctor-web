@@ -202,7 +202,6 @@ def send_message_before_5mins():
                 reminder_min(appointments, 5)
 
 def appointmentExpired():
-    print('checking ')
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
     today = datetime.datetime.now()
     print(all_pending_appointment)
@@ -212,13 +211,10 @@ def appointmentExpired():
         str_appointment_date = appointments.appointment_date
         date_format_app_date = datetime.datetime.strptime(str_appointment_date, "%d/%m/%Y")
         day_diff = today - date_format_app_date
-        print(day_diff.days," ",appointments.id)
-        print('patient is', appointments.patient)
         if day_diff.days <= 0:
             app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
             diff = (after_15mins - app_time_instance)
             in_secoends = diff.total_seconds()
-            print(in_secoends)
             if in_secoends >= 900 :
                 appointments.consultation_status = 'Expired'
                 appointments.save()

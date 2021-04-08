@@ -46,6 +46,44 @@ function initializeSession() {
       video_session.publish(publisher, handleError);
     }
   });
+  
+  video_session.on('signal:msg', function signalCallback(event) {
+    serializedMessage(event.data, event.from.connectionId === session.connection.connectionId ? 'self' : 'other')
+  });
+}
+
+
+function serializedMessage(message, messageOf) {
+  let lis = '';
+  var messagesContainer = $('.messages');
+  let li = `<li class="${messageOf}">${message}</li>`;
+  $('#messagess').append(lis);
+  messagesContainer.finish().animate({
+      scrollTop: messagesContainer.prop("scrollHeight")
+  }, 250);
+}
+
+function sendNewMessage() {
+  sendMessageAjax(newMessage);
+}
+
+function sendMessageAjax(message) {
+  video_session.signal({
+      type: 'msg',
+      data: message
+  }, function signalCallback(error) {
+      if (error) {
+          console.error('Error sending signal:', error.name, error.message);
+      } else {
+          msgTxt.value = '';
+      }
+  });
+}
+
+function onMetaAndEnter(event) {
+  if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
+      sendNewMessage();
+  }
 }
 
 $('#micBtn').click(function(){

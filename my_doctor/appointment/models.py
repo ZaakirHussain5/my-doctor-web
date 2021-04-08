@@ -61,7 +61,6 @@ class appointment(models.Model):
             app_time_instance = datetime.datetime.strptime(str_appointment_date + ' ' + appointment_time, '%d/%m/%Y %I:%M %p')
             diff = (app_time_instance - after_15mins)
             in_secoends = diff.total_seconds()
-            print("Seconds Remaining ",in_secoends)
             if int(in_secoends) < 600:
                 return True
             else:

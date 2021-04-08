@@ -68,7 +68,7 @@ class GetPatientPrescriptionAPI(viewsets.ModelViewSet):
         return self.request.user.records.filter(is_prescription=True)
 
 class PatientRecordAPI(viewsets.ModelViewSet):
-    permission = [
+    permissions = [
         permissions.IsAuthenticated
     ]
     serializer_class = MedicalRecordSerializer

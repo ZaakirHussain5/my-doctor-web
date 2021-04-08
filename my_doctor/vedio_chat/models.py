@@ -35,7 +35,8 @@ class video_chat_session(models.Model):
     Call_for = models.ForeignKey(User, related_name="call_for_user", on_delete=models.CASCADE,null=True,blank=True)
     appoinment_id = models.IntegerField(default=0)
     is_answered = models.BooleanField(default=False)
-    consult_id=models.IntegerField(default=0)
+    is_rejected = models.BooleanField(default=False)
+    consult_id = models.IntegerField(default=0)
 
     @property
     def caller_name(self):
