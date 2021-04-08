@@ -19,4 +19,5 @@ urlpatterns = [
     path('MobCallDoctor',call_doctor_mobile.as_view(),name='MDVideoCall'),
     path('MobCallPatient',call_patient_mobile.as_view(),name='MPVideoCall'),
     path('MobAnswerCall',MobAnswerCallAPI.as_view(),name='answer_call'),
+    path('answer_call',MobAnswerCallAPI.as_view(),name='answer_call'),
 ]
