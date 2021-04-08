@@ -683,7 +683,7 @@
                 var user = urlParams.get('user')
                 if(checkAnswer) clearInterval(checkAnswer)
                 $.ajax({
-                    'url': '/api/reject_call',
+                    'url': '/api/end_call',
                     'method': 'POST',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + (user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token')));

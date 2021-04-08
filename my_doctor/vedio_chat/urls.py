@@ -15,6 +15,7 @@ urlpatterns = [
     path('VideoCall',views.patientVideoChat,name="video_chat"),
     path('ratings',views.ratings,name='ratings'),
     path('reject_call',MobRejectEndCallAPI.as_view(),name='answer_call'),
+    path('end_call',MobRejectEndCallAPI.as_view(),name='end_call'),
     path('MobCallDoctor',call_doctor_mobile.as_view(),name='MDVideoCall'),
     path('MobCallPatient',call_patient_mobile.as_view(),name='MPVideoCall'),
     path('MobAnswerCall',MobAnswerCallAPI.as_view(),name='answer_call'),
