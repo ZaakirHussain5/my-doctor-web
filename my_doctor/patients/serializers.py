@@ -81,7 +81,8 @@ class socailRegistrationSerializer(serializers.Serializer):
             user.save()
             patient_details = patient_info.objects.create(user=user,
                 pat_id=validated_data['pat_id'],
-                full_name=validated_data['full_name']
+                full_name=validated_data['full_name'],
+                is_logged_in=True
             )
         return user
 
