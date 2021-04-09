@@ -690,7 +690,12 @@
                     },
                 }).done((response) => {
 
+                   
+                }).fail((response) => {
                     console.log(response)
+                })
+
+                console.log(response)
                     if (user == 'doc') {
                     video_session.disconnect()
                     $.ajax({
@@ -709,11 +714,6 @@
                     video_session.disconnect()
                     window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
                 }
-                }).fail((response) => {
-                    console.log(response)
-                })
-
-                
             })
 
             $('#btnViewMore').click(function () {

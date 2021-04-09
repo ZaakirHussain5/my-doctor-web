@@ -147,7 +147,10 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
       try:
         video = video_chat_session.objects.get(Call_from=request.user,is_rejected=False)
       except video_chat_session.DoesNotExist:
-        return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
+        try:  
+          video = video_chat_session.objects.get(Call_for=request.user,is_rejected=False)
+        except video_chat_session.DoesNotExist:
+          return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
 
     video.is_rejected = True
     video.save()
