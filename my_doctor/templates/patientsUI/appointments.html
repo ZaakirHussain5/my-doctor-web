@@ -271,7 +271,11 @@
                         window.location.href = `/api/VideoCall?session_id=${response.session_id}&session_token=${response.token}&device=big&user=pat&session=${response.id}&doctor=${button.attr('data-doctor')}&appointment=${button.attr('data-const')}`
                 },
                 error: function (response) {
+                    if(response.status == 400){
+                        toastr.error(response.renponseJSON.error,"Error",{positionClass:"toast-top-center"})
+                    }
                     console.log(response)
+
                 }
             })
         })
