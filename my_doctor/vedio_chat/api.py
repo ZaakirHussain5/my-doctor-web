@@ -81,7 +81,7 @@ class call_patient_mobile(generics.GenericAPIView):
     else:
       return Response({
         "error":"Patient is Offline"
-      })
+      },status=status.HTTP_400_BAD_REQUEST)
 
 class call_doctor_mobile(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
@@ -110,7 +110,7 @@ class call_doctor_mobile(generics.GenericAPIView):
     else:
       return Response({
         "error":"Doctor is Offline"
-      })
+      },status=status.HTTP_400_BAD_REQUEST)
 
 class MobAnswerCallAPI(generics.GenericAPIView):
   serializer_class = video_mobile_serializer
@@ -123,7 +123,7 @@ class MobAnswerCallAPI(generics.GenericAPIView):
     try:
       video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
     except video_chat_session.DoesNotExist:
-      return Response({"error":"No Active Calls found"})
+      return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
     video.is_answered = True
     video.save()
     token = opentok.generate_token(video.session_id)
@@ -147,7 +147,7 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
       try:
         video = video_chat_session.objects.get(Call_from=request.user,is_rejected=False)
       except video_chat_session.DoesNotExist:
-        return Response({"error":"No Active Calls found"})
+        return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
 
     video.is_rejected = True
     video.save()
