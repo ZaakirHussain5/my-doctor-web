@@ -689,13 +689,11 @@
                         xhr.setRequestHeader("Authorization", "Token " + (user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token')));
                     },
                 }).done((response) => {
-
-                   
+                    console.log(response)
                 }).fail((response) => {
                     console.log(response)
                 })
-
-                console.log(response)
+                
                     if (user == 'doc') {
                     video_session.disconnect()
                     $.ajax({

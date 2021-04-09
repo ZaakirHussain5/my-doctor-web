@@ -403,8 +403,12 @@
                     console.log(err)
                 })
             }
+
+            var checkAnswer = null;
+            
+
             if (user == 'pat') {
-                let checkAnswer = setInterval(check_for_answer, 2000)
+                checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer() {
                     jQuery.ajax({
                         url: `/api/check_for_answer?sessions=${session}`,
@@ -417,7 +421,6 @@
                             // })
                             // toastr.error("Doctor is busy now.","Success",{positionClass:'toast-top-center'})
                             clearInterval(checkAnswer)
-                            clearInterval(messageInterval)
                             alert('Doctor is busy now.');
                             window.location.href = '/patients/dashboard'
                         }
@@ -431,7 +434,7 @@
                 }
             }
             else {
-                let checkAnswer = setInterval(check_for_answer, 2000)
+                checkAnswer = setInterval(check_for_answer, 2000)
                 function check_for_answer() {
                     jQuery.ajax({
                         url: `/api/check_for_answer?sessions=${session}`,
@@ -439,9 +442,7 @@
                         contentType: 'application/json'
                     }).done((res) => {
                         if (res.length == 0) {
-
                             clearInterval(checkAnswer)
-                            clearInterval(messageInterval)
                             alert('Patient is busy now.');
                             window.location.href = '/doctors/dashboard'
                         }
@@ -457,10 +458,10 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 var id = urlParams.get('session')
                 var user = urlParams.get('user')
-
+                if(checkAnswer) clearInterval(checkAnswer)
                 $.ajax({
-                    'url': '/api/MobVedioChatOparetion/' + id + '/',
-                    'method': 'DELETE',
+                    'url': '/api/end_call',
+                    'method': 'POST',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + (user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token')));
                     },
@@ -469,8 +470,8 @@
                 }).fail((response) => {
                     console.log(response)
                 })
-
-                if (user == 'doc') {
+                
+                    if (user == 'doc') {
                     video_session.disconnect()
                     $.ajax({
                         url: '/api/consult_info_for_doct?sessions=' + session,
