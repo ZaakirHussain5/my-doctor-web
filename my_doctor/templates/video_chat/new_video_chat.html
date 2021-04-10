@@ -648,7 +648,9 @@
                             window.location.href = '/patients/dashboard'
                         }
                         if (res[0].is_answered == true) {
-                            create_consultation()
+                            setTimeout(() => {
+                                create_consultation();
+                            }, 180000);
                             clearInterval(checkAnswer)
                         }
                     }).fail((err) => {
@@ -693,7 +695,7 @@
                 }).fail((response) => {
                     console.log(response)
                 })
-                
+
                     if (user == 'doc') {
                     video_session.disconnect()
                     $.ajax({

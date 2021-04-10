@@ -24,7 +24,7 @@ def Prescription(request):
 	patients = patient_info.objects.all()
 	print(patients)
 	for patient in patients:
-		if consultations.objects.filter(patient = patient.user).count() <= 0:
+		if consultations.objects.filter(patient = patient.user).filter(doctor__user=request.user).count() <= 0:
 			patients = patients.exclude(id__in = [patient.id])
 	context['select_required'] = False
 	context['consulataion_id'] = 0

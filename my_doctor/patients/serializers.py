@@ -76,6 +76,9 @@ class socailRegistrationSerializer(serializers.Serializer):
     def create(self, validated_data):
         try:
             user = User.objects.get(username = validated_data['email'])
+            patient = patient_info.objects.get(user=user)
+            patient.is_logged_in = True
+            patient.save()
         except User.DoesNotExist:
             user = User(username=validated_data['email'], email=validated_data['email'])
             user.save()

@@ -1,42 +1,4 @@
-var element = $('.floating-chat');
-var myStorage = localStorage;
 
-if (!myStorage.getItem('chatID')) {
-    myStorage.setItem('chatID', createUUID());
-}
-
-setTimeout(function () {
-    element.addClass('enter');
-}, 1000);
-
-element.click(openElement);
-
-function openElement() {
-    var messages = element.find('.messages');
-    var textInput = element.find('.text-box');
-    $('.chat-btn').hide();
-    element.addClass('expand');
-    element.find('.chat').addClass('enter');
-    var strLength = textInput.val().length * 2;
-    textInput.keydown(onMetaAndEnter).prop("disabled", false).focus();
-    element.off('click', openElement);
-    element.find('.header button').click(closeElement);
-    element.find('#sendMessage').click(sendNewMessage);
-    messages.scrollTop(messages.prop("scrollHeight"));
-}
-
-function closeElement() {
-    element.find('.chat').removeClass('enter').hide();
-    $('.chat-btn').show();
-    element.removeClass('expand');
-    element.find('.header button').off('click', closeElement);
-    element.find('#sendMessage').off('click', sendNewMessage);
-    element.find('.text-box').off('keydown', onMetaAndEnter).prop("disabled", true).blur();
-    setTimeout(function () {
-        element.find('.chat').removeClass('enter').show()
-        element.click(openElement);
-    }, 500);
-}
 
 function createUUID() {
     // http://www.ietf.org/rfc/rfc4122.txt
@@ -54,13 +16,5 @@ function createUUID() {
 }
 
 
-
-
-
-let total_messages = 0;
-
-
-
-let totalMessage = 0
 
 

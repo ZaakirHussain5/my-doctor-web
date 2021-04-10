@@ -10,6 +10,7 @@ function handleError(error) {
     console.error(error);
   }
 }
+
 var video_session;
 
 function initializeSession() {
@@ -61,8 +62,9 @@ function serializedMessage(message, messageOf) {
   var UpdatedMessages = allMessages + li;
   $('#messagess').html(UpdatedMessages)
   messagesContainer.finish().animate({
-      scrollTop: messagesContainer.prop("scrollHeight")
+    scrollTop: messagesContainer.prop("scrollHeight")
   }, 250);
+  openElement();
 }
 
 function sendNewMessage() {
@@ -120,23 +122,6 @@ $('#videoBtn').click(function(){
   }
 })
 
-$('#endCall').click(function(){
-  if(window.location.href.search('DoctorVideoUI') !=-1) {
-    $.ajax({
-      'url': '/api/vedioChatOparetion/' + urlParams.get('conf_id')+'/',
-      'method': 'DELETE',
-      beforeSend: function (xhr) {
-          xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
-      },
-  }).done((response) => {
-      console.log(response)
-  }).fail((response) => {
-      console.log(response)
-  })
-  }
-  video_session.disconnect()
-
-})
 
 // See the config.js file.
 if (API_KEY && TOKEN && SESSION_ID) {
@@ -158,4 +143,40 @@ if (API_KEY && TOKEN && SESSION_ID) {
     handleError(error);
     alert('Failed to get opentok sessionId and token. Make sure you have updated the config.js file.');
   });
+}
+
+var element = $('.floating-chat');
+var myStorage = localStorage;
+
+setTimeout(function () {
+    element.addClass('enter');
+}, 100);
+
+element.click(openElement);
+
+function openElement() {
+    var messages = element.find('.messages');
+    var textInput = element.find('.text-box');
+    $('.chat-btn').hide();
+    element.addClass('expand');
+    element.find('.chat').addClass('enter');
+    var strLength = textInput.val().length * 2;
+    textInput.keydown(onMetaAndEnter).prop("disabled", false).focus();
+    element.off('click', openElement);
+    element.find('.header button').click(closeElement);
+    element.find('#sendMessage').click(sendNewMessage);
+    messages.scrollTop(messages.prop("scrollHeight"));
+}
+
+function closeElement() {
+    element.find('.chat').removeClass('enter').hide();
+    $('.chat-btn').show();
+    element.removeClass('expand');
+    element.find('.header button').off('click', closeElement);
+    element.find('#sendMessage').off('click', sendNewMessage);
+    element.find('.text-box').off('keydown', onMetaAndEnter).prop("disabled", true).blur();
+    setTimeout(function () {
+        element.find('.chat').removeClass('enter').show()
+        element.click(openElement);
+    }, 500);
 }
