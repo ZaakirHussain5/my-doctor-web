@@ -272,7 +272,7 @@
                 },
                 error: function (response) {
                     if(response.status == 400){
-                        toastr.error(response.renponseJSON.error,"Error",{positionClass:"toast-top-center"})
+                        toastr.error(response.responseJSON.error,"Error",{positionClass:"toast-top-center"})
                     }
                     console.log(response)
 
