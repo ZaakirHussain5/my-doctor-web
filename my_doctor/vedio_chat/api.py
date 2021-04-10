@@ -219,9 +219,8 @@ def pushNotification(deviceToken,title, message,user):
     }
 
     body = {
-      'notification': {'title': title,'body': message},
+      'data': {'title': title,'message': message,"action":"1"},
       'to': deviceToken,
-      'priority': 'high'
     }
     response = requests.post("https://fcm.googleapis.com/fcm/send",headers = headers, data=json.dumps(body))
     print(response.status_code)
