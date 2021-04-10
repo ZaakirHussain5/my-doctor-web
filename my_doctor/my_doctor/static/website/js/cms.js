@@ -63,7 +63,7 @@ function submitRegistrationForm() {
                 method: 'POST',
                 contentType: 'application/json'
             }).done((response) => {
-                $.cookie('Token', response.token, { expires: 1 })
+                localStorage.setItem("Token",response.token)
                 $.ajax({
                     url: 'https://teleduce.corefactors.in/lead/apiwebhook/a224db72-cafb-4cce-93ab-3d7f950c92e2/Register_patient/',
                     method: 'POST',
