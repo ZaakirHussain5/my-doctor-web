@@ -48,7 +48,7 @@ function initializeSession() {
   });
   
   video_session.on('signal:msg', function signalCallback(event) {
-    serializedMessage(event.data, event.from.connectionId === session.connection.connectionId ? 'self' : 'other')
+    serializedMessage(event.data, event.from.connectionId === video_session.connection.connectionId ? 'self' : 'other')
   });
 }
 
@@ -57,14 +57,16 @@ function serializedMessage(message, messageOf) {
   let lis = '';
   var messagesContainer = $('.messages');
   let li = `<li class="${messageOf}">${message}</li>`;
-  $('#messagess').append(lis);
+  var allMessages = $('#messagess').html();
+  var UpdatedMessages = allMessages + li;
+  $('#messagess').html(UpdatedMessages)
   messagesContainer.finish().animate({
       scrollTop: messagesContainer.prop("scrollHeight")
   }, 250);
 }
 
 function sendNewMessage() {
-  sendMessageAjax(newMessage);
+  sendMessageAjax($('.text-box').html());
 }
 
 function sendMessageAjax(message) {
@@ -75,7 +77,7 @@ function sendMessageAjax(message) {
       if (error) {
           console.error('Error sending signal:', error.name, error.message);
       } else {
-          msgTxt.value = '';
+        $('.text-box').html('');
       }
   });
 }
