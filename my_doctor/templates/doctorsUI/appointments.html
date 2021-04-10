@@ -263,7 +263,7 @@
       {
         data: 'consultation_date_time',
         render:function(data){
-          return new Date(data)
+          return moment(data).format('LLL')
         }
       },
       {

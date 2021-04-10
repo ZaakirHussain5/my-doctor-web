@@ -217,12 +217,13 @@
                         </div>
                         <div class="calllist__actions">
                             <div class="calllist__actions">
-                                <div class="iconbox btn-hovered-light call" data-const="${index.id}" data-doctor="${index.doctor.id}">
+                                ${index.video_flag == true ? `<div class="iconbox btn-hovered-light call" data-const="${index.id}" data-doctor="${index.doctor.id}">
                                     <ul>
                                         <li><i class="iconbox__icon mdi mdi-video text-danger"></i></li>
                                         <li class="text-center"><span>Call</span></li>
                                     </ul>
-                                </div>
+                                </div>` : ""}
+                                
                                 <div class="iconbox btn-hovered-light edit-app" data-doct='${JSON.stringify(index)}' data-id='${index.id}'>
                                     <ul>
                                         <li><i  class="iconbox__icon mdi mdi-pencil-outline text-primary"></i></li>
