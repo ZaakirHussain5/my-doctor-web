@@ -329,7 +329,9 @@
                 },
             }).done((res)=>{
                 jQuery('#todaysAppoinmentCount').html(res.length)
-            })
+            }).fail((error) => {
+                console.log(error);
+            });
 
 
         }).fail((error) => {
