@@ -51,8 +51,8 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
-        doctor = doctors_info.objects.get(id=self.request.data['doctor_id'])
         appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
+        doctor = doctors_info.objects.get(id=appointment.doctor)
         appointment.consultation_status="Completed"
         cons_fee = appointment.paid_amount
         appointment.save()

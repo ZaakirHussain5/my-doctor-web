@@ -47,20 +47,28 @@ function initializeSession() {
       video_session.publish(publisher, handleError);
     }
   });
-  
+
   video_session.on('signal:msg', function signalCallback(event) {
-    serializedMessage(event.data, event.from.connectionId === video_session.connection.connectionId ? 'self' : 'other')
+    var messageAlreadyExists = messagesList.some(function(type){
+      return event.from.connectionId+','+event.data == type
+  })
+  if(!messageAlreadyExists){
+    messagesList.push(event.from.connectionId+','+$('.text-box').html())
+    updateMessages(event.data, event.from.connectionId === video_session.connection.connectionId ? 'self' : 'other')
+  }
   });
+  
 }
 
+var messagesList = []
 
-function serializedMessage(message, messageOf) {
+function updateMessages(message, messageOf) {
   let lis = '';
   var messagesContainer = $('.messages');
   let li = `<li class="${messageOf}">${message}</li>`;
   var allMessages = $('#messagess').html();
-  var UpdatedMessages = allMessages + li;
-  $('#messagess').html(UpdatedMessages)
+  allMessages += li;
+  $('#messagess').html(allMessages)
   messagesContainer.finish().animate({
     scrollTop: messagesContainer.prop("scrollHeight")
   }, 250);
@@ -88,6 +96,21 @@ function onMetaAndEnter(event) {
   if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
       sendNewMessage();
   }
+}
+
+function createUUID() {
+  // http://www.ietf.org/rfc/rfc4122.txt
+  var s = [];
+  var hexDigits = "0123456789abcdef";
+  for (var i = 0; i < 36; i++) {
+      s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+  }
+  s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+  s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+  s[8] = s[13] = s[18] = s[23] = "-";
+
+  var uuid = s.join("");
+  return uuid;
 }
 
 $('#micBtn').click(function(){
