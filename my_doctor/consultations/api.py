@@ -52,7 +52,7 @@ class consultationsViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
-        doctor = doctors_info.objects.get(id=appointment.doctor)
+        doctor = appointment.doctor
         appointment.consultation_status="Completed"
         cons_fee = appointment.paid_amount
         appointment.save()
