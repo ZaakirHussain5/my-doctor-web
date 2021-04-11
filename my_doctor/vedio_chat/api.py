@@ -70,7 +70,7 @@ class call_patient_mobile(generics.GenericAPIView):
       session_id = session.session_id
       doctor_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
-      pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.full_name,"You are getting a call from your doctor for the Appointment.","P")
+      pushNotification(patient.fcm_token,"Call From "+appointIns.doctor.full_name,"You are getting a call from your doctor for the Appointment.","P","1")
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=patient.user, appoinment_id=appointment,session_id=session_id,user_token=doctor_token)
       return Response({
         "Message":"Call initiated",
@@ -99,7 +99,7 @@ class call_doctor_mobile(generics.GenericAPIView):
       session_id = session.session_id
       patient_token = session.generate_token()
       appointIns=appo.objects.get(id=appointment)
-      pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.","D")
+      pushNotification(doctor.fcm_token,"Call From "+appointIns.patient_name,"You are getting a call from your patient for the Appointment.","D","1")
       video = video_chat_session.objects.create(Call_from=request.user,Call_for=doctor.user, appoinment_id=appointment,session_id=session_id,user_token=patient_token)
       return Response({
         "Message":"Call initiated",
@@ -157,17 +157,17 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
     if request.user.id == video.Call_from.id:
       if video.Call_for.username.startswith('DPDOC') and video.is_answered == False:
         doctor = doctors_info.objects.get(user__id=video.Call_for.id)
-        pushNotification(doctor.fcm_token,"Call Ended","Call was Ended by Patient","D")
+        pushNotification(doctor.fcm_token,"Call Ended","Call was Ended by Patient","D","2")
       elif serializer.is_answered == False:
         patient = patient_info.objects.get(user__id=video.Call_for.id)
-        pushNotification(patient.fcm_token,"Call Ended","Call was Ended by the Doctor","P")
+        pushNotification(patient.fcm_token,"Call Ended","Call was Ended by the Doctor","P","2")
     else:
       if video.Call_from.username.startswith('DPDOC') and video.is_answered == False:
         doctor = doctors_info.objects.get(user__id=video.Call_from.id)
-        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
+        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D","2")
       elif video.is_answered == False:
         patient = patient_info.objects.get(user__id=video.Call_from.id)
-        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
+        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P","2")
     return Response({
         "Message":"Call Rejected"
     })
@@ -189,22 +189,22 @@ class MobEndCallAPI(generics.GenericAPIView):
     if request.user.id == video.Call_from.id:
       if video.Call_for.username.startswith('DPDOC') and video.is_answered == False:
         doctor = doctors_info.objects.get(user__id=video.Call_for.id)
-        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
+        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D","2")
       elif serializer.is_answered == False:
         patient = patient_info.objects.get(user__id=video.Call_for.id)
-        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
+        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P","2")
     else:
       if video.Call_from.username.startswith('DPDOC') and video.is_answered == False:
         doctor = doctors_info.objects.get(user__id=video.Call_from.id)
-        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D")
+        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D","2")
       elif video.is_answered == False:
         patient = patient_info.objects.get(user__id=video.Call_from.id)
-        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P")
+        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P","2")
     return Response({
         "Message":"Call Rejected"
     })
 
-def pushNotification(deviceToken,title, message,user):
+def pushNotification(deviceToken,title, message,user,action):
     import requests
     import json
 
@@ -219,7 +219,7 @@ def pushNotification(deviceToken,title, message,user):
     }
 
     body = {
-      'data': {'title': title,'message': message,"action":"1"},
+      'data': {'title': title,'message': message,"action":action},
       'to': deviceToken,
     }
     response = requests.post("https://fcm.googleapis.com/fcm/send",headers = headers, data=json.dumps(body))
