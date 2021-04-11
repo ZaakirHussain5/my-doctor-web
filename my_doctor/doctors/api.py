@@ -240,9 +240,9 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                         appointment_time = current_datetime + datetime.timedelta( minutes= 10 * total_appiontments)
                         if (appointment_time < to_time):
                             if from_times < current_datetime:
-                                doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
+                                doctor.from_time = datetime.datetime.strftime(appointment_time, '%H:%M')
                             else:
-                                doctor.from_time = datetime.datetime.strftime(from_times, '%I:%M %p')
+                                doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
                         else:
                             queryset = queryset.exclude(id= doctor.id)
 
@@ -250,9 +250,9 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                         appointment_time = current_datetime + datetime.timedelta( minutes= 10 )
                         if appointment_time < to_time:
                             if from_times < current_datetime:
-                                doctor.from_time = datetime.datetime.strftime(appointment_time, '%I:%M %p')
+                                doctor.from_time = datetime.datetime.strftime(appointment_time, '%H:%M')
                             else:
-                                doctor.from_time = datetime.datetime.strftime(from_times, '%I:%M %p')
+                                doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
                         else:
                             queryset = queryset.exclude(id=doctor.id)
                 else:
@@ -266,7 +266,7 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
                     to_time = datetime.datetime.strptime(doctor.to_time, '%H:%M')
                     from_times = date_format + datetime.timedelta( minutes= 10 * total_appiontments )
                     if (from_times < to_time):
-                        doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M %p')
+                        doctor.from_time = datetime.datetime.strftime(from_times, '%H:%M')
                     else:
                         queryset = queryset.exclude(id= doctor.id)
 
