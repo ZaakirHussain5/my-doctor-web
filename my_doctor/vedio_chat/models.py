@@ -37,6 +37,8 @@ class video_chat_session(models.Model):
     is_answered = models.BooleanField(default=False)
     is_rejected = models.BooleanField(default=False)
     consult_id = models.IntegerField(default=0)
+    startTime = models.DateTimeField(null=True,blank=True)
+    endTime = models.DateTimeField(null=True,blank=True)
 
     @property
     def caller_name(self):

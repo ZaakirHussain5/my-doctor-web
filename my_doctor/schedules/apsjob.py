@@ -204,7 +204,6 @@ def send_message_before_5mins():
 def appointmentExpired():
     all_pending_appointment = appointment.objects.filter(consultation_status='Pending')
     today = datetime.datetime.now()
-    print(all_pending_appointment)
     for appointments in all_pending_appointment:
         after_15mins = today 
         appointment_time = appointments.appointment_time

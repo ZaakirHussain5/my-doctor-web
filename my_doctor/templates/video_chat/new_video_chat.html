@@ -605,26 +605,6 @@
             $('#rating-div').html(star);
 
             let consultation_id = 0;
-            function create_consultation() {
-                data = {
-                    appoinment_id: appoinment,
-                    session: session
-                };
-                $.ajax({
-                    url: '/api/consultations/',
-                    method: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('Token'));
-                    }
-                }).done((response) => {
-                    console.log(response);
-                    consultation_id = response.id
-                }).fail((err) => {
-                    console.log(err)
-                })
-            }
 
             var checkAnswer = null;
             
@@ -647,9 +627,6 @@
                             window.location.href = '/patients/dashboard'
                         }
                         if (res[0].is_answered == true) {
-                            setTimeout(() => {
-                                create_consultation();
-                            }, 180000);
                             clearInterval(checkAnswer)
                         }
                     }).fail((err) => {
@@ -682,37 +659,28 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 var id = urlParams.get('session')
                 var user = urlParams.get('user')
-                if(checkAnswer) clearInterval(checkAnswer)
+                if (checkAnswer) clearInterval(checkAnswer)
                 $.ajax({
-                    'url': '/api/end_call',
+                    'url': '/api/end_call?session='+session,
                     'method': 'POST',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Token " + (user == 'doc' ? localStorage.getItem('DoctorToken') : localStorage.getItem('Token')));
                     },
                 }).done((response) => {
-                    console.log(response)
+                    consultation_id = response.consultationId
+                    if (user == 'doc') {
+                        video_session.disconnect()
+                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
+                    }
+                    else {
+                        video_session.disconnect()
+                        window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
+                    }
                 }).fail((response) => {
                     console.log(response)
                 })
 
-                    if (user == 'doc') {
-                    video_session.disconnect()
-                    $.ajax({
-                        url: '/api/consult_info_for_doct?sessions=' + session,
-                        method: 'GET',
-                        contentType: 'application/json',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Token " + localStorage.getItem('DoctorToken'));
-                        }
-                    }).done(res => {
-                        consultation_id = res[0] ? res[0].id : 0
-                        window.location.href = `/doctors/Prescription?pat_id=${urlParams.get('patient')}${consultation_id && consultation_id != 0 ? `&cons_id=${consultation_id}` : ""}`;
-                    })
-                }
-                else {
-                    video_session.disconnect()
-                    window.location.href = `/api/ratings?${consultation_id && consultation_id != 0 ? `&consultation=${consultation_id}` : ""}`;
-                }
+
             })
 
             $('#btnViewMore').click(function () {

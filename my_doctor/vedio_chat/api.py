@@ -5,8 +5,10 @@ from .serializers import VedioChatSerializer,video_mobile_serializer
 from doctors.models import doctors_info
 from patients.models import patient_info
 from appointment.models import appointment as appo
+from consultations.models import consultations
 from rest_framework import status
 from opentok import OpenTok
+from django.utils import timezone
 opentok = OpenTok("47034434", "21f8951c03ab3c4f33eba0962905212594f477e5")
 
 class vedioChatOparetion(viewsets.ModelViewSet):
@@ -125,6 +127,7 @@ class MobAnswerCallAPI(generics.GenericAPIView):
     except video_chat_session.DoesNotExist:
       return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
     video.is_answered = True
+    video.startTime = timezone.now()
     video.save()
     token = opentok.generate_token(video.session_id)
     return Response({
@@ -141,24 +144,27 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
   ]
   
   def post(self, request, *args, **kwargs):
-    try:
-      video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
-    except video_chat_session.DoesNotExist:
+    session_id = request.query_params.get("session")
+    if session_id is not None:
+      video = video_chat_session.objects.get(id=session_id)
+    else :
       try:
-        video = video_chat_session.objects.get(Call_from=request.user,is_rejected=False)
+        video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
       except video_chat_session.DoesNotExist:
-        try:  
-          video = video_chat_session.objects.get(Call_for=request.user,is_rejected=False)
+        try:
+          video = video_chat_session.objects.get(Call_from=request.user,is_rejected=False)
         except video_chat_session.DoesNotExist:
           return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
 
     video.is_rejected = True
+    video.endTime = timezone.now()
     video.save()
+    consId = createConsultation(video)
     if request.user.id == video.Call_from.id:
       if video.Call_for.username.startswith('DPDOC') and video.is_answered == False:
         doctor = doctors_info.objects.get(user__id=video.Call_for.id)
         pushNotification(doctor.fcm_token,"Call Ended","Call was Ended by Patient","D","2")
-      elif serializer.is_answered == False:
+      elif video.is_answered == False:
         patient = patient_info.objects.get(user__id=video.Call_for.id)
         pushNotification(patient.fcm_token,"Call Ended","Call was Ended by the Doctor","P","2")
     else:
@@ -169,40 +175,44 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
         patient = patient_info.objects.get(user__id=video.Call_from.id)
         pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P","2")
     return Response({
-        "Message":"Call Rejected"
+        "Message":"Call Rejected",
+        "consultationId":consId
     })
 
-class MobEndCallAPI(generics.GenericAPIView):
-  serializer_class = video_mobile_serializer
+def createConsultation(video):
+  consId = 0
+  if video.consult_id != 0:
+    return video.consult_id
+  if video.is_answered:
+    diff = video.endTime - video.startTime
+    print(diff.total_seconds())
+    if diff.total_seconds() > 180:
+      if video.Call_from.username.startswith('DPDOC'):
+        doctor = doctors_info.objects.get(user=video.Call_from)
+        patient = video.Call_for
+      else:
+        doctor = doctors_info.objects.get(user=video.Call_for)
+        patient = video.Call_from
+      app = appo.objects.get(id=video.appoinment_id)
+      app.consultation_status="Completed"
+      app.save()
+      cons_fee = doctor.consultation_fee
+      share_type = doctor.commission_type
+      if cons_fee:
+        share_val = doctor.commission_val
+      else:
+        share_val = 0.00
+      if share_type == 'Percent':
+        share_val = cons_fee * (share_val/100)
+      cons = consultations.objects.create(doctor_id=doctor,patient=patient,consultation_amt=app.paid_amount,comp_share=share_val)
+      consId = cons.id
+      video.consult_id = consId
+      video.save()
+    
+  return consId
 
-  permissions = [
-    permissions.IsAuthenticated
-  ]
-  
-  def post(self, request, *args, **kwargs):
-    try:
-      video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
-    except video_chat_session.DoesNotExist:
-      video = video_chat_session.objects.get(Call_from=request.user,is_answered=False,is_rejected=False)
-    video.is_ended = True
-    video.save()
-    if request.user.id == video.Call_from.id:
-      if video.Call_for.username.startswith('DPDOC') and video.is_answered == False:
-        doctor = doctors_info.objects.get(user__id=video.Call_for.id)
-        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D","2")
-      elif serializer.is_answered == False:
-        patient = patient_info.objects.get(user__id=video.Call_for.id)
-        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P","2")
-    else:
-      if video.Call_from.username.startswith('DPDOC') and video.is_answered == False:
-        doctor = doctors_info.objects.get(user__id=video.Call_from.id)
-        pushNotification(doctor.fcm_token,"Call Rejected","Call was Rejected by Patient","D","2")
-      elif video.is_answered == False:
-        patient = patient_info.objects.get(user__id=video.Call_from.id)
-        pushNotification(patient.fcm_token,"Call Rejected","Call was rejected by the Doctor","P","2")
-    return Response({
-        "Message":"Call Rejected"
-    })
+
+
 
 def pushNotification(deviceToken,title, message,user,action):
     import requests

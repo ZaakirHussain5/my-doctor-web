@@ -27,6 +27,7 @@ function initializeSession() {
   });
 
   video_session.on('sessionDisconnected', function sessionDisconnected(event) {
+    console.log(event)
     console.log('You were disconnected from the session.', event.reason);
   });
 
