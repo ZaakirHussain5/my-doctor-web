@@ -15,7 +15,7 @@ def getEndDate():
 	return days_after
 # Create your models here.
 class PatientSubscription(models.Model):
-	user = models.OneToOneField(patient_info, on_delete=models.CASCADE, related_name="patientSubscription",null=True)
+	user = models.ForeignKey(patient_info, on_delete=models.CASCADE, related_name="patientSubscription",null=True)
 	sub_date = models.DateField(default=startDate)
 	cons_count = models.IntegerField(default=0)
 	total_count = models.IntegerField(null=True,blank=True)
