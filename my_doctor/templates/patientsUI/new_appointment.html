@@ -644,7 +644,10 @@
             $.ajax({
                 url: "/api/patientAppointment/DoctorAvailable/?date=" + date + "&id=" + speciality_type,
                 method: 'GET',
-                contentType: 'Application/json'
+                contentType: 'Application/json',
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'Token ' + localStorage.getItem('Token'));
+                }
             }).done((response) => {
                 console.log(response)
                 $('#pills-profile-tab').removeClass('active');

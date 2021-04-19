@@ -20,6 +20,7 @@ from .serializers import *
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from knox.models import AuthToken
+from patient_subscription.models import PatientSubscription
 
 class doctors_infoViewSet(viewsets.ModelViewSet):
     queryset = doctors_info.objects.filter(web_registration=False, is_active=True)
@@ -176,6 +177,8 @@ class GetLoggedDoctor(generics.RetrieveAPIView):
 class getAvailableDoctors(viewsets.ModelViewSet):
     serializer_class = AvlDoctorsListSerializer
 
+   
+
     def get_queryset(self):
         day = self.request.query_params.get('day', None)
         spl = self.request.query_params.get('spl', None)
@@ -212,6 +215,10 @@ class getAvailableDoctors(viewsets.ModelViewSet):
 class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
     serializer_class = AvlDoctorsListSerializer
 
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
     def get_queryset(self):
         date = self.request.query_params.get('date')
         specialist_id = self.request.query_params.get('id')
@@ -223,7 +230,11 @@ class getAvailableDoctorsForApponment(viewsets.ModelViewSet):
         #     print('matched')
 
         queryset = DoctorTimings.objects.filter(day = day_name, doctor__specialist_type = specialist_type.objects.get(id=specialist_id))
+        patient_sub = PatientSubscription.objects.filter(user__user=self.request.user).filter(is_active=True).count()
         for doctor in queryset:
+            if patient_sub != 0:
+                doctor.doctor.consultation_fee = 0.00
+                doctor.doctor.commission_val = 0.00
             total_appiontments = appointment.objects.filter(doctor__id=doctor.doctor.id, appointment_date=date,consultation_status="Pending").count()
             if dates == today_date:
                 current_datetime = datetime.datetime.now()
