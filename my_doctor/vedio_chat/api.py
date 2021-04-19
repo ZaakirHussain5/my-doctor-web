@@ -133,7 +133,8 @@ class MobAnswerCallAPI(generics.GenericAPIView):
     return Response({
         "Message":"Call Answered",
         "session_id" : video.session_id,
-        "token":token
+        "token":token,
+        "id":video.id
     })
 
 class MobRejectEndCallAPI(generics.GenericAPIView):
