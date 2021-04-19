@@ -51,45 +51,18 @@ class consultationsViewSet(viewsets.ModelViewSet):
         return consultations.objects.all()
 
     def perform_create(self, serializer):
-        appointment = appointmentTable.objects.get(id=self.request.data['appoinment_id'])
-        doctor = appointment.doctor
-        appointment.consultation_status="Completed"
-        cons_fee = appointment.paid_amount
-        appointment.save()
-        share_type = doctor.commission_type
-        if cons_fee:
-            share_val = doctor.commission_val
-        else:
-            share_val = 0.00
-        if share_type == 'Percent':
-            share_val = cons_fee * (share_val/100)
-        
-        try:
-            Reminders.objects.filter(appointment_id=appointment.id).delete()
-        except Reminders.DoesNotExist: 
-            pass
-        
-        vedioChatInstance = video_chat_session.objects.get(id=self.request.data['session'])
-        if vedioChatInstance.consult_id == 0:
-            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
-            print(instance.id)
-            vedioChatInstance.consult_id=instance.id
-            vedioChatInstance.save()
-        else :
-            consultations.objects.get(id=vedioChatInstance.consult_id).delete()
-            instance= serializer.save(patient=self.request.user, doctor_id=doctor, comp_share=share_val, consultation_amt=appointment.paid_amount)
-            vedioChatInstance.consult_id=instance.id
-            vedioChatInstance.save()
-        return instance
-
-    def perform_update(self, serializer):
-        serializer.save()
-        doctor = consultations.objects.get(id=self.request.data['consultation']).doctor_id
+        cons = consultations.objects.get(id=self.request.data['consultation'])
+        cons.message = self.request.data["message"]
+        cons.video_audio_rating = self.request.data["video_audio_rating"]
+        cons.overall_rating = self.request.data["overall_rating"]
+        cons.consultation_rating = self.request.data["consultation_rating"]
+        cons.save()
+        doctor = cons.doctor_id
         consultation = consultations.objects.filter(doctor_id=doctor)
         total_rating = consultation.aggregate(Sum('consultation_rating'))
         doctor.rating = float(total_rating['consultation_rating__sum'] / consultation.count()) 
         doctor.save()
-        return 
+        return cons
 
 
 
