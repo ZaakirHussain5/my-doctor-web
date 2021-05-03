@@ -166,7 +166,7 @@ def send_message_before_10mins():
                 pat_message = "Your Appointment with Dr. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments".format(appointments.doctor.full_name)
                 doct_message = "Your Appointment with Mr./Mrs. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments".format(patient.full_name)
                 pat_reminder = Reminders.objects.create(reminder_message=pat_message, reminder_owner=appointments.patient, appointment_id=appointments.id)
-                doct_reminder = Reminders.objects.create(reminder_message=doct_message, reminder_owner=appointment.doctor.user, appointment_id=appointments.id )
+                doct_reminder = Reminders.objects.create(reminder_message=doct_message, reminder_owner=appointments.doctor.user, appointment_id=appointments.id )
 
                 url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 10 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
                 requests.get(url)
