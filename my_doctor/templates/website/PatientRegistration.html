@@ -174,7 +174,7 @@
                 alert('Enter Name and Mobile Number')
             else {
                 $.ajax({
-                    url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Welcome ${$('#Name1').val()}, OTP for Mobile Number Verification is <OTP>. Do not Share or forward&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`,
+                    url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Welcome ${$('#Name1').val()}, OTP for Mobile Number Verification is <OTP>. Do not Share or forward Regards, B and S Associates&route=0&from=BANDSS&to=${$('#mob1').val()}&otp=1&otp_length=4`,
                     method: 'GET',
                     success: function (response) {
                         console.log(response)

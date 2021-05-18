@@ -932,14 +932,14 @@
                     $('#Confirmation').addClass('active show'); 
                     mob()
                     $.ajax({
-                        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to=${$('#mob1').val()}`,
+                        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. ${$('#Doctor').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/patients/appointments Regards, B and S Associates &route=0&from=BANDSS&to=${$('#mob1').val()}`,
                         method: 'GET',
                         success: function (response) {
                             console.log(response)
                         }
                     })
                     $.ajax({
-                        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ${$('#patientNameForSMS').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to=${$('#docNum').val()}`,
+                        url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with ${$('#patientNameForSMS').html()} has been fixed on ${response.appointment_date} at ${response.appointment_time} to keep track of your appointments visit https://doctor-plus.in/doctors/appointments Regards, B and S Associates &route=0&from=BANDSS&to=${$('#docNum').val()}`,
                         method: 'GET',
                         success: function (response) {
                             console.log(response)

@@ -195,9 +195,9 @@ def send_message_before_5mins():
                 pat_reminder.save()
                 doct_reminder = Reminders(reminder_message=doct_message, reminder_owner=appointments.doctor.user, appointment_id=appointments.id )
                 doct_reminder.save()
-                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments &route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
+                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Dr. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/patients/appointments Regards, B and S Associates&route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, patient.ph_no)
                 requests.get(url)
-                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments &route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
+                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Your Appointment with Mr./Mrs. {0} has been next 5 minutes later to keep track of your appointments visit https://doctor-plus.in/doctors/appointments Regards, B and S Associates&route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
                 requests.get(doct_url)
                 reminder_min(appointments, 5)
 
@@ -224,9 +224,9 @@ def appointmentExpired():
                     pass
                 trans = transactions(trans_type="Appointment Expired", trans_desc="Appointment Exired due inactivity.",user_id = appointments.patient, credit=appointments.paid_amount)
                 trans.save()
-                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Dr. {0} has been Expired and the paid Amount has been transfered to the doctor plus wallet.&route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, appointments.patient.username)
+                url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Dr. {0} has been Expired and the paid Amount has been transfered to the doctor plus wallet Regards, B and S Associates.&route=0&from=BANDSS&to={1}".format(appointments.doctor.full_name, appointments.patient.username)
                 requests.get(url)
-                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with Mr./Mrs. {0} has been Cancelled.&route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
+                doct_url = "https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Appointment with {0} has been Cancelled Regards, B and S Associates.&route=0&from=BANDSS&to={1}".format(patient.full_name, appointments.doctor.phone_number)
                 requests.get(doct_url)
 
 # import requests
