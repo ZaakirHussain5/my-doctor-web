@@ -314,7 +314,7 @@
                 },
             }).done((response) => {
                 let balance= response.length ==0 ? 0 : response[0]['balance']
-                jQuery('#amount').html('₹ '+ balance)
+                jQuery('#amount').html('₹ '+ balance) 
             }).fail((error) => {
                 console.log(error);
             });

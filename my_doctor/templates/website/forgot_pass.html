@@ -113,7 +113,7 @@
             patient_id = res.patient.id;
             console.log(patient_id)
             $.ajax({
-              url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Your Verification to reset your Password is <OTP>.Don't Share or forward.&route=0&from=BANDSS&to=${phone_or_email}&otp=1&otp_length=4`,
+              url: `https://teleduce.in/sendsms/?key=a224db72-cafb-4cce-93ab-3d7f950c92e2&text=Doctor Plus : Welcome ${$('#Name1').val()}, OTP for Mobile Number Verification is <OTP>. Do not Share or forward Regards, B and S Associates&route=0&from=BANDSS&to=${phone_or_email}&otp=1&otp_length=4`,
               method: 'GET',
               success: function (response) {
                 console.log(response)

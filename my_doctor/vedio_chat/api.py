@@ -123,7 +123,7 @@ class MobAnswerCallAPI(generics.GenericAPIView):
   
   def post(self, request, *args, **kwargs):
     try:
-      video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
+      video = video_chat_session.objects.filter(Call_for=request.user,is_answered=False,is_rejected=False).order_by('-created_at').first()
     except video_chat_session.DoesNotExist:
       return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
     video.is_answered = True
@@ -150,10 +150,10 @@ class MobRejectEndCallAPI(generics.GenericAPIView):
       video = video_chat_session.objects.get(id=session_id)
     else :
       try:
-        video = video_chat_session.objects.get(Call_for=request.user,is_answered=False,is_rejected=False)
+        video = video_chat_session.objects.filter(Call_for=request.user,is_answered=False,is_rejected=False).order_by('-created_at').first()
       except video_chat_session.DoesNotExist:
         try:
-          video = video_chat_session.objects.get(Call_from=request.user,is_rejected=False)
+          video = video_chat_session.objects.filter(Call_from=request.user,is_rejected=False).order_by('-created_at').first()
         except video_chat_session.DoesNotExist:
           return Response({"error":"No Active Calls found"},status=status.HTTP_400_BAD_REQUEST)
 

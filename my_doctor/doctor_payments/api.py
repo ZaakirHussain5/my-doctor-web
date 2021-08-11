@@ -21,7 +21,7 @@ def getDateFormat(date_time):
 
 class doctor_paymentsViewSet(viewsets.ModelViewSet):
     queryset = doctor_payments.objects.all()
-    permissions = [
+    permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = doctor_paymentsSerializer
@@ -29,7 +29,7 @@ class doctor_paymentsViewSet(viewsets.ModelViewSet):
 
 class doctor_listViewset(viewsets.ModelViewSet):
     queryset = doctor_payments.objects.all()
-    permissions = [
+    permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = DoctorPaymentsListSerializer
@@ -37,7 +37,7 @@ class doctor_listViewset(viewsets.ModelViewSet):
 
 
 class doctor_dataView(viewsets.ModelViewSet):
-    permissions = [
+    permission_classes = [
         permissions.IsAuthenticated
     ]
     serializer_class = DoctorPaymentsListSerializer

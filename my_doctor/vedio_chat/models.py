@@ -40,6 +40,8 @@ class video_chat_session(models.Model):
     startTime = models.DateTimeField(null=True,blank=True)
     endTime = models.DateTimeField(null=True,blank=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     @property
     def caller_name(self):
         try:
