@@ -1,8 +1,5 @@
-Here’s the updated README:
 
----
-
-# **Telemedicine Platform**
+# **Doctor Plus (Telemedicine Platform)**
 
 A comprehensive **telemedicine platform** enabling **real-time video consultations** and **medical record management**. Built with **Django, WebRTC, jQuery, JavaScript, WebSocket, and AWS**, it ensures a secure, scalable, and user-friendly healthcare experience.
 
