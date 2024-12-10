@@ -17,7 +17,7 @@ A comprehensive **telemedicine platform** enabling **real-time video consultatio
 ---
 
 ## **Features**  
-- **Real-time Video Consultations:** Conduct interactive sessions via **WebRTC** with seamless video and audio streaming.  
+- **Real-time Video Consultations:** Conduct interactive sessions via **OpenTok(WebRTC)** with seamless video and audio streaming.  
 - **Medical Record Management:** Store and access patient records, prescriptions, and reports securely.  
 - **Role-based Access Control:** Separate dashboards for doctors, patients, and administrators.  
 - **WebSocket-based Notifications:** Real-time alerts for appointments and messages.  
